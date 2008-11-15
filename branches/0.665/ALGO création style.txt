@@ -1,0 +1,32 @@
+Si {toto} est plus grand que ~{Tata}~.
+   4    9                    01    67
+Si toto est plus grand que Tata.
+
+colname, style, start-stop;
+
+1 4
+2 9 -1 = 8
+3 30
+4 37 -1 = 36
+5 31
+6 36 -1 = 35
+
+tri :
+
+1 4
+2 8
+3 30
+5 31
+6 35
+4 36
+
+soustraction :
+
+1 4      = 4
+2 8   -1 = 7
+3 30  -2 = 28
+5 31  -3 = 28
+6 35  -4 = 31
+4 36  -5 = 31
+
+"", errata, 4-7; "", trait, 28-31; "", errata, 28-31  
