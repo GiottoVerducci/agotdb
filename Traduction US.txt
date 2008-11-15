@@ -1,0 +1,44 @@
+Maison House
+Neutral
+le reste est inchangé
+
+Icônes Icons
+Military
+Intrigue
+Power
+
+Mots-clef Keywords
+Deadly
+Renown
+Stealth
+No attachment
+Set-up
+Immune to...
+Deathbound
+
+Mécanisme Mecanism
+Unique
+Recursive
+Doomed
+
+Fournit... Provides...
+Provides gold
+Provides influence
+Provides initiative
+
+Extension Expansion set
+
+Déclencheur Trigger
+Any phase
+Plot
+Draw
+Marshalling
+Challenges
+Dominance
+Response
+
+Vertus Virtues
+Noble
+Learned
+Holy
+War
