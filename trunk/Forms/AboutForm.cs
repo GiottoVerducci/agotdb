@@ -27,7 +27,7 @@ namespace AGoT.AGoTDB.Forms
   /// </summary>
   public partial class AboutForm : Form
   {
-    public static String Version = "v. 0.665 (BETA)";
+    public static String Version = "v. 0.668 (BETA)";
 
     /// <summary>
     /// Default form constructor.

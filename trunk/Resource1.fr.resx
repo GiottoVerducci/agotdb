@@ -237,6 +237,9 @@
   <data name="SetText" xml:space="preserve">
     <value>Édition</value>
   </data>
+  <data name="ShadowVirtueText" xml:space="preserve">
+    <value>Ombre</value>
+  </data>
   <data name="StrengthText" xml:space="preserve">
     <value>Force</value>
   </data>

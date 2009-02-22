@@ -439,6 +439,15 @@ namespace AGoT.AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shadow.
+        /// </summary>
+        internal static string ShadowVirtueText {
+            get {
+                return ResourceManager.GetString("ShadowVirtueText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Strength.
         /// </summary>
         internal static string StrengthText {

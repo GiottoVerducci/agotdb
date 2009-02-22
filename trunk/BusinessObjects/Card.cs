@@ -35,7 +35,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     public Int32 UniversalId;
     public FormattedValue<string> Name, Traits, Keywords, Text, Set, OriginalName;
     public FormattedValue<int> Type, House;
-    public FormattedValue<bool> Unique, Doomed, Endless, Military, Intrigue, Power, War, Holy, Noble, Learned, Multiplayer;
+    public FormattedValue<bool> Unique, Doomed, Endless, Military, Intrigue, Power, War, Holy, Noble, Learned, Shadow, Multiplayer;
     public FormattedValue<XInt> Cost, Strength, Income, Initiative, Claim, Influence;
 
     public int Quantity = 1; // used by decks
@@ -50,7 +50,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     public static List<TagText> CardTypeNames, CardHouseNames; // to convert ids in human strings
 
     // "Id", "Name", "Type", "House", "Unique", "Traits", "Keywords", "Text", "Doomed", "Endless", "Cost", "Strength",
-    // "Military", "Intrigue", "Power", "War", "Holy", "Noble", "Learned", "Income", "Initiative", "Claim",
+    // "Military", "Intrigue", "Power", "War", "Holy", "Noble", "Learned", "Shadow", "Income", "Initiative", "Claim",
     // "Influence", "Multiplayer", "Set", "OriginalName", "UniversalId");
 
     private static List<FormatSection> GetFormat(string style)
@@ -148,6 +148,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       Holy = GetBoolAndStyleFromRow(row, "Holy");
       Noble = GetBoolAndStyleFromRow(row, "Noble");
       Learned = GetBoolAndStyleFromRow(row, "Learned");
+      Shadow = GetBoolAndStyleFromRow(row, "Shadow");
       Income = GetXIntAndStyleFromRow(row, "Income");
       Initiative = GetXIntAndStyleFromRow(row, "Initiative");
       Claim = GetXIntAndStyleFromRow(row, "Claim");
@@ -178,6 +179,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       Holy = original.Holy;
       Noble = original.Noble;
       Learned = original.Learned;
+      Shadow = original.Shadow;
       Multiplayer = original.Multiplayer;
       Cost = original.Cost;
       Strength = original.Strength;
@@ -246,6 +248,7 @@ namespace AGoT.AGoTDB.BusinessObjects
           if (War.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.WarVirtueText);
           if (Holy.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.HolyVirtueText);
           if (Learned.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.LearnedVirtueText);
+          if (Shadow.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.ShadowVirtueText);
           if (Keywords.Value != "")
             fSummaryInfo += " - " + Keywords.Value;
           break;
@@ -303,12 +306,12 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <param name="formats">The list of formats to apply.</param>
     private static void ApplyFormatsToFormattedText(List<FormattedText> result, List<FormatSection> formats)
     {
-      bool formatAppliesToNext = false;
       for (int i = 0; i < formats.Count; ++i)
       {
         // go to the first FormattedText element affected by the format
         int j = 0;
         int pos = 0;
+        bool formatAppliesToNext;
         do
         {
           while (pos + result[j].text.Length < formats[i].begin)
@@ -317,33 +320,33 @@ namespace AGoT.AGoTDB.BusinessObjects
             j++;
           }
 
-          int relbegin = Math.Max(formats[i].begin - pos, 0); // peut être inférieur à 0 si formatAppliesToNext a précédemment été mis à vrai
-          int relend = formats[i].end - pos;
-          if (relend > result[j].text.Length)
+          int relBegin = Math.Max(formats[i].begin - pos, 0); // peut être inférieur à 0 si formatAppliesToNext a précédemment été mis à vrai
+          int relEnd = formats[i].end - pos;
+          if (relEnd > result[j].text.Length)
           {
-            relend = result[j].text.Length;
+            relEnd = result[j].text.Length;
             formatAppliesToNext = true;
           }
           else
             formatAppliesToNext = false;
 
           // we split the FormattedText element and apply the format to the right portion
-          List<FormattedText> subresult = new List<FormattedText>();
-          if (relbegin != 0)
-            subresult.Add(new FormattedText(result[j].text.Substring(0, relbegin), result[j].format));
-          subresult.Add(new FormattedText(result[j].text.Substring(relbegin, relend - relbegin),
+          List<FormattedText> subResult = new List<FormattedText>();
+          if (relBegin != 0)
+            subResult.Add(new FormattedText(result[j].text.Substring(0, relBegin), result[j].format));
+          subResult.Add(new FormattedText(result[j].text.Substring(relBegin, relEnd - relBegin),
                                           MergeTextFormat(result[j].format, formats[i].format)));
-          if (relend != result[j].text.Length)
-            subresult.Add(new FormattedText(result[j].text.Substring(relend, result[j].text.Length - relend), result[j].format));
+          if (relEnd != result[j].text.Length)
+            subResult.Add(new FormattedText(result[j].text.Substring(relEnd, result[j].text.Length - relEnd), result[j].format));
 
           // we replace the old element by the new splitted one
           result.RemoveAt(j);
-          result.InsertRange(j, subresult);
+          result.InsertRange(j, subResult);
 
           // we have to adjust the indexes if the we carry on the next part
           if (formatAppliesToNext)
           {
-            if (relbegin != 0) { pos += result[j].text.Length; j++; }
+            if (relBegin != 0) { pos += result[j].text.Length; j++; }
             pos += result[j].text.Length; j++;
           }
         }
@@ -488,13 +491,14 @@ namespace AGoT.AGoTDB.BusinessObjects
           else
             result.Add(new FormattedText("-"));
           result.Add(new FormattedText("\r\n"));
-          if (Noble.Value || War.Value || Holy.Value || Learned.Value)
+          if (Noble.Value || War.Value || Holy.Value || Learned.Value || Shadow.Value)
           {
             result.Add(new FormattedText(Resource1.VirtuesText + ": "));
             result.AddRange(FormattedValueBoolToFormattedText(Noble, Resource1.NobleVirtueText + ". ", "", TextFormat.Regular));
             result.AddRange(FormattedValueBoolToFormattedText(War, Resource1.WarVirtueText + ". ", "", TextFormat.Regular));
             result.AddRange(FormattedValueBoolToFormattedText(Holy, Resource1.HolyVirtueText + ". ", "", TextFormat.Regular));
             result.AddRange(FormattedValueBoolToFormattedText(Learned, Resource1.LearnedVirtueText + ". ", "", TextFormat.Regular));
+            result.AddRange(FormattedValueBoolToFormattedText(Shadow, Resource1.ShadowVirtueText + ". ", "", TextFormat.Regular));
             result.Add(new FormattedText("\r\n"));
           }
           break;
