@@ -201,7 +201,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// 1) cardtypes from string to integer (eg. Attachment becomes 2)
     /// 2) house(s) from string to integer (bitwise combinaison) (eg. Stark/Lannister becomes 1|2 = 3)
     /// 3) traits, keywords and cardtext are left as text.
-    /// 4) Doomed, Endless, Military, Intrigue, Power, War, Holy, Noble, Learned, Multiplayer from string to Yes/No
+    /// 4) Doomed, Endless, Military, Intrigue, Power, War, Holy, Noble, Learned, Shadow, Multiplayer from string to Yes/No
     /// 5) Cost, Strength, Income, Initiative, Claim, Influence from string to integer (with 'X' converted to -1)
     /// A column "Style" is added for each colum except UniversalId. It allows the base to have the plain values and the style separated. Otherwise,
     /// the style may interfer with the search functions.
@@ -417,7 +417,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       Int32 UniversalId;
       FormattedValue<string> Name, Traits, Keywords, Text, Set, OriginalName;
       FormattedValue<int> Type, House;
-      FormattedValue<bool?> Unique, Doomed, Endless, Military, Intrigue, Power, War, Holy, Noble, Learned, Multiplayer;
+      FormattedValue<bool?> Unique, Doomed, Endless, Military, Intrigue, Power, War, Holy, Noble, Learned, Shadow, Multiplayer;
       FormattedValue<XInt> Cost, Strength, Income, Initiative, Claim, Influence;
 
       UniversalId = Int32.Parse(GetRowValue(rowSource, "UniversalId"));
@@ -442,6 +442,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       Holy = ExtractFormattedBoolValueFromRow(rowSource, "Holy");
       Noble = ExtractFormattedBoolValueFromRow(rowSource, "Noble");
       Learned = ExtractFormattedBoolValueFromRow(rowSource, "Learned");
+      Shadow = ExtractFormattedBoolValueFromRow(rowSource, "Shadow");
       Multiplayer = ExtractFormattedBoolValueFromRow(rowSource, "Multiplayer");
 
       Cost = ExtractFormattedXIntValueFromRow(rowSource, "Cost");
@@ -477,6 +478,7 @@ namespace AGoT.AGoTDB.BusinessObjects
                    NullableBoolToString(Holy.Value), BoolToString(Holy.Formats.Count > 0),
                    NullableBoolToString(Noble.Value), BoolToString(Noble.Formats.Count > 0),
                    NullableBoolToString(Learned.Value), BoolToString(Learned.Formats.Count > 0),
+                   NullableBoolToString(Shadow.Value), BoolToString(Shadow.Formats.Count > 0),
                    XIntToString(Income.Value), BoolToString(Income.Formats.Count > 0),
                    XIntToString(Initiative.Value), BoolToString(Initiative.Formats.Count > 0),
                    XIntToString(Claim.Value), BoolToString(Claim.Formats.Count > 0),
