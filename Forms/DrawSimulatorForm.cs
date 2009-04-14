@@ -61,10 +61,10 @@ namespace AGoT.AGoTDB.Forms
     /// <summary>
     /// Sets the deck used for the draws.
     /// </summary>
-    /// <param name="aDeck">The deck to use.</param>
-    public void SetDeck(Deck aDeck)
+    /// <param name="deck">The deck to use.</param>
+    public void SetDeck(Deck deck)
     {
-      fDeck = aDeck;
+      fDeck = deck;
       InitializeFromDeck();
     }
 
@@ -90,32 +90,31 @@ namespace AGoT.AGoTDB.Forms
     public void ShuffleToDeckList(ListBox list)
     {
       list.BeginUpdate();
-      Random alea = new Random();
-      for (int i = 0; i < fDeck.Cards.Count; ++i)
+      var alea = new Random();
+      for (var i = 0; i < fDeck.Cards.Count; ++i)
         if(fDeck.Cards[i].IsDrawable())
-          for(int j = 0; j < fDeck.Cards[i].Quantity; ++j)
+          for(var j = 0; j < fDeck.Cards[i].Quantity; ++j)
             list.Items.Insert(alea.Next(list.Items.Count+1), fDeck.Cards[i]);
       list.EndUpdate();
     }
 
     public void MoveFromOneListToAnother(ListBox srcList, int index, ListBox dstList)
     {
-      if (srcList.Items.Count > 0)
-      {
-        ListsBeginUpdate(srcList, dstList);
-        dstList.Items.Add(srcList.Items[index]);
-        srcList.Items.RemoveAt(index);
-        ListsEndUpdate(srcList, dstList);
-      }
+      if (srcList.Items.Count <= 0) 
+        return;
+      ListsBeginUpdate(srcList, dstList);
+      dstList.Items.Add(srcList.Items[index]);
+      srcList.Items.RemoveAt(index);
+      ListsEndUpdate(srcList, dstList);
     }
 
-    private void ListsBeginUpdate(params ListBox[] lists)
+    private static void ListsBeginUpdate(params ListBox[] lists)
     {
       foreach (ListBox list in lists)
         list.BeginUpdate();
     }
 
-    private void ListsEndUpdate(params ListBox[] lists)
+    private static void ListsEndUpdate(params ListBox[] lists)
     {
       foreach (ListBox list in lists)
         list.EndUpdate();
@@ -153,13 +152,13 @@ namespace AGoT.AGoTDB.Forms
 
     private void btnShuffle_Click(object sender, EventArgs e)
     {
-      List<Object> temp = new List<Object>();
-      for (int i = 0; i < lbDeck.Items.Count; ++i)
+      var temp = new List<object>();
+      for (var i = 0; i < lbDeck.Items.Count; ++i)
         temp.Add(lbDeck.Items[i]);
       lbDeck.BeginUpdate();
       lbDeck.Items.Clear();
-      Random alea = new Random();
-      for (int i = 0; i < temp.Count; ++i)
+      var alea = new Random();
+      for (var i = 0; i < temp.Count; ++i)
         lbDeck.Items.Insert(alea.Next(i+1), temp[i]);
       lbDeck.EndUpdate();
     }

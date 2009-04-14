@@ -44,9 +44,9 @@ namespace AGoT.AGoTDB.BusinessObjects
     public enum CardType { Unknown = -1, Character = 1, Location = 2, Attachment = 4, Event = 8, Plot = 16, Agenda = 32, Title = 64 };
     public enum CardHouse { Unknown = -1, Neutral = 0, Stark = 1, Lannister = 2, Baratheon = 4, Greyjoy = 8, Martell = 16, Targaryen = 32 };
 
-    public static TextFormat ErrataFormat = new TextFormat("errata", FontStyle.Regular, Color.Red);
-    public static TextFormat TraitsFormat = new TextFormat("traits", FontStyle.Bold | FontStyle.Italic, Color.Black);
-    public static TextFormat TriggerFormat = new TextFormat("trigger", FontStyle.Bold, Color.Black);
+    public static TextFormat ErrataFormat = new TextFormat("errata", Color.Red);
+    public static TextFormat TraitsFormat = new TextFormat("traits", FontStyle.Bold | FontStyle.Italic);
+    public static TextFormat TriggerFormat = new TextFormat("trigger", FontStyle.Bold);
     public static List<TagText> CardTypeNames, CardHouseNames; // to convert ids in human strings
 
     // "Id", "Name", "Type", "House", "Unique", "Traits", "Keywords", "Text", "Doomed", "Endless", "Cost", "Strength",
@@ -55,12 +55,12 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     private static List<FormatSection> GetFormat(string style)
     {
-      List<FormatSection> formats = new List<FormatSection>();
+      var formats = new List<FormatSection>();
 
       if (style != "")
       {
         string[] styles = style.Split(';');
-        for (int i = 0; i < styles.Length; ++i)
+        for (var i = 0; i < styles.Length; ++i)
         {
           string[] styleinfo = styles[i].Trim().Split(',', '-');
           formats.Add(new FormatSection(Int32.Parse(styleinfo[1]), Int32.Parse(styleinfo[2]), (styleinfo[0].Trim() == "errata") ? ErrataFormat : TraitsFormat));
@@ -72,7 +72,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     private static List<FormatSection> GetFormatFromErrata(string value)
     {
       bool errated = (value == "YES");
-      List<FormatSection> formats = new List<FormatSection>();
+      var formats = new List<FormatSection>();
       if (errated)
         formats.Add(new FormatSection(0, 0, ErrataFormat));
       return formats;
@@ -119,18 +119,18 @@ namespace AGoT.AGoTDB.BusinessObjects
       Name = GetTextAndStyleFromRow(row, "Name");
       Type = GetIntAndStyleFromRow(row, "Type");
       int house = 0;
-      if ((Boolean) row["HouseStark"])
-        house += (int) CardHouse.Stark;
+      if ((Boolean)row["HouseStark"])
+        house += (int)CardHouse.Stark;
       if ((Boolean)row["HouseLannister"])
         house += (int)CardHouse.Lannister;
       if ((Boolean)row["HouseBaratheon"])
-        house += (int) CardHouse.Baratheon;
+        house += (int)CardHouse.Baratheon;
       if ((Boolean)row["HouseGreyjoy"])
-        house += (int) CardHouse.Greyjoy;
+        house += (int)CardHouse.Greyjoy;
       if ((Boolean)row["HouseMartell"])
-        house += (int) CardHouse.Martell;
+        house += (int)CardHouse.Martell;
       if ((Boolean)row["HouseTargaryen"])
-        house += (int) CardHouse.Targaryen;
+        house += (int)CardHouse.Targaryen;
       House = new FormattedValue<int>(house, GetFormatFromErrata(row["HouseErrated"].ToString()));
 
       Unique = GetBoolAndStyleFromRow(row, "Unique");
@@ -199,9 +199,9 @@ namespace AGoT.AGoTDB.BusinessObjects
       //String result = ("Nom: " + Name.Value + " " + ReportBrackets(unique, (unique.Contains("Yes") ? "*" : ""))).Trim() + "\r\n";
       String result = String.Format("{0}: {1}", Resource1.NameText, Name.Value); //, (Unique.Value)? "*" : "");
       List<FormattedText> formatted = ToFormattedString();
-      for(int i = 1; i < formatted.Count; ++i) // start at index 1 to skip the name part
-        if ((formatted[i].text != "\r\n") || ((i+1 < formatted.Count) && (formatted[i+1].text != "\r\n")))
-          result += formatted[i].text;
+      for (var i = 1; i < formatted.Count; ++i) // start at index 1 to skip the name part
+        if ((formatted[i].Text != "\r\n") || ((i + 1 < formatted.Count) && (formatted[i + 1].Text != "\r\n")))
+          result += formatted[i].Text;
       return result;
     }
 
@@ -253,7 +253,7 @@ namespace AGoT.AGoTDB.BusinessObjects
             fSummaryInfo += " - " + Keywords.Value;
           break;
         case CardType.Event:
-          if (Cost.Value.NonZero())  // for old events with a gold cost
+          if (Cost.Value.IsNonZero())  // for old events with a gold cost
             fSummaryInfo = String.Format("[{0}]", Cost.Value);
           if (Traits.Value != "")
             fSummaryInfo += " - " + Traits.Value;
@@ -262,9 +262,9 @@ namespace AGoT.AGoTDB.BusinessObjects
           break;
         case CardType.Location:
           fSummaryInfo = String.Format("[{0}]", Cost.Value);
-          fSummaryInfo += (Income.Value.NonZero()) ? ("+" + Income.Value) : "  ";
-          fSummaryInfo += (Influence.Value.NonZero()) ? String.Format("|{0}|", Influence.Value) : "   ";
-          fSummaryInfo += (Initiative.Value.NonZero()) ? String.Format("<{0}>", Initiative.Value) : "   ";
+          fSummaryInfo += (Income.Value.IsNonZero()) ? ("+" + Income.Value) : "  ";
+          fSummaryInfo += (Influence.Value.IsNonZero()) ? String.Format("|{0}|", Influence.Value) : "   ";
+          fSummaryInfo += (Initiative.Value.IsNonZero()) ? String.Format("<{0}>", Initiative.Value) : "   ";
           if (Traits.Value != "")
             fSummaryInfo += " - " + Traits.Value;
           if (Keywords.Value != "")
@@ -290,9 +290,9 @@ namespace AGoT.AGoTDB.BusinessObjects
         return format2;
       if (format2 == TextFormat.Regular)
         return format1;
-      return new TextFormat(format1.name + "+" + format2.name,
-                            format1.style | format2.style, // merge styles
-                            (format2.color == Color.Black) ? format1.color : format2.color); // non-black color2 is prefered to color1
+      return new TextFormat(format1.Name + "+" + format2.Name,
+        format1.Style | format2.Style, // merge styles
+        (format2.Color == TextFormat.DefaultColor) ? format1.Color : format2.Color); // merge colors with the following rule : color2 is prefered to color1 if color2 is not the default color
     }
 
     /// <summary>
@@ -304,9 +304,9 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// </summary>
     /// <param name="result">The list representing the text on which the formats are applied.</param>
     /// <param name="formats">The list of formats to apply.</param>
-    private static void ApplyFormatsToFormattedText(List<FormattedText> result, List<FormatSection> formats)
+    private static void ApplyFormatsToFormattedText(List<FormattedText> result, IList<FormatSection> formats)
     {
-      for (int i = 0; i < formats.Count; ++i)
+      for (var i = 0; i < formats.Count; ++i)
       {
         // go to the first FormattedText element affected by the format
         int j = 0;
@@ -314,30 +314,30 @@ namespace AGoT.AGoTDB.BusinessObjects
         bool formatAppliesToNext;
         do
         {
-          while (pos + result[j].text.Length < formats[i].begin)
+          while (pos + result[j].Text.Length < formats[i].Begin)
           {
-            pos += result[j].text.Length;
+            pos += result[j].Text.Length;
             j++;
           }
 
-          int relBegin = Math.Max(formats[i].begin - pos, 0); // peut être inférieur à 0 si formatAppliesToNext a précédemment été mis à vrai
-          int relEnd = formats[i].end - pos;
-          if (relEnd > result[j].text.Length)
+          int relBegin = Math.Max(formats[i].Begin - pos, 0); // peut être inférieur à 0 si formatAppliesToNext a précédemment été mis à vrai
+          int relEnd = formats[i].End - pos;
+          if (relEnd > result[j].Text.Length)
           {
-            relEnd = result[j].text.Length;
+            relEnd = result[j].Text.Length;
             formatAppliesToNext = true;
           }
           else
             formatAppliesToNext = false;
 
           // we split the FormattedText element and apply the format to the right portion
-          List<FormattedText> subResult = new List<FormattedText>();
+          var subResult = new List<FormattedText>();
           if (relBegin != 0)
-            subResult.Add(new FormattedText(result[j].text.Substring(0, relBegin), result[j].format));
-          subResult.Add(new FormattedText(result[j].text.Substring(relBegin, relEnd - relBegin),
-                                          MergeTextFormat(result[j].format, formats[i].format)));
-          if (relEnd != result[j].text.Length)
-            subResult.Add(new FormattedText(result[j].text.Substring(relEnd, result[j].text.Length - relEnd), result[j].format));
+            subResult.Add(new FormattedText(result[j].Text.Substring(0, relBegin), result[j].Format));
+          subResult.Add(new FormattedText(result[j].Text.Substring(relBegin, relEnd - relBegin),
+                                          MergeTextFormat(result[j].Format, formats[i].Format)));
+          if (relEnd != result[j].Text.Length)
+            subResult.Add(new FormattedText(result[j].Text.Substring(relEnd, result[j].Text.Length - relEnd), result[j].Format));
 
           // we replace the old element by the new splitted one
           result.RemoveAt(j);
@@ -346,8 +346,8 @@ namespace AGoT.AGoTDB.BusinessObjects
           // we have to adjust the indexes if the we carry on the next part
           if (formatAppliesToNext)
           {
-            if (relBegin != 0) { pos += result[j].text.Length; j++; }
-            pos += result[j].text.Length; j++;
+            if (relBegin != 0) { pos += result[j].Text.Length; ++j; }
+            pos += result[j].Text.Length; ++j;
           }
         }
         while (formatAppliesToNext);
@@ -356,7 +356,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     private static List<FormattedText> FormattedValueStringToFormattedText(FormattedValue<string> value, TextFormat defaultFormat)
     {
-      List<FormattedText> result = new List<FormattedText>();
+      var result = new List<FormattedText>();
       if (value != null)
       {
         result.Add(new FormattedText(value.Value, defaultFormat));
@@ -368,11 +368,11 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     private static List<FormattedText> FormattedValueBoolToFormattedText(FormattedValue<bool> value, string yesValue, string noValue, TextFormat defaultFormat)
     {
-      List<FormattedText> result = new List<FormattedText>();
+      var result = new List<FormattedText>();
       if (value != null)
       {
         if (value.Formats.Count > 0)
-          result.Add(new FormattedText(value.Value ? yesValue : noValue, MergeTextFormat(value.Formats[0].format, defaultFormat)));
+          result.Add(new FormattedText(value.Value ? yesValue : noValue, MergeTextFormat(value.Formats[0].Format, defaultFormat)));
         else
           result.Add(new FormattedText(value.Value ? yesValue : noValue, defaultFormat));
       }
@@ -381,11 +381,11 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     private static List<FormattedText> FormattedValueXIntToFormattedText(FormattedValue<XInt> value, TextFormat defaultFormat)
     {
-      List<FormattedText> result = new List<FormattedText>();
+      var result = new List<FormattedText>();
       if (value != null)
       {
         if (value.Formats.Count > 0)
-          result.Add(new FormattedText(value.Value.ToString(), MergeTextFormat(value.Formats[0].format, defaultFormat)));
+          result.Add(new FormattedText(value.Value.ToString(), MergeTextFormat(value.Formats[0].Format, defaultFormat)));
         else
           result.Add(new FormattedText(value.Value.ToString(), defaultFormat));
       }
@@ -394,7 +394,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     public static string GetTextFromList(List<TagText> tt, Int32 id)
     {
-      int index = tt.FindIndex(delegate(TagText t) { return (t.tag == id); });
+      var index = tt.FindIndex(t => (t.tag == id));
       return index != -1 ? tt[index].text : "";
     }
 
@@ -437,9 +437,9 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>A list of FormattedText elements containing the informations about this card.</returns>
     public List<FormattedText> ToFormattedString()
     {
-      List<FormattedText> result = new List<FormattedText>();
+      var result = new List<FormattedText>();
 
-      TextFormat nameFormat = new TextFormat("name", FontStyle.Bold, Color.Black);
+      var nameFormat = new TextFormat("name", FontStyle.Bold);
 
       result.AddRange(FormattedValueStringToFormattedText(Name, nameFormat));
       result.AddRange(FormattedValueBoolToFormattedText(Unique, " *", "", nameFormat));
@@ -452,7 +452,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       if (Type != null)
       {
         result.Add(new FormattedText(Resource1.TypeText + ": "));
-        result.Add(new FormattedText(GetTypeName(Type != null ? Type.Value : (Int32) CardType.Unknown), (Type != null && Type.Formats.Count > 0)? Type.Formats[0].format : TextFormat.Regular));
+        result.Add(new FormattedText(GetTypeName(Type != null ? Type.Value : (Int32)CardType.Unknown), (Type != null && Type.Formats.Count > 0) ? Type.Formats[0].Format : TextFormat.Regular));
         result.Add(new FormattedText("\r\n"));
       }
       switch (Type != null ? (CardType)Type.Value : CardType.Unknown)
@@ -460,7 +460,7 @@ namespace AGoT.AGoTDB.BusinessObjects
         case CardType.Location:
         case CardType.Attachment:
           result.Add(new FormattedText(Resource1.HouseText + ": "));
-          result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].format : TextFormat.Regular));
+          result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
           result.Add(new FormattedText(Resource1.CostText + ": "));
           result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
@@ -468,12 +468,12 @@ namespace AGoT.AGoTDB.BusinessObjects
           break;
         case CardType.Event:
           result.Add(new FormattedText(Resource1.HouseText + ": "));
-          result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].format : TextFormat.Regular));
+          result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
           break;
         case CardType.Character:
           result.Add(new FormattedText(Resource1.HouseText + ": "));
-          result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].format : TextFormat.Regular));
+          result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
           result.Add(new FormattedText(Resource1.CostText + ": "));
           result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
@@ -531,12 +531,12 @@ namespace AGoT.AGoTDB.BusinessObjects
 
       if (Text != null && Text.Value != "")
       {
-        List<FormattedText> cardText = new List<FormattedText>();
+        var cardText = new List<FormattedText>();
         FormatCardText(Text.Value, ref cardText);
         ApplyFormatsToFormattedText(cardText, Text.Formats);
         result.AddRange(cardText);
       }
-      if (Type != null && Type.Value != (Int32) CardType.Plot)
+      if (Type != null && Type.Value != (Int32)CardType.Plot)
       {
         if (Income.Value.IsX || (Income.Value.Value != 0))
         {
@@ -575,7 +575,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       }
 
       // remove the \r\n from the last line
-      FormattedText lastLine = new FormattedText(result[result.Count - 1].text.TrimEnd('\r', '\n'), result[result.Count - 1].format);
+      var lastLine = new FormattedText(result[result.Count - 1].Text.TrimEnd('\r', '\n'), result[result.Count - 1].Format);
       result.RemoveAt(result.Count - 1);
       result.Add(lastLine);
       return result;
@@ -705,25 +705,25 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// Returns the comparaison relationship between this card and another card.
     /// Both cards must have the same type, otherwise a plain name comparaison is done.
     /// </summary>
-    /// <param name="c">The card to compare this card to.</param>
+    /// <param name="otherCard">The card to compare this card to.</param>
     /// <returns>-1 if this card is before the other card, 0 if they're equal, 1 otherwise</returns>
-    public int CompareOrder(Card c)
+    public int CompareOrder(Card otherCard)
     {
-      if (c.Type != null && Type != null && c.Type.Value == Type.Value)
+      if (otherCard.Type != null && Type != null && otherCard.Type.Value == Type.Value)
       {
         switch (Type.Value)
         {
           case (Int32)CardType.Character:
           case (Int32)CardType.Location:
-          case (Int32)CardType.Attachment: return MultipleCompare(Cost.Value.CompareTo(c.Cost.Value), Name.Value.CompareTo(c.Name.Value));
+          case (Int32)CardType.Attachment: return MultipleCompare(Cost.Value.CompareTo(otherCard.Cost.Value), Name.Value.CompareTo(otherCard.Name.Value));
           default:
           case (Int32)CardType.Event:
           case (Int32)CardType.Agenda:
-          case (Int32)CardType.Title: return Name.Value.CompareTo(c.Name.Value);
-          case (Int32)CardType.Plot: return MultipleCompare(Claim.Value.CompareTo(c.Claim.Value), Income.Value.CompareTo(c.Income.Value), Name.Value.CompareTo(c.Name.Value));
+          case (Int32)CardType.Title: return Name.Value.CompareTo(otherCard.Name.Value);
+          case (Int32)CardType.Plot: return MultipleCompare(Claim.Value.CompareTo(otherCard.Claim.Value), Income.Value.CompareTo(otherCard.Income.Value), Name.Value.CompareTo(otherCard.Name.Value));
         }
       }
-      return Name.Value.CompareTo(c.Name.Value);
+      return Name.Value.CompareTo(otherCard.Name.Value);
     }
 
     /// <summary>
@@ -735,7 +735,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>-1, 0 or 1</returns>
     private static int MultipleCompare(params int[] compResults)
     {
-      for (int i = 0; i < compResults.Length; ++i)
+      for (var i = 0; i < compResults.Length; ++i)
         if (compResults[i] != 0)
           return Math.Sign(compResults[i]);
       return 0;

@@ -43,11 +43,13 @@ namespace AGoT.AGoTDB.Forms
     private String fCurrentFilename; // filename of the deck (non-empty if the deck was loaded or saved)
 
     private int fDeckTreeViewSpaceWidth; // width of a space using the deck tree view font (used to expand the lines)
-    private DeckTreeNodeSorter deckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
+    private readonly DeckTreeNodeSorter deckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
 
     protected internal class TypeNodeInfo {
-      public int width, length, type;
-      public TypeNodeInfo(int aType) { type = aType; }
+      public int Width { get; set; }
+      public int Length { get; set; }
+      public int Type { get; set; }
+      public TypeNodeInfo(int type) { Type = type; }
     }
 
     /// <summary>
@@ -69,7 +71,7 @@ namespace AGoT.AGoTDB.Forms
     /// <summary>
     /// Default form constructor.
     /// </summary>
-    public DeckBuilderForm()
+    private DeckBuilderForm()
     {
       InitializeComponent();
       treeViewDeck.NodeInfo = treeViewDeck.Nodes[0]; // must have been added during design time
@@ -121,15 +123,15 @@ namespace AGoT.AGoTDB.Forms
     private void treeViewDeck_AfterSelect(object sender, TreeViewEventArgs e)
     {
       rtbCardText.Clear();
-      if (isCardNode(e.Node) && (e.Node.Tag != null))
+      if (!isCardNode(e.Node) || (e.Node.Tag == null)) 
+        return;
+      
+      Card card = (Card)e.Node.Tag;
+      foreach (FormattedText ft in card.ToFormattedString())
       {
-        Card card = (Card)e.Node.Tag;
-        foreach (FormattedText ft in card.ToFormattedString())
-        {
-          rtbCardText.SelectionFont = new Font(rtbCardText.SelectionFont, ft.format.style);
-          rtbCardText.SelectionColor = ft.format.color;
-          rtbCardText.AppendText(ft.text);
-        }
+        rtbCardText.SelectionFont = new Font(rtbCardText.SelectionFont, ft.Format.Style);
+        rtbCardText.SelectionColor = ft.Format.Color;
+        rtbCardText.AppendText(ft.Text);
       }
     }
 
@@ -172,22 +174,20 @@ namespace AGoT.AGoTDB.Forms
 
     private void newVersionToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      if (UserSettings.Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true))
+      if (!UserSettings.Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true)) 
+        return;
+      using (var form = new FormNewVersionInfo())
       {
-        using (FormNewVersionInfo form = new FormNewVersionInfo())
-        {
-          if (form.ShowDialog() != DialogResult.OK)
-            return;
-          UserSettings.Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", form.DisplayFormNextTime());
-        }
-        using (RevisionCommentInputForm form = new RevisionCommentInputForm())
-        {
-          if (form.ShowDialog() == DialogResult.OK)
-          {
-            fVersionedDeck.AddNewVersion(form.RevisionComment());
-            UpdateHistoryFromVersionedDeck();
-          }
-        }
+        if (form.ShowDialog() != DialogResult.OK)
+          return;
+        UserSettings.Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", form.DisplayFormNextTime());
+      }
+      using (var form = new RevisionCommentInputForm())
+      {
+        if (form.ShowDialog() != DialogResult.OK) 
+          return;
+        fVersionedDeck.AddNewVersion(form.RevisionComment());
+        UpdateHistoryFromVersionedDeck();
       }
     }
 
@@ -211,7 +211,7 @@ namespace AGoT.AGoTDB.Forms
     #region Deck tree view context menu events (increase/decrease count...)
     private void contextMenuStripTreeView_Opening(object sender, CancelEventArgs e)
     {
-      ContextMenuStrip cms = (ContextMenuStrip)sender;
+      var cms = (ContextMenuStrip)sender;
       TreeNode node = ((TreeView)cms.SourceControl).SelectedNode;
       // disable items if the deck isn't editable or if the current node isn't a card node
       foreach (ToolStripMenuItem mi in contextMenuStripTreeView.Items)
@@ -221,7 +221,7 @@ namespace AGoT.AGoTDB.Forms
 
     private void miIncreaseCount_Click(object sender, EventArgs e)
     {
-      TreeView tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+      var tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
       TreeNode node = tv.SelectedNode;
       if (node.Level == 1) // card node (menuitem should be disabled for other nodes anyway)
       {
@@ -231,7 +231,7 @@ namespace AGoT.AGoTDB.Forms
 
     private void miDecreaseCount_Click(object sender, EventArgs e)
     {
-      TreeView tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+      var tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
       TreeNode node = tv.SelectedNode;
       if (node.Level == 1) // card node (menuitem should be disabled for other nodes anyway)
       {
@@ -258,7 +258,7 @@ namespace AGoT.AGoTDB.Forms
         cbAgenda.SelectedIndex = 0; // no agenda
       else
       {
-        int i = 1;
+        var i = 1;
         while ((i < cbAgenda.Items.Count) && (((Card)cbAgenda.Items[i]).UniversalId != fCurrentDeck.Agenda.UniversalId))
           ++i;
         if (i < cbAgenda.Items.Count)
@@ -280,19 +280,19 @@ namespace AGoT.AGoTDB.Forms
       cbAgenda.Items.Clear();
       cbAgenda.Items.Add("—");
 
-      DataTable cTable = new DataTable();
-      using (OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter(String.Format("SELECT * FROM [{0}] WHERE Type = {1} ORDER BY Name", DatabaseInterface.TableName.Main, (Int32)Card.CardType.Agenda), DatabaseInterface.Singleton.DbConnection))
+      var table = new DataTable();
+      using (var dbDataAdapter = new OleDbDataAdapter(String.Format("SELECT * FROM [{0}] WHERE Type = {1} ORDER BY Name", DatabaseInterface.TableName.Main, (Int32)Card.CardType.Agenda), DatabaseInterface.Singleton.DbConnection))
       {
-        dbDataAdapter.Fill(cTable);
-        for (int i = 1; i < cTable.Rows.Count; ++i)
-          cbAgenda.Items.Add(new Card(cTable.Rows[i]));
+        dbDataAdapter.Fill(table);
+        for (var i = 1; i < table.Rows.Count; ++i)
+          cbAgenda.Items.Add(new Card(table.Rows[i]));
       }
       cbAgenda.SelectedIndex = 0;
     }
 
     private void UpdateTypeNodeText(TreeNode typeNode)
     {
-      int count = 0;
+      var count = 0;
       int maxWidth = 0, maxLength = 0;
 
       foreach (TreeNode node in typeNode.Nodes)
@@ -300,12 +300,12 @@ namespace AGoT.AGoTDB.Forms
         count += ((Card)node.Tag).Quantity;
         Font font = GetNodeFont(node);
         StringPair text = GetCardNodeText(node);
-        maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(text.value1, font).Width);
-        maxLength = Math.Max(maxLength, text.value1.Length);
+        maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(text.Value1, font).Width);
+        maxLength = Math.Max(maxLength, text.Value1.Length);
       }
-      TypeNodeInfo currentInfo = (TypeNodeInfo)typeNode.Tag;
-      currentInfo.width = maxWidth;
-      currentInfo.length = maxLength;
+      var currentInfo = (TypeNodeInfo)typeNode.Tag;
+      currentInfo.Width = maxWidth;
+      currentInfo.Length = maxLength;
 
       Int32 typeNodeValue = Int32.Parse(typeNode.Name);
 
@@ -321,10 +321,10 @@ namespace AGoT.AGoTDB.Forms
         ComputeDeckTreeViewSpaceWidth(cardNode.TreeView);
       StringPair lineText = GetCardNodeText(cardNode);
       Font font = GetNodeFont(cardNode);
-      int textWidth = TextRenderer.MeasureText(lineText.value1, font).Width;
-      int text2Width = TextRenderer.MeasureText(lineText.value2, GetNodeInfoFont(cardNode)).Width;
-      int nbSpacesToAdd = 1 + (((TypeNodeInfo)cardNode.Parent.Tag).width - textWidth + text2Width) / fDeckTreeViewSpaceWidth;
-      cardNode.Text = lineText.value1 + " ".PadRight(nbSpacesToAdd);
+      var textWidth = TextRenderer.MeasureText(lineText.Value1, font).Width;
+      var text2Width = TextRenderer.MeasureText(lineText.Value2, GetNodeInfoFont(cardNode)).Width;
+      var nbSpacesToAdd = 1 + (((TypeNodeInfo)cardNode.Parent.Tag).Width - textWidth + text2Width) / fDeckTreeViewSpaceWidth;
+      cardNode.Text = lineText.Value1 + " ".PadRight(nbSpacesToAdd);
     }
     #endregion
 
@@ -349,16 +349,16 @@ namespace AGoT.AGoTDB.Forms
       rtbDescription.Enabled = fCurrentDeck.Editable;
     }
 
-    private void UpdateTreeViewWithCards(CardTreeView aTreeView, List<Card> aCards)
+    private void UpdateTreeViewWithCards(CardTreeView treeView, List<Card> cards)
     {
-      aTreeView.BeginUpdate();
-      aTreeView.Cards = aCards;
-      aTreeView.Nodes.Clear();
-      aTreeView.Nodes.Add(aTreeView.NodeInfo);
-      for (int i = 0; i < aCards.Count; ++i)
-        AddCardToTreeView(aTreeView, aCards[i], false);
-      aTreeView.EndUpdate();
-      UpdateTabText(aTreeView);
+      treeView.BeginUpdate();
+      treeView.Cards = cards;
+      treeView.Nodes.Clear();
+      treeView.Nodes.Add(treeView.NodeInfo);
+      for (var i = 0; i < cards.Count; ++i)
+        AddCardToTreeView(treeView, cards[i], false);
+      treeView.EndUpdate();
+      UpdateTabText(treeView);
     }
 
     private void UpdateVersionedDeckWithControls()
@@ -371,11 +371,11 @@ namespace AGoT.AGoTDB.Forms
 
     private void UpdateHouseFromControls()
     {
-      int h = 0;
+      var h = 0;
       bool condensed = eclHouse.Condensed; // we'll use it to restore its previous state
       if (condensed)
         eclHouse.Condensed = false; // expand ecl to get access to the items
-      for (int i = 0; i < eclHouse.Items.Count; ++i)
+      for (var i = 0; i < eclHouse.Items.Count; ++i)
         if (eclHouse.GetItemCheckState(i) == CheckState.Checked)
           h += Int32.Parse(((AGoTFilter)eclHouse.Items[i]).Column);
       fCurrentDeck.Houses = h;
@@ -385,13 +385,13 @@ namespace AGoT.AGoTDB.Forms
 
     private void UpdateControlsFromHouse()
     {
-      Int32 h = fCurrentDeck.Houses;
+      var h = fCurrentDeck.Houses;
       bool condensed = eclHouse.Condensed; // we'll use it to restore its previous state
       eclHouse.Condensed = false; // expand ecl to get access to the items
 
-      for (int i = eclHouse.Items.Count - 1; i >= 0; --i) // houses are sorted by increasing value
+      for (var i = eclHouse.Items.Count - 1; i >= 0; --i) // houses are sorted by increasing value
       {
-        Int32 hv = Int32.Parse(((AGoTFilter)eclHouse.Items[i]).Column);
+        var hv = Int32.Parse(((AGoTFilter)eclHouse.Items[i]).Column);
         if (h >= hv)
         {
           eclHouse.SetItemCheckState(i, CheckState.Checked);
@@ -406,8 +406,8 @@ namespace AGoT.AGoTDB.Forms
     private void UpdateHistoryFromVersionedDeck()
     {
       treeViewHistory.Nodes.Clear();
-      Int32 lastVersionIndex = fVersionedDeck.GetVersionsCount() - 1;
-      for (int i = 0; i < lastVersionIndex; ++i)
+      var lastVersionIndex = fVersionedDeck.GetVersionsCount() - 1;
+      for (var i = 0; i < lastVersionIndex; ++i)
         treeViewHistory.Nodes.Insert(0, i.ToString(), String.Format("v{0} {1} {2}: {3}", i, fVersionedDeck.GetVersion(i).LastModifiedDate.ToShortDateString(), fVersionedDeck.GetVersion(i).LastModifiedDate.ToShortTimeString(), fVersionedDeck.GetVersion(i).RevisionComments));
       treeViewHistory.Nodes.Insert(0, lastVersionIndex.ToString(), String.Format("{0} {1} {2}", Resource1.CurrentRevision, fVersionedDeck.GetLastVersion().LastModifiedDate.ToShortDateString(), fVersionedDeck.GetLastVersion().LastModifiedDate.ToShortTimeString()));
     }
@@ -419,50 +419,50 @@ namespace AGoT.AGoTDB.Forms
       return (node.Level == 1);
     }
 
-    private TreeNode AddTypeNode(CardTreeView aTreeView, Int32 type)
+    private TreeNode AddTypeNode(CardTreeView treeView, Int32 type)
     {
       TreeNode typeNode;
 
-      int order = deckTreeNodeSorter.GetTypeOrder(type);
+      var order = deckTreeNodeSorter.GetTypeOrder(type);
       if (order == -1) // type not found in the order list
-        typeNode = aTreeView.Nodes.Add(type.ToString(), Card.GetTypeName(type)); // add it to the end
+        typeNode = treeView.Nodes.Add(type.ToString(), Card.GetTypeName(type)); // add it to the end
       else
       {
         // get the index of the greatest node below the node to add
-        int i = 0;
-        while (i < aTreeView.Nodes.Count)
+        var i = 0;
+        while (i < treeView.Nodes.Count)
         {
-          int nodeOrder = deckTreeNodeSorter.GetTypeOrder(Int32.Parse(aTreeView.Nodes[i].Name));
+          var nodeOrder = deckTreeNodeSorter.GetTypeOrder(Int32.Parse(treeView.Nodes[i].Name));
           if ((nodeOrder == -1) || (nodeOrder > order))
             break;
           ++i;
         }
-        typeNode = aTreeView.Nodes.Insert(i, type.ToString(), Card.GetTypeName(type));
+        typeNode = treeView.Nodes.Insert(i, type.ToString(), Card.GetTypeName(type));
       }
       typeNode.Tag = new TypeNodeInfo(type);
       return typeNode;
     }
 
-    private void AddCardToTreeView(CardTreeView aTreeView, Card card, bool alreadyPresent)
+    private void AddCardToTreeView(CardTreeView treeView, Card card, bool alreadyPresent)
     {
-      aTreeView.BeginUpdate();
-      if (aTreeView.Nodes.Count == 1) // information node
+      treeView.BeginUpdate();
+      if (treeView.Nodes.Count == 1) // information node
       {
-        if (aTreeView.NodeInfo == null)
-          aTreeView.NodeInfo = aTreeView.Nodes[0]; // must have been added during design time
-        aTreeView.Nodes.Remove(aTreeView.NodeInfo);
+        if (treeView.NodeInfo == null)
+          treeView.NodeInfo = treeView.Nodes[0]; // must have been added during design time
+        treeView.Nodes.Remove(treeView.NodeInfo);
       }
       TreeNode root, cardNode;
       if (!alreadyPresent)
       {
-        int cardType = card.Type != null ? card.Type.Value : (Int32)Card.CardType.Unknown; // we may have no type for unknown cards
-        int rootIndex = aTreeView.Nodes.IndexOfKey(cardType.ToString());
+        var cardType = card.Type != null ? card.Type.Value : (Int32)Card.CardType.Unknown; // we may have no type for unknown cards
+        var rootIndex = treeView.Nodes.IndexOfKey(cardType.ToString());
         if (rootIndex == -1)
-          root = AddTypeNode(aTreeView, cardType);
+          root = AddTypeNode(treeView, cardType);
         else
-          root = aTreeView.Nodes[rootIndex];
+          root = treeView.Nodes[rootIndex];
 
-        int i = 0;
+        var i = 0;
         while ((i < root.Nodes.Count) && (card.CompareOrder((Card)root.Nodes[i].Tag) < 0))
           ++i;
 
@@ -472,41 +472,40 @@ namespace AGoT.AGoTDB.Forms
       else
       {
         // we assume that all the nodes that we're going to use exist
-        root = aTreeView.Nodes[aTreeView.Nodes.IndexOfKey(card.Type.Value.ToString())];
+        root = treeView.Nodes[treeView.Nodes.IndexOfKey(card.Type.Value.ToString())];
         cardNode = root.Nodes[root.Nodes.IndexOfKey(card.UniversalId.ToString())];
       }
       // we must set the ToolTipText property here because the ShowNodeToolTips property of the treeview is ignored
       // when the treeView isn't large enough to display the whole node (a tooltip is displayed to show the whole node)
       StringPair text = GetCardNodeText(cardNode);
-      cardNode.ToolTipText = text.value1 + text.value2;
+      cardNode.ToolTipText = text.Value1 + text.Value2;
       UpdateTypeNodeText(root); // update count and column size
       //UpdateCardNodeText(cardNode);
       // we must redraw each node in order to redisplay the nodes - is there another method?
       foreach (TreeNode node in root.Nodes)
         UpdateCardNodeText(node);
       root.Expand();
-      aTreeView.EndUpdate();
-      UpdateTabText(aTreeView); // updates the card count (excluding plots)
+      treeView.EndUpdate();
+      UpdateTabText(treeView); // updates the card count (excluding plots)
     }
 
-    private void SubstractCardFromTreeView(CardTreeView aTreeView, Card card, bool wasLastCopy)
+    private void SubstractCardFromTreeView(CardTreeView treeView, Card card, bool wasLastCopy)
     {
-      TreeNode root, cardNode;
-      aTreeView.BeginUpdate();
-      int rootIndex = aTreeView.Nodes.IndexOfKey(card.Type.Value.ToString());
+      treeView.BeginUpdate();
+      var rootIndex = treeView.Nodes.IndexOfKey(card.Type.Value.ToString());
       if (rootIndex == -1)
         return; // could not find its root
 
-      root = aTreeView.Nodes[rootIndex];
+      TreeNode root = treeView.Nodes[rootIndex];
 
-      int i = 0;
+      var i = 0;
       while ((i < root.Nodes.Count) && (card.UniversalId != ((Card)root.Nodes[i].Tag).UniversalId))
         ++i;
 
       if (i == root.Nodes.Count)
         return; // could not find the card
 
-      cardNode = root.Nodes[i];
+      TreeNode cardNode = root.Nodes[i];
       if (!wasLastCopy)
         cardNode.Tag = card;
       else
@@ -524,7 +523,7 @@ namespace AGoT.AGoTDB.Forms
         // we must set the ToolTipText property here because the ShowNodeToolTips property of the treeview is ignored
         // when the treeView isn't large enough to display the whole node (a tooltip is displayed to show the whole node)
         StringPair text = GetCardNodeText(cardNode);
-        cardNode.ToolTipText = text.value1 + text.value2;
+        cardNode.ToolTipText = text.Value1 + text.Value2;
       }
       if (root != null)
       {
@@ -534,39 +533,39 @@ namespace AGoT.AGoTDB.Forms
         root.Expand();
       }
 
-      if (aTreeView.Nodes.Count == 0) // add the information node
-        aTreeView.Nodes.Add(aTreeView.NodeInfo);
-      aTreeView.EndUpdate();
-      UpdateTabText(aTreeView); // updates the card count (excluding plots)
+      if (treeView.Nodes.Count == 0) // add the information node
+        treeView.Nodes.Add(treeView.NodeInfo);
+      treeView.EndUpdate();
+      UpdateTabText(treeView); // updates the card count (excluding plots)
     }
 
     /// <summary>
     /// Updates the tab text to reflect the card count (excluding plots)
     /// </summary>
-    /// <param name="aTreeView"></param>
-    private void UpdateTabText(CardTreeView aTreeView)
+    /// <param name="treeView"></param>
+    private static void UpdateTabText(CardTreeView treeView)
     {
-      TabPage tp = (TabPage)aTreeView.Parent;
-      int count = 0;
-      foreach (Card c in aTreeView.Cards)
+      var tabPage = (TabPage)treeView.Parent;
+      var count = 0;
+      foreach (Card card in treeView.Cards)
       {
-        if (c.Type != null && c.Type.Value != (Int32)Card.CardType.Plot)
-          count += c.Quantity;
+        if (card.Type != null && card.Type.Value != (Int32)Card.CardType.Plot)
+          count += card.Quantity;
       }
 
-      int index = tp.Text.IndexOf('(');
+      var index = tabPage.Text.IndexOf('(');
       if (index > 0)
-        tp.Text = tp.Text.Substring(0, index - 1);
-      tp.Text = tp.Text + String.Format(" ({0})", count);
+        tabPage.Text = tabPage.Text.Substring(0, index - 1);
+      tabPage.Text = tabPage.Text + String.Format(" ({0})", count);
     }
 
     /// <summary>
     /// Returns the font used to display the node in the treeview.
     /// </summary>
     /// <param name="node">The font</param>
-    private Font GetNodeFont(TreeNode node)
+    private static Font GetNodeFont(TreeNode node)
     {
-      return (node.NodeFont != null) ? node.NodeFont : node.TreeView.Font;
+      return node.NodeFont ?? node.TreeView.Font;
     }
 
     /// <summary>
@@ -574,19 +573,19 @@ namespace AGoT.AGoTDB.Forms
     /// The font is monospace.
     /// </summary>
     /// <returns>The monospace font</returns>
-    private Font GetNodeInfoFont(TreeNode node)
+    private static Font GetNodeInfoFont(TreeNode node)
     {
       return new Font(FontFamily.GenericMonospace, GetNodeFont(node).Size);
     }
 
-    private StringPair GetCardNodeText(TreeNode cardNode)
+    private static StringPair GetCardNodeText(TreeNode cardNode)
     {
-      Card card = (Card)cardNode.Tag;
-      StringPair result = new StringPair(String.Format("{0}x {1}", card.Quantity, card.Name.Value), card.GetSummaryInfo());
+      var card = (Card)cardNode.Tag;
+      var result = new StringPair(String.Format("{0}x {1}", card.Quantity, card.Name.Value), card.GetSummaryInfo());
       if (card.Unique == null)
-        result.value1 += " ?";
+        result.Value1 += " ?";
       else if (card.Unique.Value)
-        result.value1 += String.Format(" * ({0})", card.GetShortSet());
+        result.Value1 += String.Format(" * ({0})", card.GetShortSet());
       return result;
     }
     #endregion
@@ -596,7 +595,7 @@ namespace AGoT.AGoTDB.Forms
     {
       if (isCardNode(e.Node))
       {
-        CardTreeView treeView = (CardTreeView)sender;
+        var treeView = (CardTreeView)sender;
         Font font = GetNodeFont(e.Node);
 
         Color textColor = treeView.ForeColor;
@@ -614,13 +613,13 @@ namespace AGoT.AGoTDB.Forms
         Brush backBrush = new SolidBrush(backColor);
         e.Graphics.FillRectangle(backBrush, e.Node.Bounds);
 
-        int x = e.Bounds.Left + ((TypeNodeInfo)e.Node.Parent.Tag).width; // x of the second column (in pixel)
+        var x = e.Bounds.Left + ((TypeNodeInfo)e.Node.Parent.Tag).Width; // x of the second column (in pixel)
         StringPair text = GetCardNodeText(e.Node);
         // e.Graphics.DrawString produit un affichage trop large (plus large que la taille mesurée avec TextRenderer.MeasureText
         // et plus large également que le rendu standard du treeview. Mais :
         //The text rendering offered by the TextRenderer class is based on GDI text rendering and is not supported for printing from Windows Forms. Instead, use the DrawString methods of the Graphics class.
-        TextRenderer.DrawText(e.Graphics, text.value1, font, new Point(e.Bounds.Left, e.Bounds.Top), textColor);
-        TextRenderer.DrawText(e.Graphics, text.value2, GetNodeInfoFont(e.Node), new Point(x, e.Bounds.Top), textColor);
+        TextRenderer.DrawText(e.Graphics, text.Value1, font, new Point(e.Bounds.Left, e.Bounds.Top), textColor);
+        TextRenderer.DrawText(e.Graphics, text.Value2, GetNodeInfoFont(e.Node), new Point(x, e.Bounds.Top), textColor);
       }
       else
         e.DrawDefault = true;
@@ -689,7 +688,7 @@ namespace AGoT.AGoTDB.Forms
       String previousFilename = fCurrentFilename;
       if ((fCurrentFilename == "") || forceCallToSaveDialog)
       {
-        using (SaveFileDialog fd = new SaveFileDialog())
+        using (var fd = new SaveFileDialog())
         {
           fd.Filter = Resource1.DeckFileFilter;
           fd.ValidateNames = true;
@@ -712,7 +711,7 @@ namespace AGoT.AGoTDB.Forms
     {
       string oldFilename = fCurrentFilename;
       //fVersionedDeck.LoadFromXMLFile("toto.xml"); // for quick debug purpose
-      using (OpenFileDialog fd = new OpenFileDialog())
+      using (var fd = new OpenFileDialog())
       {
         fd.Filter = Resource1.DeckFileFilter;
         if (fd.ShowDialog() != DialogResult.OK)
@@ -770,10 +769,10 @@ namespace AGoT.AGoTDB.Forms
       return result;
     }
 
-    private String ComputeStatsPlots(List<Card> aCards)
+    private static String ComputeStatsPlots(IEnumerable<Card> cards)
     {
-      int maxIncome = 0, minIncome = 20, count = 0, totalIncome = 0;
-      foreach (Card card in aCards)
+      int maxIncome = 0, minIncome = int.MaxValue, count = 0, totalIncome = 0;
+      foreach (Card card in cards)
       {
         if (card.Type != null && card.Type.Value == (Int32)Card.CardType.Plot)
         {
@@ -792,7 +791,7 @@ namespace AGoT.AGoTDB.Forms
 
     private string CurrentDeckToText()
     {
-      StringBuilder text = new StringBuilder();
+      var text = new StringBuilder();
 
       text.Append(lblDeckName.Text).AppendLine(fVersionedDeck.Name);
       text.Append(lblAuthor.Text).AppendLine(fVersionedDeck.Author);
@@ -810,21 +809,21 @@ namespace AGoT.AGoTDB.Forms
       return text.ToString();
     }
 
-    private String TreeViewToText(CardTreeView aTreeView)
+    private static String TreeViewToText(CardTreeView treeView)
     {
       String text = "";
-      if ((aTreeView.Nodes.Count > 1) || (aTreeView.Nodes[0] != aTreeView.NodeInfo)) // not the node info alone
+      if ((treeView.Nodes.Count > 1) || (treeView.Nodes[0] != treeView.NodeInfo)) // not the node info alone
       {
-        foreach (TreeNode typeNode in aTreeView.Nodes)
+        foreach (TreeNode typeNode in treeView.Nodes)
         {
           text += typeNode.Text + "\n";
-          TypeNodeInfo currentInfo = (TypeNodeInfo)typeNode.Tag;
+          var currentInfo = (TypeNodeInfo)typeNode.Tag;
           foreach (TreeNode cardNode in typeNode.Nodes)
           {
             StringPair cardNodeText = GetCardNodeText(cardNode);
-            String curLine = cardNodeText.value1;
-            curLine = "\t" + curLine.PadRight(currentInfo.length + 1);
-            curLine += cardNodeText.value2;
+            String curLine = cardNodeText.Value1;
+            curLine = "\t" + curLine.PadRight(currentInfo.Length + 1);
+            curLine += cardNodeText.Value2;
             text += curLine + "\n";
           }
         }
@@ -842,11 +841,11 @@ namespace AGoT.AGoTDB.Forms
     /// Computes the width in pixel of a space using the deck tree view font.
     /// The width is used to compute the number of spaces to use to enlarge each tree node.
     /// </summary>
-    private void ComputeDeckTreeViewSpaceWidth(TreeView aTreeView)
+    private void ComputeDeckTreeViewSpaceWidth(TreeView treeView)
     {
       // we have to substract two strings to remove the constant part
-      int spaceWidth = TextRenderer.MeasureText(" ", aTreeView.Font).Width;
-      int spaceWidth2 = TextRenderer.MeasureText("  ", aTreeView.Font).Width;
+      var spaceWidth = TextRenderer.MeasureText(" ", treeView.Font).Width;
+      var spaceWidth2 = TextRenderer.MeasureText("  ", treeView.Font).Width;
       fDeckTreeViewSpaceWidth = spaceWidth2 - spaceWidth;
     }
 

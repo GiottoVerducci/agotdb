@@ -56,7 +56,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     public VersionedDeck(VersionedDeck original)
     {
       fDecks = new List<Deck>();
-      for (int i = 0; i < original.fDecks.Count; ++i)
+      for (var i = 0; i < original.fDecks.Count; ++i)
         fDecks.Add(new Deck(original.fDecks[i]));
       Author = original.Author;
       Description = original.Description;
@@ -122,9 +122,9 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>A value indicating if the load was successful or if not, why it wasn't.</returns>
     public DeckLoadResult LoadFromXMLFile(string filename)
     {
-      XmlDocument doc = new XmlDocument();
+      var doc = new XmlDocument();
       string author, description, name;
-      List<Deck> decks = new List<Deck>();
+      var decks = new List<Deck>();
       try
       {
         doc.Load(filename);
@@ -177,7 +177,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       XmlToolBox.AddElementValue(doc, root, "Description", Description);
       XmlToolBox.AddElementValue(doc, root, "Name", Name);
 
-      for (int i = 0; i < fDecks.Count; ++i)
+      for (var i = 0; i < fDecks.Count; ++i)
       {
         XmlElement deckRoot = doc.CreateElement("Deck" + i);
         deckRoot.AppendChild(fDecks[i].ToXML(doc));
@@ -215,17 +215,16 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>True if the two versioned decks are identical by content or both null, false otherwise.</returns>
     public static bool AreEqual(VersionedDeck vdeck1, VersionedDeck vdeck2)
     {
-      bool result = (vdeck1.Author == vdeck2.Author) &&
-                    (vdeck1.Description == vdeck2.Description) &&
-                    (vdeck1.Name == vdeck2.Name) &&
-                    (vdeck1.fDecks.Count == vdeck2.fDecks.Count);
-      int i = 0;
-      while (result && (i < vdeck1.fDecks.Count))
-      {
-        result &= Deck.AreEqual(vdeck1.fDecks[i], vdeck2.fDecks[i]);
-        ++i;
-      }
-      return result;
+      if ((vdeck1.Author != vdeck2.Author) || 
+        (vdeck1.Description != vdeck2.Description) || 
+        (vdeck1.Name != vdeck2.Name) ||
+        (vdeck1.fDecks.Count != vdeck2.fDecks.Count))
+        return false;
+
+      for(var i = 0; i < vdeck1.fDecks.Count; ++i)
+        if (!Deck.AreEqual(vdeck1.fDecks[i], vdeck2.fDecks[i]))
+          return false;
+      return true;
     }
   }
 }

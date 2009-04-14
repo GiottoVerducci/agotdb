@@ -26,16 +26,16 @@ namespace AGoT.AGoTDB.BusinessObjects
   ///</summary>
   public class XInt : IComparable<XInt>
   {
-    public readonly int Value;
-    public readonly bool IsX;
+    public int Value { get; private set; }
+    public bool IsX { get; private set; }
 
     /// <summary>
     /// Initializes a new instance of XInt, representing an integer value. 
     /// </summary>
-    /// <param name="aValue">The value represented.</param>
-    public XInt(int aValue)
+    /// <param name="value">The value represented.</param>
+    public XInt(int value)
     {
-      Value = aValue;
+      Value = value;
       IsX = false;
     }
 
@@ -52,7 +52,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// X values are not equal to 0.
     /// </summary>
     /// <returns>True if the value is X or different from 0, False otherwise.</returns>
-    public bool NonZero()
+    public bool IsNonZero()
     {
       return (IsX || (Value > 0));
     }

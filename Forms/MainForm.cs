@@ -45,9 +45,7 @@ namespace AGoT.AGoTDB.Forms
     private int quickFindIndex; // index of the current quick find result
 
     private readonly DataTable fDataTable = new DataTable();
-    private StringPair fQuery = new StringPair();
-
-    //private List<Form> fDataGridViewForms = new List<Form>();
+    private Query fQuery = new Query();
 
     /// <summary>
     /// The default constructor.
@@ -65,7 +63,7 @@ namespace AGoT.AGoTDB.Forms
     {
       fIsMainForm = true;
       fMainForm = this;
-      fMustClose = (!UserSettings.LoadSettings() || !DatabaseInterface.Singleton.ConnectedToDatabase);
+      fMustClose = (UserSettings.Singleton == null) || !DatabaseInterface.Singleton.ConnectedToDatabase;
     }
 
     /// <summary>
@@ -73,7 +71,7 @@ namespace AGoT.AGoTDB.Forms
     /// </summary>
     public void InitializeViewForm(Object dataTable)
     {
-      int i = 0;
+      var i = 0;
       while(i < splitContainer1.Panel1.Controls.Count)
         if (splitContainer1.Panel1.Controls[i] != dataGridView)
           splitContainer1.Panel1.Controls[i].Parent = null;
@@ -84,10 +82,10 @@ namespace AGoT.AGoTDB.Forms
       dataGridView.DataSource = dataTable;
       menuStrip1.Visible = false;
       moveToANewWindowToolStripMenuItem.Visible = false;
-      Text = String.Format(Resource1.ViewFormTitle, fViewIndex) + " | " + fQuery.value2;
+      Text = String.Format(Resource1.ViewFormTitle, fViewIndex) + " | " + fQuery.HumanQuery;
     }
 
-    private void LoadCardTypeName()
+    private static void LoadCardTypeName()
     {
       DataTable types = DatabaseInterface.Singleton.GetResultFromRequest(String.Format("SELECT * FROM {0}", DatabaseInterface.TableName.Type));
       Card.CardTypeNames = new List<TagText>();
@@ -98,7 +96,7 @@ namespace AGoT.AGoTDB.Forms
       }
     }
 
-    private void LoadHouseName()
+    private static void LoadHouseName()
     {
       DataTable houses = DatabaseInterface.Singleton.GetResultFromRequest(String.Format("SELECT * FROM {0}", DatabaseInterface.TableName.House));
       Card.CardHouseNames = new List<TagText>();
@@ -144,7 +142,7 @@ namespace AGoT.AGoTDB.Forms
     /// </summary>
     /// <param name="i">Must be 0 on the first call</param>
     /// <returns>The expression used by the data column</returns>
-    internal String BuildTypeExpression(int i)
+    private static String BuildTypeExpression(int i)
     {
       if (i < Card.CardTypeNames.Count - 1)
         return String.Format("IIF(Type={0}, '{1}', {2})", Card.CardTypeNames[i].tag, Card.CardTypeNames[i].text, BuildTypeExpression(i + 1));
@@ -156,16 +154,16 @@ namespace AGoT.AGoTDB.Forms
     /// </summary>
     private void CustomizeDataTable()
     {
-      DataColumn houseTempColumn = new DataColumn("HouseTemp", Type.GetType("System.String"));
+      var houseTempColumn = new DataColumn("HouseTemp", Type.GetType("System.String"));
       houseTempColumn.Expression = String.Format("IIF(HouseNeutral, '{0}/', '') + IIF(HouseStark, '{1}/', '') + IIF(HouseLannister, '{2}/', '') + IIF(HouseBaratheon, '{3}/', '') + IIF(HouseGreyjoy, '{4}/', '') + IIF(HouseMartell, '{5}/', '') + IIF(HouseTargaryen, '{6}/', '')", Card.GetHouseName((Int32)Card.CardHouse.Neutral), Card.GetHouseName((Int32)Card.CardHouse.Stark), Card.GetHouseName((Int32)Card.CardHouse.Lannister), Card.GetHouseName((Int32)Card.CardHouse.Baratheon), Card.GetHouseName((Int32)Card.CardHouse.Greyjoy), Card.GetHouseName((Int32)Card.CardHouse.Martell), Card.GetHouseName((Int32)Card.CardHouse.Targaryen));
       fDataTable.Columns.Add(houseTempColumn);
 
-      DataColumn houseColumn = new DataColumn("House", Type.GetType("System.String"));
+      var houseColumn = new DataColumn("House", Type.GetType("System.String"));
       houseColumn.Expression = String.Format("SUBSTRING(HouseTemp, 1, LEN(HouseTemp) - 1)");
       fDataTable.Columns.Add(houseColumn);
       fDataTable.Columns["House"].SetOrdinal(fDataTable.Columns["Name"].Ordinal+1);
 
-      DataColumn typeColumn = new DataColumn("Type ", Type.GetType("System.String"));
+      var typeColumn = new DataColumn("Type ", Type.GetType("System.String"));
       typeColumn.Expression = BuildTypeExpression(0);
       fDataTable.Columns.Add(typeColumn);
       fDataTable.Columns["Type "].SetOrdinal(fDataTable.Columns["Type"].Ordinal + 1);
@@ -176,8 +174,8 @@ namespace AGoT.AGoTDB.Forms
     /// </summary>
     private void UpdateDataTableView()
     {
-      StringPair query = BuildQueryFromControls();
-      if (query.value1 == fQuery.value1) // query hasn't change, so the result has not change neither
+      var query = BuildQueryFromControls();
+      if (query.SqlQuery == fQuery.SqlQuery) // query hasn't change, so the result has not change neither
         return; // nothing to do
 
       Cursor.Current = Cursors.WaitCursor;
@@ -189,7 +187,7 @@ namespace AGoT.AGoTDB.Forms
           selectedRowId = Int32.Parse(((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row["UniversalId"].ToString());
 
         fQuery = query;
-        using (OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter(query.value1, DatabaseInterface.Singleton.DbConnection))
+        using (var dbDataAdapter = new OleDbDataAdapter(query.SqlQuery, DatabaseInterface.Singleton.DbConnection))
         {
           fDataTable.Clear();
           dbDataAdapter.Fill(fDataTable);
@@ -200,7 +198,7 @@ namespace AGoT.AGoTDB.Forms
             fDataTableFirstLoad = false;
           }
 
-          for (int i = 0; i < fDataTable.Columns.Count; ++i)
+          for (var i = 0; i < fDataTable.Columns.Count; ++i)
           {
             string colName = fDataTable.Columns[i].ColumnName;
             if ((colName.IndexOf("Style") != -1) || (colName.IndexOf("Errated") != -1) ||
@@ -216,29 +214,9 @@ namespace AGoT.AGoTDB.Forms
       }
       catch (Exception e)
       {
-        MessageBox.Show("Exception while processing query " + query.value1 + "\n" + e.Message + "\n" + e.StackTrace);
+        MessageBox.Show("Exception while processing query " + query.SqlQuery + "\n" + e.Message + "\n" + e.StackTrace);
       }
       Cursor.Current = Cursors.Default;
-    }
-
-    /// <summary>
-    /// Concatenate a query string to another query string by using the keyword "AND".
-    /// Empty string values are treated correctly.
-    /// </summary>
-    /// <param name="firstQuery">the first query</param>
-    /// <param name="secondQuery">the second query</param>
-    private void AddQuery(ref StringPair firstQuery, StringPair secondQuery)
-    {
-      if (secondQuery.value1 != "")
-      {
-        if (firstQuery.value1 != "")
-        {
-          firstQuery.value1 = firstQuery.value1 + " AND " + secondQuery.value1;
-          firstQuery.value2 = firstQuery.value2 + " " + Resource1.And + " " + secondQuery.value2;
-        }
-        else
-          firstQuery = secondQuery;
-      }
     }
 
     private enum PositiveDataType { LikeValue, ExactValue, Yes, Integer, KeywordValue, TriggerValue };
@@ -247,40 +225,39 @@ namespace AGoT.AGoTDB.Forms
     /// Creates a SQL query/human query pair from the state of the controls.
     /// </summary>
     /// <returns>The SQL query/human query pair reflecting the controls state</returns>
-    private StringPair BuildQueryFromControls()
+    private Query BuildQueryFromControls()
     {
-      StringPair result = new StringPair(String.Format("SELECT * FROM [{0}]", DatabaseInterface.TableName.Main), "");
-      StringPair query = new StringPair();
+      var result = new Query(String.Format("SELECT * FROM [{0}]", DatabaseInterface.TableName.Main), "");
 
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclCardtype, "OR", PositiveDataType.ExactValue));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclHouse, "OR", PositiveDataType.Yes));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclProvides, "AND", PositiveDataType.Integer));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclMecanism, "AND", PositiveDataType.Yes));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclIcon, "AND", PositiveDataType.Yes));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclVirtue, "AND", PositiveDataType.Yes));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclKeyword, "AND", PositiveDataType.KeywordValue));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclTrigger, "OR", PositiveDataType.TriggerValue));
-      AddQuery(ref query, GetFilterFromExtendedCheckedListBox(eclExpansionSet, "OR", PositiveDataType.LikeValue));
+      Query filter = GetFilterFromExtendedCheckedListBox(eclCardtype, "OR", PositiveDataType.ExactValue) +
+                     GetFilterFromExtendedCheckedListBox(eclHouse, "OR", PositiveDataType.Yes) +
+                     GetFilterFromExtendedCheckedListBox(eclProvides, "AND", PositiveDataType.Integer) +
+                     GetFilterFromExtendedCheckedListBox(eclMecanism, "AND", PositiveDataType.Yes) +
+                     GetFilterFromExtendedCheckedListBox(eclIcon, "AND", PositiveDataType.Yes) +
+                     GetFilterFromExtendedCheckedListBox(eclVirtue, "AND", PositiveDataType.Yes) +
+                     GetFilterFromExtendedCheckedListBox(eclKeyword, "AND", PositiveDataType.KeywordValue) +
+                     GetFilterFromExtendedCheckedListBox(eclTrigger, "OR", PositiveDataType.TriggerValue) +
+                     GetFilterFromExtendedCheckedListBox(eclExpansionSet, "OR", PositiveDataType.LikeValue);
 
-      StringPair costOrIncome = GetFilterFromRangeBoxes(tbGoldLow, tbGoldHigh, "Cost");
-      if (costOrIncome.value1 != "")
+      Query costOrIncome = GetFilterFromRangeBoxes(tbGoldLow, tbGoldHigh, "Cost");
+      if (costOrIncome.SqlQuery != "")
       {
-        costOrIncome.value1 = String.Format("(({0}) OR ({1}))", costOrIncome.value1, costOrIncome.value1.Replace("Cost", "Income"));
-        costOrIncome.value2 = costOrIncome.value2.Replace("Cost", Resource1.CostOrIncomeText);
+        costOrIncome.SqlQuery = String.Format("(({0}) OR ({1}))", costOrIncome.SqlQuery, costOrIncome.SqlQuery.Replace("Cost", "Income"));
+        costOrIncome.HumanQuery = costOrIncome.HumanQuery.Replace("Cost", Resource1.CostOrIncomeText);
       }
-      AddQuery(ref query, costOrIncome);
-      AddQuery(ref query, GetFilterFromRangeBoxes(tbInitiativeLow, tbInitiativeHigh, "Initiative"));
-      AddQuery(ref query, GetFilterFromRangeBoxes(tbClaimLow, tbClaimHigh, "Claim"));
-      AddQuery(ref query, GetFilterFromRangeBoxes(tbStrengthLow, tbStrengthHigh, "Strength"));
+      filter = filter +
+              costOrIncome +
+              GetFilterFromRangeBoxes(tbInitiativeLow, tbInitiativeHigh, "Initiative") +
+              GetFilterFromRangeBoxes(tbClaimLow, tbClaimHigh, "Claim") +
+              GetFilterFromRangeBoxes(tbStrengthLow, tbStrengthHigh, "Strength") +
+              GetFilterFromTextBox(tbCardtext, eclCardtextCheck, "Text") +
+              GetFilterFromTextBox(tbTraits, eclTraitCheck, "Traits") +
+              GetFilterFromTextBox(tbName, eclNameCheck, "Name");
 
-      AddQuery(ref query, GetFilterFromTextBox(tbCardtext, eclCardtextCheck, "Text"));
-      AddQuery(ref query, GetFilterFromTextBox(tbTraits, eclTraitCheck, "Traits"));
-      AddQuery(ref query, GetFilterFromTextBox(tbName, eclNameCheck, "Name"));
-
-      if (query.value1 != "")
+      if (filter.SqlQuery != "")
       {
-        result.value1 += " WHERE (" + query.value1 + ")";
-        result.value2 += query.value2;
+        result.SqlQuery += " WHERE (" + filter.SqlQuery + ")";
+        result.HumanQuery += filter.HumanQuery;
       }
       return result;
     }
@@ -297,9 +274,9 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="column">the name of the field that is filtered</param>
     /// <returns>a string containing the filtering expression</returns>
 
-    private StringPair GetFilterFromRangeBoxes(TextBox lowTextBox, TextBox highTextBox, string column)
+    private Query GetFilterFromRangeBoxes(TextBox lowTextBox, TextBox highTextBox, string column)
     {
-      StringPair result = new StringPair();
+      var result = new Query();
       string high = highTextBox.Text.Trim();
       string low = lowTextBox.Text.Trim();
       if ((low == "") && (high == ""))
@@ -307,31 +284,31 @@ namespace AGoT.AGoTDB.Forms
 
       // sql part of the query
       if (low != "")
-        result.value1 = String.Format("({0} >= {1})", column, Int32.Parse(low));
+        result.SqlQuery = String.Format("({0} >= {1})", column, Int32.Parse(low));
       if (high != "")
-        AddQuery(ref result, new StringPair(String.Format("({0} <= {1})", column, Int32.Parse(high)), ""));
+        result = result + new Query(String.Format("({0} <= {1})", column, Int32.Parse(high)), "");
 
-      result.value1 = String.Format("(({0} = -1) OR ({1}))", column, result.value1);
+      result.SqlQuery = String.Format("(({0} = -1) OR ({1}))", column, result.SqlQuery);
 
       // human part of the query
       if (low != "")
       {
         if (high != "")
-          result.value2 = String.Format(Resource1.RangeBetween, column, low, high);
+          result.HumanQuery = String.Format(Resource1.RangeBetween, column, low, high);
         else
-          result.value2 = String.Format(Resource1.RangeGreaterOrLesser, column, ">=", low);
+          result.HumanQuery = String.Format(Resource1.RangeGreaterOrLesser, column, ">=", low);
       }
       else
-        result.value2 = String.Format(Resource1.RangeGreaterOrLesser, column, "<=", high);
+        result.HumanQuery = String.Format(Resource1.RangeGreaterOrLesser, column, "<=", high);
       return result;
     }
 
-    private string EscapeSqlCharacters(string text)
+    private static string EscapeSqlCharacters(string text)
     {
       return EscapeSqlCharacters(text, true);
     }
 
-    private string EscapeSqlCharacters(string text, bool escapePercent)
+    private static string EscapeSqlCharacters(string text, bool escapePercent)
     {
       string result = text.Replace("[", "[[]").Replace("'", "''").Replace("\"", "\"\"");
       if (escapePercent)
@@ -350,39 +327,29 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="logicalOperator">Indicates the combination between the choices</param>
     /// <param name="positiveDataType">The type of result expected to make a selection positive</param>
     /// <returns>A query which can be used in a SQL query</returns>
-    private StringPair GetFilterFromExtendedCheckedListBox(ExtendedCheckedListBox clb, string logicalOperator, PositiveDataType positiveDataType)
+    private Query GetFilterFromExtendedCheckedListBox(ExtendedCheckedListBox clb, string logicalOperator, PositiveDataType positiveDataType)
     {
-      StringPair result = new StringPair();
+      var result = new Query();
 
-      List<Object> checkedItems = clb.GetItemsByState(CheckState.Checked);
-      result += GetFilterFromItems(checkedItems, true, logicalOperator, positiveDataType);
+      // included values
+      result += GetFilterFromItems(clb.GetItemsByState(CheckState.Checked), true, logicalOperator, positiveDataType);
+      // excluded values
+      result += GetFilterFromItems(clb.GetItemsByState(CheckState.Indeterminate), false, logicalOperator, positiveDataType);
 
-      if (result.value1 != "")
-      {
-        result.value1 = result.value1.Substring(0, result.value1.LastIndexOf(' ')); // remove the last logical operator
-        result.value1 += " AND"; //logicalOperator == "OR" ? " AND" : " OR"; // add the opposite logical operator
-      }
-
-      checkedItems = clb.GetItemsByState(CheckState.Indeterminate);
-      result += GetFilterFromItems(checkedItems, false, logicalOperator, positiveDataType);
-
-      if (result.value1 != "")
-      {
-        result.value1 = result.value1.Substring(0, result.value1.LastIndexOf(' ')); // remove the last logical operator
-        result.value1 = "(" + result.value1.Trim() + ")";
-      }
+      if (result.SqlQuery != "")
+        result.SqlQuery = "(" + result.SqlQuery.Trim() + ")";
       return result;
     }
 
-    private StringPair GetFilterFromItems(List<Object> items, bool include, string logicalOperator, PositiveDataType positiveDataType)
+    private static Query GetFilterFromItems(IList<object> items, bool include, string logicalOperator, PositiveDataType positiveDataType)
     {
-      StringPair result = new StringPair();
+      var result = new Query();
       string prefix = include ? "" : "NOT ";
       string expectedYes = include ? "YES" : "NO";
       if (!include)
         logicalOperator = "AND";
 
-      for (int i = 0; i < items.Count; ++i)
+      for (var i = 0; i < items.Count; ++i)
       {
         AGoTFilter filter = (AGoTFilter)items[i];
 
@@ -409,34 +376,38 @@ namespace AGoT.AGoTDB.Forms
         }
         if (!include)
           subresult = String.Format(" (({0} IS NULL) OR {1})", filter.Column, subresult);
-        result.value1 += subresult + " " + logicalOperator;
+        result.SqlQuery += subresult + " " + logicalOperator;
 
         // human part of the query
-        result.value2 += ((include) ? "" : "-") + filter + " ";
+        result.HumanQuery += ((include) ? "" : "-") + filter + " ";
       }
+      if (result.SqlQuery != "")
+        result.SqlQuery = result.SqlQuery.Substring(0, result.SqlQuery.LastIndexOf(' ')); // remove the last logical operator
       return result;
     }
 
-    private StringPair GetFilterFromTextBox(TextBox textBox, ExtendedCheckBox checkBox, string column)
+    private static Query GetFilterFromTextBox(TextBox textBox, ExtendedCheckBox checkBox, string column)
     {
       if (checkBox.CheckState == CheckState.Unchecked) // no filter to apply
-        return new StringPair();
+        return new Query();
 
       string[] filters = textBox.Text.Split(';');
-      List<string> included = new List<string>(); // items that must appear in the query result
-      List<string> excluded = new List<string>(); // items that must not appear in the query result
+      List<string> included; // items that must appear in the query result
+      List<string> excluded; // items that must not appear in the query result
 
       // add each filter to the right list, depending on the general mode defined by the checkbox
       // and on each individual "+" or "-" modifier
-      GetIncludedAndExcluded(filters, ref included, ref excluded, checkBox.CheckState == CheckState.Indeterminate);
+      GetIncludedAndExcluded(filters, out included, out excluded, checkBox.CheckState == CheckState.Indeterminate);
       return BuildIncludeAndExcludeQueryFromLists(included, excluded, column);
     }
 
-    private void GetIncludedAndExcluded(string[] filters, ref List<string> included, ref List<string> excluded, bool reversed)
+    private static void GetIncludedAndExcluded(string[] filters, out List<string> included, out List<string> excluded, bool reversed)
     {
+      included = new List<string>();
+      excluded = new List<string>();
       // REMARK: trailing space are removed.
       // TODO: leave trailing space between quotes?
-      for (int i = 0; i < filters.Length; ++i)
+      for (var i = 0; i < filters.Length; ++i)
       {
         string current = filters[i].Trim();
         if (current == "")
@@ -464,26 +435,26 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="excluded">the list of items that must not appear</param>
     /// <param name="column">the column on which the filter is applied</param>
     /// <returns></returns>
-    private StringPair BuildIncludeAndExcludeQueryFromLists(List<string> included, List<string> excluded, string column)
+    private static Query BuildIncludeAndExcludeQueryFromLists(IList<string> included, IList<string> excluded, string column)
     {
-      StringPair result = new StringPair();
+      var result = new Query();
 
-      for (int i = 0; i < included.Count; ++i)
+      for (var i = 0; i < included.Count; ++i)
       {
-        result.value1 += String.Format(" ({0} LIKE '%{1}%') AND", column, included[i]);
-        result.value2 += "+" + included[i] + " "; // human form of the query
+        result.SqlQuery += String.Format(" ({0} LIKE '%{1}%') AND", column, included[i]);
+        result.HumanQuery += "+" + included[i] + " "; // human form of the query
       }
-      for (int i = 0; i < excluded.Count; ++i)
+      for (var i = 0; i < excluded.Count; ++i)
       {
-        result.value1 += String.Format(" (NOT {0} LIKE '%{1}%') AND", column, excluded[i]);
-        result.value2 += "-" + excluded[i] + " "; // human form of the query
+        result.SqlQuery += String.Format(" (NOT {0} LIKE '%{1}%') AND", column, excluded[i]);
+        result.HumanQuery += "-" + excluded[i] + " "; // human form of the query
       }
 
-      if (result.value1 != "")
+      if (result.SqlQuery != "")
       {
-        result.value1 = result.value1.Substring(0, result.value1.LastIndexOf(' ')); // remove the last logical operator
-        result.value1 = "(" + result.value1.Trim() + ")";
-        result.value2 = column + " " + result.value2; // human form of the query
+        result.SqlQuery = result.SqlQuery.Substring(0, result.SqlQuery.LastIndexOf(' ')); // remove the last logical operator
+        result.SqlQuery = "(" + result.SqlQuery.Trim() + ")";
+        result.HumanQuery = column + " " + result.HumanQuery; // human form of the query
       }
 
       return result;
@@ -502,21 +473,21 @@ namespace AGoT.AGoTDB.Forms
       UpdateDataTableView();
     }
 
-    private void ClearCheckListBoxes(params ExtendedCheckedListBox[] items)
+    private static void ClearCheckListBoxes(params ExtendedCheckedListBox[] items)
     {
-      for (int i = 0; i < items.Length; ++i)
+      for (var i = 0; i < items.Length; ++i)
         items[i].ClearCheckBoxes();
     }
 
-    private void ClearCheckBoxes(params ExtendedCheckBox[] items)
+    private static void ClearCheckBoxes(params ExtendedCheckBox[] items)
     {
-      for (int i = 0; i < items.Length; ++i)
+      for (var i = 0; i < items.Length; ++i)
         items[i].Checked = false;
     }
 
-    private void ClearTextBoxes(params TextBox[] items)
+    private static void ClearTextBoxes(params TextBox[] items)
     {
-      for (int i = 0; i < items.Length; ++i)
+      for (var i = 0; i < items.Length; ++i)
         items[i].Text = "";
     }
 
@@ -537,23 +508,22 @@ namespace AGoT.AGoTDB.Forms
 
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      using (AboutForm about = new AboutForm())
+      using (var about = new AboutForm())
         about.ShowDialog();
     }
 
     private void tbLowHigh_TextChanged(object sender, EventArgs e)
     {
-      if (((TextBox)sender).Tag == null) // to avoid reentrance
-      {
-        string text = ((TextBox)sender).Text;
-        string newText = "";
-        for (int i = 0; i < text.Length; ++i)
-          if ((text[i] >= '0') && (text[i] <= '9'))
-            newText += text[i];
-        ((TextBox)sender).Tag = 0;
-        ((TextBox)sender).Text = newText;
-        ((TextBox)sender).Tag = null;
-      }
+      if (((TextBox)sender).Tag != null) // to avoid reentrance
+        return;
+      string text = ((TextBox)sender).Text;
+      string newText = "";
+      for (var i = 0; i < text.Length; ++i)
+        if ((text[i] >= '0') && (text[i] <= '9'))
+          newText += text[i];
+      ((TextBox)sender).Tag = 0;
+      ((TextBox)sender).Text = newText;
+      ((TextBox)sender).Tag = null;
     }
 
     private void eclCheck_CheckStateChanged(object sender, EventArgs e)
@@ -570,19 +540,18 @@ namespace AGoT.AGoTDB.Forms
     /// <returns>True if a row was selected, False otherwise.</returns>
     private bool SelectRow(int rowId)
     {
-      Int32 curId;
-      for (int i = 0; i < dataGridView.Rows.Count; ++i)
+      for (var i = 0; i < dataGridView.Rows.Count; ++i)
       {
-        curId = Int32.Parse(((DataRowView)dataGridView.Rows[i].DataBoundItem).Row["UniversalId"].ToString());
-        if (curId == rowId)
-        {
-          dataGridView.ClearSelection();
-          dataGridView.Rows[i].Selected = true;
-          // scroll in the view in order to have the selected row centered
-          int displayedRowsCount = dataGridView.Height / dataGridView.RowTemplate.Height;
-          dataGridView.FirstDisplayedScrollingRowIndex = Math.Max(0, i - (displayedRowsCount / 2) + 1);
-          return true;
-        }
+        int curId = Int32.Parse(((DataRowView)dataGridView.Rows[i].DataBoundItem).Row["UniversalId"].ToString());
+        if (curId != rowId) 
+          continue;
+        
+        dataGridView.ClearSelection();
+        dataGridView.Rows[i].Selected = true;
+        // scroll in the view in order to have the selected row centered
+        int displayedRowsCount = dataGridView.Height / dataGridView.RowTemplate.Height;
+        dataGridView.FirstDisplayedScrollingRowIndex = Math.Max(0, i - (displayedRowsCount / 2) + 1);
+        return true;
       }
       return false;
     }
@@ -595,11 +564,10 @@ namespace AGoT.AGoTDB.Forms
 
     private void btnQuickFindNext_Click(object sender, EventArgs e)
     {
-      if ((quickFindRows != null) && (quickFindRows.Length > 0))
-      {
-        quickFindIndex = (quickFindIndex + 1) % quickFindRows.Length;
-        SelectCurrentQuickFindResult();
-      }
+      if ((quickFindRows == null) || (quickFindRows.Length <= 0))
+        return;
+      quickFindIndex = (quickFindIndex + 1) % quickFindRows.Length;
+      SelectCurrentQuickFindResult();
     }
 
     /// <summary>
@@ -629,19 +597,19 @@ namespace AGoT.AGoTDB.Forms
 
     private void saveSelectionToTextFileToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      using (SaveFileDialog fd = new SaveFileDialog())
+      using (var fd = new SaveFileDialog())
       {
         fd.Filter = Resource1.ExportSaveDialogFilter;
         fd.FileName = Resource1.ExportDefaultFilename;
         if (fd.ShowDialog() == DialogResult.OK)
         {
-          List<Card> entries = new List<Card>();
-          for (int i = 0; i < dataGridView.Rows.Count; ++i)
+          var entries = new List<Card>();
+          for (var i = 0; i < dataGridView.Rows.Count; ++i)
             entries.Add(new Card(((DataRowView)dataGridView.Rows[i].DataBoundItem).Row));
 
-          using (StreamWriter sw = new StreamWriter(fd.FileName, false, System.Text.Encoding.Default))
+          using (var sw = new StreamWriter(fd.FileName, false, System.Text.Encoding.Default))
           {
-            for (int i = 0; i < entries.Count; ++i)
+            for (var i = 0; i < entries.Count; ++i)
             {
               sw.WriteLine(entries[i].ToPlainFullString());
               sw.WriteLine();
@@ -663,17 +631,17 @@ namespace AGoT.AGoTDB.Forms
 
     private void moveToANewWindowToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      MainForm form = new MainForm();
+      var form = new MainForm();
       fViewIndex++;
-      form.fQuery = new StringPair(fQuery.value1, fQuery.value2);
+      form.fQuery = new Query(fQuery.SqlQuery, fQuery.HumanQuery);
       form.InitializeViewForm(fDataTable.Copy());
 
       // keep a reference to the window in order to display it in the window menu
       form.Show();
       //fDataGridViewForms.Add(form);
-      ToolStripMenuItem item = new ToolStripMenuItem(form.Text);
+      var item = new ToolStripMenuItem(form.Text);
       item.Tag = form;
-      item.Click += new EventHandler(WindowsViewitem_Click);
+      item.Click += WindowsViewitem_Click;
       windowToolStripMenuItem.DropDownItems.Add(item);
     }
 
@@ -684,7 +652,7 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="e">event arguments</param>
     void WindowsViewitem_Click(object sender, EventArgs e)
     {
-      Form form = (Form)((ToolStripMenuItem)sender).Tag;
+      var form = (Form)((ToolStripMenuItem)sender).Tag;
       form.Show();
       if (form.WindowState == FormWindowState.Minimized)
         form.WindowState = FormWindowState.Normal;
@@ -730,12 +698,12 @@ namespace AGoT.AGoTDB.Forms
 
     private void ShowCardDetails(DataRow row)
     {
-      Card card = new Card(row);
+      var card = new Card(row);
       foreach (FormattedText ft in card.ToFormattedString())
       {
-        rtbCardDetails.SelectionFont = new Font(rtbCardDetails.SelectionFont, ft.format.style);
-        rtbCardDetails.SelectionColor = ft.format.color;
-        rtbCardDetails.AppendText(ft.text);
+        rtbCardDetails.SelectionFont = new Font(rtbCardDetails.SelectionFont, ft.Format.Style);
+        rtbCardDetails.SelectionColor = ft.Format.Color;
+        rtbCardDetails.AppendText(ft.Text);
       }
     }
 
@@ -751,13 +719,12 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="addCard"></param>
     private void AddCardToDeckOrSide(CardOperation addCard)
     {
-      if (dataGridView.SelectedRows.Count != 0)
-      {
-        DataRow row = ((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row;
-        Card card = new Card(row);
-        if (!addCard(card))
-          MessageBox.Show(Resource1.WarnImpossibleToAddCard, Resource1.WarnImpossibleToAddCardTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-      }
+      if (dataGridView.SelectedRows.Count == 0) 
+        return;
+      DataRow row = ((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row;
+      var card = new Card(row);
+      if (!addCard(card))
+        MessageBox.Show(Resource1.WarnImpossibleToAddCard, Resource1.WarnImpossibleToAddCardTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
     }
 
     private void dataGridView_DoubleClick(object sender, EventArgs e)
@@ -799,43 +766,12 @@ namespace AGoT.AGoTDB.Forms
 
     private void RemoveFormFromWindowMenu(MainForm form)
     {
-      for (int i = 0; i < windowToolStripMenuItem.DropDownItems.Count; ++i)
+      for (var i = 0; i < windowToolStripMenuItem.DropDownItems.Count; ++i)
         if (windowToolStripMenuItem.DropDownItems[i].Tag == form)
         {
           windowToolStripMenuItem.DropDownItems.RemoveAt(i);
           return;
         }
-    }
-
-  }
-
-  public class AGoTFilter
-  {
-    private readonly string longName; // value used for the display
-    private readonly string column;
-    private readonly string shortName; // "true" value used in the database
-
-    public string LongName { get { return longName; } }
-    public string Column { get { return column; } }
-    public string ShortName { get { return shortName; } }
-
-    public AGoTFilter(string aLongName, string aColumn)
-    {
-      longName = aLongName;
-      shortName = aLongName;
-      column = aColumn;
-    }
-
-    public AGoTFilter(string aLongName, string aColumn, string aShortName)
-    {
-      longName = aLongName;
-      column = aColumn;
-      shortName = aShortName;
-    }
-
-    public override string ToString()
-    {
-      return longName;
     }
   }
 }
