@@ -30,14 +30,24 @@ namespace AGoT.AGoTDB.BusinessObjects
   /// </summary>
   public struct FormatSection
   {
-    public int begin, end;
-    public TextFormat format;
+    /// <summary>
+    /// The index of the first (included) character of the section.
+    /// </summary>
+    public int Begin { get; private set; }
+    /// <summary>
+    /// The index of the last (included) character of the section.
+    /// </summary>
+    public int End { get; private set; }
+    /// <summary>
+    /// The text format of the section.
+    /// </summary>
+    public TextFormat Format { get; private set; }
 
-    public FormatSection(int idxBegin, int idxEnd, TextFormat aFormat)
+    public FormatSection(int begin, int end, TextFormat format) : this()
     {
-      begin = idxBegin;
-      end = idxEnd;
-      format = aFormat;
+      Begin = begin;
+      End = end;
+      Format = format;
     }
 
     /// Styles are: errata (in human mode: {errata}), trait (~trait~)
@@ -45,7 +55,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// For non-text column, start and stop are ignored. The style is applied to the whole field
     public override String ToString()
     {
-      return String.Format("{0}, {1}-{2}", format.name, begin, end);
+      return String.Format("{0}, {1}-{2}", Format.Name, Begin, End);
     }
   }
 }

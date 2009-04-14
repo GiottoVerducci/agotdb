@@ -22,36 +22,42 @@ using Heelana;
 
 namespace AGoT.AGoTDB.BusinessObjects
 {
-  class UserSettings
+  public sealed class UserSettings
   {
     public const string SettingsFilename = "AGoTDB.xml";
-    private static readonly Object SingletonLock = new Object();
-    private static Settings fSettings;
+    private static readonly Settings fSettings = LoadSettings();
+
+    // Explicit static constructor to tell C# compiler
+    // not to mark type as beforefieldinit (for singleton template implementation)
+    static UserSettings()
+    {
+    }
+
+    private UserSettings()
+    {
+    }
 
     /// <summary>
     /// Gets the unique shared singleton instance of this class.
     /// </summary>
     public static Settings Singleton
     {
-      get
-      {
-        lock (SingletonLock)
-        {
-          if (fSettings == null)
-            LoadSettings();
-          return fSettings;
-        }
-      }
+      get { return fSettings; }
     }
 
     /// <summary>
     /// Load the application settings stored in the xml configuration file.
     /// </summary>
-    /// <returns>True if the method succeeds, false otherwise.</returns>
-    public static bool LoadSettings()
+    private static Settings LoadSettings()
     {
-      fSettings = new Settings(SettingsFilename);
-      return true;
+      try
+      {
+        return new Settings(SettingsFilename);
+      }
+      catch(Exception)
+      {
+        return null;
+      }
     }
   }
 }

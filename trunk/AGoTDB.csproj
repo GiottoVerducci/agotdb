@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\FormattedText.cs" />
+    <Compile Include="BusinessObjects\Query.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +78,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="BusinessObjects\DeckTreeNodeSorter.cs" />
+    <Compile Include="BusinessObjects\AGoTFilter.cs" />
     <Compile Include="Forms\DrawSimulatorForm.cs">
       <SubType>Form</SubType>
     </Compile>

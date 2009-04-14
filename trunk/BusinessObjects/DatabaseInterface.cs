@@ -31,25 +31,20 @@ namespace AGoT.AGoTDB.BusinessObjects
   /// <summary>
   /// Provides an interface with the card database.
   /// </summary>
-  public class DatabaseInterface
+  public sealed class DatabaseInterface
   {
-    private static readonly Object SingletonLock = new Object();
-    private static DatabaseInterface fSingleton;
+    private static readonly DatabaseInterface fSingleton = new DatabaseInterface();
+
+    // Explicit static constructor to tell C# compiler
+    // not to mark type as beforefieldinit (for singleton template implementation)
+    static DatabaseInterface() { }
 
     /// <summary>
     /// Gets the unique shared singleton instance of this class.
     /// </summary>
     public static DatabaseInterface Singleton
     {
-      get
-      {
-        lock (SingletonLock)
-        {
-          if (fSingleton == null)
-            fSingleton = new DatabaseInterface();
-          return fSingleton;
-        }
-      }
+      get { return fSingleton; }
     }
 
     private OleDbConnection fHDbConnection; // human database
@@ -73,10 +68,10 @@ namespace AGoT.AGoTDB.BusinessObjects
       public const string Virtue = "TableVirtue";
     }
 
-    private bool fConnectedToDatabase = false;
     public bool ConnectedToDatabase
     {
-      get { return fConnectedToDatabase; }
+      get;
+      private set;
     }
 
     public OleDbConnection DbConnection
@@ -92,25 +87,25 @@ namespace AGoT.AGoTDB.BusinessObjects
           return;
         if (!ConnectToExtendedDatabase())
           return;
-        fConnectedToDatabase = true; // required by ConvertDatabase
+        ConnectedToDatabase = true; // required by ConvertDatabase
         if (ConvertDatabase())
         {
           UserSettings.Singleton.WriteBool("Startup", "CreateExtendedDB", false);
           UserSettings.Singleton.Save();
-          fConnectedToDatabase = ConnectToExtendedDatabase();
+          ConnectedToDatabase = ConnectToExtendedDatabase();
         }
         else
-          fConnectedToDatabase = false;
+          ConnectedToDatabase = false;
       }
       else
-        fConnectedToDatabase = ConnectToExtendedDatabase();
+        ConnectedToDatabase = ConnectToExtendedDatabase();
     }
 
     /// <summary>
     /// Establishes a connection to the database.
     /// </summary>
     /// <returns>True if the method succeeds, false otherwise</returns>
-    private bool ConnectToDatabase(ref OleDbConnection aDbConnection, string dbFilename)
+    private bool ConnectToDatabase(ref OleDbConnection dbConnection, string dbFilename)
     {
       // There is not a 64 bit version of jet that is why there's an error under winxp64.
       // To force your app to use the 32 bit change the target cpu to x86 in the advanced compiler options.
@@ -120,9 +115,9 @@ namespace AGoT.AGoTDB.BusinessObjects
       // "I used regsvr32 with  the five dll's under the Jet 4.0 OLD DB provider and it worked for me."
       try
       {
-        aDbConnection = new OleDbConnection();
-        aDbConnection.ConnectionString = String.Format(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=""|DataDirectory|\{0}""", dbFilename);
-        aDbConnection.Open();
+        dbConnection = new OleDbConnection();
+        dbConnection.ConnectionString = String.Format(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=""|DataDirectory|\{0}""", dbFilename);
+        dbConnection.Open();
         return true;
       }
       catch (FileNotFoundException)
@@ -180,10 +175,10 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     private DataTable GetResultFromRequest(string request, OleDbConnection aDbConnection)
     {
-      DataTable table = new DataTable();
+      var table = new DataTable();
       if (ConnectedToDatabase)
       {
-        using (OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter(request, aDbConnection))
+        using (var dbDataAdapter = new OleDbDataAdapter(request, aDbConnection))
         {
           dbDataAdapter.Fill(table);
         }
@@ -218,13 +213,13 @@ namespace AGoT.AGoTDB.BusinessObjects
       query = String.Format("SELECT * FROM [{0}]", TableName.Main);
       DataTable HumanData = GetResultFromRequest(query, fHDbConnection);
 
-      using (OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter(query, fDbConnection))
+      using (var dbDataAdapter = new OleDbDataAdapter(query, fDbConnection))
       {
-        OleDbCommandBuilder builder = new OleDbCommandBuilder(dbDataAdapter);
+        var builder = new OleDbCommandBuilder(dbDataAdapter);
         builder.QuotePrefix = "[";
         builder.QuoteSuffix = "]";
 
-        DataSet fDataSet = new DataSet();
+        var fDataSet = new DataSet();
         dbDataAdapter.Fill(fDataSet);
 
         foreach (DataRow row in HumanData.Rows)
@@ -261,14 +256,14 @@ namespace AGoT.AGoTDB.BusinessObjects
     {
       string value = row[columnName].ToString();
 
-      List<int> bounds = new List<int>();
-      List<TextFormat> formats = new List<TextFormat>();
+      var bounds = new List<int>();
+      var formats = new List<TextFormat>();
 
-      List<char> special = new List<char>();
+      var special = new List<char>();
       string newValue = "";
 
       int dec = 0;
-      for (int i = 0; i < value.Length; ++i)
+      for (var i = 0; i < value.Length; ++i)
       {
         bool boundChar = true;
         switch (value[i])
@@ -299,9 +294,9 @@ namespace AGoT.AGoTDB.BusinessObjects
       if (special.Count != 0)
         throw new Exception(String.Format("Mismatch in database: {0} formatting characters left, column = {1}, value = {2}", special.Count, columnName, value));
 
-      List<FormatSection> formatSections = new List<FormatSection>();
-      for(int i = 0; i < formats.Count; ++i)
-        formatSections.Add(new FormatSection(bounds[i * 2], bounds[i * 2 + 1], formats[i]));
+      var formatSections = new List<FormatSection>();
+      for (var i = 0; i < formats.Count; ++i)
+        formatSections.Add(new FormatSection(bounds[i*2], bounds[i*2 + 1], formats[i]));
       return new FormattedValue<string>(newValue, formatSections);
     }
 
@@ -324,13 +319,15 @@ namespace AGoT.AGoTDB.BusinessObjects
       string[] values = stringValue.Value.Split('/');
 
       int intValue = 0;
-      List<FormatSection> formatSections = new List<FormatSection>();
+      var formatSections = new List<FormatSection>();
       if (stringValue.Formats.Count != 0)
         formatSections.Add(new FormatSection(0, 0, Card.ErrataFormat));
 
-      for (int i = 0; i < values.Length; ++i)
+      for (var i = 0; i < values.Length; ++i)
       {
-        DataTable dt = GetResultFromRequest(String.Format("SELECT Id FROM {0} WHERE Value LIKE '{1}'", refTableName, values[i]), fHDbConnection);
+        DataTable dt =
+          GetResultFromRequest(String.Format("SELECT Id FROM {0} WHERE Value LIKE '{1}'", refTableName, values[i]),
+                               fHDbConnection);
         intValue += Int32.Parse(dt.Rows[0]["Id"].ToString());
       }
 
@@ -353,7 +350,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       bool? bvalue = null;
       if (value != "")
         bvalue = (value == "yes");
-      List<FormatSection> formatSections = new List<FormatSection>();
+      var formatSections = new List<FormatSection>();
       if (stringValue.Formats.Count != 0)
         formatSections.Add(new FormatSection(0, 0, Card.ErrataFormat));
       return new FormattedValue<bool?>(bvalue, formatSections);
@@ -374,7 +371,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
       XInt xvalue = (value == "") ? null : ((value == "x") ? new XInt() : new XInt(Int32.Parse(value)));
 
-      List<FormatSection> formatSections = new List<FormatSection>();
+      var formatSections = new List<FormatSection>();
       if (stringValue.Formats.Count != 0)
         formatSections.Add(new FormatSection(0, 0, Card.ErrataFormat));
       return new FormattedValue<XInt>(xvalue, formatSections);
@@ -498,21 +495,21 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <param name="ecb">The checkbox associated to the textbox, so it can be checked automatically</param>
     public void UpdateFilterMenu(ToolStripMenuItem mi, string tableName, TextBox tb, ExtendedCheckBox ecb)
     {
-      DataTable cTable = GetResultFromRequest(String.Format("SELECT * FROM [{0}] ORDER BY Id", tableName));
-      for (int i = 1; i < cTable.Rows.Count; ++i)
+      DataTable table = GetResultFromRequest(String.Format("SELECT * FROM [{0}] ORDER BY Id", tableName));
+      for (var i = 1; i < table.Rows.Count; ++i)
       {
-        ToolStripMenuItem cItem = new ToolStripMenuItem(cTable.Rows[i]["Value"].ToString(), null,
-                                                        delegate(object sender, EventArgs e)
-                                                          {
-                                                            if (tb.Text == "")
-                                                              tb.Text = ((ToolStripMenuItem)sender).Tag.ToString();
-                                                            else
-                                                              tb.Text += ";" + ((ToolStripMenuItem)sender).Tag;
-                                                            if (ecb.CheckState == CheckState.Unchecked)
-                                                              ecb.CheckState = CheckState.Checked;
-                                                          });
-        cItem.Tag = cTable.Rows[i]["Filter"].ToString();
-        mi.DropDownItems.Add(cItem);
+        var item = new ToolStripMenuItem(table.Rows[i]["Value"].ToString(), null,
+          delegate(object sender, EventArgs e)
+          {
+            if (String.IsNullOrEmpty(tb.Text))
+              tb.Text = ((ToolStripMenuItem)sender).Tag.ToString();
+            else
+              tb.Text += ";" + ((ToolStripMenuItem)sender).Tag;
+            if (ecb.CheckState == CheckState.Unchecked)
+              ecb.CheckState = CheckState.Checked;
+          });
+        item.Tag = table.Rows[i]["Filter"].ToString();
+        mi.DropDownItems.Add(item);
       }
     }
 
@@ -525,24 +522,24 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <param name="tableType">The type indicating the columns to use</param>
     public void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType)
     {
-      DataTable cTable = GetResultFromRequest(String.Format("SELECT * FROM [{0}] ORDER BY Id", tableName));
+      DataTable table = GetResultFromRequest(String.Format("SELECT * FROM [{0}] ORDER BY Id", tableName));
       clb.Items.Clear();
       switch (tableType)
       {
         case TableType.Value:
-          for (int i = 1; i < cTable.Rows.Count; ++i)
-            clb.Items.Add(new AGoTFilter(cTable.Rows[i]["Value"].ToString(), column)); break;
+          for (var i = 1; i < table.Rows.Count; ++i)
+            clb.Items.Add(new AGoTFilter(table.Rows[i]["Value"].ToString(), column)); break;
         case TableType.ValueKey:
-          for (int i = 1; i < cTable.Rows.Count; ++i)
-            clb.Items.Add(new AGoTFilter(cTable.Rows[i]["Value"].ToString(), cTable.Rows[i]["Key"].ToString())); break;
+          for (var i = 1; i < table.Rows.Count; ++i)
+            clb.Items.Add(new AGoTFilter(table.Rows[i]["Value"].ToString(), table.Rows[i]["Key"].ToString())); break;
         case TableType.ValueShortName:
-          for (int i = 1; i < cTable.Rows.Count; ++i)
-            clb.Items.Add(new AGoTFilter(cTable.Rows[i]["Value"].ToString(), column, cTable.Rows[i]["ShortName"].ToString())); break;
+          for (var i = 1; i < table.Rows.Count; ++i)
+            clb.Items.Add(new AGoTFilter(table.Rows[i]["Value"].ToString(), column, table.Rows[i]["ShortName"].ToString())); break;
         case TableType.ValueId:
-          for (int i = 1; i < cTable.Rows.Count; ++i)
-            clb.Items.Add(new AGoTFilter(cTable.Rows[i]["Value"].ToString(), cTable.Rows[i]["Id"].ToString())); break;
+          for (var i = 1; i < table.Rows.Count; ++i)
+            clb.Items.Add(new AGoTFilter(table.Rows[i]["Value"].ToString(), table.Rows[i]["Id"].ToString())); break;
       }
-      clb.Summary = cTable.Rows[0]["Value"].ToString();
+      clb.Summary = table.Rows[0]["Value"].ToString();
       clb.UpdateSize();
     }
   }

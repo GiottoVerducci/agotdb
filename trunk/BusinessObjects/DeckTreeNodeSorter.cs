@@ -20,7 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AGoT.AGoTDB.BusinessObjects;
 using AGoT.AGoTDB.Forms;
 
 namespace AGoT.AGoTDB.BusinessObjects
@@ -37,9 +36,9 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// </summary>
     public DeckTreeNodeSorter()
     {
-      int i = 0;
       try
       {
+        var i = 0;
         int type;
         while (-1 != (type = UserSettings.Singleton.ReadInt("DeckBuilderTypeOrder", String.Format("Type{0}", i), -1)))
         {
@@ -60,12 +59,12 @@ namespace AGoT.AGoTDB.BusinessObjects
     {
       if (DeckBuilderForm.isCardNode(x))
       {
-        Card cx = x.Tag as Card;
-        Card cy = y.Tag as Card;
+        var cx = x.Tag as Card;
+        var cy = y.Tag as Card;
         return cx.CompareOrder(cy);
       }
-      int xType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo) x.Tag).type);
-      int yType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo) y.Tag).type);
+      int xType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo) x.Tag).Type);
+      int yType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo) y.Tag).Type);
       return xType.CompareTo(yType);
     }
 
@@ -77,7 +76,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     public int GetTypeOrder(Int32 type)
     {
       // search our type in our order list.
-      return orders.FindLastIndex(delegate(int t) { return (t == type); });
+      return orders.FindLastIndex(t => (t == type));
     }
   }
 }

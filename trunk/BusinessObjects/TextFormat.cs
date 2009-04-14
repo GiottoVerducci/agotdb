@@ -22,45 +22,40 @@ using System.Drawing;
 namespace AGoT.AGoTDB.BusinessObjects
 {
   /// <summary>
-  /// Represents a pair of string and TextFormat.
-  /// Eg. a "Hello world" string in bold and red.
-  /// </summary>
-  public struct FormattedText
-  {
-    public string text;
-    public TextFormat format;
-
-    public FormattedText(string aText, TextFormat aFormat)
-    {
-      text = aText;
-      format = aFormat;
-    }
-
-    public FormattedText(string aText)
-    {
-      text = aText;
-      format = TextFormat.Regular;
-    }
-  }
-
-  /// <summary>
   /// Represents the format for some text (= a string).
   /// Exposes a static property Regular for black and regular text.
   /// Eg. Bold and red formatting.
   /// </summary>
   public class TextFormat
   {
-    public FontStyle style;
-    public Color color;
-    public string name;
+    public FontStyle Style { get; private set; }
+    public Color Color { get; private set; }
+    public string Name { get; private set; }
 
-    public static TextFormat Regular = new TextFormat("regular", FontStyle.Regular, Color.Black);
+    public static readonly Color DefaultColor = Color.Black;
+    public static readonly FontStyle DefaultFontStyle = FontStyle.Regular;
 
-    public TextFormat(string aName, FontStyle aStyle, Color aColor)
+    public static TextFormat Regular = new TextFormat("regular", DefaultFontStyle, DefaultColor);
+
+    public TextFormat(string name, FontStyle style)
     {
-      name = aName;
-      style = aStyle;
-      color = aColor;
+      Name = name;
+      Style = style;
+      Color = DefaultColor;
+    }
+
+    public TextFormat(string name, Color color)
+    {
+      Name = name;
+      Color = color;
+      Style = DefaultFontStyle;
+    }
+
+    public TextFormat(string name, FontStyle style, Color color)
+    {
+      Name = name;
+      Style = style;
+      Color = color;
     }
   }
 }

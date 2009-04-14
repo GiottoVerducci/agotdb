@@ -19,25 +19,26 @@
 
 namespace AGoT.AGoTDB.BusinessObjects
 {
-  class StringPair
+  public class StringPair
   {
-    public string value1, value2;
+    public string Value1 { get; set; }
+    public string Value2 { get; set; }
 
     public StringPair()
     {
-      value1 = "";
-      value2 = "";
+      Value1 = "";
+      Value2 = "";
     }
 
-    public StringPair(string aValue1, string aValue2)
+    public StringPair(string value1, string value2)
     {
-      value1 = aValue1;
-      value2 = aValue2;
+      Value1 = value1;
+      Value2 = value2;
     }
 
     public static StringPair operator +(StringPair a, StringPair b)
     {
-      return new StringPair(a.value1 + b.value1, a.value2 + b.value2);
+      return new StringPair(a.Value1 + b.Value1, a.Value2 + b.Value2);
     }
   }
 }

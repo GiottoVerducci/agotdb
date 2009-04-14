@@ -29,13 +29,19 @@ namespace AGoT.AGoTDB
   ///<typeparam name="T">The type of the value.</typeparam>
   public class FormattedValue<T>
   {
-    public T Value;
-    public List<FormatSection> Formats;
+    /// <summary>
+    /// The value to which the formatted sections applies.
+    /// </summary>
+    public T Value { get; private set; }
+    /// <summary>
+    /// The format sections that apply to the value.
+    /// </summary>
+    public List<FormatSection> Formats { get; private set; }
 
-    public FormattedValue(T aValue, List<FormatSection> aFormats)
+    public FormattedValue(T value, List<FormatSection> formats)
     {
-      Value = aValue;
-      Formats = aFormats;
+      Value = value;
+      Formats = formats;
     }
 
     /// Styles are: errata (in human mode: {errata}), trait (~trait~)
@@ -44,7 +50,7 @@ namespace AGoT.AGoTDB
     public String FormatsToString()
     {
       string result = "";
-      for (int i = 0; i < Formats.Count; ++i)
+      for (var i = 0; i < Formats.Count; ++i)
         result += Formats[i] + "; ";
       if (result != "")
         result = result.Substring(0, result.Length - 2);

@@ -31,13 +31,11 @@ namespace AGoT.AGoTDB.Components
     /// <summary>
     /// Node from the treeview containing the hint about how to add cards.
     /// </summary>
-    public TreeNode NodeInfo
-    { get; set; }
+    public TreeNode NodeInfo { get; set; }
 
     /// <summary>
     /// Cards displayed by this treeview.
     /// </summary>
-    public List<Card> Cards
-    { get; set; }
+    public List<Card> Cards { get; set; }
   }
 }

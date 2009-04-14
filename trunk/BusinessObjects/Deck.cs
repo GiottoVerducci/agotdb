@@ -25,120 +25,74 @@ namespace AGoT.AGoTDB.BusinessObjects
 {
   public class Deck
   {
-    private readonly List<Card> fCards;
-    private readonly List<Card> fSideboard;
-    private Int32 fHouses;
-    private Card fAgenda;
-    private String fRevisionComments;
-    private DateTime fCreationDate, fLastModifiedDate;
-    private bool fEditable;
-
-    #region Getter and setter
-
-    public List<Card> Cards
-    {
-      get { return fCards; }
-    }
-
-    public List<Card> Sideboard
-    {
-      get { return fSideboard; }
-    }
-
-    public Int32 Houses
-    {
-      get { return fHouses; }
-      set { fHouses = value; }
-    }
-
-    public Card Agenda
-    {
-      get { return fAgenda; }
-      set { fAgenda = value; }
-    }
-
-    public String RevisionComments
-    {
-      get { return fRevisionComments; }
-      set { fRevisionComments = value; }
-    }
-
-    public DateTime CreationDate
-    {
-      get { return fCreationDate; }
-    }
-
-    public DateTime LastModifiedDate
-    {
-      get { return fLastModifiedDate; }
-    }
-
-    public bool Editable
-    {
-      get { return fEditable; }
-      set { fEditable = value; }
-    }
-
-    #endregion
+    public List<Card> Cards { get; private set; }
+    public List<Card> Sideboard { get; private set; }
+    public Int32 Houses { get; set; }
+    public Card Agenda { get; set; }
+    public String RevisionComments { get; set; }
+    public DateTime CreationDate { get; private set; }
+    public DateTime LastModifiedDate { get; private set; }
+    public bool Editable { get; set; }
 
     public Deck()
     {
-      fCards = new List<Card>();
-      fSideboard = new List<Card>();
-      fAgenda = null;
-      fRevisionComments = "";
-      fCreationDate = DateTime.Now;
-      fLastModifiedDate = DateTime.Now;
-      fEditable = true;
+      Cards = new List<Card>();
+      Sideboard = new List<Card>();
+      Agenda = null;
+      RevisionComments = "";
+      CreationDate = DateTime.Now;
+      LastModifiedDate = DateTime.Now;
+      Editable = true;
     }
 
     /// <summary>
     /// This constructor is used to create a deep copy (clone)
     /// </summary>
-    /// <param name="aDeck">the cloned deck </param>
-    public Deck(Deck aDeck) : this()
+    /// <param name="originalDeck">The deck to clone.</param>
+    public Deck(Deck originalDeck)
+      : this()
     {
-      CopyCardList(aDeck.Cards, fCards);
-      CopyCardList(aDeck.Sideboard, fSideboard);
-      fHouses = aDeck.Houses;
-      fAgenda = aDeck.Agenda;
-      fRevisionComments = aDeck.fRevisionComments;
-      fCreationDate = aDeck.fCreationDate;
-      fLastModifiedDate = aDeck.fLastModifiedDate;
-      fEditable = aDeck.fEditable;
+      CopyCardList(originalDeck.Cards, Cards);
+      CopyCardList(originalDeck.Sideboard, Sideboard);
+      Houses = originalDeck.Houses;
+      Agenda = originalDeck.Agenda;
+      RevisionComments = originalDeck.RevisionComments;
+      CreationDate = originalDeck.CreationDate;
+      LastModifiedDate = originalDeck.LastModifiedDate;
+      Editable = originalDeck.Editable;
     }
 
     /// <summary>
     /// Creates a new revision of the deck.
     /// </summary>
-    /// <param name="aDeck">the previous revision of the deck </param>
-    public static Deck CreateRevision(Deck aDeck)
+    /// <param name="previousRevisionDeck">The previous revision of the deck.</param>
+    public static Deck CreateRevision(Deck previousRevisionDeck)
     {
-      Deck result = new Deck();
-      CopyCardList(aDeck.Cards, result.fCards);
-      CopyCardList(aDeck.Sideboard, result.fSideboard);
-      result.fHouses = aDeck.Houses;
-      result.fAgenda = aDeck.Agenda;
+      var result = new Deck();
+      CopyCardList(previousRevisionDeck.Cards, result.Cards);
+      CopyCardList(previousRevisionDeck.Sideboard, result.Sideboard);
+      result.Houses = previousRevisionDeck.Houses;
+      result.Agenda = previousRevisionDeck.Agenda;
       return result;
     }
 
-    private static void CopyCardList(List<Card> source, List<Card> dest)
+    private static void CopyCardList(IList<Card> source, ICollection<Card> dest)
     {
-      for (int i = 0; i < source.Count; ++i)
+      for (var i = 0; i < source.Count; ++i)
         dest.Add(new Card(source[i]));
     }
 
     /// <summary>
     /// Serializes the deck under an xml data format.
     /// </summary>
-    /// <param name="doc">The xml document where the data will be stored</param>
+    /// <param name="doc">The xml document where the data will be stored.</param>
     public XmlElement ToXML(XmlDocument doc)
     {
       XmlElement deckRoot = doc.CreateElement("Deck");
 
-      XmlToolBox.AddElementValue(doc, deckRoot, "RevisionComments", fRevisionComments);
-      XmlToolBox.AddElementValue(doc, deckRoot, "CreationDate", fCreationDate.ToBinary().ToString());
-      XmlToolBox.AddElementValue(doc, deckRoot, "LastModifiedDate", fLastModifiedDate.ToBinary().ToString());
+      XmlToolBox.AddElementValue(doc, deckRoot, "RevisionComments", RevisionComments);
+      XmlToolBox.AddElementValue(doc, deckRoot, "CreationDate", CreationDate.ToBinary().ToString());
+      XmlToolBox.AddElementValue(doc, deckRoot, "LastModifiedDate", LastModifiedDate.ToBinary().ToString());
       XmlToolBox.AddElementValue(doc, deckRoot, "Houses", Houses.ToString());
       if (Agenda != null)
       {
@@ -147,12 +101,12 @@ namespace AGoT.AGoTDB.BusinessObjects
         deckRoot.AppendChild(agendaElement);
       }
       XmlElement cardsElement = doc.CreateElement("Cards");
-      for (int i = 0; i < fCards.Count; ++i)
-        cardsElement.AppendChild(fCards[i].ToXml(doc));
+      for (var i = 0; i < Cards.Count; ++i)
+        cardsElement.AppendChild(Cards[i].ToXml(doc));
       deckRoot.AppendChild(cardsElement);
       XmlElement sideboardElement = doc.CreateElement("Sideboard");
-      for (int i = 0; i < fSideboard.Count; ++i)
-        cardsElement.AppendChild(fSideboard[i].ToXml(doc));
+      for (var i = 0; i < Sideboard.Count; ++i)
+        cardsElement.AppendChild(Sideboard[i].ToXml(doc));
       deckRoot.AppendChild(sideboardElement);
       return deckRoot;
     }
@@ -163,32 +117,33 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// </summary>
     /// <param name="doc">The xml document where the data is stored</param>
     /// <param name="deckRoot">The xml root node that was returned by a call to ToXML</param>
-    public Deck(XmlDocument doc, XmlNode deckRoot) : this()
+    public Deck(XmlDocument doc, XmlNode deckRoot)
+      : this()
     {
       if (deckRoot.Name != "Deck")
         throw new Exception("Invalid deck root node");
-      fRevisionComments = XmlToolBox.GetElementValue(doc, deckRoot, "RevisionComments");
+      RevisionComments = XmlToolBox.GetElementValue(doc, deckRoot, "RevisionComments");
 
       String value;
       if ((value = XmlToolBox.GetElementValue(doc, deckRoot, "CreationDate")) != null)
-        fCreationDate = DateTime.FromBinary(Int64.Parse(value));
+        CreationDate = DateTime.FromBinary(Int64.Parse(value));
       if ((value = XmlToolBox.GetElementValue(doc, deckRoot, "LastModifiedDate")) != null)
-        fLastModifiedDate = DateTime.FromBinary(Int64.Parse(value));
+        LastModifiedDate = DateTime.FromBinary(Int64.Parse(value));
       if (((value = XmlToolBox.GetElementValue(doc, deckRoot, "Houses")) != null) && (value != ""))
-        fHouses = Int32.Parse(value);
+        Houses = Int32.Parse(value);
       XmlNode agendaNode = XmlToolBox.FindNode(doc, deckRoot, "Agenda");
-      fAgenda = (agendaNode != null) ? new Card(doc, agendaNode.FirstChild) : null;
+      Agenda = (agendaNode != null) ? new Card(doc, agendaNode.FirstChild) : null;
       XmlNode cardsRoot = XmlToolBox.FindNode(doc, deckRoot, "Cards");
       if (cardsRoot != null)
       {
-        foreach(XmlNode cardNode in cardsRoot.ChildNodes)
-          fCards.Add(new Card(doc, cardNode));
+        foreach (XmlNode cardNode in cardsRoot.ChildNodes)
+          Cards.Add(new Card(doc, cardNode));
       }
       XmlNode sideboardRoot = XmlToolBox.FindNode(doc, deckRoot, "Sideboard");
       if (sideboardRoot != null)
       {
         foreach (XmlNode sidecardNode in sideboardRoot.ChildNodes)
-          fSideboard.Add(new Card(doc, sidecardNode));
+          Sideboard.Add(new Card(doc, sidecardNode));
       }
     }
 
@@ -200,7 +155,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>The card added or modified</returns>
     public Card AddCard(Card card)
     {
-      return AddCardToList(card, fCards);
+      return AddCardToList(card, Cards);
     }
 
     /// <summary>
@@ -211,7 +166,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>The card substracted, or null if the card was not found or the last copy was removed.</returns>
     public Card SubstractCard(Card card)
     {
-      return SubstractCardFromList(card, fCards);
+      return SubstractCardFromList(card, Cards);
     }
 
     /// <summary>
@@ -222,7 +177,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>The card added or modified</returns>
     public Card AddCardToSideboard(Card card)
     {
-      return AddCardToList(card, fSideboard);
+      return AddCardToList(card, Sideboard);
     }
 
     /// <summary>
@@ -233,27 +188,27 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>The card substracted, or null if the card was not found or the last copy was removed.</returns>
     public Card SubstractCardFromSideboard(Card card)
     {
-      return SubstractCardFromList(card, fSideboard);
+      return SubstractCardFromList(card, Sideboard);
     }
 
     /// <summary>
     /// Adds a card to a list of cards. If the card is already present, increment
     /// the quantity by 1.
     /// </summary>
-    /// <param name="card">The card to add to the list</param>
+    /// <param name="card">The card to add to the list.</param>
+    /// <param name="list">The list to add the card to.</param>
     /// <returns>The card added or modified</returns>
-    private Card AddCardToList(Card card, List<Card> list)
+    private static Card AddCardToList(Card card, List<Card> list)
     {
-      Card c = list.Find(delegate(Card aCard) { return (aCard.UniversalId == card.UniversalId); });
-      if (c != null)
-        c.Quantity++;
+      Card result = list.Find(c => (c.UniversalId == card.UniversalId));
+      if (result != null)
+        result.Quantity++;
       else
       {
-        c = new Card(card);
-        c.Quantity = 1;
-        list.Add(c);
+        result = new Card(card) { Quantity = 1 };
+        list.Add(result);
       }
-      return c;
+      return result;
     }
 
     /// <summary>
@@ -265,17 +220,17 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>The card substracted, or null if the card was not found or the last copy was removed.</returns>
     public Card SubstractCardFromList(Card card, List<Card> list)
     {
-      Card c = list.Find(delegate(Card aCard) { return (aCard.UniversalId == card.UniversalId); });
-      if (c != null)
+      Card result = list.Find(c => (c.UniversalId == card.UniversalId));
+      if (result != null)
       {
-        c.Quantity--;
-        if (c.Quantity == 0)
+        result.Quantity--;
+        if (result.Quantity == 0)
         {
-          list.Remove(c);
-          c = null;
+          list.Remove(result);
+          result = null;
         }
       }
-      return c;
+      return result;
     }
 
     /// <summary>
@@ -291,28 +246,27 @@ namespace AGoT.AGoTDB.BusinessObjects
         return true;
       if ((deck1 == null) || (deck2 == null))
         return false;
-      bool result = (deck1.fHouses == deck2.fHouses) &&
-                    (Card.AreEqual(deck1.fAgenda, deck2.fAgenda)) &&
-                    (deck1.fRevisionComments == deck2.fRevisionComments) &&
-                    (deck1.fCreationDate.CompareTo(deck2.fCreationDate) == 0) &&
-                    (deck1.fLastModifiedDate.CompareTo(deck2.fLastModifiedDate) == 0) &&
-                    (deck1.fCards.Count == deck2.fCards.Count) &&
-                    (deck1.fSideboard.Count == deck2.fSideboard.Count);
-      int i = 0;
-      while (result && (i < deck1.fCards.Count))
-      {
-        result &= Card.AreEqual(deck1.fCards[i], deck2.fCards[i]);
-        ++i;
-      }
+      if ((deck1.Houses != deck2.Houses) || (!Card.AreEqual(deck1.Agenda, deck2.Agenda)) ||
+          (deck1.RevisionComments != deck2.RevisionComments) || (deck1.CreationDate.CompareTo(deck2.CreationDate) != 0) ||
+          (deck1.LastModifiedDate.CompareTo(deck2.LastModifiedDate) != 0))
+        return false;
 
-      i = 0;
-      while (result && (i < deck1.fSideboard.Count))
-      {
-        result &= Card.AreEqual(deck1.fSideboard[i], deck2.fSideboard[i]);
-        ++i;
-      }
+      return AreEqual(deck1.Sideboard, deck2.Sideboard) && AreEqual(deck1.Cards, deck2.Cards);
+    }
 
-      return result;
+    private static bool AreEqual(List<Card> cardList1, List<Card> cardList2)
+    {
+      if (cardList1.Count != cardList2.Count)
+        return false;
+      var i = 0;
+      while(i < cardList1.Count)
+      {
+        if (!Card.AreEqual(cardList1[i], cardList2[i]) && // quick test if both card lists are in the same order
+          (cardList2.Find(c => Card.AreEqual(c, cardList1[i])) == null))
+          return false;
+      }
+      return true;
     }
   }
+
 }
