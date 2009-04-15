@@ -273,4 +273,10 @@
   <data name="ErrInvalidXmlDeckFile" xml:space="preserve">
     <value>Le contenu du fichier ne correspond pas à un deck AGOTDB.</value>
   </data>
+  <data name="ErrMinimalSoftwareVersionRequired" xml:space="preserve">
+    <value>Cette version de la base de données requière au moins la version {0} du logiciel. La version courante du logiciel est {1}. Le programme risque de fonctionner incorrectement. Voulez-vous continuer ?</value>
+  </data>
+  <data name="ErrMinimalSoftwareVersionRequiredTitle" xml:space="preserve">
+    <value>Versions incompatibles</value>
+  </data>
 </root>

@@ -34,6 +34,7 @@ namespace AGoT.AGoTDB.Forms
       this.lblVersion = new System.Windows.Forms.Label();
       this.btnOk = new System.Windows.Forms.Button();
       this.textBox1 = new System.Windows.Forms.TextBox();
+      this.lblDbVersion = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // label1
@@ -65,11 +66,17 @@ namespace AGoT.AGoTDB.Forms
       this.textBox1.Name = "textBox1";
       this.textBox1.ReadOnly = true;
       // 
+      // lblDbVersion
+      // 
+      resources.ApplyResources(this.lblDbVersion, "lblDbVersion");
+      this.lblDbVersion.Name = "lblDbVersion";
+      // 
       // AboutForm
       // 
       resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btnOk;
+      this.Controls.Add(this.lblDbVersion);
       this.Controls.Add(this.textBox1);
       this.Controls.Add(this.btnOk);
       this.Controls.Add(this.lblVersion);
@@ -93,5 +100,6 @@ namespace AGoT.AGoTDB.Forms
     private System.Windows.Forms.Label lblVersion;
     private System.Windows.Forms.Button btnOk;
     private System.Windows.Forms.TextBox textBox1;
+    private System.Windows.Forms.Label lblDbVersion;
   }
 }

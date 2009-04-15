@@ -752,7 +752,7 @@ namespace AGoT.AGoTDB.Forms
     {
       if (fIsMainForm)
       {
-        if (DeckBuilderForm.Singleton.Visible) // to be totally bullet-proof, we should create a lock to avoid concurrency
+        if (DeckBuilderForm.SingletonExists() && DeckBuilderForm.Singleton.Visible) // to be totally bullet-proof, we should create a lock to avoid concurrency
         {
           DeckBuilderForm.Singleton.Close();
           e.Cancel = DeckBuilderForm.Singleton.Visible; // cancel if deck builder form was not closed

@@ -49,6 +49,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     private OleDbConnection fHDbConnection; // human database
     private OleDbConnection fDbConnection; // extended database
+    private readonly List<DatabaseInfo> fDatabaseInfos;
     private const string HDataBaseFilename = "AGoT.mdb";
     private const string DataBaseFilename = "AGoTEx.mdb";
     private const string DataBasePath = @"Databases\";
@@ -66,6 +67,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       public const string Trigger = "TableTrigger";
       public const string Type = "TableType";
       public const string Virtue = "TableVirtue";
+      public const string Version = "TableVersion";
     }
 
     public bool ConnectedToDatabase
@@ -79,6 +81,8 @@ namespace AGoT.AGoTDB.BusinessObjects
       get { return fDbConnection; }
     }
 
+    public List<DatabaseInfo> DatabaseInfos { get { return fDatabaseInfos; } }
+
     private DatabaseInterface()
     {
       if (UserSettings.Singleton.ReadBool("Startup", "CreateExtendedDB", true))
@@ -88,6 +92,7 @@ namespace AGoT.AGoTDB.BusinessObjects
         if (!ConnectToExtendedDatabase())
           return;
         ConnectedToDatabase = true; // required by ConvertDatabase
+        ReadDatabaseInformations(fHDbConnection, out fDatabaseInfos);
         if (ConvertDatabase())
         {
           UserSettings.Singleton.WriteBool("Startup", "CreateExtendedDB", false);
@@ -98,14 +103,21 @@ namespace AGoT.AGoTDB.BusinessObjects
           ConnectedToDatabase = false;
       }
       else
+      {
         ConnectedToDatabase = ConnectToExtendedDatabase();
+        ReadDatabaseInformations(fDbConnection, out fDatabaseInfos);
+      }
+      if ((fDatabaseInfos.Count > 0) && (ApplicationSettings.ApplicationVersion.CompareTo(fDatabaseInfos[0].MinimalAgotDbVersion) < 0))
+        if (DialogResult.No == MessageBox.Show(String.Format(Resource1.ErrMinimalSoftwareVersionRequired, fDatabaseInfos[0].MinimalAgotDbVersion, ApplicationSettings.ApplicationVersion),
+          Resource1.ErrMinimalSoftwareVersionRequiredTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+          ConnectedToDatabase = false;
     }
 
     /// <summary>
     /// Establishes a connection to the database.
     /// </summary>
     /// <returns>True if the method succeeds, false otherwise</returns>
-    private bool ConnectToDatabase(ref OleDbConnection dbConnection, string dbFilename)
+    private static bool ConnectToDatabase(ref OleDbConnection dbConnection, string dbFilename)
     {
       // There is not a 64 bit version of jet that is why there's an error under winxp64.
       // To force your app to use the 32 bit change the target cpu to x86 in the advanced compiler options.
@@ -129,6 +141,31 @@ namespace AGoT.AGoTDB.BusinessObjects
       {
         MessageBox.Show(String.Format(Resource1.ErrInvalidDatabase, dbFilename), Resource1.ErrInvalidDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         return false;
+      }
+    }
+
+    /// <summary>
+    /// Reads the database informations. Those informations are sorted by VersionId, descending, which means
+    /// that the more recent version of the informations is at index 0.
+    /// </summary>
+    /// <param name="dbConnection">The connection used to access the database.</param>
+    /// <param name="dbInformations">The list of informations about the database.</param>
+    private void ReadDatabaseInformations(OleDbConnection dbConnection, out List<DatabaseInfo> dbInformations)
+    {
+      dbInformations = new List<DatabaseInfo>();
+      var query = String.Format("SELECT * FROM [{0}] ORDER BY [VersionId] DESC", TableName.Version);
+      DataTable data = GetResultFromRequest(query, dbConnection);
+      foreach (DataRow row in data.Rows)
+      {
+        int dbVersion;
+        if (!Int32.TryParse(GetRowValue(row, "VersionId"), out dbVersion))
+          return;
+        DateTime dbDate;
+        SoftwareVersion dbSoftwareVersion;
+        dbInformations.Add(new DatabaseInfo(dbVersion,
+          DateTime.TryParse(GetRowValue(row, "Date"), out dbDate) ? dbDate : (DateTime?)null,
+          SoftwareVersion.TryParse(GetRowValue(row, "MinimalAGoTDBVersion"), out dbSoftwareVersion) ? dbSoftwareVersion : null,
+          GetRowValue(row, "Comments")));
       }
     }
 
@@ -239,7 +276,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       return true;
     }
 
-    private string GetRowValue(DataRow row, string columnName)
+    private static string GetRowValue(DataRow row, string columnName)
     {
       return row[columnName].ToString();
     }
@@ -296,7 +333,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
       var formatSections = new List<FormatSection>();
       for (var i = 0; i < formats.Count; ++i)
-        formatSections.Add(new FormatSection(bounds[i*2], bounds[i*2 + 1], formats[i]));
+        formatSections.Add(new FormatSection(bounds[i * 2], bounds[i * 2 + 1], formats[i]));
       return new FormattedValue<string>(newValue, formatSections);
     }
 

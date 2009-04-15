@@ -68,6 +68,11 @@ namespace AGoT.AGoTDB.Forms
       }
     }
 
+    public static bool SingletonExists()
+    {
+      return fSingleton != null;
+    }
+
     /// <summary>
     /// Default form constructor.
     /// </summary>

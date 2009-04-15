@@ -172,7 +172,9 @@ namespace AGoT.AGoTDB.BusinessObjects
       XmlElement root = doc.CreateElement(fXmlRootName);
       doc.AppendChild(root);
 
-      root.SetAttributeNode("DeckBuilderVersion", "").Value = AboutForm.Version;
+      root.SetAttributeNode("DeckBuilderVersion", "").Value = ApplicationSettings.ApplicationVersion.ToString();
+      if (DatabaseInterface.Singleton.DatabaseInfos.Count > 0)
+        root.SetAttributeNode("DatabaseVersion", "").Value = DatabaseInterface.Singleton.DatabaseInfos[0].VersionId.ToString();
       XmlToolBox.AddElementValue(doc, root, "Author", Author);
       XmlToolBox.AddElementValue(doc, root, "Description", Description);
       XmlToolBox.AddElementValue(doc, root, "Name", Name);
