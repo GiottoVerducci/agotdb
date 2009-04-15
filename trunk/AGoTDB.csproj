@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\ApplicationSettings.cs" />
+    <Compile Include="BusinessObjects\DatabaseInfo.cs" />
     <Compile Include="BusinessObjects\FormattedText.cs" />
     <Compile Include="BusinessObjects\Query.cs" />
     <Compile Include="Forms\AboutForm.cs">
@@ -94,6 +96,7 @@
       <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessObjects\StringPair.cs" />
+    <Compile Include="BusinessObjects\SoftwareVersion.cs" />
     <Compile Include="Resource1.fr.Designer.cs">
       <DependentUpon>Resource1.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>

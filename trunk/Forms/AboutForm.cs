@@ -19,6 +19,7 @@
 
 using System;
 using System.Windows.Forms;
+using AGoT.AGoTDB.BusinessObjects;
 
 namespace AGoT.AGoTDB.Forms
 {
@@ -27,8 +28,6 @@ namespace AGoT.AGoTDB.Forms
   /// </summary>
   public partial class AboutForm : Form
   {
-    public static String Version = "v. 0.668 (BETA)";
-
     /// <summary>
     /// Default form constructor.
     /// </summary>
@@ -39,7 +38,12 @@ namespace AGoT.AGoTDB.Forms
 
     private void AboutForm_Shown(object sender, EventArgs e)
     {
-      lblVersion.Text = Version;
+      var dbInfos = DatabaseInterface.Singleton.DatabaseInfos.Count > 0
+                      ? DatabaseInterface.Singleton.DatabaseInfos[0]
+                      : null;
+      lblVersion.Text = ApplicationSettings.ApplicationVersion.ToString();
+      if (dbInfos != null)
+        lblDbVersion.Text = string.Format("DB version: {0} ({1})", dbInfos.VersionId, dbInfos.DateCreation.HasValue ? dbInfos.DateCreation.Value.ToShortDateString() : "");
     }
 
     private void btnOk_Click(object sender, EventArgs e)

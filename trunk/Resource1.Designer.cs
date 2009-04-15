@@ -205,6 +205,24 @@ namespace AGoT.AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This version of the database requires at least the version {0} for the software. Current version of the software is {1}. The software may malfunction. Do you wish to continue?.
+        /// </summary>
+        internal static string ErrMinimalSoftwareVersionRequired {
+            get {
+                return ResourceManager.GetString("ErrMinimalSoftwareVersionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version mismatch.
+        /// </summary>
+        internal static string ErrMinimalSoftwareVersionRequiredTitle {
+            get {
+                return ResourceManager.GetString("ErrMinimalSoftwareVersionRequiredTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error!.
         /// </summary>
         internal static string ErrorTitle {
