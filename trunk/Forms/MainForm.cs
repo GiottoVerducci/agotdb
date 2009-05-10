@@ -145,8 +145,8 @@ namespace AGoT.AGoTDB.Forms
     private static String BuildTypeExpression(int i)
     {
       if (i < Card.CardTypeNames.Count - 1)
-        return String.Format("IIF(Type={0}, '{1}', {2})", Card.CardTypeNames[i].tag, Card.CardTypeNames[i].text, BuildTypeExpression(i + 1));
-      return String.Format("'{0}'", Card.CardTypeNames[i].text);
+        return String.Format("IIF(Type={0}, '{1}', {2})", Card.CardTypeNames[i].Tag, Card.CardTypeNames[i].Text, BuildTypeExpression(i + 1));
+      return String.Format("'{0}'", Card.CardTypeNames[i].Text);
     }
 
     /// <summary>

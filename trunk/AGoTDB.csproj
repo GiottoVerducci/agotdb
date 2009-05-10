@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\ApplicationSettings.cs" />
+    <Compile Include="BusinessObjects\CardList.cs" />
+    <Compile Include="BusinessObjects\CommandParameters.cs" />
     <Compile Include="BusinessObjects\DatabaseInfo.cs" />
     <Compile Include="BusinessObjects\FormattedText.cs" />
     <Compile Include="BusinessObjects\Query.cs" />

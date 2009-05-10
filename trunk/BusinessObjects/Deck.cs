@@ -25,8 +25,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 {
   public class Deck
   {
-    public List<Card> Cards { get; private set; }
-    public List<Card> Sideboard { get; private set; }
+    public List<CardList> CardLists { get; private set; }
     public Int32 Houses { get; set; }
     public Card Agenda { get; set; }
     public String RevisionComments { get; set; }
@@ -36,8 +35,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     public Deck()
     {
-      Cards = new List<Card>();
-      Sideboard = new List<Card>();
+      CardLists = new List<CardList> {new CardList(), new CardList()}; // sideboard (0) and main deck (1)
       Agenda = null;
       RevisionComments = "";
       CreationDate = DateTime.Now;
@@ -52,8 +50,9 @@ namespace AGoT.AGoTDB.BusinessObjects
     public Deck(Deck originalDeck)
       : this()
     {
-      CopyCardList(originalDeck.Cards, Cards);
-      CopyCardList(originalDeck.Sideboard, Sideboard);
+      CardLists = new List<CardList>();
+      for (var i = 0; i < originalDeck.CardLists.Count; ++i)
+        CardLists.Add(new CardList(originalDeck.CardLists[i]));
       Houses = originalDeck.Houses;
       Agenda = originalDeck.Agenda;
       RevisionComments = originalDeck.RevisionComments;
@@ -69,17 +68,12 @@ namespace AGoT.AGoTDB.BusinessObjects
     public static Deck CreateRevision(Deck previousRevisionDeck)
     {
       var result = new Deck();
-      CopyCardList(previousRevisionDeck.Cards, result.Cards);
-      CopyCardList(previousRevisionDeck.Sideboard, result.Sideboard);
+      result.CardLists.Clear();
+      for (var i = 0; i < previousRevisionDeck.CardLists.Count; ++i)
+        result.CardLists.Add(new CardList(previousRevisionDeck.CardLists[i]));
       result.Houses = previousRevisionDeck.Houses;
       result.Agenda = previousRevisionDeck.Agenda;
       return result;
-    }
-
-    private static void CopyCardList(IList<Card> source, ICollection<Card> dest)
-    {
-      for (var i = 0; i < source.Count; ++i)
-        dest.Add(new Card(source[i]));
     }
 
     /// <summary>
@@ -100,15 +94,23 @@ namespace AGoT.AGoTDB.BusinessObjects
         agendaElement.AppendChild(Agenda.ToXml(doc));
         deckRoot.AppendChild(agendaElement);
       }
-      XmlElement cardsElement = doc.CreateElement("Cards");
-      for (var i = 0; i < Cards.Count; ++i)
-        cardsElement.AppendChild(Cards[i].ToXml(doc));
-      deckRoot.AppendChild(cardsElement);
-      XmlElement sideboardElement = doc.CreateElement("Sideboard");
-      for (var i = 0; i < Sideboard.Count; ++i)
-        cardsElement.AppendChild(Sideboard[i].ToXml(doc));
-      deckRoot.AppendChild(sideboardElement);
+      for (var j = 0; j < CardLists.Count; ++j)
+      {
+        string nodeName = GetNodeName(j);
+        XmlElement cardsElement = CardLists[j].ToXml(doc, nodeName);
+        deckRoot.AppendChild(cardsElement);
+      }
       return deckRoot;
+    }
+
+    /// <summary>
+    /// Returns the node name for xml storage associated to the index in the list of CardList elements.
+    /// </summary>
+    /// <param name="cardListIndex">The index.</param>
+    /// <returns>The node name.</returns>
+    private static String GetNodeName(int cardListIndex)
+    {
+      return cardListIndex == 0 ? "Sideboard" : (cardListIndex == 1 ? "Cards" : String.Format("Cards{0}", cardListIndex));
     }
 
     /// <summary>
@@ -133,104 +135,15 @@ namespace AGoT.AGoTDB.BusinessObjects
         Houses = Int32.Parse(value);
       XmlNode agendaNode = XmlToolBox.FindNode(doc, deckRoot, "Agenda");
       Agenda = (agendaNode != null) ? new Card(doc, agendaNode.FirstChild) : null;
-      XmlNode cardsRoot = XmlToolBox.FindNode(doc, deckRoot, "Cards");
-      if (cardsRoot != null)
+      // we read the cardlists
+      CardLists.Clear();
+      XmlNode cardsRoot;
+      var j = 0;
+      while (null != (cardsRoot = XmlToolBox.FindNode(doc, deckRoot, GetNodeName(j))))
       {
-        foreach (XmlNode cardNode in cardsRoot.ChildNodes)
-          Cards.Add(new Card(doc, cardNode));
+        CardLists.Add(new CardList(doc, cardsRoot));
+        ++j;
       }
-      XmlNode sideboardRoot = XmlToolBox.FindNode(doc, deckRoot, "Sideboard");
-      if (sideboardRoot != null)
-      {
-        foreach (XmlNode sidecardNode in sideboardRoot.ChildNodes)
-          Sideboard.Add(new Card(doc, sidecardNode));
-      }
-    }
-
-    /// <summary>
-    /// Adds a card to the deck. If the card is already present, increment
-    /// the quantity by 1.
-    /// </summary>
-    /// <param name="card">The card to add to the deck</param>
-    /// <returns>The card added or modified</returns>
-    public Card AddCard(Card card)
-    {
-      return AddCardToList(card, Cards);
-    }
-
-    /// <summary>
-    /// Substracts a card from the deck by decreasing the quantity by 1.
-    /// If the quantity reaches 0, removes the card from the list.
-    /// </summary>
-    /// <param name="card">The card to substract from the deck</param>
-    /// <returns>The card substracted, or null if the card was not found or the last copy was removed.</returns>
-    public Card SubstractCard(Card card)
-    {
-      return SubstractCardFromList(card, Cards);
-    }
-
-    /// <summary>
-    /// Adds a card to the sideboard. If the card is already present, increment
-    /// the quantity by 1.
-    /// </summary>
-    /// <param name="card">The card to add to the sideboard</param>
-    /// <returns>The card added or modified</returns>
-    public Card AddCardToSideboard(Card card)
-    {
-      return AddCardToList(card, Sideboard);
-    }
-
-    /// <summary>
-    /// Substracts a card from the sideboard by decreasing the quantity by 1.
-    /// If the quantity reaches 0, removes the card from the list.
-    /// </summary>
-    /// <param name="card">The card to substract from the sideboard</param>
-    /// <returns>The card substracted, or null if the card was not found or the last copy was removed.</returns>
-    public Card SubstractCardFromSideboard(Card card)
-    {
-      return SubstractCardFromList(card, Sideboard);
-    }
-
-    /// <summary>
-    /// Adds a card to a list of cards. If the card is already present, increment
-    /// the quantity by 1.
-    /// </summary>
-    /// <param name="card">The card to add to the list.</param>
-    /// <param name="list">The list to add the card to.</param>
-    /// <returns>The card added or modified</returns>
-    private static Card AddCardToList(Card card, List<Card> list)
-    {
-      Card result = list.Find(c => (c.UniversalId == card.UniversalId));
-      if (result != null)
-        result.Quantity++;
-      else
-      {
-        result = new Card(card) { Quantity = 1 };
-        list.Add(result);
-      }
-      return result;
-    }
-
-    /// <summary>
-    /// Substracts a card from a list of cards by decreasing the quantity by 1.
-    /// If the quantity reaches 0, removes the card from the list.
-    /// </summary>
-    /// <param name="card">The card to substract from the list</param>
-    /// <param name="list">The list from which the card must be substracted.</param>
-    /// <returns>The card substracted, or null if the card was not found or the last copy was removed.</returns>
-    public Card SubstractCardFromList(Card card, List<Card> list)
-    {
-      Card result = list.Find(c => (c.UniversalId == card.UniversalId));
-      if (result != null)
-      {
-        result.Quantity--;
-        if (result.Quantity == 0)
-        {
-          list.Remove(result);
-          result = null;
-        }
-      }
-      return result;
     }
 
     /// <summary>
@@ -248,23 +161,13 @@ namespace AGoT.AGoTDB.BusinessObjects
         return false;
       if ((deck1.Houses != deck2.Houses) || (!Card.AreEqual(deck1.Agenda, deck2.Agenda)) ||
           (deck1.RevisionComments != deck2.RevisionComments) || (deck1.CreationDate.CompareTo(deck2.CreationDate) != 0) ||
-          (deck1.LastModifiedDate.CompareTo(deck2.LastModifiedDate) != 0))
+          (deck1.LastModifiedDate.CompareTo(deck2.LastModifiedDate) != 0) ||
+          (deck1.CardLists.Count != deck2.CardLists.Count))
         return false;
 
-      return AreEqual(deck1.Sideboard, deck2.Sideboard) && AreEqual(deck1.Cards, deck2.Cards);
-    }
-
-    private static bool AreEqual(List<Card> cardList1, List<Card> cardList2)
-    {
-      if (cardList1.Count != cardList2.Count)
-        return false;
-      var i = 0;
-      while(i < cardList1.Count)
-      {
-        if (!Card.AreEqual(cardList1[i], cardList2[i]) && // quick test if both card lists are in the same order
-          (cardList2.Find(c => Card.AreEqual(c, cardList1[i])) == null))
+      for (var i = 0; i < deck1.CardLists.Count; ++i)
+        if (!CardList.AreEqual(deck1.CardLists[i], deck2.CardLists[i]))
           return false;
-      }
       return true;
     }
   }

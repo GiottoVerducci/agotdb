@@ -19,9 +19,8 @@
 
 using System;
 using System.Collections.Generic;
-using AGoT.AGoTDB.BusinessObjects;
 
-namespace AGoT.AGoTDB
+namespace AGoT.AGoTDB.BusinessObjects
 {
   ///<summary>
   /// Represents a value and a list of format sections.

@@ -17,7 +17,6 @@
 // © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
-using System.Collections.Generic;
 using System.Windows.Forms;
 using AGoT.AGoTDB.BusinessObjects;
 
@@ -36,6 +35,6 @@ namespace AGoT.AGoTDB.Components
     /// <summary>
     /// Cards displayed by this treeview.
     /// </summary>
-    public List<Card> Cards { get; set; }
+    public CardList Cards { get; set; }
   }
 }

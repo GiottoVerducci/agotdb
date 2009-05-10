@@ -72,8 +72,8 @@ namespace AGoT.AGoTDB.Forms
     {
       ListsBeginUpdate(lbDeck, lbHand);
       ClearLists();
-      ShuffleToDeckList(lbDeck);
-      for (int i = 0; i < HandSize; ++i)
+      ShuffleToDeckList(lbDeck, fDeck.CardLists[1]); // TODO : modify to handle multiple deck lists
+      for (var i = 0; i < HandSize; ++i)
         MoveFromOneListToAnother(lbDeck, 0, lbHand);
       ListsEndUpdate(lbDeck, lbHand);
     }
@@ -87,14 +87,14 @@ namespace AGoT.AGoTDB.Forms
       lbHand.Items.Clear();
     }
 
-    public void ShuffleToDeckList(ListBox list)
+    public void ShuffleToDeckList(ListBox list, CardList cardList)
     {
       list.BeginUpdate();
       var alea = new Random();
-      for (var i = 0; i < fDeck.Cards.Count; ++i)
-        if(fDeck.Cards[i].IsDrawable())
-          for(var j = 0; j < fDeck.Cards[i].Quantity; ++j)
-            list.Items.Insert(alea.Next(list.Items.Count+1), fDeck.Cards[i]);
+      for (var i = 0; i < fDeck.CardLists.Count; ++i)
+        if (cardList[i].IsDrawable())
+          for (var j = 0; j < cardList[i].Quantity; ++j)
+            list.Items.Insert(alea.Next(list.Items.Count+1), fDeck.CardLists[i]);
       list.EndUpdate();
     }
 
