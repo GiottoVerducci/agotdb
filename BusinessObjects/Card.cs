@@ -28,7 +28,7 @@ namespace AGoT.AGoTDB.BusinessObjects
   /// <summary>
   /// A pair field structure containing a string and an integer.
   /// </summary>
-  public struct TagText { public string text; public int tag; public TagText(string aText, int aTag) { text = aText; tag = aTag; } }
+  public struct TagText { public string Text; public int Tag; public TagText(string text, int tag) { Text = text; Tag = tag; } }
 
   public class Card
   {
@@ -394,8 +394,8 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     public static string GetTextFromList(List<TagText> tt, Int32 id)
     {
-      var index = tt.FindIndex(t => (t.tag == id));
-      return index != -1 ? tt[index].text : "";
+      var index = tt.FindIndex(t => (t.Tag == id));
+      return index != -1 ? tt[index].Text : "";
     }
 
     /// <summary>
@@ -689,15 +689,28 @@ namespace AGoT.AGoTDB.BusinessObjects
     public Card(XmlDocument doc, XmlNode root)
     {
       UniversalId = Int32.Parse(XmlToolBox.GetElementValue(doc, root, "UniversalId"));
-      DataTable table = DatabaseInterface.Singleton.GetResultFromRequest(String.Format("SELECT * FROM [{0}] WHERE UniversalId = {1}", DatabaseInterface.TableName.Main, UniversalId));
+      DataTable table = DatabaseInterface.Singleton.GetResultFromRequest(
+        String.Format("SELECT * FROM [{0}] WHERE UniversalId = :universalId", DatabaseInterface.TableName.Main),
+        new CommandParameters().Add("universalId", UniversalId));
+      if (table.Rows.Count <= 0)
+      {
+        var recordedName = XmlToolBox.GetElementValue(doc, root, "Name");
+        var recordedSet = XmlToolBox.GetElementValue(doc, root, "Set");
+        // try to match the card with its name and expansion number (for cards that were merged in previous versions)
+        table = DatabaseInterface.Singleton.GetResultFromRequest(
+          String.Format("SELECT * FROM [{0}] WHERE Name = :name AND Set LIKE '%' + :set + '%'", DatabaseInterface.TableName.Main),
+          new CommandParameters().Add("name", recordedName)
+          .Add("set", recordedSet));
+        if (table.Rows.Count <= 0)
+        {
+          Name = new FormattedValue<string>(recordedName, new List<FormatSection>());
+          Set = new FormattedValue<string>(recordedSet, new List<FormatSection>());
+          Text = new FormattedValue<string>(Resource1.UnknownCard, new List<FormatSection>());
+        }
+      }
+
       if (table.Rows.Count > 0)
         InitializeFromDataRow(table.Rows[0]);
-      else
-      {
-        Name = new FormattedValue<string>(XmlToolBox.GetElementValue(doc, root, "Name"), new List<FormatSection>());
-        Set = new FormattedValue<string>(XmlToolBox.GetElementValue(doc, root, "Set"), new List<FormatSection>());
-        Text = new FormattedValue<string>(Resource1.UnknownCard, new List<FormatSection>());
-      }
       Quantity = Int32.Parse(XmlToolBox.GetElementValue(doc, root, "Quantity"));
     }
 

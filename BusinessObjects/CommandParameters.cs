@@ -16,40 +16,30 @@
 // © A Game of Thrones 2005 George R. R. Martin
 // © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
+using System;
+using System.Collections.Generic;
+using System.Data.OleDb;
 
-namespace AGoT.AGoTDB.Forms
+namespace AGoT.AGoTDB.BusinessObjects
 {
-  public class AGoTFilter
+  public class CommandParameters
   {
-    /// <summary>
-    /// Value used for the display
-    /// </summary>
-    public string LongName { get; private set; } 
+    private readonly List<KeyValuePair<string, object>> fParameters = new List<KeyValuePair<string, object>>();
 
-    /// <summary>
-    /// Value that is truly used in the database
-    /// </summary>
-    public string ShortName { get; private set; }
-
-    public string Column { get; private set; }
-
-    public AGoTFilter(string longName, string column)
+    public CommandParameters Add(string parameterName, object parameterValue)
     {
-      LongName = longName;
-      ShortName = longName;
-      Column = column;
+      parameterName = parameterName.Trim();
+      if(String.IsNullOrEmpty(parameterName))
+        throw new ArgumentOutOfRangeException("parameterName");
+      if(fParameters.Exists(p => p.Key == parameterName))
+        throw new ApplicationException(String.Format("parameterName '{0}' already exists", parameterName));
+      fParameters.Add(new KeyValuePair<string, object>(parameterName, parameterValue));
+      return this;
     }
 
-    public AGoTFilter(string longName, string column, string shortName)
+    internal void AppendToCommand(OleDbCommand command)
     {
-      LongName = longName;
-      Column = column;
-      ShortName = shortName;
-    }
-
-    public override string ToString()
-    {
-      return LongName;
+      fParameters.ForEach(p => command.Parameters.AddWithValue(p.Key, p.Value));
     }
   }
 }

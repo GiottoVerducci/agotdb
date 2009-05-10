@@ -154,7 +154,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     {
       dbInformations = new List<DatabaseInfo>();
       var query = String.Format("SELECT * FROM [{0}] ORDER BY [VersionId] DESC", TableName.Version);
-      DataTable data = GetResultFromRequest(query, dbConnection);
+      DataTable data = GetResultFromRequest(query, dbConnection, null);
       foreach (DataRow row in data.Rows)
       {
         int dbVersion;
@@ -210,12 +210,16 @@ namespace AGoT.AGoTDB.BusinessObjects
       ValueId
     };
 
-    private DataTable GetResultFromRequest(string request, OleDbConnection aDbConnection)
+    private DataTable GetResultFromRequest(string request, OleDbConnection aDbConnection, CommandParameters parameters)
     {
       var table = new DataTable();
       if (ConnectedToDatabase)
       {
-        using (var dbDataAdapter = new OleDbDataAdapter(request, aDbConnection))
+        var command = new OleDbCommand(request, aDbConnection);
+        if(parameters != null)
+          parameters.AppendToCommand(command);
+
+        using (var dbDataAdapter = new OleDbDataAdapter(command))
         {
           dbDataAdapter.Fill(table);
         }
@@ -223,9 +227,15 @@ namespace AGoT.AGoTDB.BusinessObjects
       return table;
     }
 
+    // TODO : remplacer toutes les requêtes avec String.Format("...{n}...") par des appels avec CommandParameters
+    public DataTable GetResultFromRequest(string request, CommandParameters parameters)
+    {
+      return GetResultFromRequest(request, DbConnection, parameters);
+    }
+
     public DataTable GetResultFromRequest(string request)
     {
-      return GetResultFromRequest(request, DbConnection);
+      return GetResultFromRequest(request, DbConnection, null);
     }
 
     /// <summary>
@@ -245,10 +255,10 @@ namespace AGoT.AGoTDB.BusinessObjects
     public bool ConvertDatabase()
     {
       string query = String.Format("DELETE FROM [{0}]", TableName.Main);
-      GetResultFromRequest(query, fDbConnection);
+      GetResultFromRequest(query, fDbConnection, null);
 
       query = String.Format("SELECT * FROM [{0}]", TableName.Main);
-      DataTable HumanData = GetResultFromRequest(query, fHDbConnection);
+      DataTable humanData = GetResultFromRequest(query, fHDbConnection, null);
 
       using (var dbDataAdapter = new OleDbDataAdapter(query, fDbConnection))
       {
@@ -256,14 +266,14 @@ namespace AGoT.AGoTDB.BusinessObjects
         builder.QuotePrefix = "[";
         builder.QuoteSuffix = "]";
 
-        var fDataSet = new DataSet();
-        dbDataAdapter.Fill(fDataSet);
+        var dataSet = new DataSet();
+        dbDataAdapter.Fill(dataSet);
 
-        foreach (DataRow row in HumanData.Rows)
+        foreach (DataRow row in humanData.Rows)
         {
           try
           {
-            ConvertCard(row, fDataSet.Tables[0].Rows);
+            ConvertCard(row, dataSet.Tables[0].Rows);
           }
           catch
           {
@@ -271,7 +281,7 @@ namespace AGoT.AGoTDB.BusinessObjects
             return false;
           }
         }
-        dbDataAdapter.Update(fDataSet);
+        dbDataAdapter.Update(dataSet);
       }
       return true;
     }
@@ -364,7 +374,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       {
         DataTable dt =
           GetResultFromRequest(String.Format("SELECT Id FROM {0} WHERE Value LIKE '{1}'", refTableName, values[i]),
-                               fHDbConnection);
+                               fHDbConnection, null);
         intValue += Int32.Parse(dt.Rows[0]["Id"].ToString());
       }
 
@@ -485,6 +495,22 @@ namespace AGoT.AGoTDB.BusinessObjects
       Initiative = ExtractFormattedXIntValueFromRow(rowSource, "Initiative");
       Claim = ExtractFormattedXIntValueFromRow(rowSource, "Claim");
       Influence = ExtractFormattedXIntValueFromRow(rowSource, "Influence");
+
+#if DEBUG
+      // we compare the case of the name of the card in its title and its cardtext.
+      int index;
+      string text = Text.Value;
+      do
+      {
+        index = text.ToLower().IndexOf(Name.Value.ToLower());
+        if (index != -1)
+        {
+          if (text.Substring(index, Name.Value.Length).CompareTo(Name.Value) != 0)
+            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1}", Name.Value, UniversalId));
+          text = text.Substring(index + Name.Value.Length);
+        }
+      } while (index != -1);
+#endif
 
       rowsDest.Add(UniversalId.ToString(),
                    Name.Value, Name.FormatsToString(),

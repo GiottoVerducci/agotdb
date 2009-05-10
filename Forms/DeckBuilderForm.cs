@@ -41,6 +41,7 @@ namespace AGoT.AGoTDB.Forms
     private VersionedDeck fLastLoadedDeck; // used to detect changes in the versioned deck
     private Deck fCurrentDeck; // deck currently displayed
     private String fCurrentFilename; // filename of the deck (non-empty if the deck was loaded or saved)
+    private readonly List<CardTreeView> fTreeViews;
 
     private int fDeckTreeViewSpaceWidth; // width of a space using the deck tree view font (used to expand the lines)
     private readonly DeckTreeNodeSorter deckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
@@ -79,11 +80,14 @@ namespace AGoT.AGoTDB.Forms
     private DeckBuilderForm()
     {
       InitializeComponent();
-      treeViewDeck.NodeInfo = treeViewDeck.Nodes[0]; // must have been added during design time
-      treeViewSide.NodeInfo = treeViewSide.Nodes[0]; // must have been added during design time
+      fTreeViews = new List<CardTreeView>();
+      fTreeViews.Add(treeViewSide);
+      fTreeViews.Add(treeViewDeck);
+      for (var i = 0; i < fTreeViews.Count; ++i)
+        fTreeViews[i].NodeInfo = fTreeViews[i].Nodes[0]; // must have been added during design time
       NewVersionedDeck(false);
-      treeViewDeck.Cards = fCurrentDeck.Cards;
-      treeViewSide.Cards = fCurrentDeck.Sideboard;
+      for (var i = 0; i < fTreeViews.Count; ++i)
+        fTreeViews[i].Cards = fCurrentDeck.CardLists[i];
       deckTreeNodeSorter = new DeckTreeNodeSorter();
 
       DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclHouse, DatabaseInterface.TableName.House, "House", DatabaseInterface.TableType.ValueId);
@@ -339,8 +343,8 @@ namespace AGoT.AGoTDB.Forms
       UpdateControlsFromHouse();
       UpdateControlsAgenda();
 
-      UpdateTreeViewWithCards(treeViewDeck, fCurrentDeck.Cards);
-      UpdateTreeViewWithCards(treeViewSide, fCurrentDeck.Sideboard);
+      UpdateTreeViewWithCards(treeViewDeck, fCurrentDeck.CardLists[1]); // TODO : modify to handle multiple deck lists
+      UpdateTreeViewWithCards(treeViewSide, fCurrentDeck.CardLists[0]); // TODO : modify to handle multiple deck lists
 
       tbDeckName.Text = fVersionedDeck.Name;
       tbAuthor.Text = fVersionedDeck.Author;
@@ -354,7 +358,7 @@ namespace AGoT.AGoTDB.Forms
       rtbDescription.Enabled = fCurrentDeck.Editable;
     }
 
-    private void UpdateTreeViewWithCards(CardTreeView treeView, List<Card> cards)
+    private void UpdateTreeViewWithCards(CardTreeView treeView, CardList cards)
     {
       treeView.BeginUpdate();
       treeView.Cards = cards;
@@ -636,7 +640,7 @@ namespace AGoT.AGoTDB.Forms
       if (!fCurrentDeck.Editable)
         return false;
 
-      Card c = fCurrentDeck.AddCard(card);
+      Card c = fCurrentDeck.CardLists[1].AddCard(card); // TODO : modify to handle multiple deck lists
       AddCardToTreeView(treeViewDeck, c, c.Quantity > 1);
       return true;
     }
@@ -646,7 +650,7 @@ namespace AGoT.AGoTDB.Forms
       if (!fCurrentDeck.Editable)
         return false;
 
-      Card c = fCurrentDeck.SubstractCard(card);
+      Card c = fCurrentDeck.CardLists[1].SubstractCard(card); // TODO : modify to handle multiple deck lists
       SubstractCardFromTreeView(treeViewDeck, card, c == null);
       return true;
     }
@@ -656,7 +660,7 @@ namespace AGoT.AGoTDB.Forms
       if (!fCurrentDeck.Editable)
         return false;
 
-      Card c = fCurrentDeck.AddCardToSideboard(card);
+      Card c = fCurrentDeck.CardLists[0].AddCard(card); // TODO : modify to handle multiple deck lists
       AddCardToTreeView(treeViewSide, c, c.Quantity > 1);
       return true;
     }
@@ -666,7 +670,7 @@ namespace AGoT.AGoTDB.Forms
       if (!fCurrentDeck.Editable)
         return false;
 
-      Card c = fCurrentDeck.SubstractCardFromSideboard(card);
+      Card c = fCurrentDeck.CardLists[0].SubstractCard(card); // TODO : modify to handle multiple deck lists
       SubstractCardFromTreeView(treeViewSide, card, c == null);
       return true;
     }
@@ -864,6 +868,16 @@ namespace AGoT.AGoTDB.Forms
       DrawSimulatorForm.Singleton.SetDeck(fCurrentDeck);
       DrawSimulatorForm.Singleton.Show();
       DrawSimulatorForm.Singleton.Activate();
+    }
+
+    private void miAddCardList_Click(object sender, EventArgs e)
+    {
+      var ctv = new CardTreeView();
+      ctv.Nodes.Add(new TreeNode(fTreeViews[1].NodeInfo.Text));
+      ctv.NodeInfo = ctv.Nodes[0];
+      var tabPage = new TabPage(tabPageDeck.Text + "+");
+      tabControlDecks.TabPages.Add(tabPage);
+      tabPage.Controls.Add(ctv);
     }
   }
 
