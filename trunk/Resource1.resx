@@ -240,6 +240,9 @@
   <data name="SetText" xml:space="preserve">
     <value>Set</value>
   </data>
+  <data name="ShadowCostText" xml:space="preserve">
+    <value>ShadowCost</value>
+  </data>
   <data name="ShadowVirtueText" xml:space="preserve">
     <value>Shadow</value>
   </data>

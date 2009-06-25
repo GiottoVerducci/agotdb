@@ -462,20 +462,44 @@ namespace AGoT.AGoTDB.BusinessObjects
           result.Add(new FormattedText(Resource1.HouseText + ": "));
           result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
-          result.Add(new FormattedText(Resource1.CostText + ": "));
-          result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
-          result.Add(new FormattedText("\r\n"));
+          if (Shadow.Value)
+          {
+              result.Add(new FormattedText(Resource1.ShadowCostText + ": "));
+              result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
+              result.Add(new FormattedText("\r\n"));
+              result.Add(new FormattedText(Resource1.VirtuesText + ": "));
+              result.AddRange(FormattedValueBoolToFormattedText(Shadow, Resource1.ShadowVirtueText + ". ", "", TextFormat.Regular));
+              result.Add(new FormattedText("\r\n"));
+          }
+          else
+          {
+              result.Add(new FormattedText(Resource1.CostText + ": "));
+              result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
+              result.Add(new FormattedText("\r\n"));
+          }
           break;
         case CardType.Event:
           result.Add(new FormattedText(Resource1.HouseText + ": "));
           result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
+          if (Shadow.Value)
+          {
+              result.Add(new FormattedText(Resource1.ShadowCostText + ": "));
+              result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
+              result.Add(new FormattedText("\r\n"));
+              result.Add(new FormattedText(Resource1.VirtuesText + ": "));
+              result.AddRange(FormattedValueBoolToFormattedText(Shadow, Resource1.ShadowVirtueText + ". ", "", TextFormat.Regular));
+              result.Add(new FormattedText("\r\n"));
+          }
           break;
         case CardType.Character:
           result.Add(new FormattedText(Resource1.HouseText + ": "));
           result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
-          result.Add(new FormattedText(Resource1.CostText + ": "));
+          if (Shadow.Value)
+              result.Add(new FormattedText(Resource1.ShadowCostText + ": "));
+          else 
+              result.Add(new FormattedText(Resource1.CostText + ": "));
           result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
           result.Add(new FormattedText(Resource1.StrengthText + ": "));
