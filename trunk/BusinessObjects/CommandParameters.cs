@@ -32,7 +32,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       if(String.IsNullOrEmpty(parameterName))
         throw new ArgumentOutOfRangeException("parameterName");
       if(fParameters.Exists(p => p.Key == parameterName))
-        throw new ApplicationException(String.Format("parameterName '{0}' already exists", parameterName));
+        throw new ArgumentException(String.Format("parameterName '{0}' already exists", parameterName));
       fParameters.Add(new KeyValuePair<string, object>(parameterName, parameterValue));
       return this;
     }

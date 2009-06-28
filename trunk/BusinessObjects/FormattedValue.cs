@@ -48,12 +48,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// For non-text column, start and stop are ignored. The style is applied to the whole field
     public String FormatsToString()
     {
-      string result = "";
-      for (var i = 0; i < Formats.Count; ++i)
-        result += Formats[i] + "; ";
-      if (result != "")
-        result = result.Substring(0, result.Length - 2);
-      return result;
+      return string.Join("; ", Formats.ConvertAll(f => f.ToString()).ToArray());
     }
   }
 }

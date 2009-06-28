@@ -18,6 +18,7 @@
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 using AGoT.AGoTDB.BusinessObjects;
 
@@ -39,11 +40,11 @@ namespace AGoT.AGoTDB.Forms
     private void AboutForm_Shown(object sender, EventArgs e)
     {
       var dbInfos = DatabaseInterface.Singleton.DatabaseInfos.Count > 0
-                      ? DatabaseInterface.Singleton.DatabaseInfos[0]
-                      : null;
+        ? DatabaseInterface.Singleton.DatabaseInfos[0]
+        : null;
       lblVersion.Text = ApplicationSettings.ApplicationVersion.ToString();
       if (dbInfos != null)
-        lblDbVersion.Text = string.Format("DB version: {0} ({1})", dbInfos.VersionId, dbInfos.DateCreation.HasValue ? dbInfos.DateCreation.Value.ToShortDateString() : "");
+        lblDbVersion.Text = string.Format(CultureInfo.InvariantCulture, "DB version: {0} ({1})", dbInfos.VersionId, dbInfos.DateCreation.HasValue ? dbInfos.DateCreation.Value.ToShortDateString() : "");
     }
 
     private void btnOk_Click(object sender, EventArgs e)

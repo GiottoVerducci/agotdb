@@ -35,7 +35,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     public static readonly Color DefaultColor = Color.Black;
     public static readonly FontStyle DefaultFontStyle = FontStyle.Regular;
 
-    public static TextFormat Regular = new TextFormat("regular", DefaultFontStyle, DefaultColor);
+    public static readonly TextFormat Regular = new TextFormat("regular", DefaultFontStyle, DefaultColor);
 
     public TextFormat(string name, FontStyle style)
     {

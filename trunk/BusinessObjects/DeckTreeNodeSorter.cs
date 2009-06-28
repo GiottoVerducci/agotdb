@@ -57,7 +57,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>0 is x and y are equal, -1 if x is lesser than b, 1 if a is greater than b.</returns>
     public int Compare(TreeNode x, TreeNode y)
     {
-      if (DeckBuilderForm.isCardNode(x))
+      if (DeckBuilderForm.IsCardNode(x))
       {
         var cx = x.Tag as Card;
         var cy = y.Tag as Card;

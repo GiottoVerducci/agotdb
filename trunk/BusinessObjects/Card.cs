@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Xml;
 
 namespace AGoT.AGoTDB.BusinessObjects
@@ -41,12 +42,12 @@ namespace AGoT.AGoTDB.BusinessObjects
     public int Quantity = 1; // used by decks
     private string fSummaryInfo = ""; // cache for GetSummaryInfo method
 
-    public enum CardType { Unknown = -1, Character = 1, Location = 2, Attachment = 4, Event = 8, Plot = 16, Agenda = 32, Title = 64 };
+    public enum CardType { Unknown = -1, None = 0, Character = 1, Location = 2, Attachment = 4, Event = 8, Plot = 16, Agenda = 32, Title = 64 };
     public enum CardHouse { Unknown = -1, Neutral = 0, Stark = 1, Lannister = 2, Baratheon = 4, Greyjoy = 8, Martell = 16, Targaryen = 32 };
 
-    public static TextFormat ErrataFormat = new TextFormat("errata", Color.Red);
-    public static TextFormat TraitsFormat = new TextFormat("traits", FontStyle.Bold | FontStyle.Italic);
-    public static TextFormat TriggerFormat = new TextFormat("trigger", FontStyle.Bold);
+    public static readonly TextFormat ErrataFormat = new TextFormat("errata", Color.Red);
+    public static readonly TextFormat TraitsFormat = new TextFormat("traits", FontStyle.Bold | FontStyle.Italic);
+    public static readonly TextFormat TriggerFormat = new TextFormat("trigger", FontStyle.Bold);
     public static List<TagText> CardTypeNames, CardHouseNames; // to convert ids in human strings
 
     // "Id", "Name", "Type", "House", "Unique", "Traits", "Keywords", "Text", "Doomed", "Endless", "Cost", "Strength",
@@ -57,13 +58,16 @@ namespace AGoT.AGoTDB.BusinessObjects
     {
       var formats = new List<FormatSection>();
 
-      if (style != "")
+      if (!string.IsNullOrEmpty(style))
       {
         string[] styles = style.Split(';');
         for (var i = 0; i < styles.Length; ++i)
         {
           string[] styleinfo = styles[i].Trim().Split(',', '-');
-          formats.Add(new FormatSection(Int32.Parse(styleinfo[1]), Int32.Parse(styleinfo[2]), (styleinfo[0].Trim() == "errata") ? ErrataFormat : TraitsFormat));
+          formats.Add(new FormatSection(
+            Int32.Parse(styleinfo[1], CultureInfo.InvariantCulture),
+            Int32.Parse(styleinfo[2], CultureInfo.InvariantCulture),
+            (styleinfo[0].Trim() == "errata") ? ErrataFormat : TraitsFormat));
         }
       }
       return formats;
@@ -88,7 +92,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     private static FormattedValue<int> GetIntAndStyleFromRow(DataRow row, string column)
     {
       string text = row[column].ToString();
-      int value = (text.Trim() == "") ? 0 : Int32.Parse(text);
+      int value = string.IsNullOrEmpty(text.Trim()) ? 0 : Int32.Parse(text);
       string errated = row[column + "Errated"].ToString().Trim();
       return new FormattedValue<int>(value, GetFormatFromErrata(errated));
     }
@@ -96,14 +100,14 @@ namespace AGoT.AGoTDB.BusinessObjects
     private static FormattedValue<XInt> GetXIntAndStyleFromRow(DataRow row, string column)
     {
       string text = row[column].ToString();
-      int value = (text.Trim() == "") ? 0 : Int32.Parse(text);
+      int value = string.IsNullOrEmpty(text.Trim()) ? 0 : Int32.Parse(text, CultureInfo.InvariantCulture);
       string errated = row[column + "Errated"].ToString().Trim();
       return new FormattedValue<XInt>((value == -1) ? new XInt() : new XInt(value), GetFormatFromErrata(errated));
     }
 
     private static FormattedValue<bool> GetBoolAndStyleFromRow(DataRow row, string column)
     {
-      bool value = row[column].ToString().ToLowerInvariant() == true.ToString().ToLowerInvariant();
+      bool value = row[column].ToString().ToUpperInvariant() == true.ToString().ToUpperInvariant();
       string errated = row[column + "Errated"].ToString().Trim();
       return new FormattedValue<bool>(value, GetFormatFromErrata(errated));
     }
@@ -115,6 +119,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     private void InitializeFromDataRow(DataRow row)
     {
+      // ZONK pas possible de caster directement?
       UniversalId = Int32.Parse(row["UniversalId"].ToString());
       Name = GetTextAndStyleFromRow(row, "Name");
       Type = GetIntAndStyleFromRow(row, "Type");
@@ -196,8 +201,8 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>The card text in plain text.</returns>
     public string ToPlainFullString()
     {
-      //String result = ("Nom: " + Name.Value + " " + ReportBrackets(unique, (unique.Contains("Yes") ? "*" : ""))).Trim() + "\r\n";
-      String result = String.Format("{0}: {1}", Resource1.NameText, Name.Value); //, (Unique.Value)? "*" : "");
+      String result = String.Format(CultureInfo.CurrentCulture, "{0}{1}{2}",
+        Resource1.NameText, Resource1.SeparatorText, Name.Value);
       List<FormattedText> formatted = ToFormattedString();
       for (var i = 1; i < formatted.Count; ++i) // start at index 1 to skip the name part
         if ((formatted[i].Text != "\r\n") || ((i + 1 < formatted.Count) && (formatted[i + 1].Text != "\r\n")))
@@ -231,43 +236,43 @@ namespace AGoT.AGoTDB.BusinessObjects
       switch ((CardType)Type.Value)
       {
         case CardType.Plot:
-          fSummaryInfo = String.Format("{0,2} {1,2} {2,2}", Income.Value, Initiative.Value, Claim.Value);
-          if (Traits.Value != "")
+          fSummaryInfo = String.Format(CultureInfo.CurrentCulture, "{0,2} {1,2} {2,2}", Income.Value, Initiative.Value, Claim.Value);
+          if (!string.IsNullOrEmpty(Traits.Value))
             fSummaryInfo += " - " + Traits.Value;
           break;
         case CardType.Attachment:
-          fSummaryInfo = String.Format("[{0}]", Cost.Value);
-          if (Keywords.Value != "")
+          fSummaryInfo = String.Format(CultureInfo.CurrentCulture, "[{0}]", Cost.Value);
+          if (!string.IsNullOrEmpty(Keywords.Value))
             fSummaryInfo += " - " + Keywords.Value;
           break;
         case CardType.Character:
-          fSummaryInfo = String.Format("[{0}] {1,2} {2} {3} {4}", Cost.Value, Strength.Value, (Military.Value) ? Resource1.MilitaryIconAbrev[0] : ' ', (Intrigue.Value) ? Resource1.IntrigueIconAbrev[0] : ' ', (Power.Value) ? Resource1.PowerIconAbrev[0] : ' ');
-          if (Traits.Value != "")
+          fSummaryInfo = String.Format(CultureInfo.CurrentCulture, "[{0}] {1,2} {2} {3} {4}", Cost.Value, Strength.Value, (Military.Value) ? Resource1.MilitaryIconAbrev[0] : ' ', (Intrigue.Value) ? Resource1.IntrigueIconAbrev[0] : ' ', (Power.Value) ? Resource1.PowerIconAbrev[0] : ' ');
+          if (!string.IsNullOrEmpty(Traits.Value))
             fSummaryInfo += " - " + Traits.Value;
           if (Noble.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.NobleVirtueText);
           if (War.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.WarVirtueText);
           if (Holy.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.HolyVirtueText);
           if (Learned.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.LearnedVirtueText);
           if (Shadow.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.ShadowVirtueText);
-          if (Keywords.Value != "")
+          if (!string.IsNullOrEmpty(Keywords.Value))
             fSummaryInfo += " - " + Keywords.Value;
           break;
         case CardType.Event:
-          if (Cost.Value.IsNonZero())  // for old events with a gold cost
-            fSummaryInfo = String.Format("[{0}]", Cost.Value);
-          if (Traits.Value != "")
+          if (Cost.Value.IsNonzero())  // for old events with a gold cost
+            fSummaryInfo = String.Format(CultureInfo.CurrentCulture, "[{0}]", Cost.Value);
+          if (!string.IsNullOrEmpty(Traits.Value))
             fSummaryInfo += " - " + Traits.Value;
-          if (Keywords.Value != "")
+          if (!string.IsNullOrEmpty(Keywords.Value))
             fSummaryInfo += " - " + Keywords.Value;
           break;
         case CardType.Location:
-          fSummaryInfo = String.Format("[{0}]", Cost.Value);
-          fSummaryInfo += (Income.Value.IsNonZero()) ? ("+" + Income.Value) : "  ";
-          fSummaryInfo += (Influence.Value.IsNonZero()) ? String.Format("|{0}|", Influence.Value) : "   ";
-          fSummaryInfo += (Initiative.Value.IsNonZero()) ? String.Format("<{0}>", Initiative.Value) : "   ";
-          if (Traits.Value != "")
+          fSummaryInfo = String.Format(CultureInfo.CurrentCulture, "[{0}]", Cost.Value);
+          fSummaryInfo += (Income.Value.IsNonzero()) ? (string.Format(CultureInfo.CurrentCulture, "+{0}", Income.Value)) : "  ";
+          fSummaryInfo += (Influence.Value.IsNonzero()) ? String.Format(CultureInfo.CurrentCulture, "|{0}|", Influence.Value) : "   ";
+          fSummaryInfo += (Initiative.Value.IsNonzero()) ? String.Format(CultureInfo.CurrentCulture, "<{0}>", Initiative.Value) : "   ";
+          if (!string.IsNullOrEmpty(Traits.Value))
             fSummaryInfo += " - " + Traits.Value;
-          if (Keywords.Value != "")
+          if (!string.IsNullOrEmpty(Keywords.Value))
             fSummaryInfo += " - " + Keywords.Value;
           break;
         default: fSummaryInfo = ""; break;
@@ -343,7 +348,7 @@ namespace AGoT.AGoTDB.BusinessObjects
           result.RemoveAt(j);
           result.InsertRange(j, subResult);
 
-          // we have to adjust the indexes if the we carry on the next part
+          // we have to adjust the indexes if we carry the format on the next part
           if (formatAppliesToNext)
           {
             if (relBegin != 0) { pos += result[j].Text.Length; ++j; }
@@ -392,7 +397,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       return result;
     }
 
-    public static string GetTextFromList(List<TagText> tt, Int32 id)
+    protected static string GetTextFromList(List<TagText> tt, Int32 id)
     {
       var index = tt.FindIndex(t => (t.Tag == id));
       return index != -1 ? tt[index].Text : "";
@@ -437,6 +442,8 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>A list of FormattedText elements containing the informations about this card.</returns>
     public List<FormattedText> ToFormattedString()
     {
+      var separator = Resource1.SeparatorText;
+
       var result = new List<FormattedText>();
 
       var nameFormat = new TextFormat("name", FontStyle.Bold);
@@ -445,13 +452,13 @@ namespace AGoT.AGoTDB.BusinessObjects
       result.AddRange(FormattedValueBoolToFormattedText(Unique, " *", "", nameFormat));
       result.Add(new FormattedText("\r\n"));
 
-      result.Add(new FormattedText(Resource1.SetText + ": "));
+      result.Add(new FormattedText(Resource1.SetText + separator));
       result.AddRange(FormattedValueStringToFormattedText(Set, TextFormat.Regular));
       result.Add(new FormattedText("\r\n"));
 
       if (Type != null)
       {
-        result.Add(new FormattedText(Resource1.TypeText + ": "));
+        result.Add(new FormattedText(Resource1.TypeText + separator));
         result.Add(new FormattedText(GetTypeName(Type != null ? Type.Value : (Int32)CardType.Unknown), (Type != null && Type.Formats.Count > 0) ? Type.Formats[0].Format : TextFormat.Regular));
         result.Add(new FormattedText("\r\n"));
       }
@@ -459,53 +466,44 @@ namespace AGoT.AGoTDB.BusinessObjects
       {
         case CardType.Location:
         case CardType.Attachment:
-          result.Add(new FormattedText(Resource1.HouseText + ": "));
+          result.Add(new FormattedText(Resource1.HouseText + separator));
           result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
+          result.Add(new FormattedText("\r\n"));
+          result.Add(new FormattedText((Shadow.Value ? Resource1.ShadowCostText : Resource1.CostText) + separator));
+          result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
           if (Shadow.Value)
           {
-              result.Add(new FormattedText(Resource1.ShadowCostText + ": "));
-              result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
-              result.Add(new FormattedText("\r\n"));
-              result.Add(new FormattedText(Resource1.VirtuesText + ": "));
-              result.AddRange(FormattedValueBoolToFormattedText(Shadow, Resource1.ShadowVirtueText + ". ", "", TextFormat.Regular));
-              result.Add(new FormattedText("\r\n"));
-          }
-          else
-          {
-              result.Add(new FormattedText(Resource1.CostText + ": "));
-              result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
-              result.Add(new FormattedText("\r\n"));
+            result.Add(new FormattedText(Resource1.VirtuesText + separator));
+            result.AddRange(FormattedValueBoolToFormattedText(Shadow, Resource1.ShadowVirtueText + ". ", "", TextFormat.Regular));
+            result.Add(new FormattedText("\r\n"));
           }
           break;
         case CardType.Event:
-          result.Add(new FormattedText(Resource1.HouseText + ": "));
+          result.Add(new FormattedText(Resource1.HouseText + separator));
           result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
           if (Shadow.Value)
           {
-              result.Add(new FormattedText(Resource1.ShadowCostText + ": "));
-              result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
-              result.Add(new FormattedText("\r\n"));
-              result.Add(new FormattedText(Resource1.VirtuesText + ": "));
-              result.AddRange(FormattedValueBoolToFormattedText(Shadow, Resource1.ShadowVirtueText + ". ", "", TextFormat.Regular));
-              result.Add(new FormattedText("\r\n"));
+            result.Add(new FormattedText(Resource1.ShadowCostText + separator));
+            result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
+            result.Add(new FormattedText("\r\n"));
+            result.Add(new FormattedText(Resource1.VirtuesText + separator));
+            result.AddRange(FormattedValueBoolToFormattedText(Shadow, Resource1.ShadowVirtueText + ". ", "", TextFormat.Regular));
+            result.Add(new FormattedText("\r\n"));
           }
           break;
         case CardType.Character:
-          result.Add(new FormattedText(Resource1.HouseText + ": "));
+          result.Add(new FormattedText(Resource1.HouseText + separator));
           result.Add(new FormattedText(GetHouseName(House.Value), (House.Formats.Count > 0) ? House.Formats[0].Format : TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
-          if (Shadow.Value)
-              result.Add(new FormattedText(Resource1.ShadowCostText + ": "));
-          else 
-              result.Add(new FormattedText(Resource1.CostText + ": "));
+          result.Add(new FormattedText((Shadow.Value ? Resource1.ShadowCostText : Resource1.CostText) + separator));
           result.AddRange(FormattedValueXIntToFormattedText(Cost, TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
-          result.Add(new FormattedText(Resource1.StrengthText + ": "));
+          result.Add(new FormattedText(Resource1.StrengthText + separator));
           result.AddRange(FormattedValueXIntToFormattedText(Strength, TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
-          result.Add(new FormattedText(Resource1.IconsText + ": "));
+          result.Add(new FormattedText(Resource1.IconsText + separator));
           if (Military.Value || Intrigue.Value || Power.Value)
           {
             result.AddRange(FormattedValueBoolToFormattedText(Military, Resource1.MilitaryIconAbrev + " ", "", TextFormat.Regular));
@@ -517,7 +515,7 @@ namespace AGoT.AGoTDB.BusinessObjects
           result.Add(new FormattedText("\r\n"));
           if (Noble.Value || War.Value || Holy.Value || Learned.Value || Shadow.Value)
           {
-            result.Add(new FormattedText(Resource1.VirtuesText + ": "));
+            result.Add(new FormattedText(Resource1.VirtuesText + separator));
             result.AddRange(FormattedValueBoolToFormattedText(Noble, Resource1.NobleVirtueText + ". ", "", TextFormat.Regular));
             result.AddRange(FormattedValueBoolToFormattedText(War, Resource1.WarVirtueText + ". ", "", TextFormat.Regular));
             result.AddRange(FormattedValueBoolToFormattedText(Holy, Resource1.HolyVirtueText + ". ", "", TextFormat.Regular));
@@ -527,13 +525,13 @@ namespace AGoT.AGoTDB.BusinessObjects
           }
           break;
         case CardType.Plot:
-          result.Add(new FormattedText(Resource1.IncomeText + ": "));
+          result.Add(new FormattedText(Resource1.IncomeText + separator));
           result.AddRange(FormattedValueXIntToFormattedText(Income, TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
-          result.Add(new FormattedText(Resource1.InitiativeText + ": "));
+          result.Add(new FormattedText(Resource1.InitiativeText + separator));
           result.AddRange(FormattedValueXIntToFormattedText(Initiative, TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
-          result.Add(new FormattedText(Resource1.ClaimText + ": "));
+          result.Add(new FormattedText(Resource1.ClaimText + separator));
           result.AddRange(FormattedValueXIntToFormattedText(Claim, TextFormat.Regular));
           result.Add(new FormattedText("\r\n"));
           break;
@@ -541,19 +539,19 @@ namespace AGoT.AGoTDB.BusinessObjects
 
       result.Add(new FormattedText("\r\n"));
 
-      if (Traits != null && Traits.Value != "")
+      if (Traits != null && !string.IsNullOrEmpty(Traits.Value))
       {
         result.AddRange(FormattedValueStringToFormattedText(Traits, TraitsFormat));
         result.Add(new FormattedText("\r\n"));
       }
 
-      if (Keywords != null && Keywords.Value != "")
+      if (Keywords != null && !string.IsNullOrEmpty(Keywords.Value))
       {
         result.AddRange(FormattedValueStringToFormattedText(Keywords, TextFormat.Regular));
         result.Add(new FormattedText("\r\n"));
       }
 
-      if (Text != null && Text.Value != "")
+      if (Text != null && !string.IsNullOrEmpty(Text.Value))
       {
         var cardText = new List<FormattedText>();
         FormatCardText(Text.Value, ref cardText);
@@ -694,10 +692,10 @@ namespace AGoT.AGoTDB.BusinessObjects
     public XmlElement ToXml(XmlDocument doc)
     {
       XmlElement value = doc.CreateElement("Card");
-      XmlToolBox.AddElementValue(doc, value, "UniversalId", UniversalId.ToString());
-      XmlToolBox.AddElementValue(doc, value, "Quantity", Quantity.ToString());
-      XmlToolBox.AddElementValue(doc, value, "Name", Name.Value);
-      XmlToolBox.AddElementValue(doc, value, "Set", Set.Value);
+      XmlToolbox.AddElementValue(doc, value, "UniversalId", UniversalId.ToString(CultureInfo.InvariantCulture));
+      XmlToolbox.AddElementValue(doc, value, "Quantity", Quantity.ToString(CultureInfo.InvariantCulture));
+      XmlToolbox.AddElementValue(doc, value, "Name", Name.Value);
+      XmlToolbox.AddElementValue(doc, value, "Set", Set.Value);
       return value;
     }
 
@@ -712,14 +710,15 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// are not in the database, such as cards from older sets, proxy cards or new cards.</remarks>
     public Card(XmlDocument doc, XmlNode root)
     {
-      UniversalId = Int32.Parse(XmlToolBox.GetElementValue(doc, root, "UniversalId"));
+      // ZONK : pas possible de caster directement?
+      UniversalId = Int32.Parse(XmlToolbox.GetElementValue(doc, root, "UniversalId"));
       DataTable table = DatabaseInterface.Singleton.GetResultFromRequest(
         String.Format("SELECT * FROM [{0}] WHERE UniversalId = :universalId", DatabaseInterface.TableName.Main),
         new CommandParameters().Add("universalId", UniversalId));
       if (table.Rows.Count <= 0)
       {
-        var recordedName = XmlToolBox.GetElementValue(doc, root, "Name");
-        var recordedSet = XmlToolBox.GetElementValue(doc, root, "Set");
+        var recordedName = XmlToolbox.GetElementValue(doc, root, "Name");
+        var recordedSet = XmlToolbox.GetElementValue(doc, root, "Set");
         // try to match the card with its name and expansion number (for cards that were merged in previous versions)
         table = DatabaseInterface.Singleton.GetResultFromRequest(
           String.Format("SELECT * FROM [{0}] WHERE Name = :name AND Set LIKE '%' + :set + '%'", DatabaseInterface.TableName.Main),
@@ -735,7 +734,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
       if (table.Rows.Count > 0)
         InitializeFromDataRow(table.Rows[0]);
-      Quantity = Int32.Parse(XmlToolBox.GetElementValue(doc, root, "Quantity"));
+      Quantity = Int32.Parse(XmlToolbox.GetElementValue(doc, root, "Quantity"), CultureInfo.InvariantCulture);
     }
 
     /// <summary>
@@ -752,12 +751,17 @@ namespace AGoT.AGoTDB.BusinessObjects
         {
           case (Int32)CardType.Character:
           case (Int32)CardType.Location:
-          case (Int32)CardType.Attachment: return MultipleCompare(Cost.Value.CompareTo(otherCard.Cost.Value), Name.Value.CompareTo(otherCard.Name.Value));
+          case (Int32)CardType.Attachment: return MultipleCompare(
+            Cost.Value.CompareTo(otherCard.Cost.Value),
+            string.Compare(Name.Value, otherCard.Name.Value, StringComparison.CurrentCulture));
           default:
           case (Int32)CardType.Event:
           case (Int32)CardType.Agenda:
-          case (Int32)CardType.Title: return Name.Value.CompareTo(otherCard.Name.Value);
-          case (Int32)CardType.Plot: return MultipleCompare(Claim.Value.CompareTo(otherCard.Claim.Value), Income.Value.CompareTo(otherCard.Income.Value), Name.Value.CompareTo(otherCard.Name.Value));
+          case (Int32)CardType.Title: return string.Compare(Name.Value, otherCard.Name.Value, StringComparison.CurrentCulture);
+          case (Int32)CardType.Plot: return MultipleCompare(
+            Claim.Value.CompareTo(otherCard.Claim.Value),
+            Income.Value.CompareTo(otherCard.Income.Value),
+            string.Compare(Name.Value, otherCard.Name.Value, StringComparison.CurrentCulture));
         }
       }
       return Name.Value.CompareTo(otherCard.Name.Value);

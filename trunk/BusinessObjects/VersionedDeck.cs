@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml;
 using System.Windows.Forms;
 using AGoT.AGoTDB.Forms;
@@ -31,9 +32,18 @@ namespace AGoT.AGoTDB.BusinessObjects
   public class VersionedDeck
   {
     private readonly List<Deck> fDecks;
-    public String Author; // name of the deck author
-    public String Description; // description of the deck
-    public String Name; // name of the deck
+    /// <summary>
+    /// Name of the deck author.
+    /// </summary>
+    public String Author { get; set; }
+    /// <summary>
+    /// Description of the deck, by its author.
+    /// </summary>
+    public String Description { get; set; }
+    /// <summary>
+    /// Name of the deck, by its author.
+    /// </summary>
+    public String Name { get; set; }
     private const String fXmlRootName = "VersionedDeck";
 
     /// <summary>
@@ -70,38 +80,38 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// The deck of index equal to GetVersionsCount - 1 is the latest deck version.</remarks>
     /// <param name="versionIndex">The index of the version of the deck to get.</param>
     /// <returns>The <paramref name="versionIndex"/> version of the deck.</returns>
-    public Deck GetVersion(int versionIndex)
+    public Deck this[int versionIndex]
     {
-      return fDecks[versionIndex];
+      get { return fDecks[versionIndex]; }
     }
 
     /// <summary>
     /// Gets the latest version of the deck.
     /// </summary>
     /// <returns>The lastest version of the deck.</returns>
-    public Deck GetLastVersion()
+    public Deck LastVersion
     {
-      return fDecks[fDecks.Count - 1];
+      get { return fDecks[fDecks.Count - 1]; }
     }
 
     /// <summary>
     /// Gets the count of versions of the deck.
     /// </summary>
     /// <returns>The count of versions of the deck.</returns>
-    public int GetVersionsCount()
+    public int Count
     {
-      return fDecks.Count;
+      get { return fDecks.Count; }
     }
 
     /// <summary>
     /// Adds a new version to the versioned deck.
     /// </summary>
-    /// <param name="CommentsForLastVersion">The comment associated to the previously latest version.</param>
-    public void AddNewVersion(String CommentsForLastVersion)
+    /// <param name="commentsForLastVersion">The comment associated to the previously latest version.</param>
+    public void AddNewVersion(String commentsForLastVersion)
     {
-      GetLastVersion().RevisionComments = CommentsForLastVersion;
-      GetLastVersion().Editable = false;
-      fDecks.Add(Deck.CreateRevision(GetLastVersion()));
+      LastVersion.RevisionComments = commentsForLastVersion;
+      LastVersion.Editable = false;
+      fDecks.Add(Deck.CreateRevision(LastVersion));
     }
 
     /// <summary>
@@ -120,7 +130,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// </summary>
     /// <param name="filename">The full path and name of the xml file.</param>
     /// <returns>A value indicating if the load was successful or if not, why it wasn't.</returns>
-    public DeckLoadResult LoadFromXMLFile(string filename)
+    public DeckLoadResult LoadFromXmlFile(string filename)
     {
       var doc = new XmlDocument();
       string author, description, name;
@@ -131,13 +141,13 @@ namespace AGoT.AGoTDB.BusinessObjects
         XmlNode xmlDecl = doc.FirstChild;
         XmlNode root = xmlDecl.NextSibling;
         //if (root.GetAttributeNode("DeckBuilderVersion").Value
-        author = XmlToolBox.GetElementValue(doc, root, "Author");
-        description = XmlToolBox.GetElementValue(doc, root, "Description");
-        name = XmlToolBox.GetElementValue(doc, root, "Name");
+        author = XmlToolbox.GetElementValue(doc, root, "Author");
+        description = XmlToolbox.GetElementValue(doc, root, "Description");
+        name = XmlToolbox.GetElementValue(doc, root, "Name");
         int i = 0;
         XmlNode deckRoot;
         Deck deck = null;
-        while ((deckRoot = XmlToolBox.FindNode(doc, root, "Deck" + i)) != null)
+        while ((deckRoot = XmlToolbox.FindNode(root, "Deck" + i)) != null)
         {
           if (deck != null) // allows us to affect all decks but the last
             deck.Editable = false;
@@ -165,7 +175,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// Builds an xml document representing this versioned deck.
     /// </summary>
     /// <returns>The xml document.</returns>
-    private XmlDocument BuildXMLDocument()
+    private XmlDocument BuildXmlDocument()
     {
       XmlDocument doc = new XmlDocument();
       doc.AppendChild(doc.CreateXmlDeclaration("1.0", null, null));
@@ -174,15 +184,15 @@ namespace AGoT.AGoTDB.BusinessObjects
 
       root.SetAttributeNode("DeckBuilderVersion", "").Value = ApplicationSettings.ApplicationVersion.ToString();
       if (DatabaseInterface.Singleton.DatabaseInfos.Count > 0)
-        root.SetAttributeNode("DatabaseVersion", "").Value = DatabaseInterface.Singleton.DatabaseInfos[0].VersionId.ToString();
-      XmlToolBox.AddElementValue(doc, root, "Author", Author);
-      XmlToolBox.AddElementValue(doc, root, "Description", Description);
-      XmlToolBox.AddElementValue(doc, root, "Name", Name);
+        root.SetAttributeNode("DatabaseVersion", "").Value = DatabaseInterface.Singleton.DatabaseInfos[0].VersionId.ToString(CultureInfo.InvariantCulture);
+      XmlToolbox.AddElementValue(doc, root, "Author", Author);
+      XmlToolbox.AddElementValue(doc, root, "Description", Description);
+      XmlToolbox.AddElementValue(doc, root, "Name", Name);
 
       for (var i = 0; i < fDecks.Count; ++i)
       {
         XmlElement deckRoot = doc.CreateElement("Deck" + i);
-        deckRoot.AppendChild(fDecks[i].ToXML(doc));
+        deckRoot.AppendChild(fDecks[i].ToXml(doc));
         root.AppendChild(deckRoot);
       }
       return doc;
@@ -193,16 +203,16 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// </summary>
     /// <param name="filename">The full path and name of the file.</param>
     /// <returns>True if the save was successful, False otherwise.</returns>
-    public bool SaveToXMLFile(string filename)
+    public bool SaveToXmlFile(string filename)
     {
-      XmlDocument doc = BuildXMLDocument();
+      XmlDocument doc = BuildXmlDocument();
       try
       {
         doc.Save(filename);
       }
       catch
       {
-        MessageBox.Show(String.Format(Resource1.ErrSaveXmlDeck, filename), Resource1.ErrDeckSaveTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrSaveXmlDeck, filename), Resource1.ErrDeckSaveTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         return false;
       }
       return true;
@@ -212,19 +222,19 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// Compares two versioned decks by comparing their content. If both references are null, the method
     /// returns true.
     /// </summary>
-    /// <param name="vdeck1">The first versioned deck</param>
-    /// <param name="vdeck2">The second versioned deck</param>
+    /// <param name="first">The first versioned deck.</param>
+    /// <param name="second">The second versioned deck.</param>
     /// <returns>True if the two versioned decks are identical by content or both null, false otherwise.</returns>
-    public static bool AreEqual(VersionedDeck vdeck1, VersionedDeck vdeck2)
+    public static bool AreEqual(VersionedDeck first, VersionedDeck second)
     {
-      if ((vdeck1.Author != vdeck2.Author) || 
-        (vdeck1.Description != vdeck2.Description) || 
-        (vdeck1.Name != vdeck2.Name) ||
-        (vdeck1.fDecks.Count != vdeck2.fDecks.Count))
+      if ((first.Author != second.Author) ||
+        (first.Description != second.Description) ||
+        (first.Name != second.Name) ||
+        (first.fDecks.Count != second.fDecks.Count))
         return false;
 
-      for(var i = 0; i < vdeck1.fDecks.Count; ++i)
-        if (!Deck.AreEqual(vdeck1.fDecks[i], vdeck2.fDecks[i]))
+      for (var i = 0; i < first.fDecks.Count; ++i)
+        if (!Deck.AreEqual(first.fDecks[i], second.fDecks[i]))
           return false;
       return true;
     }
