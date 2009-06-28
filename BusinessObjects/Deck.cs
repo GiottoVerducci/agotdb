@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml;
 
 namespace AGoT.AGoTDB.BusinessObjects
@@ -35,7 +36,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     public Deck()
     {
-      CardLists = new List<CardList> {new CardList(), new CardList()}; // sideboard (0) and main deck (1)
+      CardLists = new List<CardList> { new CardList(), new CardList() }; // sideboard (0) and main deck (1)
       Agenda = null;
       RevisionComments = "";
       CreationDate = DateTime.Now;
@@ -80,14 +81,14 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// Serializes the deck under an xml data format.
     /// </summary>
     /// <param name="doc">The xml document where the data will be stored.</param>
-    public XmlElement ToXML(XmlDocument doc)
+    public XmlElement ToXml(XmlDocument doc)
     {
       XmlElement deckRoot = doc.CreateElement("Deck");
 
-      XmlToolBox.AddElementValue(doc, deckRoot, "RevisionComments", RevisionComments);
-      XmlToolBox.AddElementValue(doc, deckRoot, "CreationDate", CreationDate.ToBinary().ToString());
-      XmlToolBox.AddElementValue(doc, deckRoot, "LastModifiedDate", LastModifiedDate.ToBinary().ToString());
-      XmlToolBox.AddElementValue(doc, deckRoot, "Houses", Houses.ToString());
+      XmlToolbox.AddElementValue(doc, deckRoot, "RevisionComments", RevisionComments);
+      XmlToolbox.AddElementValue(doc, deckRoot, "CreationDate", CreationDate.ToBinary().ToString(CultureInfo.InvariantCulture));
+      XmlToolbox.AddElementValue(doc, deckRoot, "LastModifiedDate", LastModifiedDate.ToBinary().ToString(CultureInfo.InvariantCulture));
+      XmlToolbox.AddElementValue(doc, deckRoot, "Houses", Houses.ToString());
       if (Agenda != null)
       {
         XmlElement agendaElement = doc.CreateElement("Agenda");
@@ -110,7 +111,9 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <returns>The node name.</returns>
     private static String GetNodeName(int cardListIndex)
     {
-      return cardListIndex == 0 ? "Sideboard" : (cardListIndex == 1 ? "Cards" : String.Format("Cards{0}", cardListIndex));
+      return cardListIndex == 0
+        ? "Sideboard"
+        : (cardListIndex == 1 ? "Cards" : String.Format(CultureInfo.CurrentCulture, "Cards{0}", cardListIndex));
     }
 
     /// <summary>
@@ -123,23 +126,23 @@ namespace AGoT.AGoTDB.BusinessObjects
       : this()
     {
       if (deckRoot.Name != "Deck")
-        throw new Exception("Invalid deck root node");
-      RevisionComments = XmlToolBox.GetElementValue(doc, deckRoot, "RevisionComments");
+        throw new XmlException("Invalid deck root node");
+      RevisionComments = XmlToolbox.GetElementValue(doc, deckRoot, "RevisionComments");
 
       String value;
-      if ((value = XmlToolBox.GetElementValue(doc, deckRoot, "CreationDate")) != null)
-        CreationDate = DateTime.FromBinary(Int64.Parse(value));
-      if ((value = XmlToolBox.GetElementValue(doc, deckRoot, "LastModifiedDate")) != null)
-        LastModifiedDate = DateTime.FromBinary(Int64.Parse(value));
-      if (((value = XmlToolBox.GetElementValue(doc, deckRoot, "Houses")) != null) && (value != ""))
-        Houses = Int32.Parse(value);
-      XmlNode agendaNode = XmlToolBox.FindNode(doc, deckRoot, "Agenda");
+      if ((value = XmlToolbox.GetElementValue(doc, deckRoot, "CreationDate")) != null)
+        CreationDate = DateTime.FromBinary(Int64.Parse(value, CultureInfo.InvariantCulture));
+      if ((value = XmlToolbox.GetElementValue(doc, deckRoot, "LastModifiedDate")) != null)
+        LastModifiedDate = DateTime.FromBinary(Int64.Parse(value, CultureInfo.InvariantCulture));
+      if (!string.IsNullOrEmpty(value = XmlToolbox.GetElementValue(doc, deckRoot, "Houses")))
+        Houses = Int32.Parse(value, CultureInfo.InvariantCulture);
+      XmlNode agendaNode = XmlToolbox.FindNode(deckRoot, "Agenda");
       Agenda = (agendaNode != null) ? new Card(doc, agendaNode.FirstChild) : null;
       // we read the cardlists
       CardLists.Clear();
       XmlNode cardsRoot;
       var j = 0;
-      while (null != (cardsRoot = XmlToolBox.FindNode(doc, deckRoot, GetNodeName(j))))
+      while (null != (cardsRoot = XmlToolbox.FindNode(deckRoot, GetNodeName(j))))
       {
         CardLists.Add(new CardList(doc, cardsRoot));
         ++j;

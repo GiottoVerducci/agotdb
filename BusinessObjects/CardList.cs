@@ -27,7 +27,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     public CardList()
     {
     }
-    
+
     public CardList(CardList other)
     {
       CopyCardList(other);
@@ -35,7 +35,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     public CardList(XmlDocument doc, XmlNode cardListRoot)
     {
-      if (cardListRoot == null) 
+      if (cardListRoot == null)
         return;
       foreach (XmlNode cardNode in cardListRoot.ChildNodes)
         Add(new Card(doc, cardNode));
@@ -97,12 +97,12 @@ namespace AGoT.AGoTDB.BusinessObjects
     }
 
     /// <summary>
-    /// Substracts a card from this list of cards by decreasing the quantity by 1.
+    /// Subtracts a card from this list of cards by decreasing the quantity by 1.
     /// If the quantity reaches 0, removes the card from the list.
     /// </summary>
-    /// <param name="card">The card to substract from the list</param>
-    /// <returns>The card substracted, or null if the card was not found or the last copy was removed.</returns>
-    public Card SubstractCard(Card card)
+    /// <param name="card">The card to subtract from the list</param>
+    /// <returns>The card subtracted, or null if the card was not found or the last copy was removed.</returns>
+    public Card SubtractCard(Card card)
     {
       Card result = Find(c => (c.UniversalId == card.UniversalId));
       if (result != null)
@@ -116,6 +116,5 @@ namespace AGoT.AGoTDB.BusinessObjects
       }
       return result;
     }
-
   }
 }

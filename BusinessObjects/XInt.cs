@@ -18,6 +18,7 @@
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
 using System;
+using System.Globalization;
 
 namespace AGoT.AGoTDB.BusinessObjects
 {
@@ -52,7 +53,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// X values are not equal to 0.
     /// </summary>
     /// <returns>True if the value is X or different from 0, False otherwise.</returns>
-    public bool IsNonZero()
+    public bool IsNonzero()
     {
       return (IsX || (Value > 0));
     }
@@ -66,7 +67,7 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     public override string ToString()
     {
-      return (IsX) ? "X" : Value.ToString();
+      return (IsX) ? "X" : Value.ToString(CultureInfo.CurrentCulture);
     }
   }
 }

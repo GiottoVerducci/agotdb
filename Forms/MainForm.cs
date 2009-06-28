@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using System.Data.OleDb;
@@ -54,6 +55,8 @@ namespace AGoT.AGoTDB.Forms
     {
       // Cet appel est requis par le Concepteur Windows Form.
       InitializeComponent();
+      fDataTable.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
+
     }
 
     /// <summary>
@@ -72,7 +75,7 @@ namespace AGoT.AGoTDB.Forms
     public void InitializeViewForm(Object dataTable)
     {
       var i = 0;
-      while(i < splitContainer1.Panel1.Controls.Count)
+      while (i < splitContainer1.Panel1.Controls.Count)
         if (splitContainer1.Panel1.Controls[i] != dataGridView)
           splitContainer1.Panel1.Controls[i].Parent = null;
         else
@@ -82,16 +85,18 @@ namespace AGoT.AGoTDB.Forms
       dataGridView.DataSource = dataTable;
       menuStrip1.Visible = false;
       moveToANewWindowToolStripMenuItem.Visible = false;
-      Text = String.Format(Resource1.ViewFormTitle, fViewIndex) + " | " + fQuery.HumanQuery;
+      Text = String.Format(CultureInfo.CurrentCulture, Resource1.ViewFormTitle, fViewIndex) + " | " + fQuery.HumanQuery;
     }
 
     private static void LoadCardTypeName()
     {
       DataTable types = DatabaseInterface.Singleton.GetResultFromRequest(String.Format("SELECT * FROM {0}", DatabaseInterface.TableName.Type));
       Card.CardTypeNames = new List<TagText>();
-      foreach(DataRow row in types.Rows)
+      foreach (DataRow row in types.Rows)
       {
-        if(Int32.Parse(row["Id"].ToString()) >= 0)
+        // ZONK cast en int possible?
+        if (Int32.Parse(row["Id"].ToString()) >= 0)
+          // ZONK cast en int possible?
           Card.CardTypeNames.Add(new TagText(row["Value"].ToString(), Int32.Parse(row["ShortName"].ToString())));
       }
     }
@@ -102,7 +107,9 @@ namespace AGoT.AGoTDB.Forms
       Card.CardHouseNames = new List<TagText>();
       foreach (DataRow row in houses.Rows)
       {
+        // ZONK cast en int possible?
         if (Int32.Parse(row["Id"].ToString()) >= 0)
+          // ZONK cast en int possible?
           Card.CardHouseNames.Add(new TagText(row["Value"].ToString(), Int32.Parse(row["Id"].ToString())));
       }
     }
@@ -117,7 +124,7 @@ namespace AGoT.AGoTDB.Forms
       DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclHouse, DatabaseInterface.TableName.House, "House", DatabaseInterface.TableType.ValueKey);
       DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclCardtype, DatabaseInterface.TableName.Type, "Type", DatabaseInterface.TableType.ValueShortName);
       DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclProvides, DatabaseInterface.TableName.Provides, "", DatabaseInterface.TableType.ValueKey);
-      DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclMecanism, DatabaseInterface.TableName.Mecanism, "", DatabaseInterface.TableType.ValueKey);
+      DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclMecanism, DatabaseInterface.TableName.Mechanism, "", DatabaseInterface.TableType.ValueKey);
       DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclIcon, DatabaseInterface.TableName.Icon, "", DatabaseInterface.TableType.ValueKey);
       DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclVirtue, DatabaseInterface.TableName.Virtue, "", DatabaseInterface.TableType.ValueKey);
       DatabaseInterface.Singleton.UpdateExtendedCheckedListBox(eclKeyword, DatabaseInterface.TableName.Keyword, "Keywords", DatabaseInterface.TableType.Value);
@@ -161,7 +168,7 @@ namespace AGoT.AGoTDB.Forms
       var houseColumn = new DataColumn("House", Type.GetType("System.String"));
       houseColumn.Expression = String.Format("SUBSTRING(HouseTemp, 1, LEN(HouseTemp) - 1)");
       fDataTable.Columns.Add(houseColumn);
-      fDataTable.Columns["House"].SetOrdinal(fDataTable.Columns["Name"].Ordinal+1);
+      fDataTable.Columns["House"].SetOrdinal(fDataTable.Columns["Name"].Ordinal + 1);
 
       var typeColumn = new DataColumn("Type ", Type.GetType("System.String"));
       typeColumn.Expression = BuildTypeExpression(0);
@@ -184,6 +191,7 @@ namespace AGoT.AGoTDB.Forms
       {
         int selectedRowId = -1;
         if (dataGridView.SelectedRows.Count != 0)
+          // ZONK : cast en int possible?
           selectedRowId = Int32.Parse(((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row["UniversalId"].ToString());
 
         fQuery = query;
@@ -201,9 +209,10 @@ namespace AGoT.AGoTDB.Forms
           for (var i = 0; i < fDataTable.Columns.Count; ++i)
           {
             string colName = fDataTable.Columns[i].ColumnName;
-            if ((colName.IndexOf("Style") != -1) || (colName.IndexOf("Errated") != -1) ||
-                ((colName.StartsWith("House") && (colName.Length > "House".Length))) ||
-                (colName == "Type"))
+            if ((colName.IndexOf("Style", StringComparison.InvariantCultureIgnoreCase) != -1)
+              || (colName.IndexOf("Errated", StringComparison.InvariantCultureIgnoreCase) != -1)
+              || ((colName.StartsWith("House", StringComparison.InvariantCultureIgnoreCase) && (colName.Length > "House".Length)))
+              || (string.Compare(colName, "Type", StringComparison.InvariantCultureIgnoreCase) == 0))
               fDataTable.Columns[i].ColumnMapping = MappingType.Hidden;
           }
           fDataTable.Columns["UniversalId"].ColumnMapping = MappingType.Hidden;
@@ -240,7 +249,7 @@ namespace AGoT.AGoTDB.Forms
                      GetFilterFromExtendedCheckedListBox(eclExpansionSet, "OR", PositiveDataType.LikeValue);
 
       Query costOrIncome = GetFilterFromRangeBoxes(tbGoldLow, tbGoldHigh, "Cost");
-      if (costOrIncome.SqlQuery != "")
+      if (!string.IsNullOrEmpty(costOrIncome.SqlQuery))
       {
         costOrIncome.SqlQuery = String.Format("(({0}) OR ({1}))", costOrIncome.SqlQuery, costOrIncome.SqlQuery.Replace("Cost", "Income"));
         costOrIncome.HumanQuery = costOrIncome.HumanQuery.Replace("Cost", Resource1.CostOrIncomeText);
@@ -254,7 +263,7 @@ namespace AGoT.AGoTDB.Forms
               GetFilterFromTextBox(tbTraits, eclTraitCheck, "Traits") +
               GetFilterFromTextBox(tbName, eclNameCheck, "Name");
 
-      if (filter.SqlQuery != "")
+      if (!string.IsNullOrEmpty(filter.SqlQuery))
       {
         result.SqlQuery += " WHERE (" + filter.SqlQuery + ")";
         result.HumanQuery += filter.HumanQuery;
@@ -274,32 +283,32 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="column">the name of the field that is filtered</param>
     /// <returns>a string containing the filtering expression</returns>
 
-    private Query GetFilterFromRangeBoxes(TextBox lowTextBox, TextBox highTextBox, string column)
+    private static Query GetFilterFromRangeBoxes(TextBox lowTextBox, TextBox highTextBox, string column)
     {
       var result = new Query();
       string high = highTextBox.Text.Trim();
       string low = lowTextBox.Text.Trim();
-      if ((low == "") && (high == ""))
+      if (string.IsNullOrEmpty(low) && string.IsNullOrEmpty(high))
         return result;
 
       // sql part of the query
-      if (low != "")
-        result.SqlQuery = String.Format("({0} >= {1})", column, Int32.Parse(low));
-      if (high != "")
-        result = result + new Query(String.Format("({0} <= {1})", column, Int32.Parse(high)), "");
+      if (!string.IsNullOrEmpty(low))
+        result.SqlQuery = String.Format("({0} >= {1})", column, Int32.Parse(low, CultureInfo.CurrentCulture));
+      if (!string.IsNullOrEmpty(high))
+        result = result + new Query(String.Format("({0} <= {1})", column, Int32.Parse(high, CultureInfo.CurrentCulture)), "");
 
       result.SqlQuery = String.Format("(({0} = -1) OR ({1}))", column, result.SqlQuery);
 
       // human part of the query
-      if (low != "")
+      if (!string.IsNullOrEmpty(low))
       {
-        if (high != "")
-          result.HumanQuery = String.Format(Resource1.RangeBetween, column, low, high);
+        if (!string.IsNullOrEmpty(high))
+          result.HumanQuery = String.Format(CultureInfo.CurrentCulture, Resource1.RangeBetween, column, low, high);
         else
-          result.HumanQuery = String.Format(Resource1.RangeGreaterOrLesser, column, ">=", low);
+          result.HumanQuery = String.Format(CultureInfo.CurrentCulture, Resource1.RangeGreaterOrLesser, column, ">=", low);
       }
       else
-        result.HumanQuery = String.Format(Resource1.RangeGreaterOrLesser, column, "<=", high);
+        result.HumanQuery = String.Format(CultureInfo.CurrentCulture, Resource1.RangeGreaterOrLesser, column, "<=", high);
       return result;
     }
 
@@ -327,7 +336,7 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="logicalOperator">Indicates the combination between the choices</param>
     /// <param name="positiveDataType">The type of result expected to make a selection positive</param>
     /// <returns>A query which can be used in a SQL query</returns>
-    private Query GetFilterFromExtendedCheckedListBox(ExtendedCheckedListBox clb, string logicalOperator, PositiveDataType positiveDataType)
+    private static Query GetFilterFromExtendedCheckedListBox(ExtendedCheckedListBox clb, string logicalOperator, PositiveDataType positiveDataType)
     {
       var result = new Query();
 
@@ -336,7 +345,7 @@ namespace AGoT.AGoTDB.Forms
       // excluded values
       result += GetFilterFromItems(clb.GetItemsByState(CheckState.Indeterminate), false, logicalOperator, positiveDataType);
 
-      if (result.SqlQuery != "")
+      if (!string.IsNullOrEmpty(result.SqlQuery))
         result.SqlQuery = "(" + result.SqlQuery.Trim() + ")";
       return result;
     }
@@ -351,7 +360,7 @@ namespace AGoT.AGoTDB.Forms
 
       for (var i = 0; i < items.Count; ++i)
       {
-        AGoTFilter filter = (AGoTFilter)items[i];
+        var filter = (AGoTFilter)items[i];
 
         string subresult = "";
         switch (positiveDataType)
@@ -381,7 +390,7 @@ namespace AGoT.AGoTDB.Forms
         // human part of the query
         result.HumanQuery += ((include) ? "" : "-") + filter + " ";
       }
-      if (result.SqlQuery != "")
+      if (!string.IsNullOrEmpty(result.SqlQuery))
         result.SqlQuery = result.SqlQuery.Substring(0, result.SqlQuery.LastIndexOf(' ')); // remove the last logical operator
       return result;
     }
@@ -410,7 +419,7 @@ namespace AGoT.AGoTDB.Forms
       for (var i = 0; i < filters.Length; ++i)
       {
         string current = filters[i].Trim();
-        if (current == "")
+        if (string.IsNullOrEmpty(current))
           continue;
 
         bool currentReversed = reversed;
@@ -450,7 +459,7 @@ namespace AGoT.AGoTDB.Forms
         result.HumanQuery += "-" + excluded[i] + " "; // human form of the query
       }
 
-      if (result.SqlQuery != "")
+      if (!string.IsNullOrEmpty(result.SqlQuery))
       {
         result.SqlQuery = result.SqlQuery.Substring(0, result.SqlQuery.LastIndexOf(' ')); // remove the last logical operator
         result.SqlQuery = "(" + result.SqlQuery.Trim() + ")";
@@ -514,16 +523,17 @@ namespace AGoT.AGoTDB.Forms
 
     private void tbLowHigh_TextChanged(object sender, EventArgs e)
     {
-      if (((TextBox)sender).Tag != null) // to avoid reentrance
+      var senderTextBox = (TextBox)sender;
+      if (senderTextBox.Tag != null) // to avoid reentrance
         return;
-      string text = ((TextBox)sender).Text;
+      string text = senderTextBox.Text;
       string newText = "";
       for (var i = 0; i < text.Length; ++i)
         if ((text[i] >= '0') && (text[i] <= '9'))
           newText += text[i];
-      ((TextBox)sender).Tag = 0;
-      ((TextBox)sender).Text = newText;
-      ((TextBox)sender).Tag = null;
+      senderTextBox.Tag = 0;
+      senderTextBox.Text = newText;
+      senderTextBox.Tag = null;
     }
 
     private void eclCheck_CheckStateChanged(object sender, EventArgs e)
@@ -542,10 +552,11 @@ namespace AGoT.AGoTDB.Forms
     {
       for (var i = 0; i < dataGridView.Rows.Count; ++i)
       {
+        // ZONK : cast en int possible?
         int curId = Int32.Parse(((DataRowView)dataGridView.Rows[i].DataBoundItem).Row["UniversalId"].ToString());
-        if (curId != rowId) 
+        if (curId != rowId)
           continue;
-        
+
         dataGridView.ClearSelection();
         dataGridView.Rows[i].Selected = true;
         // scroll in the view in order to have the selected row centered
@@ -576,7 +587,7 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="text">The part of the name to search in the data rows.</param>
     private void QuickFind(string text)
     {
-      if (text != "")
+      if (!string.IsNullOrEmpty(text))
       {
         quickFindRows = fDataTable.Select(String.Format("Name LIKE '%{0}%'", EscapeSqlCharacters(text, false)));
         if (quickFindRows.Length > 0)
@@ -592,6 +603,7 @@ namespace AGoT.AGoTDB.Forms
     private void SelectCurrentQuickFindResult()
     {
       if ((quickFindRows != null) && (quickFindIndex >= 0) && (quickFindIndex < quickFindRows.Length))
+        // ZONK : cast en int possible?
         SelectRow(Int32.Parse(quickFindRows[quickFindIndex]["UniversalId"].ToString()));
     }
 
@@ -719,7 +731,7 @@ namespace AGoT.AGoTDB.Forms
     /// <param name="addCard"></param>
     private void AddCardToDeckOrSide(CardOperation addCard)
     {
-      if (dataGridView.SelectedRows.Count == 0) 
+      if (dataGridView.SelectedRows.Count == 0)
         return;
       DataRow row = ((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row;
       var card = new Card(row);

@@ -21,6 +21,6 @@ namespace AGoT.AGoTDB.BusinessObjects
 {
   public static class ApplicationSettings
   {
-    public static SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 672, 0);
+    public static readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 674, 0);
   }
 }

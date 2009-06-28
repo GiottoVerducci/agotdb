@@ -43,16 +43,21 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <param name="firstQuery">The first query.</param>
     /// <param name="secondQuery">The second query.</param>
     /// <returns>The concatenated queries.</returns>
-    public static Query operator +(Query firstQuery, Query secondQuery)
+    public static Query Add(Query firstQuery, Query secondQuery)
     {
-      if (secondQuery.SqlQuery == "")
+      if (string.IsNullOrEmpty(secondQuery.SqlQuery))
         return firstQuery;
 
-      if (firstQuery.SqlQuery == "")
+      if (string.IsNullOrEmpty(firstQuery.SqlQuery))
         return secondQuery;
 
       return new Query(string.Format("{0} AND {1}", firstQuery.SqlQuery, secondQuery.SqlQuery),
                        string.Format("{0} {1} {2}", firstQuery.HumanQuery, Resource1.And, secondQuery.HumanQuery));
+    }
+
+    public static Query operator +(Query firstQuery, Query secondQuery)
+    {
+      return Add(firstQuery, secondQuery);
     }
   }
 }

@@ -36,9 +36,14 @@ namespace AGoT.AGoTDB.BusinessObjects
       Value2 = value2;
     }
 
-    public static StringPair operator +(StringPair a, StringPair b)
+    public static StringPair Add(StringPair first, StringPair second)
     {
-      return new StringPair(a.Value1 + b.Value1, a.Value2 + b.Value2);
+      return new StringPair(first.Value1 + second.Value1, first.Value2 + second.Value2);
+    }
+
+    public static StringPair operator +(StringPair first, StringPair second)
+    {
+      return Add(first, second);
     }
   }
 }

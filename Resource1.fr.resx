@@ -238,7 +238,7 @@
     <value>Édition</value>
   </data>
   <data name="ShadowCostText" xml:space="preserve">
-    <value>Shadow Coût</value>
+    <value>Coût ombre</value>
   </data>
   <data name="ShadowVirtueText" xml:space="preserve">
     <value>Ombre</value>
@@ -281,5 +281,8 @@
   </data>
   <data name="ErrMinimalSoftwareVersionRequiredTitle" xml:space="preserve">
     <value>Versions incompatibles</value>
+  </data>
+  <data name="SeparatorText" xml:space="preserve">
+    <value> : </value>
   </data>
 </root>

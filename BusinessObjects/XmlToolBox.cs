@@ -24,7 +24,7 @@ namespace AGoT.AGoTDB.BusinessObjects
   /// <summary>
   /// Static class providing convenient methods for handling xml documents.
   /// </summary>
-  public static class XmlToolBox
+  public static class XmlToolbox
   {
     public static void AddElementValue(XmlDocument doc, XmlElement parent, string elementName, string elementValue)
     {
@@ -35,13 +35,13 @@ namespace AGoT.AGoTDB.BusinessObjects
 
     public static string GetElementValue(XmlDocument doc, XmlNode parent, string elementName)
     {
-      XmlNode element = FindNode(doc, parent, elementName);
+      XmlNode element = FindNode(parent, elementName);
       if ((element != null) && (element.FirstChild != null))
         return element.FirstChild.Value;
       return "";
     }
 
-    public static XmlNode FindNode(XmlDocument doc, XmlNode parent, string nodeName)
+    public static XmlNode FindNode(XmlNode parent, string nodeName)
     {
       foreach (XmlNode element in parent.ChildNodes)
         if (element.Name == nodeName)

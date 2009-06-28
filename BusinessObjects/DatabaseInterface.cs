@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using AGoT.AGoTDB.Forms;
 using Beyond.ExtendedControls;
@@ -61,7 +62,7 @@ namespace AGoT.AGoTDB.BusinessObjects
       public const string House = "TableHouse";
       public const string Icon = "TableIcon";
       public const string Keyword = "TableKeyword";
-      public const string Mecanism = "TableMecanism";
+      public const string Mechanism = "TableMecanism";
       public const string Provides = "TableProvides";
       public const string Set = "TableSet";
       public const string Trigger = "TableTrigger";
@@ -108,7 +109,7 @@ namespace AGoT.AGoTDB.BusinessObjects
         ReadDatabaseInformations(fDbConnection, out fDatabaseInfos);
       }
       if ((fDatabaseInfos.Count > 0) && (ApplicationSettings.ApplicationVersion.CompareTo(fDatabaseInfos[0].MinimalAgotDbVersion) < 0))
-        if (DialogResult.No == MessageBox.Show(String.Format(Resource1.ErrMinimalSoftwareVersionRequired, fDatabaseInfos[0].MinimalAgotDbVersion, ApplicationSettings.ApplicationVersion),
+        if (DialogResult.No == MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrMinimalSoftwareVersionRequired, fDatabaseInfos[0].MinimalAgotDbVersion, ApplicationSettings.ApplicationVersion),
           Resource1.ErrMinimalSoftwareVersionRequiredTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
           ConnectedToDatabase = false;
     }
@@ -134,12 +135,14 @@ namespace AGoT.AGoTDB.BusinessObjects
       }
       catch (FileNotFoundException)
       {
-        MessageBox.Show(String.Format(Resource1.ErrDatabaseNotFound, dbFilename), Resource1.ErrDatabaseNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrDatabaseNotFound, dbFilename),
+          Resource1.ErrDatabaseNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         return false;
       }
       catch
       {
-        MessageBox.Show(String.Format(Resource1.ErrInvalidDatabase, dbFilename), Resource1.ErrInvalidDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrInvalidDatabase, dbFilename),
+          Resource1.ErrInvalidDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         return false;
       }
     }
@@ -213,10 +216,11 @@ namespace AGoT.AGoTDB.BusinessObjects
     private DataTable GetResultFromRequest(string request, OleDbConnection aDbConnection, CommandParameters parameters)
     {
       var table = new DataTable();
+      table.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
       if (ConnectedToDatabase)
       {
         var command = new OleDbCommand(request, aDbConnection);
-        if(parameters != null)
+        if (parameters != null)
           parameters.AppendToCommand(command);
 
         using (var dbDataAdapter = new OleDbDataAdapter(command))
@@ -267,6 +271,7 @@ namespace AGoT.AGoTDB.BusinessObjects
         builder.QuoteSuffix = "]";
 
         var dataSet = new DataSet();
+        dataSet.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
         dbDataAdapter.Fill(dataSet);
 
         foreach (DataRow row in humanData.Rows)
@@ -299,7 +304,7 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <param name="row">The row from which to read the string value.</param>
     /// <param name="columnName">The colum in the row containing the string value to read.</param>
     /// <returns>A formatted value.</returns>
-    public FormattedValue<string> ExtractFormattedStringValueFromRow(DataRow row, string columnName)
+    public static FormattedValue<string> ExtractFormattedStringValueFromRow(DataRow row, string columnName)
     {
       string value = row[columnName].ToString();
 
@@ -318,7 +323,7 @@ namespace AGoT.AGoTDB.BusinessObjects
           case '{': special.Add('{'); formats.Add(Card.ErrataFormat); break;
           case '}':
             if (special[special.Count - 1] != '{')
-              throw new Exception(String.Format("Mismatch in database: '}' unexpected, column = {0}, value = {1}", columnName, value));
+              throw new ApplicationException(String.Format(CultureInfo.InvariantCulture, "Mismatch in database: '}' unexpected, column = {0}, value = {1}", columnName, value));
             special.RemoveAt(special.Count - 1);
             break;
           case '~':
@@ -339,7 +344,7 @@ namespace AGoT.AGoTDB.BusinessObjects
           bounds.Add(i - dec++);
       }
       if (special.Count != 0)
-        throw new Exception(String.Format("Mismatch in database: {0} formatting characters left, column = {1}, value = {2}", special.Count, columnName, value));
+        throw new ApplicationException(String.Format(CultureInfo.InvariantCulture, "Mismatch in database: {0} formatting characters left, column = {1}, value = {2}", special.Count, columnName, value));
 
       var formatSections = new List<FormatSection>();
       for (var i = 0; i < formats.Count; ++i)
@@ -375,7 +380,7 @@ namespace AGoT.AGoTDB.BusinessObjects
         DataTable dt =
           GetResultFromRequest(String.Format("SELECT Id FROM {0} WHERE Value LIKE '{1}'", refTableName, values[i]),
                                fHDbConnection, null);
-        intValue += Int32.Parse(dt.Rows[0]["Id"].ToString());
+        intValue += Int32.Parse(dt.Rows[0]["Id"].ToString(), CultureInfo.InvariantCulture);
       }
 
       return new FormattedValue<int>(intValue, formatSections);
@@ -388,15 +393,15 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <param name="row">The row from which to read the string value.</param>
     /// <param name="columnName">The colum in the row containing the string value to read.</param>
     /// <returns>A formatted value.</returns>
-    public FormattedValue<bool?> ExtractFormattedBoolValueFromRow(DataRow row, string columnName)
+    public static FormattedValue<bool?> ExtractFormattedBoolValueFromRow(DataRow row, string columnName)
     {
       FormattedValue<string> stringValue = ExtractFormattedStringValueFromRow(row, columnName);
 
-      string value = stringValue.Value.ToLower();
+      string value = stringValue.Value.ToUpper();
 
       bool? bvalue = null;
-      if (value != "")
-        bvalue = (value == "yes");
+      if (!string.IsNullOrEmpty(value))
+        bvalue = (value == "YES");
       var formatSections = new List<FormatSection>();
       if (stringValue.Formats.Count != 0)
         formatSections.Add(new FormatSection(0, 0, Card.ErrataFormat));
@@ -410,13 +415,13 @@ namespace AGoT.AGoTDB.BusinessObjects
     /// <param name="row">The row from which to read the string value.</param>
     /// <param name="columnName">The colum in the row containing the string value to read.</param>
     /// <returns>A formatted value.</returns>
-    public FormattedValue<XInt> ExtractFormattedXIntValueFromRow(DataRow row, string columnName)
+    public static FormattedValue<XInt> ExtractFormattedXIntValueFromRow(DataRow row, string columnName)
     {
       FormattedValue<string> stringValue = ExtractFormattedStringValueFromRow(row, columnName);
 
-      string value = stringValue.Value.ToLower();
+      string value = stringValue.Value.ToUpper();
 
-      XInt xvalue = (value == "") ? null : ((value == "x") ? new XInt() : new XInt(Int32.Parse(value)));
+      XInt xvalue = string.IsNullOrEmpty(value) ? null : ((value == "X") ? new XInt() : new XInt(Int32.Parse(value, CultureInfo.InvariantCulture)));
 
       var formatSections = new List<FormatSection>();
       if (stringValue.Formats.Count != 0)
@@ -453,10 +458,10 @@ namespace AGoT.AGoTDB.BusinessObjects
     {
       if (value == null)
         return null;
-      return value.IsX ? "-1" : value.Value.ToString();
+      return value.IsX ? "-1" : value.Value.ToString(CultureInfo.CurrentCulture);
     }
 
-    public void ConvertCard(DataRow rowSource, DataRowCollection rowsDest)
+    public void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows)
     {
       Int32 UniversalId;
       FormattedValue<string> Name, Traits, Keywords, Text, Set, OriginalName;
@@ -464,37 +469,38 @@ namespace AGoT.AGoTDB.BusinessObjects
       FormattedValue<bool?> Unique, Doomed, Endless, Military, Intrigue, Power, War, Holy, Noble, Learned, Shadow, Multiplayer;
       FormattedValue<XInt> Cost, Strength, Income, Initiative, Claim, Influence;
 
-      UniversalId = Int32.Parse(GetRowValue(rowSource, "UniversalId"));
+      // ZONK pas possible de caster directement?
+      UniversalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
 
-      Name = ExtractFormattedStringValueFromRow(rowSource, "Name");
-      Traits = ExtractFormattedStringValueFromRow(rowSource, "Traits");
-      Keywords = ExtractFormattedStringValueFromRow(rowSource, "Keywords");
-      Text = ExtractFormattedStringValueFromRow(rowSource, "Text");
-      Set = ExtractFormattedStringValueFromRow(rowSource, "Set");
-      OriginalName = ExtractFormattedStringValueFromRow(rowSource, "OriginalName");
+      Name = ExtractFormattedStringValueFromRow(sourceRow, "Name");
+      Traits = ExtractFormattedStringValueFromRow(sourceRow, "Traits");
+      Keywords = ExtractFormattedStringValueFromRow(sourceRow, "Keywords");
+      Text = ExtractFormattedStringValueFromRow(sourceRow, "Text");
+      Set = ExtractFormattedStringValueFromRow(sourceRow, "Set");
+      OriginalName = ExtractFormattedStringValueFromRow(sourceRow, "OriginalName");
 
-      Type = ExtractFormattedIntValueFromRow(rowSource, "Type", "TableType");
-      House = ExtractFormattedIntValueFromRow(rowSource, "House", "TableHouse");
+      Type = ExtractFormattedIntValueFromRow(sourceRow, "Type", "TableType");
+      House = ExtractFormattedIntValueFromRow(sourceRow, "House", "TableHouse");
 
-      Unique = ExtractFormattedBoolValueFromRow(rowSource, "Unique");
-      Doomed = ExtractFormattedBoolValueFromRow(rowSource, "Doomed");
-      Endless = ExtractFormattedBoolValueFromRow(rowSource, "Endless");
-      Military = ExtractFormattedBoolValueFromRow(rowSource, "Military");
-      Intrigue = ExtractFormattedBoolValueFromRow(rowSource, "Intrigue");
-      Power = ExtractFormattedBoolValueFromRow(rowSource, "Power");
-      War = ExtractFormattedBoolValueFromRow(rowSource, "War");
-      Holy = ExtractFormattedBoolValueFromRow(rowSource, "Holy");
-      Noble = ExtractFormattedBoolValueFromRow(rowSource, "Noble");
-      Learned = ExtractFormattedBoolValueFromRow(rowSource, "Learned");
-      Shadow = ExtractFormattedBoolValueFromRow(rowSource, "Shadow");
-      Multiplayer = ExtractFormattedBoolValueFromRow(rowSource, "Multiplayer");
+      Unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique");
+      Doomed = ExtractFormattedBoolValueFromRow(sourceRow, "Doomed");
+      Endless = ExtractFormattedBoolValueFromRow(sourceRow, "Endless");
+      Military = ExtractFormattedBoolValueFromRow(sourceRow, "Military");
+      Intrigue = ExtractFormattedBoolValueFromRow(sourceRow, "Intrigue");
+      Power = ExtractFormattedBoolValueFromRow(sourceRow, "Power");
+      War = ExtractFormattedBoolValueFromRow(sourceRow, "War");
+      Holy = ExtractFormattedBoolValueFromRow(sourceRow, "Holy");
+      Noble = ExtractFormattedBoolValueFromRow(sourceRow, "Noble");
+      Learned = ExtractFormattedBoolValueFromRow(sourceRow, "Learned");
+      Shadow = ExtractFormattedBoolValueFromRow(sourceRow, "Shadow");
+      Multiplayer = ExtractFormattedBoolValueFromRow(sourceRow, "Multiplayer");
 
-      Cost = ExtractFormattedXIntValueFromRow(rowSource, "Cost");
-      Strength = ExtractFormattedXIntValueFromRow(rowSource, "Strength");
-      Income = ExtractFormattedXIntValueFromRow(rowSource, "Income");
-      Initiative = ExtractFormattedXIntValueFromRow(rowSource, "Initiative");
-      Claim = ExtractFormattedXIntValueFromRow(rowSource, "Claim");
-      Influence = ExtractFormattedXIntValueFromRow(rowSource, "Influence");
+      Cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost");
+      Strength = ExtractFormattedXIntValueFromRow(sourceRow, "Strength");
+      Income = ExtractFormattedXIntValueFromRow(sourceRow, "Income");
+      Initiative = ExtractFormattedXIntValueFromRow(sourceRow, "Initiative");
+      Claim = ExtractFormattedXIntValueFromRow(sourceRow, "Claim");
+      Influence = ExtractFormattedXIntValueFromRow(sourceRow, "Influence");
 
 #if DEBUG
       // we compare the case of the name of the card in its title and its cardtext.
@@ -502,17 +508,17 @@ namespace AGoT.AGoTDB.BusinessObjects
       string text = Text.Value;
       do
       {
-        index = text.ToLower().IndexOf(Name.Value.ToLower());
+        index = text.IndexOf(Name.Value, StringComparison.CurrentCultureIgnoreCase);
         if (index != -1)
         {
-          if (text.Substring(index, Name.Value.Length).CompareTo(Name.Value) != 0)
-            System.Diagnostics.Debug.WriteLine(String.Format("{0} {1}", Name.Value, UniversalId));
+          if (string.Compare(text.Substring(index, Name.Value.Length), Name.Value, StringComparison.CurrentCulture) != 0)
+            System.Diagnostics.Debug.WriteLine(CultureInfo.CurrentCulture, String.Format("{0} {1}", Name.Value, UniversalId));
           text = text.Substring(index + Name.Value.Length);
         }
       } while (index != -1);
 #endif
 
-      rowsDest.Add(UniversalId.ToString(),
+      destinationRows.Add(UniversalId.ToString(CultureInfo.InvariantCulture),
                    Name.Value, Name.FormatsToString(),
                    Type.Value, (Type.Formats.Count > 0).ToString(),
                    (House.Value == 0).ToString(),
@@ -564,10 +570,11 @@ namespace AGoT.AGoTDB.BusinessObjects
         var item = new ToolStripMenuItem(table.Rows[i]["Value"].ToString(), null,
           delegate(object sender, EventArgs e)
           {
+            var tag = ((ToolStripMenuItem)sender).Tag;
             if (String.IsNullOrEmpty(tb.Text))
-              tb.Text = ((ToolStripMenuItem)sender).Tag.ToString();
+              tb.Text = tag.ToString();
             else
-              tb.Text += ";" + ((ToolStripMenuItem)sender).Tag;
+              tb.Text += ";" + tag;
             if (ecb.CheckState == CheckState.Unchecked)
               ecb.CheckState = CheckState.Checked;
           });

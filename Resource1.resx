@@ -241,7 +241,7 @@
     <value>Set</value>
   </data>
   <data name="ShadowCostText" xml:space="preserve">
-    <value>ShadowCost</value>
+    <value>Shadow Cost</value>
   </data>
   <data name="ShadowVirtueText" xml:space="preserve">
     <value>Shadow</value>
@@ -284,5 +284,8 @@
   </data>
   <data name="ErrMinimalSoftwareVersionRequiredTitle" xml:space="preserve">
     <value>Version mismatch</value>
+  </data>
+  <data name="SeparatorText" xml:space="preserve">
+    <value>: </value>
   </data>
 </root>
