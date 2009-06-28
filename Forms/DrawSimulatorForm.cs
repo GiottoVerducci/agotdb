@@ -87,25 +87,25 @@ namespace AGoT.AGoTDB.Forms
       lbHand.Items.Clear();
     }
 
-    public void ShuffleToDeckList(ListBox list, CardList cardList)
+    public static void ShuffleToDeckList(ListBox list, CardList cardList)
     {
       list.BeginUpdate();
       var alea = new Random();
-      for (var i = 0; i < fDeck.CardLists.Count; ++i)
+      for (var i = 0; i < cardList.Count; ++i)
         if (cardList[i].IsDrawable())
           for (var j = 0; j < cardList[i].Quantity; ++j)
-            list.Items.Insert(alea.Next(list.Items.Count+1), fDeck.CardLists[i]);
+            list.Items.Insert(alea.Next(list.Items.Count + 1), cardList[i]);
       list.EndUpdate();
     }
 
-    public void MoveFromOneListToAnother(ListBox srcList, int index, ListBox dstList)
+    public static void MoveFromOneListToAnother(ListBox sourceList, int index, ListBox destinationList)
     {
-      if (srcList.Items.Count <= 0) 
+      if (sourceList.Items.Count <= 0)
         return;
-      ListsBeginUpdate(srcList, dstList);
-      dstList.Items.Add(srcList.Items[index]);
-      srcList.Items.RemoveAt(index);
-      ListsEndUpdate(srcList, dstList);
+      ListsBeginUpdate(sourceList, destinationList);
+      destinationList.Items.Add(sourceList.Items[index]);
+      sourceList.Items.RemoveAt(index);
+      ListsEndUpdate(sourceList, destinationList);
     }
 
     private static void ListsBeginUpdate(params ListBox[] lists)
@@ -131,7 +131,7 @@ namespace AGoT.AGoTDB.Forms
     private void btnMoveRight_Click(object sender, EventArgs e)
     {
       ListBox.SelectedIndexCollection indices = lbHand.SelectedIndices; // given by ascending order
-      for(int i = indices.Count-1; i >= 0; --i)
+      for (int i = indices.Count - 1; i >= 0; --i)
         MoveFromOneListToAnother(lbHand, indices[i], lbDeck);
     }
 
@@ -159,7 +159,7 @@ namespace AGoT.AGoTDB.Forms
       lbDeck.Items.Clear();
       var alea = new Random();
       for (var i = 0; i < temp.Count; ++i)
-        lbDeck.Items.Insert(alea.Next(i+1), temp[i]);
+        lbDeck.Items.Insert(alea.Next(i + 1), temp[i]);
       lbDeck.EndUpdate();
     }
 
