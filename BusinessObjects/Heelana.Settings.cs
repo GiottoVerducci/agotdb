@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Xml;
 using System.Windows.Forms;
 
@@ -112,136 +113,57 @@ namespace Heelana
 
 		#region Read methods
 
-		public bool ReadBool(string section, string name, bool defaultValue)
+		protected delegate T ConverterDelegate<T>(string s);  
+
+		protected T ReadValue<T>(string section, string name, T defaultValue, ConverterDelegate<T> converter)
 		{
 			string s = ReadString(section, name, "");
 
-			if(s == Boolean.TrueString)
-				return true;
-			else if(s == Boolean.FalseString)
-				return false;
-			else
+			if (string.IsNullOrEmpty(s))
 				return defaultValue;
+			try
+			{
+				return converter(s);
+			}
+			catch (FormatException)
+			{
+				return defaultValue;
+			}
+		}
+
+		public bool ReadBool(string section, string name, bool defaultValue)
+		{
+			return ReadValue(section, name, defaultValue, v => Convert.ToBoolean(v, CultureInfo.InvariantCulture));
 		}
 
 		public DateTime ReadDateTime(string section, string name, DateTime defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					DateTime dt = Convert.ToDateTime(s);
-					return dt;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToDateTime(v, CultureInfo.InvariantCulture));
 		}
 
 		public double ReadDouble(string section, string name, double defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					double d = Convert.ToDouble(s);
-					return d;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToDouble(v, CultureInfo.InvariantCulture));
 		}
 
 		public float ReadFloat(string section, string name, float defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					float f = Convert.ToSingle(s);
-					return f;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToSingle(v, CultureInfo.InvariantCulture));
 		}
 
 		public int ReadInt(string section, string name, int defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					int n = Convert.ToInt32(s);
-					return n;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToInt32(v, CultureInfo.InvariantCulture));
 		}
 
 		public long ReadLong(string section, string name, long defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					long l = Convert.ToInt64(s);
-					return l;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToInt64(v, CultureInfo.InvariantCulture));
 		}
 
 		public short ReadShort(string section, string name, short defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					short n = Convert.ToInt16(s);
-					return n;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToInt16(v, CultureInfo.InvariantCulture));
 		}
 
 		public string ReadString(string section, string name, string defaultValue)
@@ -270,62 +192,17 @@ namespace Heelana
 
 		public uint ReadUInt(string section, string name, uint defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					uint n = Convert.ToUInt32(s);
-					return n;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToUInt32(v, CultureInfo.InvariantCulture));
 		}
 
 		public ulong ReadULong(string section, string name, ulong defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					ulong l = Convert.ToUInt64(s);
-					return l;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToUInt64(v, CultureInfo.InvariantCulture));
 		}
 
 		public ushort ReadUShort(string section, string name, ushort defaultValue)
 		{
-			string s = ReadString(section, name, "");
-
-			if(s == "")
-				return defaultValue;
-			else
-			{
-				try
-				{
-					ushort n = Convert.ToUInt16(s);
-					return n;
-				}
-				catch(FormatException)
-				{
-					return defaultValue;
-				}
-			}
+			return ReadValue(section, name, defaultValue, v => Convert.ToUInt16(v, CultureInfo.InvariantCulture));
 		}
 
 		#endregion
@@ -340,32 +217,32 @@ namespace Heelana
 
 		public void WriteDateTime(string section, string name, DateTime value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public void WriteDouble(string section, string name, double value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public void WriteFloat(string section, string name, float value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public void WriteInt(string section, string name, int value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public void WriteLong(string section, string name, long value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public void WriteShort(string section, string name, short value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public void WriteString(string section, string name, string value)
@@ -387,17 +264,17 @@ namespace Heelana
 
 		public void WriteUInt(string section, string name, uint value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
         public void WriteULong(string section, string name, ulong value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public void WriteUShort(string section, string name, ushort value)
 		{
-			WriteString(section, name, value.ToString());
+			WriteString(section, name, value.ToString(CultureInfo.InvariantCulture));
 		}
 
 		#endregion
