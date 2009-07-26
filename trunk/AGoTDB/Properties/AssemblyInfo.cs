@@ -11,7 +11,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 // © A Game of Thrones 2005 George R. R. Martin
 // © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
@@ -47,5 +47,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("0.66.5.0")]
-[assembly: AssemblyFileVersion("0.66.5.0")]
+[assembly: AssemblyVersion("0.70.0.0")]
+[assembly: AssemblyFileVersion("0.70.0.0")]

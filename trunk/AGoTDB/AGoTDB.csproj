@@ -2,12 +2,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{835E8A74-18A5-4CC5-A1D8-655CA7B9E232}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AGoT.AGoTDB</RootNamespace>
+    <RootNamespace>AGoTDB</RootNamespace>
     <AssemblyName>AGoTDB</AssemblyName>
     <ApplicationIcon>agotdb.ico</ApplicationIcon>
     <FileUpgradeFlags>
@@ -30,6 +30,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,6 +59,9 @@
       <HintPath>.\ExtendedControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -65,47 +69,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\AgotCardList.cs" />
+    <Compile Include="Components\AgotCardTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataAccess\AgotDatabaseManager.cs" />
+    <Compile Include="BusinessObjects\AgotDeck.cs" />
+    <Compile Include="BusinessObjects\AgotVersionedDeck.cs" />
     <Compile Include="BusinessObjects\ApplicationSettings.cs" />
-    <Compile Include="BusinessObjects\CardList.cs" />
-    <Compile Include="BusinessObjects\CommandParameters.cs" />
-    <Compile Include="BusinessObjects\DatabaseInfo.cs" />
-    <Compile Include="BusinessObjects\FormattedText.cs" />
-    <Compile Include="BusinessObjects\Query.cs" />
+    <Compile Include="BusinessObjects\UserSettings.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessObjects\Card.cs" />
-    <Compile Include="Components\CardTreeView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="BusinessObjects\DeckTreeNodeSorter.cs" />
-    <Compile Include="BusinessObjects\AGoTFilter.cs" />
+    <Compile Include="BusinessObjects\AgotCard.cs" />
     <Compile Include="Forms\DrawSimulatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\DrawSimulatorForm.Designer.cs">
       <DependentUpon>DrawSimulatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessObjects\FormatSection.cs" />
-    <Compile Include="BusinessObjects\FormattedValue.cs" />
-    <Compile Include="Forms\NewVersionInfoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\NewVersionInfoForm.Designer.cs">
-      <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BusinessObjects\StringPair.cs" />
-    <Compile Include="BusinessObjects\SoftwareVersion.cs" />
     <Compile Include="Resource1.fr.Designer.cs">
       <DependentUpon>Resource1.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="BusinessObjects\DatabaseInterface.cs" />
-    <Compile Include="BusinessObjects\Deck.cs" />
     <Compile Include="Forms\DeckBuilderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,7 +108,6 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessObjects\Heelana.Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AboutForm.fr.resx">
@@ -141,14 +130,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>DrawSimulatorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NewVersionInfoForm.fr.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NewVersionInfoForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resource1.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.fr.Designer.cs</LastGenOutput>
@@ -166,29 +147,11 @@
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resource1.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RevisionCommentInputForm.fr.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RevisionCommentInputForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -204,17 +167,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RevisionCommentInputForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RevisionCommentInputForm.Designer.cs">
-      <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BusinessObjects\TextFormat.cs" />
-    <Compile Include="BusinessObjects\UserSettings.cs" />
-    <Compile Include="BusinessObjects\VersionedDeck.cs" />
-    <Compile Include="BusinessObjects\XInt.cs" />
-    <Compile Include="BusinessObjects\XmlToolBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Databases\AGoT.mdb">
@@ -224,7 +176,9 @@
     <Content Include="Databases\AGoTEx.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="gpl.txt" />
+    <Content Include="gpl.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -242,6 +196,12 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GenericDB\GenericDB.csproj">
+      <Project>{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}</Project>
+      <Name>GenericDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

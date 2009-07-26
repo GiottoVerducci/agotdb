@@ -152,6 +152,9 @@
   <data name="picStrength.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 22</value>
   </data>
+  <data name="&gt;&gt;eclCardtype.Type" xml:space="preserve">
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="label5.Text" xml:space="preserve">
     <value>-</value>
   </data>
@@ -183,8 +186,8 @@
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 13</value>
   </data>
-  <data name="&gt;&gt;eclProvides.ZOrder" xml:space="preserve">
-    <value>21</value>
+  <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
+    <value>fileToolStripMenuItem</value>
   </data>
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>Tools</value>
@@ -203,6 +206,9 @@
   </data>
   <data name="eclExpansionSet.Location" type="System.Drawing.Point, System.Drawing">
     <value>381, 93</value>
+  </data>
+  <data name="picGold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>751, 24</value>
@@ -228,9 +234,6 @@
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="eclNameCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 17</value>
   </data>
@@ -245,9 +248,6 @@
   </data>
   <data name="&gt;&gt;eclHouse.Type" xml:space="preserve">
     <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
-    <value>fileToolStripMenuItem</value>
   </data>
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -273,6 +273,9 @@
   <data name="splitContainer1.Panel2.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;eclProvides.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
   <data name="tbClaimHigh.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -295,7 +298,10 @@
     <value>22</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form1</value>
+    <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;tbFind.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
     <value>splitContainer1</value>
@@ -327,8 +333,11 @@
   <data name="&gt;&gt;picStrength.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
-  <data name="tbGoldHigh.ToolTip" xml:space="preserve">
-    <value />
+  <data name="eclProvides.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 43</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
   </data>
   <data name="&gt;&gt;tbInitiativeLow.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -456,17 +465,6 @@
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnQuickFindNext.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEwAA
-        CxMBAJqcGAAAAPFJREFUOE9j/P//PwNVAchAamKqGgb2LT7XXXl+5iOprsdrYMKMiP9Xnp1+T4qhBA20
-        LNP/f/nZKaJditfAqClB/zfcWvyfFEPxGhg8wft/2f5suKGXnp0k6FK8Bvp0OYMNBOGoRQFgl156egKv
-        oXgNdGy2+J+xIRZsmG2z/n+dYoX/Emnc/68/OPscV0ThNdC8Rg/FMP4Elv/X7595ii/W8RqoV6oMdxnE
-        sNN4DSOYsFXypcDeBBl27f4pnN5EdjFeF0pnCIINu3rvBFGGEXShSDLn/yt3jxNtGEEDL985SpJhBA0k
-        JQ/D1NK3+BoULgQArp1VWsfSQs0AAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="picInit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -491,6 +489,9 @@
   <data name="tbTraits.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 20</value>
   </data>
+  <data name="tbGoldHigh.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;tbName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -502,9 +503,6 @@
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -542,7 +540,7 @@
   <data name="&gt;&gt;tbCardtext.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="picStrength.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
@@ -617,9 +615,6 @@
   <data name="eclKeyword.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbClaimHigh.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
@@ -662,8 +657,8 @@
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="picGold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>20, 20</value>
+  <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
   <data name="&gt;&gt;picStrength.Name" xml:space="preserve">
     <value>picStrength</value>
@@ -743,6 +738,9 @@
   <data name="eclCardtype.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="moveToANewWindowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
@@ -760,6 +758,9 @@
   </data>
   <data name="&gt;&gt;eclExpansionSet.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
   </data>
   <data name="&gt;&gt;dataGridView.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -839,20 +840,11 @@
   <data name="btnReset.Location" type="System.Drawing.Point, System.Drawing">
     <value>156, 91</value>
   </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>107</value>
-  </data>
-  <data name="eclCardtextCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;tbFind.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;eclMecanism.Type" xml:space="preserve">
     <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnReset.TabIndex" type="System.Int32, mscorlib">
     <value>141</value>
@@ -911,8 +903,8 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Name:</value>
   </data>
-  <data name="&gt;&gt;eclCardtype.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;tbName.Name" xml:space="preserve">
+    <value>tbName</value>
   </data>
   <data name="&gt;&gt;picClaim.ZOrder" xml:space="preserve">
     <value>26</value>
@@ -935,8 +927,8 @@
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="moveToANewWindowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
+  <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 117</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -986,9 +978,6 @@
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 117</value>
-  </data>
   <data name="&gt;&gt;picInit.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
@@ -998,8 +987,8 @@
   <data name="&gt;&gt;addCardToSideboardToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
+  <data name="&gt;&gt;tbGoldLow.Name" xml:space="preserve">
+    <value>tbGoldLow</value>
   </data>
   <data name="&gt;&gt;eclCardtype.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1087,6 +1076,9 @@
   </data>
   <data name="&gt;&gt;eclTrigger.Name" xml:space="preserve">
     <value>eclTrigger</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>File</value>
@@ -1182,11 +1174,17 @@
   <data name="&gt;&gt;eclTrigger.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
+  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
   <data name="eclTrigger.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 19</value>
   </data>
   <data name="&gt;&gt;tbStrengthHigh.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="tbFind.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;toolsToolStripMenuItem.Name" xml:space="preserve">
     <value>toolsToolStripMenuItem</value>
@@ -1212,11 +1210,11 @@
   <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
     <value>menuStrip1</value>
   </data>
-  <data name="tbClaimHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="tbClaimHigh.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.Name" xml:space="preserve">
-    <value>tbGoldLow</value>
+  <data name="eclVirtue.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
   <data name="tbGoldLow.ToolTip" xml:space="preserve">
     <value />
@@ -1301,14 +1299,11 @@
   <data name="windowToolStripMenuItem.Text" xml:space="preserve">
     <value>Window</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>537, 43</value>
-  </data>
   <data name="eclMecanism.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="rtbCardDetails.Text" xml:space="preserve">
-    <value />
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>537, 43</value>
   </data>
   <data name="tbCardtext.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1352,8 +1347,16 @@
   <data name="tbGoldLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbFind.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnQuickFindNext.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEwAA
+        CxMBAJqcGAAAAPFJREFUOE9j/P//PwNVAchAamKqGgb2LT7XXXl+5iOprsdrYMKMiP9Xnp1+T4qhBA20
+        LNP/f/nZKaJditfAqClB/zfcWvyfFEPxGhg8wft/2f5suKGXnp0k6FK8Bvp0OYMNBOGoRQFgl156egKv
+        oXgNdGy2+J+xIRZsmG2z/n+dYoX/Emnc/68/OPscV0ThNdC8Rg/FMP4Elv/X7595ii/W8RqoV6oMdxnE
+        sNN4DSOYsFXypcDeBBl27f4pnN5EdjFeF0pnCIINu3rvBFGGEXShSDLn/yt3jxNtGEEDL985SpJhBA0k
+        JQ/D1NK3+BoULgQArp1VWsfSQs0AAAAASUVORK5CYII=
+</value>
   </data>
   <data name="&gt;&gt;tbClaimLow.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1367,11 +1370,14 @@
   <data name="tbInitiativeHigh.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
   <data name="addCardToDeckToolStripMenuItem.Text" xml:space="preserve">
     <value>Add card to deck</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>107</value>
   </data>
   <data name="&gt;&gt;tbClaimHigh.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1387,9 +1393,6 @@
   </data>
   <data name="&gt;&gt;eclCardtextCheck.ZOrder" xml:space="preserve">
     <value>14</value>
-  </data>
-  <data name="eclProvides.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 43</value>
   </data>
   <data name="&gt;&gt;tbName.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1478,9 +1481,6 @@
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
-  </data>
-  <data name="picStrength.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;tbClaimLow.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1625,8 +1625,8 @@
   <data name="&gt;&gt;eclMecanism.Name" xml:space="preserve">
     <value>eclMecanism</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="picGold.Location" type="System.Drawing.Point, System.Drawing">
     <value>205, 6</value>
@@ -1643,8 +1643,8 @@
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbName.Name" xml:space="preserve">
-    <value>tbName</value>
+  <data name="eclCardtextCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -1652,11 +1652,8 @@
   <data name="tbFind.Location" type="System.Drawing.Point, System.Drawing">
     <value>46, 6</value>
   </data>
-  <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="picInit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;eclTraitCheck.ZOrder" xml:space="preserve">
     <value>20</value>
@@ -1664,8 +1661,8 @@
   <data name="tbClaimLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
-    <value>37</value>
+  <data name="tbClaimHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="eclNameCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1733,8 +1730,8 @@
   <data name="label8.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="eclVirtue.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>31</value>
@@ -1766,7 +1763,7 @@
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 9</value>
   </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="picInit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="eclNameCheck.Text" xml:space="preserve">
