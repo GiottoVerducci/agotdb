@@ -11,7 +11,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 // © A Game of Thrones 2005 George R. R. Martin
 // © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
@@ -20,36 +20,37 @@
 using System;
 using System.Globalization;
 using System.Windows.Forms;
-using AGoT.AGoTDB.BusinessObjects;
+using AGoTDB.BusinessObjects;
 
-namespace AGoT.AGoTDB.Forms
+namespace AGoTDB.Forms
 {
-  /// <summary>
-  /// About form, including version number and GPL license.
-  /// </summary>
-  public partial class AboutForm : Form
-  {
-    /// <summary>
-    /// Default form constructor.
-    /// </summary>
-    public AboutForm()
-    {
-      InitializeComponent();
-    }
+	/// <summary>
+	/// About form, including version number and GPL license.
+	/// </summary>
+	public partial class AboutForm : Form
+	{
+		/// <summary>
+		/// Default form constructor.
+		/// </summary>
+		public AboutForm()
+		{
+			InitializeComponent();
+		}
 
-    private void AboutForm_Shown(object sender, EventArgs e)
-    {
-      var dbInfos = DatabaseInterface.Singleton.DatabaseInfos.Count > 0
-        ? DatabaseInterface.Singleton.DatabaseInfos[0]
-        : null;
-      lblVersion.Text = ApplicationSettings.ApplicationVersion.ToString();
-      if (dbInfos != null)
-        lblDbVersion.Text = string.Format(CultureInfo.InvariantCulture, "DB version: {0} ({1})", dbInfos.VersionId, dbInfos.DateCreation.HasValue ? dbInfos.DateCreation.Value.ToShortDateString() : "");
-    }
+		private void AboutForm_Shown(object sender, EventArgs e)
+		{
+			lblVersion.Text = ApplicationSettings.ApplicationVersion.ToString();
+			var databaseInfo = ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0
+				? ApplicationSettings.DatabaseManager.DatabaseInfos[0]
+				: null;
+			if (databaseInfo != null)
+				lblDbVersion.Text = string.Format(CultureInfo.InvariantCulture, "DB version: {0} ({1})",
+				databaseInfo.VersionId, databaseInfo.DateCreation.HasValue ? databaseInfo.DateCreation.Value.ToShortDateString() : "");
+		}
 
-    private void btnOk_Click(object sender, EventArgs e)
-    {
-      Close();
-    }
-  }
+		private void btnOk_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+	}
 }

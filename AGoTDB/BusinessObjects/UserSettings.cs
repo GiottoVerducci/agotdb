@@ -11,53 +11,53 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 // © A Game of Thrones 2005 George R. R. Martin
 // © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
 using System;
-using Heelana;
+using GenericDB.BusinessObjects;
 
-namespace AGoT.AGoTDB.BusinessObjects
+namespace AGoTDB.BusinessObjects
 {
-  public sealed class UserSettings
-  {
-    public const string SettingsFilename = "AGoTDB.xml";
-    private static readonly Settings fSettings = LoadSettings();
+	public sealed class UserSettings
+	{
+		public const string SettingsFilename = "AGoTDB.xml";
+		private static readonly Settings fSettings = LoadSettings();
 
-    // Explicit static constructor to tell C# compiler
-    // not to mark type as beforefieldinit (for singleton template implementation)
-    static UserSettings()
-    {
-    }
+		// Explicit static constructor to tell C# compiler
+		// not to mark type as beforefieldinit (for singleton template implementation)
+		static UserSettings()
+		{
+		}
 
-    private UserSettings()
-    {
-    }
+		private UserSettings()
+		{
+		}
 
-    /// <summary>
-    /// Gets the unique shared singleton instance of this class.
-    /// </summary>
-    public static Settings Singleton
-    {
-      get { return fSettings; }
-    }
+		/// <summary>
+		/// Gets the unique shared singleton instance of this class.
+		/// </summary>
+		public static Settings Singleton
+		{
+			get { return fSettings; }
+		}
 
-    /// <summary>
-    /// Load the application settings stored in the xml configuration file.
-    /// </summary>
-    private static Settings LoadSettings()
-    {
-      try
-      {
-        return new Settings(SettingsFilename);
-      }
-      catch(Exception)
-      {
-        return null;
-      }
-    }
-  }
+		/// <summary>
+		/// Load the application settings stored in the xml configuration file.
+		/// </summary>
+		private static Settings LoadSettings()
+		{
+			try
+			{
+				return new Settings(SettingsFilename);
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+	}
 }

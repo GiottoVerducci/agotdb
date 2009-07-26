@@ -17,15 +17,26 @@
 // © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
-using AGoTDB.DataAccess;
 using GenericDB.BusinessObjects;
 
 namespace AGoTDB.BusinessObjects
 {
-	public static class ApplicationSettings
+	public class AgotVersionedDeck : VersionedDeck<AgotDeck, AgotCardList, AgotCard>
 	{
-		public static readonly string ApplicationName = "AGoTDB";
-		public static readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 700, 0);
-		public static AgotDatabaseManager DatabaseManager { get; set; }
+		#region Constructors and clone
+		public AgotVersionedDeck()
+		{
+		}
+
+		protected AgotVersionedDeck(AgotVersionedDeck original)
+			: base(original)
+		{
+		}
+
+		public override IVersionedDeck<AgotDeck, AgotCardList, AgotCard> Clone()
+		{
+			return new AgotVersionedDeck(this);
+		}
+		#endregion
 	}
 }
