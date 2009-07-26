@@ -1,4 +1,4 @@
-// AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
+// GenericDB - A generic card searcher and deck builder library for CCGs
 // Copyright © 2007, 2008, 2009 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -11,33 +11,32 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
-// © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
-// © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
-namespace AGoT.AGoTDB.BusinessObjects
+namespace GenericDB.BusinessObjects
 {
-  /// <summary>
-  /// Represents a pair of string and TextFormat.
-  /// Eg. a "Hello world" string in bold and red.
-  /// </summary>
-  public struct FormattedText
-  {
-    public string Text { get; private set; }
-    public TextFormat Format { get; private set; }
+	/// <summary>
+	/// Represents a pair of string and TextFormat.
+	/// <example>A "Hello world" string in bold and red.</example>
+	/// </summary>
+	public struct FormattedText
+	{
+		public string Text { get; private set; }
+		public TextFormat Format { get; private set; }
 
-    public FormattedText(string text, TextFormat format) : this()
-    {
-      Text = text;
-      Format = format;
-    }
+		public FormattedText(string text, TextFormat format)
+			: this()
+		{
+			Text = text;
+			Format = format;
+		}
 
-    public FormattedText(string text) : this()
-    {
-      Text = text;
-      Format = TextFormat.Regular;
-    }
-  }
+		public FormattedText(string text)
+			: this()
+		{
+			Text = text;
+			Format = TextFormat.Regular;
+		}
+	}
 }

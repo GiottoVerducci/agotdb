@@ -15,30 +15,28 @@
 // You can contact me at v.ripoll@gmail.com
 
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using GenericDB.BusinessObjects;
 
-namespace GenericDB.Forms
+namespace GenericDB.BusinessObjects
 {
-	/// <summary>
-	/// Form that allows the user to enter a comment about a deck version.
-	/// </summary>
-	public partial class RevisionCommentInputForm : Form
+	public interface IDeck<TCL, TC> : IXmlizable
+		where TCL : class, ICardList<TC>, new()
+		where TC : class, ICard, new()
 	{
-		/// <summary>
-		/// Default form constructor.
-		/// </summary>
-		public RevisionCommentInputForm()
-		{
-			InitializeComponent();
-		}
+		List<TCL> CardLists { get; }
+//		Int32 Houses { get; set; }
+//		TC Agenda { get; set; }
+		String RevisionComments { get; set; }
+		DateTime CreationDate { get; }
+		DateTime LastModifiedDate { get; }
+		bool Editable { get; set; }
 
-		/// <summary>
-		/// The comment filled in by the user.
-		/// </summary>
-		/// <returns></returns>
-		public String RevisionComment()
-		{
-			return tbRevisionComment.Text;
-		}
+		bool Equals(object obj);
+
+		int GetHashCode();
+
+		IDeck<TCL, TC> Clone();
+		IDeck<TCL, TC> CreateRevision();
 	}
 }

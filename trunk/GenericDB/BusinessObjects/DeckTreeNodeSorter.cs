@@ -19,64 +19,76 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
-using AGoT.AGoTDB.Forms;
+using GenericDB.BusinessObjects;
 
-namespace AGoT.AGoTDB.BusinessObjects
+namespace GenericDB.BusinessObjects
 {
-  /// <summary>
-  /// Represents a sorter for deck tree nodes.
-  /// </summary>
-  public class DeckTreeNodeSorter : IComparer<TreeNode>
-  {
-    private readonly List<int> orders = new List<int>();
+	public delegate bool IsCardNodeDelegate(TreeNode treeNode);
+	public delegate int GetTypeDelegate(TreeNode treeNode);
 
-    /// <summary>
-    /// Initializes a new instance of DeckTreeNodeSorter, by reading the sort values in the UserSettings singleton.
-    /// </summary>
-    public DeckTreeNodeSorter()
-    {
-      try
-      {
-        var i = 0;
-        int type;
-        while (-1 != (type = UserSettings.Singleton.ReadInt("DeckBuilderTypeOrder", String.Format("Type{0}", i), -1)))
-        {
-          orders.Add(type);
-          i++;
-        }
-      }
-      catch { }
-    }
+	/// <summary>
+	/// Represents a sorter for deck tree nodes.
+	/// </summary>
+	public class DeckTreeNodeSorter : IComparer<TreeNode>
+	{
+		private readonly List<int> fOrderedTypes;
+		private IsCardNodeDelegate fIsCardNodeDelegateMethod;
+		private GetTypeDelegate fGetTypeDelegateMethod;
 
-    /// <summary>
-    /// Compares two TreeNode objects and returns an indication of their relative values.
-    /// </summary>
-    /// <param name="x">The first TreeNode.</param>
-    /// <param name="y">The second TreeNode.</param>
-    /// <returns>0 is x and y are equal, -1 if x is lesser than b, 1 if a is greater than b.</returns>
-    public int Compare(TreeNode x, TreeNode y)
-    {
-      if (DeckBuilderForm.IsCardNode(x))
-      {
-        var cx = x.Tag as Card;
-        var cy = y.Tag as Card;
-        return cx.CompareOrder(cy);
-      }
-      int xType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo) x.Tag).Type);
-      int yType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo) y.Tag).Type);
-      return xType.CompareTo(yType);
-    }
+		/// <summary>
+		/// Initializes a new instance of DeckTreeNodeSorter with a string containing the type values 
+		/// ordered and separated by a column.
+		/// </summary>
+		/// <param name="orderedTypeValues">The type values, orderred and separated by a column.</param>
+		public DeckTreeNodeSorter(string orderedTypeValues,
+			IsCardNodeDelegate isCardNodeDelegateMethod,
+			GetTypeDelegate getTypeDelegateMethod)
+		{
+			var typeValues = orderedTypeValues.Split(',');
+			fOrderedTypes = typeValues.Length > 0 
+				? new List<int>(
+					from type in typeValues
+					select Convert.ToInt32(type))
+				: new List<int>();
+			fIsCardNodeDelegateMethod = isCardNodeDelegateMethod;
+			fGetTypeDelegateMethod = getTypeDelegateMethod;
+		}
 
-    /// <summary>
-    /// Gets the order for a given type.
-    /// </summary>
-    /// <param name="type">The type for which the order is returned.</param>
-    /// <returns>The order of the type.</returns>
-    public int GetTypeOrder(Int32 type)
-    {
-      // search our type in our order list.
-      return orders.FindLastIndex(t => (t == type));
-    }
-  }
+
+		/// <summary>
+		/// Compares two TreeNode objects and returns an indication of their relative values.
+		/// </summary>
+		/// <param name="x">The first TreeNode.</param>
+		/// <param name="y">The second TreeNode.</param>
+		/// <returns>0 is x and y are equal, -1 if x is lesser than y, 1 if x is greater than y.</returns>
+		public int Compare(TreeNode x, TreeNode y)
+		{
+			//if (DeckBuilderForm.IsCardNode(x))
+			if(fIsCardNodeDelegateMethod(x))
+			{
+				var cx = x.Tag as Card;
+				var cy = y.Tag as Card;
+				return cx.CompareTo(cy);
+			}
+			//int xType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo)x.Tag).Type);
+			//int yType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo)y.Tag).Type);
+			//return xType.CompareTo(yType);
+			int xOrder = GetTypeOrder(fGetTypeDelegateMethod(x));
+			int yOrder = GetTypeOrder(fGetTypeDelegateMethod(y));
+			return xOrder.CompareTo(yOrder);
+		}
+
+		/// <summary>
+		/// Gets the order for a given type.
+		/// </summary>
+		/// <param name="type">The type for which the order is returned.</param>
+		/// <returns>The order of the type.</returns>
+		public int GetTypeOrder(Int32 type)
+		{
+			// search our type in our order list.
+			return fOrderedTypes.FindLastIndex(t => (t == type));
+		}
+	}
 }

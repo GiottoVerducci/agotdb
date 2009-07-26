@@ -1,4 +1,4 @@
-// AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
+// GenericDB - A generic card searcher and deck builder library for CCGs
 // Copyright © 2007, 2008, 2009 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -11,53 +11,72 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
-// © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
-// © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
-namespace AGoT.AGoTDB.BusinessObjects
+namespace GenericDB.DataAccess
 {
-  public class Query
-  {
-    public string SqlQuery { get; set; }
-    public string HumanQuery { get; set; }
+	public class QueryLocalization
+	{
+		public string And { get; set; }
+		public string RangeBetween { get; set; }
+		public string RangeGreaterOrLesser { get; set; }
+	}
 
-    public Query()
-    {
-      SqlQuery = "";
-      HumanQuery = "";
-    }
+	/// <summary>
+	/// Describes a database query with two synchronized strings: the sql query itself
+	/// and a human representation of it.
+	/// </summary>
+	public class Query
+	{
+		/// <summary>
+		/// The sql query.
+		/// </summary>
+		public string SqlQuery { get; set; }
+		/// <summary>
+		/// The human representation of the sql query.
+		/// </summary>
+		public string HumanQuery { get; set; }
 
-    public Query(string sqlQuery, string humanQuery)
-    {
-      SqlQuery = sqlQuery;
-      HumanQuery = humanQuery;
-    }
+		/// <summary>
+		/// A localizer used to build the human representation of the sql query.
+		/// </summary>
+		public static QueryLocalization Localization { get; set; }
 
-    /// <summary>
-    /// Concatenates a query string to another query string by using the keyword "AND".
-    /// Queries with an empty SqlQuery property are treated correctly (ie. are ignored).
-    /// </summary>
-    /// <param name="firstQuery">The first query.</param>
-    /// <param name="secondQuery">The second query.</param>
-    /// <returns>The concatenated queries.</returns>
-    public static Query Add(Query firstQuery, Query secondQuery)
-    {
-      if (string.IsNullOrEmpty(secondQuery.SqlQuery))
-        return firstQuery;
+		public Query()
+		{
+			SqlQuery = "";
+			HumanQuery = "";
+		}
 
-      if (string.IsNullOrEmpty(firstQuery.SqlQuery))
-        return secondQuery;
+		public Query(string sqlQuery, string humanQuery)
+		{
+			SqlQuery = sqlQuery;
+			HumanQuery = humanQuery;
+		}
 
-      return new Query(string.Format("{0} AND {1}", firstQuery.SqlQuery, secondQuery.SqlQuery),
-                       string.Format("{0} {1} {2}", firstQuery.HumanQuery, Resource1.And, secondQuery.HumanQuery));
-    }
+		/// <summary>
+		/// Concatenates a query string to another query string by using the keyword "AND".
+		/// Queries with an empty SqlQuery property are treated correctly (ie. are ignored).
+		/// </summary>
+		/// <param name="firstQuery">The first query.</param>
+		/// <param name="secondQuery">The second query.</param>
+		/// <returns>The concatenated queries.</returns>
+		public static Query Add(Query firstQuery, Query secondQuery)
+		{
+			if (string.IsNullOrEmpty(secondQuery.SqlQuery))
+				return firstQuery;
 
-    public static Query operator +(Query firstQuery, Query secondQuery)
-    {
-      return Add(firstQuery, secondQuery);
-    }
-  }
+			if (string.IsNullOrEmpty(firstQuery.SqlQuery))
+				return secondQuery;
+
+			return new Query(string.Format("{0} AND {1}", firstQuery.SqlQuery, secondQuery.SqlQuery),
+											 string.Format("{0} {1} {2}", firstQuery.HumanQuery, Localization.And, secondQuery.HumanQuery));
+		}
+
+		public static Query operator +(Query firstQuery, Query secondQuery)
+		{
+			return Add(firstQuery, secondQuery);
+		}
+	}
 }

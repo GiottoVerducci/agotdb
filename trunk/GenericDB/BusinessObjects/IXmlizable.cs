@@ -14,31 +14,25 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 
-using System;
-using System.Windows.Forms;
+using System.Xml;
 
-namespace GenericDB.Forms
+namespace GenericDB.BusinessObjects
 {
-	/// <summary>
-	/// Form that allows the user to enter a comment about a deck version.
-	/// </summary>
-	public partial class RevisionCommentInputForm : Form
+	public interface IXmlizable
 	{
 		/// <summary>
-		/// Default form constructor.
+		/// Gets the XML representation of this object.
 		/// </summary>
-		public RevisionCommentInputForm()
-		{
-			InitializeComponent();
-		}
+		/// <param name="doc">The XML document for which the XML representation is generated.</param>
+		/// <returns>A XML node representing this card.</returns>
+		XmlNode ToXml(XmlDocument doc);
 
 		/// <summary>
-		/// The comment filled in by the user.
+		/// Initializes the properties of this object from an XML node that was generated 
+		/// using the ToXml method.
 		/// </summary>
-		/// <returns></returns>
-		public String RevisionComment()
-		{
-			return tbRevisionComment.Text;
-		}
+		/// <param name="doc">The XML document containing the XML node.</param>
+		/// <param name="root">The XML node containing the XML data representing the object.</param>
+		void InitializeFromXml(XmlDocument doc, XmlNode root);
 	}
 }
