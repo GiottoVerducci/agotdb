@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3DAE826F-5CD8-4035-91F2-3424896AE036}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		WoMDB.vsmdi = WoMDB.vsmdi
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDB", "..\GenericDB\GenericDB.csproj", "{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDBTestProject", "..\GenericDB\GenericDBTestProject\GenericDBTestProject.csproj", "{9E635DA5-82C7-4B63-B0FC-CAA7DED5F42E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoMDB", "WoMDB.csproj", "{AC15E687-F9E1-4C87-88BB-8CB87BA2626D}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = WoMDB.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E635DA5-82C7-4B63-B0FC-CAA7DED5F42E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E635DA5-82C7-4B63-B0FC-CAA7DED5F42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E635DA5-82C7-4B63-B0FC-CAA7DED5F42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E635DA5-82C7-4B63-B0FC-CAA7DED5F42E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC15E687-F9E1-4C87-88BB-8CB87BA2626D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC15E687-F9E1-4C87-88BB-8CB87BA2626D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC15E687-F9E1-4C87-88BB-8CB87BA2626D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC15E687-F9E1-4C87-88BB-8CB87BA2626D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
