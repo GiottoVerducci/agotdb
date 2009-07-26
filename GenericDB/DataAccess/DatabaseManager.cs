@@ -314,8 +314,9 @@ namespace GenericDB.DataAccess
 					if ((value[i] == boundFormat.Opening)
 						&& (boundFormat.DistinctOpenClose || lastSpecialDoesntMatch))
 					{
-						tracker.Push(new FormatSectionTracker(boundFormat.Opening, i - offset++, boundFormat.Format));
-						boundChar = true;
+						tracker.Push(new FormatSectionTracker(boundFormat.Opening, i - offset, boundFormat.Format));
+						// we discard the bound character except for empty sections (eg. "{}" or "~~")
+						boundChar = !((i+1 < value.Length) && (value[i+1] == boundFormat.Closing));
 						break;
 					}
 					if (value[i] == boundFormat.Closing)
@@ -325,14 +326,16 @@ namespace GenericDB.DataAccess
 								"Mismatch in database: '{0}' unexpected, column = {1}, value = {2}",
 								boundFormat.Closing, columnName, value));
 						var section = tracker.Pop();
-						formatSections.Add(new FormatSection(section.StartIndex, i - offset++, section.Format));
-						boundChar = true;
+						boundChar = !(value[i-1] == boundFormat.Opening);
+						formatSections.Add(new FormatSection(section.StartIndex, i - offset + (boundChar?0:1), section.Format));
 						break;
 					}
 				}
 
 				if (!boundChar)
 					newValue.Append(value[i]);
+				else
+					offset++;
 			}
 			if (tracker.Count != 0)
 				throw new ApplicationException(string.Format(CultureInfo.InvariantCulture,
