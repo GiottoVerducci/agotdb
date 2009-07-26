@@ -14,31 +14,20 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 
-using System;
-using System.Windows.Forms;
-
-namespace GenericDB.Forms
+namespace GenericDB.BusinessObjects
 {
-	/// <summary>
-	/// Form that allows the user to enter a comment about a deck version.
-	/// </summary>
-	public partial class RevisionCommentInputForm : Form
+	public static class StaticComparer
 	{
 		/// <summary>
-		/// Default form constructor.
+		/// Compares two objects by reference and using the Equals method.
 		/// </summary>
-		public RevisionCommentInputForm()
+		/// <param name="obj1">The first object.</param>
+		/// <param name="obj2">The second object.</param>
+		/// <returns>True if both are reference to the same object (or null) or if they are equal.</returns>
+		public static bool AreEqual(object obj1, object obj2)
 		{
-			InitializeComponent();
-		}
-
-		/// <summary>
-		/// The comment filled in by the user.
-		/// </summary>
-		/// <returns></returns>
-		public String RevisionComment()
-		{
-			return tbRevisionComment.Text;
+			return (obj1 == obj2) || 
+				(obj1 != null && obj2 != null && obj1.Equals(obj2));
 		}
 	}
 }

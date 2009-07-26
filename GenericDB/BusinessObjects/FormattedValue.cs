@@ -1,4 +1,4 @@
-// AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
+// GenericDB - A generic card searcher and deck builder library for CCGs
 // Copyright © 2007, 2008, 2009 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -11,44 +11,41 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
-// © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
-// © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
 using System;
 using System.Collections.Generic;
 
-namespace AGoT.AGoTDB.BusinessObjects
+namespace GenericDB.BusinessObjects
 {
-  ///<summary>
-  /// Represents a value and a list of format sections.
-  ///</summary>
-  ///<typeparam name="T">The type of the value.</typeparam>
-  public class FormattedValue<T>
-  {
-    /// <summary>
-    /// The value to which the formatted sections applies.
-    /// </summary>
-    public T Value { get; private set; }
-    /// <summary>
-    /// The format sections that apply to the value.
-    /// </summary>
-    public List<FormatSection> Formats { get; private set; }
+	///<summary>
+	/// Represents a value and a list of format sections.
+	///</summary>
+	///<typeparam name="T">The type of the value.</typeparam>
+	public class FormattedValue<T>
+	{
+		/// <summary>
+		/// The value to which the formatted sections applies.
+		/// </summary>
+		public T Value { get; private set; }
+		/// <summary>
+		/// The format sections that apply to the value.
+		/// </summary>
+		public List<FormatSection> Formats { get; private set; }
 
-    public FormattedValue(T value, List<FormatSection> formats)
-    {
-      Value = value;
-      Formats = formats;
-    }
+		public FormattedValue(T value, List<FormatSection> formats)
+		{
+			Value = value;
+			Formats = formats;
+		}
 
-    /// Styles are: errata (in human mode: {errata}), trait (~trait~)
-    /// Style is encoded as follows: style1, start1-stop1; ... ;styleN, startN-stopN;
-    /// For non-text column, start and stop are ignored. The style is applied to the whole field
-    public String FormatsToString()
-    {
-      return string.Join("; ", Formats.ConvertAll(f => f.ToString()).ToArray());
-    }
-  }
+		/// Styles are: errata (in human mode: {errata}), trait (~trait~)
+		/// Style is encoded as follows: style1, start1-stop1; ... ;styleN, startN-stopN;
+		/// For non-text column, start and stop are ignored. The style is applied to the whole field
+		public String FormatsToString()
+		{
+			return string.Join("; ", Formats.ConvertAll(f => f.ToString()).ToArray());
+		}
+	}
 }

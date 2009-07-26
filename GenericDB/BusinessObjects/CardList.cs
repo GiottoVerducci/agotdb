@@ -1,5 +1,5 @@
-﻿// AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009 Vincent Ripoll
+// GenericDB - A generic card searcher and deck builder library for CCGs
+// Copyright � 2007, 2008, 2009 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -11,110 +11,138 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
-// © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
-// © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
+using System;
 using System.Collections.Generic;
 using System.Xml;
+using GenericDB.BusinessObjects;
 
-namespace AGoT.AGoTDB.BusinessObjects
+namespace GenericDB.BusinessObjects
 {
-  public class CardList : List<Card>
-  {
-    public CardList()
-    {
-    }
+	public abstract class CardList<T> : List<T>, ICardList<T>
+		where T : class, ICard, new()
+	{
+		#region Constructors and clone
+		public abstract ICardList<T> Clone();
+		#endregion
 
-    public CardList(CardList other)
-    {
-      CopyCardList(other);
-    }
+		#region Implementation of IXmlizable
+		/// <summary>
+		/// Gets the XML representation of this card list.
+		/// </summary>
+		/// <param name="doc">The XML document for which the XML representation is generated.</param>
+		/// <returns>A XML node representing this card.</returns>
+		public XmlNode ToXml(XmlDocument doc)
+		{
+			XmlElement result = doc.CreateElement("CardList");
+			for (var i = 0; i < Count; ++i)
+				result.AppendChild(this[i].ToXml(doc));
+			return result;
+		}
 
-    public CardList(XmlDocument doc, XmlNode cardListRoot)
-    {
-      if (cardListRoot == null)
-        return;
-      foreach (XmlNode cardNode in cardListRoot.ChildNodes)
-        Add(new Card(doc, cardNode));
-    }
+		/// <summary>
+		/// Initializes the properties of this card list from an XML node that was generated 
+		/// using the ToXml method.
+		/// </summary>
+		/// <param name="doc">The XML document containing the XML node.</param>
+		/// <param name="root">The XML node containing the XML data representing the object.</param>
+		public void InitializeFromXml(XmlDocument doc, XmlNode root)
+		{
+			if (root == null) throw new ArgumentNullException("root");
 
-    private void CopyCardList(IList<Card> source)
-    {
-      Clear();
-      for (var i = 0; i < source.Count; ++i)
-        Add(new Card(source[i]));
-    }
+			// tweak for legacy format
+			if ((root.FirstChild != null) && (root.FirstChild.Name == "CardList"))
+				root = root.FirstChild;
+			// end of tweak
 
-    /// <summary>
-    /// Serializes the card list under an xml data format.
-    /// </summary>
-    /// <param name="doc">The xml document where the data will be stored.</param>
-    /// <param name="nodeName">The name of the xml element.</param>
-    public XmlElement ToXml(XmlDocument doc, string nodeName)
-    {
-      XmlElement result = doc.CreateElement(nodeName);
-      for (var i = 0; i < Count; ++i)
-        result.AppendChild(this[i].ToXml(doc));
-      return result;
-    }
+			foreach (XmlNode cardNode in root.ChildNodes)
+			{
+				var card = new T();
+				card.InitializeFromXml(doc, cardNode);
+				Add(card);
+			}
+		}
+		#endregion
 
-    public static bool AreEqual(CardList cardList1, CardList cardList2)
-    {
-      if (cardList1.Count != cardList2.Count)
-        return false;
-      var i = 0;
-      while (i < cardList1.Count)
-      {
-        int index = i;
-        if (!Card.AreEqual(cardList1[i], cardList2[i]) && // quick test if both card lists are in the same order
-          (cardList2.Find(c => Card.AreEqual(c, cardList1[index])) == null))
-          return false;
-        ++i;
-      }
-      return true;
-    }
+		#region Equality
+		public override bool Equals(object obj)
+		{
+			// if parameter cannot be cast to this, return false
+			var cardList = obj as CardList<T>;
+			if (cardList == null)
+			{
+				return false;
+			}
 
-    /// <summary>
-    /// Adds a card to this list of cards. If the card is already present, increments
-    /// the quantity by 1.
-    /// </summary>
-    /// <param name="card">The card to add to the list.</param>
-    /// <returns>The card added or modified</returns>
-    public Card AddCard(Card card)
-    {
-      Card result = Find(c => (c.UniversalId == card.UniversalId));
-      if (result != null)
-        result.Quantity++;
-      else
-      {
-        result = new Card(card) { Quantity = 1 };
-        Add(result);
-      }
-      return result;
-    }
+			if (Count != cardList.Count)
+				return false;
+			var i = 0;
+			while (i < Count)
+			{
+				int index = i;
+				if (!StaticComparer.AreEqual(this[i], cardList[i]) && // quick test if both card lists are in the same order
+					(cardList.Find(c => StaticComparer.AreEqual(c, this[index])) == null))
+					return false;
+				++i;
+			}
+			return true;
+		}
 
-    /// <summary>
-    /// Subtracts a card from this list of cards by decreasing the quantity by 1.
-    /// If the quantity reaches 0, removes the card from the list.
-    /// </summary>
-    /// <param name="card">The card to subtract from the list</param>
-    /// <returns>The card subtracted, or null if the card was not found or the last copy was removed.</returns>
-    public Card SubtractCard(Card card)
-    {
-      Card result = Find(c => (c.UniversalId == card.UniversalId));
-      if (result != null)
-      {
-        result.Quantity--;
-        if (result.Quantity == 0)
-        {
-          Remove(result);
-          result = null;
-        }
-      }
-      return result;
-    }
-  }
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+		#endregion
+
+		protected virtual void CopyCardList(ICardList<T> source)
+		{
+			Clear();
+			for (var i = 0; i < source.Count; ++i)
+				Add((T)source[i].Clone());
+		}
+
+		/// <summary>
+		/// Adds a card to this list of cards. If the card is already present, increments
+		/// the quantity by 1.
+		/// </summary>
+		/// <param name="card">The card to add to the list.</param>
+		/// <returns>The card added or modified</returns>
+		public T AddCard(T card)
+		{
+			var result = Find(c => (c.UniversalId == card.UniversalId));
+			if (result != null)
+				result.Quantity++;
+			else
+			{
+				result = (T)card.Clone();
+				result.Quantity = 1;
+				Add(result);
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// Subtracts a card from this list of cards by decreasing the quantity by 1.
+		/// If the quantity reaches 0, removes the card from the list.
+		/// </summary>
+		/// <param name="card">The card to subtract from the list</param>
+		/// <returns>The card subtracted, or null if the card was not found or the last copy was removed.</returns>
+		public T SubtractCard(T card)
+		{
+			var result = Find(c => (c.UniversalId == card.UniversalId));
+			if (result != null)
+			{
+				result.Quantity--;
+				if (result.Quantity == 0)
+				{
+					Remove(result);
+					result = null;
+				}
+			}
+			return result;
+		}
+
+	}
 }

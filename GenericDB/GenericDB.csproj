@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GenericDB</RootNamespace>
+    <AssemblyName>GenericDB</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExtendedControls, Version=1.0.2878.25775, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ExtendedControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessObjects\Card.cs" />
+    <Compile Include="BusinessObjects\CardList.cs" />
+    <Compile Include="BusinessObjects\DatabaseInfo.cs" />
+    <Compile Include="BusinessObjects\Deck.cs" />
+    <Compile Include="BusinessObjects\DeckTreeNodeSorter.cs" />
+    <Compile Include="BusinessObjects\FormatSection.cs" />
+    <Compile Include="BusinessObjects\FormattedValue.cs" />
+    <Compile Include="BusinessObjects\Settings.cs" />
+    <Compile Include="BusinessObjects\StringPair.cs" />
+    <Compile Include="BusinessObjects\VersionedDeck.cs" />
+    <Compile Include="Components\CardTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataAccess\QueryBuilder.cs" />
+    <Compile Include="DataAccess\BoundFormat.cs" />
+    <Compile Include="DataAccess\CommandParameters.cs" />
+    <Compile Include="DataAccess\DatabaseManager.cs" />
+    <Compile Include="DataAccess\DbFilter.cs" />
+    <Compile Include="BusinessObjects\FormattedText.cs" />
+    <Compile Include="BusinessObjects\ICard.cs" />
+    <Compile Include="BusinessObjects\ICardList.cs" />
+    <Compile Include="BusinessObjects\IDeck.cs" />
+    <Compile Include="BusinessObjects\IVersionedDeck.cs" />
+    <Compile Include="BusinessObjects\IXmlizable.cs" />
+    <Compile Include="BusinessObjects\SoftwareVersion.cs" />
+    <Compile Include="BusinessObjects\StaticComparer.cs" />
+    <Compile Include="BusinessObjects\XmlToolBox.cs" />
+    <Compile Include="DataAccess\Query.cs" />
+    <Compile Include="DataAccess\RowFormattedDataExtractor.cs" />
+    <Compile Include="Extensions\IDictionaryExtension.cs" />
+    <Compile Include="Forms\NewVersionInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewVersionInfoForm.Designer.cs">
+      <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RevisionCommentInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RevisionCommentInputForm.Designer.cs">
+      <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BusinessObjects\TextFormat.cs" />
+    <Compile Include="BusinessObjects\XInt.cs" />
+    <Compile Include="Tools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\NewVersionInfoForm.fr.resx">
+      <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewVersionInfoForm.resx">
+      <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RevisionCommentInputForm.fr.resx">
+      <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RevisionCommentInputForm.resx">
+      <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gpl.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,4 +1,4 @@
-// AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
+// GenericDB - A generic card searcher and deck builder library for CCGs
 // Copyright © 2007, 2008, 2009 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -11,36 +11,33 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
-// © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
-// © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 
 using System.Windows.Forms;
 
-namespace AGoT.AGoTDB.Forms
+namespace GenericDB.Forms
 {
-  /// <summary>
-  /// Information forms about how the versioning works.
-  /// </summary>
-  public partial class FormNewVersionInfo : Form
-  {
-    /// <summary>
-    /// Default form constructor.
-    /// </summary>
-    public FormNewVersionInfo()
-    {
-      InitializeComponent();
-    }
+	/// <summary>
+	/// Information forms about how the versioning works.
+	/// </summary>
+	public partial class FormNewVersionInfo : Form
+	{
+		/// <summary>
+		/// Default form constructor.
+		/// </summary>
+		public FormNewVersionInfo()
+		{
+			InitializeComponent();
+		}
 
-    /// <summary>
-    /// Indicates whether this form must be displayed the next time it should be.
-    /// </summary>
-    /// <returns>True if the form should be displayed next time, False otherwise.</returns>
-    public bool DisplayFormNextTime()
-    {
-      return !cbDoNotDisplay.Checked;
-    }
-  }
+		/// <summary>
+		/// Indicates whether this form must be displayed the next time it should be.
+		/// </summary>
+		/// <returns>True if the form should be displayed next time, False otherwise.</returns>
+		public bool DisplayFormNextTime()
+		{
+			return !cbDoNotDisplay.Checked;
+		}
+	}
 }
