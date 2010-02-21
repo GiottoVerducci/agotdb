@@ -1,5 +1,5 @@
 // AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -23,6 +23,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
@@ -94,7 +95,7 @@ namespace AGoTDB.Forms
 				fTreeViews[i].Cards = fCurrentDeck.CardLists[i];
 			fDeckTreeNodeSorter = new DeckTreeNodeSorter(
 				UserSettings.Singleton.ReadString("DeckBuilder", "TypeOrder", ""),
-				IsCardNode, 
+				IsCardNode,
 				x => ((TypeNodeInfo)x.Tag).Type
 			);
 
@@ -109,6 +110,7 @@ namespace AGoTDB.Forms
 		private void DeckBuilderForm_Shown(object sender, EventArgs e)
 		{
 			eclHouse.UpdateSize(); // update size because neutral house has been removed
+			eclAgenda.UpdateSize();
 		}
 
 		private void DeckBuilderForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -128,6 +130,11 @@ namespace AGoTDB.Forms
 		private void eclHouse_SelectedValueChanged(object sender, EventArgs e)
 		{
 			UpdateHouseFromControls();
+		}
+
+		private void eclAgenda_SelectedValueChanged(object sender, EventArgs e)
+		{
+			UpdateAgendaFromControls();
 		}
 
 		/// <summary>
@@ -150,14 +157,6 @@ namespace AGoTDB.Forms
 				rtbCardText.SelectionColor = ft.Format.Color;
 				rtbCardText.AppendText(ft.Text);
 			}
-		}
-
-		private void cbAgenda_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (cbAgenda.SelectedIndex != 0)
-				fCurrentDeck.Agenda = (AgotCard)cbAgenda.SelectedItem;
-			else
-				fCurrentDeck.Agenda = null;
 		}
 
 		private void DeckBuilderForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -266,42 +265,15 @@ namespace AGoTDB.Forms
 		#region Form update methods
 
 		/// <summary>
-		/// Selects the agenda defined by the deck in the drop-down list. If the agenda is not found,
-		/// adds it to the list and selects it.
-		/// </summary>
-		private void UpdateControlsAgenda()
-		{
-			if (fCurrentDeck.Agenda == null)
-				cbAgenda.SelectedIndex = 0; // no agenda
-			else
-			{
-				var i = 1;
-				while ((i < cbAgenda.Items.Count) && (((AgotCard)cbAgenda.Items[i]).UniversalId != fCurrentDeck.Agenda.UniversalId))
-					++i;
-				if (i < cbAgenda.Items.Count)
-					cbAgenda.SelectedIndex = i;
-				else // card not found
-				{
-					// add it to list box and select it
-					cbAgenda.Items.Add(fCurrentDeck.Agenda);
-					cbAgenda.SelectedIndex = cbAgenda.Items.Count - 1;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Loads the agenda-card items in the agenda drop-down list.
+		/// Loads the agenda-card items in the agenda checkbox.
 		/// </summary>
 		private void UpdateAgendaComboBox()
 		{
-			cbAgenda.Items.Clear();
-			cbAgenda.Items.Add("—");
-
+			eclAgenda.Items.Clear();
 			var table = ApplicationSettings.DatabaseManager.GetAgendas();
 			foreach (DataRow row in table.Rows)
-				cbAgenda.Items.Add(new AgotCard(row));
-
-			cbAgenda.SelectedIndex = 0;
+				eclAgenda.Items.Add(new AgotCard(row));
+			eclAgenda.UpdateSize();
 		}
 
 		private static void UpdateTypeNodeText(TreeNode typeNode)
@@ -323,8 +295,8 @@ namespace AGoTDB.Forms
 
 			var typeNodeValue = Convert.ToInt32(typeNode.Name, CultureInfo.InvariantCulture);
 
-			typeNode.Text = typeNodeValue == (Int32)AgotCard.CardType.Plot 
-				? ComputeStatsPlots(((AgotCardTreeView)typeNode.TreeView).Cards) 
+			typeNode.Text = typeNodeValue == (Int32)AgotCard.CardType.Plot
+				? ComputeStatsPlots(((AgotCardTreeView)typeNode.TreeView).Cards)
 				: string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", AgotCard.GetTypeName(typeNodeValue), count);
 		}
 
@@ -345,7 +317,7 @@ namespace AGoTDB.Forms
 		private void UpdateControlsWithVersionedDeck(bool updateHistory)
 		{
 			UpdateControlsFromHouse();
-			UpdateControlsAgenda();
+			UpdateControlsFromAgenda();
 
 			UpdateTreeViewWithCards(treeViewDeck, fCurrentDeck.CardLists[1]); // TODO : modify to handle multiple deck lists
 			UpdateTreeViewWithCards(treeViewSide, fCurrentDeck.CardLists[0]); // TODO : modify to handle multiple deck lists
@@ -358,7 +330,7 @@ namespace AGoTDB.Forms
 
 			// enable or disable the edit mode depending on the Editable property of the deck
 			eclHouse.Enabled = fCurrentDeck.Editable;
-			cbAgenda.Enabled = fCurrentDeck.Editable;
+			eclAgenda.Enabled = fCurrentDeck.Editable;
 			rtbDescription.Enabled = fCurrentDeck.Editable;
 		}
 
@@ -414,6 +386,44 @@ namespace AGoTDB.Forms
 					eclHouse.SetItemCheckState(i, CheckState.Unchecked);
 			}
 			eclHouse.Condensed = condensed;
+		}
+
+		private void UpdateAgendaFromControls()
+		{
+			fCurrentDeck.Agenda.Clear();
+			bool condensed = eclAgenda.Condensed; // we'll use it to restore its previous state
+			if (condensed)
+				eclAgenda.Condensed = false; // expand ecl to get access to the items
+			for (var i = 0; i < eclAgenda.Items.Count; ++i)
+				if (eclAgenda.GetItemCheckState(i) == CheckState.Checked)
+				{
+					fCurrentDeck.Agenda.Add(eclAgenda.Items[i] as AgotCard);
+				}
+			if (condensed)
+				eclAgenda.Condensed = true;
+		}
+
+		private void UpdateControlsFromAgenda()
+		{
+			bool condensed = eclAgenda.Condensed; // we'll use it to restore its previous state
+			eclAgenda.Condensed = false; // expand ecl to get access to the items
+
+			// check for agenda in the deck but missing in our list 
+			var missingAgenda = new List<AgotCard>();
+			missingAgenda.AddRange(fCurrentDeck.Agenda);
+			missingAgenda.RemoveAll(a => eclAgenda.Items.Contains(a));
+
+			eclAgenda.Items.AddRange(missingAgenda.ToArray());
+			for (var i = eclAgenda.Items.Count - 1; i >= 0; --i)
+			{
+				var agenda = eclAgenda.Items[i] as AgotCard;
+				if (fCurrentDeck.Agenda.Contains(agenda))
+					eclAgenda.SetItemCheckState(i, CheckState.Checked);
+				else
+					eclAgenda.SetItemCheckState(i, CheckState.Unchecked);
+			}
+
+			eclAgenda.Condensed = condensed;
 		}
 
 		private void UpdateHistoryFromVersionedDeck()
@@ -693,7 +703,6 @@ namespace AGoTDB.Forms
 							 : SubtractCardFromSide(card);
 		}
 
-
 		private bool SaveVersionedDeck(bool forceCallToSaveDialog)
 		{
 			UpdateVersionedDeckWithControls();
@@ -712,7 +721,7 @@ namespace AGoTDB.Forms
 				}
 			}
 			int? databaseVersion = (ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0)
-				? (int?) ApplicationSettings.DatabaseManager.DatabaseInfos[0].VersionId
+				? (int?)ApplicationSettings.DatabaseManager.DatabaseInfos[0].VersionId
 				: null;
 
 			var result = fVersionedDeck.SaveToXmlFile(fCurrentFilename, ApplicationSettings.ApplicationName, ApplicationSettings.ApplicationVersion, databaseVersion);
@@ -822,8 +831,12 @@ namespace AGoTDB.Forms
 			text.Append(lblDeckName.Text).AppendLine(fVersionedDeck.Name);
 			text.Append(lblAuthor.Text).AppendLine(fVersionedDeck.Author);
 			text.Append(lblHouse.Text).Append(AgotCard.GetHouseName(fCurrentDeck.Houses));
-			if (fCurrentDeck.Agenda != null)
-				text.AppendFormat(" ({0})", fCurrentDeck.Agenda.Name.Value);
+			if (fCurrentDeck.Agenda.Count > 0)
+			{
+				var agendaNames = fCurrentDeck.Agenda.Select(card => card.Name.Value);
+				text.AppendFormat(" ({0})", string.Join(" + ", agendaNames.ToArray()));
+			}
+
 			text.AppendLine();
 			text.Append(tabPageDescription.Text).Append(" : ").AppendLine(fVersionedDeck.Description);
 
