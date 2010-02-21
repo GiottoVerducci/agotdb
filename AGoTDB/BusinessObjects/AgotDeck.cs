@@ -1,5 +1,5 @@
 // AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -33,19 +33,20 @@ namespace AGoTDB.BusinessObjects
 		/// <summary>
 		/// The agenda chosen for this deck (if any).
 		/// </summary>
-		public AgotCard Agenda { get; set; }
+		public CardList<AgotCard> Agenda { get; set; }
 
 		#region Constructors and clone
 		public AgotDeck()
 		{
-			Agenda = null;
+			Agenda = new AgotCardList();
 		}
 
 		protected AgotDeck(AgotDeck originalDeck)
 			: base(originalDeck)
 		{
 			Houses = originalDeck.Houses;
-			Agenda = originalDeck.Agenda;
+			Agenda = new AgotCardList();
+			Agenda.AddRange(originalDeck.Agenda);
 		}
 
 		public override IDeck<AgotCardList, AgotCard> Clone()
@@ -60,13 +61,27 @@ namespace AGoTDB.BusinessObjects
 			base.WriteXmlElements(doc, deckRoot);
 
 			XmlToolbox.AddElementValue(doc, deckRoot, "Houses", Houses.ToString());
-			if (Agenda != null)
+			for (var j = 0; j < Agenda.Count; ++j)
 			{
-				XmlElement agendaElement = doc.CreateElement("Agenda");
-				agendaElement.AppendChild(Agenda.ToXml(doc));
+				string cardListNodeName = GetAgendaListNodeName(j);
+				XmlElement agendaElement = doc.CreateElement(cardListNodeName);
+				agendaElement.AppendChild(Agenda[j].ToXml(doc));
 				deckRoot.AppendChild(agendaElement);
 			}
 		}
+
+		/// <summary>
+		/// Returns the node name for xml storage associated to the index in the list of Agenda elements.
+		/// </summary>
+		/// <param name="agendaListIndex">The index.</param>
+		/// <returns>The node name.</returns>
+		protected static string GetAgendaListNodeName(int agendaListIndex)
+		{
+			return agendaListIndex == 0
+				? "Agenda"
+				: String.Format(CultureInfo.CurrentCulture, "Agenda{0}", agendaListIndex);
+		}
+
 
 		protected override void ReadXmlElements(XmlNode root, XmlDocument doc)
 		{
@@ -74,13 +89,17 @@ namespace AGoTDB.BusinessObjects
 			string value;
 			if (!string.IsNullOrEmpty(value = XmlToolbox.GetElementValue(doc, root, "Houses")))
 				Houses = Convert.ToInt32(value, CultureInfo.InvariantCulture);
-			XmlNode agendaNode = XmlToolbox.FindNode(root, "Agenda");
-			if (agendaNode != null)
+			// we read the agenda cards
+			Agenda.Clear();
+			XmlNode agendaRoot;
+			var j = 0;
+			while (null != (agendaRoot = XmlToolbox.FindNode(root, GetAgendaListNodeName(j))))
 			{
-				Agenda = new AgotCard();
-				Agenda.InitializeFromXml(doc, agendaNode.FirstChild);
+				var agendaCard = new AgotCard();
+				agendaCard.InitializeFromXml(doc, agendaRoot.FirstChild);
+				Agenda.Add(agendaCard);
+				++j;
 			}
-			else Agenda = null;
 		}
 		#endregion
 
