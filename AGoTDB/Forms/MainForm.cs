@@ -1,5 +1,5 @@
 // AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -14,8 +14,10 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 // © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
+// © A Game of Thrones CCG 2005 Fantasy Flight Publishing, Inc.
+// © A Game of Thrones LCG 2008 Fantasy Flight Publishing, Inc.
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
+// © Le Trône de Fer JCE 2008 Edge Entertainment
 
 using System;
 using System.Collections.Generic;
@@ -152,6 +154,17 @@ namespace AGoTDB.Forms
 			{
 				if ((int)row["Id"] >= 0)
 					AgotCard.CardHouseNames.Add((int)row["Id"], row["Value"].ToString());
+			}
+		}
+
+		private static void LoadCardTriggerNames()
+		{
+			var triggers = ApplicationSettings.DatabaseManager.GetCardTriggerNames();
+			AgotCard.CardTriggerNames = new List<string>();
+			foreach (DataRow row in triggers.Rows)
+			{
+				if ((int)row["Id"] >= 0)
+					AgotCard.CardTriggerNames.Add(row["Value"].ToString());
 			}
 		}
 
@@ -554,6 +567,7 @@ namespace AGoTDB.Forms
 			UpdateControlsLabels();
 			LoadCardTypeNames();
 			LoadCardHouseNames();
+			LoadCardTriggerNames();
 			UpdateDataTableView();
 			dataGridView.DataSource = fDataTable;
 

@@ -14,8 +14,11 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 // © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
+// © A Game of Thrones CCG 2005 Fantasy Flight Publishing, Inc.
+// © A Game of Thrones LCG 2008 Fantasy Flight Publishing, Inc.
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
+// © Le Trône de Fer JCE 2008 Edge Entertainment
+
 
 using System;
 using System.Collections.Generic;
