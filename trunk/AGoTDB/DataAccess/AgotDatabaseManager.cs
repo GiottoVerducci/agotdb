@@ -47,6 +47,7 @@ namespace AGoTDB.DataAccess
 		public string TableNameTrigger { get { return "TableTrigger"; } }
 		public string TableNameType { get { return "TableType"; } }
 		public string TableNameVirtue { get { return "TableVirtue"; } }
+		public string TableNamePattern { get { return "TablePattern"; } }
 		public override TextFormat ErrataFormat { get { return AgotCard.ErrataFormat; } }
 
 		protected override void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows)
@@ -54,7 +55,7 @@ namespace AGoTDB.DataAccess
 			Int32 universalId;
 			FormattedValue<string> name, traits, keywords, text, set, originalName;
 			FormattedValue<int> type, house;
-			FormattedValue<bool?> unique, doomed, endless, military, intrigue, power, war, holy, noble, learned, shadow, multiplayer;
+			FormattedValue<bool?> unique, doomed, endless, military, intrigue, power, war, holy, noble, learned, shadow, multiplayer, banned;
 			FormattedValue<XInt> cost, strength, income, initiative, claim, influence;
 
 			universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
@@ -84,6 +85,7 @@ namespace AGoTDB.DataAccess
 			learned = ExtractFormattedBoolValueFromRow(sourceRow, "Learned");
 			shadow = ExtractFormattedBoolValueFromRow(sourceRow, "Shadow");
 			multiplayer = ExtractFormattedBoolValueFromRow(sourceRow, "Multiplayer");
+			banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned");
 
 			cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost");
 			strength = ExtractFormattedXIntValueFromRow(sourceRow, "Strength");
@@ -142,7 +144,8 @@ namespace AGoTDB.DataAccess
 				XIntToString(influence.Value), influence.Formats.Count > 0,
 				multiplayer.Value.Value, multiplayer.Formats.Count > 0, // Multiplayer shouldn't be null
 				set.Value, set.FormatsToString(),
-				originalName.Value, originalName.FormatsToString()
+				originalName.Value, originalName.FormatsToString(),
+				banned.Value, banned.Formats.Count > 0
 			);
 		}
 
@@ -169,6 +172,12 @@ namespace AGoTDB.DataAccess
 		{
 			return GetResultFromRequest(
 				string.Format("SELECT * FROM {0}", TableNameTrigger));
+		}
+
+		public DataTable GetCardPatterns()
+		{
+			return GetResultFromRequest(
+				string.Format("SELECT * FROM {0}", TableNamePattern));
 		}
 	}
 }

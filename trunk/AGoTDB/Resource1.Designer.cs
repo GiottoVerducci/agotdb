@@ -79,6 +79,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BANNED IN TOURNAMENT.
+        /// </summary>
+        internal static string BannedText {
+            get {
+                return ResourceManager.GetString("BannedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deck couldn&apos;t be saved!.
         /// </summary>
         internal static string CantSaveDeckErr {
