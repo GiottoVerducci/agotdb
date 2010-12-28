@@ -95,7 +95,10 @@ namespace AGoTDB.Forms
 				fTreeViews[i].NodeInfo = fTreeViews[i].Nodes[0]; // must have been added during design time
 			NewVersionedDeck(false);
 			for (var i = 0; i < fTreeViews.Count; ++i)
+			{
 				fTreeViews[i].Cards = fCurrentDeck.CardLists[i];
+				fTreeViews[i].Deck = fCurrentDeck;
+			}
 			fDeckTreeNodeSorter = new DeckTreeNodeSorter(
 				UserSettings.Singleton.ReadString("DeckBuilder", "TypeOrder", ""),
 				IsCardNode,
@@ -103,6 +106,7 @@ namespace AGoTDB.Forms
 			);
 
 			ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameHouse, "House", TableType.ValueId);
+			eclHouse.Summary += " - " + eclHouse.Items[0].ToString();
 			eclHouse.Items.RemoveAt(0); // remove neutral house
 			UpdateAgendaComboBox();
 			UpdateHistoryFromVersionedDeck();
@@ -288,9 +292,9 @@ namespace AGoTDB.Forms
 			{
 				count += ((AgotCard)node.Tag).Quantity;
 				Font font = GetNodeFont(node);
-				StringPair text = GetCardNodeText(node);
-				maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(text.Value1, font).Width);
-				maxLength = Math.Max(maxLength, text.Value1.Length);
+				var cardNodeInfo = GetCardNodeInfo(node);
+				maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(cardNodeInfo.Value1, font).Width);
+				maxLength = Math.Max(maxLength, cardNodeInfo.Value1.Length);
 			}
 			var currentInfo = (TypeNodeInfo)typeNode.Tag;
 			currentInfo.Width = maxWidth;
@@ -307,12 +311,14 @@ namespace AGoTDB.Forms
 		{
 			if (fDeckTreeViewSpaceWidth == 0)
 				ComputeDeckTreeViewSpaceWidth(cardNode.TreeView);
-			StringPair lineText = GetCardNodeText(cardNode);
+			var cardNodeInfo = GetCardNodeInfo(cardNode);
 			Font font = GetNodeFont(cardNode);
-			var textWidth = TextRenderer.MeasureText(lineText.Value1, font).Width;
-			var text2Width = TextRenderer.MeasureText(lineText.Value2, GetNodeInfoFont(cardNode)).Width;
+			var textWidth = TextRenderer.MeasureText(cardNodeInfo.Value1, font).Width;
+			var text2Width = TextRenderer.MeasureText(cardNodeInfo.Value2, GetNodeInfoFont(cardNode)).Width;
 			var nbSpacesToAdd = 1 + (((TypeNodeInfo)cardNode.Parent.Tag).Width - textWidth + text2Width) / fDeckTreeViewSpaceWidth;
-			cardNode.Text = lineText.Value1 + " ".PadRight(nbSpacesToAdd);
+			cardNode.Text = cardNodeInfo.Value1 + " ".PadRight(nbSpacesToAdd);
+			cardNode.ForeColor = cardNodeInfo.ForeColor;
+			cardNode.BackColor = cardNodeInfo.BackColor;
 		}
 		#endregion
 
@@ -321,9 +327,7 @@ namespace AGoTDB.Forms
 		{
 			UpdateControlsFromHouse();
 			UpdateControlsFromAgenda();
-
-			UpdateTreeViewWithCards(treeViewDeck, fCurrentDeck.CardLists[1]); // TODO : modify to handle multiple deck lists
-			UpdateTreeViewWithCards(treeViewSide, fCurrentDeck.CardLists[0]); // TODO : modify to handle multiple deck lists
+			UpdateTreeViews();
 
 			tbDeckName.Text = fVersionedDeck.Name;
 			tbAuthor.Text = fVersionedDeck.Author;
@@ -337,7 +341,13 @@ namespace AGoTDB.Forms
 			rtbDescription.Enabled = fCurrentDeck.Editable;
 		}
 
-		private void UpdateTreeViewWithCards(AgotCardTreeView treeView, AgotCardList cards)
+		private void UpdateTreeViews()
+		{
+			UpdateTreeViewWithCards(treeViewDeck, fCurrentDeck.CardLists[1], fCurrentDeck); // TODO : modify to handle multiple deck lists
+			UpdateTreeViewWithCards(treeViewSide, fCurrentDeck.CardLists[0], fCurrentDeck); // TODO : modify to handle multiple deck lists
+		}
+
+		private void UpdateTreeViewWithCards(AgotCardTreeView treeView, AgotCardList cards, AgotDeck deck)
 		{
 			treeView.BeginUpdate();
 			treeView.Cards = cards;
@@ -345,6 +355,7 @@ namespace AGoTDB.Forms
 			treeView.Nodes.Add(treeView.NodeInfo);
 			for (var i = 0; i < cards.Count; ++i)
 				AddCardToTreeView(treeView, cards[i], false);
+			treeView.Deck = deck;
 			treeView.EndUpdate();
 			UpdateTabText(treeView);
 		}
@@ -369,6 +380,7 @@ namespace AGoTDB.Forms
 			fCurrentDeck.Houses = h;
 			if (condensed)
 				eclHouse.Condensed = true;
+			UpdateTreeViews();
 		}
 
 		private void UpdateControlsFromHouse()
@@ -503,8 +515,8 @@ namespace AGoTDB.Forms
 			}
 			// we must set the ToolTipText property here because the ShowNodeToolTips property of the treeview is ignored
 			// when the treeView isn't large enough to display the whole node (a tooltip is displayed to show the whole node)
-			StringPair text = GetCardNodeText(cardNode);
-			cardNode.ToolTipText = text.Value1 + text.Value2;
+			var cardNodeInfo = GetCardNodeInfo(cardNode);
+			cardNode.ToolTipText = cardNodeInfo.Value1 + cardNodeInfo.Value2;
 			UpdateTypeNodeText(root); // update count and column size
 			//UpdateCardNodeText(cardNode);
 			// we must redraw each node in order to redisplay the nodes - is there another method?
@@ -548,8 +560,8 @@ namespace AGoTDB.Forms
 				//UpdateCardNodeText(cardNode);
 				// we must set the ToolTipText property here because the ShowNodeToolTips property of the treeview is ignored
 				// when the treeView isn't large enough to display the whole node (a tooltip is displayed to show the whole node)
-				StringPair text = GetCardNodeText(cardNode);
-				cardNode.ToolTipText = text.Value1 + text.Value2;
+				var cardNodeInfo = GetCardNodeInfo(cardNode);
+				cardNode.ToolTipText = cardNodeInfo.Value1 + cardNodeInfo.Value2;
 			}
 			if (root != null)
 			{
@@ -579,10 +591,10 @@ namespace AGoTDB.Forms
 					count += card.Quantity;
 			}
 
-			var index = tabPage.Text.IndexOf('(');
+			var index = tabPage.Text.IndexOf('[');
 			if (index > 0)
 				tabPage.Text = tabPage.Text.Substring(0, index - 1);
-			tabPage.Text = tabPage.Text + String.Format(CultureInfo.CurrentCulture, " ({0})", count);
+			tabPage.Text = tabPage.Text + String.Format(CultureInfo.CurrentCulture, " [{0}]", count);
 		}
 
 		/// <summary>
@@ -604,14 +616,24 @@ namespace AGoTDB.Forms
 			return new Font(FontFamily.GenericMonospace, GetNodeFont(node).Size);
 		}
 
-		private static StringPair GetCardNodeText(TreeNode cardNode)
+		private static CardNodeInfo GetCardNodeInfo(TreeNode cardNode)
 		{
 			var card = (AgotCard)cardNode.Tag;
-			var result = new StringPair(String.Format(CultureInfo.CurrentCulture, "{0}x {1}", card.Quantity, card.Name.Value), card.GetSummaryInfo());
+			var deck = ((AgotCardTreeView)cardNode.TreeView).Deck;
+			var result = new CardNodeInfo(String.Format(CultureInfo.CurrentCulture, "{0}× {1}", card.Quantity, card.Name.Value), card.GetSummaryInfo());
 			if (card.Unique == null)
 				result.Value1 += " ?";
 			else if (card.Unique.Value)
 				result.Value1 += String.Format(CultureInfo.CurrentCulture, " * ({0})", card.GetShortSet());
+			result.ForeColor = cardNode.TreeView.ForeColor; // default value
+			result.BackColor = cardNode.TreeView.BackColor; // default value
+			if (card.Shadow != null && card.Shadow.Value)
+			{
+				result.ForeColor = Color.White;
+				result.BackColor = Color.Gray;
+			}
+			if (card.House.Value != (int)AgotCard.CardHouse.Neutral && (deck.Houses & card.House.Value) == 0)
+				result.ForeColor = Color.OrangeRed;
 			return result;
 		}
 		#endregion
@@ -624,15 +646,16 @@ namespace AGoTDB.Forms
 				var treeView = (AgotCardTreeView)sender;
 				Font font = GetNodeFont(e.Node);
 
-				Color textColor = treeView.ForeColor;
-				Color backColor = treeView.BackColor;
+				var cardNodeInfo = GetCardNodeInfo(e.Node);
+				Color foreColor = cardNodeInfo.ForeColor;
+				Color backColor = cardNodeInfo.BackColor;
 
 				bool isFocused = treeView.Focused;
 				bool isSelected = e.Node.IsSelected;
 
 				if (isSelected)
 				{
-					textColor = isFocused ? SystemColors.HighlightText : SystemColors.WindowText;
+					foreColor = isFocused ? SystemColors.HighlightText : SystemColors.WindowText;
 					backColor = isFocused ? SystemColors.Highlight : SystemColors.Control;
 				}
 
@@ -640,12 +663,11 @@ namespace AGoTDB.Forms
 				e.Graphics.FillRectangle(backBrush, e.Node.Bounds);
 
 				var x = e.Bounds.Left + ((TypeNodeInfo)e.Node.Parent.Tag).Width; // x of the second column (in pixel)
-				StringPair text = GetCardNodeText(e.Node);
 				// e.Graphics.DrawString produit un affichage trop large (plus large que la taille mesurée avec TextRenderer.MeasureText
 				// et plus large également que le rendu standard du treeview. Mais :
 				//The text rendering offered by the TextRenderer class is based on GDI text rendering and is not supported for printing from Windows Forms. Instead, use the DrawString methods of the Graphics class.
-				TextRenderer.DrawText(e.Graphics, text.Value1, font, new Point(e.Bounds.Left, e.Bounds.Top), textColor);
-				TextRenderer.DrawText(e.Graphics, text.Value2, GetNodeInfoFont(e.Node), new Point(x, e.Bounds.Top), textColor);
+				TextRenderer.DrawText(e.Graphics, cardNodeInfo.Value1, font, new Point(e.Bounds.Left, e.Bounds.Top), foreColor);
+				TextRenderer.DrawText(e.Graphics, cardNodeInfo.Value2, GetNodeInfoFont(e.Node), new Point(x, e.Bounds.Top), foreColor);
 			}
 			else
 				e.DrawDefault = true;
@@ -824,7 +846,7 @@ namespace AGoTDB.Forms
 				}
 			}
 			return String.Format(CultureInfo.CurrentCulture, "{0} [{1}] ({2}: {3}: {4} {5}: {6} {7}: {8:F})",
-													 AgotCard.GetTypeName((Int32)AgotCard.CardType.Plot), count, Resource1.IncomeText, Resource1.MinStatsText, minIncome, Resource1.MaxStatsText, maxIncome, Resource1.AvgStatsText, (totalIncome / count));
+				AgotCard.GetTypeName((Int32)AgotCard.CardType.Plot), count, Resource1.IncomeText, Resource1.MinStatsText, minIncome, Resource1.MaxStatsText, maxIncome, Resource1.AvgStatsText, (totalIncome / count));
 		}
 
 		private string CurrentDeckToText()
@@ -862,10 +884,10 @@ namespace AGoTDB.Forms
 					var currentInfo = (TypeNodeInfo)typeNode.Tag;
 					foreach (TreeNode cardNode in typeNode.Nodes)
 					{
-						StringPair cardNodeText = GetCardNodeText(cardNode);
-						String curLine = cardNodeText.Value1;
+						var cardNodeInfo = GetCardNodeInfo(cardNode);
+						String curLine = cardNodeInfo.Value1;
 						curLine = "\t" + curLine.PadRight(currentInfo.Length + 1);
-						curLine += cardNodeText.Value2;
+						curLine += cardNodeInfo.Value2;
 						text += curLine + "\n";
 					}
 				}
@@ -914,5 +936,18 @@ namespace AGoTDB.Forms
 		}
 	}
 
-	public delegate bool CardOperation(AgotCard card);
+	internal delegate bool CardOperation(AgotCard card);
+
+	internal class CardNodeInfo : StringPair
+	{
+		public Color ForeColor { get; set; }
+		public Color BackColor { get; set; }
+
+		public CardNodeInfo(string value1, string value2)
+			: base(value1, value2)
+		{
+			ForeColor = Color.Empty;
+			BackColor = Color.Empty;
+		}
+	}
 }

@@ -26,5 +26,10 @@ namespace AGoTDB.Components
 {
 	public class AgotCardTreeView : CardTreeView<AgotCardList, AgotCard>
 	{
+		/// <summary>
+		/// Deck partially represented by this treeview (contains global informations such as the house,
+		/// used to highlight out of House cards)
+		/// </summary>
+		public AgotDeck Deck { get; set; }
 	}
 }
