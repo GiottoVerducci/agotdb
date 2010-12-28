@@ -151,7 +151,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 361</value>
+    <value>191, 381</value>
   </data>
   <data name="btnOk.Text" xml:space="preserve">
     <value>OK</value>
@@ -172,8 +172,8 @@
     <value>AGoTDB</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-Copyright © 2007, 2008, 2009 Vincent Ripoll
+    <value>AGoTDB - A card searcher and deck builder tool for the CCG/LCG "A Game of Thrones"
+Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
 Contributors: Thierry Parres - thanks!
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
 
@@ -182,8 +182,10 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 You can contact me at v.ripoll@gmail.com
 © A Game of Thrones 2005 George R. R. Martin
-© A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
-© Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl </value>
+© A Game of Thrones CCG 2005 Fantasy Flight Publishing, Inc.
+© A Game of Thrones LCG 2008 Fantasy Flight Publishing, Inc.
+© Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
+© Le Trône de Fer JCE 2008 Edge Entertainment</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -237,7 +239,7 @@ You can contact me at v.ripoll@gmail.com
     <value>MiddleCenter</value>
   </data>
   <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>427, 234</value>
+    <value>427, 254</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 121</value>
@@ -291,7 +293,7 @@ You can contact me at v.ripoll@gmail.com
     <value>427, 23</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>451, 396</value>
+    <value>451, 416</value>
   </data>
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -343,8 +345,5 @@ You can contact me at v.ripoll@gmail.com
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>French</value>
   </metadata>
 </root>

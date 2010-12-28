@@ -1,5 +1,5 @@
 // GenericDB - A generic card searcher and deck builder library for CCGs
-// Copyright © 2007, 2008, 2009 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -316,7 +316,7 @@ namespace GenericDB.DataAccess
 					{
 						tracker.Push(new FormatSectionTracker(boundFormat.Opening, i - offset, boundFormat.Format));
 						// we discard the bound character except for empty sections (eg. "{}" or "~~")
-						boundChar = !((i+1 < value.Length) && (value[i+1] == boundFormat.Closing));
+						boundChar = !((i + 1 < value.Length) && (value[i + 1] == boundFormat.Closing));
 						break;
 					}
 					if (value[i] == boundFormat.Closing)
@@ -326,8 +326,8 @@ namespace GenericDB.DataAccess
 								"Mismatch in database: '{0}' unexpected, column = {1}, value = {2}",
 								boundFormat.Closing, columnName, value));
 						var section = tracker.Pop();
-						boundChar = !(value[i-1] == boundFormat.Opening);
-						formatSections.Add(new FormatSection(section.StartIndex, i - offset + (boundChar?0:1), section.Format));
+						boundChar = !(value[i - 1] == boundFormat.Opening);
+						formatSections.Add(new FormatSection(section.StartIndex, i - offset + (boundChar ? 0 : 1), section.Format));
 						break;
 					}
 				}

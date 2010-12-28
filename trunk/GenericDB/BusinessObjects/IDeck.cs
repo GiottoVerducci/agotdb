@@ -1,5 +1,5 @@
 // GenericDB - A generic card searcher and deck builder library for CCGs
-// Copyright © 2007, 2008, 2009 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -25,8 +25,6 @@ namespace GenericDB.BusinessObjects
 		where TC : class, ICard, new()
 	{
 		List<TCL> CardLists { get; }
-//		Int32 Houses { get; set; }
-//		TC Agenda { get; set; }
 		String RevisionComments { get; set; }
 		DateTime CreationDate { get; }
 		DateTime LastModifiedDate { get; }

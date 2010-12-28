@@ -1,5 +1,5 @@
 // AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -14,8 +14,10 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 // © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Games Inc.
+// © A Game of Thrones CCG 2005 Fantasy Flight Publishing, Inc.
+// © A Game of Thrones LCG 2008 Fantasy Flight Publishing, Inc.
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
+// © Le Trône de Fer JCE 2008 Edge Entertainment
 
 using System;
 using System.Collections.Generic;
@@ -48,6 +50,7 @@ namespace AGoTDB.BusinessObjects
 		private static readonly RowFormattedDataExtractor fRowFormattedDataExtractor =
 			new RowFormattedDataExtractor(ErrataFormat, TraitsFormat, TriggerFormat);
 		public static IDictionary<int, string> CardTypeNames, CardHouseNames;
+		public static IList<string> CardTriggerNames;
 
 		// "Id", "Name", "Type", "House", "Unique", "Traits", "Keywords", "Text", "Doomed", "Endless", "Cost", "Strength",
 		// "Military", "Intrigue", "Power", "War", "Holy", "Noble", "Learned", "Shadow", "Income", "Initiative", "Claim",
@@ -201,7 +204,7 @@ namespace AGoTDB.BusinessObjects
 			Quantity = Int32.Parse(XmlToolbox.GetElementValue(doc, root, "Quantity"), CultureInfo.InvariantCulture);
 		}
 		#endregion
-		
+
 		#region Implementation of IComparable
 		/// <summary>
 		/// Returns the comparison relationship between this card and another card.
@@ -236,7 +239,7 @@ namespace AGoTDB.BusinessObjects
 			return Name.Value.CompareTo(otherAgotCard.Name.Value);
 		}
 		#endregion
-		
+
 		#region Equality
 		/// <summary>
 		/// Compares this card with another card by comparing their universal id and their quantity.
@@ -312,6 +315,7 @@ namespace AGoTDB.BusinessObjects
 					break;
 				case CardType.Attachment:
 					fSummaryInfo = String.Format(CultureInfo.CurrentCulture, "[{0}]", Cost.Value);
+					if (Shadow.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.ShadowVirtueText);
 					if (!string.IsNullOrEmpty(Keywords.Value))
 						fSummaryInfo += " - " + Keywords.Value;
 					break;
@@ -332,6 +336,7 @@ namespace AGoTDB.BusinessObjects
 						fSummaryInfo = String.Format(CultureInfo.CurrentCulture, "[{0}]", Cost.Value);
 					if (!string.IsNullOrEmpty(Traits.Value))
 						fSummaryInfo += " - " + Traits.Value;
+					if (Shadow.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.ShadowVirtueText);
 					if (!string.IsNullOrEmpty(Keywords.Value))
 						fSummaryInfo += " - " + Keywords.Value;
 					break;
@@ -342,6 +347,7 @@ namespace AGoTDB.BusinessObjects
 					fSummaryInfo += (Initiative.Value.IsNonzero()) ? String.Format(CultureInfo.CurrentCulture, "<{0}>", Initiative.Value) : "   ";
 					if (!string.IsNullOrEmpty(Traits.Value))
 						fSummaryInfo += " - " + Traits.Value;
+					if (Shadow.Value) fSummaryInfo += String.Format(" [{0}]", Resource1.ShadowVirtueText);
 					if (!string.IsNullOrEmpty(Keywords.Value))
 						fSummaryInfo += " - " + Keywords.Value;
 					break;
@@ -566,10 +572,12 @@ namespace AGoTDB.BusinessObjects
 				posBegin = Math.Max(text.Substring(0, posEnd).LastIndexOf("\n"),
 					Math.Max(text.Substring(0, posEnd).LastIndexOf("("),
 						Math.Max(text.Substring(0, posEnd).LastIndexOf("«"),
-							text.Substring(0, posEnd).LastIndexOf("\"")))) + 1;
+							Math.Max(text.Substring(0, posEnd).LastIndexOf("“"),
+								text.Substring(0, posEnd).LastIndexOf("\""))))) + 1;
 
-				if (((posBegin != 0) && (text[posBegin - 1] == '(')) || // we do not want to bold the text (it's probably a "limit:" sequence)
-						(text[posEnd - 1] == ' ')) // or is not a trigger
+				if (((posBegin != 0) && (text[posBegin - 1] == '(')) // we do not want to bold the text (it's probably a "limit:" sequence)
+						|| (text[posEnd - 1] == ' ') // or is not a trigger
+						|| CardTriggerNames.All(t => posEnd < t.Length || text.Substring(posEnd - t.Length, t.Length) != t))
 					formattedText.Add(new FormattedText(text.Substring(0, posEnd + 1)));
 				else
 				{

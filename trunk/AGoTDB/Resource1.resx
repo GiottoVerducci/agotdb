@@ -223,7 +223,7 @@
     <value>POW</value>
   </data>
   <data name="ProvidedGoldText" xml:space="preserve">
-    <value>GOLD</value>
+    <value>INCOME</value>
   </data>
   <data name="ProvidedInfluenceText" xml:space="preserve">
     <value>INFLUENCE</value>
