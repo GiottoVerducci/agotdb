@@ -634,6 +634,11 @@ namespace AGoTDB.Forms
 			}
 			if (card.House.Value != (int)AgotCard.CardHouse.Neutral && (deck.Houses & card.House.Value) == 0)
 				result.ForeColor = Color.OrangeRed;
+			if (card.Banned != null && card.Banned.Value)
+			{
+				result.ForeColor = Color.White;
+				result.BackColor = Color.Red;
+			}
 			return result;
 		}
 		#endregion

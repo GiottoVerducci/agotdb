@@ -288,4 +288,7 @@
   <data name="SeparatorText" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="BannedText" xml:space="preserve">
+    <value>BANNED IN TOURNAMENT</value>
+  </data>
 </root>
