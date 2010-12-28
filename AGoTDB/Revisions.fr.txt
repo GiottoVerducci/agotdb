@@ -1,0 +1,209 @@
+Beta 0.718 (28 décembre 2010)
+ - Updated copyrights.
+ - Updated software version to 0.718
+ - Added English database.
+ - Bug fix: the trigger formatting wouldn't work properly in English.
+ - Bug fix: the shadow crest wouldn't appear in the deck builder on non-character cards.
+ - Localization fix: changed GOLD to INCOME
+Beta 0.717 (21 novembre 2010)
+ - Ajout du chapitre 4 de Fraternité sans Bannière "Le Chant du Silence"
+ - Ajout de l'extension "Rois de l'Orage"
+ - Cartes rééditées non autorisées en LCG: Marya Mervault, Festin ou famine et Sladhor Saan
+ - Ajout de la FAQ anglaise
+
+Beta 0.716 (15 octobre 2010)
+ - Ajout du chapitre 3 de Fraternité sans Bannière "Montagne de la Lune"
+ - Correction d'erreurs sur la base
+
+Beta 0.715 (27 septembre 2010)
+ - Ajout du chapitre 2 de Fraternité sans Bannière "Rituels de R'llhor"
+ - Correction d'erreurs sur la base
+
+Beta 0.714 (7 septembre 2010)
+ - Ajout du chapitre 1 de Fraternité sans Bannière "Le cadeau D'Ilyrio"
+
+Beta 0.713 (18 juillet 2010)
+ - Ajout du chapitre 6 de Défenseurs du Nord "Le Retour des Autres"
+
+Beta 0.712 (30 juin 2010)
+ - Ajout de l'extension "Seigneurs de l'Hiver"
+
+Beta 0.711 (27 juin 2010)
+ - Ajout du chapitre 5 de Défenseurs du Nord "Un Roi dans le Nord"
+
+Beta 0.710 (24 mai 2010)
+ - Ajout du chapitre 4 de Défenseurs du Nord "La Horde de Sauvageons"
+
+Beta 0.709 (14 avril 2010)
+ - Ajout du chapitre 3 de Défenseurs du Nord "Une épée dans les Ténèbres"
+ - Correction d'erreurs sur la base. Merci Caranud :)
+
+Beta 0.708 (4 avril 2010)
+ - Ajout du chapitre 2 de Défenseurs du Nord "Au-delà du Mur"
+ - Ajout de la derniere FAQ 1.4 VO
+ - Correction d'erreurs sur la base
+
+Beta 0.707 (6 mars 2010)
+ - Ajout du chapitre 1 de Défenseurs du Nord "Loups du Nord"
+
+Beta 0.706 (21 février 2010)
+ - Ajout de la gestion de plusieurs agenda
+
+Beta 0.705 (21 decembre 2009)
+ - Ajout de l'extension "Princes du Soleil"
+
+Beta 0.704 (12 novembre 2009)
+ - Ajout du chapitre 6 de ¨Port-Real "La bataille de la Néra"
+
+Beta 0.703 (18 octobre 2009)
+ - Ajout du chapitre 5 de Port-Réal "Secrets d'espion"
+
+Beta 0.702 (16 septembre 2009)
+ - Ajout du chapitre 4 de Port-Réal "Contes du Donjon Rouge"
+
+Beta 0.701 (22 août 2009)
+ - Ajout du chapitre 3 de Port-Réal "La Tour de la Main"
+ - Ajout de l'extension Rois de la Mer
+ - Ajout de la FAQ LCG 1.3.1
+
+Beta 0.700 (26 juillet 2009)
+ - Refonte interne (utilisation de GenericDB)
+ - Mise à jour de la base de données
+ - Gestion des sections de texte erratées vides
+
+Beta 0.675 (17 juin 2009)
+ - Ajout du chapitre 2 de Port-Réal
+
+Beta 0.674 (28 juin 2009)
+ - Correction Bug 4 : Le simulateur de pioche ne fonctionne plus (version 0.672 BETA)
+
+Beta 0.673 (17 juin 2009)
+ - Ajout du chapitre 1 de Port-Réal
+ - Ajout de la vertu Ombre
+
+Beta 0.672 (11 mai 2009)
+ - Refactoring
+ - Préparation pour gestion multi deck lists (pour l'agenda Baratheon par exemple) 
+ - Sécurisation des requêtes (en cours)
+ - Correction Bug 1 : Impossible de fermer le programme 
+ - Correction Bug 2 : Problème de compatibilité des decks 
+ - Correction Bug 3 : Les cartes de réserve sont enregistrées dans la liste principale à la place
+
+Beta 0.671 (15 avril 2009)
+ - Gestion des versions de la base de données qui sont désormais séparées de la version du logiciel
+ - Suppression des doublons du core set avec les anciennes éditions (pour les cartes qui n'ont pas changées)
+
+Beta 0.670 (11 avril 2009)
+ -Ajout du pack 6 du Temps des Corbeaux (Armées dispersées)
+
+Beta 0.669 (1 mars 2009)
+ -Ajout du pack 4 et 5 du Temps des Corbeaux (le Cri du Corbeau et Réfigiés de Guerre)
+ -Ré-organisation des cartes dans la base
+
+Beta 0.668 ( février 2009)
+ -Ajout des packs 2 et 3 du Temps des Corbeaux (Vent de l'hiver et Changement de saison)
+
+Beta 0.667 (20 février 2009)
+ - Ajout du pack 1 du Temps des Corbeaux (Chant d'Eté)
+ - Correction d'erreur
+
+Beta 0.666 (20 février 2009)
+ - Ajout du packs 6 du Fracas des Armes (Ralliement des bannières)
+ - Ajout du Core Set
+ - Ajout de l'errat Jaqen H'ghar (Chapitre 3 : Liens sacrés)
+
+Beta 0.665 (15 novembre 2008)
+ - Correction d'un bug lors du chargement de deck d'un fichier XML invalide
+ - Ajout de la licence GNU GPL v3
+ - Nettoyage du code
+ - Gestion des cartes inexistantes
+
+Beta 0.664 (1er août 2008)
+ - Ajout du packs 5 du Fracas des Armes (La Bataille du Gué aux Rubis)
+ - Ajout de la promo Quaithe de l'Ombre (merci à Nickel)
+ - Corrections d'erreurs (merci à Comm)
+ - Correction d'un bug lorsqu'un errata était appliqué à une section contenant ':'
+ - Intégration des erratas de la FAQ 6.0 à 6.1.2
+
+Beta 0.663 (15 juin 2008)
+ - Ajout des packs 3 & 4 du Fracas des Armes (Liens sacrés et Batailles épiques)
+ - En cas d'erreur lors de la conversion de la base, un message affiche la carte concernée.
+
+Beta 0.662 (17 mai 2008)
+ - Ajout d'un bouton "Suivant" pour la recherche rapide
+ - Ajout d'un filtre "Personnages X uniquement"
+
+Beta 0.661 (29 avril 2008)
+ - Correction d'erreurs dans certaines cartes (merci Madmojo)
+ - La base avancée de données n'était pas à jour
+
+Beta 0.66 (27 avril 2008)
+ - Ajout des dernières cartes promotionnelles
+ - L'utilisation de certains caractères dans la recherche provoquait des erreurs
+ - Ajout de hints sur certains contrôles
+ - Gestion de la réserve (celle-ci peut servir de second deck pour le traité Frères ennemis)
+ - Le nombre total de cartes dans le deck et la réserve est affiché (les complots ne sont pas comptabilisés dans ce total)
+ - Le support Windows 64 bits avait été désactivé accidentellement : il a été rétabli.
+
+Beta 0.65 (5 avril 2008)
+- Ajout du chapitre Anciens Ennemis
+
+Beta 0.64 (9 mars 2008)
+- Gestion des chapitres
+- Finalisation de la fenêtre de tirage des cartes 
+- La recréation de la base AGotEx.mdb échouait si celle-ci n'était pas vide.
+
+Beta 0.63 (29 décembre 2007)
+- Ajout de la fenêtre de tirage des cartes (à finir)
+
+Beta 0.62 (27 décembre 2007)
+- Affichage du résumé des cartes dans l'arbre du deck builder
+- Changement de présentation des colonnes dans la fenêtre principale (fusion des colonnes maison, la colonne type est présentée sous forme de texte)
+- Quand la fenêtre de sélection des cartes est détachée, affichage du critère de sélection dans la barre de titre
+- Un double-clic sur l'entête de la colonne n'ajoute plus la carte sélectionnée
+- Correction du bug introduit dans la 0.61 qui provoquait une erreur lors de l'ajout d'une carte alors que le deck builder n'était pas affiché
+- Les cartes étaient toujours affichées comme Neutre dans leur description
+- Les cartes sont affichées au lancement par ordre alphabétique
+
+Beta 0.61 (15 décembre 2007)
+- Correction d'un bug d'affichage concernant les bonus d'influence
+- Le menu popup n'était pas toujours grisé dans le deck builder, notamment quand il n'y avait pas de carte
+- Ajout d'un message dans la fenêtre du deck builder pour indiquer comment ajouter des cartes
+- Support Windows 64 bits
+
+Beta 0.6 (9 décembre 2007)
+- Changement de base : plus rapide, plus de flexibilité concernant la gestion des errata et traits
+- Coloration des erratas en rouge
+- Deck builder avec gestion des révisions
+
+Beta 0.5 (3 septembre 2007)
+- Correction du bug remettant la propriété Image du fichier de configuration à vrai à chaque lancement
+- Correction du filtre sur les coûts/revenus
+- Ajout des identifiants universels des cartes
+- Ebauche de la fenêtre de deck-building; ajout automatique des cartes au deck par double-clic
+
+Beta 0.4 (15 juillet 2007)
+ - Ajout des menus servant de raccourcis pour filtrer les "ne peut être tué" et "ne peut être défaussé"
+ - Correction de la mise en valeur des déclencheurs
+ - Ajout de l'icône de l'exécutable
+ - Ajout d'un fichier de configuration
+ - Possibilité de désactiver l'affichage des images via le fichier de configuration
+
+Beta 0.3 (27 janvier 2007)
+ - Ajout du mot-clef "limité" 
+ - Correction d'un bug dans le remplissage des listes de checkbox
+ - Un clic gauche sur une boîte de sélection condensée la développe immédiatement
+ - Un clic droit sur une boîte de sélection condensée la remet à zéro (tous les items deviennent décochés)
+ - Le filtre d'or permet aussi de filtrer le revenu des cartes (notamment des complots)
+ - "Pas d'attachement" renvoie également "Pas d'attachement sauf..."
+ - Les traits sont affichés en italique dans le texte de la carte
+ - Ajout d'une fonction d'enregistrement de la sélection de cartes au format texte
+ - Ajout d'une fonction pour conserver le résultat d'une recherche dans une fenêtre séparée
+ 
+Beta 0.2 (1er janvier 2007)
+ - Tous les modes de recherche fonctionnent à présent
+ - Corrections dans la base de données de champs NULL au lieu de 'No'
+ - Amélioration de l'interface avec un délai de déroulement des boîtes de sélection condensées. 
+ 
+Beta 0.1 (29 décembre 2006)
+ - Version initiale
