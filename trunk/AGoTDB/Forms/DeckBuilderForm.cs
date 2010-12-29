@@ -632,7 +632,7 @@ namespace AGoTDB.Forms
 				result.ForeColor = Color.White;
 				result.BackColor = Color.Gray;
 			}
-			if (card.House.Value != (int)AgotCard.CardHouse.Neutral && (deck.Houses & card.House.Value) == 0)
+			if (card.House != null && card.House.Value != (int)AgotCard.CardHouse.Neutral && (deck.Houses & card.House.Value) == 0)
 			{
 				result.ForeColor = Enlighten(Color.OrangeRed, result.BackColor);
 			}

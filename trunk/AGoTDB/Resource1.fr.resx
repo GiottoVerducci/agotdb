@@ -288,4 +288,7 @@
   <data name="BannedText" xml:space="preserve">
     <value>BANNI EN TOURNOI</value>
   </data>
+  <data name="UnknownCardType" xml:space="preserve">
+    <value>Type de carte inconnu</value>
+  </data>
 </root>
