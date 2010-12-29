@@ -176,7 +176,7 @@ namespace GenericDB.DataAccess
 				{
 					case PositiveDataType.LikeValue: subresult = String.Format(" ({0}{1} LIKE '%{2}%') ", prefix, filter.Column, EscapeSqlCharacters(filter.ShortName)); break;
 					case PositiveDataType.ExactValue: subresult = String.Format(" ({0}{1} = {2}) ", prefix, filter.Column, EscapeSqlCharacters(filter.ShortName)); break;
-					case PositiveDataType.Integer: subresult = String.Format(" (NOT(ISNULL({0}{1}))) ", prefix, filter.Column); break;
+					case PositiveDataType.Integer: subresult = String.Format(" ({0}NOT(ISNULL({1}))) ", prefix, filter.Column); break;
 					case PositiveDataType.Yes: subresult = String.Format(" ({0} = {1}) ", filter.Column, expectedYes); break;
 					case PositiveDataType.KeywordValue:
 						string value = filter.ToString();
