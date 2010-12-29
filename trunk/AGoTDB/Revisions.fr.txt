@@ -1,7 +1,6 @@
 Beta 0.720 (29 décembre 2010)
-  - Deckbuilder: improved the contrast between the forecolor and the backcolor of shadow cards
-  - Database fix: the power icons were not present
-  - Bug fix: exclusion rules for integers would not work.
+  - Deckbuilder: amélioration du contraste entre la couleur du texte et la couleur du fond des cartes Ombre
+  - Correction: les règles d'exclusion pour les nombres ne marchaient pas correctement
 
 Beta 0.719 (29 décembre 2010)
   - Ajout de la colonne Banned
