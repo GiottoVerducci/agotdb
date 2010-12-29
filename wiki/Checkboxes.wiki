@@ -7,15 +7,19 @@ AGoTDB uses a custom expandable 3-state checkboxes list.
 = Details =
 
 Checkboxes are initially in a compact state.
+
 http://agotdb.googlecode.com/svn/wiki/images/checkbox-compact-nochoice.png
 
 Hovering with the mouse over it will expand the list, displaying all checkboxes.
+
 http://agotdb.googlecode.com/svn/wiki/images/checkbox-expanded-nochoice.png
 
 You may include choices by left-clicking in the checkbox, making a green "+" sign appear, and exclude choices by right-clicking in it, making a red "-" sign appear. You may cycle through "+", "-" and unselected by clicking many times in the same checkbox.
+
 http://agotdb.googlecode.com/svn/wiki/images/checkbox-expanded-choices.png
 
 As soon as the mouse leaves the expanded chechbox list area, it collapses back to a compact state, showing a brief summary of the selected choices.
+
 http://agotdb.googlecode.com/svn/wiki/images/checkbox-compact-choices.png
 
 The choices made are taken into account immediately, displaying the new results in the result windows.
@@ -23,4 +27,5 @@ The choices made are taken into account immediately, displaying the new results 
 You may clear all the choices of the checkbox by right-clicking on it before it expands.
 
 Choices within a checkbox list are inclusive. For example, the following selection will perform a search on cards that are either locations or attachments, but are not plots nor agendas. 
+
 http://agotdb.googlecode.com/svn/wiki/images/checkbox-expanded-choices2.png
