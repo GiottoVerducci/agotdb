@@ -27,7 +27,7 @@ namespace AGoTDB.BusinessObjects
 	public static class ApplicationSettings
 	{
 		public static readonly string ApplicationName = "AGoTDB";
-		public static readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 719, 0);
+		public static readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 720, 0);
 		public static AgotDatabaseManager DatabaseManager { get; set; }
 	}
 }
