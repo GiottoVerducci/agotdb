@@ -8,7 +8,7 @@
 
 *AGotDB* allows you to:
   * search card by multiple criteria:
-    * checkboxes with multiple include and exclude choices:
+    * [Checkboxes checkboxes] with multiple include and exclude choices:
       * type of card (agenda, character, plot, etc.)
       * house
       * whether it provides income, initiative or influence
