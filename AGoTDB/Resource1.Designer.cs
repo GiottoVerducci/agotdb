@@ -520,6 +520,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown card type.
+        /// </summary>
+        internal static string UnknownCardType {
+            get {
+                return ResourceManager.GetString("UnknownCardType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View - {0}.
         /// </summary>
         internal static string ViewFormTitle {

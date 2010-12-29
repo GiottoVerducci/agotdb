@@ -291,4 +291,7 @@
   <data name="BannedText" xml:space="preserve">
     <value>BANNED IN TOURNAMENT</value>
   </data>
+  <data name="UnknownCardType" xml:space="preserve">
+    <value>Unknown card type</value>
+  </data>
 </root>
