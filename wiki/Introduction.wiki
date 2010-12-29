@@ -43,6 +43,6 @@
     
 = Requirements =
 
-*AGoTDB* only works on Windows systems (either 32 or 64-bits) with the 3.5 .Net framework installed.
+*AGoTDB* only works on *Windows* systems (either 32 or 64-bits) with the *3.5 .Net framework* installed.
 
-If you use Windows XP, please make sure you updated it recently.
+If you run Windows XP, please make sure you updated it recently.
