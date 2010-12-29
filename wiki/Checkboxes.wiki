@@ -24,7 +24,7 @@ http://agotdb.googlecode.com/svn/wiki/images/checkbox-compact-choices.png
 
 The choices made are taken into account immediately, displaying the new results in the result windows.
 
-You may clear all the choices of the checkbox by right-clicking on it before it expands. A cleared list is ignored when filtering the results.
+You may *clear all the choices* of the checkbox by right-clicking on it before it expands. A cleared list is ignored when filtering the results.
 
 Choices within a checkbox list may use a "*or*" or "*and*" condition, depending on the checkbox. 
 
