@@ -633,7 +633,9 @@ namespace AGoTDB.Forms
 				result.BackColor = Color.Gray;
 			}
 			if (card.House.Value != (int)AgotCard.CardHouse.Neutral && (deck.Houses & card.House.Value) == 0)
-				result.ForeColor = Color.OrangeRed;
+			{
+				result.ForeColor = Enlighten(Color.OrangeRed, result.BackColor);
+			}
 			if (card.Banned != null && card.Banned.Value)
 			{
 				result.ForeColor = Color.White;
@@ -641,6 +643,19 @@ namespace AGoTDB.Forms
 			}
 			return result;
 		}
+
+		private static Color Enlighten(Color color, Color backgroundColor)
+		{
+			if (backgroundColor.GetBrightness() * color.GetBrightness() < 0.5f)
+			{
+				return Color.FromArgb(color.A,
+					Math.Min(color.R * 2, 255),
+					Math.Min(color.G * 2, 255),
+					Math.Min(color.B * 2, 255));
+			}
+			return color;
+		}
+
 		#endregion
 
 		#region Deck tree view drawing
