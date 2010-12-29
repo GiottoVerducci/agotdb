@@ -24,8 +24,27 @@ http://agotdb.googlecode.com/svn/wiki/images/checkbox-compact-choices.png
 
 The choices made are taken into account immediately, displaying the new results in the result windows.
 
-You may clear all the choices of the checkbox by right-clicking on it before it expands.
+You may clear all the choices of the checkbox by right-clicking on it before it expands. A cleared list is ignored when filtering the results.
 
-Choices within a checkbox list are inclusive. For example, the following selection will perform a search on cards that are either locations or attachments, but are not plots nor agendas. 
+Choices within a checkbox list may be inclusive or exclusive, depending on the checkbox. 
+
+The following checkbox lists are inclusive:
+  * card type
+  * house
+  * trigger
+  * expansion set
+For example, the following selection will perform a search on cards that are either locations or attachments, but are not plots nor agendas. 
 
 http://agotdb.googlecode.com/svn/wiki/images/checkbox-expanded-choices2.png
+
+The following checkbox lists are exclusive:
+  * provides gold / income / influence
+  * mecanism
+  * icon
+  * virtue
+  * keyword
+For example, the following selection will perform a search on cards that have the military and intrigue icon (and may have a power icon or not).
+
+http://agotdb.googlecode.com/svn/wiki/images/checkbox-expanded-exclusive-choices.png
+
+In both case, "-" choices are discriminating.
