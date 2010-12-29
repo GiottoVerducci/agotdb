@@ -7,4 +7,4 @@ AGoTDB uses a custom expandable 3-state checkboxes list.
 = Details =
 
 Checkboxes are initially in a compact state.
-http://code.google.com/p/agotdb/wiki/images/checkbox-compact-nochoice.png
+http://agotdb.googlecode.com/svn/wiki/images/checkbox-compact-nochoice.png
