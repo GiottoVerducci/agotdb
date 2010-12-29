@@ -1,0 +1,48 @@
+#summary Introduction
+
+= Introduction =
+
+*AGoTDB* is a powerful tool that allows you to search any card using advanced criteria and build decks.
+
+= Details =
+
+*AGotDB* allows you to:
+  * search card by multiple criteria:
+  ** checkboxes with multiple include and exclude choices (see details):
+  *** type of card (agenda, character, plot, etc.)
+  *** house
+  *** whether it provides income, initiative or influence
+      *** mecanism (unique, endless, doomed)
+      *** icons
+      *** virtues
+      *** keywords (deadly, reknown, immune to..., deathbound, etc. )
+      *** trigger (any phase, response, etc.)
+      *** set (with chapters of the same set regrouped as one)
+    ** textbox for entering custom filters (see details):
+      ** text box
+      ** traits
+      ** name
+    ** ranges (see details):  
+      *** gold cost range (income range for plots)
+      *** initiative range for plots
+      *** claim range
+    ** additional filters (see details)
+  * make parallel searches using multiple windows (see details)
+  * see the cards full details, including errata (in red) (see details)
+  * export search results as text (see details)
+  * perform quick search on a partial card name (see details)
+  
+  * create decks with revisions (see details)
+    ** add and remove cards to the main deck or any additionnal deck list such as a sideboard
+    ** create multiple deck lists for decks such as using Brothers in Arms
+    ** set House(s) for the deck, including Neutral
+    ** set the running Agendas
+    ** define the deck details: name, author etc.
+    ** quickly see the icons and price spread
+    ** perform some drawing tests
+    
+= Requirements =
+
+*AGoTDB* only works on Windows systems (either 32 or 64-bits) with the 3.5 .Net framework installed.
+
+If you use Windows XP, please make sure you updated it recently.
