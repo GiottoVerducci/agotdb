@@ -1,10 +1,24 @@
+Beta 0.720 (29 décembre 2010)
+  - Deckbuilder: improved the contrast between the forecolor and the backcolor of shadow cards
+  - Database fix: the power icons were not present
+  - Bug fix: exclusion rules for integers would not work.
+
+Beta 0.719 (29 décembre 2010)
+  - Ajout de la colonne Banned
+  - Ajout de la table Pattern (utilisée pour récupérer des informations dans la langue courante, par exemple pour la détection de cartes hors-Maison).
+  - Deck builder: Changement de l'affichage des cartes fournissant de l'influence ou de l'initiative
+  - Deck builder: Les cartes ombres sont maintenant affichées en premier et avec un fond gris.
+  - Deck builder: Les cartes hors-Maison sont maintenant affichées en orange
+  - Deck builder: L'affichage du nombre de cartes dans le deck (affiché dans l'onglet) est cohérent avec les autres nombres.
+  - Deck builder: "Aucune maison" est équivalent à la maison Neutre (l'"agenda" faction neutre peut toujours être sélectionné par ailleurs).
+
 Beta 0.718 (28 décembre 2010)
- - Updated copyrights.
- - Updated software version to 0.718
- - Added English database.
- - Bug fix: the trigger formatting wouldn't work properly in English.
- - Bug fix: the shadow crest wouldn't appear in the deck builder on non-character cards.
- - Localization fix: changed GOLD to INCOME
+ - Mise à jour des copyrights.
+ - Ajout de la base de données anglaise.
+ - Correction: le formattage des déclencheurs ne marchait pas correctement en anglais.
+ - Correction: la vertu Ombre n'apparaissait pas dans le deckbuilder sur les cartes non-personnages.
+ - Correction de localisation EN : changement de GOLD à INCOME
+
 Beta 0.717 (21 novembre 2010)
  - Ajout du chapitre 4 de Fraternité sans Bannière "Le Chant du Silence"
  - Ajout de l'extension "Rois de l'Orage"
@@ -83,10 +97,10 @@ Beta 0.673 (17 juin 2009)
 
 Beta 0.672 (11 mai 2009)
  - Refactoring
- - Préparation pour gestion multi deck lists (pour l'agenda Baratheon par exemple) 
+ - Préparation pour gestion multi deck lists (pour l'agenda Baratheon par exemple)
  - Sécurisation des requêtes (en cours)
- - Correction Bug 1 : Impossible de fermer le programme 
- - Correction Bug 2 : Problème de compatibilité des decks 
+ - Correction Bug 1 : Impossible de fermer le programme
+ - Correction Bug 2 : Problème de compatibilité des decks
  - Correction Bug 3 : Les cartes de réserve sont enregistrées dans la liste principale à la place
 
 Beta 0.671 (15 avril 2009)
@@ -150,7 +164,7 @@ Beta 0.65 (5 avril 2008)
 
 Beta 0.64 (9 mars 2008)
 - Gestion des chapitres
-- Finalisation de la fenêtre de tirage des cartes 
+- Finalisation de la fenêtre de tirage des cartes
 - La recréation de la base AGotEx.mdb échouait si celle-ci n'était pas vide.
 
 Beta 0.63 (29 décembre 2007)
@@ -190,7 +204,7 @@ Beta 0.4 (15 juillet 2007)
  - Possibilité de désactiver l'affichage des images via le fichier de configuration
 
 Beta 0.3 (27 janvier 2007)
- - Ajout du mot-clef "limité" 
+ - Ajout du mot-clef "limité"
  - Correction d'un bug dans le remplissage des listes de checkbox
  - Un clic gauche sur une boîte de sélection condensée la développe immédiatement
  - Un clic droit sur une boîte de sélection condensée la remet à zéro (tous les items deviennent décochés)
@@ -199,11 +213,11 @@ Beta 0.3 (27 janvier 2007)
  - Les traits sont affichés en italique dans le texte de la carte
  - Ajout d'une fonction d'enregistrement de la sélection de cartes au format texte
  - Ajout d'une fonction pour conserver le résultat d'une recherche dans une fenêtre séparée
- 
+
 Beta 0.2 (1er janvier 2007)
  - Tous les modes de recherche fonctionnent à présent
  - Corrections dans la base de données de champs NULL au lieu de 'No'
- - Amélioration de l'interface avec un délai de déroulement des boîtes de sélection condensées. 
- 
+ - Amélioration de l'interface avec un délai de déroulement des boîtes de sélection condensées.
+
 Beta 0.1 (29 décembre 2006)
  - Version initiale
