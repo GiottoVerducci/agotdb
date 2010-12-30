@@ -1,3 +1,9 @@
+Beta 0.721 (30 décembre 2010)
+  - Ajout de la colonne LCG et ajout du filtre "Extensions JCE uniquement" dans le menu Filtres
+  - Base de données : des accents étaient manquant sur des lettres capitales
+  - Base de données : correction de la table TableSet de la base de données étendue
+  - Correction : Deckbuilder : le chargement d'une carte inconnue provoquait des erreurs
+
 Beta 0.720 (29 décembre 2010)
   - Deckbuilder: amélioration du contraste entre la couleur du texte et la couleur du fond des cartes Ombre
   - Correction: les règles d'exclusion pour les nombres ne marchaient pas correctement
