@@ -124,6 +124,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crests.
+        /// </summary>
+        internal static string CrestsText {
+            get {
+                return ResourceManager.GetString("CrestsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current.
         /// </summary>
         internal static string CurrentRevision {
@@ -502,6 +511,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Traits.
+        /// </summary>
+        internal static string TraitsText {
+            get {
+                return ResourceManager.GetString("TraitsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         internal static string TypeText {
@@ -534,15 +552,6 @@ namespace AGoTDB {
         internal static string ViewFormTitle {
             get {
                 return ResourceManager.GetString("ViewFormTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtues.
-        /// </summary>
-        internal static string VirtuesText {
-            get {
-                return ResourceManager.GetString("VirtuesText", resourceCulture);
             }
         }
         

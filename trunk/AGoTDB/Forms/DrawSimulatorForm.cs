@@ -59,6 +59,7 @@ namespace AGoTDB.Forms
 		public DrawSimulatorForm()
 		{
 			InitializeComponent();
+			lbHand.DisplayMember = "Description";
 		}
 
 		/// <summary>

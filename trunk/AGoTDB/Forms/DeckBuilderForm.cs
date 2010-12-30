@@ -156,14 +156,7 @@ namespace AGoTDB.Forms
 			rtbCardText.Clear();
 			if (!IsCardNode(e.Node) || (e.Node.Tag == null))
 				return;
-
-			var card = (AgotCard)e.Node.Tag;
-			foreach (FormattedText ft in card.ToFormattedString())
-			{
-				rtbCardText.SelectionFont = new Font(rtbCardText.SelectionFont, ft.Format.Style);
-				rtbCardText.SelectionColor = ft.Format.Color;
-				rtbCardText.AppendText(ft.Text);
-			}
+			UpdateCardText((AgotCard)e.Node.Tag);
 		}
 
 		private void DeckBuilderForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -320,6 +313,216 @@ namespace AGoTDB.Forms
 			cardNode.ForeColor = cardNodeInfo.ForeColor;
 			cardNode.BackColor = cardNodeInfo.BackColor;
 		}
+
+		/// <summary>
+		/// Updates the card detail textbox with a given card.
+		/// </summary>
+		private void UpdateCardText(AgotCard card)
+		{
+			rtbCardText.Clear();
+			foreach (FormattedText ft in card.ToFormattedString())
+			{
+				rtbCardText.SelectionFont = new Font(rtbCardText.SelectionFont, ft.Format.Style);
+				rtbCardText.SelectionColor = ft.Format.Color;
+				rtbCardText.AppendText(ft.Text);
+			}
+		}
+
+		private void UpdateStatistics()
+		{
+			rtbStatistics.Clear();
+
+			var types = new AgotCard.CardType[] { AgotCard.CardType.Plot, AgotCard.CardType.Character, AgotCard.CardType.Location, AgotCard.CardType.Attachment, AgotCard.CardType.Event };
+
+			var cardList = fCurrentDeck.CardLists[1];
+
+			var alreadyIntroduced = false;
+			foreach (var type in types)
+			{
+				var traits = GetTraitsDistribution(type, cardList);
+				if (traits.Count > 0)
+				{
+					AddStatsIntroIfNecessary(Resource1.TraitsText, ref alreadyIntroduced);
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
+					rtbStatistics.SelectionColor = Color.Black;
+					rtbStatistics.AppendText(String.Format("{0}: ", AgotCard.CardTypeNames[(int)type]));
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, AgotCard.TraitsFormat.Style);
+					rtbStatistics.SelectionColor = AgotCard.TraitsFormat.Color;
+
+					rtbStatistics.AppendText(String.Join(", ",
+						traits.OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+					rtbStatistics.AppendText("\n");
+				}
+			}
+
+			alreadyIntroduced = false;
+			foreach (var type in types)
+			{
+				var crests = GetCrestsDistribution(type, cardList);
+				if (crests.Count > 0)
+				{
+					AddStatsIntroIfNecessary(Resource1.CrestsText, ref alreadyIntroduced);
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
+					rtbStatistics.SelectionColor = Color.Black;
+					rtbStatistics.AppendText(String.Format("{0}: ", AgotCard.CardTypeNames[(int)type]));
+
+					rtbStatistics.AppendText(String.Join(", ",
+						crests.OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+					rtbStatistics.AppendText("\n");
+				}
+			}
+
+			alreadyIntroduced = false;
+			{
+				var icons = GetIconsDistribution(cardList);
+				if (icons.Count > 0)
+				{
+					AddStatsIntroIfNecessary(Resource1.IconsText, ref alreadyIntroduced);
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
+					rtbStatistics.SelectionColor = Color.Black;
+					rtbStatistics.AppendText(String.Format("{0}:\n", AgotCard.CardTypeNames[(int)AgotCard.CardType.Character]));
+
+					rtbStatistics.AppendText(String.Join("\n",
+						icons.OrderByDescending(kv => kv.Value * 100 + kv.Key.Length).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+					rtbStatistics.AppendText("\n");
+				}
+			}
+
+			alreadyIntroduced = false;
+			foreach (var type in types)
+			{
+				var houses = GetHousesDistribution(type, cardList);
+				if (houses.Count > 0)
+				{
+					AddStatsIntroIfNecessary(Resource1.HouseText, ref alreadyIntroduced);
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
+					rtbStatistics.SelectionColor = Color.Black;
+					rtbStatistics.AppendText(String.Format("{0}:\n", AgotCard.CardTypeNames[(int)type]));
+
+					rtbStatistics.AppendText(String.Join("\n",
+						houses.OrderByDescending(kv => kv.Value * 100 + kv.Key.Length).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+					rtbStatistics.AppendText("\n");
+				}
+			}
+		}
+
+		private void AddStatsIntroIfNecessary(string text, ref bool alreadyIntroduced)
+		{
+			if (!alreadyIntroduced)
+			{
+				rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Underline);
+				rtbStatistics.SelectionColor = Color.Black;
+				rtbStatistics.AppendText("\n" + text + "\n");
+				alreadyIntroduced = true;
+			}
+		}
+
+		private static Dictionary<string, int> GetTraitsDistribution(AgotCard.CardType cardType, AgotCardList cardList)
+		{
+			var result = new Dictionary<string, int>();
+
+			foreach (var c in cardList)
+			{
+				if (c.Type.Value != (int)cardType || String.IsNullOrEmpty(c.Traits.Value))
+					continue;
+
+				foreach (var t in c.Traits.Value.Split('.'))
+				{
+					var current = t.Trim();
+					if (current == "")
+						continue;
+					if (result.ContainsKey(current))
+						result[current]+= c.Quantity;
+					else
+						result.Add(current, c.Quantity);
+				}
+			}
+			return result;
+		}
+
+		private static Dictionary<string, int> GetCrestsDistribution(AgotCard.CardType cardType, AgotCardList cardList)
+		{
+			var result = new Dictionary<string, int> { 
+				{ Resource1.WarVirtueText, 0 }, 
+				{ Resource1.HolyVirtueText, 0 }, 
+				{ Resource1.LearnedVirtueText, 0 }, 
+				{ Resource1.NobleVirtueText, 0 }, 
+				{ Resource1.ShadowVirtueText, 0 }
+			};
+
+			foreach (var c in cardList)
+			{
+				if (c.Type.Value != (int)cardType)
+					continue;
+				if (c.War != null && c.War.Value)
+					result[Resource1.WarVirtueText] += c.Quantity;
+				if (c.Holy != null && c.Holy.Value)
+					result[Resource1.HolyVirtueText] += c.Quantity;
+				if (c.Learned != null && c.Learned.Value)
+					result[Resource1.LearnedVirtueText] += c.Quantity;
+				if (c.Noble != null && c.Noble.Value)
+					result[Resource1.NobleVirtueText] += c.Quantity;
+				if (c.Shadow != null && c.Shadow.Value)
+					result[Resource1.ShadowVirtueText] += c.Quantity;
+			}
+
+			return (from kv in result
+					where kv.Value > 0
+					select kv).ToDictionary(kv => kv.Key, kv => kv.Value);
+		}
+
+		private static Dictionary<string, int> GetIconsDistribution(AgotCardList cardList)
+		{
+			var result = new Dictionary<string, int>();
+
+			var iconList = new List<string>();
+
+			foreach (var c in cardList)
+			{
+				if (c.Type.Value != (int)AgotCard.CardType.Character)
+					continue;
+				bool hasMil = c.Military != null && c.Military.Value;
+				bool hasInt = c.Intrigue != null && c.Intrigue.Value;
+				bool hasPow = c.Power != null && c.Power.Value;
+
+				iconList.Clear();
+				if (hasMil) iconList.Add(Resource1.MilitaryIconAbrev);
+				if (hasInt) iconList.Add(Resource1.IntrigueIconAbrev);
+				if (hasPow) iconList.Add(Resource1.PowerIconAbrev);
+
+				var key = String.Join(" ", iconList.ToArray());
+				if (result.ContainsKey(key))
+					result[key] += c.Quantity;
+				else
+					result.Add(key, c.Quantity);
+			}
+
+			return result;
+		}
+
+		private static Dictionary<string, int> GetHousesDistribution(AgotCard.CardType cardType, AgotCardList cardList)
+		{
+			var result = new Dictionary<string, int>();
+
+			var housesLists = new List<string>();
+
+			foreach (var c in cardList)
+			{
+				if (c.Type.Value != (int)cardType || c.House == null ||c.House.Value == (int)AgotCard.CardHouse.Neutral)
+					continue;
+
+				var house = AgotCard.GetHouseName(c.House.Value);
+
+				if (result.ContainsKey(house))
+					result[house] += c.Quantity;
+				else
+					result.Add(house, c.Quantity);
+			}
+
+			return result;
+		}
+
+
 		#endregion
 
 		#region Controls / Versioned deck synchronization
@@ -358,6 +561,7 @@ namespace AGoTDB.Forms
 			treeView.Deck = deck;
 			treeView.EndUpdate();
 			UpdateTabText(treeView);
+			UpdateStatistics();
 		}
 
 		private void UpdateVersionedDeckWithControls()
@@ -525,6 +729,7 @@ namespace AGoTDB.Forms
 			root.Expand();
 			treeView.EndUpdate();
 			UpdateTabText(treeView); // updates the card count (excluding plots)
+			UpdateStatistics();
 		}
 
 		private void SubtractCardFromTreeView(AgotCardTreeView treeView, AgotCard card, bool wasLastCopy)
@@ -575,6 +780,7 @@ namespace AGoTDB.Forms
 				treeView.Nodes.Add(treeView.NodeInfo);
 			treeView.EndUpdate();
 			UpdateTabText(treeView); // updates the card count (excluding plots)
+			UpdateStatistics();
 		}
 
 		/// <summary>

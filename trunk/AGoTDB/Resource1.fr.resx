@@ -255,7 +255,7 @@
   <data name="ViewFormTitle" xml:space="preserve">
     <value>Vue - {0}</value>
   </data>
-  <data name="VirtuesText" xml:space="preserve">
+  <data name="CrestsText" xml:space="preserve">
     <value>Vertus</value>
   </data>
   <data name="WarnDeckModified" xml:space="preserve">
@@ -290,5 +290,8 @@
   </data>
   <data name="UnknownCardType" xml:space="preserve">
     <value>Type de carte inconnu</value>
+  </data>
+  <data name="TraitsText" xml:space="preserve">
+    <value>Traits</value>
   </data>
 </root>
