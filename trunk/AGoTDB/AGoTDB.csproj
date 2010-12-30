@@ -170,13 +170,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="agotdb.ico" />
-    <Content Include="Databases\AGoT - English.mdb">
+    <Content Include="Databases\AGoT - EN.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Databases\AGoT - FR.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Databases\AGoTEx - English.mdb">
+    <Content Include="Databases\AGoTEx - EN.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Databases\AGoTEx - FR.mdb">

@@ -179,5 +179,11 @@ namespace AGoTDB.DataAccess
 			return GetResultFromRequest(
 				string.Format("SELECT * FROM {0}", TableNamePattern));
 		}
+
+		public DataTable GetExpansionSets()
+		{
+			return GetResultFromRequest(
+				string.Format("SELECT * FROM {0}", TableNameSet));
+		}
 	}
 }
