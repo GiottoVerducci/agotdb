@@ -93,8 +93,9 @@ namespace GenericDB.DataAccess
 		}
 
 		/// <summary>
-		/// Returns a filter (subquery) reflecting the state of a checked box list. A logical
-		/// operator "OR" or "AND" must be provided in order to know if the choices in the
+		/// Returns a filter (subquery) reflecting the state of a checked box list.
+		/// All items must be DbFilter objects.
+		/// A logical operator "OR" or "AND" must be provided in order to know if the choices in the
 		/// checked box list must be all present ("AND") or if any combination of them is sufficient ("OR").
 		/// The value1 field of the object returned is used in SQL queries, the  value2 contains the query
 		/// using an user-understandable form.
@@ -105,17 +106,43 @@ namespace GenericDB.DataAccess
 		/// <returns>A query which can be used in a SQL query</returns>
 		public static Query GetFilterFromExtendedCheckedListBox(ExtendedCheckedListBox clb, string logicalOperator, PositiveDataType positiveDataType)
 		{
+			return GetFilterFromExtendedCheckedListBox(clb, logicalOperator, positiveDataType, null, null);
+		}
+
+		/// <summary>
+		/// Returns a filter (subquery) reflecting the state of a checked box list, augmented with
+		/// additional included or excluded items. All items must be DbFilter objects.
+		/// A logical operator "OR" or "AND" must be provided in order to know if the choices in the
+		/// checked box list must be all present ("AND") or if any combination of them is sufficient ("OR").
+		/// The value1 field of the object returned is used in SQL queries, the  value2 contains the query
+		/// using an user-understandable form.
+		/// </summary>
+		/// <param name="clb">The checked box list</param>
+		/// <param name="logicalOperator">Indicates the combination between the choices</param>
+		/// <param name="positiveDataType">The type of result expected to make a selection positive</param>
+		/// <param name="additionalIncludedItems">Additional included items.</param>
+		/// <param name="additionalExcludedItems">Additional excluded items.</param>
+		/// <returns>A query which can be used in a SQL query</returns>
+		public static Query GetFilterFromExtendedCheckedListBox(ExtendedCheckedListBox clb, string logicalOperator, PositiveDataType positiveDataType, IList<DbFilter> additionalIncludedItems, IList<DbFilter> additionalExcludedItems)
+		{
 			var result = new Query();
 
 			// included values
-			result += GetFilterFromItems(clb.GetItemsByState(CheckState.Checked), true, logicalOperator, positiveDataType);
+			var includedValues = clb.GetItemsByState(CheckState.Checked).ConvertAll<DbFilter>(i => (DbFilter)i);
+			if (additionalIncludedItems != null)
+				includedValues.AddRange(additionalIncludedItems);
+			result += GetFilterFromItems(includedValues, true, logicalOperator, positiveDataType);
 			// excluded values
-			result += GetFilterFromItems(clb.GetItemsByState(CheckState.Indeterminate), false, logicalOperator, positiveDataType);
+			var excludedValues = clb.GetItemsByState(CheckState.Indeterminate).ConvertAll<DbFilter>(i => (DbFilter)i);
+			if(additionalExcludedItems != null)
+				excludedValues.AddRange(additionalExcludedItems);
+			result += GetFilterFromItems(excludedValues, false, logicalOperator, positiveDataType);
 
 			if (!string.IsNullOrEmpty(result.SqlQuery))
 				result.SqlQuery = "(" + result.SqlQuery.Trim() + ")";
 			return result;
 		}
+
 
 		public static Query GetFilterFromTextBox(TextBox textBox, ExtendedCheckBox checkBox, string column)
 		{
@@ -159,7 +186,7 @@ namespace GenericDB.DataAccess
 			}
 		}
 
-		private static Query GetFilterFromItems(IList<object> items, bool include, string logicalOperator, PositiveDataType positiveDataType)
+		private static Query GetFilterFromItems(IList<DbFilter> items, bool include, string logicalOperator, PositiveDataType positiveDataType)
 		{
 			var result = new Query();
 			string prefix = include ? "" : "NOT ";
@@ -169,7 +196,7 @@ namespace GenericDB.DataAccess
 
 			for (var i = 0; i < items.Count; ++i)
 			{
-				var filter = (DbFilter)items[i];
+				var filter = items[i];
 
 				string subresult = "";
 				switch (positiveDataType)
