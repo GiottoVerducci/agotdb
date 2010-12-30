@@ -168,6 +168,17 @@ namespace AGoTDB.Forms
 			}
 		}
 
+		private static void LoadExpansionSets()
+		{
+			AgotCard.ExpansionSets = new Dictionary<string, bool>();
+			var sets = ApplicationSettings.DatabaseManager.GetExpansionSets();
+			foreach (DataRow row in sets.Rows)
+			{
+				if ((int)row["Id"] >= 0)
+					AgotCard.ExpansionSets.Add(row["ShortName"].ToString(), (bool)row["LCG"]);
+			}
+		}
+
 		/// <summary>
 		/// Updates the content and caption of the controls with data read in the database.
 		/// Therefore, new values (for example a new keyword) are automatically handled by
@@ -304,6 +315,20 @@ namespace AGoTDB.Forms
 		{
 			var result = new Query(String.Format("SELECT * FROM [{0}]", ApplicationSettings.DatabaseManager.TableNameMain), "");
 
+			IList<DbFilter> additionalIncludedSets = null;
+			IList<DbFilter> additionalExcludedSets = null;
+
+			if (miLcgSetsOnly.Checked)
+			{
+				// add the lcg unchecked expansions to perform a search on lcg expansions only
+				var uncheckedValues = eclExpansionSet.GetItemsByState(CheckState.Unchecked).ConvertAll<DbFilter>(i => (DbFilter)i);
+				additionalIncludedSets = new List<DbFilter>(
+					uncheckedValues.FindAll(v => AgotCard.ExpansionSets[v.ShortName]));
+				if (additionalIncludedSets.Count == 0 // all LCG expansions are removed 
+					&& eclExpansionSet.GetItemsByState(CheckState.Checked).Count == 0) //and no other non-LCG set is explicit added
+					additionalExcludedSets = new List<DbFilter>(uncheckedValues);
+			}
+
 			Query filter =
 				QueryBuilder.GetFilterFromExtendedCheckedListBox(eclCardtype, "OR", PositiveDataType.ExactValue) +
 				QueryBuilder.GetFilterFromExtendedCheckedListBox(eclHouse, "OR", PositiveDataType.Yes) +
@@ -313,7 +338,7 @@ namespace AGoTDB.Forms
 				QueryBuilder.GetFilterFromExtendedCheckedListBox(eclVirtue, "AND", PositiveDataType.Yes) +
 				QueryBuilder.GetFilterFromExtendedCheckedListBox(eclKeyword, "AND", PositiveDataType.KeywordValue) +
 				QueryBuilder.GetFilterFromExtendedCheckedListBox(eclTrigger, "OR", PositiveDataType.TriggerValue) +
-				QueryBuilder.GetFilterFromExtendedCheckedListBox(eclExpansionSet, "OR", PositiveDataType.LikeValue);
+				QueryBuilder.GetFilterFromExtendedCheckedListBox(eclExpansionSet, "OR", PositiveDataType.LikeValue, additionalIncludedSets, additionalExcludedSets);
 
 			Query costOrIncome = QueryBuilder.GetFilterFromRangeBoxes(tbGoldLow, tbGoldHigh, "Cost");
 			if (!string.IsNullOrEmpty(costOrIncome.SqlQuery))
@@ -568,6 +593,7 @@ namespace AGoTDB.Forms
 			LoadCardTypeNames();
 			LoadCardHouseNames();
 			LoadCardTriggerNames();
+			LoadExpansionSets();
 			UpdateDataTableView();
 			dataGridView.DataSource = fDataTable;
 
