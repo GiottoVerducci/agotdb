@@ -1,3 +1,7 @@
+Beta 0.721 (Dec, 30 2010)
+  - Added the LCG column and added the "LCG expansion sets only" checkbox in the Filters menu.
+  - Bug fix: Deckbuilder: loading an unknown card would result in errors.
+
 Beta 0.720 (Dec, 29 2010)
   - Deckbuilder: improved the contrast between the forecolor and the backcolor of shadow cards
   - Database fix: the power icons were not present
