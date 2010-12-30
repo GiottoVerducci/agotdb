@@ -258,8 +258,8 @@
   <data name="ViewFormTitle" xml:space="preserve">
     <value>View - {0}</value>
   </data>
-  <data name="VirtuesText" xml:space="preserve">
-    <value>Virtues</value>
+  <data name="CrestsText" xml:space="preserve">
+    <value>Crests</value>
   </data>
   <data name="WarnDeckModified" xml:space="preserve">
     <value>The deck has been modified. Do you want to save the changes?</value>
@@ -293,5 +293,8 @@
   </data>
   <data name="UnknownCardType" xml:space="preserve">
     <value>Unknown card type</value>
+  </data>
+  <data name="TraitsText" xml:space="preserve">
+    <value>Traits</value>
   </data>
 </root>

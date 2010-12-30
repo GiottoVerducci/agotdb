@@ -117,11 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
   <data name="miIncreaseCount.Text" xml:space="preserve">
     <value>Ajouter un exemplaire</value>
   </data>
+  <data name="miDecreaseCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
   <data name="miDecreaseCount.Text" xml:space="preserve">
     <value>Retirer un exemplaire</value>
+  </data>
+  <data name="miExportDeckToClipboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miAddCardList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miRemoveCardList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="contextMenuStripTreeView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 114</value>
   </data>
   <data name="treeViewDeck.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -145,7 +164,6 @@
         c1VuaXQBAAAAB3ZhbHVlX18ACAcAAAADAAAACw==
 </value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
     <value>420, 179</value>
   </data>
@@ -194,6 +212,13 @@
   </data>
   <data name="tabPageCardtext.Text" xml:space="preserve">
     <value>Texte de la carte</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="rtbStatistics.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 179</value>
   </data>
   <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 185</value>
@@ -299,19 +324,19 @@
     <value>Quitter</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>54, 20</value>
   </data>
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>Fichier</value>
   </data>
   <data name="drawSimulatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>186, 22</value>
   </data>
   <data name="drawSimulatorToolStripMenuItem.Text" xml:space="preserve">
     <value>Simulateur de pioche</value>
   </data>
   <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
+    <value>50, 20</value>
   </data>
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>Outils</value>
