@@ -423,7 +423,7 @@ namespace AGoTDB.Forms
 
 			foreach (var c in cardList)
 			{
-				if (c.Type.Value != (int)cardType || String.IsNullOrEmpty(c.Traits.Value))
+				if (c.Type == null || c.Type.Value != (int)cardType || c.Traits == null || String.IsNullOrEmpty(c.Traits.Value))
 					continue;
 
 				foreach (var t in c.Traits.Value.Split('.'))
@@ -452,7 +452,7 @@ namespace AGoTDB.Forms
 
 			foreach (var c in cardList)
 			{
-				if (c.Type.Value != (int)cardType)
+				if (c.Type == null || c.Type.Value != (int)cardType)
 					continue;
 				if (c.War != null && c.War.Value)
 					result[Resource1.WarVirtueText] += c.Quantity;
@@ -479,7 +479,7 @@ namespace AGoTDB.Forms
 
 			foreach (var c in cardList)
 			{
-				if (c.Type.Value != (int)AgotCard.CardType.Character)
+				if (c.Type == null || c.Type.Value != (int)AgotCard.CardType.Character)
 					continue;
 				bool hasMil = c.Military != null && c.Military.Value;
 				bool hasInt = c.Intrigue != null && c.Intrigue.Value;
@@ -508,7 +508,7 @@ namespace AGoTDB.Forms
 
 			foreach (var c in cardList)
 			{
-				if (c.Type.Value != (int)cardType || c.House == null ||c.House.Value == (int)AgotCard.CardHouse.Neutral)
+				if (c.Type == null || c.Type.Value != (int)cardType || c.House == null || c.House.Value == (int)AgotCard.CardHouse.Neutral)
 					continue;
 
 				var house = AgotCard.GetHouseName(c.House.Value);
@@ -521,7 +521,6 @@ namespace AGoTDB.Forms
 
 			return result;
 		}
-
 
 		#endregion
 
