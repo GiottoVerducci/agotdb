@@ -297,4 +297,7 @@
   <data name="TraitsText" xml:space="preserve">
     <value>Traits</value>
   </data>
+  <data name="ErrUnprintedProxies" xml:space="preserve">
+    <value>The following cards had no image and couldn't be added to the proxy document:</value>
+  </data>
 </root>

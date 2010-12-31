@@ -36,15 +36,14 @@ namespace AGoTDB.Forms
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabControlDecks = new System.Windows.Forms.TabControl();
 			this.tabPageDeck = new System.Windows.Forms.TabPage();
-			this.treeViewDeck = new AGoTDB.Components.AgotCardTreeView();
 			this.contextMenuStripTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.miIncreaseCount = new System.Windows.Forms.ToolStripMenuItem();
 			this.miDecreaseCount = new System.Windows.Forms.ToolStripMenuItem();
 			this.miExportDeckToClipboard = new System.Windows.Forms.ToolStripMenuItem();
 			this.miAddCardList = new System.Windows.Forms.ToolStripMenuItem();
 			this.miRemoveCardList = new System.Windows.Forms.ToolStripMenuItem();
+			this.miGenerateProxyPdf = new System.Windows.Forms.ToolStripMenuItem();
 			this.tabPageSideboard = new System.Windows.Forms.TabPage();
-			this.treeViewSide = new AGoTDB.Components.AgotCardTreeView();
 			this.tabControlLocalInfo = new System.Windows.Forms.TabControl();
 			this.tabPageCardtext = new System.Windows.Forms.TabPage();
 			this.rtbCardText = new System.Windows.Forms.RichTextBox();
@@ -76,6 +75,8 @@ namespace AGoTDB.Forms
 			this.tbAuthor = new System.Windows.Forms.TextBox();
 			this.lblAuthor = new System.Windows.Forms.Label();
 			this.eclAgenda = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+			this.treeViewDeck = new AGoTDB.Components.AgotCardTreeView();
+			this.treeViewSide = new AGoTDB.Components.AgotCardTreeView();
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
@@ -136,24 +137,6 @@ namespace AGoTDB.Forms
 			this.tabPageDeck.Name = "tabPageDeck";
 			this.tabPageDeck.UseVisualStyleBackColor = true;
 			// 
-			// treeViewDeck
-			// 
-			this.treeViewDeck.Cards = null;
-			this.treeViewDeck.ContextMenuStrip = this.contextMenuStripTreeView;
-			this.treeViewDeck.Deck = null;
-			resources.ApplyResources(this.treeViewDeck, "treeViewDeck");
-			this.treeViewDeck.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-			this.treeViewDeck.HideSelection = false;
-			this.treeViewDeck.Name = "treeViewDeck";
-			this.treeViewDeck.NodeInfo = null;
-			this.treeViewDeck.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewDeck.Nodes")))});
-			this.treeViewDeck.ShowNodeToolTips = true;
-			this.treeViewDeck.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
-			this.treeViewDeck.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
-			this.treeViewDeck.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
-			this.treeViewDeck.FontChanged += new System.EventHandler(this.treeViewDeck_FontChanged);
-			// 
 			// contextMenuStripTreeView
 			// 
 			this.contextMenuStripTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -161,7 +144,8 @@ namespace AGoTDB.Forms
             this.miDecreaseCount,
             this.miExportDeckToClipboard,
             this.miAddCardList,
-            this.miRemoveCardList});
+            this.miRemoveCardList,
+            this.miGenerateProxyPdf});
 			this.contextMenuStripTreeView.Name = "contextMenuStrip1";
 			resources.ApplyResources(this.contextMenuStripTreeView, "contextMenuStripTreeView");
 			this.contextMenuStripTreeView.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripTreeView_Opening);
@@ -195,29 +179,18 @@ namespace AGoTDB.Forms
 			this.miRemoveCardList.Name = "miRemoveCardList";
 			resources.ApplyResources(this.miRemoveCardList, "miRemoveCardList");
 			// 
+			// miGenerateProxyPdf
+			// 
+			this.miGenerateProxyPdf.Name = "miGenerateProxyPdf";
+			resources.ApplyResources(this.miGenerateProxyPdf, "miGenerateProxyPdf");
+			this.miGenerateProxyPdf.Click += new System.EventHandler(this.miGenerateProxyPdf_Click);
+			// 
 			// tabPageSideboard
 			// 
 			this.tabPageSideboard.Controls.Add(this.treeViewSide);
 			resources.ApplyResources(this.tabPageSideboard, "tabPageSideboard");
 			this.tabPageSideboard.Name = "tabPageSideboard";
 			this.tabPageSideboard.UseVisualStyleBackColor = true;
-			// 
-			// treeViewSide
-			// 
-			this.treeViewSide.Cards = null;
-			this.treeViewSide.ContextMenuStrip = this.contextMenuStripTreeView;
-			this.treeViewSide.Deck = null;
-			resources.ApplyResources(this.treeViewSide, "treeViewSide");
-			this.treeViewSide.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-			this.treeViewSide.HideSelection = false;
-			this.treeViewSide.Name = "treeViewSide";
-			this.treeViewSide.NodeInfo = null;
-			this.treeViewSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewSide.Nodes")))});
-			this.treeViewSide.ShowNodeToolTips = true;
-			this.treeViewSide.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
-			this.treeViewSide.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
-			this.treeViewSide.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
 			// 
 			// tabControlLocalInfo
 			// 
@@ -434,6 +407,43 @@ namespace AGoTDB.Forms
 			this.eclAgenda.ThreeState = false;
 			this.eclAgenda.SelectedValueChanged += new System.EventHandler(this.eclAgenda_SelectedValueChanged);
 			// 
+			// treeViewDeck
+			// 
+			this.treeViewDeck.Cards = null;
+			this.treeViewDeck.ContextMenuStrip = this.contextMenuStripTreeView;
+			this.treeViewDeck.Deck = null;
+			resources.ApplyResources(this.treeViewDeck, "treeViewDeck");
+			this.treeViewDeck.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+			this.treeViewDeck.HideSelection = false;
+			this.treeViewDeck.Name = "treeViewDeck";
+			this.treeViewDeck.NodeInfo = null;
+			this.treeViewDeck.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewDeck.Nodes")))});
+			this.treeViewDeck.ShowNodeToolTips = true;
+			this.treeViewDeck.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
+			this.treeViewDeck.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
+			this.treeViewDeck.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeViewDeck_KeyPress);
+			this.treeViewDeck.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
+			this.treeViewDeck.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewDeck_KeyDown);
+			this.treeViewDeck.FontChanged += new System.EventHandler(this.treeViewDeck_FontChanged);
+			// 
+			// treeViewSide
+			// 
+			this.treeViewSide.Cards = null;
+			this.treeViewSide.ContextMenuStrip = this.contextMenuStripTreeView;
+			this.treeViewSide.Deck = null;
+			resources.ApplyResources(this.treeViewSide, "treeViewSide");
+			this.treeViewSide.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+			this.treeViewSide.HideSelection = false;
+			this.treeViewSide.Name = "treeViewSide";
+			this.treeViewSide.NodeInfo = null;
+			this.treeViewSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewSide.Nodes")))});
+			this.treeViewSide.ShowNodeToolTips = true;
+			this.treeViewSide.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
+			this.treeViewSide.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
+			this.treeViewSide.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
+			// 
 			// DeckBuilderForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -523,5 +533,6 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.ToolStripMenuItem miRemoveCardList;
     private Beyond.ExtendedControls.ExtendedCheckedListBox eclAgenda;
 	private System.Windows.Forms.RichTextBox rtbStatistics;
+	private System.Windows.Forms.ToolStripMenuItem miGenerateProxyPdf;
 	}
 }

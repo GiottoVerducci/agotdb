@@ -134,6 +134,122 @@
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <metadata name="contextMenuStripTreeView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>6, 24</value>
+  </metadata>
+  <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miIncreaseCount.Text" xml:space="preserve">
+    <value>Add a copy</value>
+  </data>
+  <data name="miDecreaseCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miDecreaseCount.Text" xml:space="preserve">
+    <value>Remove a copy</value>
+  </data>
+  <data name="miExportDeckToClipboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miExportDeckToClipboard.Text" xml:space="preserve">
+    <value>Export deck to clipboard</value>
+  </data>
+  <data name="miAddCardList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miAddCardList.Text" xml:space="preserve">
+    <value>Add a card list</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miAddCardList.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miRemoveCardList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miRemoveCardList.Text" xml:space="preserve">
+    <value>Remove this card list</value>
+  </data>
+  <data name="miRemoveCardList.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miGenerateProxyPdf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miGenerateProxyPdf.Text" xml:space="preserve">
+    <value>Generate proxy pdf</value>
+  </data>
+  <data name="contextMenuStripTreeView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 136</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripTreeView.Name" xml:space="preserve">
+    <value>contextMenuStripTreeView</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripTreeView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="treeViewDeck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="treeViewDeck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="treeViewDeck.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
+        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
+        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
+        CAgIAgAAAAkDAAAABgQAAAA/WW91IG1heSBhZGQgY2FyZHMgYnkgZG91YmxlLWNsaWNraW5nIG9uIHRo
+        ZW0gaW4gdGhlIG1haW4gd2luZG93BgUAAAAFTm9kZTAA/////wYGAAAAAP////8JBgAAAAAAAAAMBwAA
+        AFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
+        eVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQ
+        cm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNv
+        bG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVtLkRyYXdpbmcuRm9udAcAAAACAAAA
+        Bfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEA
+        AAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAAAAAAAAAJCgAAAAUKAAAAE1N5c3Rl
+        bS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcu
+        Rm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQHAAAABwAAAAYLAAAAFE1pY3Jv
+        c29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVf
+        XwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAcA
+        AAADAAAACw==
+</value>
+  </data>
+  <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 179</value>
+  </data>
+  <data name="treeViewDeck.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;treeViewDeck.Name" xml:space="preserve">
+    <value>treeViewDeck</value>
+  </data>
+  <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
+    <value>tabPageDeck</value>
+  </data>
+  <data name="&gt;&gt;treeViewDeck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageDeck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageDeck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 185</value>
+  </data>
+  <data name="tabPageDeck.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageDeck.Text" xml:space="preserve">
+    <value>Deck</value>
+  </data>
   <data name="&gt;&gt;tabPageDeck.Name" xml:space="preserve">
     <value>tabPageDeck</value>
   </data>
@@ -145,6 +261,67 @@
   </data>
   <data name="&gt;&gt;tabPageDeck.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="treeViewSide.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="treeViewSide.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="treeViewSide.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
+        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
+        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
+        CAgIAgAAAAkDAAAABgQAAAA/WW91IG1heSBhZGQgY2FyZHMgYnkgZG91YmxlLWNsaWNraW5nIG9uIHRo
+        ZW0gaW4gdGhlIG1haW4gd2luZG93BgUAAAAFTm9kZTAA/////wYGAAAAAP////8JBgAAAAAAAAAMBwAA
+        AFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
+        eVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQ
+        cm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNv
+        bG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVtLkRyYXdpbmcuRm9udAcAAAACAAAA
+        Bfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEA
+        AAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAAAAAAAAAJCgAAAAUKAAAAE1N5c3Rl
+        bS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcu
+        Rm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQHAAAABwAAAAYLAAAAFE1pY3Jv
+        c29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVf
+        XwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAcA
+        AAADAAAACw==
+</value>
+  </data>
+  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 179</value>
+  </data>
+  <data name="treeViewSide.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;treeViewSide.Name" xml:space="preserve">
+    <value>treeViewSide</value>
+  </data>
+  <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
+    <value>tabPageSideboard</value>
+  </data>
+  <data name="&gt;&gt;treeViewSide.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageSideboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageSideboard.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageSideboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 185</value>
+  </data>
+  <data name="tabPageSideboard.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageSideboard.Text" xml:space="preserve">
+    <value>Sideboard</value>
   </data>
   <data name="&gt;&gt;tabPageSideboard.Name" xml:space="preserve">
     <value>tabPageSideboard</value>
@@ -167,7 +344,6 @@
   <data name="tabControlDecks.Size" type="System.Drawing.Size, System.Drawing">
     <value>349, 211</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tabControlDecks.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -195,6 +371,48 @@
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="rtbCardText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbCardText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="rtbCardText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 179</value>
+  </data>
+  <data name="rtbCardText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rtbCardText.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;rtbCardText.Name" xml:space="preserve">
+    <value>rtbCardText</value>
+  </data>
+  <data name="&gt;&gt;rtbCardText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rtbCardText.Parent" xml:space="preserve">
+    <value>tabPageCardtext</value>
+  </data>
+  <data name="&gt;&gt;rtbCardText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageCardtext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageCardtext.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageCardtext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 185</value>
+  </data>
+  <data name="tabPageCardtext.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageCardtext.Text" xml:space="preserve">
+    <value>Cardtext</value>
+  </data>
   <data name="&gt;&gt;tabPageCardtext.Name" xml:space="preserve">
     <value>tabPageCardtext</value>
   </data>
@@ -206,6 +424,48 @@
   </data>
   <data name="&gt;&gt;tabPageCardtext.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="rtbStatistics.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbStatistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 179</value>
+  </data>
+  <data name="rtbStatistics.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rtbStatistics.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Name" xml:space="preserve">
+    <value>rtbStatistics</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
+    <value>tabPageStats</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageStats.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageStats.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 185</value>
+  </data>
+  <data name="tabPageStats.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageStats.Text" xml:space="preserve">
+    <value>Statistics</value>
   </data>
   <data name="&gt;&gt;tabPageStats.Name" xml:space="preserve">
     <value>tabPageStats</value>
@@ -288,6 +548,48 @@
   <data name="&gt;&gt;splitContainer2.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="rtbDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 175</value>
+  </data>
+  <data name="rtbDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rtbDescription.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;rtbDescription.Name" xml:space="preserve">
+    <value>rtbDescription</value>
+  </data>
+  <data name="&gt;&gt;rtbDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rtbDescription.Parent" xml:space="preserve">
+    <value>tabPageDescription</value>
+  </data>
+  <data name="&gt;&gt;rtbDescription.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageDescription.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>762, 181</value>
+  </data>
+  <data name="tabPageDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="&gt;&gt;tabPageDescription.Name" xml:space="preserve">
     <value>tabPageDescription</value>
   </data>
@@ -300,6 +602,45 @@
   <data name="&gt;&gt;tabPageDescription.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="treeViewHistory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="treeViewHistory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 175</value>
+  </data>
+  <data name="treeViewHistory.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.Name" xml:space="preserve">
+    <value>treeViewHistory</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.Parent" xml:space="preserve">
+    <value>tabPageHistory</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageHistory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageHistory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageHistory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>762, 181</value>
+  </data>
+  <data name="tabPageHistory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageHistory.Text" xml:space="preserve">
+    <value>History</value>
+  </data>
   <data name="&gt;&gt;tabPageHistory.Name" xml:space="preserve">
     <value>tabPageHistory</value>
   </data>
@@ -311,6 +652,21 @@
   </data>
   <data name="&gt;&gt;tabPageHistory.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>762, 181</value>
+  </data>
+  <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Infos</value>
   </data>
   <data name="&gt;&gt;tabPage5.Name" xml:space="preserve">
     <value>tabPage5</value>
@@ -381,512 +737,6 @@
   <data name="&gt;&gt;splitContainer2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;treeViewDeck.Name" xml:space="preserve">
-    <value>treeViewDeck</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
-    <value>tabPageDeck</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageDeck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageDeck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 185</value>
-  </data>
-  <data name="tabPageDeck.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPageDeck.Text" xml:space="preserve">
-    <value>Deck</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.Name" xml:space="preserve">
-    <value>tabPageDeck</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.Parent" xml:space="preserve">
-    <value>tabControlDecks</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="contextMenuStripTreeView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>6, 24</value>
-  </metadata>
-  <data name="contextMenuStripTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 114</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripTreeView.Name" xml:space="preserve">
-    <value>contextMenuStripTreeView</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripTreeView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="treeViewDeck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="treeViewDeck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="treeViewDeck.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
-        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
-        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
-        CAgIAgAAAAkDAAAABgQAAAA/WW91IG1heSBhZGQgY2FyZHMgYnkgZG91YmxlLWNsaWNraW5nIG9uIHRo
-        ZW0gaW4gdGhlIG1haW4gd2luZG93BgUAAAAFTm9kZTAA/////wYGAAAAAP////8JBgAAAAAAAAAMBwAA
-        AFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
-        eVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQ
-        cm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNv
-        bG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVtLkRyYXdpbmcuRm9udAcAAAACAAAA
-        Bfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEA
-        AAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAAAAAAAAAJCgAAAAUKAAAAE1N5c3Rl
-        bS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcu
-        Rm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQHAAAABwAAAAYLAAAAFE1pY3Jv
-        c29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVf
-        XwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAcA
-        AAADAAAACw==
-</value>
-  </data>
-  <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 179</value>
-  </data>
-  <data name="treeViewDeck.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.Name" xml:space="preserve">
-    <value>treeViewDeck</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
-    <value>tabPageDeck</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="miIncreaseCount.Text" xml:space="preserve">
-    <value>Add a copy</value>
-  </data>
-  <data name="miDecreaseCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="miDecreaseCount.Text" xml:space="preserve">
-    <value>Remove a copy</value>
-  </data>
-  <data name="miExportDeckToClipboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="miExportDeckToClipboard.Text" xml:space="preserve">
-    <value>Export deck to clipboard</value>
-  </data>
-  <data name="miAddCardList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="miAddCardList.Text" xml:space="preserve">
-    <value>Add a card list</value>
-  </data>
-  <data name="miAddCardList.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="miRemoveCardList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="miRemoveCardList.Text" xml:space="preserve">
-    <value>Remove this card list</value>
-  </data>
-  <data name="miRemoveCardList.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Name" xml:space="preserve">
-    <value>treeViewSide</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
-    <value>tabPageSideboard</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageSideboard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageSideboard.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageSideboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 185</value>
-  </data>
-  <data name="tabPageSideboard.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageSideboard.Text" xml:space="preserve">
-    <value>Sideboard</value>
-  </data>
-  <data name="&gt;&gt;tabPageSideboard.Name" xml:space="preserve">
-    <value>tabPageSideboard</value>
-  </data>
-  <data name="&gt;&gt;tabPageSideboard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageSideboard.Parent" xml:space="preserve">
-    <value>tabControlDecks</value>
-  </data>
-  <data name="&gt;&gt;tabPageSideboard.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="treeViewSide.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="treeViewSide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="treeViewSide.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
-        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
-        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
-        CAgIAgAAAAkDAAAABgQAAAA/WW91IG1heSBhZGQgY2FyZHMgYnkgZG91YmxlLWNsaWNraW5nIG9uIHRo
-        ZW0gaW4gdGhlIG1haW4gd2luZG93BgUAAAAFTm9kZTAA/////wYGAAAAAP////8JBgAAAAAAAAAMBwAA
-        AFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
-        eVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQ
-        cm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNv
-        bG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVtLkRyYXdpbmcuRm9udAcAAAACAAAA
-        Bfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEA
-        AAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAAAAAAAAAJCgAAAAUKAAAAE1N5c3Rl
-        bS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcu
-        Rm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQHAAAABwAAAAYLAAAAFE1pY3Jv
-        c29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVf
-        XwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAcA
-        AAADAAAACw==
-</value>
-  </data>
-  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 179</value>
-  </data>
-  <data name="treeViewSide.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Name" xml:space="preserve">
-    <value>treeViewSide</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
-    <value>tabPageSideboard</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Name" xml:space="preserve">
-    <value>rtbCardText</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Parent" xml:space="preserve">
-    <value>tabPageCardtext</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageCardtext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageCardtext.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageCardtext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 185</value>
-  </data>
-  <data name="tabPageCardtext.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPageCardtext.Text" xml:space="preserve">
-    <value>Cardtext</value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.Name" xml:space="preserve">
-    <value>tabPageCardtext</value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.Parent" xml:space="preserve">
-    <value>tabControlLocalInfo</value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rtbCardText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="rtbCardText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="rtbCardText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 179</value>
-  </data>
-  <data name="rtbCardText.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rtbCardText.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;rtbCardText.Name" xml:space="preserve">
-    <value>rtbCardText</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Parent" xml:space="preserve">
-    <value>tabPageCardtext</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Name" xml:space="preserve">
-    <value>rtbStatistics</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
-    <value>tabPageStats</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageStats.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 185</value>
-  </data>
-  <data name="tabPageStats.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageStats.Text" xml:space="preserve">
-    <value>Statistics</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Name" xml:space="preserve">
-    <value>tabPageStats</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Parent" xml:space="preserve">
-    <value>tabControlLocalInfo</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rtbStatistics.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="rtbStatistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 179</value>
-  </data>
-  <data name="rtbStatistics.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rtbStatistics.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Name" xml:space="preserve">
-    <value>rtbStatistics</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
-    <value>tabPageStats</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.Name" xml:space="preserve">
-    <value>rtbDescription</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.Parent" xml:space="preserve">
-    <value>tabPageDescription</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageDescription.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>762, 181</value>
-  </data>
-  <data name="tabPageDescription.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPageDescription.Text" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="&gt;&gt;tabPageDescription.Name" xml:space="preserve">
-    <value>tabPageDescription</value>
-  </data>
-  <data name="&gt;&gt;tabPageDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageDescription.Parent" xml:space="preserve">
-    <value>tabControlGlobalInfo</value>
-  </data>
-  <data name="&gt;&gt;tabPageDescription.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rtbDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="rtbDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 175</value>
-  </data>
-  <data name="rtbDescription.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rtbDescription.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;rtbDescription.Name" xml:space="preserve">
-    <value>rtbDescription</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.Parent" xml:space="preserve">
-    <value>tabPageDescription</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Name" xml:space="preserve">
-    <value>treeViewHistory</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Parent" xml:space="preserve">
-    <value>tabPageHistory</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageHistory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>762, 181</value>
-  </data>
-  <data name="tabPageHistory.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageHistory.Text" xml:space="preserve">
-    <value>History</value>
-  </data>
-  <data name="&gt;&gt;tabPageHistory.Name" xml:space="preserve">
-    <value>tabPageHistory</value>
-  </data>
-  <data name="&gt;&gt;tabPageHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageHistory.Parent" xml:space="preserve">
-    <value>tabControlGlobalInfo</value>
-  </data>
-  <data name="&gt;&gt;tabPageHistory.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="treeViewHistory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="treeViewHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 175</value>
-  </data>
-  <data name="treeViewHistory.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Name" xml:space="preserve">
-    <value>treeViewHistory</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Parent" xml:space="preserve">
-    <value>tabPageHistory</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>762, 181</value>
-  </data>
-  <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Infos</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Name" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Parent" xml:space="preserve">
-    <value>tabControlGlobalInfo</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="lblDeckName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -944,36 +794,6 @@
   <metadata name="menuStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
-  <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>797, 24</value>
-  </data>
-  <data name="menuStripMain.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="menuStripMain.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.Name" xml:space="preserve">
-    <value>menuStripMain</value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
   <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 22</value>
   </data>
@@ -1022,17 +842,47 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
   </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tools</value>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="drawSimulatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 22</value>
   </data>
   <data name="drawSimulatorToolStripMenuItem.Text" xml:space="preserve">
     <value>Draw simulator</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>797, 24</value>
+  </data>
+  <data name="menuStripMain.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="menuStripMain.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Name" xml:space="preserve">
+    <value>menuStripMain</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="lblHouse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1205,9 +1055,6 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>French</value>
-  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -1321,6 +1168,12 @@
     <value>miRemoveCardList</value>
   </data>
   <data name="&gt;&gt;miRemoveCardList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miGenerateProxyPdf.Name" xml:space="preserve">
+    <value>miGenerateProxyPdf</value>
+  </data>
+  <data name="&gt;&gt;miGenerateProxyPdf.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
