@@ -1,3 +1,7 @@
+Beta 0.722 (Dec, 30 2010)
+ - Deckbuilder: Le simulateur de pioche affiche maintenant le résumé de la carte
+ - Deckbuilder: Ajout de statistiques pour les traits, vertus, icônes et maisons
+
 Beta 0.721 (30 décembre 2010)
   - Ajout de la colonne LCG et ajout du filtre "Extensions JCE uniquement" dans le menu Filtres
   - Base de données : des accents étaient manquant sur des lettres capitales

@@ -145,10 +145,6 @@
   <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lbHand.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="&gt;&gt;btnMoveLeft.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -170,9 +166,6 @@
   <data name="&gt;&gt;btnDiscard.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="btnDiscard.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="btnMoveRight.Text" xml:space="preserve">
     <value>Move right</value>
   </data>
@@ -184,6 +177,9 @@
   </data>
   <data name="&gt;&gt;lbHand.Name" xml:space="preserve">
     <value>lbHand</value>
+  </data>
+  <data name="&gt;&gt;btnMoveRight.Name" xml:space="preserve">
+    <value>btnMoveRight</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -213,6 +209,7 @@
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>278</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnMoveLeft.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -251,6 +248,9 @@
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
     <value>splitContainer1</value>
+  </data>
+  <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="btnMoveLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -324,9 +324,6 @@
   <data name="btnMoveRight.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="lbDeck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="btnRestart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -360,8 +357,11 @@
   <data name="&gt;&gt;btnMoveRight.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="lbHand.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;btnDiscard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnMoveRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>93, 272</value>
@@ -378,14 +378,14 @@
   <data name="&gt;&gt;btnRestart.Name" xml:space="preserve">
     <value>btnRestart</value>
   </data>
-  <data name="&gt;&gt;btnDiscard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbDeck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="lbHand.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;btnMoveRight.Name" xml:space="preserve">
-    <value>btnMoveRight</value>
+  <data name="btnDiscard.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="btnDiscard.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 23</value>

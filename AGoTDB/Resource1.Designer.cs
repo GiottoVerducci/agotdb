@@ -259,6 +259,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following cards had no image and couldn&apos;t be added to the proxy document:.
+        /// </summary>
+        internal static string ErrUnprintedProxies {
+            get {
+                return ResourceManager.GetString("ErrUnprintedProxies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The deck file {0} could not be found..
         /// </summary>
         internal static string ErrXmlDeckFileNotFound {

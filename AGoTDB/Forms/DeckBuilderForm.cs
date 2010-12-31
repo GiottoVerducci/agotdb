@@ -19,7 +19,6 @@
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 // © Le Trône de Fer JCE 2008 Edge Entertainment
 
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +30,7 @@ using System.Text;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
 using AGoTDB.Components;
+using AGoTDB.Services;
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Forms;
@@ -111,6 +111,7 @@ namespace AGoTDB.Forms
 			UpdateAgendaComboBox();
 			UpdateHistoryFromVersionedDeck();
 			//treeViewDeck.TreeViewNodeSorter = deckTreeNodeSorter; // we don't use it because it's slower than inserting directly at the right place (visible when loading decks)
+			miGenerateProxyPdf.Visible = ApplicationSettings.ImagesFolderExists; // show the proxy generator only if the images folder exists
 		}
 
 		#region Form events (FormShown/Closed, NodeClick or HouseValue changed, tvHistory select)
@@ -132,6 +133,50 @@ namespace AGoTDB.Forms
 		{
 			if ((e.Button == MouseButtons.Right) && IsCardNode(e.Node))
 				((TreeView)sender).SelectedNode = e.Node;
+		}
+
+		private void treeViewDeck_KeyDown(object sender, KeyEventArgs e)
+		{
+			var node = ((TreeView)sender).SelectedNode;
+
+			switch (e.KeyCode)
+			{
+				case Keys.Delete:
+					if (IsCardNode(node))
+					{
+						SubtractCardFromCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
+					};
+					break;
+				case Keys.Insert:
+					if (IsCardNode(node))
+					{
+						AddCardToCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
+					};
+					break;
+			}
+		}
+
+		private void treeViewDeck_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			var node = ((TreeView)sender).SelectedNode;
+
+			e.Handled = true;
+			switch (e.KeyChar)
+			{
+				case '-':
+					if (IsCardNode(node))
+					{
+						SubtractCardFromCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
+					};
+					break;
+				case '+':
+					if (IsCardNode(node))
+					{
+						AddCardToCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
+					};
+					break;
+				default: e.Handled = false; break;
+			}
 		}
 
 		private void eclHouse_SelectedValueChanged(object sender, EventArgs e)
@@ -232,14 +277,16 @@ namespace AGoTDB.Forms
 			// disable items if the deck isn't editable or if the current node isn't a card node
 			foreach (ToolStripMenuItem mi in contextMenuStripTreeView.Items)
 				mi.Enabled = fCurrentDeck.Editable && (node != null) && IsCardNode(node);
-			miExportDeckToClipboard.Enabled = true; // always true
+			// always enabled items
+			miExportDeckToClipboard.Enabled = true;
+			miGenerateProxyPdf.Enabled = true;
 		}
 
 		private void miIncreaseCount_Click(object sender, EventArgs e)
 		{
 			var tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
 			TreeNode node = tv.SelectedNode;
-			if (node.Level == 1) // card node (menuitem should be disabled for other nodes anyway)
+			if (IsCardNode(node)) // menuitem should be disabled for other nodes anyway
 			{
 				AddCardToCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
 			}
@@ -249,7 +296,7 @@ namespace AGoTDB.Forms
 		{
 			var tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
 			TreeNode node = tv.SelectedNode;
-			if (node.Level == 1) // card node (menuitem should be disabled for other nodes anyway)
+			if (IsCardNode(node)) // menuitem should be disabled for other nodes anyway
 			{
 				SubtractCardFromCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
 			}
@@ -432,7 +479,7 @@ namespace AGoTDB.Forms
 					if (current == "")
 						continue;
 					if (result.ContainsKey(current))
-						result[current]+= c.Quantity;
+						result[current] += c.Quantity;
 					else
 						result.Add(current, c.Quantity);
 				}
@@ -657,7 +704,7 @@ namespace AGoTDB.Forms
 		#region Node methods
 		protected internal static bool IsCardNode(TreeNode node)
 		{
-			return (node.Level == 1);
+			return node.Level == 1;
 		}
 
 		private TreeNode AddTypeNode(TreeView treeView, Int32 type)
@@ -1158,6 +1205,22 @@ namespace AGoTDB.Forms
 			var tabPage = new TabPage(tabPageDeck.Text + "+");
 			tabControlDecks.TabPages.Add(tabPage);
 			tabPage.Controls.Add(ctv);
+		}
+
+		private void miGenerateProxyPdf_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				var unprintedProxies = ProxyPdfGenerator.CreateProxiesPdf("proxy.pdf", fCurrentDeck);
+				if (unprintedProxies.Count > 0)
+					MessageBox.Show(String.Format("{0}\n{1}",
+						Resource1.ErrUnprintedProxies,
+						String.Join("\n", unprintedProxies.ToArray())));
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
 		}
 	}
 
