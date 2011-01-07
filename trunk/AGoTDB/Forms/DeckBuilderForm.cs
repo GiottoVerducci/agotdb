@@ -403,7 +403,7 @@ namespace AGoTDB.Forms
 					rtbStatistics.SelectionColor = AgotCard.TraitsFormat.Color;
 
 					rtbStatistics.AppendText(String.Join(", ",
-						traits.OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+						traits.OrderBy(kv => kv.Key).OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
 					rtbStatistics.AppendText("\n");
 				}
 			}
@@ -419,6 +419,7 @@ namespace AGoTDB.Forms
 					rtbStatistics.SelectionColor = Color.Black;
 					rtbStatistics.AppendText(String.Format("{0}: ", AgotCard.CardTypeNames[(int)type]));
 
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Bold);
 					rtbStatistics.AppendText(String.Join(", ",
 						crests.OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
 					rtbStatistics.AppendText("\n");
@@ -435,6 +436,7 @@ namespace AGoTDB.Forms
 					rtbStatistics.SelectionColor = Color.Black;
 					rtbStatistics.AppendText(String.Format("{0}:\n", AgotCard.CardTypeNames[(int)AgotCard.CardType.Character]));
 
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Bold);
 					rtbStatistics.AppendText(String.Join("\n",
 						icons.OrderByDescending(kv => kv.Value * 100 + kv.Key.Length).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
 					rtbStatistics.AppendText("\n");
@@ -450,9 +452,10 @@ namespace AGoTDB.Forms
 					AddStatsIntroIfNecessary(Resource1.HouseText, ref alreadyIntroduced);
 					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
 					rtbStatistics.SelectionColor = Color.Black;
-					rtbStatistics.AppendText(String.Format("{0}:\n", AgotCard.CardTypeNames[(int)type]));
+					rtbStatistics.AppendText(String.Format("{0}: ", AgotCard.CardTypeNames[(int)type]));
 
-					rtbStatistics.AppendText(String.Join("\n",
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Bold);
+					rtbStatistics.AppendText(String.Join(", ",
 						houses.OrderByDescending(kv => kv.Value * 100 + kv.Key.Length).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
 					rtbStatistics.AppendText("\n");
 				}
@@ -582,6 +585,7 @@ namespace AGoTDB.Forms
 		{
 			UpdateControlsFromHouse();
 			UpdateControlsFromAgenda();
+			Application.DoEvents();
 			UpdateTreeViews();
 
 			tbDeckName.Text = fVersionedDeck.Name;
@@ -598,8 +602,10 @@ namespace AGoTDB.Forms
 
 		private void UpdateTreeViews()
 		{
+			rtbStatistics.BeginUpdate();
 			UpdateTreeViewWithCards(treeViewDeck, fCurrentDeck.CardLists[1], fCurrentDeck); // TODO : modify to handle multiple deck lists
 			UpdateTreeViewWithCards(treeViewSide, fCurrentDeck.CardLists[0], fCurrentDeck); // TODO : modify to handle multiple deck lists
+			rtbStatistics.EndUpdate();
 		}
 
 		private void UpdateTreeViewWithCards(AgotCardTreeView treeView, AgotCardList cards, AgotDeck deck)

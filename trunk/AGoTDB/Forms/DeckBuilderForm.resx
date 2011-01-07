@@ -425,60 +425,6 @@
   <data name="&gt;&gt;tabPageCardtext.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rtbStatistics.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="rtbStatistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 179</value>
-  </data>
-  <data name="rtbStatistics.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rtbStatistics.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Name" xml:space="preserve">
-    <value>rtbStatistics</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
-    <value>tabPageStats</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageStats.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 185</value>
-  </data>
-  <data name="tabPageStats.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageStats.Text" xml:space="preserve">
-    <value>Statistics</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Name" xml:space="preserve">
-    <value>tabPageStats</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Parent" xml:space="preserve">
-    <value>tabControlLocalInfo</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="tabControlLocalInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -653,31 +599,58 @@
   <data name="&gt;&gt;tabPageHistory.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rtbStatistics.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbStatistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 175</value>
+  </data>
+  <data name="rtbStatistics.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rtbStatistics.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Name" xml:space="preserve">
+    <value>rtbStatistics</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
+    <value>tabPageStats</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageStats.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="tabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPageStats.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
     <value>762, 181</value>
   </data>
-  <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabPageStats.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Infos</value>
+  <data name="tabPageStats.Text" xml:space="preserve">
+    <value>Stats</value>
   </data>
-  <data name="&gt;&gt;tabPage5.Name" xml:space="preserve">
-    <value>tabPage5</value>
+  <data name="&gt;&gt;tabPageStats.Name" xml:space="preserve">
+    <value>tabPageStats</value>
   </data>
-  <data name="&gt;&gt;tabPage5.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPageStats.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPage5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPageStats.Parent" xml:space="preserve">
     <value>tabControlGlobalInfo</value>
   </data>
-  <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabPageStats.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tabControlGlobalInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1136,6 +1109,9 @@
         AB8AAAA/AAAAfwAAAP8AAAD/AAAB/wAAA/8AAAf/AAAP/wAAB/8AAAH/AAAA/wAAAD8AAAAfAAAABwAA
         AAcAAAAfwAAA//gAH/////////////////8=
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Deck Builder -</value>
