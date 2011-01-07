@@ -35,5 +35,11 @@ namespace GenericDB.Components
 		/// Cards displayed by this treeview.
 		/// </summary>
 		public TCL Cards { get; set; }
+
+		public CardTreeView()
+			:base()
+		{
+			SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+		}
 	}
 }
