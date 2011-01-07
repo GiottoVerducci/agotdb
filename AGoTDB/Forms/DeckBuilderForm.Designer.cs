@@ -46,15 +46,11 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard = new System.Windows.Forms.TabPage();
 			this.tabControlLocalInfo = new System.Windows.Forms.TabControl();
 			this.tabPageCardtext = new System.Windows.Forms.TabPage();
-			this.rtbCardText = new System.Windows.Forms.RichTextBox();
-			this.tabPageStats = new System.Windows.Forms.TabPage();
-			this.rtbStatistics = new System.Windows.Forms.RichTextBox();
 			this.tabControlGlobalInfo = new System.Windows.Forms.TabControl();
 			this.tabPageDescription = new System.Windows.Forms.TabPage();
 			this.rtbDescription = new System.Windows.Forms.RichTextBox();
 			this.tabPageHistory = new System.Windows.Forms.TabPage();
 			this.treeViewHistory = new System.Windows.Forms.TreeView();
-			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.lblDeckName = new System.Windows.Forms.Label();
 			this.tbDeckName = new System.Windows.Forms.TextBox();
 			this.menuStripMain = new System.Windows.Forms.MenuStrip();
@@ -75,6 +71,9 @@ namespace AGoTDB.Forms
 			this.tbAuthor = new System.Windows.Forms.TextBox();
 			this.lblAuthor = new System.Windows.Forms.Label();
 			this.eclAgenda = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+			this.tabPageStats = new System.Windows.Forms.TabPage();
+			this.rtbCardText = new System.Windows.Forms.RichTextBox();
+			this.rtbStatistics = new System.Windows.Forms.RichTextBox();
 			this.treeViewDeck = new AGoTDB.Components.AgotCardTreeView();
 			this.treeViewSide = new AGoTDB.Components.AgotCardTreeView();
 			this.splitContainer2.Panel1.SuspendLayout();
@@ -89,11 +88,11 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard.SuspendLayout();
 			this.tabControlLocalInfo.SuspendLayout();
 			this.tabPageCardtext.SuspendLayout();
-			this.tabPageStats.SuspendLayout();
 			this.tabControlGlobalInfo.SuspendLayout();
 			this.tabPageDescription.SuspendLayout();
 			this.tabPageHistory.SuspendLayout();
 			this.menuStripMain.SuspendLayout();
+			this.tabPageStats.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer2
@@ -195,7 +194,6 @@ namespace AGoTDB.Forms
 			// tabControlLocalInfo
 			// 
 			this.tabControlLocalInfo.Controls.Add(this.tabPageCardtext);
-			this.tabControlLocalInfo.Controls.Add(this.tabPageStats);
 			resources.ApplyResources(this.tabControlLocalInfo, "tabControlLocalInfo");
 			this.tabControlLocalInfo.Name = "tabControlLocalInfo";
 			this.tabControlLocalInfo.SelectedIndex = 0;
@@ -207,30 +205,11 @@ namespace AGoTDB.Forms
 			this.tabPageCardtext.Name = "tabPageCardtext";
 			this.tabPageCardtext.UseVisualStyleBackColor = true;
 			// 
-			// rtbCardText
-			// 
-			this.rtbCardText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			resources.ApplyResources(this.rtbCardText, "rtbCardText");
-			this.rtbCardText.Name = "rtbCardText";
-			// 
-			// tabPageStats
-			// 
-			this.tabPageStats.Controls.Add(this.rtbStatistics);
-			resources.ApplyResources(this.tabPageStats, "tabPageStats");
-			this.tabPageStats.Name = "tabPageStats";
-			this.tabPageStats.UseVisualStyleBackColor = true;
-			// 
-			// rtbStatistics
-			// 
-			this.rtbStatistics.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			resources.ApplyResources(this.rtbStatistics, "rtbStatistics");
-			this.rtbStatistics.Name = "rtbStatistics";
-			// 
 			// tabControlGlobalInfo
 			// 
 			this.tabControlGlobalInfo.Controls.Add(this.tabPageDescription);
 			this.tabControlGlobalInfo.Controls.Add(this.tabPageHistory);
-			this.tabControlGlobalInfo.Controls.Add(this.tabPage5);
+			this.tabControlGlobalInfo.Controls.Add(this.tabPageStats);
 			resources.ApplyResources(this.tabControlGlobalInfo, "tabControlGlobalInfo");
 			this.tabControlGlobalInfo.Name = "tabControlGlobalInfo";
 			this.tabControlGlobalInfo.SelectedIndex = 0;
@@ -262,12 +241,6 @@ namespace AGoTDB.Forms
 			this.treeViewHistory.HideSelection = false;
 			this.treeViewHistory.Name = "treeViewHistory";
 			this.treeViewHistory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewHistory_AfterSelect);
-			// 
-			// tabPage5
-			// 
-			resources.ApplyResources(this.tabPage5, "tabPage5");
-			this.tabPage5.Name = "tabPage5";
-			this.tabPage5.UseVisualStyleBackColor = true;
 			// 
 			// lblDeckName
 			// 
@@ -407,6 +380,25 @@ namespace AGoTDB.Forms
 			this.eclAgenda.ThreeState = false;
 			this.eclAgenda.SelectedValueChanged += new System.EventHandler(this.eclAgenda_SelectedValueChanged);
 			// 
+			// tabPageStats
+			// 
+			this.tabPageStats.Controls.Add(this.rtbStatistics);
+			resources.ApplyResources(this.tabPageStats, "tabPageStats");
+			this.tabPageStats.Name = "tabPageStats";
+			this.tabPageStats.UseVisualStyleBackColor = true;
+			// 
+			// rtbCardText
+			// 
+			this.rtbCardText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.rtbCardText, "rtbCardText");
+			this.rtbCardText.Name = "rtbCardText";
+			// 
+			// rtbStatistics
+			// 
+			this.rtbStatistics.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.rtbStatistics, "rtbStatistics");
+			this.rtbStatistics.Name = "rtbStatistics";
+			// 
 			// treeViewDeck
 			// 
 			this.treeViewDeck.Cards = null;
@@ -476,12 +468,12 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard.ResumeLayout(false);
 			this.tabControlLocalInfo.ResumeLayout(false);
 			this.tabPageCardtext.ResumeLayout(false);
-			this.tabPageStats.ResumeLayout(false);
 			this.tabControlGlobalInfo.ResumeLayout(false);
 			this.tabPageDescription.ResumeLayout(false);
 			this.tabPageHistory.ResumeLayout(false);
 			this.menuStripMain.ResumeLayout(false);
 			this.menuStripMain.PerformLayout();
+			this.tabPageStats.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -510,16 +502,13 @@ namespace AGoTDB.Forms
 		private AgotCardTreeView treeViewDeck;
 		private System.Windows.Forms.TabControl tabControlLocalInfo;
 		private System.Windows.Forms.TabPage tabPageCardtext;
-		private System.Windows.Forms.TabPage tabPageStats;
 		private System.Windows.Forms.TabControl tabControlGlobalInfo;
 		private System.Windows.Forms.TabPage tabPageDescription;
 		private System.Windows.Forms.RichTextBox rtbDescription;
 		private System.Windows.Forms.TabPage tabPageHistory;
-		private System.Windows.Forms.TabPage tabPage5;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripTreeView;
 		private System.Windows.Forms.ToolStripMenuItem miIncreaseCount;
 		private System.Windows.Forms.ToolStripMenuItem miDecreaseCount;
-		private System.Windows.Forms.RichTextBox rtbCardText;
 		private System.Windows.Forms.TextBox tbAuthor;
 		private System.Windows.Forms.Label lblAuthor;
 		private System.Windows.Forms.TreeView treeViewHistory;
@@ -531,8 +520,10 @@ namespace AGoTDB.Forms
 		private AgotCardTreeView treeViewSide;
 		private System.Windows.Forms.ToolStripMenuItem miAddCardList;
 		private System.Windows.Forms.ToolStripMenuItem miRemoveCardList;
-    private Beyond.ExtendedControls.ExtendedCheckedListBox eclAgenda;
-	private System.Windows.Forms.RichTextBox rtbStatistics;
+		private Beyond.ExtendedControls.ExtendedCheckedListBox eclAgenda;
 	private System.Windows.Forms.ToolStripMenuItem miGenerateProxyPdf;
+	private System.Windows.Forms.RichTextBox rtbCardText;
+	private System.Windows.Forms.TabPage tabPageStats;
+	private System.Windows.Forms.RichTextBox rtbStatistics;
 	}
 }
