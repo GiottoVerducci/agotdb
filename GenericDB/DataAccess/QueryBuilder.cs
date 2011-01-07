@@ -17,9 +17,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Beyond.ExtendedControls;
-using GenericDB.DataAccess;
 
 namespace GenericDB.DataAccess
 {
@@ -134,7 +134,7 @@ namespace GenericDB.DataAccess
 			result += GetFilterFromItems(includedValues, true, logicalOperator, positiveDataType);
 			// excluded values
 			var excludedValues = clb.GetItemsByState(CheckState.Indeterminate).ConvertAll<DbFilter>(i => (DbFilter)i);
-			if(additionalExcludedItems != null)
+			if (additionalExcludedItems != null)
 				excludedValues.AddRange(additionalExcludedItems);
 			result += GetFilterFromItems(excludedValues, false, logicalOperator, positiveDataType);
 
@@ -207,15 +207,21 @@ namespace GenericDB.DataAccess
 					case PositiveDataType.Yes: subresult = String.Format(" ({0} = {1}) ", filter.Column, expectedYes); break;
 					case PositiveDataType.KeywordValue:
 						string value = filter.ToString();
+						// treat ellipsis
+						// treat X such as in "House X character only"
+						var words = EscapeSqlCharacters(value).Split(' ');
+						words = words.Select(w => w == "X" ? "%" : w).ToArray();
+						value = String.Join(" ", words);
+
 						int pos = Math.Max(value.IndexOf("..."), value.IndexOf('…'));
 						if (pos == -1) // no ellipsis, keep the value as it is
-							value = String.Format("%{0}.%", EscapeSqlCharacters(value));
+							value = String.Format("%{0}.%", value);
 						if (pos != -1) // ellipsis, remove the last word and "..." or "…"
 						{
 							value = value.Substring(0, value.Substring(0, pos).LastIndexOf(' '));
-							value = String.Format("%{0}%.%", EscapeSqlCharacters(value));
+							value = String.Format("%{0}%.%", value);
 						}
-						value = value.Replace(" X ", " % "); // ex: Personnages X uniquement
+
 						subresult = String.Format(" ({0}{1} LIKE '{2}') ", prefix, filter.Column, value); break;
 					case PositiveDataType.TriggerValue: subresult = String.Format(" ({0}{1} LIKE '%{2}%') ", prefix, filter.Column, EscapeSqlCharacters(filter + ": ")); break;
 				}

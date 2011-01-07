@@ -74,6 +74,7 @@
     <Compile Include="BusinessObjects\XmlToolBox.cs" />
     <Compile Include="DataAccess\Query.cs" />
     <Compile Include="DataAccess\RowFormattedDataExtractor.cs" />
+    <Compile Include="Extensions\ExtendedCheckedListBoxExtension.cs" />
     <Compile Include="Extensions\IDictionaryExtension.cs" />
     <Compile Include="Forms\NewVersionInfoForm.cs">
       <SubType>Form</SubType>

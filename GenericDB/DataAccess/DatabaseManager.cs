@@ -16,15 +16,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Beyond.ExtendedControls;
-using System.Data;
-using System.Data.OleDb;
-using System.IO;
 using GenericDB.BusinessObjects;
-using GenericDB.DataAccess;
+using GenericDB.Extensions;
 
 namespace GenericDB.DataAccess
 {
@@ -475,28 +475,44 @@ namespace GenericDB.DataAccess
 		/// <param name="tableName">The name of the table where to get the data from</param>
 		/// <param name="column">the column in the main database associated to this checkbox (used by the filter). Ignored if useKey is true</param>
 		/// <param name="tableType">The type indicating the columns to use</param>
-		public void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType)
+		/// <param name="filter">The predicate used to keep some items (if returning true) or discard them so they don't appear in the list (if returning false). Null if no filter is used.</param>
+		public void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType, Predicate<DbFilter> filter)
 		{
 			DataTable table = GetResultFromRequest(String.Format("SELECT * FROM [{0}] ORDER BY Id", tableName));
-			clb.Items.Clear();
-			switch (tableType)
+
+			clb.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
 			{
-				case TableType.Value:
-					for (var i = 1; i < table.Rows.Count; ++i)
-						clb.Items.Add(new DbFilter(table.Rows[i]["Value"].ToString(), column)); break;
-				case TableType.ValueKey:
-					for (var i = 1; i < table.Rows.Count; ++i)
-						clb.Items.Add(new DbFilter(table.Rows[i]["Value"].ToString(), table.Rows[i]["Key"].ToString())); break;
-				case TableType.ValueShortName:
-					for (var i = 1; i < table.Rows.Count; ++i)
-						clb.Items.Add(new DbFilter(table.Rows[i]["Value"].ToString(), column, table.Rows[i]["ShortName"].ToString())); break;
-				case TableType.ValueId:
-					for (var i = 1; i < table.Rows.Count; ++i)
-						clb.Items.Add(new DbFilter(table.Rows[i]["Value"].ToString(), table.Rows[i]["Id"].ToString())); break;
-			}
-			clb.Summary = table.Rows[0]["Value"].ToString();
-			clb.UpdateSize();
+				ecl.Items.Clear();
+
+				// define the way the data row is converted to a DbFilter item
+				Converter<DataRow, DbFilter> converter;
+				switch (tableType)
+				{
+					case TableType.Value: converter = (r => new DbFilter(r["Value"].ToString(), column)); break;
+					case TableType.ValueKey: converter = (r => new DbFilter(r["Value"].ToString(), r["Key"].ToString())); break;
+					case TableType.ValueShortName: converter = (r => new DbFilter(r["Value"].ToString(), column, r["ShortName"].ToString())); break;
+					case TableType.ValueId: converter = (r => new DbFilter(r["Value"].ToString(), r["Id"].ToString())); break;
+					default: throw new ArgumentException(string.Format("TableType {0} not supported.", tableType));
+				}
+
+				// add the items that are not discarded by the filter predicate as DbFilter items
+				for (var i = 1; i < table.Rows.Count; ++i)
+				{
+					var dbFilter = converter(table.Rows[i]);
+					if (filter == null || filter(dbFilter))
+						ecl.Items.Add(dbFilter);
+				}
+
+				ecl.Summary = table.Rows[0]["Value"].ToString();
+				ecl.UpdateSize();
+			});
 		}
+
+		public void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType)
+		{
+			UpdateExtendedCheckedListBox(clb, tableName, column, tableType, null);
+		}
+
 
 		/// <summary>
 		/// Returns all the cards (should have only 1 row) that have a given universal id.
