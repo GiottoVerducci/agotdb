@@ -31,8 +31,10 @@ using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
 using AGoTDB.Components;
 using AGoTDB.Services;
+using Beyond.ExtendedControls;
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
+using GenericDB.Extensions;
 using GenericDB.Forms;
 
 namespace AGoTDB.Forms
@@ -104,21 +106,22 @@ namespace AGoTDB.Forms
 				IsCardNode,
 				x => ((TypeNodeInfo)x.Tag).Type
 			);
-
-			ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameHouse, "House", TableType.ValueId);
-			eclHouse.Summary += " - " + eclHouse.Items[0].ToString();
-			eclHouse.Items.RemoveAt(0); // remove neutral house
-			UpdateAgendaComboBox();
-			UpdateHistoryFromVersionedDeck();
-			//treeViewDeck.TreeViewNodeSorter = deckTreeNodeSorter; // we don't use it because it's slower than inserting directly at the right place (visible when loading decks)
-			miGenerateProxyPdf.Visible = ApplicationSettings.ImagesFolderExists; // show the proxy generator only if the images folder exists
 		}
 
 		#region Form events (FormShown/Closed, NodeClick or HouseValue changed, tvHistory select)
 		private void DeckBuilderForm_Shown(object sender, EventArgs e)
 		{
-			eclHouse.UpdateSize(); // update size because neutral house has been removed
-			eclAgenda.UpdateSize();
+			ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameHouse, "House", TableType.ValueId);
+			eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+			{
+				ecl.Summary += " - " + ecl.Items[0].ToString();
+				ecl.Items.RemoveAt(0); // remove neutral house
+				ecl.UpdateSize(); // update size because neutral house has been removed
+			});
+			UpdateAgendaComboBox();
+			UpdateHistoryFromVersionedDeck();
+			//treeViewDeck.TreeViewNodeSorter = deckTreeNodeSorter; // we don't use it because it's slower than inserting directly at the right place (visible when loading decks)
+			miGenerateProxyPdf.Visible = ApplicationSettings.ImagesFolderExists; // show the proxy generator only if the images folder exists
 		}
 
 		private void DeckBuilderForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -316,11 +319,14 @@ namespace AGoTDB.Forms
 		/// </summary>
 		private void UpdateAgendaComboBox()
 		{
-			eclAgenda.Items.Clear();
-			var table = ApplicationSettings.DatabaseManager.GetAgendas();
-			foreach (DataRow row in table.Rows)
-				eclAgenda.Items.Add(new AgotCard(row));
-			eclAgenda.UpdateSize();
+			eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+			{
+				ecl.Items.Clear();
+				var table = ApplicationSettings.DatabaseManager.GetAgendas();
+				foreach (DataRow row in table.Rows)
+					ecl.Items.Add(new AgotCard(row));
+				ecl.UpdateSize();
+			});
 		}
 
 		private static void UpdateTypeNodeText(TreeNode typeNode)
@@ -621,74 +627,70 @@ namespace AGoTDB.Forms
 		private void UpdateHouseFromControls()
 		{
 			var h = 0;
-			bool condensed = eclHouse.Condensed; // we'll use it to restore its previous state
-			if (condensed)
-				eclHouse.Condensed = false; // expand ecl to get access to the items
-			for (var i = 0; i < eclHouse.Items.Count; ++i)
-				if (eclHouse.GetItemCheckState(i) == CheckState.Checked)
-					h += Int32.Parse(((DbFilter)eclHouse.Items[i]).Column, CultureInfo.InvariantCulture);
-			fCurrentDeck.Houses = h;
-			if (condensed)
-				eclHouse.Condensed = true;
+			eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+			{
+				for (var i = 0; i < ecl.Items.Count; ++i)
+					if (ecl.GetItemCheckState(i) == CheckState.Checked)
+						h += Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
+			});
 			UpdateTreeViews();
 		}
 
 		private void UpdateControlsFromHouse()
 		{
 			var h = fCurrentDeck.Houses;
-			bool condensed = eclHouse.Condensed; // we'll use it to restore its previous state
-			eclHouse.Condensed = false; // expand ecl to get access to the items
-
-			for (var i = eclHouse.Items.Count - 1; i >= 0; --i) // houses are sorted by increasing value
+			eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
 			{
-				var hv = Int32.Parse(((DbFilter)eclHouse.Items[i]).Column, CultureInfo.InvariantCulture);
-				if (h >= hv)
+				for (var i = ecl.Items.Count - 1; i >= 0; --i) // houses are sorted by increasing value
 				{
-					eclHouse.SetItemCheckState(i, CheckState.Checked);
-					h -= hv;
+					var hv = Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
+					if (h >= hv)
+					{
+						ecl.SetItemCheckState(i, CheckState.Checked);
+						h -= hv;
+					}
+					else
+						ecl.SetItemCheckState(i, CheckState.Unchecked);
 				}
-				else
-					eclHouse.SetItemCheckState(i, CheckState.Unchecked);
-			}
-			eclHouse.Condensed = condensed;
+			});
 		}
 
 		private void UpdateAgendaFromControls()
 		{
+			var agenda = new AgotCardList();
+			eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+			{
+				for (var i = 0; i < ecl.Items.Count; ++i)
+					if (ecl.GetItemCheckState(i) == CheckState.Checked)
+					{
+						agenda.Add(ecl.Items[i] as AgotCard);
+					}
+			});
 			fCurrentDeck.Agenda.Clear();
-			bool condensed = eclAgenda.Condensed; // we'll use it to restore its previous state
-			if (condensed)
-				eclAgenda.Condensed = false; // expand ecl to get access to the items
-			for (var i = 0; i < eclAgenda.Items.Count; ++i)
-				if (eclAgenda.GetItemCheckState(i) == CheckState.Checked)
-				{
-					fCurrentDeck.Agenda.Add(eclAgenda.Items[i] as AgotCard);
-				}
-			if (condensed)
-				eclAgenda.Condensed = true;
+			fCurrentDeck.Agenda.AddRange(agenda);
 		}
 
 		private void UpdateControlsFromAgenda()
 		{
-			bool condensed = eclAgenda.Condensed; // we'll use it to restore its previous state
-			eclAgenda.Condensed = false; // expand ecl to get access to the items
-
 			// check for agenda in the deck but missing in our list 
 			var missingAgenda = new List<AgotCard>();
+			var currentAgenda = new List<AgotCard>(fCurrentDeck.Agenda);
 			missingAgenda.AddRange(fCurrentDeck.Agenda);
-			missingAgenda.RemoveAll(a => eclAgenda.Items.Contains(a));
 
-			eclAgenda.Items.AddRange(missingAgenda.ToArray());
-			for (var i = eclAgenda.Items.Count - 1; i >= 0; --i)
+			eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
 			{
-				var agenda = eclAgenda.Items[i] as AgotCard;
-				if (fCurrentDeck.Agenda.Contains(agenda))
-					eclAgenda.SetItemCheckState(i, CheckState.Checked);
-				else
-					eclAgenda.SetItemCheckState(i, CheckState.Unchecked);
-			}
+				missingAgenda.RemoveAll(a => ecl.Items.Contains(a));
 
-			eclAgenda.Condensed = condensed;
+				ecl.Items.AddRange(missingAgenda.ToArray());
+				for (var i = ecl.Items.Count - 1; i >= 0; --i)
+				{
+					var agenda = ecl.Items[i] as AgotCard;
+					if (currentAgenda.Contains(agenda))
+						ecl.SetItemCheckState(i, CheckState.Checked);
+					else
+						ecl.SetItemCheckState(i, CheckState.Unchecked);
+				}
+			});
 		}
 
 		private void UpdateHistoryFromVersionedDeck()
@@ -913,9 +915,11 @@ namespace AGoTDB.Forms
 		#region Deck tree view drawing
 		private void treeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
 		{
+			var treeView = (AgotCardTreeView)sender;
+			if (treeView.IsBeingUpdated()) // no redraw when updating
+				return;
 			if (IsCardNode(e.Node))
 			{
-				var treeView = (AgotCardTreeView)sender;
 				Font font = GetNodeFont(e.Node);
 
 				var cardNodeInfo = GetCardNodeInfo(e.Node);
@@ -989,15 +993,15 @@ namespace AGoTDB.Forms
 		public bool AddCardToCurrent(AgotCard card)
 		{
 			return tabControlDecks.SelectedTab == tabPageDeck
-							 ? AddCardToDeck(card)
-							 : AddCardToSide(card);
+				? AddCardToDeck(card)
+				: AddCardToSide(card);
 		}
 
 		private bool SubtractCardFromCurrent(AgotCard card)
 		{
 			return tabControlDecks.SelectedTab == tabPageDeck
-							 ? SubtractCardFromDeck(card)
-							 : SubtractCardFromSide(card);
+				? SubtractCardFromDeck(card)
+				: SubtractCardFromSide(card);
 		}
 
 		private bool SaveVersionedDeck(bool forceCallToSaveDialog)

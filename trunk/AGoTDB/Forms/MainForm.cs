@@ -23,17 +23,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-using System.Data.OleDb;
 using AGoTDB.BusinessObjects;
 using AGoTDB.DataAccess;
 using Beyond.ExtendedControls;
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
-using System.Linq;
+using GenericDB.Extensions;
 
 namespace AGoTDB.Forms
 {
@@ -322,11 +323,16 @@ namespace AGoTDB.Forms
 
 			if (miLcgSetsOnly.Checked)
 			{
-				// add the lcg unchecked expansions to perform a search on lcg expansions only
 				var uncheckedValues = eclExpansionSet.GetItemsByState(CheckState.Unchecked).ConvertAll<DbFilter>(i => (DbFilter)i);
-				additionalIncludedSets = new List<DbFilter>(
-					uncheckedValues.FindAll(v => AgotCard.ExpansionSets[v.ShortName]));
-				if (additionalIncludedSets.Count == 0 // all LCG expansions are removed 
+				var checkedValues = eclExpansionSet.GetItemsByState(CheckState.Checked).ConvertAll<DbFilter>(i => (DbFilter)i);
+
+				// add the lcg unchecked expansions to perform a search on all lcg expansions only
+				// only if no lcg expansion is checked
+				additionalIncludedSets = checkedValues.Any(v => AgotCard.ExpansionSets[v.ShortName])
+					? null
+					: new List<DbFilter>(uncheckedValues.FindAll(v => AgotCard.ExpansionSets[v.ShortName]));
+
+				if (additionalIncludedSets != null && additionalIncludedSets.Count == 0 // all LCG expansions are removed 
 					&& eclExpansionSet.GetItemsByState(CheckState.Checked).Count == 0) //and no other non-LCG set is explicit added
 					additionalExcludedSets = new List<DbFilter>(uncheckedValues);
 			}
@@ -694,6 +700,32 @@ namespace AGoTDB.Forms
 					windowToolStripMenuItem.DropDownItems.RemoveAt(i);
 					return;
 				}
+		}
+
+		private void miLcgSetsOnly_Click(object sender, EventArgs e)
+		{
+			// keep the state of the checked items
+			var checkedItems = eclExpansionSet.GetItemsByState(CheckState.Checked);
+			var indeterminateItems = eclExpansionSet.GetItemsByState(CheckState.Indeterminate);
+			
+			// reload the items by filtering them if the "LCG only" checkbox is checked
+			ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName,
+				miLcgSetsOnly.Checked 
+					? (item => AgotCard.ExpansionSets[item.ShortName]) 
+					: (Predicate<DbFilter>)null);
+			
+			// recheck the items the way they were before
+			eclExpansionSet.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+			{
+				for (int i = 0; i < ecl.Items.Count; ++i)
+				{
+					var item = (DbFilter)ecl.Items[i];
+					if (checkedItems.Any(o => ((DbFilter)o).ShortName == item.ShortName))
+						ecl.SetItemCheckState(i, CheckState.Checked);
+					else if (indeterminateItems.Any(o => ((DbFilter)o).ShortName == item.ShortName))
+						ecl.SetItemCheckState(i, CheckState.Indeterminate);
+				}
+			});
 		}
 	}
 }

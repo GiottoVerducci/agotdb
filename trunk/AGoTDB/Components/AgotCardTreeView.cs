@@ -31,5 +31,31 @@ namespace AGoTDB.Components
 		/// used to highlight out of House cards)
 		/// </summary>
 		public AgotDeck Deck { get; set; }
+
+		/// <summary>
+		/// Keeps the count of calls to BeginUpdate and EndUpdate to be used by the IsBeingUpdated method.
+		/// </summary>
+		protected int updateCount = 0;
+
+		/// <summary>
+		/// Indicates whether the control is being updated or not. When it is, drawing must be skipped.
+		/// </summary>
+		/// <returns>True if the control is being updated, false otherwise.</returns>
+		public bool IsBeingUpdated()
+		{
+			return updateCount > 0;
+		}
+
+		public new void BeginUpdate()
+		{
+			++updateCount;
+			base.BeginUpdate();
+		}
+
+		public new void EndUpdate()
+		{
+			--updateCount;
+			base.EndUpdate();
+		}
 	}
 }
