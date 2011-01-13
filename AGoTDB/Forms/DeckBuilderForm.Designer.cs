@@ -46,11 +46,15 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard = new System.Windows.Forms.TabPage();
 			this.tabControlLocalInfo = new System.Windows.Forms.TabControl();
 			this.tabPageCardtext = new System.Windows.Forms.TabPage();
+			this.splitCardText = new System.Windows.Forms.SplitContainer();
+			this.rtbCardText = new System.Windows.Forms.RichTextBox();
 			this.tabControlGlobalInfo = new System.Windows.Forms.TabControl();
 			this.tabPageDescription = new System.Windows.Forms.TabPage();
 			this.rtbDescription = new System.Windows.Forms.RichTextBox();
 			this.tabPageHistory = new System.Windows.Forms.TabPage();
 			this.treeViewHistory = new System.Windows.Forms.TreeView();
+			this.tabPageStats = new System.Windows.Forms.TabPage();
+			this.rtbStatistics = new System.Windows.Forms.RichTextBox();
 			this.lblDeckName = new System.Windows.Forms.Label();
 			this.tbDeckName = new System.Windows.Forms.TextBox();
 			this.menuStripMain = new System.Windows.Forms.MenuStrip();
@@ -71,11 +75,9 @@ namespace AGoTDB.Forms
 			this.tbAuthor = new System.Windows.Forms.TextBox();
 			this.lblAuthor = new System.Windows.Forms.Label();
 			this.eclAgenda = new Beyond.ExtendedControls.ExtendedCheckedListBox();
-			this.tabPageStats = new System.Windows.Forms.TabPage();
-			this.rtbCardText = new System.Windows.Forms.RichTextBox();
-			this.rtbStatistics = new System.Windows.Forms.RichTextBox();
 			this.treeViewDeck = new AGoTDB.Components.AgotCardTreeView();
 			this.treeViewSide = new AGoTDB.Components.AgotCardTreeView();
+			this.cardPreviewControl = new AGoTDB.Forms.CardPreviewControl();
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
@@ -88,11 +90,14 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard.SuspendLayout();
 			this.tabControlLocalInfo.SuspendLayout();
 			this.tabPageCardtext.SuspendLayout();
+			this.splitCardText.Panel1.SuspendLayout();
+			this.splitCardText.Panel2.SuspendLayout();
+			this.splitCardText.SuspendLayout();
 			this.tabControlGlobalInfo.SuspendLayout();
 			this.tabPageDescription.SuspendLayout();
 			this.tabPageHistory.SuspendLayout();
-			this.menuStripMain.SuspendLayout();
 			this.tabPageStats.SuspendLayout();
+			this.menuStripMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer2
@@ -200,10 +205,29 @@ namespace AGoTDB.Forms
 			// 
 			// tabPageCardtext
 			// 
-			this.tabPageCardtext.Controls.Add(this.rtbCardText);
+			this.tabPageCardtext.Controls.Add(this.splitCardText);
 			resources.ApplyResources(this.tabPageCardtext, "tabPageCardtext");
 			this.tabPageCardtext.Name = "tabPageCardtext";
 			this.tabPageCardtext.UseVisualStyleBackColor = true;
+			// 
+			// splitCardText
+			// 
+			resources.ApplyResources(this.splitCardText, "splitCardText");
+			this.splitCardText.Name = "splitCardText";
+			// 
+			// splitCardText.Panel1
+			// 
+			this.splitCardText.Panel1.Controls.Add(this.rtbCardText);
+			// 
+			// splitCardText.Panel2
+			// 
+			this.splitCardText.Panel2.Controls.Add(this.cardPreviewControl);
+			// 
+			// rtbCardText
+			// 
+			this.rtbCardText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.rtbCardText, "rtbCardText");
+			this.rtbCardText.Name = "rtbCardText";
 			// 
 			// tabControlGlobalInfo
 			// 
@@ -241,6 +265,19 @@ namespace AGoTDB.Forms
 			this.treeViewHistory.HideSelection = false;
 			this.treeViewHistory.Name = "treeViewHistory";
 			this.treeViewHistory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewHistory_AfterSelect);
+			// 
+			// tabPageStats
+			// 
+			this.tabPageStats.Controls.Add(this.rtbStatistics);
+			resources.ApplyResources(this.tabPageStats, "tabPageStats");
+			this.tabPageStats.Name = "tabPageStats";
+			this.tabPageStats.UseVisualStyleBackColor = true;
+			// 
+			// rtbStatistics
+			// 
+			this.rtbStatistics.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			resources.ApplyResources(this.rtbStatistics, "rtbStatistics");
+			this.rtbStatistics.Name = "rtbStatistics";
 			// 
 			// lblDeckName
 			// 
@@ -308,6 +345,7 @@ namespace AGoTDB.Forms
 			// 
 			this.printDeckToolStripMenuItem.Name = "printDeckToolStripMenuItem";
 			resources.ApplyResources(this.printDeckToolStripMenuItem, "printDeckToolStripMenuItem");
+			this.printDeckToolStripMenuItem.Click += new System.EventHandler(this.printDeckToolStripMenuItem_Click);
 			// 
 			// exportToClipboardToolStripMenuItem
 			// 
@@ -380,25 +418,6 @@ namespace AGoTDB.Forms
 			this.eclAgenda.ThreeState = false;
 			this.eclAgenda.SelectedValueChanged += new System.EventHandler(this.eclAgenda_SelectedValueChanged);
 			// 
-			// tabPageStats
-			// 
-			this.tabPageStats.Controls.Add(this.rtbStatistics);
-			resources.ApplyResources(this.tabPageStats, "tabPageStats");
-			this.tabPageStats.Name = "tabPageStats";
-			this.tabPageStats.UseVisualStyleBackColor = true;
-			// 
-			// rtbCardText
-			// 
-			this.rtbCardText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			resources.ApplyResources(this.rtbCardText, "rtbCardText");
-			this.rtbCardText.Name = "rtbCardText";
-			// 
-			// rtbStatistics
-			// 
-			this.rtbStatistics.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			resources.ApplyResources(this.rtbStatistics, "rtbStatistics");
-			this.rtbStatistics.Name = "rtbStatistics";
-			// 
 			// treeViewDeck
 			// 
 			this.treeViewDeck.Cards = null;
@@ -436,6 +455,15 @@ namespace AGoTDB.Forms
 			this.treeViewSide.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
 			this.treeViewSide.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
 			// 
+			// cardPreviewControl
+			// 
+			this.cardPreviewControl.CardUniversalId = -1;
+			resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
+			this.cardPreviewControl.Name = "cardPreviewControl";
+			this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl1_MouseCaptureChanged);
+			this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl1_MouseLeave);
+			this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl1_MouseEnter);
+			// 
 			// DeckBuilderForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -468,12 +496,15 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard.ResumeLayout(false);
 			this.tabControlLocalInfo.ResumeLayout(false);
 			this.tabPageCardtext.ResumeLayout(false);
+			this.splitCardText.Panel1.ResumeLayout(false);
+			this.splitCardText.Panel2.ResumeLayout(false);
+			this.splitCardText.ResumeLayout(false);
 			this.tabControlGlobalInfo.ResumeLayout(false);
 			this.tabPageDescription.ResumeLayout(false);
 			this.tabPageHistory.ResumeLayout(false);
+			this.tabPageStats.ResumeLayout(false);
 			this.menuStripMain.ResumeLayout(false);
 			this.menuStripMain.PerformLayout();
-			this.tabPageStats.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -525,5 +556,7 @@ namespace AGoTDB.Forms
 	private System.Windows.Forms.RichTextBox rtbCardText;
 	private System.Windows.Forms.TabPage tabPageStats;
 	private System.Windows.Forms.RichTextBox rtbStatistics;
+	private System.Windows.Forms.SplitContainer splitCardText;
+	private CardPreviewControl cardPreviewControl;
 	}
 }

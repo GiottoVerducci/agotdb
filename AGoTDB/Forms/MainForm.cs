@@ -35,6 +35,7 @@ using Beyond.ExtendedControls;
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Extensions;
+using AGoTDB.Services;
 
 namespace AGoTDB.Forms
 {
@@ -71,7 +72,7 @@ namespace AGoTDB.Forms
 
 		private static void InitializeDatabaseConnection()
 		{
-			var createExtendedDb = UserSettings.Singleton.ReadBool("Startup", "CreateExtendedDB", true);
+			var createExtendedDb = UserSettings.CreateExtendedDB;
 			ApplicationSettings.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
 			var connectionResult = ApplicationSettings.DatabaseManager.Connect(createExtendedDb, ApplicationSettings.ApplicationVersion);
 			switch (connectionResult.ErrorCode)
@@ -79,8 +80,8 @@ namespace AGoTDB.Forms
 				case ConnectionErrorCode.Success:
 					if (createExtendedDb)
 					{
-						UserSettings.Singleton.WriteBool("Startup", "CreateExtendedDB", false);
-						UserSettings.Singleton.Save();
+						UserSettings.CreateExtendedDB = false;
+						UserSettings.Save();
 					}
 					break;
 				case ConnectionErrorCode.InvalidVersion:
@@ -116,7 +117,7 @@ namespace AGoTDB.Forms
 		{
 			fIsMainForm = true;
 			fMainForm = this;
-			fMustClose = (UserSettings.Singleton == null) || !ApplicationSettings.DatabaseManager.ConnectedToDatabase;
+			fMustClose = !(UserSettings.IsAvailable() && ApplicationSettings.DatabaseManager.ConnectedToDatabase);
 		}
 
 		/// <summary>
@@ -202,14 +203,14 @@ namespace AGoTDB.Forms
 		}
 
 		/// <summary>
-		/// Removes the pictures for discrete use.
+		/// Enables or removes the icons for discrete use.
 		/// </summary>
-		private void DisableImages()
+		private void DisplayIcons(bool displayImages)
 		{
-			picGold.Visible = false;
-			picInit.Visible = false;
-			picClaim.Visible = false;
-			picStrength.Visible = false;
+			picGold.Visible = displayImages;
+			picInit.Visible = displayImages;
+			picClaim.Visible = displayImages;
+			picStrength.Visible = displayImages;
 		}
 
 		/// <summary>
@@ -593,10 +594,16 @@ namespace AGoTDB.Forms
 				InitializeMainFormForShowing();
 		}
 
+		private void SetupDisplay()
+		{
+			DisplayIcons(UserSettings.DisplayImages);
+		}
+
 		private void InitializeMainFormForShowing()
 		{
-			if (!UserSettings.Singleton.ReadBool("SearchForm", "DisplayImages", false))
-				DisableImages();
+			//DownloadService.DownloadFile("http://agotdb.googlecode.com/files/AGoTDB%20-%20EN%20-%20Beta%200.722.zip", "c:\\temp\\toto.zip");
+
+			SetupDisplay();
 			UpdateControlsLabels();
 			LoadCardTypeNames();
 			LoadCardHouseNames();
@@ -612,6 +619,9 @@ namespace AGoTDB.Forms
 				if (dataGridView.Columns[i].GetType() != System.Type.GetType("System.Boolean"))
 					dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 			dataGridView.AutoResizeColumns();*/
+
+			// set options
+			miLcgSetsOnly.Checked = UserSettings.LcgSetsOnly;
 		}
 
 		private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -704,16 +714,20 @@ namespace AGoTDB.Forms
 
 		private void miLcgSetsOnly_Click(object sender, EventArgs e)
 		{
+			var lcgSetsOnly = miLcgSetsOnly.Checked;
+			UserSettings.LcgSetsOnly = lcgSetsOnly;
+			UserSettings.Save();
+
 			// keep the state of the checked items
 			var checkedItems = eclExpansionSet.GetItemsByState(CheckState.Checked);
 			var indeterminateItems = eclExpansionSet.GetItemsByState(CheckState.Indeterminate);
-			
+
 			// reload the items by filtering them if the "LCG only" checkbox is checked
 			ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName,
-				miLcgSetsOnly.Checked 
-					? (item => AgotCard.ExpansionSets[item.ShortName]) 
+				lcgSetsOnly
+					? (item => AgotCard.ExpansionSets[item.ShortName])
 					: (Predicate<DbFilter>)null);
-			
+
 			// recheck the items the way they were before
 			eclExpansionSet.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
 			{
@@ -726,6 +740,15 @@ namespace AGoTDB.Forms
 						ecl.SetItemCheckState(i, CheckState.Indeterminate);
 				}
 			});
+		}
+
+		private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (var optionsForm = new OptionsForm())
+			{
+				if (optionsForm.ShowDialog() == DialogResult.OK)
+					SetupDisplay();
+			}
 		}
 	}
 }

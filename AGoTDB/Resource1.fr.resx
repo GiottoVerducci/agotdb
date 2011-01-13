@@ -297,4 +297,7 @@
   <data name="ErrUnprintedProxies" xml:space="preserve">
     <value>Les cartes suivantes n'ont pas d'image et n'ont pu être ajoutées au document contenant les proxys  :</value>
   </data>
+  <data name="ImageNotAvailable" xml:space="preserve">
+    <value>Image non disponible.</value>
+  </data>
 </root>
