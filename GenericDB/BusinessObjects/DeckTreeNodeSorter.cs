@@ -38,15 +38,16 @@ namespace GenericDB.BusinessObjects
 		/// Initializes a new instance of DeckTreeNodeSorter with a string containing the type values 
 		/// ordered and separated by a column.
 		/// </summary>
-		/// <param name="orderedTypeValues">The type values, orderred and separated by a column.</param>
-		public DeckTreeNodeSorter(string orderedTypeValues,
+		/// <param name="orderedTypeValues">The ordered type values.</param>
+		/// <param name="isCardNodeDelegateMethod">[Delegate] Indicates whether the node is a card node (true) or not (false).</param>
+		/// <param name="getTypeDelegateMethod">[Delegate] Gets the type of card represented by the node.</param>
+		public DeckTreeNodeSorter(string[] orderedTypeValues,
 			IsCardNodeDelegate isCardNodeDelegateMethod,
 			GetTypeDelegate getTypeDelegateMethod)
 		{
-			var typeValues = orderedTypeValues.Split(',');
-			fOrderedTypes = typeValues.Length > 0 
+			fOrderedTypes = orderedTypeValues.Length > 0 
 				? new List<int>(
-					from type in typeValues
+					from type in orderedTypeValues
 					select Convert.ToInt32(type))
 				: new List<int>();
 			fIsCardNodeDelegateMethod = isCardNodeDelegateMethod;
