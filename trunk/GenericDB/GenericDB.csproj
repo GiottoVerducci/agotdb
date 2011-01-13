@@ -76,6 +76,7 @@
     <Compile Include="DataAccess\RowFormattedDataExtractor.cs" />
     <Compile Include="Extensions\ExtendedCheckedListBoxExtension.cs" />
     <Compile Include="Extensions\IDictionaryExtension.cs" />
+    <Compile Include="Extensions\RichTextBoxExtension.cs" />
     <Compile Include="Forms\NewVersionInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
