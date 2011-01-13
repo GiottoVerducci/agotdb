@@ -322,6 +322,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image not available..
+        /// </summary>
+        internal static string ImageNotAvailable {
+            get {
+                return ResourceManager.GetString("ImageNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Income.
         /// </summary>
         internal static string IncomeText {

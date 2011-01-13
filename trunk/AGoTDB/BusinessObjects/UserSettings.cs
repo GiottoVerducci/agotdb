@@ -42,7 +42,7 @@ namespace AGoTDB.BusinessObjects
 		/// <summary>
 		/// Gets the unique shared singleton instance of this class.
 		/// </summary>
-		public static Settings Singleton
+		private static Settings Singleton
 		{
 			get { return fSettings; }
 		}
@@ -60,6 +60,58 @@ namespace AGoTDB.BusinessObjects
 			{
 				return null;
 			}
+		}
+
+		public static bool IsAvailable()
+		{
+			return Singleton != null;
+		}
+
+		public static bool DisplayImages
+		{
+			get { return UserSettings.Singleton.ReadBool("General", "DisplayImages", true); }
+			set { UserSettings.Singleton.WriteBool("General", "DisplayImages", value); }
+		}
+
+		public static int ImagePreviewSize
+		{
+			get { return Math.Max(0, Math.Min(100, UserSettings.Singleton.ReadInt("General", "ImagePreviewSize", 100))); }
+			set { UserSettings.Singleton.WriteInt("General", "ImagePreviewSize", Math.Max(0, Math.Min(100, value))); }
+		}
+
+		public static bool CreateExtendedDB
+		{
+			get { return UserSettings.Singleton.ReadBool("Startup", "CreateExtendedDB", true); }
+			set { UserSettings.Singleton.WriteBool("Startup", "CreateExtendedDB", value); }
+		}
+
+		public static string[] TypeOrder
+		{
+			get { return UserSettings.Singleton.ReadString("DeckBuilder", "TypeOrder", "").Split(','); }
+			set { UserSettings.Singleton.WriteString("DeckBuilder", "TypeOrder", String.Join(",", value)); }
+		}
+
+		public static bool ShowNewVersionMessage
+		{
+			get { return UserSettings.Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true); }
+			set { UserSettings.Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", value); }
+		}
+
+		public static bool LcgSetsOnly
+		{
+			get { return UserSettings.Singleton.ReadBool("SearchForm", "LcgSetsOnly", false); }
+			set { UserSettings.Singleton.WriteBool("SearchForm", "LcgSetsOnly", value); }
+		}
+
+		public static string ImageRepositoryUrl
+		{
+			get { return UserSettings.Singleton.ReadString("General", "ImageRepositoryUrl", ""); }
+			set { UserSettings.Singleton.WriteString("General", "ImageRepositoryUrl", value); }
+		}
+
+		public static void Save()
+		{
+			UserSettings.Singleton.Save();
 		}
 	}
 }

@@ -300,4 +300,7 @@
   <data name="ErrUnprintedProxies" xml:space="preserve">
     <value>The following cards had no image and couldn't be added to the proxy document:</value>
   </data>
+  <data name="ImageNotAvailable" xml:space="preserve">
+    <value>Image not available.</value>
+  </data>
 </root>

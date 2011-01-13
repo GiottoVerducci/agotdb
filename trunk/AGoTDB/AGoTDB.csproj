@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\AgotCardList.cs" />
+    <Compile Include="Common\Win32.cs" />
     <Compile Include="Components\AgotCardTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -89,11 +90,29 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessObjects\AgotCard.cs" />
+    <Compile Include="Forms\CardPreviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\CardPreviewControl.Designer.cs">
+      <DependentUpon>CardPreviewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CardPreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CardPreviewForm.Designer.cs">
+      <DependentUpon>CardPreviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DrawSimulatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\DrawSimulatorForm.Designer.cs">
       <DependentUpon>DrawSimulatorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Resource1.fr.Designer.cs">
       <DependentUpon>Resource1.fr.resx</DependentUpon>
@@ -122,6 +141,12 @@
       <SubType>Designer</SubType>
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CardPreviewControl.resx">
+      <DependentUpon>CardPreviewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CardPreviewForm.resx">
+      <DependentUpon>CardPreviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DeckBuilderForm.fr.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DeckBuilderForm.cs</DependentUpon>
@@ -133,6 +158,9 @@
     <EmbeddedResource Include="Forms\DrawSimulatorForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DrawSimulatorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource1.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -171,6 +199,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\CardImageService.cs" />
+    <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\ProxyPdfGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

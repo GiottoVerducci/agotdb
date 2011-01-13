@@ -112,10 +112,8 @@ namespace AGoTDB.Services
 		{
 			foreach (var card in cardList)
 			{
-				var cardfilepath = String.Format("{0}\\{1}.jpg",
-					ApplicationSettings.ImagesFolder,
-					card.UniversalId);
-				if (File.Exists(cardfilepath))
+				var cardfilepath = CardImageService.GetImageFileName(card.UniversalId);
+				if (CardImageService.GetImageAvailability(cardfilepath) == ImageAvailability.Available)
 					printList.Add(new ProxyInfo()
 					{
 						ImagePath = cardfilepath,

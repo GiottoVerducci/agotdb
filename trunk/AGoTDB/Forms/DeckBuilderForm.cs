@@ -51,6 +51,7 @@ namespace AGoTDB.Forms
 		private AgotDeck fCurrentDeck; // deck currently displayed
 		private String fCurrentFilename; // filename of the deck (non-empty if the deck was loaded or saved)
 		private readonly List<AgotCardTreeView> fTreeViews;
+		private CardPreviewForm fCardPreviewForm = new CardPreviewForm();
 
 		private int fDeckTreeViewSpaceWidth; // width of a space using the deck tree view font (used to expand the lines)
 		private readonly DeckTreeNodeSorter fDeckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
@@ -102,7 +103,7 @@ namespace AGoTDB.Forms
 				fTreeViews[i].Deck = fCurrentDeck;
 			}
 			fDeckTreeNodeSorter = new DeckTreeNodeSorter(
-				UserSettings.Singleton.ReadString("DeckBuilder", "TypeOrder", ""),
+				UserSettings.TypeOrder,
 				IsCardNode,
 				x => ((TypeNodeInfo)x.Tag).Type
 			);
@@ -122,6 +123,16 @@ namespace AGoTDB.Forms
 			UpdateHistoryFromVersionedDeck();
 			//treeViewDeck.TreeViewNodeSorter = deckTreeNodeSorter; // we don't use it because it's slower than inserting directly at the right place (visible when loading decks)
 			miGenerateProxyPdf.Visible = ApplicationSettings.ImagesFolderExists; // show the proxy generator only if the images folder exists
+
+			if (UserSettings.DisplayImages)
+			{
+				fCardPreviewForm.Visible = true;
+			}
+			else
+			{
+				splitCardText.Panel2Collapsed = true;
+				splitCardText.IsSplitterFixed = true;
+			}
 		}
 
 		private void DeckBuilderForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -197,14 +208,13 @@ namespace AGoTDB.Forms
 		/// If the selected node is a card, the description of the card is displayed. Otherwise,
 		/// the textbox is cleared.
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void treeViewDeck_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			rtbCardText.Clear();
+			ClearCardInformations();
+
 			if (!IsCardNode(e.Node) || (e.Node.Tag == null))
 				return;
-			UpdateCardText((AgotCard)e.Node.Tag);
+			UpdateCardInformations((AgotCard)e.Node.Tag);
 		}
 
 		private void DeckBuilderForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -238,13 +248,15 @@ namespace AGoTDB.Forms
 
 		private void newVersionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (!UserSettings.Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true))
-				return;
-			using (var form = new FormNewVersionInfo())
+			if (UserSettings.ShowNewVersionMessage)
 			{
-				if (form.ShowDialog() != DialogResult.OK)
-					return;
-				UserSettings.Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", form.DisplayFormNextTime());
+				using (var form = new FormNewVersionInfo())
+				{
+					if (form.ShowDialog() != DialogResult.OK)
+						return;
+					UserSettings.ShowNewVersionMessage = form.DisplayFormNextTime();
+					UserSettings.Save();
+				}
 			}
 			using (var form = new RevisionCommentInputForm())
 			{
@@ -368,6 +380,25 @@ namespace AGoTDB.Forms
 		}
 
 		/// <summary>
+		/// Clears the card detail textbox and image preview.
+		/// </summary>
+		private void ClearCardInformations()
+		{
+			rtbCardText.Clear();
+			cardPreviewControl.Visible = false;
+		}
+
+		/// <summary>
+		/// Updates the card detail textbox and image preview with a given card.
+		/// </summary>
+		private void UpdateCardInformations(AgotCard card)
+		{
+			UpdateCardText(card);
+			if (UserSettings.DisplayImages)
+				UpdateCardImage(card);
+		}
+
+		/// <summary>
 		/// Updates the card detail textbox with a given card.
 		/// </summary>
 		private void UpdateCardText(AgotCard card)
@@ -379,6 +410,39 @@ namespace AGoTDB.Forms
 				rtbCardText.SelectionColor = ft.Format.Color;
 				rtbCardText.AppendText(ft.Text);
 			}
+		}
+
+		/// <summary>
+		/// Updates the card image preview with a given card.
+		/// </summary>
+		private void UpdateCardImage(AgotCard card)
+		{
+			cardPreviewControl.Visible = true;
+			cardPreviewControl.CardUniversalId = card.UniversalId;
+		}
+
+		/// <summary>
+		/// Shows the card preview form for given card id.
+		/// </summary>
+		/// <param name="universalId">The card id.</param>
+		private void ShowCardPreviewForm(int universalId)
+		{
+			if (ApplicationSettings.ImagesFolderExists && UserSettings.DisplayImages)
+			{
+				fCardPreviewForm.CardUniversalId = universalId;
+				var x = this.Location.X + this.Width;
+				var y = this.Location.Y + 10;
+
+				fCardPreviewForm.Location = new Point(x, y);
+			}
+		}
+
+		/// <summary>
+		/// Hides the card preview form.
+		/// </summary>
+		private void HideCardPreviewForm()
+		{
+			fCardPreviewForm.Hide();
 		}
 
 		private void UpdateStatistics()
@@ -1144,37 +1208,38 @@ namespace AGoTDB.Forms
 				text.AppendFormat(" ({0})", string.Join(" + ", agendaNames.ToArray()));
 			}
 
-			text.AppendLine();
+			text.AppendLine().AppendLine();
 			text.Append(tabPageDescription.Text).Append(" : ").AppendLine(fVersionedDeck.Description);
 
 			text.AppendLine().AppendLine(tabPageDeck.Text);
-			text.Append(TreeViewToText(treeViewDeck));
-			text.AppendLine().AppendLine(tabPageSideboard.Text);
-			text.Append(TreeViewToText(treeViewSide));
-
+			text.AppendLine(TreeViewToText(treeViewDeck));
+			text.AppendLine(tabPageSideboard.Text);
+			text.AppendLine(TreeViewToText(treeViewSide));
+			text.AppendLine(tabPageStats.Text);
+			text.AppendLine(rtbStatistics.Text);
 			return text.ToString();
 		}
 
 		private static String TreeViewToText(AgotCardTreeView treeView)
 		{
-			String text = "";
+			var text = new StringBuilder();
 			if ((treeView.Nodes.Count > 1) || (treeView.Nodes[0] != treeView.NodeInfo)) // not the node info alone
 			{
 				foreach (TreeNode typeNode in treeView.Nodes)
 				{
-					text += typeNode.Text + "\n";
+					text.AppendLine(typeNode.Text);
 					var currentInfo = (TypeNodeInfo)typeNode.Tag;
 					foreach (TreeNode cardNode in typeNode.Nodes)
 					{
 						var cardNodeInfo = GetCardNodeInfo(cardNode);
 						String curLine = cardNodeInfo.Value1;
-						curLine = "\t" + curLine.PadRight(currentInfo.Length + 1);
-						curLine += cardNodeInfo.Value2;
-						text += curLine + "\n";
+						curLine = String.Format("\t{0}{1}", curLine.PadRight(currentInfo.Length + 1), cardNodeInfo.Value2);
+						text.AppendLine(curLine);
 					}
+					text.AppendLine();
 				}
 			}
-			return text;
+			return text.ToString();
 		}
 
 		private void UpdateFormTitle()
@@ -1231,6 +1296,26 @@ namespace AGoTDB.Forms
 			{
 				MessageBox.Show(ex.ToString());
 			}
+		}
+
+		private void cardPreviewControl1_MouseEnter(object sender, EventArgs e)
+		{
+			ShowCardPreviewForm(cardPreviewControl.CardUniversalId);
+		}
+
+		private void cardPreviewControl1_MouseLeave(object sender, EventArgs e)
+		{
+			HideCardPreviewForm();
+		}
+
+		private void cardPreviewControl1_MouseCaptureChanged(object sender, EventArgs e)
+		{
+			HideCardPreviewForm();
+		}
+
+		private void printDeckToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 
