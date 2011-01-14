@@ -200,6 +200,7 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\CardImageService.cs" />
+    <Compile Include="Services\DeckStatisticsService.cs" />
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\ProxyPdfGenerator.cs" />
   </ItemGroup>
