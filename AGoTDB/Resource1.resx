@@ -303,4 +303,7 @@
   <data name="ImageNotAvailable" xml:space="preserve">
     <value>Image not available.</value>
   </data>
+  <data name="InfluenceCostingCardsText" xml:space="preserve">
+    <value>Cards costing influence</value>
+  </data>
 </root>

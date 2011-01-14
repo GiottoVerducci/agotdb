@@ -340,6 +340,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cards costing influence.
+        /// </summary>
+        internal static string InfluenceCostingCardsText {
+            get {
+                return ResourceManager.GetString("InfluenceCostingCardsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initiative.
         /// </summary>
         internal static string InitiativeText {

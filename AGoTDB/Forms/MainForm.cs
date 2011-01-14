@@ -172,6 +172,17 @@ namespace AGoTDB.Forms
 			}
 		}
 
+		private static void LoadCardPatterns()
+		{
+			var patterns = ApplicationSettings.DatabaseManager.GetCardPatterns();
+			AgotCard.CardPatterns = new Dictionary<AgotCard.Pattern, string>();
+			foreach (DataRow row in patterns.Rows)
+			{
+				if ((int)row["Id"] >= 0)
+					AgotCard.CardPatterns.Add((AgotCard.Pattern)row["Id"], row["Value"].ToString());
+			}
+		}
+
 		private static void LoadExpansionSets()
 		{
 			AgotCard.ExpansionSets = new Dictionary<string, bool>();
@@ -608,6 +619,7 @@ namespace AGoTDB.Forms
 			LoadCardTypeNames();
 			LoadCardHouseNames();
 			LoadCardTriggerNames();
+			LoadCardPatterns();
 			LoadExpansionSets();
 			UpdateDataTableView();
 			dataGridView.DataSource = fDataTable;
