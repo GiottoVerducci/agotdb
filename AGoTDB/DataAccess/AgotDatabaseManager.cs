@@ -73,26 +73,26 @@ namespace AGoTDB.DataAccess
 			type = ExtractFormattedIntValueFromRow(sourceRow, "Type", TableNameType);
 			house = ExtractFormattedIntValueFromRow(sourceRow, "House", TableNameHouse);
 
-			unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique");
-			doomed = ExtractFormattedBoolValueFromRow(sourceRow, "Doomed");
-			endless = ExtractFormattedBoolValueFromRow(sourceRow, "Endless");
-			military = ExtractFormattedBoolValueFromRow(sourceRow, "Military");
-			intrigue = ExtractFormattedBoolValueFromRow(sourceRow, "Intrigue");
-			power = ExtractFormattedBoolValueFromRow(sourceRow, "Power");
-			war = ExtractFormattedBoolValueFromRow(sourceRow, "War");
-			holy = ExtractFormattedBoolValueFromRow(sourceRow, "Holy");
-			noble = ExtractFormattedBoolValueFromRow(sourceRow, "Noble");
-			learned = ExtractFormattedBoolValueFromRow(sourceRow, "Learned");
-			shadow = ExtractFormattedBoolValueFromRow(sourceRow, "Shadow");
-			multiplayer = ExtractFormattedBoolValueFromRow(sourceRow, "Multiplayer");
-			banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned");
+			unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique", errataBoundFormat);
+			doomed = ExtractFormattedBoolValueFromRow(sourceRow, "Doomed", errataBoundFormat);
+			endless = ExtractFormattedBoolValueFromRow(sourceRow, "Endless", errataBoundFormat);
+			military = ExtractFormattedBoolValueFromRow(sourceRow, "Military", errataBoundFormat);
+			intrigue = ExtractFormattedBoolValueFromRow(sourceRow, "Intrigue", errataBoundFormat);
+			power = ExtractFormattedBoolValueFromRow(sourceRow, "Power", errataBoundFormat);
+			war = ExtractFormattedBoolValueFromRow(sourceRow, "War", errataBoundFormat);
+			holy = ExtractFormattedBoolValueFromRow(sourceRow, "Holy", errataBoundFormat);
+			noble = ExtractFormattedBoolValueFromRow(sourceRow, "Noble", errataBoundFormat);
+			learned = ExtractFormattedBoolValueFromRow(sourceRow, "Learned", errataBoundFormat);
+			shadow = ExtractFormattedBoolValueFromRow(sourceRow, "Shadow", errataBoundFormat);
+			multiplayer = ExtractFormattedBoolValueFromRow(sourceRow, "Multiplayer", errataBoundFormat);
+			banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
 
-			cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost");
-			strength = ExtractFormattedXIntValueFromRow(sourceRow, "Strength");
-			income = ExtractFormattedXIntValueFromRow(sourceRow, "Income");
-			initiative = ExtractFormattedXIntValueFromRow(sourceRow, "Initiative");
-			claim = ExtractFormattedXIntValueFromRow(sourceRow, "Claim");
-			influence = ExtractFormattedXIntValueFromRow(sourceRow, "Influence");
+			cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost", errataBoundFormat);
+			strength = ExtractFormattedXIntValueFromRow(sourceRow, "Strength", errataBoundFormat);
+			income = ExtractFormattedXIntValueFromRow(sourceRow, "Income", errataBoundFormat);
+			initiative = ExtractFormattedXIntValueFromRow(sourceRow, "Initiative", errataBoundFormat);
+			claim = ExtractFormattedXIntValueFromRow(sourceRow, "Claim", errataBoundFormat);
+			influence = ExtractFormattedXIntValueFromRow(sourceRow, "Influence", errataBoundFormat);
 
 #if DEBUG
 			// we compare the case of the name of the card in its title and its cardtext.

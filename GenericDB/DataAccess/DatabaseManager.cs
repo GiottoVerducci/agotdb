@@ -387,9 +387,9 @@ namespace GenericDB.DataAccess
 		/// <param name="row">The row from which to read the string value.</param>
 		/// <param name="columnName">The colum in the row containing the string value to read.</param>
 		/// <returns>A formatted value.</returns>
-		protected virtual FormattedValue<bool?> ExtractFormattedBoolValueFromRow(DataRow row, string columnName)
+		protected virtual FormattedValue<bool?> ExtractFormattedBoolValueFromRow(DataRow row, string columnName, params BoundFormat[] boundFormats)
 		{
-			FormattedValue<string> stringValue = ExtractFormattedStringValueFromRow(row, columnName);
+			FormattedValue<string> stringValue = ExtractFormattedStringValueFromRow(row, columnName, boundFormats);
 
 			string value = stringValue.Value.ToUpper();
 
@@ -409,9 +409,9 @@ namespace GenericDB.DataAccess
 		/// <param name="row">The row from which to read the string value.</param>
 		/// <param name="columnName">The colum in the row containing the string value to read.</param>
 		/// <returns>A formatted value.</returns>
-		protected virtual FormattedValue<XInt> ExtractFormattedXIntValueFromRow(DataRow row, string columnName)
+		protected virtual FormattedValue<XInt> ExtractFormattedXIntValueFromRow(DataRow row, string columnName, params BoundFormat[] boundFormats)
 		{
-			FormattedValue<string> stringValue = ExtractFormattedStringValueFromRow(row, columnName);
+			FormattedValue<string> stringValue = ExtractFormattedStringValueFromRow(row, columnName, boundFormats);
 
 			string value = stringValue.Value.ToUpper();
 

@@ -36,6 +36,7 @@ using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Extensions;
 using GenericDB.Forms;
+using System.Text.RegularExpressions;
 
 namespace AGoTDB.Forms
 {
@@ -615,6 +616,7 @@ namespace AGoTDB.Forms
 					if (ecl.GetItemCheckState(i) == CheckState.Checked)
 						h += Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
 			});
+			fCurrentDeck.Houses = h;
 			UpdateTreeViews();
 		}
 
