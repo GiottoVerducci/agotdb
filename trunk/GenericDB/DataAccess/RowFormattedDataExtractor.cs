@@ -119,7 +119,8 @@ namespace GenericDB.DataAccess
 		public virtual List<FormatSection> GetFormatFromErrata(string errated)
 		{
 			var formats = new List<FormatSection>();
-			if (errated == "YES")
+			if (String.Equals(errated, "YES", StringComparison.OrdinalIgnoreCase)
+				|| String.Equals(errated, "True", StringComparison.OrdinalIgnoreCase))
 				formats.Add(new FormatSection(0, 0, Formats["errata"]));
 			return formats;
 		}
