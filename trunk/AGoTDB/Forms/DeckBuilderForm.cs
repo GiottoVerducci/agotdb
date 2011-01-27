@@ -506,6 +506,19 @@ namespace AGoTDB.Forms
 						icons.OrderByDescending(kv => kv.Value * 100 + kv.Key.Length).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
 					rtbStatistics.AppendText("\n");
 				}
+				var iconsStrengths = DeckStatisticsService.GetIconsStrength(cardList);
+				if (iconsStrengths.Count > 0)
+				{
+					AddStatsIntroIfNecessary(Resource1.IconsText, ref alreadyIntroduced);
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
+					rtbStatistics.SelectionColor = Color.Black;
+					rtbStatistics.AppendText(String.Format("{0}:\n", AgotCard.CardTypeNames[(int)AgotCard.CardType.Character]));
+
+					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Bold);
+					rtbStatistics.AppendText(String.Join("\n",
+						iconsStrengths.Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+					rtbStatistics.AppendText("\n");
+				}
 			}
 
 			alreadyIntroduced = false;

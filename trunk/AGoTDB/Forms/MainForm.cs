@@ -192,6 +192,14 @@ namespace AGoTDB.Forms
 				if ((int)row["Id"] >= 0)
 					AgotCard.ExpansionSets.Add(row["ShortName"].ToString(), (bool)row["LCG"]);
 			}
+
+			AgotCard.ChaptersNames = new Dictionary<string, string>();
+
+			foreach (DataRow row in sets.Rows)
+			{
+				if ((int)row["Id"] >= 0 && (bool)row["ByChapter"])
+					AgotCard.ChaptersNames.Add(row["ShortName"].ToString(), row["ChaptersNames"].ToString());
+			}
 		}
 
 		/// <summary>
@@ -612,7 +620,7 @@ namespace AGoTDB.Forms
 
 		private void InitializeMainFormForShowing()
 		{
-			//DownloadService.DownloadFile("http://agotdb.googlecode.com/files/AGoTDB%20-%20EN%20-%20Beta%200.722.zip", "c:\\temp\\toto.zip");
+			DownloadService.DownloadFile("http://agotdb.googlecode.com/files/AGoTDB%20-%20EN%20-%20Beta%200.722.zip", "c:\\temp\\toto.zip");
 
 			SetupDisplay();
 			UpdateControlsLabels();
@@ -634,6 +642,7 @@ namespace AGoTDB.Forms
 
 			// set options
 			miLcgSetsOnly.Checked = UserSettings.LcgSetsOnly;
+			UpdateSetsChoicesControl();
 		}
 
 		private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -730,6 +739,16 @@ namespace AGoTDB.Forms
 			UserSettings.LcgSetsOnly = lcgSetsOnly;
 			UserSettings.Save();
 
+			UpdateSetsChoicesControl();
+		}
+
+		/// <summary>
+		/// Updates the extended checklist box control according to the 
+		/// user settings.
+		/// </summary>
+		private void UpdateSetsChoicesControl()
+		{
+			bool lcgSetsOnly = UserSettings.LcgSetsOnly;
 			// keep the state of the checked items
 			var checkedItems = eclExpansionSet.GetItemsByState(CheckState.Checked);
 			var indeterminateItems = eclExpansionSet.GetItemsByState(CheckState.Indeterminate);
