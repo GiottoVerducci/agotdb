@@ -156,5 +156,29 @@ namespace AGoTDB.Services
 			}
 			return result;
 		}
+
+		public static Dictionary<string, int> GetIconsStrength(AgotCardList cardList)
+		{
+			var result = new Dictionary<string, int>();
+			result.Add(Resource1.MilitaryIconAbrev, 0);
+			result.Add(Resource1.IntrigueIconAbrev, 0);
+			result.Add(Resource1.PowerIconAbrev, 0);
+
+			foreach (var c in cardList)
+			{
+				if (c.Type == null || c.Type.Value != (int)AgotCard.CardType.Character)
+					continue;
+				bool hasMil = c.Military != null && c.Military.Value;
+				bool hasInt = c.Intrigue != null && c.Intrigue.Value;
+				bool hasPow = c.Power != null && c.Power.Value;
+
+				var strength = c.Strength.Value.IsX ? 0 : c.Strength.Value.Value;
+				if (hasMil) result[Resource1.MilitaryIconAbrev] += strength * c.Quantity;
+				if (hasInt) result[Resource1.IntrigueIconAbrev] += strength * c.Quantity;
+				if (hasPow) result[Resource1.PowerIconAbrev] += strength * c.Quantity;
+			}
+
+			return result;
+		}
 	}
 }

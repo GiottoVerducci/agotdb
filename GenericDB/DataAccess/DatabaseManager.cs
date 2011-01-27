@@ -190,7 +190,7 @@ namespace GenericDB.DataAccess
 			return ConnectToDatabase(ref fDbConnection, DataBasePath + DataBaseFilename);
 		}
 
-		protected DataTable GetResultFromRequest(string request, OleDbConnection aDbConnection, CommandParameters parameters)
+		protected virtual DataTable GetResultFromRequest(string request, OleDbConnection aDbConnection, CommandParameters parameters)
 		{
 			var table = new DataTable();
 			table.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
@@ -208,12 +208,12 @@ namespace GenericDB.DataAccess
 			return table;
 		}
 
-		public DataTable GetResultFromRequest(string request, CommandParameters parameters)
+		public virtual DataTable GetResultFromRequest(string request, CommandParameters parameters)
 		{
 			return GetResultFromRequest(request, DbConnection, parameters);
 		}
 
-		public DataTable GetResultFromRequest(string request)
+		public virtual DataTable GetResultFromRequest(string request)
 		{
 			return GetResultFromRequest(request, DbConnection, null);
 		}
@@ -232,7 +232,7 @@ namespace GenericDB.DataAccess
 		/// For non-text column, start and stop are ignored. The style is applied to the whole field.
 		/// </summary>
 		/// <returns>True if the conversion was successful, False otherwise.</returns>
-		public bool ConvertDatabase()
+		public virtual bool ConvertDatabase()
 		{
 			string query = String.Format("DELETE FROM [{0}]", TableNameMain);
 			GetResultFromRequest(query, fDbConnection, null);
@@ -294,7 +294,25 @@ namespace GenericDB.DataAccess
 		/// <returns>A formatted value.</returns>
 		protected static FormattedValue<string> ExtractFormattedStringValueFromRow(DataRow row, string columnName, params BoundFormat[] boundFormats)
 		{
+			return ExtractFormattedStringValueFromRow(row, columnName, null, boundFormats);
+		}
+
+		/// <summary>
+		/// Reads a formatted string value from a row and returns a FormattedValue object containing the value read 
+		/// and transformed using a transformation function, and its format.
+		/// The read string can use any of given the bound formats.
+		/// </summary>
+		/// <param name="row">The row from which to read the string value.</param>
+		/// <param name="columnName">The colum in the row containing the string value to read.</param>
+		/// <param name="valueTransformer">The function used to transform the value read in the row before processing it.</param>
+		/// <param name="boundFormats">The formats with their bound characters.</param>
+		/// <returns>A formatted value.</returns>
+		protected static FormattedValue<string> ExtractFormattedStringValueFromRow(DataRow row, string columnName, Func<string, string> valueTransformer, params BoundFormat[] boundFormats)
+		{
 			string value = row[columnName].ToString();
+			if (valueTransformer != null)
+				value = valueTransformer(value);
+
 			if (boundFormats == null || boundFormats.Length <= 0)
 				return new FormattedValue<string>(value, new List<FormatSection>());
 
@@ -423,7 +441,7 @@ namespace GenericDB.DataAccess
 			return new FormattedValue<XInt>(xvalue, formatSections);
 		}
 
-		protected static string GetRowValue(DataRow row, string columnName)
+		protected virtual string GetRowValue(DataRow row, string columnName)
 		{
 			return row[columnName].ToString();
 		}
@@ -433,7 +451,7 @@ namespace GenericDB.DataAccess
 		/// </summary>
 		/// <param name="value">The value to convert.</param>
 		/// <returns>The string representing the value.</returns>
-		protected static string XIntToString(XInt value)
+		protected virtual string XIntToString(XInt value)
 		{
 			if (value == null)
 				return null;
@@ -447,7 +465,7 @@ namespace GenericDB.DataAccess
 		/// <param name="tableName">The name of the table where to get the data from</param>
 		/// <param name="tb">The textbox which the filter must be applied to</param>
 		/// <param name="ecb">The checkbox associated to the textbox, so it can be checked automatically</param>
-		public void UpdateFilterMenu(ToolStripMenuItem mi, string tableName, TextBox tb, ExtendedCheckBox ecb)
+		public virtual void UpdateFilterMenu(ToolStripMenuItem mi, string tableName, TextBox tb, ExtendedCheckBox ecb)
 		{
 			DataTable table = GetResultFromRequest(String.Format("SELECT * FROM [{0}] ORDER BY Id", tableName));
 			for (var i = 1; i < table.Rows.Count; ++i)
@@ -476,7 +494,7 @@ namespace GenericDB.DataAccess
 		/// <param name="column">the column in the main database associated to this checkbox (used by the filter). Ignored if useKey is true</param>
 		/// <param name="tableType">The type indicating the columns to use</param>
 		/// <param name="filter">The predicate used to keep some items (if returning true) or discard them so they don't appear in the list (if returning false). Null if no filter is used.</param>
-		public void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType, Predicate<DbFilter> filter)
+		public virtual void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType, Predicate<DbFilter> filter)
 		{
 			DataTable table = GetResultFromRequest(String.Format("SELECT * FROM [{0}] ORDER BY Id", tableName));
 
@@ -508,7 +526,7 @@ namespace GenericDB.DataAccess
 			});
 		}
 
-		public void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType)
+		public virtual void UpdateExtendedCheckedListBox(ExtendedCheckedListBox clb, string tableName, string column, TableType tableType)
 		{
 			UpdateExtendedCheckedListBox(clb, tableName, column, tableType, null);
 		}
@@ -519,7 +537,7 @@ namespace GenericDB.DataAccess
 		/// </summary>
 		/// <param name="UniversalId">The universal id of the card.</param>
 		/// <returns>The data table containing the row of the matching card.</returns>
-		public DataTable GetCardFromUniversalId(int UniversalId)
+		public virtual DataTable GetCardFromUniversalId(int UniversalId)
 		{
 			return GetResultFromRequest(
 				string.Format("SELECT * FROM [{0}] WHERE UniversalId = :universalId", TableNameMain),
@@ -532,7 +550,7 @@ namespace GenericDB.DataAccess
 		/// <param name="name">The name of the card.</param>
 		/// <param name="set">The set of the card.</param>
 		/// <returns>The data table containing the row of the matching card.</returns>
-		public DataTable GetCardFromNameAndSet(string name, string set)
+		public virtual DataTable GetCardFromNameAndSet(string name, string set)
 		{
 			return GetResultFromRequest(
 				string.Format("SELECT * FROM [{0}] WHERE Name = :name AND Set LIKE '%' + :set + '%'", TableNameMain),
