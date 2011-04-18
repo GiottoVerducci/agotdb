@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<AGoTDB DeckBuilderVersion="v. 0.722.0 (BETA)" DatabaseVersion="5">
+  <VersionedDeck>
+    <Author>
+    </Author>
+    <Description>
+    </Description>
+    <Name>Weenie Seige of Winterfell</Name>
+    <Deck0>
+      <Deck>
+        <RevisionComments>
+        </RevisionComments>
+        <CreationDate>-8589001870697744558</CreationDate>
+        <LastModifiedDate>-8589001870697744558</LastModifiedDate>
+        <Sideboard>
+          <CardList />
+        </Sideboard>
+        <Cards>
+          <CardList>
+            <Card>
+              <UniversalId>130004</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Arya Stark</Name>
+              <Set>ITE(U4) / CS(S7)</Set>
+            </Card>
+            <Card>
+              <UniversalId>200083</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Bolton Refugee</Name>
+              <Set>AToR-5(C83)</Set>
+            </Card>
+            <Card>
+              <UniversalId>130130</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Brienne of Tarth</Name>
+              <Set>ITE(R130) / PotS(F37)</Set>
+            </Card>
+            <Card>
+              <UniversalId>250010</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Deepwood Mercenary</Name>
+              <Set>LoW(F11)</Set>
+            </Card>
+            <Card>
+              <UniversalId>192019</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Direwolf Pup</Name>
+              <Set>CS(S19)</Set>
+            </Card>
+            <Card>
+              <UniversalId>240061</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Ghost</Name>
+              <Set>DotN-4(R61)</Set>
+            </Card>
+            <Card>
+              <UniversalId>151101</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Guard at Riverrun</Name>
+              <Set>Legacy(F1) / LoW(F18)</Set>
+            </Card>
+            <Card>
+              <UniversalId>250014</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Host of the Bear</Name>
+              <Set>LoW(F15)</Set>
+            </Card>
+            <Card>
+              <UniversalId>210002</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Hungry Mob</Name>
+              <Set>KL-1(C2)</Set>
+            </Card>
+            <Card>
+              <UniversalId>192020</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Kennel Master</Name>
+              <Set>CS(S20)</Set>
+            </Card>
+            <Card>
+              <UniversalId>130014</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Knight of the Tumblestone</Name>
+              <Set>ITE(C14) / CS(S18)</Set>
+            </Card>
+            <Card>
+              <UniversalId>180091</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Midnight Sentry</Name>
+              <Set>ACoA-5(C91)</Set>
+            </Card>
+            <Card>
+              <UniversalId>240081</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Osha</Name>
+              <Set>DotN-5(R81)</Set>
+            </Card>
+            <Card>
+              <UniversalId>210101</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Peasant Defenders</Name>
+              <Set>KL-6(C101)</Set>
+            </Card>
+            <Card>
+              <UniversalId>130133</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Ser Jorah Mormont</Name>
+              <Set>ITE(R133) / PotS(F39)</Set>
+            </Card>
+            <Card>
+              <UniversalId>130134</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>The Hound</Name>
+              <Set>ITE(R134) / PotS(F35)</Set>
+            </Card>
+            <Card>
+              <UniversalId>250013</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Wolf Pack</Name>
+              <Set>LoW(F14)</Set>
+            </Card>
+            <Card>
+              <UniversalId>180087</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Battle of Ruby Ford</Name>
+              <Set>ACoA-5(R87)</Set>
+            </Card>
+            <Card>
+              <UniversalId>210119</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Battle of the Bay</Name>
+              <Set>KL-6(R119)</Set>
+            </Card>
+            <Card>
+              <UniversalId>180065</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>The Battle of the Whispering Wood</Name>
+              <Set>ACoA-4(R65)</Set>
+            </Card>
+            <Card>
+              <UniversalId>193057</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Golden Tooth Mines</Name>
+              <Set>CS(L57)</Set>
+            </Card>
+            <Card>
+              <UniversalId>192159</UniversalId>
+              <Quantity>2</Quantity>
+              <Name>Bran the Builder's Legacy</Name>
+              <Set>CS(S159)</Set>
+            </Card>
+            <Card>
+              <UniversalId>130142</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Narrow Sea</Name>
+              <Set>ITE(U142) / CS(S33) / SdH(F32) / KoStorm(F29)</Set>
+            </Card>
+            <Card>
+              <UniversalId>100020</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Northern Fiefdoms</Name>
+              <Set>Winter(C20) / CS(S26) / SdH(F31)</Set>
+            </Card>
+            <Card>
+              <UniversalId>170215</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>After the Mummer's Ford</Name>
+              <Set>5KE(R215) / KotSe(F48)</Set>
+            </Card>
+            <Card>
+              <UniversalId>240040</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Fear of Winter</Name>
+              <Set>DotN-2(R40)</Set>
+            </Card>
+            <Card>
+              <UniversalId>180025</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Fury of the Wolf</Name>
+              <Set>ACoA-2(R25)</Set>
+            </Card>
+            <Card>
+              <UniversalId>194184</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Rains of Autumn</Name>
+              <Set>CS(B184)</Set>
+            </Card>
+            <Card>
+              <UniversalId>171342</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Rule by Decree</Name>
+              <Set>5KE(F242) / CS(T206)</Set>
+            </Card>
+            <Card>
+              <UniversalId>250035</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Storm of Swords</Name>
+              <Set>LoW(F53)</Set>
+            </Card>
+            <Card>
+              <UniversalId>130231</UniversalId>
+              <Quantity>1</Quantity>
+              <Name>Take Them by Surprise</Name>
+              <Set>ITE(R231) / LoW(F52)</Set>
+            </Card>
+            <Card>
+              <UniversalId>240042</UniversalId>
+              <Quantity>3</Quantity>
+              <Name>Feigned Retreat</Name>
+              <Set>DotN-3(R42)</Set>
+            </Card>
+          </CardList>
+        </Cards>
+        <Houses>1</Houses>
+        <Agenda>
+          <Card>
+            <UniversalId>250032</UniversalId>
+            <Quantity>1</Quantity>
+            <Name>The Siege of Winterfell</Name>
+            <Set>LoW(F48)</Set>
+          </Card>
+        </Agenda>
+      </Deck>
+    </Deck0>
+  </VersionedDeck>
+</AGoTDB>

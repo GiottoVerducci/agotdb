@@ -1,0 +1,29 @@
+Beta 0.722 (Dec, 30 2010)
+ - Localization EN: changed "Virtues" to "Crest"
+ - Deckbuilder: The draw simulator now displays the summary of the cards
+ - Deckbuilder: Added figures for traits, crests, icons and houses
+
+Beta 0.721 (Dec, 30 2010)
+  - Added the LCG column and added the "LCG expansion sets only" checkbox in the Filters menu.
+  - Bug fix: Deckbuilder: loading an unknown card would result in errors.
+
+Beta 0.720 (Dec, 29 2010)
+  - Deckbuilder: improved the contrast between the forecolor and the backcolor of shadow cards
+  - Database fix: the power icons were not present
+  - Bug fix: exclusion rules for integers would not work.
+
+Beta 0.719 (Dec, 28 2010)
+  - Added the Banned column.
+  - Added the Pattern table (used to match language specific data for detecting out of house cards, for instance).
+  - Deck builder: Changed display of influence and initiative providing cards.
+  - Deck builder: Shadow cards are now displayed first and on a gray background
+  - Deck builder: Out of House cards are now displayed in orange
+  - Deck builder: The number of cards in the deck (displayed in the tab) is now coherent with the display of other numbers
+  - Deck builder: No house is now equivalent to "House neutral" (the neutral faction "agenda" can still be selected anyway with no incidence)
+
+Beta 0.718 (Dec, 28 2010)
+ - Updated copyrights.
+ - Added English database.
+ - Bug fix: the trigger formatting wouldn't work properly in English.
+ - Bug fix: the shadow crest wouldn't appear in the deck builder on non-character cards.
+ - Localization fix: changed GOLD to INCOME
