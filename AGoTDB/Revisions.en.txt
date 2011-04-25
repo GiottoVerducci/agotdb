@@ -1,6 +1,7 @@
 Beta 0.725 (Apr, 18 2011)
  - Added Chapter 1 of Secrets of Oldtown "Gates of the Citadel"
  - Added Chapter 6 of Brotherhood without Banners "Dreadfort Betrayal"
+ - Bug fix: Typo on Stealth filter fixed
 
 Beta 0.722 (Dec, 30 2010)
  - Localization EN: changed "Virtues" to "Crest"
