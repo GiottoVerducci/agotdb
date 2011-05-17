@@ -1,3 +1,10 @@
+Beta 0.726 (May, 17 2011)
+ - Added "Queen of Dragons"
+
+Beta 0.725 (Apr, 18 2011)
+ - Added Chapter 6 Brotherhood without Banners "Dreadfort Betrayal"
+ - Added Chapter 1 Secrets of Oldtown "Gates of the Citadel"
+
 Beta 0.722 (Dec, 30 2010)
  - Localization EN: changed "Virtues" to "Crest"
  - Deckbuilder: The draw simulator now displays the summary of the cards
