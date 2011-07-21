@@ -1,4 +1,8 @@
-Beta 0.725 (20 juillet 2011)
+Beta 0.727 (21 juillet 2011)
+ - Ajout des chapitres 3 et 4 des Secrets de Villevieille "Appelé par le Conclave" et "L'Île aux Corbeaux"
+ - Correction : l'extension Les Secrets de Villevieille n'était pas marquée comme étant LCG
+
+Beta 0.726 (20 juillet 2011)
  - Ajout du chapitre 2 des Secrets de Villevieille "Forger la Chaîne"
 
 Beta 0.725 (18 juillet 2011)
@@ -7,7 +11,7 @@ Beta 0.725 (18 juillet 2011)
 Beta 0.724 (03 mars 2011)
  - Ajout du chapitre 6 de Fraternité sans Bannière "Trahison de Fort-Terreur"
 
-Beta 0.723 
+Beta 0.723
  - Ajout du chapitre 5 de Fraternité sans Bannière "De Serpents et de Sable"
 
 Beta 0.722 (Dec, 30 2010)
