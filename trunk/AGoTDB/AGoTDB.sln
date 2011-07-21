@@ -1,15 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGoTDB", "AGoTDB.csproj", "{835E8A74-18A5-4CC5-A1D8-655CA7B9E232}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGotDBTestProject", "AGotDBTestProject\AGotDBTestProject.csproj", "{6E882E6F-1CF3-4A54-BD44-DACB45B9F3DC}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB869052-76D7-4308-8291-04E1F2583A14}"
 	ProjectSection(SolutionItems) = preProject
 		AGoTDB.vsmdi = AGoTDB.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGoTDB", "AGoTDB.csproj", "{835E8A74-18A5-4CC5-A1D8-655CA7B9E232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGotDBTestProject", "AGotDBTestProject\AGotDBTestProject.csproj", "{6E882E6F-1CF3-4A54-BD44-DACB45B9F3DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDB", "..\GenericDB\GenericDB.csproj", "{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}"
 EndProject
