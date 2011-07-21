@@ -256,7 +256,7 @@ namespace GenericDB.DataAccess
 					{
 						ConvertCard(row, dataSet.Tables[0].Rows);
 					}
-					catch
+					catch(Exception e)
 					{
 						MessageBox.Show("Une erreur de conversion est survenue sur la carte " + row["UniversalId"]);
 						return false;
