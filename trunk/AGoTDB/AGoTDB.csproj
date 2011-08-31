@@ -267,7 +267,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)Databases\AGoT - FR.mdb" "$(TargetDir)Databases\AGoT.mdb"
-copy "$(TargetDir)Databases\AGoTEx - FR.mdb" "$(TargetDir)Databases\AGoTEx.mdb"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)Databases\AGoT - EN.mdb" "$(TargetDir)Databases\AGoT.mdb"
+copy "$(TargetDir)Databases\AGoTEx - EN.mdb" "$(TargetDir)Databases\AGoTEx.mdb"</PostBuildEvent>
   </PropertyGroup>
 </Project>
