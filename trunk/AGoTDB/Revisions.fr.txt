@@ -1,3 +1,6 @@
+Beta 0.728 (25 août 2011)
+ - Ajout de la boîte la Reine des Dragons
+
 Beta 0.727 (21 juillet 2011)
  - Ajout des chapitres 3 et 4 des Secrets de Villevieille "Appelé par le Conclave" et "L'Île aux Corbeaux"
  - Correction : l'extension Les Secrets de Villevieille n'était pas marquée comme étant LCG
