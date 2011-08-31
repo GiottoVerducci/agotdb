@@ -300,4 +300,7 @@
   <data name="ImageNotAvailable" xml:space="preserve">
     <value>Image non disponible.</value>
   </data>
+  <data name="RestrictedText" xml:space="preserve">
+    <value>Cette carte est sur la liste des cartes restreintes en tournoi.</value>
+  </data>
 </root>

@@ -1,3 +1,8 @@
+Beta 0.729 (31 août 2011)
+ - Ajout du support de la liste des cartes restreintes
+ - FR: ajout des noms originaux manquants
+ - FR+EN: mise à jour des colonnes banni/restreint
+
 Beta 0.728 (25 août 2011)
  - Ajout de la boîte la Reine des Dragons
 

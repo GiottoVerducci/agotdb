@@ -306,4 +306,7 @@
   <data name="InfluenceCostingCardsText" xml:space="preserve">
     <value>Cards costing influence</value>
   </data>
+  <data name="RestrictedText" xml:space="preserve">
+    <value>This card is on the tournament restricted list.</value>
+  </data>
 </root>

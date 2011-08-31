@@ -1,3 +1,7 @@
+Beta 0.729 (May, 31 2011)
+ - Added restricted list support.
+ - FR+EN: updated banned/restricted columns
+
 Beta 0.727 (May, 18 2011)
  - Fixed issue with "Stealth"
 
