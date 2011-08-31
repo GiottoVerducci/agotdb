@@ -55,7 +55,7 @@ namespace AGoTDB.DataAccess
 			Int32 universalId;
 			FormattedValue<string> name, traits, keywords, text, set, originalName;
 			FormattedValue<int> type, house;
-			FormattedValue<bool?> unique, doomed, endless, military, intrigue, power, war, holy, noble, learned, shadow, multiplayer, banned;
+			FormattedValue<bool?> unique, doomed, endless, military, intrigue, power, war, holy, noble, learned, shadow, multiplayer, banned, restricted;
 			FormattedValue<XInt> cost, strength, income, initiative, claim, influence;
 
 			universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
@@ -86,6 +86,7 @@ namespace AGoTDB.DataAccess
 			shadow = ExtractFormattedBoolValueFromRow(sourceRow, "Shadow", errataBoundFormat);
 			multiplayer = ExtractFormattedBoolValueFromRow(sourceRow, "Multiplayer", errataBoundFormat);
 			banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
+			restricted = ExtractFormattedBoolValueFromRow(sourceRow, "Restricted", errataBoundFormat);
 
 			cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost", errataBoundFormat);
 			strength = ExtractFormattedXIntValueFromRow(sourceRow, "Strength", errataBoundFormat);
@@ -145,7 +146,8 @@ namespace AGoTDB.DataAccess
 				multiplayer.Value.Value, multiplayer.Formats.Count > 0, // Multiplayer shouldn't be null
 				set.Value, set.FormatsToString(),
 				originalName.Value, originalName.FormatsToString(),
-				banned.Value, banned.Formats.Count > 0
+				banned.Value, banned.Formats.Count > 0,
+				restricted.Value, restricted.Formats.Count > 0
 			);
 		}
 
