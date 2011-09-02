@@ -1,3 +1,8 @@
+Beta 0.730 (02 septembre 2011)
+ - Ajout du chapitre 5 des Secrets de Villevieille "Le Masque de l'Archimestre"
+ - Mise en forme des ~traits~ dans le texte des cartes
+ - FR/EN: augmentation de la longueur du champ TextFormat (50 -> 100)
+
 Beta 0.729 (31 août 2011)
  - Ajout du support de la liste des cartes restreintes
  - FR: ajout des noms originaux manquants
