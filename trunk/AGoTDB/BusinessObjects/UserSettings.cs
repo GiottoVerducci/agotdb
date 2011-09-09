@@ -27,7 +27,7 @@ namespace AGoTDB.BusinessObjects
 	public sealed class UserSettings
 	{
 		public const string SettingsFilename = "AGoTDB.xml";
-		private static readonly Settings fSettings = LoadSettings();
+		private static readonly Settings _settings = LoadSettings();
 
 		// Explicit static constructor to tell C# compiler
 		// not to mark type as beforefieldinit (for singleton template implementation)
@@ -44,7 +44,7 @@ namespace AGoTDB.BusinessObjects
 		/// </summary>
 		private static Settings Singleton
 		{
-			get { return fSettings; }
+			get { return _settings; }
 		}
 
 		/// <summary>
@@ -69,49 +69,49 @@ namespace AGoTDB.BusinessObjects
 
 		public static bool DisplayImages
 		{
-			get { return UserSettings.Singleton.ReadBool("General", "DisplayImages", true); }
-			set { UserSettings.Singleton.WriteBool("General", "DisplayImages", value); }
+			get { return Singleton.ReadBool("General", "DisplayImages", true); }
+			set { Singleton.WriteBool("General", "DisplayImages", value); }
 		}
 
 		public static int ImagePreviewSize
 		{
-			get { return Math.Max(0, Math.Min(100, UserSettings.Singleton.ReadInt("General", "ImagePreviewSize", 100))); }
-			set { UserSettings.Singleton.WriteInt("General", "ImagePreviewSize", Math.Max(0, Math.Min(100, value))); }
+			get { return Math.Max(0, Math.Min(100, Singleton.ReadInt("General", "ImagePreviewSize", 100))); }
+			set { Singleton.WriteInt("General", "ImagePreviewSize", Math.Max(0, Math.Min(100, value))); }
 		}
 
 		public static bool CreateExtendedDB
 		{
-			get { return UserSettings.Singleton.ReadBool("Startup", "CreateExtendedDB", true); }
-			set { UserSettings.Singleton.WriteBool("Startup", "CreateExtendedDB", value); }
+			get { return Singleton.ReadBool("Startup", "CreateExtendedDB", true); }
+			set { Singleton.WriteBool("Startup", "CreateExtendedDB", value); }
 		}
 
 		public static string[] TypeOrder
 		{
-			get { return UserSettings.Singleton.ReadString("DeckBuilder", "TypeOrder", "").Split(','); }
-			set { UserSettings.Singleton.WriteString("DeckBuilder", "TypeOrder", String.Join(",", value)); }
+			get { return Singleton.ReadString("DeckBuilder", "TypeOrder", "").Split(','); }
+			set { Singleton.WriteString("DeckBuilder", "TypeOrder", String.Join(",", value)); }
 		}
 
 		public static bool ShowNewVersionMessage
 		{
-			get { return UserSettings.Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true); }
-			set { UserSettings.Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", value); }
+			get { return Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true); }
+			set { Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", value); }
 		}
 
 		public static bool LcgSetsOnly
 		{
-			get { return UserSettings.Singleton.ReadBool("SearchForm", "LcgSetsOnly", false); }
-			set { UserSettings.Singleton.WriteBool("SearchForm", "LcgSetsOnly", value); }
+			get { return Singleton.ReadBool("SearchForm", "LcgSetsOnly", false); }
+			set { Singleton.WriteBool("SearchForm", "LcgSetsOnly", value); }
 		}
 
 		public static string ImageRepositoryUrl
 		{
-			get { return UserSettings.Singleton.ReadString("General", "ImageRepositoryUrl", ""); }
-			set { UserSettings.Singleton.WriteString("General", "ImageRepositoryUrl", value); }
+			get { return Singleton.ReadString("General", "ImageRepositoryUrl", ""); }
+			set { Singleton.WriteString("General", "ImageRepositoryUrl", value); }
 		}
 
 		public static void Save()
 		{
-			UserSettings.Singleton.Save();
+			Singleton.Save();
 		}
 	}
 }

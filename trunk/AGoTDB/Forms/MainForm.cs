@@ -45,16 +45,16 @@ namespace AGoTDB.Forms
 	/// </summary>
 	public partial class MainForm : Form
 	{
-		private bool fIsMainForm = false; // false if it's a card list window
-		private static MainForm fMainForm;
-		private bool fMustClose = false;
-		private int fViewIndex = 1;
-		private bool fDataTableFirstLoad = true; // used when the data table is loaded for the first time
-		private DataRow[] quickFindRows; // quick find results
-		private int quickFindIndex; // index of the current quick find result
+		private bool _isMainForm; // false if it's a card list window
+		private static MainForm _mainForm;
+		private bool _mustClose;
+		private int _viewIndex = 1;
+		private bool _dataTableFirstLoad = true; // used when the data table is loaded for the first time
+		private DataRow[] _quickFindRows; // quick find results
+		private int _quickFindIndex; // index of the current quick find result
 
-		private readonly DataTable fDataTable = new DataTable();
-		private Query fQuery = new Query();
+		private readonly DataTable _dataTable = new DataTable();
+		private Query _query = new Query();
 
 		/// <summary>
 		/// The default constructor.
@@ -63,7 +63,7 @@ namespace AGoTDB.Forms
 		{
 			// Cet appel est requis par le Concepteur Windows Form.
 			InitializeComponent();
-			fDataTable.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
+			_dataTable.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
 			InitializeQueryLocalization();
 			InitializeDatabaseConnection();
 			ApplicationSettings.ImagesFolder = String.Format("{0}\\Images", Application.StartupPath);
@@ -115,9 +115,9 @@ namespace AGoTDB.Forms
 		/// </summary>
 		public void InitializeMainForm()
 		{
-			fIsMainForm = true;
-			fMainForm = this;
-			fMustClose = !(UserSettings.IsAvailable() && ApplicationSettings.DatabaseManager.ConnectedToDatabase);
+			_isMainForm = true;
+			_mainForm = this;
+			_mustClose = !(UserSettings.IsAvailable() && ApplicationSettings.DatabaseManager.ConnectedToDatabase);
 		}
 
 		/// <summary>
@@ -136,7 +136,7 @@ namespace AGoTDB.Forms
 			dataGridView.DataSource = dataTable;
 			menuStrip1.Visible = false;
 			moveToANewWindowToolStripMenuItem.Visible = false;
-			Text = string.Format(CultureInfo.CurrentCulture, Resource1.ViewFormTitle, fViewIndex) + " | " + fQuery.HumanQuery;
+			Text = string.Format("{0} | {1}", string.Format(CultureInfo.CurrentCulture, Resource1.ViewFormTitle, _viewIndex), _query.HumanQuery);
 		}
 
 		private static void LoadCardTypeNames()
@@ -244,30 +244,43 @@ namespace AGoTDB.Forms
 
 		private static string BuildTypeExpression(int i, KeyValuePair<int, string>[] types)
 		{
-			if (i < types.Length - 1)
-				return string.Format("IIF(Type={0}, '{1}', {2})", types[i].Key, types[i].Value, BuildTypeExpression(i + 1, types));
-			return string.Format("'{0}'", types[i].Value);
+			return i < types.Length - 1
+				? string.Format("IIF(Type={0}, '{1}', {2})", types[i].Key, types[i].Value, BuildTypeExpression(i + 1, types))
+				: string.Format("'{0}'", types[i].Value);
 		}
-
 
 		/// <summary>
 		/// Adds dynamically computed columns to the main data table.
 		/// </summary>
 		private void CustomizeDataTable()
 		{
-			var houseTempColumn = new DataColumn("HouseTemp", typeof(System.String));
-			houseTempColumn.Expression = String.Format("IIF(HouseNeutral, '{0}/', '') + IIF(HouseStark, '{1}/', '') + IIF(HouseLannister, '{2}/', '') + IIF(HouseBaratheon, '{3}/', '') + IIF(HouseGreyjoy, '{4}/', '') + IIF(HouseMartell, '{5}/', '') + IIF(HouseTargaryen, '{6}/', '')", AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Neutral), AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Stark), AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Lannister), AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Baratheon), AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Greyjoy), AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Martell), AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Targaryen));
-			fDataTable.Columns.Add(houseTempColumn);
+			var houseTempColumn = new DataColumn("HouseTemp", typeof(String))
+			{
+				Expression = String.Format(
+					"IIF(HouseNeutral, '{0}/', '') + IIF(HouseStark, '{1}/', '') + IIF(HouseLannister, '{2}/', '') + IIF(HouseBaratheon, '{3}/', '') + IIF(HouseGreyjoy, '{4}/', '') + IIF(HouseMartell, '{5}/', '') + IIF(HouseTargaryen, '{6}/', '')",
+					AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Neutral),
+					AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Stark),
+					AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Lannister),
+					AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Baratheon),
+					AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Greyjoy),
+					AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Martell),
+					AgotCard.GetHouseName((Int32)AgotCard.CardHouse.Targaryen))
+			};
+			_dataTable.Columns.Add(houseTempColumn);
 
-			var houseColumn = new DataColumn("House", typeof(System.String));
-			houseColumn.Expression = String.Format("SUBSTRING(HouseTemp, 1, LEN(HouseTemp) - 1)");
-			fDataTable.Columns.Add(houseColumn);
-			fDataTable.Columns["House"].SetOrdinal(fDataTable.Columns["Name"].Ordinal + 1);
+			var houseColumn = new DataColumn("House", typeof(String))
+			{
+				Expression = String.Format("SUBSTRING(HouseTemp, 1, LEN(HouseTemp) - 1)")
+			};
+			_dataTable.Columns.Add(houseColumn);
+			_dataTable.Columns["House"].SetOrdinal(_dataTable.Columns["Name"].Ordinal + 1);
 
-			var typeColumn = new DataColumn("Type ", typeof(System.String));
-			typeColumn.Expression = BuildTypeExpression();
-			fDataTable.Columns.Add(typeColumn);
-			fDataTable.Columns["Type "].SetOrdinal(fDataTable.Columns["Type"].Ordinal + 1);
+			var typeColumn = new DataColumn("Type ", typeof(String))
+			{
+				Expression = BuildTypeExpression()
+			};
+			_dataTable.Columns.Add(typeColumn);
+			_dataTable.Columns["Type "].SetOrdinal(_dataTable.Columns["Type"].Ordinal + 1);
 		}
 
 		/// <summary>
@@ -276,7 +289,7 @@ namespace AGoTDB.Forms
 		private void UpdateDataTableView()
 		{
 			var query = BuildQueryFromControls();
-			if (query.SqlQuery == fQuery.SqlQuery) // query hasn't change, so the result has not change neither
+			if (query.SqlQuery == _query.SqlQuery) // query hasn't change, so the result has not change neither
 				return; // nothing to do
 
 			Cursor.Current = Cursors.WaitCursor;
@@ -287,23 +300,23 @@ namespace AGoTDB.Forms
 				if (dataGridView.SelectedRows.Count != 0)
 					selectedRowId = (int)((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row["UniversalId"];
 
-				fQuery = query;
+				_query = query;
 				using (var dbDataAdapter = new OleDbDataAdapter(query.SqlQuery, ApplicationSettings.DatabaseManager.DbConnection))
 				{
-					fDataTable.Clear();
-					dbDataAdapter.Fill(fDataTable);
+					_dataTable.Clear();
+					dbDataAdapter.Fill(_dataTable);
 
-					if (fDataTableFirstLoad)
+					if (_dataTableFirstLoad)
 					{
 						CustomizeDataTable();
-						fDataTableFirstLoad = false;
+						_dataTableFirstLoad = false;
 					}
 
-					foreach (DataColumn column in fDataTable.Columns)
+					foreach (DataColumn column in _dataTable.Columns)
 						if (IsColumnHidden(column.ColumnName))
 							column.ColumnMapping = MappingType.Hidden;
 
-					fDataTable.Columns["UniversalId"].ColumnMapping = MappingType.Hidden;
+					_dataTable.Columns["UniversalId"].ColumnMapping = MappingType.Hidden;
 				}
 				QuickFind(tbFind.Text); // sets the new quick find results
 				if (!SelectRow(selectedRowId)) // the previously selected row doesn't exist anymore
@@ -311,7 +324,7 @@ namespace AGoTDB.Forms
 			}
 			catch (Exception e)
 			{
-				MessageBox.Show("Exception while processing query " + query.SqlQuery + "\n" + e.Message + "\n" + e.StackTrace);
+				MessageBox.Show(string.Format("Exception while processing query {0}\n{1}\n{2}", query.SqlQuery, e.Message, e.StackTrace));
 			}
 			Cursor.Current = Cursors.Default;
 		}
@@ -406,20 +419,20 @@ namespace AGoTDB.Forms
 
 		private static void ClearCheckListBoxes(params ExtendedCheckedListBox[] items)
 		{
-			for (var i = 0; i < items.Length; ++i)
-				items[i].ClearCheckBoxes();
+			foreach (ExtendedCheckedListBox listBox in items)
+				listBox.ClearCheckBoxes();
 		}
 
 		private static void ClearCheckBoxes(params ExtendedCheckBox[] items)
 		{
-			for (var i = 0; i < items.Length; ++i)
-				items[i].Checked = false;
+			foreach (ExtendedCheckBox checkBox in items)
+				checkBox.Checked = false;
 		}
 
 		private static void ClearTextBoxes(params TextBox[] items)
 		{
-			for (var i = 0; i < items.Length; ++i)
-				items[i].Text = "";
+			foreach (TextBox textBox in items)
+				textBox.Text = "";
 		}
 
 		private void eclMouseLeave(object sender, EventArgs e)
@@ -437,7 +450,7 @@ namespace AGoTDB.Forms
 			Close();
 		}
 
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		private static void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			using (var about = new AboutForm())
 			{
@@ -445,16 +458,15 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private void tbLowHigh_TextChanged(object sender, EventArgs e)
+		private static void tbLowHigh_TextChanged(object sender, EventArgs e)
 		{
 			var senderTextBox = (TextBox)sender;
 			if (senderTextBox.Tag != null) // to avoid reentrance
 				return;
 			string text = senderTextBox.Text;
-			string newText = "";
-			for (var i = 0; i < text.Length; ++i)
-				if ((text[i] >= '0') && (text[i] <= '9'))
-					newText += text[i];
+			string newText = text
+				.Where(c => (c >= '0') && (c <= '9'))
+				.Aggregate("", (current, t) => current + t);
 			senderTextBox.Tag = 0;
 			senderTextBox.Text = newText;
 			senderTextBox.Tag = null;
@@ -498,9 +510,9 @@ namespace AGoTDB.Forms
 
 		private void btnQuickFindNext_Click(object sender, EventArgs e)
 		{
-			if ((quickFindRows == null) || (quickFindRows.Length <= 0))
+			if ((_quickFindRows == null) || (_quickFindRows.Length <= 0))
 				return;
-			quickFindIndex = (quickFindIndex + 1) % quickFindRows.Length;
+			_quickFindIndex = (_quickFindIndex + 1) % _quickFindRows.Length;
 			SelectCurrentQuickFindResult();
 		}
 
@@ -512,12 +524,12 @@ namespace AGoTDB.Forms
 		{
 			if (!string.IsNullOrEmpty(text))
 			{
-				quickFindRows = fDataTable.Select(String.Format("Name LIKE '%{0}%'", QueryBuilder.EscapeSqlCharacters(text, false)));
-				if (quickFindRows.Length > 0)
-					quickFindIndex = 0;
+				_quickFindRows = _dataTable.Select(String.Format("Name LIKE '%{0}%'", QueryBuilder.EscapeSqlCharacters(text, false)));
+				if (_quickFindRows.Length > 0)
+					_quickFindIndex = 0;
 			}
 			else
-				quickFindRows = null;
+				_quickFindRows = null;
 		}
 
 		/// <summary>
@@ -525,8 +537,8 @@ namespace AGoTDB.Forms
 		/// </summary>
 		private void SelectCurrentQuickFindResult()
 		{
-			if ((quickFindRows != null) && (quickFindIndex >= 0) && (quickFindIndex < quickFindRows.Length))
-				SelectRow((int)quickFindRows[quickFindIndex]["UniversalId"]);
+			if ((_quickFindRows != null) && (_quickFindIndex >= 0) && (_quickFindIndex < _quickFindRows.Length))
+				SelectRow((int)_quickFindRows[_quickFindIndex]["UniversalId"]);
 		}
 
 		private void saveSelectionToTextFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -548,23 +560,23 @@ namespace AGoTDB.Forms
 
 			using (var sw = new StreamWriter(fileName, false, System.Text.Encoding.Default))
 			{
-				for (var i = 0; i < entries.Count; ++i)
+				foreach (AgotCard card in entries)
 				{
-					sw.WriteLine(entries[i].ToPlainFullString());
+					sw.WriteLine(card.ToPlainFullString());
 					sw.WriteLine();
 				}
 			}
 		}
 
-		/*public Object Clone(Object obj)
-	{
-		MemoryStream mem = new MemoryStream();
-		BinaryFormatter binFormat = new BinaryFormatter();
-		binFormat.Serialize(mem, obj); // serialization of obj in memory
-		mem.Seek(0, SeekOrigin.Begin); // go back to the start of the stream
-		return binFormat.Deserialize(mem); // create the object
-	}
-	*/
+		//public Object Clone(Object obj)
+		//{
+		//    MemoryStream mem = new MemoryStream();
+		//    BinaryFormatter binFormat = new BinaryFormatter();
+		//    binFormat.Serialize(mem, obj); // serialization of obj in memory
+		//    mem.Seek(0, SeekOrigin.Begin); // go back to the start of the stream
+		//    return binFormat.Deserialize(mem); // create the object
+		//}
+
 
 		private void moveToANewWindowToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -574,14 +586,13 @@ namespace AGoTDB.Forms
 		private void CreateNewWindowWithResults()
 		{
 			var form = new MainForm();
-			fViewIndex++;
-			form.fQuery = new Query(fQuery.SqlQuery, fQuery.HumanQuery);
-			form.InitializeViewForm(fDataTable.Copy());
+			_viewIndex++;
+			form._query = new Query(_query.SqlQuery, _query.HumanQuery);
+			form.InitializeViewForm(_dataTable.Copy());
 
 			// keep a reference to the window in order to display it in the window menu
 			form.Show();
-			var item = new ToolStripMenuItem(form.Text);
-			item.Tag = form;
+			var item = new ToolStripMenuItem(form.Text) { Tag = form };
 			item.Click += WindowsViewitem_Click;
 			windowToolStripMenuItem.DropDownItems.Add(item);
 		}
@@ -591,7 +602,7 @@ namespace AGoTDB.Forms
 		/// </summary>
 		/// <param name="sender">the item that triggered the event</param>-
 		/// <param name="e">event arguments</param>
-		void WindowsViewitem_Click(object sender, EventArgs e)
+		private static void WindowsViewitem_Click(object sender, EventArgs e)
 		{
 			var form = (Form)((ToolStripMenuItem)sender).Tag;
 			ShowFormAndBringItToFront(form);
@@ -607,9 +618,9 @@ namespace AGoTDB.Forms
 
 		private void Form1_Shown(object sender, EventArgs e)
 		{
-			if (fMustClose)
+			if (_mustClose)
 				Close();
-			else if (fIsMainForm)
+			else if (_isMainForm)
 				InitializeMainFormForShowing();
 		}
 
@@ -630,7 +641,7 @@ namespace AGoTDB.Forms
 			LoadCardPatterns();
 			LoadExpansionSets();
 			UpdateDataTableView();
-			dataGridView.DataSource = fDataTable;
+			dataGridView.DataSource = _dataTable;
 
 			dataGridView.Sort(dataGridView.Columns["Name"], ListSortDirection.Ascending);
 			dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
@@ -666,7 +677,7 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private void deckBuilderToolStripMenuItem_Click(object sender, EventArgs e)
+		private static void deckBuilderToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DeckBuilderForm.Singleton.Show();
 			DeckBuilderForm.Singleton.Activate();
@@ -709,7 +720,7 @@ namespace AGoTDB.Forms
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (fIsMainForm)
+			if (_isMainForm)
 			{
 				if (DeckBuilderForm.SingletonExists() && DeckBuilderForm.Singleton.Visible) // to be totally bullet-proof, we should create a lock to avoid concurrency
 				{
@@ -719,7 +730,7 @@ namespace AGoTDB.Forms
 			}
 			else
 			{
-				fMainForm.RemoveFormFromWindowMenu(this); // remove reference in the Window menu
+				_mainForm.RemoveFormFromWindowMenu(this); // remove reference in the Window menu
 			}
 		}
 

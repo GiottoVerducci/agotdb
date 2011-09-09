@@ -345,7 +345,7 @@ namespace AGoTDB.Forms
 			// 
 			this.printDeckToolStripMenuItem.Name = "printDeckToolStripMenuItem";
 			resources.ApplyResources(this.printDeckToolStripMenuItem, "printDeckToolStripMenuItem");
-			this.printDeckToolStripMenuItem.Click += new System.EventHandler(this.printDeckToolStripMenuItem_Click);
+			this.printDeckToolStripMenuItem.Click += new System.EventHandler(printDeckToolStripMenuItem_Click);
 			// 
 			// exportToClipboardToolStripMenuItem
 			// 
@@ -431,10 +431,10 @@ namespace AGoTDB.Forms
 			this.treeViewDeck.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewDeck.Nodes")))});
 			this.treeViewDeck.ShowNodeToolTips = true;
-			this.treeViewDeck.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
+			this.treeViewDeck.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(treeViewDeck_DrawNode);
 			this.treeViewDeck.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
 			this.treeViewDeck.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeViewDeck_KeyPress);
-			this.treeViewDeck.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
+			this.treeViewDeck.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(treeViewDeck_NodeMouseClick);
 			this.treeViewDeck.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewDeck_KeyDown);
 			this.treeViewDeck.FontChanged += new System.EventHandler(this.treeViewDeck_FontChanged);
 			// 
@@ -451,9 +451,9 @@ namespace AGoTDB.Forms
 			this.treeViewSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewSide.Nodes")))});
 			this.treeViewSide.ShowNodeToolTips = true;
-			this.treeViewSide.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
+			this.treeViewSide.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(treeViewDeck_DrawNode);
 			this.treeViewSide.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
-			this.treeViewSide.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
+			this.treeViewSide.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(treeViewDeck_NodeMouseClick);
 			// 
 			// cardPreviewControl
 			// 
@@ -482,7 +482,7 @@ namespace AGoTDB.Forms
 			this.MainMenuStrip = this.menuStripMain;
 			this.Name = "DeckBuilderForm";
 			this.Shown += new System.EventHandler(this.DeckBuilderForm_Shown);
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DeckBuilderForm_FormClosed);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(DeckBuilderForm_FormClosed);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DeckBuilderForm_FormClosing);
 			this.splitContainer2.Panel1.ResumeLayout(false);
 			this.splitContainer2.Panel2.ResumeLayout(false);

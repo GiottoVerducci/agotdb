@@ -303,4 +303,7 @@
   <data name="RestrictedText" xml:space="preserve">
     <value>Cette carte est sur la liste des cartes restreintes en tournoi.</value>
   </data>
+  <data name="ImageFolderDoesntExist" xml:space="preserve">
+    <value>Le répertoire contenant les images des cartes n'existe pas.</value>
+  </data>
 </root>

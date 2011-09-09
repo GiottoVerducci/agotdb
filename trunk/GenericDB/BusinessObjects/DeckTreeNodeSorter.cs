@@ -18,7 +18,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using GenericDB.BusinessObjects;
 
 namespace GenericDB.BusinessObjects
 {
@@ -30,9 +29,9 @@ namespace GenericDB.BusinessObjects
 	/// </summary>
 	public class DeckTreeNodeSorter : IComparer<TreeNode>
 	{
-		private readonly List<int> fOrderedTypes;
-		private IsCardNodeDelegate fIsCardNodeDelegateMethod;
-		private GetTypeDelegate fGetTypeDelegateMethod;
+		private readonly List<int> _orderedTypes;
+		private readonly IsCardNodeDelegate _isCardNodeDelegateMethod;
+		private readonly GetTypeDelegate _getTypeDelegateMethod;
 
 		/// <summary>
 		/// Initializes a new instance of DeckTreeNodeSorter with a string containing the type values 
@@ -45,13 +44,13 @@ namespace GenericDB.BusinessObjects
 			IsCardNodeDelegate isCardNodeDelegateMethod,
 			GetTypeDelegate getTypeDelegateMethod)
 		{
-			fOrderedTypes = orderedTypeValues.Length > 0 
+			_orderedTypes = orderedTypeValues.Length > 0
 				? new List<int>(
 					from type in orderedTypeValues
 					select Convert.ToInt32(type))
 				: new List<int>();
-			fIsCardNodeDelegateMethod = isCardNodeDelegateMethod;
-			fGetTypeDelegateMethod = getTypeDelegateMethod;
+			_isCardNodeDelegateMethod = isCardNodeDelegateMethod;
+			_getTypeDelegateMethod = getTypeDelegateMethod;
 		}
 
 
@@ -64,7 +63,7 @@ namespace GenericDB.BusinessObjects
 		public int Compare(TreeNode x, TreeNode y)
 		{
 			//if (DeckBuilderForm.IsCardNode(x))
-			if(fIsCardNodeDelegateMethod(x))
+			if (_isCardNodeDelegateMethod(x))
 			{
 				var cx = x.Tag as Card;
 				var cy = y.Tag as Card;
@@ -73,8 +72,8 @@ namespace GenericDB.BusinessObjects
 			//int xType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo)x.Tag).Type);
 			//int yType = GetTypeOrder(((DeckBuilderForm.TypeNodeInfo)y.Tag).Type);
 			//return xType.CompareTo(yType);
-			int xOrder = GetTypeOrder(fGetTypeDelegateMethod(x));
-			int yOrder = GetTypeOrder(fGetTypeDelegateMethod(y));
+			int xOrder = GetTypeOrder(_getTypeDelegateMethod(x));
+			int yOrder = GetTypeOrder(_getTypeDelegateMethod(y));
 			return xOrder.CompareTo(yOrder);
 		}
 
@@ -86,7 +85,7 @@ namespace GenericDB.BusinessObjects
 		public int GetTypeOrder(Int32 type)
 		{
 			// search our type in our order list.
-			return fOrderedTypes.FindLastIndex(t => (t == type));
+			return _orderedTypes.FindLastIndex(t => (t == type));
 		}
 	}
 }

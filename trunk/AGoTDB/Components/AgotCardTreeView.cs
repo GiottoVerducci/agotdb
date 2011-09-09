@@ -35,7 +35,7 @@ namespace AGoTDB.Components
 		/// <summary>
 		/// Keeps the count of calls to BeginUpdate and EndUpdate to be used by the IsBeingUpdated method.
 		/// </summary>
-		protected int updateCount = 0;
+		protected int _updateCount;
 
 		/// <summary>
 		/// Indicates whether the control is being updated or not. When it is, drawing must be skipped.
@@ -43,19 +43,19 @@ namespace AGoTDB.Components
 		/// <returns>True if the control is being updated, false otherwise.</returns>
 		public bool IsBeingUpdated()
 		{
-			return updateCount > 0;
+			return _updateCount > 0;
 		}
 
 		public new void BeginUpdate()
 		{
-			++updateCount;
+			++_updateCount;
 			base.BeginUpdate();
 		}
 
 		public new void EndUpdate()
 		{
-			--updateCount;
 			base.EndUpdate();
+			--_updateCount;
 		}
 	}
 }

@@ -322,6 +322,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The folder containing the card images doesn&apos;t exist.
+        /// </summary>
+        internal static string ImageFolderDoesntExist {
+            get {
+                return ResourceManager.GetString("ImageFolderDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image not available..
         /// </summary>
         internal static string ImageNotAvailable {

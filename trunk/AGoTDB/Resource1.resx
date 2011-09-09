@@ -309,4 +309,7 @@
   <data name="RestrictedText" xml:space="preserve">
     <value>This card is on the tournament restricted list.</value>
   </data>
+  <data name="ImageFolderDoesntExist" xml:space="preserve">
+    <value>The folder containing the card images doesn't exist</value>
+  </data>
 </root>
