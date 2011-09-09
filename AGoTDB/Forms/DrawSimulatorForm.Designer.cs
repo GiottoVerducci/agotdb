@@ -177,7 +177,7 @@ namespace AGoTDB.Forms
 			this.Font = null;
 			this.Icon = null;
 			this.Name = "DrawSimulatorForm";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DrawSimulatorForm_FormClosed);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(DrawSimulatorForm_FormClosed);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);

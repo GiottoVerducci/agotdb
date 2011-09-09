@@ -204,56 +204,56 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbStrengthHigh, "tbStrengthHigh");
 			this.tbStrengthHigh.Name = "tbStrengthHigh";
-			this.tbStrengthHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbStrengthHigh.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbStrengthHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// tbStrengthLow
 			// 
 			resources.ApplyResources(this.tbStrengthLow, "tbStrengthLow");
 			this.tbStrengthLow.Name = "tbStrengthLow";
-			this.tbStrengthLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbStrengthLow.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbStrengthLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// tbClaimHigh
 			// 
 			resources.ApplyResources(this.tbClaimHigh, "tbClaimHigh");
 			this.tbClaimHigh.Name = "tbClaimHigh";
-			this.tbClaimHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbClaimHigh.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbClaimHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// tbClaimLow
 			// 
 			resources.ApplyResources(this.tbClaimLow, "tbClaimLow");
 			this.tbClaimLow.Name = "tbClaimLow";
-			this.tbClaimLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbClaimLow.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbClaimLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// tbInitiativeHigh
 			// 
 			resources.ApplyResources(this.tbInitiativeHigh, "tbInitiativeHigh");
 			this.tbInitiativeHigh.Name = "tbInitiativeHigh";
-			this.tbInitiativeHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbInitiativeHigh.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbInitiativeHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// tbInitiativeLow
 			// 
 			resources.ApplyResources(this.tbInitiativeLow, "tbInitiativeLow");
 			this.tbInitiativeLow.Name = "tbInitiativeLow";
-			this.tbInitiativeLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbInitiativeLow.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbInitiativeLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// tbGoldHigh
 			// 
 			resources.ApplyResources(this.tbGoldHigh, "tbGoldHigh");
 			this.tbGoldHigh.Name = "tbGoldHigh";
-			this.tbGoldHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbGoldHigh.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbGoldHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// tbGoldLow
 			// 
 			resources.ApplyResources(this.tbGoldLow, "tbGoldLow");
 			this.tbGoldLow.Name = "tbGoldLow";
-			this.tbGoldLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+			this.tbGoldLow.TextChanged += new System.EventHandler(tbLowHigh_TextChanged);
 			this.tbGoldLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// label1
@@ -571,7 +571,7 @@ namespace AGoTDB.Forms
 			// 
 			this.deckBuilderToolStripMenuItem.Name = "deckBuilderToolStripMenuItem";
 			resources.ApplyResources(this.deckBuilderToolStripMenuItem, "deckBuilderToolStripMenuItem");
-			this.deckBuilderToolStripMenuItem.Click += new System.EventHandler(this.deckBuilderToolStripMenuItem_Click);
+			this.deckBuilderToolStripMenuItem.Click += new System.EventHandler(deckBuilderToolStripMenuItem_Click);
 			// 
 			// windowToolStripMenuItem
 			// 
@@ -589,7 +589,7 @@ namespace AGoTDB.Forms
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
 			resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
-			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(aboutToolStripMenuItem_Click);
 			// 
 			// optionsToolStripMenuItem
 			// 

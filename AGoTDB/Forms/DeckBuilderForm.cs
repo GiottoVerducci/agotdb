@@ -36,7 +36,6 @@ using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Extensions;
 using GenericDB.Forms;
-using System.Text.RegularExpressions;
 
 namespace AGoTDB.Forms
 {
@@ -45,17 +44,17 @@ namespace AGoTDB.Forms
 	/// </summary>
 	public partial class DeckBuilderForm : Form
 	{
-		private static readonly Object SingletonLock = new Object();
-		private static DeckBuilderForm fSingleton;
-		private AgotVersionedDeck fVersionedDeck;
-		private AgotVersionedDeck fLastLoadedDeck; // used to detect changes in the versioned deck
-		private AgotDeck fCurrentDeck; // deck currently displayed
-		private String fCurrentFilename; // filename of the deck (non-empty if the deck was loaded or saved)
-		private readonly List<AgotCardTreeView> fTreeViews;
-		private CardPreviewForm fCardPreviewForm = new CardPreviewForm();
+		private static readonly Object _singletonLock = new Object();
+		private static DeckBuilderForm _singleton;
+		private AgotVersionedDeck _versionedDeck;
+		private AgotVersionedDeck _lastLoadedDeck; // used to detect changes in the versioned deck
+		private AgotDeck _currentDeck; // deck currently displayed
+		private String _currentFilename; // filename of the deck (non-empty if the deck was loaded or saved)
+		private readonly List<AgotCardTreeView> _treeViews;
+		private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm();
 
-		private int fDeckTreeViewSpaceWidth; // width of a space using the deck tree view font (used to expand the lines)
-		private readonly DeckTreeNodeSorter fDeckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
+		private int _deckTreeViewSpaceWidth; // width of a space using the deck tree view font (used to expand the lines)
+		private readonly DeckTreeNodeSorter _deckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
 
 		protected internal class TypeNodeInfo
 		{
@@ -72,18 +71,16 @@ namespace AGoTDB.Forms
 		{
 			get
 			{
-				lock (SingletonLock)
+				lock (_singletonLock)
 				{
-					if (fSingleton == null)
-						fSingleton = new DeckBuilderForm();
-					return fSingleton;
+					return _singleton ?? (_singleton = new DeckBuilderForm());
 				}
 			}
 		}
 
 		public static bool SingletonExists()
 		{
-			return fSingleton != null;
+			return _singleton != null;
 		}
 
 		/// <summary>
@@ -92,18 +89,16 @@ namespace AGoTDB.Forms
 		private DeckBuilderForm()
 		{
 			InitializeComponent();
-			fTreeViews = new List<AgotCardTreeView>();
-			fTreeViews.Add(treeViewSide);
-			fTreeViews.Add(treeViewDeck);
-			for (var i = 0; i < fTreeViews.Count; ++i)
-				fTreeViews[i].NodeInfo = fTreeViews[i].Nodes[0]; // must have been added during design time
+			_treeViews = new List<AgotCardTreeView> { treeViewSide, treeViewDeck };
+			foreach (AgotCardTreeView t in _treeViews)
+				t.NodeInfo = t.Nodes[0]; // must have been added during design time
 			NewVersionedDeck(false);
-			for (var i = 0; i < fTreeViews.Count; ++i)
+			for (var i = 0; i < _treeViews.Count; ++i)
 			{
-				fTreeViews[i].Cards = fCurrentDeck.CardLists[i];
-				fTreeViews[i].Deck = fCurrentDeck;
+				_treeViews[i].Cards = _currentDeck.CardLists[i];
+				_treeViews[i].Deck = _currentDeck;
 			}
-			fDeckTreeNodeSorter = new DeckTreeNodeSorter(
+			_deckTreeNodeSorter = new DeckTreeNodeSorter(
 				UserSettings.TypeOrder,
 				IsCardNode,
 				x => ((TypeNodeInfo)x.Tag).Type
@@ -116,7 +111,7 @@ namespace AGoTDB.Forms
 			ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameHouse, "House", TableType.ValueId);
 			eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
 			{
-				ecl.Summary += " - " + ecl.Items[0].ToString();
+				ecl.Summary += " - " + ecl.Items[0];
 				ecl.Items.RemoveAt(0); // remove neutral house
 				ecl.UpdateSize(); // update size because neutral house has been removed
 			});
@@ -127,7 +122,7 @@ namespace AGoTDB.Forms
 
 			if (UserSettings.DisplayImages)
 			{
-				fCardPreviewForm.Visible = true;
+				_cardPreviewForm.Visible = true;
 			}
 			else
 			{
@@ -136,15 +131,15 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private void DeckBuilderForm_FormClosed(object sender, FormClosedEventArgs e)
+		private static void DeckBuilderForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			lock (SingletonLock)
+			lock (_singletonLock)
 			{
-				fSingleton = null;
+				_singleton = null;
 			}
 		}
 
-		private void treeViewDeck_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+		private static void treeViewDeck_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
 			if ((e.Button == MouseButtons.Right) && IsCardNode(e.Node))
 				((TreeView)sender).SelectedNode = e.Node;
@@ -158,15 +153,11 @@ namespace AGoTDB.Forms
 			{
 				case Keys.Delete:
 					if (IsCardNode(node))
-					{
 						SubtractCardFromCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
-					};
 					break;
 				case Keys.Insert:
 					if (IsCardNode(node))
-					{
 						AddCardToCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
-					};
 					break;
 			}
 		}
@@ -180,15 +171,11 @@ namespace AGoTDB.Forms
 			{
 				case '-':
 					if (IsCardNode(node))
-					{
 						SubtractCardFromCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
-					};
 					break;
 				case '+':
 					if (IsCardNode(node))
-					{
 						AddCardToCurrent((AgotCard)node.Tag); // keeps the coherence between the versioned deck and its display
-					};
 					break;
 				default: e.Handled = false; break;
 			}
@@ -225,7 +212,7 @@ namespace AGoTDB.Forms
 
 		private void treeViewHistory_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			fCurrentDeck = fVersionedDeck[Int32.Parse(e.Node.Name, CultureInfo.InvariantCulture)];
+			_currentDeck = _versionedDeck[Int32.Parse(e.Node.Name, CultureInfo.InvariantCulture)];
 			UpdateControlsWithVersionedDeck(false);
 		}
 		#endregion
@@ -263,7 +250,7 @@ namespace AGoTDB.Forms
 			{
 				if (form.ShowDialog() != DialogResult.OK)
 					return;
-				fVersionedDeck.AddNewVersion(form.RevisionComment());
+				_versionedDeck.AddNewVersion(form.RevisionComment());
 				UpdateHistoryFromVersionedDeck();
 			}
 		}
@@ -292,7 +279,7 @@ namespace AGoTDB.Forms
 			TreeNode node = ((TreeView)cms.SourceControl).SelectedNode;
 			// disable items if the deck isn't editable or if the current node isn't a card node
 			foreach (ToolStripMenuItem mi in contextMenuStripTreeView.Items)
-				mi.Enabled = fCurrentDeck.Editable && (node != null) && IsCardNode(node);
+				mi.Enabled = _currentDeck.Editable && (node != null) && IsCardNode(node);
 			// always enabled items
 			miExportDeckToClipboard.Enabled = true;
 			miGenerateProxyPdf.Enabled = true;
@@ -368,13 +355,13 @@ namespace AGoTDB.Forms
 
 		private void UpdateCardNodeText(TreeNode cardNode)
 		{
-			if (fDeckTreeViewSpaceWidth == 0)
+			if (_deckTreeViewSpaceWidth == 0)
 				ComputeDeckTreeViewSpaceWidth(cardNode.TreeView);
 			var cardNodeInfo = GetCardNodeInfo(cardNode);
 			Font font = GetNodeFont(cardNode);
 			var textWidth = TextRenderer.MeasureText(cardNodeInfo.Value1, font).Width;
 			var text2Width = TextRenderer.MeasureText(cardNodeInfo.Value2, GetNodeInfoFont(cardNode)).Width;
-			var nbSpacesToAdd = 1 + (((TypeNodeInfo)cardNode.Parent.Tag).Width - textWidth + text2Width) / fDeckTreeViewSpaceWidth;
+			var nbSpacesToAdd = 1 + (((TypeNodeInfo)cardNode.Parent.Tag).Width - textWidth + text2Width) / _deckTreeViewSpaceWidth;
 			cardNode.Text = cardNodeInfo.Value1 + " ".PadRight(nbSpacesToAdd);
 			cardNode.ForeColor = cardNodeInfo.ForeColor;
 			cardNode.BackColor = cardNodeInfo.BackColor;
@@ -428,14 +415,13 @@ namespace AGoTDB.Forms
 		/// <param name="universalId">The card id.</param>
 		private void ShowCardPreviewForm(int universalId)
 		{
-			if (ApplicationSettings.ImagesFolderExists && UserSettings.DisplayImages)
-			{
-				fCardPreviewForm.CardUniversalId = universalId;
-				var x = this.Location.X + this.Width;
-				var y = this.Location.Y + 10;
+			if (!ApplicationSettings.ImagesFolderExists || !UserSettings.DisplayImages)
+				return;
+			_cardPreviewForm.CardUniversalId = universalId;
+			var x = this.Location.X + this.Width;
+			var y = this.Location.Y + 10;
 
-				fCardPreviewForm.Location = new Point(x, y);
-			}
+			_cardPreviewForm.Location = new Point(x, y);
 		}
 
 		/// <summary>
@@ -443,34 +429,33 @@ namespace AGoTDB.Forms
 		/// </summary>
 		private void HideCardPreviewForm()
 		{
-			fCardPreviewForm.Hide();
+			_cardPreviewForm.Hide();
 		}
 
 		private void UpdateStatistics()
 		{
 			rtbStatistics.Clear();
 
-			var types = new AgotCard.CardType[] { AgotCard.CardType.Plot, AgotCard.CardType.Character, AgotCard.CardType.Location, AgotCard.CardType.Attachment, AgotCard.CardType.Event };
+			var types = new[] { AgotCard.CardType.Plot, AgotCard.CardType.Character, 
+                AgotCard.CardType.Location, AgotCard.CardType.Attachment, AgotCard.CardType.Event };
 
-			var cardList = fCurrentDeck.CardLists[1];
+			var cardList = _currentDeck.CardLists[1];
 
 			var alreadyIntroduced = false;
 			foreach (var type in types)
 			{
 				var traits = DeckStatisticsService.GetTraitsDistribution(type, cardList);
-				if (traits.Count > 0)
-				{
-					AddStatsIntroIfNecessary(Resource1.TraitsText, ref alreadyIntroduced);
-					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
-					rtbStatistics.SelectionColor = Color.Black;
-					rtbStatistics.AppendText(String.Format("{0}: ", AgotCard.CardTypeNames[(int)type]));
-					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, AgotCard.TraitsFormat.Style);
-					rtbStatistics.SelectionColor = AgotCard.TraitsFormat.Color;
+				if (traits.Count == 0)
+					continue;
+				AddStatsIntroIfNecessary(Resource1.TraitsText, ref alreadyIntroduced);
+				rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
+				rtbStatistics.SelectionColor = Color.Black;
+				rtbStatistics.AppendText(String.Format("{0}: ", AgotCard.CardTypeNames[(int)type]));
+				rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, AgotCard.TraitsFormat.Style);
+				rtbStatistics.SelectionColor = AgotCard.TraitsFormat.Color;
 
-					rtbStatistics.AppendText(String.Join(", ",
-						traits.OrderBy(kv => kv.Key).OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
-					rtbStatistics.AppendText("\n");
-				}
+				rtbStatistics.AppendText(String.Join(", ", traits.OrderBy(kv => kv.Key).OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+				rtbStatistics.AppendText("\n");
 			}
 
 			alreadyIntroduced = false;
@@ -547,7 +532,6 @@ namespace AGoTDB.Forms
 					AddStatsIntroIfNecessary(Resource1.InfluenceCostingCardsText, ref alreadyIntroduced);
 					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Regular);
 					rtbStatistics.SelectionColor = Color.Black;
-					
 
 					rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Bold);
 					rtbStatistics.AppendText(String.Join(", ",
@@ -578,23 +562,23 @@ namespace AGoTDB.Forms
 			Application.DoEvents();
 			UpdateTreeViews();
 
-			tbDeckName.Text = fVersionedDeck.Name;
-			tbAuthor.Text = fVersionedDeck.Author;
-			rtbDescription.Text = fVersionedDeck.Description;
+			tbDeckName.Text = _versionedDeck.Name;
+			tbAuthor.Text = _versionedDeck.Author;
+			rtbDescription.Text = _versionedDeck.Description;
 			if (updateHistory)
 				UpdateHistoryFromVersionedDeck();
 
 			// enable or disable the edit mode depending on the Editable property of the deck
-			eclHouse.Enabled = fCurrentDeck.Editable;
-			eclAgenda.Enabled = fCurrentDeck.Editable;
-			rtbDescription.Enabled = fCurrentDeck.Editable;
+			eclHouse.Enabled = _currentDeck.Editable;
+			eclAgenda.Enabled = _currentDeck.Editable;
+			rtbDescription.Enabled = _currentDeck.Editable;
 		}
 
 		private void UpdateTreeViews()
 		{
 			rtbStatistics.BeginUpdate();
-			UpdateTreeViewWithCards(treeViewDeck, fCurrentDeck.CardLists[1], fCurrentDeck); // TODO : modify to handle multiple deck lists
-			UpdateTreeViewWithCards(treeViewSide, fCurrentDeck.CardLists[0], fCurrentDeck); // TODO : modify to handle multiple deck lists
+			UpdateTreeViewWithCards(treeViewDeck, _currentDeck.CardLists[1], _currentDeck); // TODO : modify to handle multiple deck lists
+			UpdateTreeViewWithCards(treeViewSide, _currentDeck.CardLists[0], _currentDeck); // TODO : modify to handle multiple deck lists
 			rtbStatistics.EndUpdate();
 		}
 
@@ -604,8 +588,8 @@ namespace AGoTDB.Forms
 			treeView.Cards = cards;
 			treeView.Nodes.Clear();
 			treeView.Nodes.Add(treeView.NodeInfo);
-			for (var i = 0; i < cards.Count; ++i)
-				AddCardToTreeView(treeView, cards[i], false);
+			foreach (AgotCard card in cards)
+				AddCardToTreeView(treeView, card, false);
 			treeView.Deck = deck;
 			treeView.EndUpdate();
 			UpdateTabText(treeView);
@@ -615,9 +599,9 @@ namespace AGoTDB.Forms
 		private void UpdateVersionedDeckWithControls()
 		{
 			UpdateHouseFromControls();
-			fVersionedDeck.Name = tbDeckName.Text;
-			fVersionedDeck.Author = tbAuthor.Text;
-			fVersionedDeck.Description = rtbDescription.Text;
+			_versionedDeck.Name = tbDeckName.Text;
+			_versionedDeck.Author = tbAuthor.Text;
+			_versionedDeck.Description = rtbDescription.Text;
 		}
 
 		private void UpdateHouseFromControls()
@@ -629,13 +613,13 @@ namespace AGoTDB.Forms
 					if (ecl.GetItemCheckState(i) == CheckState.Checked)
 						h += Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
 			});
-			fCurrentDeck.Houses = h;
+			_currentDeck.Houses = h;
 			UpdateTreeViews();
 		}
 
 		private void UpdateControlsFromHouse()
 		{
-			var h = fCurrentDeck.Houses;
+			var h = _currentDeck.Houses;
 			eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
 			{
 				for (var i = ecl.Items.Count - 1; i >= 0; --i) // houses are sorted by increasing value
@@ -655,24 +639,19 @@ namespace AGoTDB.Forms
 		private void UpdateAgendaFromControls()
 		{
 			var agenda = new AgotCardList();
-			eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
-			{
-				for (var i = 0; i < ecl.Items.Count; ++i)
-					if (ecl.GetItemCheckState(i) == CheckState.Checked)
-					{
-						agenda.Add(ecl.Items[i] as AgotCard);
-					}
-			});
-			fCurrentDeck.Agenda.Clear();
-			fCurrentDeck.Agenda.AddRange(agenda);
+			eclAgenda.WorkOnExpandedItems(ecl => agenda.AddRange(ecl.Items.Cast<object>()
+				.Where((t, i) => ecl.GetItemCheckState(i) == CheckState.Checked)
+				.Select(t => t as AgotCard)));
+			_currentDeck.Agenda.Clear();
+			_currentDeck.Agenda.AddRange(agenda);
 		}
 
 		private void UpdateControlsFromAgenda()
 		{
 			// check for agenda in the deck but missing in our list 
 			var missingAgenda = new List<AgotCard>();
-			var currentAgenda = new List<AgotCard>(fCurrentDeck.Agenda);
-			missingAgenda.AddRange(fCurrentDeck.Agenda);
+			var currentAgenda = new List<AgotCard>(_currentDeck.Agenda);
+			missingAgenda.AddRange(_currentDeck.Agenda);
 
 			eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
 			{
@@ -682,10 +661,7 @@ namespace AGoTDB.Forms
 				for (var i = ecl.Items.Count - 1; i >= 0; --i)
 				{
 					var agenda = ecl.Items[i] as AgotCard;
-					if (currentAgenda.Contains(agenda))
-						ecl.SetItemCheckState(i, CheckState.Checked);
-					else
-						ecl.SetItemCheckState(i, CheckState.Unchecked);
+					ecl.SetItemCheckState(i, currentAgenda.Contains(agenda) ? CheckState.Checked : CheckState.Unchecked);
 				}
 			});
 		}
@@ -693,10 +669,10 @@ namespace AGoTDB.Forms
 		private void UpdateHistoryFromVersionedDeck()
 		{
 			treeViewHistory.Nodes.Clear();
-			var lastVersionIndex = fVersionedDeck.Count - 1;
+			var lastVersionIndex = _versionedDeck.Count - 1;
 			for (var i = 0; i < lastVersionIndex; ++i)
-				treeViewHistory.Nodes.Insert(0, i.ToString(), String.Format(CultureInfo.CurrentCulture, "v{0} {1} {2}: {3}", i, fVersionedDeck[i].LastModifiedDate.ToShortDateString(), fVersionedDeck[i].LastModifiedDate.ToShortTimeString(), fVersionedDeck[i].RevisionComments));
-			treeViewHistory.Nodes.Insert(0, lastVersionIndex.ToString(), String.Format(CultureInfo.CurrentCulture, "{0} {1} {2}", Resource1.CurrentRevision, fVersionedDeck.LastVersion.LastModifiedDate.ToShortDateString(), fVersionedDeck.LastVersion.LastModifiedDate.ToShortTimeString()));
+				treeViewHistory.Nodes.Insert(0, i.ToString(), String.Format(CultureInfo.CurrentCulture, "v{0} {1} {2}: {3}", i, _versionedDeck[i].LastModifiedDate.ToShortDateString(), _versionedDeck[i].LastModifiedDate.ToShortTimeString(), _versionedDeck[i].RevisionComments));
+			treeViewHistory.Nodes.Insert(0, lastVersionIndex.ToString(), String.Format(CultureInfo.CurrentCulture, "{0} {1} {2}", Resource1.CurrentRevision, _versionedDeck.LastVersion.LastModifiedDate.ToShortDateString(), _versionedDeck.LastVersion.LastModifiedDate.ToShortTimeString()));
 		}
 		#endregion
 
@@ -710,7 +686,7 @@ namespace AGoTDB.Forms
 		{
 			TreeNode typeNode;
 
-			var order = fDeckTreeNodeSorter.GetTypeOrder(type);
+			var order = _deckTreeNodeSorter.GetTypeOrder(type);
 			if (order == -1) // type not found in the order list
 				typeNode = treeView.Nodes.Add(type.ToString(CultureInfo.InvariantCulture), AgotCard.GetTypeName(type)); // add it to the end
 			else
@@ -719,7 +695,7 @@ namespace AGoTDB.Forms
 				var i = 0;
 				while (i < treeView.Nodes.Count)
 				{
-					var nodeOrder = fDeckTreeNodeSorter.GetTypeOrder(Int32.Parse(treeView.Nodes[i].Name, CultureInfo.InvariantCulture));
+					var nodeOrder = _deckTreeNodeSorter.GetTypeOrder(Int32.Parse(treeView.Nodes[i].Name, CultureInfo.InvariantCulture));
 					if ((nodeOrder == -1) || (nodeOrder > order))
 						break;
 					++i;
@@ -744,10 +720,9 @@ namespace AGoTDB.Forms
 			{
 				var cardType = card.Type != null ? card.Type.Value : (Int32)AgotCard.CardType.Unknown; // we may have no type for unknown cards
 				var rootIndex = treeView.Nodes.IndexOfKey(cardType.ToString(CultureInfo.InvariantCulture));
-				if (rootIndex == -1)
-					root = AddTypeNode(treeView, cardType);
-				else
-					root = treeView.Nodes[rootIndex];
+				root = rootIndex == -1
+					? AddTypeNode(treeView, cardType)
+					: treeView.Nodes[rootIndex];
 
 				var i = 0;
 				while ((i < root.Nodes.Count) && (card.CompareTo((AgotCard)root.Nodes[i].Tag) < 0))
@@ -835,12 +810,9 @@ namespace AGoTDB.Forms
 		private static void UpdateTabText(AgotCardTreeView treeView)
 		{
 			var tabPage = (TabPage)treeView.Parent;
-			var count = 0;
-			foreach (AgotCard card in treeView.Cards)
-			{
-				if (card.Type != null && card.Type.Value != (Int32)AgotCard.CardType.Plot)
-					count += card.Quantity;
-			}
+			var count = treeView.Cards
+				.Where(card => card.Type != null && card.Type.Value != (Int32)AgotCard.CardType.Plot)
+				.Sum(card => card.Quantity);
 
 			var index = tabPage.Text.IndexOf('[');
 			if (index > 0)
@@ -918,7 +890,7 @@ namespace AGoTDB.Forms
 		#endregion
 
 		#region Deck tree view drawing
-		private void treeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
+		private static void treeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
 		{
 			var treeView = (AgotCardTreeView)sender;
 			if (treeView.IsBeingUpdated()) // no redraw when updating
@@ -957,40 +929,40 @@ namespace AGoTDB.Forms
 
 		public bool AddCardToDeck(AgotCard card)
 		{
-			if (!fCurrentDeck.Editable)
+			if (!_currentDeck.Editable)
 				return false;
 
-			AgotCard c = fCurrentDeck.CardLists[1].AddCard(card); // TODO : modify to handle multiple deck lists
+			AgotCard c = _currentDeck.CardLists[1].AddCard(card); // TODO : modify to handle multiple deck lists
 			AddCardToTreeView(treeViewDeck, c, c.Quantity > 1);
 			return true;
 		}
 
 		private bool SubtractCardFromDeck(AgotCard card)
 		{
-			if (!fCurrentDeck.Editable)
+			if (!_currentDeck.Editable)
 				return false;
 
-			AgotCard c = fCurrentDeck.CardLists[1].SubtractCard(card); // TODO : modify to handle multiple deck lists
+			AgotCard c = _currentDeck.CardLists[1].SubtractCard(card); // TODO : modify to handle multiple deck lists
 			SubtractCardFromTreeView(treeViewDeck, card, c == null);
 			return true;
 		}
 
 		public bool AddCardToSide(AgotCard card)
 		{
-			if (!fCurrentDeck.Editable)
+			if (!_currentDeck.Editable)
 				return false;
 
-			AgotCard c = fCurrentDeck.CardLists[0].AddCard(card); // TODO : modify to handle multiple deck lists
+			AgotCard c = _currentDeck.CardLists[0].AddCard(card); // TODO : modify to handle multiple deck lists
 			AddCardToTreeView(treeViewSide, c, c.Quantity > 1);
 			return true;
 		}
 
 		private bool SubtractCardFromSide(AgotCard card)
 		{
-			if (!fCurrentDeck.Editable)
+			if (!_currentDeck.Editable)
 				return false;
 
-			AgotCard c = fCurrentDeck.CardLists[0].SubtractCard(card); // TODO : modify to handle multiple deck lists
+			AgotCard c = _currentDeck.CardLists[0].SubtractCard(card); // TODO : modify to handle multiple deck lists
 			SubtractCardFromTreeView(treeViewSide, card, c == null);
 			return true;
 		}
@@ -1012,31 +984,31 @@ namespace AGoTDB.Forms
 		private bool SaveVersionedDeck(bool forceCallToSaveDialog)
 		{
 			UpdateVersionedDeckWithControls();
-			//fCurrentFilename = "toto.xml"; // for quick debug purpose
-			String previousFilename = fCurrentFilename;
-			if (string.IsNullOrEmpty(fCurrentFilename) || forceCallToSaveDialog)
+			//_currentFilename = "toto.xml"; // for quick debug purpose
+			String previousFilename = _currentFilename;
+			if (string.IsNullOrEmpty(_currentFilename) || forceCallToSaveDialog)
 			{
 				using (var fd = new SaveFileDialog())
 				{
 					fd.Filter = Resource1.DeckFileFilter;
 					fd.ValidateNames = true;
-					fd.FileName = fVersionedDeck.Name + ".xml"; // use deck name as default name. Todo: remove special characters
+					fd.FileName = _versionedDeck.Name + ".xml"; // use deck name as default name. Todo: remove special characters
 					if (fd.ShowDialog() != DialogResult.OK)
 						return false;
-					fCurrentFilename = fd.FileName;
+					_currentFilename = fd.FileName;
 				}
 			}
 			int? databaseVersion = (ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0)
 				? (int?)ApplicationSettings.DatabaseManager.DatabaseInfos[0].VersionId
 				: null;
 
-			var result = fVersionedDeck.SaveToXmlFile(fCurrentFilename, ApplicationSettings.ApplicationName, ApplicationSettings.ApplicationVersion, databaseVersion);
+			var result = _versionedDeck.SaveToXmlFile(_currentFilename, ApplicationSettings.ApplicationName, ApplicationSettings.ApplicationVersion, databaseVersion);
 			if (result == DeckSaveResult.Success)
-				fLastLoadedDeck = (AgotVersionedDeck)fVersionedDeck.Clone(); // performs a deep copy
+				_lastLoadedDeck = (AgotVersionedDeck)_versionedDeck.Clone(); // performs a deep copy
 			else
 			{
-				MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrSaveXmlDeck, fCurrentFilename), Resource1.ErrDeckSaveTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				fCurrentFilename = previousFilename; // restore filename to avoid confusion ('cause the deck wasn't saved under the new filename)
+				MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrSaveXmlDeck, _currentFilename), Resource1.ErrDeckSaveTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				_currentFilename = previousFilename; // restore filename to avoid confusion ('cause the deck wasn't saved under the new filename)
 			}
 			UpdateFormTitle();
 			return result == DeckSaveResult.Success;
@@ -1044,49 +1016,49 @@ namespace AGoTDB.Forms
 
 		private void LoadVersionedDeck()
 		{
-			string oldFilename = fCurrentFilename;
-			//fVersionedDeck.LoadFromXMLFile("toto.xml"); // for quick debug purpose
+			string oldFilename = _currentFilename;
+			//_versionedDeck.LoadFromXMLFile("toto.xml"); // for quick debug purpose
 			using (var fd = new OpenFileDialog())
 			{
 				fd.Filter = Resource1.DeckFileFilter;
 				if (fd.ShowDialog() != DialogResult.OK)
 					return;
-				fCurrentFilename = fd.FileName;
+				_currentFilename = fd.FileName;
 			}
 			var versionedDeck = new AgotVersionedDeck();
-			DeckLoadResult result = versionedDeck.LoadFromXmlFile(fCurrentFilename);
+			DeckLoadResult result = versionedDeck.LoadFromXmlFile(_currentFilename);
 			if (result == DeckLoadResult.Success)
 			{
-				fVersionedDeck = versionedDeck;
-				fCurrentDeck = fVersionedDeck.LastVersion; // get reference on the latest deck
+				_versionedDeck = versionedDeck;
+				_currentDeck = _versionedDeck.LastVersion; // get reference on the latest deck
 				UpdateControlsWithVersionedDeck(true);
-				//fLastLoadedDeck = new VersionedDeck(fVersionedDeck); // performs a deep copy
-				fLastLoadedDeck = (AgotVersionedDeck)fVersionedDeck.Clone(); // performs a deep copy
+				//_lastLoadedDeck = new VersionedDeck(_versionedDeck); // performs a deep copy
+				_lastLoadedDeck = (AgotVersionedDeck)_versionedDeck.Clone(); // performs a deep copy
 			}
 			else
 			{
 				switch (result)
 				{
 					case DeckLoadResult.FileNotFound:
-						MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrXmlDeckFileNotFound, fCurrentFilename),
+						MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrXmlDeckFileNotFound, _currentFilename),
 							Resource1.ErrDeckLoadTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 						break;
 					case DeckLoadResult.InvalidContent:
 						MessageBox.Show(Resource1.ErrInvalidXmlDeckFile, Resource1.ErrDeckLoadTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 						break;
 				}
-				fCurrentFilename = oldFilename;
+				_currentFilename = oldFilename;
 			}
 			UpdateFormTitle();
 		}
 
 		private void NewVersionedDeck(bool cleanControls)
 		{
-			fVersionedDeck = new AgotVersionedDeck();
-			fCurrentDeck = fVersionedDeck.LastVersion;
-			fCurrentFilename = "";
-			//fLastLoadedDeck = new VersionedDeck(fVersionedDeck); // performs a deep copy
-			fLastLoadedDeck = (AgotVersionedDeck)fVersionedDeck.Clone(); // performs a deep copy
+			_versionedDeck = new AgotVersionedDeck();
+			_currentDeck = _versionedDeck.LastVersion;
+			_currentFilename = "";
+			//_lastLoadedDeck = new VersionedDeck(_versionedDeck); // performs a deep copy
+			_lastLoadedDeck = (AgotVersionedDeck)_versionedDeck.Clone(); // performs a deep copy
 			if (cleanControls)
 				UpdateControlsWithVersionedDeck(true);
 			UpdateFormTitle();
@@ -1094,8 +1066,8 @@ namespace AGoTDB.Forms
 
 		private bool CheckDeckChanges()
 		{
-			//if (VersionedDeck.AreEqual(fVersionedDeck, fLastLoadedDeck))
-			if (StaticComparer.AreEqual(fVersionedDeck, fLastLoadedDeck))
+			//if (VersionedDeck.AreEqual(_versionedDeck, _lastLoadedDeck))
+			if (StaticComparer.AreEqual(_versionedDeck, _lastLoadedDeck))
 				return true;
 
 			bool result = true;
@@ -1134,17 +1106,17 @@ namespace AGoTDB.Forms
 		{
 			var text = new StringBuilder();
 
-			text.Append(lblDeckName.Text).AppendLine(fVersionedDeck.Name);
-			text.Append(lblAuthor.Text).AppendLine(fVersionedDeck.Author);
-			text.Append(lblHouse.Text).Append(AgotCard.GetHouseName(fCurrentDeck.Houses));
-			if (fCurrentDeck.Agenda.Count > 0)
+			text.Append(lblDeckName.Text).AppendLine(_versionedDeck.Name);
+			text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
+			text.Append(lblHouse.Text).Append(AgotCard.GetHouseName(_currentDeck.Houses));
+			if (_currentDeck.Agenda.Count > 0)
 			{
-				var agendaNames = fCurrentDeck.Agenda.Select(card => card.Name.Value);
+				var agendaNames = _currentDeck.Agenda.Select(card => card.Name.Value);
 				text.AppendFormat(" ({0})", string.Join(" + ", agendaNames.ToArray()));
 			}
 
 			text.AppendLine().AppendLine();
-			text.Append(tabPageDescription.Text).Append(" : ").AppendLine(fVersionedDeck.Description);
+			text.Append(tabPageDescription.Text).Append(" : ").AppendLine(_versionedDeck.Description);
 
 			text.AppendLine().AppendLine(tabPageDeck.Text);
 			text.AppendLine(TreeViewToText(treeViewDeck));
@@ -1179,8 +1151,8 @@ namespace AGoTDB.Forms
 
 		private void UpdateFormTitle()
 		{
-			String header = Text.Substring(0, Text.IndexOf('-') + 1);
-			Text = header + " " + System.IO.Path.GetFileName(fCurrentFilename);
+			var header = Text.Substring(0, Text.IndexOf('-') + 1);
+			Text = string.Format("{0} {1}", header, System.IO.Path.GetFileName(_currentFilename));
 		}
 
 		/// <summary>
@@ -1192,7 +1164,7 @@ namespace AGoTDB.Forms
 			// we have to subtract two strings to remove the constant part
 			var spaceWidth = TextRenderer.MeasureText(" ", treeView.Font).Width;
 			var spaceWidth2 = TextRenderer.MeasureText("  ", treeView.Font).Width;
-			fDeckTreeViewSpaceWidth = spaceWidth2 - spaceWidth;
+			_deckTreeViewSpaceWidth = spaceWidth2 - spaceWidth;
 		}
 
 		private void treeViewDeck_FontChanged(object sender, EventArgs e)
@@ -1202,7 +1174,7 @@ namespace AGoTDB.Forms
 
 		private void drawSimulatorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			DrawSimulatorForm.Singleton.SetDeck(fCurrentDeck);
+			DrawSimulatorForm.Singleton.SetDeck(_currentDeck);
 			DrawSimulatorForm.Singleton.Show();
 			DrawSimulatorForm.Singleton.Activate();
 		}
@@ -1210,7 +1182,7 @@ namespace AGoTDB.Forms
 		private void miAddCardList_Click(object sender, EventArgs e)
 		{
 			var ctv = new AgotCardTreeView();
-			ctv.Nodes.Add(new TreeNode(fTreeViews[1].NodeInfo.Text));
+			ctv.Nodes.Add(new TreeNode(_treeViews[1].NodeInfo.Text));
 			ctv.NodeInfo = ctv.Nodes[0];
 			var tabPage = new TabPage(tabPageDeck.Text + "+");
 			tabControlDecks.TabPages.Add(tabPage);
@@ -1221,7 +1193,7 @@ namespace AGoTDB.Forms
 		{
 			try
 			{
-				var unprintedProxies = ProxyPdfGenerator.CreateProxiesPdf("proxy.pdf", fCurrentDeck);
+				var unprintedProxies = ProxyPdfGenerator.CreateProxiesPdf("proxy.pdf", _currentDeck);
 				if (unprintedProxies.Count > 0)
 					MessageBox.Show(String.Format("{0}\n{1}",
 						Resource1.ErrUnprintedProxies,
@@ -1248,7 +1220,7 @@ namespace AGoTDB.Forms
 			HideCardPreviewForm();
 		}
 
-		private void printDeckToolStripMenuItem_Click(object sender, EventArgs e)
+		private static void printDeckToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 
 		}

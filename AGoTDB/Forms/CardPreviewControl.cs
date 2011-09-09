@@ -29,16 +29,16 @@ namespace AGoTDB.Forms
 {
 	public partial class CardPreviewControl : UserControl
 	{
-		private Image fCurrentImage = null;
-		private int fCardUniversalId = -1;
+		private Image _currentImage;
+		private int _cardUniversalId = -1;
 
 		/// <summary>
 		/// The id of the card displayed.
 		/// </summary>
 		public int CardUniversalId
 		{
-			get { return fCardUniversalId; }
-			set { if (value != fCardUniversalId && ApplicationSettings.ImagesFolderExists) { fCardUniversalId = value; LoadCardImage(); } }
+			get { return _cardUniversalId; }
+			set { if (value != _cardUniversalId) { _cardUniversalId = value; LoadCardImage(); } }
 		}
 
 		public CardPreviewControl()
@@ -52,7 +52,7 @@ namespace AGoTDB.Forms
 		/// <returns>True if an image is displayed, false otherwise.</returns>
 		public bool IsImageDisplayed()
 		{
-			return fCurrentImage != null;
+			return _currentImage != null;
 		}
 
 		/// <summary>
@@ -61,25 +61,32 @@ namespace AGoTDB.Forms
 		/// <returns>The size of the image displayed, or the size of the control.</returns>
 		public Size GetDesiredSize()
 		{
-			return fCurrentImage != null
-				? fCurrentImage.Size
+			return _currentImage != null
+				? _currentImage.Size
 				: Size;
 		}
 
 		private void LoadCardImage()
 		{
-			string imageFileName = CardImageService.GetImageFileName(fCardUniversalId);
+			if (!ApplicationSettings.ImagesFolderExists)
+			{
+				lblUnavailable.Text = Resource1.ImageFolderDoesntExist;
+				DisplayImageOrText(false);
+				Invalidate();
+				return;
+			}
+			string imageFileName = CardImageService.GetImageFileName(_cardUniversalId);
 			if (CardImageService.GetImageAvailability(imageFileName) == ImageAvailability.Available)
 			{
-				fCurrentImage = new Bitmap(imageFileName);
-				pbImage.Image = fCurrentImage;
+				_currentImage = new Bitmap(imageFileName);
+				pbImage.Image = _currentImage;
 				pbImage.SizeMode = PictureBoxSizeMode.Zoom;
 				DisplayImageOrText(true);
 				Invalidate();
 			}
 			else
 			{
-				fCurrentImage = null;
+				_currentImage = null;
 				Size = new Size(60, 50);
 				lblUnavailable.Text = Resource1.ImageNotAvailable;
 				DisplayImageOrText(false);

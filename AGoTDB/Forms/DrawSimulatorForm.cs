@@ -19,9 +19,8 @@
 // © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
 // © Le Trône de Fer JCE 2008 Edge Entertainment
 
-
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
 
@@ -32,9 +31,9 @@ namespace AGoTDB.Forms
 	/// </summary>
 	public partial class DrawSimulatorForm : Form
 	{
-		private static readonly Object SingletonLock = new Object();
-		private static DrawSimulatorForm fSingleton;
-		private AgotDeck fDeck;
+		private static readonly Object _singletonLock = new Object();
+		private static DrawSimulatorForm _singleton;
+		private AgotDeck _deck;
 		private const int HandSize = 7;
 
 		/// <summary>
@@ -44,11 +43,9 @@ namespace AGoTDB.Forms
 		{
 			get
 			{
-				lock (SingletonLock)
+				lock (_singletonLock)
 				{
-					if (fSingleton == null)
-						fSingleton = new DrawSimulatorForm();
-					return fSingleton;
+					return _singleton ?? (_singleton = new DrawSimulatorForm());
 				}
 			}
 		}
@@ -68,7 +65,7 @@ namespace AGoTDB.Forms
 		/// <param name="deck">The deck to use.</param>
 		public void SetDeck(AgotDeck deck)
 		{
-			fDeck = deck;
+			_deck = deck;
 			InitializeFromDeck();
 		}
 
@@ -76,7 +73,7 @@ namespace AGoTDB.Forms
 		{
 			ListsBeginUpdate(lbDeck, lbHand);
 			ClearLists();
-			ShuffleToDeckList(lbDeck, fDeck.CardLists[1]); // TODO : modify to handle multiple deck lists
+			ShuffleToDeckList(lbDeck, _deck.CardLists[1]); // TODO : modify to handle multiple deck lists
 			for (var i = 0; i < HandSize; ++i)
 				MoveFromOneListToAnother(lbDeck, 0, lbHand);
 			ListsEndUpdate(lbDeck, lbHand);
@@ -95,10 +92,11 @@ namespace AGoTDB.Forms
 		{
 			list.BeginUpdate();
 			var alea = new Random();
-			for (var i = 0; i < cardList.Count; ++i)
-				if (cardList[i].IsDrawable())
-					for (var j = 0; j < cardList[i].Quantity; ++j)
-						list.Items.Insert(alea.Next(list.Items.Count + 1), cardList[i]);
+			foreach (AgotCard c in cardList.Where(c => c.IsDrawable()))
+			{
+				for (var j = 0; j < c.Quantity; ++j)
+					list.Items.Insert(alea.Next(list.Items.Count + 1), c);
+			}
 			list.EndUpdate();
 		}
 
@@ -124,11 +122,11 @@ namespace AGoTDB.Forms
 				list.EndUpdate();
 		}
 
-		private void DrawSimulatorForm_FormClosed(object sender, FormClosedEventArgs e)
+		private static void DrawSimulatorForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			lock (SingletonLock)
+			lock (_singletonLock)
 			{
-				fSingleton = null;
+				_singleton = null;
 			}
 		}
 
@@ -156,9 +154,7 @@ namespace AGoTDB.Forms
 
 		private void btnShuffle_Click(object sender, EventArgs e)
 		{
-			var temp = new List<object>();
-			for (var i = 0; i < lbDeck.Items.Count; ++i)
-				temp.Add(lbDeck.Items[i]);
+			var temp = lbDeck.Items.Cast<object>().ToList();
 			lbDeck.BeginUpdate();
 			lbDeck.Items.Clear();
 			var alea = new Random();
