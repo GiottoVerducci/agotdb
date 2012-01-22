@@ -1,3 +1,14 @@
+Beta 0.732 (22 janvier 2011)
+ - Ajout du chapitre chapitre 6 des Secrets de Villevieille "Ici Pour Servir"
+ - Ajout du chapitre 2 de La Geste des Champions "La Grande Mêlée"
+ - Ajout du chapitre 3 de La Geste des Champions "Sur des Terrains Dangereux"
+ - Ajout du chapitre 4 de La Geste des Champions "Où mène la loyauté"
+ - Ajout de la boîte "Lions du Roc"
+
+Beta 0.731 (28 décembre 2011)
+ - Ajout du chapitre 1 de La Geste des Champions "Le Tournoi de la Main" (oui, il manque le chapitre 6 des Secrets de Villevieille -- si vous voulez contribuer, envoyez-moi un mail à v.ripoll@gmail.com)
+ - Ajout des mots-clés joute et mêlée.
+
 Beta 0.730 (02 septembre 2011)
  - Ajout du chapitre 5 des Secrets de Villevieille "Le Masque de l'Archimestre"
  - Mise en forme des ~traits~ dans le texte des cartes
