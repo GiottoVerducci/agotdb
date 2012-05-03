@@ -57,8 +57,9 @@ namespace AGoTDB.Services
 
 		public static string GetImageFileName(int universalId)
 		{
-			return String.Format("{0}\\{1}.jpg",
+			return String.Format("{0}{1}{2}.jpg",
 				ApplicationSettings.ImagesFolder,
+				Path.DirectorySeparatorChar,
 				universalId);
 		}
 
