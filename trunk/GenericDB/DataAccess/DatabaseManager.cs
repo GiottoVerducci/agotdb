@@ -38,7 +38,7 @@ namespace GenericDB.DataAccess
         protected List<DatabaseInfo> fDatabaseInfos;
         public string HDataBaseFilename { get; protected set; }
         public string DataBaseFilename { get; protected set; }
-        protected virtual string DataBasePath { get { return @"Databases\"; } }
+        protected virtual string DataBasePath { get { return "Databases" + Path.DirectorySeparatorChar; } }
 
         public abstract string TableNameMain { get; }
         public abstract string TableNameVersion { get; }
@@ -133,7 +133,7 @@ namespace GenericDB.DataAccess
             try
             {
                 dbConnection = new OleDbConnection();
-                dbConnection.ConnectionString = String.Format(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=""|DataDirectory|\{0}""", dbFilename);
+                dbConnection.ConnectionString = String.Format(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=""|DataDirectory|{0}{1}""", Path.DirectorySeparatorChar, dbFilename);
                 dbConnection.Open();
                 return new ConnectionResult { ErrorCode = ConnectionErrorCode.Success };
             }

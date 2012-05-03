@@ -1,3 +1,6 @@
+Beta 0.734 (03 mai 2012)
+ - FR/EN: modifications pour compatibilité des chemins Linux
+
 Beta 0.733 (03 mai 2012)
  - Ajout du chapitre 5 de La Geste des Champions "Jugement par le combat"
 

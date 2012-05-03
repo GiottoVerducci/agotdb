@@ -66,7 +66,7 @@ namespace AGoTDB.Forms
 			_dataTable.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
 			InitializeQueryLocalization();
 			InitializeDatabaseConnection();
-			ApplicationSettings.ImagesFolder = String.Format("{0}\\Images", Application.StartupPath);
+			ApplicationSettings.ImagesFolder = String.Format("{0}{1}Images", Application.StartupPath, Path.DirectorySeparatorChar);
 			ApplicationSettings.ImagesFolderExists = Directory.Exists(ApplicationSettings.ImagesFolder);
 		}
 
