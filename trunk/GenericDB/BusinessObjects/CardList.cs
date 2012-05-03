@@ -1,5 +1,5 @@
 // GenericDB - A generic card searcher and deck builder library for CCGs
-// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using GenericDB.BusinessObjects;
 
 namespace GenericDB.BusinessObjects
 {
@@ -98,12 +97,12 @@ namespace GenericDB.BusinessObjects
 
 		protected virtual void CopyCardList(ICardList<T> source)
 		{
-			Clear();
-			for (var i = 0; i < source.Count; ++i)
-				Add((T)source[i].Clone());
+		    Clear();
+		    foreach (T card in source)
+		        Add((T)card.Clone());
 		}
 
-		/// <summary>
+	    /// <summary>
 		/// Adds a card to this list of cards. If the card is already present, increments
 		/// the quantity by 1.
 		/// </summary>

@@ -1,5 +1,5 @@
 // GenericDB - A generic card searcher and deck builder library for CCGs
-// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Xml;
 
 namespace GenericDB.BusinessObjects
 {

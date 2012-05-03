@@ -1,5 +1,5 @@
 // AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -356,8 +356,8 @@ namespace AGoTDB.Forms
 
 			if (miLcgSetsOnly.Checked)
 			{
-				var uncheckedValues = eclExpansionSet.GetItemsByState(CheckState.Unchecked).ConvertAll<DbFilter>(i => (DbFilter)i);
-				var checkedValues = eclExpansionSet.GetItemsByState(CheckState.Checked).ConvertAll<DbFilter>(i => (DbFilter)i);
+				var uncheckedValues = eclExpansionSet.GetItemsByState(CheckState.Unchecked).ConvertAll(i => (DbFilter)i);
+				var checkedValues = eclExpansionSet.GetItemsByState(CheckState.Checked).ConvertAll(i => (DbFilter)i);
 
 				// add the lcg unchecked expansions to perform a search on all lcg expansions only
 				// only if no lcg expansion is checked
@@ -631,7 +631,7 @@ namespace AGoTDB.Forms
 
 		private void InitializeMainFormForShowing()
 		{
-			DownloadService.DownloadFile("http://agotdb.googlecode.com/files/AGoTDB%20-%20EN%20-%20Beta%200.722.zip", "c:\\temp\\toto.zip");
+			//DownloadService.DownloadFile("http://agotdb.googlecode.com/files/AGoTDB%20-%20EN%20-%20Beta%200.722.zip", "c:\\temp\\toto.zip");
 
 			SetupDisplay();
 			UpdateControlsLabels();

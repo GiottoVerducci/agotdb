@@ -1,5 +1,5 @@
 ﻿// AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -114,7 +114,7 @@ namespace AGoTDB.Services
 			{
 				var cardfilepath = CardImageService.GetImageFileName(card.UniversalId);
 				if (CardImageService.GetImageAvailability(cardfilepath) == ImageAvailability.Available)
-					printList.Add(new ProxyInfo()
+					printList.Add(new ProxyInfo
 					{
 						ImagePath = cardfilepath,
 						Quantity = card.Quantity,
