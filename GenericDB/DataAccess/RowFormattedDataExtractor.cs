@@ -1,5 +1,5 @@
 // GenericDB - A generic card searcher and deck builder library for CCGs
-// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -51,7 +51,7 @@ namespace GenericDB.DataAccess
 
 		/// <summary>
 		/// Extracts an int value from a column in a row, and formats it according to
-		/// the presence or absence of errata (information stored in the column "<columnName>Errated")
+		/// the presence or absence of errata (information stored in the column "[columnName]Errated")
 		/// </summary>
 		/// <param name="row">The row from which the int value is extracted.</param>
 		/// <param name="column">The name of the column from which the int value is extracted.</param>
@@ -66,7 +66,7 @@ namespace GenericDB.DataAccess
 
 		/// <summary>
 		/// Extracts an xint value from a column in a row, and formats it according to
-		/// the presence or absence of errata (information stored in the column "<columnName>Errated")
+		/// the presence or absence of errata (information stored in the column "[columnName]Errated")
 		/// </summary>
 		/// <param name="row">The row from which the xint value is extracted.</param>
 		/// <param name="column">The name of the column from which the xint value is extracted.</param>
@@ -81,7 +81,7 @@ namespace GenericDB.DataAccess
 
 		/// <summary>
 		/// Extracts a bool value from a column in a row, and formats it according to
-		/// the presence or absence of errata (information stored in the column "<columnName>Errated")
+		/// the presence or absence of errata (information stored in the column "[columnName]Errated")
 		/// </summary>
 		/// <param name="row">The row from which the bool value is extracted.</param>
 		/// <param name="column">The name of the column from which the bool value is extracted.</param>
@@ -95,7 +95,7 @@ namespace GenericDB.DataAccess
 
 		/// <summary>
 		/// Extracts a string value from a column in a row, and formats it according to
-		/// the style stored in the column "<columnName>Style".
+		/// the style stored in the column "[columnName]Style".
 		/// </summary>
 		/// <param name="row">The row from which the string value is extracted.</param>
 		/// <param name="column">The name of the column from which the string value is extracted.</param>
@@ -128,8 +128,8 @@ namespace GenericDB.DataAccess
 		/// <summary>
 		/// Returns a list of FormatSection for a string value, depending on the data stored
 		/// in the associated "style" column. Styles must be stored under the following format:
-		/// style<1>; style<2>; ...; style<n> 
-		/// with style<i> under the following format:
+		/// style[1]; style[2]; ...; style[n] 
+		/// with style[i] under the following format:
 		/// styleName, startindex-endindex
 		/// </summary>
 		/// <param name="style">The value stored in the style column.</param>
@@ -154,6 +154,5 @@ namespace GenericDB.DataAccess
 			}
 			return formats;
 		}
-
 	}
 }

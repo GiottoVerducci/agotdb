@@ -1,5 +1,5 @@
 ﻿// AGoTDB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -20,116 +20,110 @@
 // © Le Trône de Fer JCE 2008 Edge Entertainment
 
 using System;
-using AGoTDB.BusinessObjects;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 
 namespace AGoTDB.Services
 {
-	public sealed class DownloadService
-	{
-		private readonly Dictionary<string, DownloadInfo> fDownloadedFiles = new Dictionary<string, DownloadInfo>();
+    public sealed class DownloadService
+    {
+        private readonly Dictionary<string, DownloadInfo> fDownloadedFiles = new Dictionary<string, DownloadInfo>();
 
-		private static readonly DownloadService fDownloadService = new DownloadService();
-		// Explicit static constructor to tell C# compiler
-		// not to mark type as beforefieldinit (for singleton template implementation)
-		static DownloadService()
-		{
-		}
+        private static readonly DownloadService fDownloadService = new DownloadService();
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit (for singleton template implementation)
+        static DownloadService()
+        {
+        }
 
-		private DownloadService()
-		{
-		}
+        private DownloadService()
+        {
+        }
 
-		/// <summary>
-		/// Gets the unique shared singleton instance of this class.
-		/// </summary>
-		private static DownloadService Singleton
-		{
-			get { return fDownloadService; }
-		}
+        /// <summary>
+        /// Gets the unique shared singleton instance of this class.
+        /// </summary>
+        private static DownloadService Singleton
+        {
+            get { return fDownloadService; }
+        }
 
-		public static void DownloadFile(string url, string filename)
-		{
-			lock (Singleton)
-			{
-				if (Singleton.fDownloadedFiles.ContainsKey(filename)
-					&& Singleton.fDownloadedFiles[filename].DownloadStatus == DownloadStatus.InProgress)
-					return;
-				Singleton.StartDownload(url, filename);
-			}
-		}
+        public static void DownloadFile(string url, string filename)
+        {
+            lock (Singleton)
+            {
+                if (Singleton.fDownloadedFiles.ContainsKey(filename)
+                    && Singleton.fDownloadedFiles[filename].DownloadStatus == DownloadStatus.InProgress)
+                    return;
+                Singleton.StartDownload(url, filename);
+            }
+        }
 
-		public static bool IsDownloadAvailable(string filename)
-		{
-			lock (Singleton)
-			{
-				return Singleton.fDownloadedFiles.ContainsKey(filename)
-					&& Singleton.fDownloadedFiles[filename].DownloadStatus == DownloadStatus.Success;
-			}
-		}
+        public static bool IsDownloadAvailable(string filename)
+        {
+            lock (Singleton)
+            {
+                return Singleton.fDownloadedFiles.ContainsKey(filename)
+                    && Singleton.fDownloadedFiles[filename].DownloadStatus == DownloadStatus.Success;
+            }
+        }
 
-		private void StartDownload(string url, string filename)
-		{
-			var di = Singleton.fDownloadedFiles.ContainsKey(filename)
-				? Singleton.fDownloadedFiles[filename]
-				: new DownloadInfo();
+        private void StartDownload(string url, string filename)
+        {
+            var di = Singleton.fDownloadedFiles.ContainsKey(filename)
+                ? Singleton.fDownloadedFiles[filename]
+                : new DownloadInfo();
 
-			di.Filename = filename;
-			di.Url = url;
-			di.DownloadStatus = DownloadStatus.InProgress;
-			di.BackgroundWorker = new BackgroundWorker();
-			di.BackgroundWorker.WorkerSupportsCancellation = true;
-			di.BackgroundWorker.DoWork += DoDownload;
-			di.BackgroundWorker.RunWorkerCompleted += RunDownloadCompleted;
-			di.BackgroundWorker.RunWorkerAsync(di);
-		}
+            di.Filename = filename;
+            di.Url = url;
+            di.DownloadStatus = DownloadStatus.InProgress;
+            di.BackgroundWorker = new BackgroundWorker { WorkerSupportsCancellation = true };
+            di.BackgroundWorker.DoWork += DoDownload;
+            di.BackgroundWorker.RunWorkerCompleted += RunDownloadCompleted;
+            di.BackgroundWorker.RunWorkerAsync(di);
+        }
 
-		private void RunDownloadCompleted(object sender, RunWorkerCompletedEventArgs e)
-		{
-			
-		}
+        private void RunDownloadCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
 
-		private void DoDownload(object sender, DoWorkEventArgs e)
-		{
-			bool completed = false;
-			var di = (DownloadInfo)e.Argument;
-			using (var wc = new WebClient())
-			{
-				wc.DownloadFileCompleted += delegate(object s, AsyncCompletedEventArgs ee) 
-				{ 
-					if (ee.Error != null)
-						di.DownloadStatus = DownloadStatus.Fail;
-					else
-						di.DownloadStatus = DownloadStatus.Success;
-					completed = true;
-				};
-				wc.DownloadFileAsync(new Uri(di.Url), di.Filename, di);
+        }
 
-				// wait until the download is completed or cancelled
-				while (!completed && !di.BackgroundWorker.CancellationPending)
-				{
-					System.Threading.Thread.Sleep(200);
-				}
-			}
-		}
-	}
+        private void DoDownload(object sender, DoWorkEventArgs e)
+        {
+            bool completed = false;
+            var di = (DownloadInfo)e.Argument;
+            using (var wc = new WebClient())
+            {
+                wc.DownloadFileCompleted += delegate(object s, AsyncCompletedEventArgs ee)
+                    {
+                        di.DownloadStatus = ee.Error != null ? DownloadStatus.Fail : DownloadStatus.Success;
+                        completed = true;
+                    };
+                wc.DownloadFileAsync(new Uri(di.Url), di.Filename, di);
 
-	internal enum DownloadStatus
-	{
-		Undefined,
-		InProgress,
-		Success,
-		Fail
-	}
+                // wait until the download is completed or cancelled
+                while (!completed && !di.BackgroundWorker.CancellationPending)
+                {
+                    System.Threading.Thread.Sleep(200);
+                }
+            }
+        }
+    }
 
-	internal class DownloadInfo
-	{
-		public DownloadStatus DownloadStatus { get; set; }
-		public BackgroundWorker BackgroundWorker { get; set; }
-		public string Url { get; set; }
-		public string Filename { get; set; }
-	}
+    internal enum DownloadStatus
+    {
+        Undefined,
+        InProgress,
+        Success,
+        Fail
+    }
+
+    internal class DownloadInfo
+    {
+        public DownloadStatus DownloadStatus { get; set; }
+        public BackgroundWorker BackgroundWorker { get; set; }
+        public string Url { get; set; }
+        public string Filename { get; set; }
+    }
 }

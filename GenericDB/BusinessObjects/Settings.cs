@@ -1,5 +1,5 @@
 // GenericDB - A generic card searcher and deck builder library for CCGs
-// Copyright © 2007, 2008, 2009, 2010, 2011 Vincent Ripoll
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -291,17 +291,13 @@ namespace GenericDB.BusinessObjects
 
 		public void WriteString(string sectionName, string propertyName, string value)
 		{
-			XmlNode s = GetSectionNode(sectionName);
+			XmlNode s = GetSectionNode(sectionName) 
+                ?? fDocRoot.AppendChild(fDoc.CreateElement(sectionName));
 
-			if (s == null)
-				s = fDocRoot.AppendChild(fDoc.CreateElement(sectionName));
+		    XmlNode n = s.SelectSingleNode(propertyName) 
+                ?? s.AppendChild(fDoc.CreateElement(propertyName));
 
-			XmlNode n = s.SelectSingleNode(propertyName);
-
-			if (n == null)
-				n = s.AppendChild(fDoc.CreateElement(propertyName));
-
-			XmlAttribute attr = ((XmlElement)n).SetAttributeNode("value", "");
+		    XmlAttribute attr = ((XmlElement)n).SetAttributeNode("value", "");
 			attr.Value = value;
 		}
 
