@@ -1,3 +1,7 @@
+Beta 0.735 (15 juin 2012)
+ - Ajout du chapitre 6 de La Geste des Champions "Une Pique Empoisonnée"
+ - Ajout du chapitre 1 de Valar Morghulis "Au-delà du détroit"
+
 Beta 0.734 (03 mai 2012)
  - FR/EN: modifications pour compatibilité des chemins Linux
 
