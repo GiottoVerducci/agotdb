@@ -28,6 +28,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
 using AGoTDB.DataAccess;
@@ -35,7 +36,6 @@ using Beyond.ExtendedControls;
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Extensions;
-using AGoTDB.Services;
 
 namespace AGoTDB.Forms
 {
@@ -52,6 +52,7 @@ namespace AGoTDB.Forms
 		private bool _dataTableFirstLoad = true; // used when the data table is loaded for the first time
 		private DataRow[] _quickFindRows; // quick find results
 		private int _quickFindIndex; // index of the current quick find result
+		private AgotCard _displayedCard;
 
 		private readonly DataTable _dataTable = new DataTable();
 		private Query _query = new Query();
@@ -450,7 +451,7 @@ namespace AGoTDB.Forms
 			Close();
 		}
 
-		private static void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			using (var about = new AboutForm())
 			{
@@ -458,7 +459,7 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private static void tbLowHigh_TextChanged(object sender, EventArgs e)
+		private void tbLowHigh_TextChanged(object sender, EventArgs e)
 		{
 			var senderTextBox = (TextBox)sender;
 			if (senderTextBox.Tag != null) // to avoid reentrance
@@ -659,17 +660,19 @@ namespace AGoTDB.Forms
 		private void dataGridView1_SelectionChanged(object sender, EventArgs e)
 		{
 			rtbCardDetails.Clear();
+			btnReportError.Enabled = false;
 			if (dataGridView.SelectedRows.Count != 0)
 			{
 				DataRow row = ((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row;
 				ShowCardDetails(row);
+				btnReportError.Enabled = true;
 			}
 		}
 
 		private void ShowCardDetails(DataRow row)
 		{
-			var card = new AgotCard(row);
-			foreach (FormattedText ft in card.ToFormattedString())
+			_displayedCard = new AgotCard(row);
+			foreach (FormattedText ft in _displayedCard.ToFormattedString())
 			{
 				rtbCardDetails.SelectionFont = new Font(rtbCardDetails.SelectionFont, ft.Format.Style);
 				rtbCardDetails.SelectionColor = ft.Format.Color;
@@ -677,7 +680,7 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private static void deckBuilderToolStripMenuItem_Click(object sender, EventArgs e)
+		private void deckBuilderToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DeckBuilderForm.Singleton.Show();
 			DeckBuilderForm.Singleton.Activate();
@@ -791,6 +794,40 @@ namespace AGoTDB.Forms
 				if (optionsForm.ShowDialog() == DialogResult.OK)
 					SetupDisplay();
 			}
+		}
+
+		private void btnReportError_Click(object sender, EventArgs e)
+		{
+			const string address = "agotdeckbuilder@gmail.com";
+			var subject = string.Format(Resource1.ReportCardErrorMessageTitle, _displayedCard.UniversalId);
+			var body = new StringBuilder();
+			body.AppendLine(Resource1.ReportCardErrorMessageBody);
+			body.AppendLine();
+			body.AppendLine("--------------------");
+			body.AppendLine();
+
+			foreach (FormattedText ft in _displayedCard.ToFormattedString())
+				body.Append(ft.Text);
+
+			body.AppendLine();
+			body.AppendLine();
+			body.AppendLine(ApplicationSettings.ApplicationVersion.ToString());
+			var databaseInfo = ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0
+				? ApplicationSettings.DatabaseManager.DatabaseInfos[0]
+				: null;
+			if (databaseInfo != null)
+				body.AppendLine(string.Format(CultureInfo.InvariantCulture, "DB version: {0} ({1})",
+				databaseInfo.VersionId, databaseInfo.DateCreation.HasValue ? databaseInfo.DateCreation.Value.ToShortDateString() : string.Empty));
+
+			var encodedBody = Uri.EscapeDataString(body.ToString());
+
+			var process = string.Format(@"mailto:{0}&subject={1}&body={2}",
+				address,
+				//System.Web.HttpUtility.HtmlEncode(subject),
+				Uri.EscapeDataString(subject),
+				encodedBody);
+			// open the client messaging
+			System.Diagnostics.Process.Start(process);
 		}
 	}
 }

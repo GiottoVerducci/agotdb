@@ -306,4 +306,10 @@
   <data name="ImageFolderDoesntExist" xml:space="preserve">
     <value>Le répertoire contenant les images des cartes n'existe pas.</value>
   </data>
+  <data name="ReportCardErrorMessageBody" xml:space="preserve">
+    <value>J'ai remarqué l'erreur suivante :</value>
+  </data>
+  <data name="ReportCardErrorMessageTitle" xml:space="preserve">
+    <value>Erreur sur la carte {0}</value>
+  </data>
 </root>
