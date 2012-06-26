@@ -45,7 +45,7 @@ namespace AGoTDB
 			using (var form = new MainForm())
 			{
 				form.InitializeMainForm();
-				Application.Run(form);
+				Application.Run();
 			}
 		}
 	}
