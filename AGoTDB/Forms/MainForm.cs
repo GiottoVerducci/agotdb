@@ -47,9 +47,11 @@ namespace AGoTDB.Forms
 	{
 		private bool _isMainForm; // false if it's a card list window
 		private static MainForm _mainForm;
+		private static SplashScreen _splashScreen;
 		private bool _mustClose;
 		private int _viewIndex = 1;
 		private bool _dataTableFirstLoad = true; // used when the data table is loaded for the first time
+		private bool _isDataBaseLoaded = false;
 		private DataRow[] _quickFindRows; // quick find results
 		private int _quickFindIndex; // index of the current quick find result
 		private AgotCard _displayedCard;
@@ -66,24 +68,34 @@ namespace AGoTDB.Forms
 			InitializeComponent();
 			_dataTable.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
 			InitializeQueryLocalization();
-			InitializeDatabaseConnection();
+
 			ApplicationSettings.ImagesFolder = String.Format("{0}{1}Images", Application.StartupPath, Path.DirectorySeparatorChar);
 			ApplicationSettings.ImagesFolderExists = Directory.Exists(ApplicationSettings.ImagesFolder);
+
+			backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+			backgroundWorker1.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
+			backgroundWorker1.RunWorkerAsync();
 		}
 
-		private static void InitializeDatabaseConnection()
+		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
 		{
-			var createExtendedDb = UserSettings.CreateExtendedDB;
-			ApplicationSettings.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
-			var connectionResult = ApplicationSettings.DatabaseManager.Connect(createExtendedDb, ApplicationSettings.ApplicationVersion);
+			e.Result = InitializeDatabaseConnection();
+		}
+
+		private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			backgroundWorker1.RunWorkerCompleted -= backgroundWorker_RunWorkerCompleted;
+			var connectionResult = (ConnectionResult)e.Result;
 			switch (connectionResult.ErrorCode)
 			{
 				case ConnectionErrorCode.Success:
+					var createExtendedDb = UserSettings.CreateExtendedDB;
 					if (createExtendedDb)
 					{
 						UserSettings.CreateExtendedDB = false;
 						UserSettings.Save();
 					}
+					_isDataBaseLoaded = true;
 					break;
 				case ConnectionErrorCode.InvalidVersion:
 					MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrMinimalSoftwareVersionRequired,
@@ -98,6 +110,23 @@ namespace AGoTDB.Forms
 						Resource1.ErrInvalidDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					break;
 			}
+			_splashScreen.CancelAndClose();
+			_mustClose = !(UserSettings.IsAvailable() && ApplicationSettings.DatabaseManager.ConnectedToDatabase);
+			if (_mustClose)
+				Close();
+			else if (_isMainForm)
+			{
+				this.Visible = true;
+				InitializeMainFormForShowing();
+			}
+		}
+
+		private static ConnectionResult InitializeDatabaseConnection()
+		{
+			var createExtendedDb = UserSettings.CreateExtendedDB;
+			ApplicationSettings.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
+			var connectionResult = ApplicationSettings.DatabaseManager.Connect(createExtendedDb, ApplicationSettings.ApplicationVersion);
+			return connectionResult;
 		}
 
 		private static void InitializeQueryLocalization()
@@ -118,7 +147,9 @@ namespace AGoTDB.Forms
 		{
 			_isMainForm = true;
 			_mainForm = this;
-			_mustClose = !(UserSettings.IsAvailable() && ApplicationSettings.DatabaseManager.ConnectedToDatabase);
+			_splashScreen = new SplashScreen();
+			_splashScreen.Show(100);
+			_splashScreen.Update();
 		}
 
 		/// <summary>
@@ -289,6 +320,8 @@ namespace AGoTDB.Forms
 		/// </summary>
 		private void UpdateDataTableView()
 		{
+			if (!_isDataBaseLoaded)
+				return;
 			var query = BuildQueryFromControls();
 			if (query.SqlQuery == _query.SqlQuery) // query hasn't change, so the result has not change neither
 				return; // nothing to do
@@ -617,14 +650,6 @@ namespace AGoTDB.Forms
 			form.BringToFront();
 		}
 
-		private void Form1_Shown(object sender, EventArgs e)
-		{
-			if (_mustClose)
-				Close();
-			else if (_isMainForm)
-				InitializeMainFormForShowing();
-		}
-
 		private void SetupDisplay()
 		{
 			DisplayIcons(UserSettings.DisplayImages);
@@ -735,6 +760,12 @@ namespace AGoTDB.Forms
 			{
 				_mainForm.RemoveFormFromWindowMenu(this); // remove reference in the Window menu
 			}
+		}
+
+		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			if (_isMainForm)
+				Application.Exit();
 		}
 
 		private void RemoveFormFromWindowMenu(MainForm form)

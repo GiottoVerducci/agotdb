@@ -85,6 +85,7 @@ namespace AGoTDB.Forms
 			this.miLcgSetsOnly = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deckBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -614,8 +615,8 @@ namespace AGoTDB.Forms
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
-			this.Shown += new System.EventHandler(this.Form1_Shown);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel1.PerformLayout();
 			this.splitContainer1.Panel2.ResumeLayout(false);
@@ -695,5 +696,6 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.ToolStripMenuItem miLcgSetsOnly;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
 		private System.Windows.Forms.Button btnReportError;
+		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 	}
 }
