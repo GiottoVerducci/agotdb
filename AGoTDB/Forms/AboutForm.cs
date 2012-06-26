@@ -48,7 +48,7 @@ namespace AGoTDB.Forms
 				: null;
 			if (databaseInfo != null)
 				lblDbVersion.Text = string.Format(CultureInfo.InvariantCulture, "DB version: {0} ({1})",
-				databaseInfo.VersionId, databaseInfo.DateCreation.HasValue ? databaseInfo.DateCreation.Value.ToShortDateString() : "");
+				databaseInfo.VersionId, databaseInfo.DateCreation.HasValue ? databaseInfo.DateCreation.Value.ToShortDateString() : string.Empty);
 		}
 
 		private void btnOk_Click(object sender, EventArgs e)

@@ -75,6 +75,7 @@ namespace AGoTDB.Forms
 			this.addCardToDeckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addCardToSideboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnReset = new System.Windows.Forms.Button();
+			this.btnReportError = new System.Windows.Forms.Button();
 			this.rtbCardDetails = new System.Windows.Forms.RichTextBox();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -150,6 +151,7 @@ namespace AGoTDB.Forms
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.btnReportError);
 			this.splitContainer1.Panel2.Controls.Add(this.rtbCardDetails);
 			// 
 			// eclKeyword
@@ -509,6 +511,13 @@ namespace AGoTDB.Forms
 			this.btnReset.UseVisualStyleBackColor = true;
 			this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
 			// 
+			// btnReportError
+			// 
+			resources.ApplyResources(this.btnReportError, "btnReportError");
+			this.btnReportError.Name = "btnReportError";
+			this.btnReportError.UseVisualStyleBackColor = true;
+			this.btnReportError.Click += new System.EventHandler(this.btnReportError_Click);
+			// 
 			// rtbCardDetails
 			// 
 			resources.ApplyResources(this.rtbCardDetails, "rtbCardDetails");
@@ -685,5 +694,6 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.Button btnQuickFindNext;
 		private System.Windows.Forms.ToolStripMenuItem miLcgSetsOnly;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+		private System.Windows.Forms.Button btnReportError;
 	}
 }

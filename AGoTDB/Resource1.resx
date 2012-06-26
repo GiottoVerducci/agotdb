@@ -312,4 +312,10 @@
   <data name="ImageFolderDoesntExist" xml:space="preserve">
     <value>The folder containing the card images doesn't exist</value>
   </data>
+  <data name="ReportCardErrorMessageBody" xml:space="preserve">
+    <value>I noticed the following error:</value>
+  </data>
+  <data name="ReportCardErrorMessageTitle" xml:space="preserve">
+    <value>Error in card {0}</value>
+  </data>
 </root>

@@ -1355,6 +1355,36 @@
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnReportError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnReportError.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnReportError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>729, 167</value>
+  </data>
+  <data name="btnReportError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
+  </data>
+  <data name="btnReportError.TabIndex" type="System.Int32, mscorlib">
+    <value>142</value>
+  </data>
+  <data name="btnReportError.Text" xml:space="preserve">
+    <value>Report an error</value>
+  </data>
+  <data name="&gt;&gt;btnReportError.Name" xml:space="preserve">
+    <value>btnReportError</value>
+  </data>
+  <data name="&gt;&gt;btnReportError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnReportError.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;btnReportError.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="rtbCardDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1380,7 +1410,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;rtbCardDetails.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
