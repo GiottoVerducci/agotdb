@@ -42,9 +42,8 @@ namespace AGoTDB
 			// 2/ change the application thread current culture
 			Thread.CurrentThread.CurrentUICulture = CultureInfo.CurrentCulture;
 
-			using (var form = new MainForm())
+			using (new MainForm(true))
 			{
-				form.InitializeMainForm();
 				Application.Run();
 			}
 		}

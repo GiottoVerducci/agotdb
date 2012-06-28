@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -7,8 +6,10 @@ namespace AGoTDB.Forms
 {
 	public partial class SplashScreen : Form
 	{
-		public volatile bool _mustShow;
-		public SplashScreen()
+		private  volatile bool _mustShow;
+        private  int _step;
+
+        public SplashScreen()
 		{
 			InitializeComponent();
 			backgroundWorker1.DoWork += backgroundWorker1_DoWork;
@@ -23,8 +24,12 @@ namespace AGoTDB.Forms
 
 		private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs args)
 		{
-			if (_mustShow)
-				Show();
+            if (_mustShow)
+            {
+                RefreshWaitLabel();
+                Show();
+                timer1.Start();
+            }
 		}
 
 		public void Show(int delay)
@@ -38,5 +43,16 @@ namespace AGoTDB.Forms
 			_mustShow = false;
 			Close();
 		}
+
+        private void timer1_Tick(object sender, System.EventArgs e)
+        {
+            _step = (_step + 1) % 4;
+            RefreshWaitLabel();
+        }
+
+	    private void RefreshWaitLabel()
+	    {
+            label1.Text = new string('.', _step);
+	    }
 	}
 }
