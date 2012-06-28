@@ -48,10 +48,9 @@ namespace AGoTDB.Forms
 		private bool _isMainForm; // false if it's a card list window
 		private static MainForm _mainForm;
 		private static SplashScreen _splashScreen;
-		private bool _mustClose;
 		private int _viewIndex = 1;
 		private bool _dataTableFirstLoad = true; // used when the data table is loaded for the first time
-		private bool _isDataBaseLoaded = false;
+		private bool _isDataBaseLoaded;
 		private DataRow[] _quickFindRows; // quick find results
 		private int _quickFindIndex; // index of the current quick find result
 		private AgotCard _displayedCard;
@@ -62,19 +61,23 @@ namespace AGoTDB.Forms
 		/// <summary>
 		/// The default constructor.
 		/// </summary>
-		public MainForm()
+		public MainForm(bool isMainForm = false)
 		{
 			// Cet appel est requis par le Concepteur Windows Form.
 			InitializeComponent();
 			_dataTable.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
 			InitializeQueryLocalization();
 
-			ApplicationSettings.ImagesFolder = String.Format("{0}{1}Images", Application.StartupPath, Path.DirectorySeparatorChar);
-			ApplicationSettings.ImagesFolderExists = Directory.Exists(ApplicationSettings.ImagesFolder);
+			if (isMainForm)
+			{
+				ApplicationSettings.ImagesFolder = String.Format("{0}{1}Images", Application.StartupPath, Path.DirectorySeparatorChar);
+				ApplicationSettings.ImagesFolderExists = Directory.Exists(ApplicationSettings.ImagesFolder);
 
-			backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-			backgroundWorker1.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
-			backgroundWorker1.RunWorkerAsync();
+				InitializeMainForm();
+				backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+				backgroundWorker1.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
+				backgroundWorker1.RunWorkerAsync();
+			}
 		}
 
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -85,6 +88,7 @@ namespace AGoTDB.Forms
 		private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			backgroundWorker1.RunWorkerCompleted -= backgroundWorker_RunWorkerCompleted;
+			_splashScreen.CancelAndClose();
 			var connectionResult = (ConnectionResult)e.Result;
 			switch (connectionResult.ErrorCode)
 			{
@@ -98,27 +102,35 @@ namespace AGoTDB.Forms
 					_isDataBaseLoaded = true;
 					break;
 				case ConnectionErrorCode.InvalidVersion:
-					MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrMinimalSoftwareVersionRequired,
-						ApplicationSettings.DatabaseManager.DatabaseInfos[0].MinimalApplicationVersion, ApplicationSettings.ApplicationVersion), Resource1.ErrMinimalSoftwareVersionRequiredTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+					if (MessageBox.Show(string.Format(CultureInfo.CurrentCulture,
+						Resource1.ErrMinimalSoftwareVersionRequired,
+						ApplicationSettings.DatabaseManager.DatabaseInfos[0].MinimalApplicationVersion,
+						ApplicationSettings.ApplicationVersion),
+						Resource1.ErrMinimalSoftwareVersionRequiredTitle,
+						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+					{
+						Application.Exit();
+					}
+					else
+					{
+						_isDataBaseLoaded = true;
+					}
 					break;
 				case ConnectionErrorCode.FileNotFound:
 					MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrDatabaseNotFound, connectionResult.Data),
 						Resource1.ErrDatabaseNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Application.Exit();
 					break;
 				case ConnectionErrorCode.InvalidDatabase:
 					MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrInvalidDatabase, connectionResult.Data),
 						Resource1.ErrInvalidDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Application.Exit();
 					break;
 			}
-			_splashScreen.CancelAndClose();
-			_mustClose = !(UserSettings.IsAvailable() && ApplicationSettings.DatabaseManager.ConnectedToDatabase);
-			if (_mustClose)
-				Close();
-			else if (_isMainForm)
-			{
-				this.Visible = true;
-				InitializeMainFormForShowing();
-			}
+			if (!UserSettings.IsAvailable() || !ApplicationSettings.DatabaseManager.ConnectedToDatabase)
+				Application.Exit();
+			this.Visible = true;
+			InitializeMainFormForShowing();
 		}
 
 		private static ConnectionResult InitializeDatabaseConnection()
@@ -852,9 +864,8 @@ namespace AGoTDB.Forms
 
 			var encodedBody = Uri.EscapeDataString(body.ToString());
 
-			var process = string.Format(@"mailto:{0}&subject={1}&body={2}",
+			var process = string.Format(@"mailto:{0}?subject={1}&body={2}",
 				address,
-				//System.Web.HttpUtility.HtmlEncode(subject),
 				Uri.EscapeDataString(subject),
 				encodedBody);
 			// open the client messaging
