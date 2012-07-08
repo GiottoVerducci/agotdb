@@ -75,7 +75,6 @@ namespace AGoTDB.Forms
 			this.addCardToDeckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addCardToSideboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnReset = new System.Windows.Forms.Button();
-			this.btnReportError = new System.Windows.Forms.Button();
 			this.rtbCardDetails = new System.Windows.Forms.RichTextBox();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,6 +90,9 @@ namespace AGoTDB.Forms
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.splitCardText = new System.Windows.Forms.SplitContainer();
+			this.btnReportError = new System.Windows.Forms.Button();
+			this.cardPreviewControl = new AGoTDB.Forms.CardPreviewControl();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -101,6 +103,9 @@ namespace AGoTDB.Forms
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
 			this.popupGrid.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
+			this.splitCardText.Panel1.SuspendLayout();
+			this.splitCardText.Panel2.SuspendLayout();
+			this.splitCardText.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -110,7 +115,6 @@ namespace AGoTDB.Forms
 			// 
 			// splitContainer1.Panel1
 			// 
-			resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
 			this.splitContainer1.Panel1.Controls.Add(this.eclKeyword);
 			this.splitContainer1.Panel1.Controls.Add(this.eclTrigger);
 			this.splitContainer1.Panel1.Controls.Add(this.eclExpansionSet);
@@ -150,56 +154,49 @@ namespace AGoTDB.Forms
 			this.splitContainer1.Panel1.Controls.Add(this.eclMecanism);
 			this.splitContainer1.Panel1.Controls.Add(this.dataGridView);
 			this.splitContainer1.Panel1.Controls.Add(this.btnReset);
-			this.toolTip1.SetToolTip(this.splitContainer1.Panel1, resources.GetString("splitContainer1.Panel1.ToolTip"));
 			// 
 			// splitContainer1.Panel2
 			// 
-			resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
-			this.splitContainer1.Panel2.Controls.Add(this.btnReportError);
-			this.splitContainer1.Panel2.Controls.Add(this.rtbCardDetails);
-			this.toolTip1.SetToolTip(this.splitContainer1.Panel2, resources.GetString("splitContainer1.Panel2.ToolTip"));
-			this.toolTip1.SetToolTip(this.splitContainer1, resources.GetString("splitContainer1.ToolTip"));
+			this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
+			this.splitContainer1.Panel2.Controls.Add(this.splitCardText);
 			// 
 			// eclKeyword
 			// 
-			resources.ApplyResources(this.eclKeyword, "eclKeyword");
 			this.eclKeyword.CheckOnClick = true;
 			this.eclKeyword.Condensed = true;
 			this.eclKeyword.CondensedMode = true;
 			this.eclKeyword.FormattingEnabled = true;
+			resources.ApplyResources(this.eclKeyword, "eclKeyword");
 			this.eclKeyword.Name = "eclKeyword";
 			this.eclKeyword.RollDownDelay = 250;
 			this.eclKeyword.Summary = "Keywords";
 			this.eclKeyword.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclKeyword, resources.GetString("eclKeyword.ToolTip"));
 			this.eclKeyword.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// eclTrigger
 			// 
-			resources.ApplyResources(this.eclTrigger, "eclTrigger");
 			this.eclTrigger.CheckOnClick = true;
 			this.eclTrigger.Condensed = true;
 			this.eclTrigger.CondensedMode = true;
 			this.eclTrigger.FormattingEnabled = true;
+			resources.ApplyResources(this.eclTrigger, "eclTrigger");
 			this.eclTrigger.Name = "eclTrigger";
 			this.eclTrigger.RollDownDelay = 250;
 			this.eclTrigger.Summary = "Trigger";
 			this.eclTrigger.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclTrigger, resources.GetString("eclTrigger.ToolTip"));
 			this.eclTrigger.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// eclExpansionSet
 			// 
-			resources.ApplyResources(this.eclExpansionSet, "eclExpansionSet");
 			this.eclExpansionSet.CheckOnClick = true;
 			this.eclExpansionSet.Condensed = true;
 			this.eclExpansionSet.CondensedMode = true;
 			this.eclExpansionSet.FormattingEnabled = true;
+			resources.ApplyResources(this.eclExpansionSet, "eclExpansionSet");
 			this.eclExpansionSet.Name = "eclExpansionSet";
 			this.eclExpansionSet.RollDownDelay = 250;
 			this.eclExpansionSet.Summary = "Expansion set";
 			this.eclExpansionSet.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclExpansionSet, resources.GetString("eclExpansionSet.ToolTip"));
 			this.eclExpansionSet.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// btnQuickFindNext
@@ -215,7 +212,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbStrengthHigh, "tbStrengthHigh");
 			this.tbStrengthHigh.Name = "tbStrengthHigh";
-			this.toolTip1.SetToolTip(this.tbStrengthHigh, resources.GetString("tbStrengthHigh.ToolTip"));
 			this.tbStrengthHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbStrengthHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -223,7 +219,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbStrengthLow, "tbStrengthLow");
 			this.tbStrengthLow.Name = "tbStrengthLow";
-			this.toolTip1.SetToolTip(this.tbStrengthLow, resources.GetString("tbStrengthLow.ToolTip"));
 			this.tbStrengthLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbStrengthLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -231,7 +226,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbClaimHigh, "tbClaimHigh");
 			this.tbClaimHigh.Name = "tbClaimHigh";
-			this.toolTip1.SetToolTip(this.tbClaimHigh, resources.GetString("tbClaimHigh.ToolTip"));
 			this.tbClaimHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbClaimHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -239,7 +233,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbClaimLow, "tbClaimLow");
 			this.tbClaimLow.Name = "tbClaimLow";
-			this.toolTip1.SetToolTip(this.tbClaimLow, resources.GetString("tbClaimLow.ToolTip"));
 			this.tbClaimLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbClaimLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -247,7 +240,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbInitiativeHigh, "tbInitiativeHigh");
 			this.tbInitiativeHigh.Name = "tbInitiativeHigh";
-			this.toolTip1.SetToolTip(this.tbInitiativeHigh, resources.GetString("tbInitiativeHigh.ToolTip"));
 			this.tbInitiativeHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbInitiativeHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -255,7 +247,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbInitiativeLow, "tbInitiativeLow");
 			this.tbInitiativeLow.Name = "tbInitiativeLow";
-			this.toolTip1.SetToolTip(this.tbInitiativeLow, resources.GetString("tbInitiativeLow.ToolTip"));
 			this.tbInitiativeLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbInitiativeLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -263,7 +254,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbGoldHigh, "tbGoldHigh");
 			this.tbGoldHigh.Name = "tbGoldHigh";
-			this.toolTip1.SetToolTip(this.tbGoldHigh, resources.GetString("tbGoldHigh.ToolTip"));
 			this.tbGoldHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbGoldHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -271,7 +261,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.tbGoldLow, "tbGoldLow");
 			this.tbGoldLow.Name = "tbGoldLow";
-			this.toolTip1.SetToolTip(this.tbGoldLow, resources.GetString("tbGoldLow.ToolTip"));
 			this.tbGoldLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
 			this.tbGoldLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
@@ -279,13 +268,11 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
-			this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
 			// 
 			// tbCardtext
 			// 
 			resources.ApplyResources(this.tbCardtext, "tbCardtext");
 			this.tbCardtext.Name = "tbCardtext";
-			this.toolTip1.SetToolTip(this.tbCardtext, resources.GetString("tbCardtext.ToolTip"));
 			this.tbCardtext.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// eclCardtextCheck
@@ -293,7 +280,6 @@ namespace AGoTDB.Forms
 			resources.ApplyResources(this.eclCardtextCheck, "eclCardtextCheck");
 			this.eclCardtextCheck.Name = "eclCardtextCheck";
 			this.eclCardtextCheck.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclCardtextCheck, resources.GetString("eclCardtextCheck.ToolTip"));
 			this.eclCardtextCheck.UseVisualStyleBackColor = true;
 			this.eclCardtextCheck.CheckStateChanged += new System.EventHandler(this.eclCheck_CheckStateChanged);
 			// 
@@ -301,13 +287,11 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.label3, "label3");
 			this.label3.Name = "label3";
-			this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
 			// 
 			// tbName
 			// 
 			resources.ApplyResources(this.tbName, "tbName");
 			this.tbName.Name = "tbName";
-			this.toolTip1.SetToolTip(this.tbName, resources.GetString("tbName.ToolTip"));
 			this.tbName.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// eclNameCheck
@@ -315,7 +299,6 @@ namespace AGoTDB.Forms
 			resources.ApplyResources(this.eclNameCheck, "eclNameCheck");
 			this.eclNameCheck.Name = "eclNameCheck";
 			this.eclNameCheck.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclNameCheck, resources.GetString("eclNameCheck.ToolTip"));
 			this.eclNameCheck.UseVisualStyleBackColor = true;
 			this.eclNameCheck.CheckStateChanged += new System.EventHandler(this.eclCheck_CheckStateChanged);
 			// 
@@ -323,13 +306,11 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.label2, "label2");
 			this.label2.Name = "label2";
-			this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
 			// 
 			// tbTraits
 			// 
 			resources.ApplyResources(this.tbTraits, "tbTraits");
 			this.tbTraits.Name = "tbTraits";
-			this.toolTip1.SetToolTip(this.tbTraits, resources.GetString("tbTraits.ToolTip"));
 			this.tbTraits.Validated += new System.EventHandler(this.tbLowHigh_Validated);
 			// 
 			// eclTraitCheck
@@ -337,50 +318,46 @@ namespace AGoTDB.Forms
 			resources.ApplyResources(this.eclTraitCheck, "eclTraitCheck");
 			this.eclTraitCheck.Name = "eclTraitCheck";
 			this.eclTraitCheck.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclTraitCheck, resources.GetString("eclTraitCheck.ToolTip"));
 			this.eclTraitCheck.UseVisualStyleBackColor = true;
 			this.eclTraitCheck.CheckStateChanged += new System.EventHandler(this.eclCheck_CheckStateChanged);
 			// 
 			// eclProvides
 			// 
-			resources.ApplyResources(this.eclProvides, "eclProvides");
 			this.eclProvides.CheckOnClick = true;
 			this.eclProvides.Condensed = true;
 			this.eclProvides.CondensedMode = true;
 			this.eclProvides.FormattingEnabled = true;
+			resources.ApplyResources(this.eclProvides, "eclProvides");
 			this.eclProvides.Name = "eclProvides";
 			this.eclProvides.RollDownDelay = 250;
 			this.eclProvides.Summary = "Provides...";
 			this.eclProvides.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclProvides, resources.GetString("eclProvides.ToolTip"));
 			this.eclProvides.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// eclIcon
 			// 
-			resources.ApplyResources(this.eclIcon, "eclIcon");
 			this.eclIcon.CheckOnClick = true;
 			this.eclIcon.Condensed = true;
 			this.eclIcon.CondensedMode = true;
 			this.eclIcon.FormattingEnabled = true;
+			resources.ApplyResources(this.eclIcon, "eclIcon");
 			this.eclIcon.Name = "eclIcon";
 			this.eclIcon.RollDownDelay = 250;
 			this.eclIcon.Summary = "Icons";
 			this.eclIcon.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclIcon, resources.GetString("eclIcon.ToolTip"));
 			this.eclIcon.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// eclCardtype
 			// 
-			resources.ApplyResources(this.eclCardtype, "eclCardtype");
 			this.eclCardtype.CheckOnClick = true;
 			this.eclCardtype.Condensed = true;
 			this.eclCardtype.CondensedMode = true;
 			this.eclCardtype.FormattingEnabled = true;
+			resources.ApplyResources(this.eclCardtype, "eclCardtype");
 			this.eclCardtype.Name = "eclCardtype";
 			this.eclCardtype.RollDownDelay = 250;
 			this.eclCardtype.Summary = "Card type";
 			this.eclCardtype.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclCardtype, resources.GetString("eclCardtype.ToolTip"));
 			this.eclCardtype.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// picStrength
@@ -394,7 +371,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.label8, "label8");
 			this.label8.Name = "label8";
-			this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
 			// 
 			// picClaim
 			// 
@@ -407,7 +383,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.label7, "label7");
 			this.label7.Name = "label7";
-			this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
 			// 
 			// picInit
 			// 
@@ -420,7 +395,6 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.label6, "label6");
 			this.label6.Name = "label6";
-			this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
 			// 
 			// picGold
 			// 
@@ -433,69 +407,63 @@ namespace AGoTDB.Forms
 			// 
 			resources.ApplyResources(this.label5, "label5");
 			this.label5.Name = "label5";
-			this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
 			// 
 			// tbFind
 			// 
 			resources.ApplyResources(this.tbFind, "tbFind");
 			this.tbFind.Name = "tbFind";
-			this.toolTip1.SetToolTip(this.tbFind, resources.GetString("tbFind.ToolTip"));
 			this.tbFind.TextChanged += new System.EventHandler(this.tbFind_TextChanged);
 			// 
 			// label11
 			// 
 			resources.ApplyResources(this.label11, "label11");
 			this.label11.Name = "label11";
-			this.toolTip1.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
 			// 
 			// eclVirtue
 			// 
-			resources.ApplyResources(this.eclVirtue, "eclVirtue");
 			this.eclVirtue.CheckOnClick = true;
 			this.eclVirtue.Condensed = true;
 			this.eclVirtue.CondensedMode = true;
 			this.eclVirtue.FormattingEnabled = true;
+			resources.ApplyResources(this.eclVirtue, "eclVirtue");
 			this.eclVirtue.Name = "eclVirtue";
 			this.eclVirtue.RollDownDelay = 250;
 			this.eclVirtue.Summary = "Virtues";
 			this.eclVirtue.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclVirtue, resources.GetString("eclVirtue.ToolTip"));
 			this.eclVirtue.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// eclHouse
 			// 
-			resources.ApplyResources(this.eclHouse, "eclHouse");
 			this.eclHouse.CheckOnClick = true;
 			this.eclHouse.Condensed = true;
 			this.eclHouse.CondensedMode = true;
 			this.eclHouse.FormattingEnabled = true;
+			resources.ApplyResources(this.eclHouse, "eclHouse");
 			this.eclHouse.Name = "eclHouse";
 			this.eclHouse.RollDownDelay = 250;
 			this.eclHouse.Summary = "House";
 			this.eclHouse.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclHouse, resources.GetString("eclHouse.ToolTip"));
 			this.eclHouse.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// eclMecanism
 			// 
-			resources.ApplyResources(this.eclMecanism, "eclMecanism");
 			this.eclMecanism.CheckOnClick = true;
 			this.eclMecanism.Condensed = true;
 			this.eclMecanism.CondensedMode = true;
 			this.eclMecanism.FormattingEnabled = true;
+			resources.ApplyResources(this.eclMecanism, "eclMecanism");
 			this.eclMecanism.Name = "eclMecanism";
 			this.eclMecanism.RollDownDelay = 250;
 			this.eclMecanism.Summary = "Mecanism";
 			this.eclMecanism.ThreeState = true;
-			this.toolTip1.SetToolTip(this.eclMecanism, resources.GetString("eclMecanism.ToolTip"));
 			this.eclMecanism.MouseLeave += new System.EventHandler(this.eclMouseLeave);
 			// 
 			// dataGridView
 			// 
-			resources.ApplyResources(this.dataGridView, "dataGridView");
 			this.dataGridView.AllowUserToAddRows = false;
 			this.dataGridView.AllowUserToDeleteRows = false;
 			this.dataGridView.AllowUserToResizeRows = false;
+			resources.ApplyResources(this.dataGridView, "dataGridView");
 			this.dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
 			this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView.ContextMenuStrip = this.popupGrid;
@@ -505,150 +473,168 @@ namespace AGoTDB.Forms
 			this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
 			this.dataGridView.RowHeadersVisible = false;
 			this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.toolTip1.SetToolTip(this.dataGridView, resources.GetString("dataGridView.ToolTip"));
 			this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
 			this.dataGridView.DoubleClick += new System.EventHandler(this.dataGridView_DoubleClick);
 			// 
 			// popupGrid
 			// 
-			resources.ApplyResources(this.popupGrid, "popupGrid");
 			this.popupGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveSelectionToTextFileToolStripMenuItem,
             this.moveToANewWindowToolStripMenuItem,
             this.addCardToDeckToolStripMenuItem,
             this.addCardToSideboardToolStripMenuItem});
 			this.popupGrid.Name = "popupGrid";
-			this.toolTip1.SetToolTip(this.popupGrid, resources.GetString("popupGrid.ToolTip"));
+			resources.ApplyResources(this.popupGrid, "popupGrid");
 			// 
 			// saveSelectionToTextFileToolStripMenuItem
 			// 
-			resources.ApplyResources(this.saveSelectionToTextFileToolStripMenuItem, "saveSelectionToTextFileToolStripMenuItem");
 			this.saveSelectionToTextFileToolStripMenuItem.Name = "saveSelectionToTextFileToolStripMenuItem";
+			resources.ApplyResources(this.saveSelectionToTextFileToolStripMenuItem, "saveSelectionToTextFileToolStripMenuItem");
 			this.saveSelectionToTextFileToolStripMenuItem.Click += new System.EventHandler(this.saveSelectionToTextFileToolStripMenuItem_Click);
 			// 
 			// moveToANewWindowToolStripMenuItem
 			// 
-			resources.ApplyResources(this.moveToANewWindowToolStripMenuItem, "moveToANewWindowToolStripMenuItem");
 			this.moveToANewWindowToolStripMenuItem.Name = "moveToANewWindowToolStripMenuItem";
+			resources.ApplyResources(this.moveToANewWindowToolStripMenuItem, "moveToANewWindowToolStripMenuItem");
 			this.moveToANewWindowToolStripMenuItem.Click += new System.EventHandler(this.moveToANewWindowToolStripMenuItem_Click);
 			// 
 			// addCardToDeckToolStripMenuItem
 			// 
-			resources.ApplyResources(this.addCardToDeckToolStripMenuItem, "addCardToDeckToolStripMenuItem");
 			this.addCardToDeckToolStripMenuItem.Name = "addCardToDeckToolStripMenuItem";
+			resources.ApplyResources(this.addCardToDeckToolStripMenuItem, "addCardToDeckToolStripMenuItem");
 			this.addCardToDeckToolStripMenuItem.Click += new System.EventHandler(this.addCardToDeckToolStripMenuItem_Click);
 			// 
 			// addCardToSideboardToolStripMenuItem
 			// 
-			resources.ApplyResources(this.addCardToSideboardToolStripMenuItem, "addCardToSideboardToolStripMenuItem");
 			this.addCardToSideboardToolStripMenuItem.Name = "addCardToSideboardToolStripMenuItem";
+			resources.ApplyResources(this.addCardToSideboardToolStripMenuItem, "addCardToSideboardToolStripMenuItem");
 			this.addCardToSideboardToolStripMenuItem.Click += new System.EventHandler(this.addCardToSideboardToolStripMenuItem_Click);
 			// 
 			// btnReset
 			// 
 			resources.ApplyResources(this.btnReset, "btnReset");
 			this.btnReset.Name = "btnReset";
-			this.toolTip1.SetToolTip(this.btnReset, resources.GetString("btnReset.ToolTip"));
 			this.btnReset.UseVisualStyleBackColor = true;
 			this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-			// 
-			// btnReportError
-			// 
-			resources.ApplyResources(this.btnReportError, "btnReportError");
-			this.btnReportError.Name = "btnReportError";
-			this.toolTip1.SetToolTip(this.btnReportError, resources.GetString("btnReportError.ToolTip"));
-			this.btnReportError.UseVisualStyleBackColor = true;
-			this.btnReportError.Click += new System.EventHandler(this.btnReportError_Click);
 			// 
 			// rtbCardDetails
 			// 
 			resources.ApplyResources(this.rtbCardDetails, "rtbCardDetails");
 			this.rtbCardDetails.Name = "rtbCardDetails";
-			this.toolTip1.SetToolTip(this.rtbCardDetails, resources.GetString("rtbCardDetails.ToolTip"));
 			// 
 			// menuStrip1
 			// 
-			resources.ApplyResources(this.menuStrip1, "menuStrip1");
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.filterToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.windowToolStripMenuItem,
             this.helpToolStripMenuItem});
+			resources.ApplyResources(this.menuStrip1, "menuStrip1");
 			this.menuStrip1.Name = "menuStrip1";
-			this.toolTip1.SetToolTip(this.menuStrip1, resources.GetString("menuStrip1.ToolTip"));
 			// 
 			// fileToolStripMenuItem
 			// 
-			resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
 			// 
 			// toolStripMenuItem1
 			// 
-			resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
 			// 
 			// exitToolStripMenuItem
 			// 
-			resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
 			// filterToolStripMenuItem
 			// 
-			resources.ApplyResources(this.filterToolStripMenuItem, "filterToolStripMenuItem");
 			this.filterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miLcgSetsOnly});
 			this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
+			resources.ApplyResources(this.filterToolStripMenuItem, "filterToolStripMenuItem");
 			// 
 			// miLcgSetsOnly
 			// 
-			resources.ApplyResources(this.miLcgSetsOnly, "miLcgSetsOnly");
 			this.miLcgSetsOnly.CheckOnClick = true;
 			this.miLcgSetsOnly.Name = "miLcgSetsOnly";
+			resources.ApplyResources(this.miLcgSetsOnly, "miLcgSetsOnly");
 			this.miLcgSetsOnly.CheckedChanged += new System.EventHandler(this.eclCheck_CheckStateChanged);
 			this.miLcgSetsOnly.Click += new System.EventHandler(this.miLcgSetsOnly_Click);
 			// 
 			// toolsToolStripMenuItem
 			// 
-			resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
 			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deckBuilderToolStripMenuItem,
             this.optionsToolStripMenuItem});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+			resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
 			// 
 			// deckBuilderToolStripMenuItem
 			// 
-			resources.ApplyResources(this.deckBuilderToolStripMenuItem, "deckBuilderToolStripMenuItem");
 			this.deckBuilderToolStripMenuItem.Name = "deckBuilderToolStripMenuItem";
+			resources.ApplyResources(this.deckBuilderToolStripMenuItem, "deckBuilderToolStripMenuItem");
 			this.deckBuilderToolStripMenuItem.Click += new System.EventHandler(this.deckBuilderToolStripMenuItem_Click);
 			// 
 			// optionsToolStripMenuItem
 			// 
-			resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+			resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
 			this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
 			// 
 			// windowToolStripMenuItem
 			// 
-			resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
 			this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
+			resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
 			// 
 			// helpToolStripMenuItem
 			// 
-			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
 			// 
 			// aboutToolStripMenuItem
 			// 
-			resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			// 
+			// splitCardText
+			// 
+			this.splitCardText.BackColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.splitCardText, "splitCardText");
+			this.splitCardText.Name = "splitCardText";
+			// 
+			// splitCardText.Panel1
+			// 
+			this.splitCardText.Panel1.Controls.Add(this.btnReportError);
+			this.splitCardText.Panel1.Controls.Add(this.rtbCardDetails);
+			// 
+			// splitCardText.Panel2
+			// 
+			this.splitCardText.Panel2.Controls.Add(this.cardPreviewControl);
+			// 
+			// btnReportError
+			// 
+			resources.ApplyResources(this.btnReportError, "btnReportError");
+			this.btnReportError.Name = "btnReportError";
+			this.btnReportError.UseVisualStyleBackColor = true;
+			// 
+			// cardPreviewControl
+			// 
+			this.cardPreviewControl.BackColor = System.Drawing.Color.Transparent;
+			this.cardPreviewControl.CardUniversalId = -1;
+			resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
+			this.cardPreviewControl.Name = "cardPreviewControl";
+			this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl_MouseCaptureChanged);
+			this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl_MouseEnter);
+			this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl_MouseLeave);
 			// 
 			// MainForm
 			// 
@@ -658,7 +644,6 @@ namespace AGoTDB.Forms
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
-			this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
 			this.splitContainer1.Panel1.ResumeLayout(false);
@@ -673,6 +658,9 @@ namespace AGoTDB.Forms
 			this.popupGrid.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.splitCardText.Panel1.ResumeLayout(false);
+			this.splitCardText.Panel2.ResumeLayout(false);
+			this.splitCardText.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -739,7 +727,9 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.Button btnQuickFindNext;
 		private System.Windows.Forms.ToolStripMenuItem miLcgSetsOnly;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-		private System.Windows.Forms.Button btnReportError;
 		private System.ComponentModel.BackgroundWorker backgroundWorker1;
+		private System.Windows.Forms.SplitContainer splitCardText;
+		private System.Windows.Forms.Button btnReportError;
+		private CardPreviewControl cardPreviewControl;
 	}
 }

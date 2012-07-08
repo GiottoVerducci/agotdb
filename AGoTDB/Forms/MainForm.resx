@@ -212,6 +212,9 @@
         S9/ia1C4EAC3cY4gEZMoWAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnQuickFindNext.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnQuickFindNext.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 6</value>
   </data>
@@ -1355,6 +1358,12 @@
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="splitCardText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="splitCardText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="btnReportError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -1362,13 +1371,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnReportError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>729, 167</value>
+    <value>505, 164</value>
   </data>
   <data name="btnReportError.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 21</value>
   </data>
   <data name="btnReportError.TabIndex" type="System.Int32, mscorlib">
-    <value>142</value>
+    <value>143</value>
   </data>
   <data name="btnReportError.Text" xml:space="preserve">
     <value>Report an error</value>
@@ -1380,7 +1389,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnReportError.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
+    <value>splitCardText.Panel1</value>
   </data>
   <data name="&gt;&gt;btnReportError.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1392,7 +1401,7 @@
     <value>0, 0</value>
   </data>
   <data name="rtbCardDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>821, 188</value>
+    <value>600, 188</value>
   </data>
   <data name="rtbCardDetails.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -1407,10 +1416,82 @@
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rtbCardDetails.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
+    <value>splitCardText.Panel1</value>
   </data>
   <data name="&gt;&gt;rtbCardDetails.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.Name" xml:space="preserve">
+    <value>splitCardText.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.Parent" xml:space="preserve">
+    <value>splitCardText</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cardPreviewControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardPreviewControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="cardPreviewControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 188</value>
+  </data>
+  <data name="cardPreviewControl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cardPreviewControl.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.Name" xml:space="preserve">
+    <value>cardPreviewControl</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
+    <value>AGoTDB.Forms.CardPreviewControl, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
+    <value>splitCardText.Panel2</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.Name" xml:space="preserve">
+    <value>splitCardText.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.Parent" xml:space="preserve">
+    <value>splitCardText</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitCardText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>821, 188</value>
+  </data>
+  <data name="splitCardText.SplitterDistance" type="System.Int32, mscorlib">
+    <value>600</value>
+  </data>
+  <data name="splitCardText.TabIndex" type="System.Int32, mscorlib">
+    <value>143</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Name" xml:space="preserve">
+    <value>splitCardText</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
@@ -1722,17 +1803,17 @@
   <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;backgroundWorker1.Name" xml:space="preserve">
     <value>backgroundWorker1</value>
   </data>
   <data name="&gt;&gt;backgroundWorker1.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
