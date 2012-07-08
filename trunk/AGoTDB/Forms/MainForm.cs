@@ -54,6 +54,7 @@ namespace AGoTDB.Forms
 		private DataRow[] _quickFindRows; // quick find results
 		private int _quickFindIndex; // index of the current quick find result
 		private AgotCard _displayedCard;
+		private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm();
 
 		private readonly DataTable _dataTable = new DataTable();
 		private Query _query = new Query();
@@ -692,11 +693,22 @@ namespace AGoTDB.Forms
 			// set options
 			miLcgSetsOnly.Checked = UserSettings.LcgSetsOnly;
 			UpdateSetsChoicesControl();
+
+			if (UserSettings.DisplayImages)
+			{
+				_cardPreviewForm.Visible = true;
+			}
+			else
+			{
+				splitCardText.Panel2Collapsed = true;
+				splitCardText.IsSplitterFixed = true;
+			}
 		}
 
 		private void dataGridView1_SelectionChanged(object sender, EventArgs e)
 		{
 			rtbCardDetails.Clear();
+			cardPreviewControl.Visible = false;
 			btnReportError.Enabled = false;
 			if (dataGridView.SelectedRows.Count != 0)
 			{
@@ -715,6 +727,8 @@ namespace AGoTDB.Forms
 				rtbCardDetails.SelectionColor = ft.Format.Color;
 				rtbCardDetails.AppendText(ft.Text);
 			}
+			if (UserSettings.DisplayImages)
+				UpdateCardImage(_displayedCard);
 		}
 
 		private void deckBuilderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -870,6 +884,53 @@ namespace AGoTDB.Forms
 				encodedBody);
 			// open the client messaging
 			System.Diagnostics.Process.Start(process);
+		}
+
+		private void cardPreviewControl_MouseEnter(object sender, EventArgs e)
+		{
+			ShowCardPreviewForm(cardPreviewControl.CardUniversalId);
+		}
+
+		private void cardPreviewControl_MouseLeave(object sender, EventArgs e)
+		{
+			HideCardPreviewForm();
+		}
+
+		private void cardPreviewControl_MouseCaptureChanged(object sender, EventArgs e)
+		{
+			HideCardPreviewForm();
+		}
+
+		/// <summary>
+		/// Updates the card image preview with a given card.
+		/// </summary>
+		private void UpdateCardImage(AgotCard card)
+		{
+			cardPreviewControl.Visible = true;
+			cardPreviewControl.CardUniversalId = card.UniversalId;
+		}
+
+		/// <summary>
+		/// Shows the card preview form for given card id.
+		/// </summary>
+		/// <param name="universalId">The card id.</param>
+		private void ShowCardPreviewForm(int universalId)
+		{
+			if (!ApplicationSettings.ImagesFolderExists || !UserSettings.DisplayImages)
+				return;
+			_cardPreviewForm.CardUniversalId = universalId;
+			var x = this.Location.X + this.Width;
+			var y = this.Location.Y + 10;
+
+			_cardPreviewForm.Location = new Point(x, y);
+		}
+
+		/// <summary>
+		/// Hides the card preview form.
+		/// </summary>
+		private void HideCardPreviewForm()
+		{
+			_cardPreviewForm.Hide();
 		}
 	}
 }
