@@ -1,3 +1,7 @@
+Beta 0.738 (22 juillet 2012)
+ - Ajout du chapitre 2 de Valar Morghulis "Valar Dohaeris"
+ - Correction de cartes dans la base de données
+
 Beta 0.737 (08 juillet 2012)
  - Correction de cartes dans la base de données
 
