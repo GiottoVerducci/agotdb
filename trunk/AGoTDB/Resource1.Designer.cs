@@ -142,6 +142,24 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new version of the database is available. Do you want to download it?.
+        /// </summary>
+        internal static string DatabaseUpdateFound {
+            get {
+                return ResourceManager.GetString("DatabaseUpdateFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New version found!.
+        /// </summary>
+        internal static string DatabaseUpdateFoundTitle {
+            get {
+                return ResourceManager.GetString("DatabaseUpdateFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deck (*.xml)|*.xml.
         /// </summary>
         internal static string DeckFileFilter {
