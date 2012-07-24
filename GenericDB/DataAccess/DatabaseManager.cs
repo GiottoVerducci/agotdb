@@ -38,7 +38,7 @@ namespace GenericDB.DataAccess
         protected List<DatabaseInfo> fDatabaseInfos;
         public string HDataBaseFilename { get; protected set; }
         public string DataBaseFilename { get; protected set; }
-        protected virtual string DataBasePath { get { return "Databases" + Path.DirectorySeparatorChar; } }
+        public virtual string DataBasePath { get { return "Databases" + Path.DirectorySeparatorChar; } }
 
         public abstract string TableNameMain { get; }
         public abstract string TableNameVersion { get; }

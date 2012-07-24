@@ -318,4 +318,10 @@
   <data name="ReportCardErrorMessageTitle" xml:space="preserve">
     <value>Error in card {0}</value>
   </data>
+  <data name="DatabaseUpdateFound" xml:space="preserve">
+    <value>A new version of the database is available. Do you want to download it?</value>
+  </data>
+  <data name="DatabaseUpdateFoundTitle" xml:space="preserve">
+    <value>New version found!</value>
+  </data>
 </root>

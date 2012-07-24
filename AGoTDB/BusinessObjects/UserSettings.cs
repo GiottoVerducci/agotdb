@@ -109,6 +109,12 @@ namespace AGoTDB.BusinessObjects
 			set { Singleton.WriteString("General", "ImageRepositoryUrl", value); }
 		}
 
+		public static string UpdateInformationsUrl
+		{
+			get { return Singleton.ReadString("Startup", "UpdateInformationsUrl", ""); }
+			set { Singleton.WriteString("Startup", "UpdateInformationsUrl", value); }
+		}
+
 		public static void Save()
 		{
 			Singleton.Save();

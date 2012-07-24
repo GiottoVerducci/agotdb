@@ -28,6 +28,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
@@ -74,15 +75,71 @@ namespace AGoTDB.Forms
 				ApplicationSettings.ImagesFolder = String.Format("{0}{1}Images", Application.StartupPath, Path.DirectorySeparatorChar);
 				ApplicationSettings.ImagesFolderExists = Directory.Exists(ApplicationSettings.ImagesFolder);
 
+				ApplicationSettings.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
+				var url = CheckNewerVersion();
+
 				InitializeMainForm();
 				backgroundWorker1.DoWork += backgroundWorker1_DoWork;
 				backgroundWorker1.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
-				backgroundWorker1.RunWorkerAsync();
+				backgroundWorker1.RunWorkerAsync(url);
+			}
+		}
+
+		private string CheckNewerVersion()
+		{
+			var databaseFilePath = ApplicationSettings.DatabaseManager.DataBasePath + ApplicationSettings.DatabaseManager.HDataBaseFilename;
+			try
+			{
+				var databaseDate = File.GetCreationTimeUtc(databaseFilePath);
+				var url = UserSettings.UpdateInformationsUrl;
+				string data;
+				using (var webClient = new WebClient())
+				{
+					data = Encoding.ASCII.GetString(webClient.DownloadData(url));
+				}
+				// data will follow the format: yyyy-mm-dd url
+				var split = data.Split(' ');
+				var lastDateItems = split[0].Split('-').Select(int.Parse).ToArray();
+				var lastDate = new DateTime(lastDateItems[0], lastDateItems[1], lastDateItems[2]);
+
+				if (lastDate < databaseDate)
+					return null;
+
+				// a new version has been detected
+				if (MessageBox.Show(Resource1.DatabaseUpdateFound,
+					Resource1.DatabaseUpdateFoundTitle,
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+				{
+					return null;
+				}
+				return split[1];
+			}
+			catch (Exception)
+			{
+				return null;
 			}
 		}
 
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
 		{
+			var url = (string) e.Argument;
+			if(url != null)
+			{
+				// we must download the new database file
+				try
+				{
+					using (var webClient = new WebClient())
+					{
+						var databaseFilePath = ApplicationSettings.DatabaseManager.DataBasePath + ApplicationSettings.DatabaseManager.HDataBaseFilename;
+						webClient.DownloadFile(url, databaseFilePath);
+						UserSettings.CreateExtendedDB = true;
+					}
+				}
+				catch (Exception)
+				{
+				}
+
+			}
 			e.Result = InitializeDatabaseConnection();
 		}
 
@@ -137,7 +194,6 @@ namespace AGoTDB.Forms
 		private static ConnectionResult InitializeDatabaseConnection()
 		{
 			var createExtendedDb = UserSettings.CreateExtendedDB;
-			ApplicationSettings.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
 			var connectionResult = ApplicationSettings.DatabaseManager.Connect(createExtendedDb, ApplicationSettings.ApplicationVersion);
 			return connectionResult;
 		}
@@ -617,11 +673,11 @@ namespace AGoTDB.Forms
 
 		//public Object Clone(Object obj)
 		//{
-		//    MemoryStream mem = new MemoryStream();
-		//    BinaryFormatter binFormat = new BinaryFormatter();
-		//    binFormat.Serialize(mem, obj); // serialization of obj in memory
-		//    mem.Seek(0, SeekOrigin.Begin); // go back to the start of the stream
-		//    return binFormat.Deserialize(mem); // create the object
+		//	MemoryStream mem = new MemoryStream();
+		//	BinaryFormatter binFormat = new BinaryFormatter();
+		//	binFormat.Serialize(mem, obj); // serialization of obj in memory
+		//	mem.Seek(0, SeekOrigin.Begin); // go back to the start of the stream
+		//	return binFormat.Deserialize(mem); // create the object
 		//}
 
 
