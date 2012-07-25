@@ -1,3 +1,6 @@
+Beta 0.739 (25 juillet 2012)
+ - La base de donnée se met désormais à jour automatiquement en cas de nouvelle version. Ceci peut être désactivé dans les options.
+
 Beta 0.738 (22 juillet 2012)
  - Ajout du chapitre 2 de Valar Morghulis "Valar Dohaeris"
  - Correction de cartes dans la base de données
