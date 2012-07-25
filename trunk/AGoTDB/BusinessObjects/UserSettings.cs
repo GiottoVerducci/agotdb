@@ -68,70 +68,74 @@ namespace AGoTDB.BusinessObjects
 		}
 
 		#region General
+		private const string GeneralSectionName = "General";
 		public static string DatabaseLanguage
 		{
-			get { return Singleton.ReadString("General", "DatabaseLanguage", "fr"); }
-			set { Singleton.WriteString("General", "DatabaseLanguage", value); }
+			get { return Singleton.ReadString(GeneralSectionName, "DatabaseLanguage", "fr"); }
+			set { Singleton.WriteString(GeneralSectionName, "DatabaseLanguage", value); }
 		}
 		
 		public static bool DisplayImages
 		{
-			get { return Singleton.ReadBool("General", "DisplayImages", true); }
-			set { Singleton.WriteBool("General", "DisplayImages", value); }
+			get { return Singleton.ReadBool(GeneralSectionName, "DisplayImages", true); }
+			set { Singleton.WriteBool(GeneralSectionName, "DisplayImages", value); }
 		}
 
 		public static int ImagePreviewSize
 		{
-			get { return Math.Max(0, Math.Min(100, Singleton.ReadInt("General", "ImagePreviewSize", 100))); }
-			set { Singleton.WriteInt("General", "ImagePreviewSize", Math.Max(0, Math.Min(100, value))); }
+			get { return Math.Max(0, Math.Min(100, Singleton.ReadInt(GeneralSectionName, "ImagePreviewSize", 100))); }
+			set { Singleton.WriteInt(GeneralSectionName, "ImagePreviewSize", Math.Max(0, Math.Min(100, value))); }
 		}
 
 		public static string ImageRepositoryUrl
 		{
-			get { return Singleton.ReadString("General", "ImageRepositoryUrl", ""); }
-			set { Singleton.WriteString("General", "ImageRepositoryUrl", value); }
+			get { return Singleton.ReadString(GeneralSectionName, "ImageRepositoryUrl", ""); }
+			set { Singleton.WriteString(GeneralSectionName, "ImageRepositoryUrl", value); }
 		}
 		#endregion
 
 		#region Startup
+		private const string StartupSectionName = "Startup";
 		public static bool CheckForUpdatesOnStartup
 		{
-			get { return Singleton.ReadBool("Startup", "CheckForUpdatesOnStartup", true); }
-			set { Singleton.WriteBool("Startup", "CheckForUpdatesOnStartup", value); }
+			get { return Singleton.ReadBool(StartupSectionName, "CheckForUpdatesOnStartup", true); }
+			set { Singleton.WriteBool(StartupSectionName, "CheckForUpdatesOnStartup", value); }
 		}
 
 		public static bool CreateExtendedDB
 		{
-			get { return Singleton.ReadBool("Startup", "CreateExtendedDB", true); }
-			set { Singleton.WriteBool("Startup", "CreateExtendedDB", value); }
+			get { return Singleton.ReadBool(StartupSectionName, "CreateExtendedDB", true); }
+			set { Singleton.WriteBool(StartupSectionName, "CreateExtendedDB", value); }
 		}
 
 		public static string UpdateInformationsUrl
 		{
-			get { return Singleton.ReadString("Startup", "UpdateInformationsUrl", ""); }
-			set { Singleton.WriteString("Startup", "UpdateInformationsUrl", value); }
+			get { return Singleton.ReadString(StartupSectionName, "UpdateInformationsUrl", ""); }
+			set { Singleton.WriteString(StartupSectionName, "UpdateInformationsUrl", value); }
 		}
 		#endregion
 
-		#region Deckbuilder
+		#region DeckBuilder
+		private const string DeckBuilderSectionName = "DeckBuilder";
 		public static string[] TypeOrder
 		{
-			get { return Singleton.ReadString("DeckBuilder", "TypeOrder", "").Split(','); }
-			set { Singleton.WriteString("DeckBuilder", "TypeOrder", String.Join(",", value)); }
+			get { return Singleton.ReadString(DeckBuilderSectionName, "TypeOrder", "").Split(','); }
+			set { Singleton.WriteString(DeckBuilderSectionName, "TypeOrder", String.Join(",", value)); }
 		}
 
 		public static bool ShowNewVersionMessage
 		{
-			get { return Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true); }
-			set { Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", value); }
+			get { return Singleton.ReadBool(DeckBuilderSectionName, "ShowNewVersionMessage", true); }
+			set { Singleton.WriteBool(DeckBuilderSectionName, "ShowNewVersionMessage", value); }
 		}
 		#endregion
 
-		#region
+		#region SearchForm
+		private const string SearchFormSectionName = "SearchForm";
 		public static bool LcgSetsOnly
 		{
-			get { return Singleton.ReadBool("SearchForm", "LcgSetsOnly", false); }
-			set { Singleton.WriteBool("SearchForm", "LcgSetsOnly", value); }
+			get { return Singleton.ReadBool(SearchFormSectionName, "LcgSetsOnly", false); }
+			set { Singleton.WriteBool(SearchFormSectionName, "LcgSetsOnly", value); }
 		}
 		#endregion
 
