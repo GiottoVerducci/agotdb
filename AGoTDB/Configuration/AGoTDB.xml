@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Settings>
+  <Startup>
+    <CheckForUpdatesOnStartup value="True" />
+    <CreateExtendedDB value="False" />
+    <UpdateInformationsUrl value="http://v.ripoll.free.fr/AGOT/databaseinfo.txt" />
+  </Startup>
+  <General>
+    <DatabaseLanguage value="FR" />
+    <DisplayImages value="True" />
+    <ImagePreviewSize value="100" />
+  </General>
+  <SearchForm>
+    <LcgSetsOnly value="True" />
+  </SearchForm>
+  <DeckBuilder>
+    <!-- 1:Personnage 2:Lieu 4:Attachement 8:Evenement 16:Complot 32:Agenda -->
+    <TypeOrder value="16,2,4,1,8" />
+    <ShowNewVersionMessage value="True" />
+  </DeckBuilder>
+</Settings>
