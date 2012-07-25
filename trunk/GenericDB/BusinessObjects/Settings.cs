@@ -55,25 +55,25 @@ namespace GenericDB.BusinessObjects
 
 	public class Settings
 	{
-		protected readonly XmlDocument fDoc;
-		protected readonly XmlNode fDocRoot;
-		protected readonly string fFileName;
-		protected readonly string fRootName;
+		protected readonly XmlDocument _doc;
+		protected readonly XmlNode _docRoot;
+		protected readonly string _fileName;
+		protected readonly string _rootName;
 
 		public Settings(string fileName, string rootName)
 		{
 			if (fileName == null) throw new ArgumentNullException("fileName");
 			if (rootName == null) throw new ArgumentNullException("rootName");
 
-			fFileName = fileName;
-			fRootName = rootName;
+			_fileName = fileName;
+			_rootName = rootName;
 
-			fDoc = new XmlDocument();
+			_doc = new XmlDocument();
 
 			bool loadingSettings = true;
 			try
 			{
-				fDoc.Load(fileName);
+				_doc.Load(fileName);
 			}
 			catch (System.IO.FileNotFoundException)
 			{
@@ -81,8 +81,8 @@ namespace GenericDB.BusinessObjects
 				CreateSettingsDocument();
 			}
 			
-			fDocRoot = fDoc.DocumentElement;
-			if(fDocRoot == null)
+			_docRoot = _doc.DocumentElement;
+			if(_docRoot == null)
 				throw new ApplicationException(string.Format("Error while {0} file {1}", loadingSettings ? "loading" : "creating", fileName));
 		}
 
@@ -111,8 +111,8 @@ namespace GenericDB.BusinessObjects
 		/// </summary>
 		protected void CreateSettingsDocument()
 		{
-			fDoc.AppendChild(fDoc.CreateXmlDeclaration("1.0", null, null));
-			fDoc.AppendChild(fDoc.CreateElement(fRootName));
+			_doc.AppendChild(_doc.CreateXmlDeclaration("1.0", null, null));
+			_doc.AppendChild(_doc.CreateElement(_rootName));
 		}
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace GenericDB.BusinessObjects
 		{
 			try
 			{
-				fDoc.Save(fFileName);
+				_doc.Save(_fileName);
 			}
 			catch (Exception ex)
 			{
@@ -139,7 +139,7 @@ namespace GenericDB.BusinessObjects
 			XmlNode s = GetSectionNode(sectionName);
 
 			if (s != null)
-				fDocRoot.RemoveChild(s);
+				_docRoot.RemoveChild(s);
 		}
 
 		/// <summary>
@@ -149,7 +149,7 @@ namespace GenericDB.BusinessObjects
 		/// <returns>The node representing the section, null if not found.</returns>
 		protected virtual XmlNode GetSectionNode(string sectionName)
 		{
-			return fDocRoot.SelectSingleNode(string.Format("/{0}/{1}", fRootName, sectionName));
+			return _docRoot.SelectSingleNode(string.Format("/{0}/{1}", _rootName, sectionName));
 		}
 
 		public void Save()
@@ -292,10 +292,10 @@ namespace GenericDB.BusinessObjects
 		public void WriteString(string sectionName, string propertyName, string value)
 		{
 			XmlNode s = GetSectionNode(sectionName) 
-                ?? fDocRoot.AppendChild(fDoc.CreateElement(sectionName));
+                ?? _docRoot.AppendChild(_doc.CreateElement(sectionName));
 
 		    XmlNode n = s.SelectSingleNode(propertyName) 
-                ?? s.AppendChild(fDoc.CreateElement(propertyName));
+                ?? s.AppendChild(_doc.CreateElement(propertyName));
 
 		    XmlAttribute attr = ((XmlElement)n).SetAttributeNode("value", "");
 			attr.Value = value;

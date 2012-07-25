@@ -45,9 +45,7 @@ namespace GenericDB.BusinessObjects
 			GetTypeDelegate getTypeDelegateMethod)
 		{
 			_orderedTypes = orderedTypeValues.Length > 0
-				? new List<int>(
-					from type in orderedTypeValues
-					select Convert.ToInt32(type))
+				? orderedTypeValues.Select(type => Convert.ToInt32(type)).ToList()
 				: new List<int>();
 			_isCardNodeDelegateMethod = isCardNodeDelegateMethod;
 			_getTypeDelegateMethod = getTypeDelegateMethod;

@@ -22,22 +22,22 @@ namespace GenericDB.DataAccess
 {
 	public class CommandParameters
 	{
-		private readonly IDictionary<string, object> fParameters = new Dictionary<string, object>();
+		private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
 
 		public CommandParameters Add(string parameterName, object parameterValue)
 		{
 			parameterName = parameterName.Trim();
 			if (string.IsNullOrEmpty(parameterName))
 				throw new ArgumentOutOfRangeException("parameterName");
-			if (fParameters.ContainsKey(parameterName))
+			if (_parameters.ContainsKey(parameterName))
 				throw new ArgumentException(String.Format("parameterName '{0}' already exists", parameterName));
-			fParameters.Add(new KeyValuePair<string, object>(parameterName, parameterValue));
+			_parameters.Add(new KeyValuePair<string, object>(parameterName, parameterValue));
 			return this;
 		}
 
 		internal void AppendToCommand(OleDbCommand command)
 		{
-			foreach (var value in fParameters)
+			foreach (var value in _parameters)
 				command.Parameters.AddWithValue(value.Key, value.Value);
 		}
 	}
