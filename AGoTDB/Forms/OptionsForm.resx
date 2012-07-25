@@ -117,4 +117,292 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbDisplayImages.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbDisplayImages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 24</value>
+  </data>
+  <data name="cbDisplayImages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 17</value>
+  </data>
+  <data name="cbDisplayImages.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cbDisplayImages.Text" xml:space="preserve">
+    <value>Display images (icons and card preview)</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayImages.Name" xml:space="preserve">
+    <value>cbDisplayImages</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayImages.Parent" xml:space="preserve">
+    <value>gbDisplay</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayImages.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbRebuildDatabase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbRebuildDatabase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 42</value>
+  </data>
+  <data name="cbRebuildDatabase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 17</value>
+  </data>
+  <data name="cbRebuildDatabase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="cbRebuildDatabase.Text" xml:space="preserve">
+    <value>Rebuild database on next start</value>
+  </data>
+  <data name="&gt;&gt;cbRebuildDatabase.Name" xml:space="preserve">
+    <value>cbRebuildDatabase</value>
+  </data>
+  <data name="&gt;&gt;cbRebuildDatabase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbRebuildDatabase.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="&gt;&gt;cbRebuildDatabase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 215</value>
+  </data>
+  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 215</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbDisplayMessages.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbDisplayMessages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 73</value>
+  </data>
+  <data name="cbDisplayMessages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 17</value>
+  </data>
+  <data name="cbDisplayMessages.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cbDisplayMessages.Text" xml:space="preserve">
+    <value>Display all messages</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayMessages.Name" xml:space="preserve">
+    <value>cbDisplayMessages</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayMessages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayMessages.Parent" xml:space="preserve">
+    <value>gbDisplay</value>
+  </data>
+  <data name="&gt;&gt;cbDisplayMessages.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="gbDisplay.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lbCardPreviewSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbCardPreviewSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>45, 47</value>
+  </data>
+  <data name="lbCardPreviewSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 13</value>
+  </data>
+  <data name="lbCardPreviewSize.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lbCardPreviewSize.Text" xml:space="preserve">
+    <value>Card preview size (%):</value>
+  </data>
+  <data name="&gt;&gt;lbCardPreviewSize.Name" xml:space="preserve">
+    <value>lbCardPreviewSize</value>
+  </data>
+  <data name="&gt;&gt;lbCardPreviewSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbCardPreviewSize.Parent" xml:space="preserve">
+    <value>gbDisplay</value>
+  </data>
+  <data name="&gt;&gt;lbCardPreviewSize.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudCardPreviewSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 45</value>
+  </data>
+  <data name="nudCardPreviewSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 20</value>
+  </data>
+  <data name="nudCardPreviewSize.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;nudCardPreviewSize.Name" xml:space="preserve">
+    <value>nudCardPreviewSize</value>
+  </data>
+  <data name="&gt;&gt;nudCardPreviewSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudCardPreviewSize.Parent" xml:space="preserve">
+    <value>gbDisplay</value>
+  </data>
+  <data name="&gt;&gt;nudCardPreviewSize.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbDisplay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="gbDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 101</value>
+  </data>
+  <data name="gbDisplay.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="gbDisplay.Text" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="&gt;&gt;gbDisplay.Name" xml:space="preserve">
+    <value>gbDisplay</value>
+  </data>
+  <data name="&gt;&gt;gbDisplay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbDisplay.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbDisplay.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbMisc.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="cbCheckForDatabaseUpdateOnStartup.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbCheckForDatabaseUpdateOnStartup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 19</value>
+  </data>
+  <data name="cbCheckForDatabaseUpdateOnStartup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 17</value>
+  </data>
+  <data name="cbCheckForDatabaseUpdateOnStartup.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cbCheckForDatabaseUpdateOnStartup.Text" xml:space="preserve">
+    <value>Check for database update on startup</value>
+  </data>
+  <data name="&gt;&gt;cbCheckForDatabaseUpdateOnStartup.Name" xml:space="preserve">
+    <value>cbCheckForDatabaseUpdateOnStartup</value>
+  </data>
+  <data name="&gt;&gt;cbCheckForDatabaseUpdateOnStartup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbCheckForDatabaseUpdateOnStartup.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="&gt;&gt;cbCheckForDatabaseUpdateOnStartup.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gbMisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 124</value>
+  </data>
+  <data name="gbMisc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 69</value>
+  </data>
+  <data name="gbMisc.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="gbMisc.Text" xml:space="preserve">
+    <value>Startup</value>
+  </data>
+  <data name="&gt;&gt;gbMisc.Name" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="&gt;&gt;gbMisc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbMisc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbMisc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>285, 250</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>OptionsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
