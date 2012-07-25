@@ -76,7 +76,7 @@ namespace AGoTDB.Forms
 				ApplicationSettings.ImagesFolderExists = Directory.Exists(ApplicationSettings.ImagesFolder);
 
 				ApplicationSettings.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
-				var url = CheckNewerVersion();
+				var url = UserSettings.CheckForUpdatesOnStartup ? CheckNewerVersion() : null;
 
 				InitializeMainForm();
 				backgroundWorker1.DoWork += backgroundWorker1_DoWork;
@@ -90,19 +90,35 @@ namespace AGoTDB.Forms
 			var databaseFilePath = ApplicationSettings.DatabaseManager.DataBasePath + ApplicationSettings.DatabaseManager.HDataBaseFilename;
 			try
 			{
-				var databaseDate = File.GetCreationTimeUtc(databaseFilePath);
+				// get the current database last modification date
+				var databaseDate = File.Exists(databaseFilePath) ? File.GetLastWriteTimeUtc(databaseFilePath) : DateTime.MinValue;
+				// download the latest database informations to compare the dates and get the download url
 				var url = UserSettings.UpdateInformationsUrl;
 				string data;
 				using (var webClient = new WebClient())
 				{
 					data = Encoding.ASCII.GetString(webClient.DownloadData(url));
 				}
-				// data will follow the format: yyyy-mm-dd url
-				var split = data.Split(' ');
-				var lastDateItems = split[0].Split('-').Select(int.Parse).ToArray();
-				var lastDate = new DateTime(lastDateItems[0], lastDateItems[1], lastDateItems[2]);
 
-				if (lastDate < databaseDate)
+				// find the line matching our database language
+				var lines = data.Split('\n');
+
+				string dbUrl = null;
+				foreach (var line in lines)
+				{
+					// data will follow the format: language yyyy-mm-dd url
+					var split = line.Split(' ');
+					if (!string.Equals(UserSettings.DatabaseLanguage, split[0], StringComparison.InvariantCultureIgnoreCase))
+						continue;
+					var lastDateItems = split[1].Split('-').Select(int.Parse).ToArray();
+					var lastDate = new DateTime(lastDateItems[0], lastDateItems[1], lastDateItems[2]);
+
+					if (lastDate < databaseDate)
+						return null;
+					dbUrl = split[2];
+					break;
+				}
+				if (dbUrl == null)
 					return null;
 
 				// a new version has been detected
@@ -112,7 +128,7 @@ namespace AGoTDB.Forms
 				{
 					return null;
 				}
-				return split[1];
+				return dbUrl;
 			}
 			catch (Exception)
 			{
@@ -130,9 +146,16 @@ namespace AGoTDB.Forms
 				{
 					using (var webClient = new WebClient())
 					{
-						var databaseFilePath = ApplicationSettings.DatabaseManager.DataBasePath + ApplicationSettings.DatabaseManager.HDataBaseFilename;
-						webClient.DownloadFile(url, databaseFilePath);
-						UserSettings.CreateExtendedDB = true;
+						var zipPath = Path.GetTempFileName();
+						webClient.DownloadFile(url, zipPath);
+						// we must unzip it
+						var filePaths = ZipHelper.UnZipFile(zipPath);
+						if (filePaths != null)
+						{
+							// overwrite our database files with it
+							foreach (var filePath in filePaths)
+								File.Copy(filePath, ApplicationSettings.DatabaseManager.DataBasePath + Path.GetFileName(filePath), true);
+						}
 					}
 				}
 				catch (Exception)
