@@ -67,6 +67,13 @@ namespace AGoTDB.BusinessObjects
 			return Singleton != null;
 		}
 
+		#region General
+		public static string DatabaseLanguage
+		{
+			get { return Singleton.ReadString("General", "DatabaseLanguage", "fr"); }
+			set { Singleton.WriteString("General", "DatabaseLanguage", value); }
+		}
+		
 		public static bool DisplayImages
 		{
 			get { return Singleton.ReadBool("General", "DisplayImages", true); }
@@ -79,12 +86,34 @@ namespace AGoTDB.BusinessObjects
 			set { Singleton.WriteInt("General", "ImagePreviewSize", Math.Max(0, Math.Min(100, value))); }
 		}
 
+		public static string ImageRepositoryUrl
+		{
+			get { return Singleton.ReadString("General", "ImageRepositoryUrl", ""); }
+			set { Singleton.WriteString("General", "ImageRepositoryUrl", value); }
+		}
+		#endregion
+
+		#region Startup
+		public static bool CheckForUpdatesOnStartup
+		{
+			get { return Singleton.ReadBool("Startup", "CheckForUpdatesOnStartup", true); }
+			set { Singleton.WriteBool("Startup", "CheckForUpdatesOnStartup", value); }
+		}
+
 		public static bool CreateExtendedDB
 		{
 			get { return Singleton.ReadBool("Startup", "CreateExtendedDB", true); }
 			set { Singleton.WriteBool("Startup", "CreateExtendedDB", value); }
 		}
 
+		public static string UpdateInformationsUrl
+		{
+			get { return Singleton.ReadString("Startup", "UpdateInformationsUrl", ""); }
+			set { Singleton.WriteString("Startup", "UpdateInformationsUrl", value); }
+		}
+		#endregion
+
+		#region Deckbuilder
 		public static string[] TypeOrder
 		{
 			get { return Singleton.ReadString("DeckBuilder", "TypeOrder", "").Split(','); }
@@ -96,24 +125,15 @@ namespace AGoTDB.BusinessObjects
 			get { return Singleton.ReadBool("Deckbuilder", "ShowNewVersionMessage", true); }
 			set { Singleton.WriteBool("Deckbuilder", "ShowNewVersionMessage", value); }
 		}
+		#endregion
 
+		#region
 		public static bool LcgSetsOnly
 		{
 			get { return Singleton.ReadBool("SearchForm", "LcgSetsOnly", false); }
 			set { Singleton.WriteBool("SearchForm", "LcgSetsOnly", value); }
 		}
-
-		public static string ImageRepositoryUrl
-		{
-			get { return Singleton.ReadString("General", "ImageRepositoryUrl", ""); }
-			set { Singleton.WriteString("General", "ImageRepositoryUrl", value); }
-		}
-
-		public static string UpdateInformationsUrl
-		{
-			get { return Singleton.ReadString("Startup", "UpdateInformationsUrl", ""); }
-			set { Singleton.WriteString("Startup", "UpdateInformationsUrl", value); }
-		}
+		#endregion
 
 		public static void Save()
 		{
