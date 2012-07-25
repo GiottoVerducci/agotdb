@@ -105,23 +105,26 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
   </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="And" xml:space="preserve">
     <value>AND</value>
   </data>
   <data name="AvgStatsText" xml:space="preserve">
     <value>avg</value>
+  </data>
+  <data name="BannedText" xml:space="preserve">
+    <value>BANNED IN TOURNAMENT</value>
   </data>
   <data name="CantSaveDeckErr" xml:space="preserve">
     <value>Deck couldn't be saved!</value>
@@ -135,8 +138,17 @@
   <data name="CostText" xml:space="preserve">
     <value>Cost</value>
   </data>
+  <data name="CrestsText" xml:space="preserve">
+    <value>Crests</value>
+  </data>
   <data name="CurrentRevision" xml:space="preserve">
     <value>Current</value>
+  </data>
+  <data name="DatabaseUpdateFound" xml:space="preserve">
+    <value>A new version of the database is available. Do you want to download it?</value>
+  </data>
+  <data name="DatabaseUpdateFoundTitle" xml:space="preserve">
+    <value>New version found!</value>
   </data>
   <data name="DeckFileFilter" xml:space="preserve">
     <value>Deck (*.xml)|*.xml</value>
@@ -162,11 +174,23 @@
   <data name="ErrInvalidDatabaseTitle" xml:space="preserve">
     <value>Invalid database</value>
   </data>
+  <data name="ErrInvalidXmlDeckFile" xml:space="preserve">
+    <value>The content of the file is not a valid AGoTDB deck.</value>
+  </data>
+  <data name="ErrMinimalSoftwareVersionRequired" xml:space="preserve">
+    <value>This version of the database requires at least the version {0} for the software. Current version of the software is {1}. The software may malfunction. Do you wish to continue?</value>
+  </data>
+  <data name="ErrMinimalSoftwareVersionRequiredTitle" xml:space="preserve">
+    <value>Version mismatch</value>
+  </data>
   <data name="ErrorTitle" xml:space="preserve">
     <value>Error!</value>
   </data>
   <data name="ErrSaveXmlDeck" xml:space="preserve">
     <value>The deck file {0} could not be saved.</value>
+  </data>
+  <data name="ErrUnprintedProxies" xml:space="preserve">
+    <value>The following cards had no image and couldn't be added to the proxy document:</value>
   </data>
   <data name="ErrXmlDeckFileNotFound" xml:space="preserve">
     <value>The deck file {0} could not be found.</value>
@@ -186,8 +210,17 @@
   <data name="IconsText" xml:space="preserve">
     <value>Icons</value>
   </data>
+  <data name="ImageFolderDoesntExist" xml:space="preserve">
+    <value>The folder containing the card images doesn't exist</value>
+  </data>
+  <data name="ImageNotAvailable" xml:space="preserve">
+    <value>Image not available.</value>
+  </data>
   <data name="IncomeText" xml:space="preserve">
     <value>Income</value>
+  </data>
+  <data name="InfluenceCostingCardsText" xml:space="preserve">
+    <value>Cards costing influence</value>
   </data>
   <data name="InitiativeText" xml:space="preserve">
     <value>Initiative</value>
@@ -237,6 +270,18 @@
   <data name="RangeGreaterOrLesser" xml:space="preserve">
     <value>{0} {1} {2}</value>
   </data>
+  <data name="ReportCardErrorMessageBody" xml:space="preserve">
+    <value>I noticed the following error:</value>
+  </data>
+  <data name="ReportCardErrorMessageTitle" xml:space="preserve">
+    <value>Error in card {0}</value>
+  </data>
+  <data name="RestrictedText" xml:space="preserve">
+    <value>This card is on the tournament restricted list.</value>
+  </data>
+  <data name="SeparatorText" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="SetText" xml:space="preserve">
     <value>Set</value>
   </data>
@@ -249,23 +294,26 @@
   <data name="StrengthText" xml:space="preserve">
     <value>Strength</value>
   </data>
+  <data name="TraitsText" xml:space="preserve">
+    <value>Traits</value>
+  </data>
   <data name="TypeText" xml:space="preserve">
     <value>Type</value>
   </data>
   <data name="UnknownCard" xml:space="preserve">
     <value>Unknown card</value>
   </data>
+  <data name="UnknownCardType" xml:space="preserve">
+    <value>Unknown card type</value>
+  </data>
   <data name="ViewFormTitle" xml:space="preserve">
     <value>View - {0}</value>
-  </data>
-  <data name="CrestsText" xml:space="preserve">
-    <value>Crests</value>
   </data>
   <data name="WarnDeckModified" xml:space="preserve">
     <value>The deck has been modified. Do you want to save the changes?</value>
   </data>
   <data name="WarnDeckModifiedTitle" xml:space="preserve">
-    <value>Deck modified.</value>
+    <value>Deck modified</value>
   </data>
   <data name="WarnImpossibleToAddCard" xml:space="preserve">
     <value>You can't add a card to the deck because you're currently viewing an previous revision of it.</value>
@@ -275,53 +323,5 @@
   </data>
   <data name="WarVirtueText" xml:space="preserve">
     <value>War</value>
-  </data>
-  <data name="ErrInvalidXmlDeckFile" xml:space="preserve">
-    <value>The content of the file is not a valid AGOTDB deck.</value>
-  </data>
-  <data name="ErrMinimalSoftwareVersionRequired" xml:space="preserve">
-    <value>This version of the database requires at least the version {0} for the software. Current version of the software is {1}. The software may malfunction. Do you wish to continue?</value>
-  </data>
-  <data name="ErrMinimalSoftwareVersionRequiredTitle" xml:space="preserve">
-    <value>Version mismatch</value>
-  </data>
-  <data name="SeparatorText" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="BannedText" xml:space="preserve">
-    <value>BANNED IN TOURNAMENT</value>
-  </data>
-  <data name="UnknownCardType" xml:space="preserve">
-    <value>Unknown card type</value>
-  </data>
-  <data name="TraitsText" xml:space="preserve">
-    <value>Traits</value>
-  </data>
-  <data name="ErrUnprintedProxies" xml:space="preserve">
-    <value>The following cards had no image and couldn't be added to the proxy document:</value>
-  </data>
-  <data name="ImageNotAvailable" xml:space="preserve">
-    <value>Image not available.</value>
-  </data>
-  <data name="InfluenceCostingCardsText" xml:space="preserve">
-    <value>Cards costing influence</value>
-  </data>
-  <data name="RestrictedText" xml:space="preserve">
-    <value>This card is on the tournament restricted list.</value>
-  </data>
-  <data name="ImageFolderDoesntExist" xml:space="preserve">
-    <value>The folder containing the card images doesn't exist</value>
-  </data>
-  <data name="ReportCardErrorMessageBody" xml:space="preserve">
-    <value>I noticed the following error:</value>
-  </data>
-  <data name="ReportCardErrorMessageTitle" xml:space="preserve">
-    <value>Error in card {0}</value>
-  </data>
-  <data name="DatabaseUpdateFound" xml:space="preserve">
-    <value>A new version of the database is available. Do you want to download it?</value>
-  </data>
-  <data name="DatabaseUpdateFoundTitle" xml:space="preserve">
-    <value>New version found!</value>
   </data>
 </root>

@@ -48,7 +48,8 @@ namespace AGoTDB.Forms
 			cbDisplayImages.Checked = UserSettings.DisplayImages;
 			nudCardPreviewSize.Value = UserSettings.ImagePreviewSize;
 			cbRebuildDatabase.Checked = UserSettings.CreateExtendedDB;
-			var displayMessageSettings = new bool[] { UserSettings.ShowNewVersionMessage };
+			cbCheckForDatabaseUpdateOnStartup.Checked = UserSettings.CheckForUpdatesOnStartup;
+			var displayMessageSettings = new [] { UserSettings.ShowNewVersionMessage };
 			cbDisplayMessages.CheckState = displayMessageSettings.All(b => b)
 				? CheckState.Checked
 				: (displayMessageSettings.All(b => !b)
@@ -61,6 +62,7 @@ namespace AGoTDB.Forms
 			UserSettings.DisplayImages = cbDisplayImages.Checked;
 			UserSettings.ImagePreviewSize = Convert.ToInt32(nudCardPreviewSize.Value);
 			UserSettings.CreateExtendedDB = cbRebuildDatabase.Checked;
+			UserSettings.CheckForUpdatesOnStartup = cbCheckForDatabaseUpdateOnStartup.Checked;
 			if (cbDisplayMessages.CheckState == CheckState.Checked || cbDisplayMessages.CheckState == CheckState.Unchecked)
 				UserSettings.ShowNewVersionMessage = cbDisplayMessages.CheckState == CheckState.Checked;
 			UserSettings.Save();
@@ -68,7 +70,7 @@ namespace AGoTDB.Forms
 
 		private void EnsureControlsCoherence()
 		{
-			pnlCardPreviewSize.Enabled = cbDisplayImages.Checked;
+			lbCardPreviewSize.Enabled = nudCardPreviewSize.Enabled = cbDisplayImages.Checked;
 		}
 
 		private void cbDisplayImages_CheckedChanged(object sender, EventArgs e)
