@@ -800,6 +800,7 @@ namespace AGoTDB.Forms
 		private void ShowCardDetails(DataRow row)
 		{
 			_displayedCard = new AgotCard(row);
+            lblUniversalId.Text = _displayedCard.UniversalId.ToString();
 			foreach (FormattedText ft in _displayedCard.ToFormattedString())
 			{
 				rtbCardDetails.SelectionFont = new Font(rtbCardDetails.SelectionFont, ft.Format.Style);
@@ -1011,5 +1012,10 @@ namespace AGoTDB.Forms
 		{
 			_cardPreviewForm.Hide();
 		}
+
+        private void lblUniversalId_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(lblUniversalId.Text);
+        }
 	}
 }

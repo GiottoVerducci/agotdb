@@ -225,18 +225,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="agotdb.ico" />
-    <Content Include="Databases\AGoT - EN.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Databases\AGoT - FR.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Databases\AGoTEx - EN.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Databases\AGoTEx - FR.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Databases\AGoT - EN.mdb" />
+    <Content Include="Databases\AGoT - FR.mdb" />
+    <Content Include="Databases\AGoTEx - EN.mdb" />
+    <Content Include="Databases\AGoTEx - FR.mdb" />
     <Content Include="gpl.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -283,7 +275,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)Databases\AGoT - FR.mdb" "$(TargetDir)Databases\AGoT.mdb"
-copy "$(TargetDir)Databases\AGoTEx - FR.mdb" "$(TargetDir)Databases\AGoTEx.mdb"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

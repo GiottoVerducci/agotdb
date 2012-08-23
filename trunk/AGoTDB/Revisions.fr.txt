@@ -1,9 +1,13 @@
+Beta 0.740 (23 août 2012)
+ - Le bouton pour signaler les erreurs des cartes avait été désactivé. Il est à nouveau fonctionnel.
+
 Beta 0.739 (25 juillet 2012)
  - La base de donnée se met désormais à jour automatiquement en cas de nouvelle version. Ceci peut être désactivé dans les options.
 
 Beta 0.738 (22 juillet 2012)
  - Ajout du chapitre 2 de Valar Morghulis "Valar Dohaeris"
  - Correction de cartes dans la base de données
+ - Réactivation de la prévisualisation des cartes.
 
 Beta 0.737 (08 juillet 2012)
  - Correction de cartes dans la base de données

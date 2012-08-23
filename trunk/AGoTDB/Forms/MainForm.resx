@@ -1364,6 +1364,39 @@
   <data name="splitCardText.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="lblUniversalId.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblUniversalId.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUniversalId.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblUniversalId.Location" type="System.Drawing.Point, System.Drawing">
+    <value>537, 3</value>
+  </data>
+  <data name="lblUniversalId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="lblUniversalId.TabIndex" type="System.Int32, mscorlib">
+    <value>144</value>
+  </data>
+  <data name="lblUniversalId.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;lblUniversalId.Name" xml:space="preserve">
+    <value>lblUniversalId</value>
+  </data>
+  <data name="&gt;&gt;lblUniversalId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUniversalId.Parent" xml:space="preserve">
+    <value>splitCardText.Panel1</value>
+  </data>
+  <data name="&gt;&gt;lblUniversalId.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="btnReportError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -1392,7 +1425,7 @@
     <value>splitCardText.Panel1</value>
   </data>
   <data name="&gt;&gt;btnReportError.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rtbCardDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1419,7 +1452,7 @@
     <value>splitCardText.Panel1</value>
   </data>
   <data name="&gt;&gt;rtbCardDetails.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;splitCardText.Panel1.Name" xml:space="preserve">
     <value>splitCardText.Panel1</value>
@@ -1709,6 +1742,9 @@
         AB8AAAA/AAAAfwAAAP8AAAD/AAAB/wAAA/8AAAf/AAAP/wAAB/8AAAH/AAAA/wAAAD8AAAAfAAAABwAA
         AAcAAAAfwAAA//gAH/////////////////8=
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>AGoT Deck Builder</value>
