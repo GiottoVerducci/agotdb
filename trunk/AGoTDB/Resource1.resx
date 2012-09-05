@@ -162,6 +162,31 @@
   <data name="ErrDatabaseNotFoundTitle" xml:space="preserve">
     <value>Database not found</value>
   </data>
+  <data name="ErrDatabaseUpdateFailed" xml:space="preserve">
+    <value>(Control+C to copy)
+{0}
+There was an error while updating the database files downloaded from {1}.
+
+Execution steps: 
+{2}
+
+Exception trace:
+{3}</value>
+  </data>
+  <data name="ErrDatabaseUpdateInformationsCouldntBeRetrieved" xml:space="preserve">
+    <value>(Control+C to copy)
+{0}
+There was an error while retrieving the database update informations from {1}.
+Current file: {2}
+Exception trace:
+{3}</value>
+  </data>
+  <data name="ErrDatabaseUpdateInformationsTitle" xml:space="preserve">
+    <value>Error while retrieving the database update informations</value>
+  </data>
+  <data name="ErrDatabaseUpdateTitle" xml:space="preserve">
+    <value>Error while updating the database</value>
+  </data>
   <data name="ErrDeckLoadTitle" xml:space="preserve">
     <value>Error while loading a deck.</value>
   </data>
@@ -200,6 +225,9 @@
   </data>
   <data name="ExportSaveDialogFilter" xml:space="preserve">
     <value>Text file (*.txt)|*.txt</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>Failure</value>
   </data>
   <data name="HolyVirtueText" xml:space="preserve">
     <value>Holy</value>
@@ -294,6 +322,9 @@
   <data name="StrengthText" xml:space="preserve">
     <value>Strength</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
   <data name="TraitsText" xml:space="preserve">
     <value>Traits</value>
   </data>
@@ -305,6 +336,15 @@
   </data>
   <data name="UnknownCardType" xml:space="preserve">
     <value>Unknown card type</value>
+  </data>
+  <data name="UpdatingDB_CopyingFiles" xml:space="preserve">
+    <value>Copying files to {0}</value>
+  </data>
+  <data name="UpdatingDB_DownloadingFileTo" xml:space="preserve">
+    <value>Downloading {0} to {1}</value>
+  </data>
+  <data name="UpdatingDB_UnzipingFile" xml:space="preserve">
+    <value>Unziping file {0}</value>
   </data>
   <data name="ViewFormTitle" xml:space="preserve">
     <value>View - {0}</value>

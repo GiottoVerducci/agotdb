@@ -196,6 +196,55 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Control+C to copy)
+        ///{0}
+        ///There was an error while updating the database files downloaded from {1}.
+        ///
+        ///Execution steps: 
+        ///{2}
+        ///
+        ///Exception trace:
+        ///{3}.
+        /// </summary>
+        internal static string ErrDatabaseUpdateFailed {
+            get {
+                return ResourceManager.GetString("ErrDatabaseUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Control+C to copy)
+        ///{0}
+        ///There was an error while retrieving the database update informations from {1}.
+        ///Current file: {2}
+        ///Exception trace:
+        ///{3}.
+        /// </summary>
+        internal static string ErrDatabaseUpdateInformationsCouldntBeRetrieved {
+            get {
+                return ResourceManager.GetString("ErrDatabaseUpdateInformationsCouldntBeRetrieved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while retrieving the database update informations.
+        /// </summary>
+        internal static string ErrDatabaseUpdateInformationsTitle {
+            get {
+                return ResourceManager.GetString("ErrDatabaseUpdateInformationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while updating the database.
+        /// </summary>
+        internal static string ErrDatabaseUpdateTitle {
+            get {
+                return ResourceManager.GetString("ErrDatabaseUpdateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while loading a deck..
         /// </summary>
         internal static string ErrDeckLoadTitle {
@@ -232,7 +281,7 @@ namespace AGoTDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The content of the file is not a valid AGOTDB deck..
+        ///   Looks up a localized string similar to The content of the file is not a valid AGoTDB deck..
         /// </summary>
         internal static string ErrInvalidXmlDeckFile {
             get {
@@ -309,6 +358,15 @@ namespace AGoTDB {
         internal static string ExportSaveDialogFilter {
             get {
                 return ResourceManager.GetString("ExportSaveDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failure.
+        /// </summary>
+        internal static string Failure {
+            get {
+                return ResourceManager.GetString("Failure", resourceCulture);
             }
         }
         
@@ -592,6 +650,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Traits.
         /// </summary>
         internal static string TraitsText {
@@ -628,6 +695,33 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copying files to {0}.
+        /// </summary>
+        internal static string UpdatingDB_CopyingFiles {
+            get {
+                return ResourceManager.GetString("UpdatingDB_CopyingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} to {1}.
+        /// </summary>
+        internal static string UpdatingDB_DownloadingFileTo {
+            get {
+                return ResourceManager.GetString("UpdatingDB_DownloadingFileTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unziping file {0}.
+        /// </summary>
+        internal static string UpdatingDB_UnzipingFile {
+            get {
+                return ResourceManager.GetString("UpdatingDB_UnzipingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View - {0}.
         /// </summary>
         internal static string ViewFormTitle {
@@ -646,7 +740,7 @@ namespace AGoTDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deck modified..
+        ///   Looks up a localized string similar to Deck modified.
         /// </summary>
         internal static string WarnDeckModifiedTitle {
             get {
