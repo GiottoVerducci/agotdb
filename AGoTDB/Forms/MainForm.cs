@@ -88,12 +88,13 @@ namespace AGoTDB.Forms
 		private string CheckNewerVersion()
 		{
 			var databaseFilePath = ApplicationSettings.DatabaseManager.DataBasePath + ApplicationSettings.DatabaseManager.HDataBaseFilename;
+			string url = null;
 			try
 			{
 				// get the current database last modification date
 				var databaseDate = File.Exists(databaseFilePath) ? File.GetLastWriteTimeUtc(databaseFilePath) : DateTime.MinValue;
 				// download the latest database informations to compare the dates and get the download url
-				var url = UserSettings.UpdateInformationsUrl;
+				url = UserSettings.UpdateInformationsUrl;
 				string data;
 				using (var webClient = new WebClient())
 				{
@@ -130,36 +131,53 @@ namespace AGoTDB.Forms
 				}
 				return dbUrl;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
+				var errorMessage = string.Format(Resource1.ErrDatabaseUpdateInformationsCouldntBeRetrieved, ApplicationSettings.ApplicationVersion, url, databaseFilePath, e);
+				MessageBox.Show(errorMessage, Resource1.ErrDatabaseUpdateInformationsTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return null;
 			}
 		}
 
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
 		{
-			var url = (string) e.Argument;
-			if(url != null)
+			var url = (string)e.Argument;
+			if (url != null)
 			{
+				var executionTrace = new ExecutionTrace();
 				// we must download the new database file
 				try
 				{
 					using (var webClient = new WebClient())
 					{
 						var zipPath = Path.GetTempFileName();
+						var step = executionTrace.AddStep(string.Format(Resource1.UpdatingDB_DownloadingFileTo, url, zipPath));
 						webClient.DownloadFile(url, zipPath);
+						step.IsSuccessful = true;
+
 						// we must unzip it
+						step = executionTrace.AddStep(string.Format(Resource1.UpdatingDB_UnzipingFile, zipPath));
 						var filePaths = ZipHelper.UnZipFile(zipPath);
+						step.IsSuccessful = true;
+
 						if (filePaths != null)
 						{
 							// overwrite our database files with it
+							step = executionTrace.AddStep(string.Format(Resource1.UpdatingDB_CopyingFiles, ApplicationSettings.DatabaseManager.DataBasePath));
 							foreach (var filePath in filePaths)
 								File.Copy(filePath, ApplicationSettings.DatabaseManager.DataBasePath + Path.GetFileName(filePath), true);
+							step.IsSuccessful = true;
+						}
+						else
+						{
+							throw new Exception("Empty or corrupted zip file");
 						}
 					}
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
+					var errorMessage = string.Format(Resource1.ErrDatabaseUpdateFailed, ApplicationSettings.ApplicationVersion, url, executionTrace, ex);
+					MessageBox.Show(errorMessage, Resource1.ErrDatabaseUpdateTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 
 			}
@@ -800,7 +818,7 @@ namespace AGoTDB.Forms
 		private void ShowCardDetails(DataRow row)
 		{
 			_displayedCard = new AgotCard(row);
-            lblUniversalId.Text = _displayedCard.UniversalId.ToString();
+			lblUniversalId.Text = _displayedCard.UniversalId.ToString();
 			foreach (FormattedText ft in _displayedCard.ToFormattedString())
 			{
 				rtbCardDetails.SelectionFont = new Font(rtbCardDetails.SelectionFont, ft.Format.Style);
@@ -1013,9 +1031,9 @@ namespace AGoTDB.Forms
 			_cardPreviewForm.Hide();
 		}
 
-        private void lblUniversalId_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(lblUniversalId.Text);
-        }
+		private void lblUniversalId_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetText(lblUniversalId.Text);
+		}
 	}
 }

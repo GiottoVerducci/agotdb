@@ -114,6 +114,7 @@
     <Compile Include="Forms\DrawSimulatorForm.Designer.cs">
       <DependentUpon>DrawSimulatorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ExecutionTrace.cs" />
     <Compile Include="Forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>

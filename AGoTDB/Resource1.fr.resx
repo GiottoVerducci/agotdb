@@ -162,6 +162,31 @@
   <data name="ErrDatabaseNotFoundTitle" xml:space="preserve">
     <value>Base de données non trouvée</value>
   </data>
+  <data name="ErrDatabaseUpdateFailed" xml:space="preserve">
+    <value>(Contrôle+C pour copier)
+{0}
+Une erreur est survenue lors de la mise à jour de la base depuis {1}.
+
+Étapes d'exécution : 
+{2}
+
+Trace de l'exception :
+{3}</value>
+  </data>
+  <data name="ErrDatabaseUpdateInformationsCouldntBeRetrieved" xml:space="preserve">
+    <value>(Contrôle+C pour copier)
+{0}
+Une erreur est survenue lors de la récupération des informations de mise à jour de la base depuis {1}.
+Fichier courant : {2}
+Trace de l'exception :
+{3}</value>
+  </data>
+  <data name="ErrDatabaseUpdateInformationsTitle" xml:space="preserve">
+    <value>Erreur lors de la récupération des informations de mise à jour de la base</value>
+  </data>
+  <data name="ErrDatabaseUpdateTitle" xml:space="preserve">
+    <value>Erreur lors de la mise à jour de la base</value>
+  </data>
   <data name="ErrDeckLoadTitle" xml:space="preserve">
     <value>Erreur lors du chargement du deck.</value>
   </data>
@@ -200,6 +225,9 @@
   </data>
   <data name="ExportSaveDialogFilter" xml:space="preserve">
     <value>Fichier texte (*.txt)|*.txt</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>Échec</value>
   </data>
   <data name="HolyVirtueText" xml:space="preserve">
     <value>Mystique</value>
@@ -267,6 +295,9 @@
   <data name="RangeBetween" xml:space="preserve">
     <value>{0} entre {1} et {2}</value>
   </data>
+  <data name="RangeGreaterOrLesser" xml:space="preserve">
+    <value>{0} {1} {2}</value>
+  </data>
   <data name="ReportCardErrorMessageBody" xml:space="preserve">
     <value>J'ai remarqué l'erreur suivante :</value>
   </data>
@@ -291,6 +322,9 @@
   <data name="StrengthText" xml:space="preserve">
     <value>Force</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Succès</value>
+  </data>
   <data name="TraitsText" xml:space="preserve">
     <value>Traits</value>
   </data>
@@ -302,6 +336,15 @@
   </data>
   <data name="UnknownCardType" xml:space="preserve">
     <value>Type de carte inconnu</value>
+  </data>
+  <data name="UpdatingDB_CopyingFiles" xml:space="preserve">
+    <value>Copie des fichiers vers {0}</value>
+  </data>
+  <data name="UpdatingDB_DownloadingFileTo" xml:space="preserve">
+    <value>Téléchargement de {0} vers {1}</value>
+  </data>
+  <data name="UpdatingDB_UnzipingFile" xml:space="preserve">
+    <value>Décompression du fichier {0}</value>
   </data>
   <data name="ViewFormTitle" xml:space="preserve">
     <value>Vue - {0}</value>
