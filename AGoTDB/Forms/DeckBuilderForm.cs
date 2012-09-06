@@ -866,8 +866,8 @@ namespace AGoTDB.Forms
 			}
 			// if the card is restricted, check there's no other card restricted in any other deck or sideboard
 			if (card.Restricted != null && card.Restricted.Value
-				&& deck.CardLists.Any(
-					cl => cl.Any(c => c.Restricted != null && c.Restricted.Value && c.UniversalId != card.UniversalId)))
+				&& (deck.CardLists.Any(cl => cl.Any(c => c.Restricted != null && c.Restricted.Value && c.UniversalId != card.UniversalId)))
+					|| deck.Agenda.Any(a => a.Restricted != null && a.Restricted.Value))
 			{
 				result.ForeColor = Color.White;
 				result.BackColor = Color.OrangeRed;

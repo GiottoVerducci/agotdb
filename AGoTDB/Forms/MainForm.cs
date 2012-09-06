@@ -98,6 +98,7 @@ namespace AGoTDB.Forms
 				string data;
 				using (var webClient = new WebClient())
 				{
+					//TODO: set proxy (if any)
 					data = Encoding.ASCII.GetString(webClient.DownloadData(url));
 				}
 
@@ -150,6 +151,8 @@ namespace AGoTDB.Forms
 				{
 					using (var webClient = new WebClient())
 					{
+						//TODO: set proxy (if any)
+
 						var zipPath = Path.GetTempFileName();
 						var step = executionTrace.AddStep(string.Format(Resource1.UpdatingDB_DownloadingFileTo, url, zipPath));
 						webClient.DownloadFile(url, zipPath);
