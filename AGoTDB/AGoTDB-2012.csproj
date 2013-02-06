@@ -120,6 +120,9 @@
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\ZipHelper.cs" />
+    <Compile Include="OCTGN\OctgnCard.cs" />
+    <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
+    <Compile Include="OCTGN\OctgnLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Services\CardImageService.cs" />
     <Compile Include="Resource1.fr.Designer.cs">
