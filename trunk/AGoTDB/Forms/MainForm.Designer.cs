@@ -76,8 +76,10 @@ namespace AGoTDB.Forms
             this.addCardToSideboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnReset = new System.Windows.Forms.Button();
             this.splitCardText = new System.Windows.Forms.SplitContainer();
+            this.lblUniversalId = new System.Windows.Forms.Label();
             this.btnReportError = new System.Windows.Forms.Button();
             this.rtbCardDetails = new System.Windows.Forms.RichTextBox();
+            this.cardPreviewControl = new AGoTDB.Forms.CardPreviewControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -92,8 +94,9 @@ namespace AGoTDB.Forms
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lblUniversalId = new System.Windows.Forms.Label();
-            this.cardPreviewControl = new AGoTDB.Forms.CardPreviewControl();
+            this.oCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadOCTGNDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -103,6 +106,7 @@ namespace AGoTDB.Forms
             ((System.ComponentModel.ISupportInitialize)(this.picGold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.popupGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitCardText)).BeginInit();
             this.splitCardText.Panel1.SuspendLayout();
             this.splitCardText.Panel2.SuspendLayout();
             this.splitCardText.SuspendLayout();
@@ -534,6 +538,12 @@ namespace AGoTDB.Forms
             // 
             this.splitCardText.Panel2.Controls.Add(this.cardPreviewControl);
             // 
+            // lblUniversalId
+            // 
+            resources.ApplyResources(this.lblUniversalId, "lblUniversalId");
+            this.lblUniversalId.Name = "lblUniversalId";
+            this.lblUniversalId.Click += new System.EventHandler(this.lblUniversalId_Click);
+            // 
             // btnReportError
             // 
             resources.ApplyResources(this.btnReportError, "btnReportError");
@@ -546,6 +556,16 @@ namespace AGoTDB.Forms
             resources.ApplyResources(this.rtbCardDetails, "rtbCardDetails");
             this.rtbCardDetails.Name = "rtbCardDetails";
             // 
+            // cardPreviewControl
+            // 
+            this.cardPreviewControl.BackColor = System.Drawing.Color.Transparent;
+            this.cardPreviewControl.CardUniversalId = -1;
+            resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
+            this.cardPreviewControl.Name = "cardPreviewControl";
+            this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl_MouseCaptureChanged);
+            this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl_MouseEnter);
+            this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl_MouseLeave);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -553,7 +573,8 @@ namespace AGoTDB.Forms
             this.filterToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.windowToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.oCTGNToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -629,21 +650,18 @@ namespace AGoTDB.Forms
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // lblUniversalId
+            // oCTGNToolStripMenuItem
             // 
-            resources.ApplyResources(this.lblUniversalId, "lblUniversalId");
-            this.lblUniversalId.Name = "lblUniversalId";
-            this.lblUniversalId.Click += new System.EventHandler(this.lblUniversalId_Click);
+            this.oCTGNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadOCTGNDataToolStripMenuItem});
+            this.oCTGNToolStripMenuItem.Name = "oCTGNToolStripMenuItem";
+            resources.ApplyResources(this.oCTGNToolStripMenuItem, "oCTGNToolStripMenuItem");
             // 
-            // cardPreviewControl
+            // loadOCTGNDataToolStripMenuItem
             // 
-            this.cardPreviewControl.BackColor = System.Drawing.Color.Transparent;
-            this.cardPreviewControl.CardUniversalId = -1;
-            resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
-            this.cardPreviewControl.Name = "cardPreviewControl";
-            this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl_MouseCaptureChanged);
-            this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl_MouseEnter);
-            this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl_MouseLeave);
+            this.loadOCTGNDataToolStripMenuItem.Name = "loadOCTGNDataToolStripMenuItem";
+            resources.ApplyResources(this.loadOCTGNDataToolStripMenuItem, "loadOCTGNDataToolStripMenuItem");
+            this.loadOCTGNDataToolStripMenuItem.Click += new System.EventHandler(this.loadOCTGNDataToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -658,6 +676,7 @@ namespace AGoTDB.Forms
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picStrength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClaim)).EndInit();
@@ -668,6 +687,7 @@ namespace AGoTDB.Forms
             this.splitCardText.Panel1.ResumeLayout(false);
             this.splitCardText.Panel1.PerformLayout();
             this.splitCardText.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitCardText)).EndInit();
             this.splitCardText.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -742,5 +762,7 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.Button btnReportError;
 		private CardPreviewControl cardPreviewControl;
         private System.Windows.Forms.Label lblUniversalId;
+        private System.Windows.Forms.ToolStripMenuItem oCTGNToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadOCTGNDataToolStripMenuItem;
 	}
 }

@@ -33,6 +33,8 @@ using System.Text;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
 using AGoTDB.DataAccess;
+using AGoTDB.Helper;
+using AGoTDB.OCTGN;
 using Beyond.ExtendedControls;
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
@@ -1037,6 +1039,24 @@ namespace AGoTDB.Forms
 		private void lblUniversalId_Click(object sender, EventArgs e)
 		{
 			Clipboard.SetText(lblUniversalId.Text);
+		}
+
+		private void loadOCTGNDataToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var sets = OctgnLoader.LoadAllSets(@"C:\Users\vripoll\Downloads\Sets");
+			OctgnLoader.UpdateCards(sets);
+			return;
+
+			var dialog = new FolderBrowserDialog
+			{
+				Description = "Select path for OCTGN set files",
+				ShowNewFolderButton = false
+			};
+
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				OctgnLoader.LoadAllSets(dialog.SelectedPath);
+			}
 		}
 	}
 }
