@@ -31,5 +31,6 @@ namespace AGoTDB.BusinessObjects
 		public static AgotDatabaseManager DatabaseManager { get; set; }
 		public static bool ImagesFolderExists { get; set; }
 		public static string ImagesFolder { get; set; }
+		public static bool IsOctgnReady { get; set; }
 	}
 }

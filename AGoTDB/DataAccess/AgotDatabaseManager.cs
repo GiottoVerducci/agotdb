@@ -161,31 +161,38 @@ namespace AGoTDB.DataAccess
 		public DataTable GetCardTypeNames()
 		{
 			return GetResultFromRequest(
-				string.Format("SELECT * FROM {0}", TableNameType));
+				string.Format("SELECT * FROM [{0}]", TableNameType));
 		}
 
 		public DataTable GetCardHouseNames()
 		{
 			return GetResultFromRequest(
-				string.Format("SELECT * FROM {0}", TableNameHouse));
+				string.Format("SELECT * FROM [{0}]", TableNameHouse));
 		}
 
 		public DataTable GetCardTriggerNames()
 		{
 			return GetResultFromRequest(
-				string.Format("SELECT * FROM {0}", TableNameTrigger));
+				string.Format("SELECT * FROM [{0}]", TableNameTrigger));
 		}
 
 		public DataTable GetCardPatterns()
 		{
 			return GetResultFromRequest(
-				string.Format("SELECT * FROM {0}", TableNamePattern));
+				string.Format("SELECT * FROM [{0}]", TableNamePattern));
 		}
 
 		public DataTable GetExpansionSets()
 		{
 			return GetResultFromRequest(
-				string.Format("SELECT * FROM {0}", TableNameSet));
+				string.Format("SELECT * FROM [{0}]", TableNameSet));
+		}
+
+		public bool HasOctgnData()
+		{
+			var table = GetResultFromRequest(
+				string.Format("SELECT TOP 1 * FROM [{0}]  WHERE [OctgnId] IS NOT NULL", TableNameMain));
+			return table.Rows.Count > 0;
 		}
 	}
 }
