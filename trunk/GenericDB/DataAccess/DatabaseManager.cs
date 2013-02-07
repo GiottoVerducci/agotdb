@@ -265,7 +265,7 @@ namespace GenericDB.DataAccess
 			return true;
 		}
 
-		public void UpdateCards(Action<DataRow> updateAction)
+		public void UpdateCards(Func<DataRow, int, bool> updateAction)
 		{
 			var query = String.Format("SELECT * FROM [{0}]", TableNameMain);
 			using (var dbDataAdapter = new OleDbDataAdapter(query, fDbConnection))
@@ -276,9 +276,13 @@ namespace GenericDB.DataAccess
 				dataSet.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
 				dbDataAdapter.Fill(dataSet);
 
-				foreach (DataRow row in dataSet.Tables[0].Rows)
+				var progress = 0;
+				var rows = dataSet.Tables[0].Rows;
+				foreach (DataRow row in rows)
 				{
-					updateAction(row);
+					++progress;
+					if (!updateAction(row, progress * 100 / rows.Count))
+						return; // abort
 				}
 				dbDataAdapter.Update(dataSet);
 			}

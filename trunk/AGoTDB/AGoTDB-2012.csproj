@@ -123,6 +123,12 @@
     <Compile Include="OCTGN\OctgnCard.cs" />
     <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
     <Compile Include="OCTGN\OctgnLoader.cs" />
+    <Compile Include="OCTGN\OctgnLoaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OCTGN\OctgnLoaderForm.Designer.cs">
+      <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Services\CardImageService.cs" />
     <Compile Include="Resource1.fr.Designer.cs">
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OCTGN\OctgnLoaderForm.resx">
+      <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource1.resx">
       <SubType>Designer</SubType>

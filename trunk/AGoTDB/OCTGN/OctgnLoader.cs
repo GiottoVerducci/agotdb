@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Forms;
 using System.Xml;
 
 using AGoTDB.BusinessObjects;
@@ -11,6 +13,45 @@ using AGoTDB.Helper;
 
 namespace AGoTDB.OCTGN
 {
+	public static class OctgnManager
+	{
+		public static void PromptForInitialization()
+		{
+			var dialog = new FolderBrowserDialog
+			{
+				Description = "Select path for OCTGN set files",
+				ShowNewFolderButton = false
+			};
+
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				var octgnLoaderWorker = new BackgroundWorker
+				{
+					WorkerReportsProgress = true,
+					WorkerSupportsCancellation = true
+				};
+
+				octgnLoaderWorker.DoWork += OctgnLoaderWorkerOnDoWork;
+
+				var loaderForm = new OctgnLoaderForm { BackgroundWorker = octgnLoaderWorker, Path = dialog.SelectedPath };
+				loaderForm.Show();
+			}
+		}
+
+		private static void OctgnLoaderWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+		{
+			var backgroundWorker = (BackgroundWorker)sender;
+			var path = (string)doWorkEventArgs.Argument;
+			var sets = OctgnLoader.LoadAllSets(path, backgroundWorker);
+			if (sets.Count == 0)
+			{
+				//backgroundWorker.Ca
+			}
+			OctgnLoader.UpdateCards(sets, backgroundWorker);
+		}
+
+	}
+
 	public static class OctgnLoader
 	{
 		private static readonly List<Tuple<PropertyInfo, OctgnCardDataAttribute>> _metadata = new List<Tuple<PropertyInfo, OctgnCardDataAttribute>>();
@@ -48,7 +89,7 @@ namespace AGoTDB.OCTGN
 			return new string(Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)))));
 		}
 
-		private static List<string> outputSummary = new List<string>();
+		private static readonly List<string> _outputSummary = new List<string>();
 
 		private static OctgnCard FindCard(DataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<string, List<OctgnCard>> octgnSets)
 		{
@@ -76,7 +117,7 @@ namespace AGoTDB.OCTGN
 					{
 						// for debugging purpose: keep track of the mismatch values
 						var output = string.Format("{0}\t{1} -> {2}", universalId, row["OriginalName"], distanceCards.First().Item2.Name);
-						outputSummary.Add(output);
+						_outputSummary.Add(output);
 						return distanceCards.First().Item2;
 					}
 
@@ -203,13 +244,17 @@ namespace AGoTDB.OCTGN
 		//    return (T)obj;
 		//}
 
-		public static void UpdateCards(Dictionary<string, List<OctgnCard>> octgnSets)
+		public static void UpdateCards(Dictionary<string, List<OctgnCard>> octgnSets, BackgroundWorker backgroundWorker)
 		{
 			var setTable = ApplicationSettings.DatabaseManager.GetExpansionSets();
 			var setInformations = new Dictionary<int, SetInformation>();
 
+			var progress = 0;
 			foreach (DataRow row in setTable.Rows)
 			{
+				if (backgroundWorker.CancellationPending)
+					return;
+				backgroundWorker.ReportProgress(progress * 100 / setTable.Rows.Count, OctgnLoaderTask.MatchSet);
 				if ((int)row["Id"] >= 0)
 				{
 					var si = new SetInformation { OriginalName = row["OriginalName"].ToString() };
@@ -218,25 +263,53 @@ namespace AGoTDB.OCTGN
 					si.OctgnName = octgnName;
 					setInformations.Add(Convert.ToInt32(row["SetId"]), si);
 				}
+				++progress;
 			}
+			backgroundWorker.ReportProgress(100, OctgnLoaderTask.MatchSet);
 
-			ApplicationSettings.DatabaseManager.UpdateCards(row =>
+			ApplicationSettings.DatabaseManager.UpdateCards((row, cardProgress) =>
 				{
+					if (backgroundWorker.CancellationPending)
+						return false;
 					var card = FindCard(row, setInformations, octgnSets);
 					if (card != null)
 						row["OctgnId"] = card.Id;
+					if (cardProgress < 100)
+						backgroundWorker.ReportProgress(cardProgress, OctgnLoaderTask.FindCard);
+					else
+					{
+						backgroundWorker.ReportProgress(100, OctgnLoaderTask.FindCard);
+						backgroundWorker.ReportProgress(66, OctgnLoaderTask.UpdateDatabase); // arbitrary, we don't get progress notification when the dataset is updated
+					}
+					return true;
 				});
+			if (backgroundWorker.CancellationPending)
+				return;
+			backgroundWorker.ReportProgress(100, OctgnLoaderTask.UpdateDatabase);
 		}
 
-		public static Dictionary<string, List<OctgnCard>> LoadAllSets(string path)
+		public enum OctgnLoaderTask
+		{
+			Undefined,
+			LoadSet,
+			MatchSet,
+			FindCard,
+			UpdateDatabase
+		}
+
+		public static Dictionary<string, List<OctgnCard>> LoadAllSets(string path, BackgroundWorker backgroundWorker)
 		{
 			var result = new Dictionary<string, List<OctgnCard>>(); // key: set name
 
 			var directoryInfo = new DirectoryInfo(path);
-			var directories = directoryInfo.GetFiles("*.o8s", SearchOption.TopDirectoryOnly);
+			var fileInfos = directoryInfo.GetFiles("*.o8s", SearchOption.TopDirectoryOnly);
 
-			foreach (FileInfo fileInfo in directories)
+			var progress = 0;
+			foreach (FileInfo fileInfo in fileInfos)
 			{
+				if (backgroundWorker.CancellationPending)
+					return null;
+				backgroundWorker.ReportProgress(progress * 100 / fileInfos.Length, OctgnLoaderTask.LoadSet);
 				var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
 				var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
 				var setFile = files.FirstOrDefault(f => !f.StartsWith("[") && f.EndsWith(".xml"));
@@ -265,7 +338,9 @@ namespace AGoTDB.OCTGN
 
 				var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
 				tempDirectoryInfo.Delete(true);
+				++progress;
 			}
+			backgroundWorker.ReportProgress(100, OctgnLoaderTask.LoadSet);
 			return result;
 		}
 

@@ -81,9 +81,9 @@ namespace AGoTDB.Forms
 				var url = UserSettings.CheckForUpdatesOnStartup ? CheckNewerVersion() : null;
 
 				InitializeMainForm();
-				backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-				backgroundWorker1.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
-				backgroundWorker1.RunWorkerAsync(url);
+				checkNewVersionBackgroundWorker.DoWork += checkNewVersionBw_DoWork;
+				checkNewVersionBackgroundWorker.RunWorkerCompleted += CheckNewVersionBw_RunWorkerCompleted;
+				checkNewVersionBackgroundWorker.RunWorkerAsync(url);
 			}
 		}
 
@@ -142,7 +142,7 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+		private void checkNewVersionBw_DoWork(object sender, DoWorkEventArgs e)
 		{
 			var url = (string)e.Argument;
 			if (url != null)
@@ -189,9 +189,9 @@ namespace AGoTDB.Forms
 			e.Result = InitializeDatabaseConnection();
 		}
 
-		private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		private void CheckNewVersionBw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			backgroundWorker1.RunWorkerCompleted -= backgroundWorker_RunWorkerCompleted;
+			checkNewVersionBackgroundWorker.RunWorkerCompleted -= CheckNewVersionBw_RunWorkerCompleted;
 			_splashScreen.CancelAndClose();
 			var connectionResult = (ConnectionResult)e.Result;
 			switch (connectionResult.ErrorCode)
@@ -784,6 +784,8 @@ namespace AGoTDB.Forms
 			UpdateDataTableView();
 			dataGridView.DataSource = _dataTable;
 
+			ApplicationSettings.IsOctgnReady = ApplicationSettings.DatabaseManager.HasOctgnData();
+
 			dataGridView.Sort(dataGridView.Columns["Name"], ListSortDirection.Ascending);
 			dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
 			// the following code was supposed to change the width of the bool-type columns only. But it doesn't work...
@@ -1043,20 +1045,7 @@ namespace AGoTDB.Forms
 
 		private void loadOCTGNDataToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var sets = OctgnLoader.LoadAllSets(@"C:\Users\vripoll\Downloads\Sets");
-			OctgnLoader.UpdateCards(sets);
-			return;
-
-			var dialog = new FolderBrowserDialog
-			{
-				Description = "Select path for OCTGN set files",
-				ShowNewFolderButton = false
-			};
-
-			if (dialog.ShowDialog() == DialogResult.OK)
-			{
-				OctgnLoader.LoadAllSets(dialog.SelectedPath);
-			}
+			OctgnManager.PromptForInitialization();
 		}
 	}
 }

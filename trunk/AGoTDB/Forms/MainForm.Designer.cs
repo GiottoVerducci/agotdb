@@ -92,10 +92,10 @@ namespace AGoTDB.Forms
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.oCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadOCTGNDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkNewVersionBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -757,7 +757,7 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.Button btnQuickFindNext;
 		private System.Windows.Forms.ToolStripMenuItem miLcgSetsOnly;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-		private System.ComponentModel.BackgroundWorker backgroundWorker1;
+		private System.ComponentModel.BackgroundWorker checkNewVersionBackgroundWorker;
 		private System.Windows.Forms.SplitContainer splitCardText;
 		private System.Windows.Forms.Button btnReportError;
 		private CardPreviewControl cardPreviewControl;
