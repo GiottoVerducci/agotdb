@@ -36,6 +36,7 @@ namespace AGoTDB.Forms
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabControlDecks = new System.Windows.Forms.TabControl();
 			this.tabPageDeck = new System.Windows.Forms.TabPage();
+			this.treeViewDeck = new AGoTDB.Components.AgotCardTreeView();
 			this.contextMenuStripTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.miIncreaseCount = new System.Windows.Forms.ToolStripMenuItem();
 			this.miDecreaseCount = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,10 +45,12 @@ namespace AGoTDB.Forms
 			this.miRemoveCardList = new System.Windows.Forms.ToolStripMenuItem();
 			this.miGenerateProxyPdf = new System.Windows.Forms.ToolStripMenuItem();
 			this.tabPageSideboard = new System.Windows.Forms.TabPage();
+			this.treeViewSide = new AGoTDB.Components.AgotCardTreeView();
 			this.tabControlLocalInfo = new System.Windows.Forms.TabControl();
 			this.tabPageCardtext = new System.Windows.Forms.TabPage();
 			this.splitCardText = new System.Windows.Forms.SplitContainer();
 			this.rtbCardText = new System.Windows.Forms.RichTextBox();
+			this.cardPreviewControl = new AGoTDB.Forms.CardPreviewControl();
 			this.tabControlGlobalInfo = new System.Windows.Forms.TabControl();
 			this.tabPageDescription = new System.Windows.Forms.TabPage();
 			this.rtbDescription = new System.Windows.Forms.RichTextBox();
@@ -65,22 +68,23 @@ namespace AGoTDB.Forms
 			this.saveDeckAstoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.printDeckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exportToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.drawSimulatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.sdsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportDeckToOCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lblHouse = new System.Windows.Forms.Label();
 			this.eclHouse = new Beyond.ExtendedControls.ExtendedCheckedListBox();
 			this.lblAgenda = new System.Windows.Forms.Label();
 			this.tbAuthor = new System.Windows.Forms.TextBox();
 			this.lblAuthor = new System.Windows.Forms.Label();
 			this.eclAgenda = new Beyond.ExtendedControls.ExtendedCheckedListBox();
-			this.treeViewDeck = new AGoTDB.Components.AgotCardTreeView();
-			this.treeViewSide = new AGoTDB.Components.AgotCardTreeView();
-			this.cardPreviewControl = new AGoTDB.Forms.CardPreviewControl();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -90,6 +94,7 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard.SuspendLayout();
 			this.tabControlLocalInfo.SuspendLayout();
 			this.tabPageCardtext.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitCardText)).BeginInit();
 			this.splitCardText.Panel1.SuspendLayout();
 			this.splitCardText.Panel2.SuspendLayout();
 			this.splitCardText.SuspendLayout();
@@ -140,6 +145,26 @@ namespace AGoTDB.Forms
 			resources.ApplyResources(this.tabPageDeck, "tabPageDeck");
 			this.tabPageDeck.Name = "tabPageDeck";
 			this.tabPageDeck.UseVisualStyleBackColor = true;
+			// 
+			// treeViewDeck
+			// 
+			this.treeViewDeck.Cards = null;
+			this.treeViewDeck.ContextMenuStrip = this.contextMenuStripTreeView;
+			this.treeViewDeck.Deck = null;
+			resources.ApplyResources(this.treeViewDeck, "treeViewDeck");
+			this.treeViewDeck.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+			this.treeViewDeck.HideSelection = false;
+			this.treeViewDeck.Name = "treeViewDeck";
+			this.treeViewDeck.NodeInfo = null;
+			this.treeViewDeck.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewDeck.Nodes")))});
+			this.treeViewDeck.ShowNodeToolTips = true;
+			this.treeViewDeck.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
+			this.treeViewDeck.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
+			this.treeViewDeck.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
+			this.treeViewDeck.FontChanged += new System.EventHandler(this.treeViewDeck_FontChanged);
+			this.treeViewDeck.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewDeck_KeyDown);
+			this.treeViewDeck.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeViewDeck_KeyPress);
 			// 
 			// contextMenuStripTreeView
 			// 
@@ -196,6 +221,23 @@ namespace AGoTDB.Forms
 			this.tabPageSideboard.Name = "tabPageSideboard";
 			this.tabPageSideboard.UseVisualStyleBackColor = true;
 			// 
+			// treeViewSide
+			// 
+			this.treeViewSide.Cards = null;
+			this.treeViewSide.ContextMenuStrip = this.contextMenuStripTreeView;
+			this.treeViewSide.Deck = null;
+			resources.ApplyResources(this.treeViewSide, "treeViewSide");
+			this.treeViewSide.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+			this.treeViewSide.HideSelection = false;
+			this.treeViewSide.Name = "treeViewSide";
+			this.treeViewSide.NodeInfo = null;
+			this.treeViewSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewSide.Nodes")))});
+			this.treeViewSide.ShowNodeToolTips = true;
+			this.treeViewSide.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeViewDeck_DrawNode);
+			this.treeViewSide.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
+			this.treeViewSide.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDeck_NodeMouseClick);
+			// 
 			// tabControlLocalInfo
 			// 
 			this.tabControlLocalInfo.Controls.Add(this.tabPageCardtext);
@@ -228,6 +270,15 @@ namespace AGoTDB.Forms
 			this.rtbCardText.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			resources.ApplyResources(this.rtbCardText, "rtbCardText");
 			this.rtbCardText.Name = "rtbCardText";
+			// 
+			// cardPreviewControl
+			// 
+			this.cardPreviewControl.CardUniversalId = -1;
+			resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
+			this.cardPreviewControl.Name = "cardPreviewControl";
+			this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl1_MouseCaptureChanged);
+			this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl1_MouseEnter);
+			this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl1_MouseLeave);
 			// 
 			// tabControlGlobalInfo
 			// 
@@ -293,7 +344,8 @@ namespace AGoTDB.Forms
 			// 
 			this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.sdsToolStripMenuItem});
 			resources.ApplyResources(this.menuStripMain, "menuStripMain");
 			this.menuStripMain.Name = "menuStripMain";
 			// 
@@ -306,7 +358,6 @@ namespace AGoTDB.Forms
             this.saveDeckAstoolStripMenuItem,
             this.newVersionToolStripMenuItem,
             this.printDeckToolStripMenuItem,
-            this.exportToClipboardToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
@@ -345,13 +396,7 @@ namespace AGoTDB.Forms
 			// 
 			this.printDeckToolStripMenuItem.Name = "printDeckToolStripMenuItem";
 			resources.ApplyResources(this.printDeckToolStripMenuItem, "printDeckToolStripMenuItem");
-			this.printDeckToolStripMenuItem.Click += new System.EventHandler(printDeckToolStripMenuItem_Click);
-			// 
-			// exportToClipboardToolStripMenuItem
-			// 
-			this.exportToClipboardToolStripMenuItem.Name = "exportToClipboardToolStripMenuItem";
-			resources.ApplyResources(this.exportToClipboardToolStripMenuItem, "exportToClipboardToolStripMenuItem");
-			this.exportToClipboardToolStripMenuItem.Click += new System.EventHandler(this.exportToClipboardToolStripMenuItem_Click);
+			this.printDeckToolStripMenuItem.Click += new System.EventHandler(this.printDeckToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
@@ -371,6 +416,26 @@ namespace AGoTDB.Forms
 			this.drawSimulatorToolStripMenuItem.Name = "drawSimulatorToolStripMenuItem";
 			resources.ApplyResources(this.drawSimulatorToolStripMenuItem, "drawSimulatorToolStripMenuItem");
 			this.drawSimulatorToolStripMenuItem.Click += new System.EventHandler(this.drawSimulatorToolStripMenuItem_Click);
+			// 
+			// sdsToolStripMenuItem
+			// 
+			this.sdsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToClipboardToolStripMenuItem,
+            this.exportDeckToOCTGNToolStripMenuItem});
+			this.sdsToolStripMenuItem.Name = "sdsToolStripMenuItem";
+			resources.ApplyResources(this.sdsToolStripMenuItem, "sdsToolStripMenuItem");
+			// 
+			// exportToClipboardToolStripMenuItem
+			// 
+			this.exportToClipboardToolStripMenuItem.Name = "exportToClipboardToolStripMenuItem";
+			resources.ApplyResources(this.exportToClipboardToolStripMenuItem, "exportToClipboardToolStripMenuItem");
+			this.exportToClipboardToolStripMenuItem.Click += new System.EventHandler(this.exportToClipboardToolStripMenuItem_Click);
+			// 
+			// exportDeckToOCTGNToolStripMenuItem
+			// 
+			this.exportDeckToOCTGNToolStripMenuItem.Name = "exportDeckToOCTGNToolStripMenuItem";
+			resources.ApplyResources(this.exportDeckToOCTGNToolStripMenuItem, "exportDeckToOCTGNToolStripMenuItem");
+			this.exportDeckToOCTGNToolStripMenuItem.Click += new System.EventHandler(this.exportDeckToOCTGNToolStripMenuItem_Click);
 			// 
 			// lblHouse
 			// 
@@ -418,52 +483,6 @@ namespace AGoTDB.Forms
 			this.eclAgenda.ThreeState = false;
 			this.eclAgenda.SelectedValueChanged += new System.EventHandler(this.eclAgenda_SelectedValueChanged);
 			// 
-			// treeViewDeck
-			// 
-			this.treeViewDeck.Cards = null;
-			this.treeViewDeck.ContextMenuStrip = this.contextMenuStripTreeView;
-			this.treeViewDeck.Deck = null;
-			resources.ApplyResources(this.treeViewDeck, "treeViewDeck");
-			this.treeViewDeck.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-			this.treeViewDeck.HideSelection = false;
-			this.treeViewDeck.Name = "treeViewDeck";
-			this.treeViewDeck.NodeInfo = null;
-			this.treeViewDeck.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewDeck.Nodes")))});
-			this.treeViewDeck.ShowNodeToolTips = true;
-			this.treeViewDeck.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(treeViewDeck_DrawNode);
-			this.treeViewDeck.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
-			this.treeViewDeck.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeViewDeck_KeyPress);
-			this.treeViewDeck.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(treeViewDeck_NodeMouseClick);
-			this.treeViewDeck.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewDeck_KeyDown);
-			this.treeViewDeck.FontChanged += new System.EventHandler(this.treeViewDeck_FontChanged);
-			// 
-			// treeViewSide
-			// 
-			this.treeViewSide.Cards = null;
-			this.treeViewSide.ContextMenuStrip = this.contextMenuStripTreeView;
-			this.treeViewSide.Deck = null;
-			resources.ApplyResources(this.treeViewSide, "treeViewSide");
-			this.treeViewSide.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-			this.treeViewSide.HideSelection = false;
-			this.treeViewSide.Name = "treeViewSide";
-			this.treeViewSide.NodeInfo = null;
-			this.treeViewSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewSide.Nodes")))});
-			this.treeViewSide.ShowNodeToolTips = true;
-			this.treeViewSide.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(treeViewDeck_DrawNode);
-			this.treeViewSide.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDeck_AfterSelect);
-			this.treeViewSide.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(treeViewDeck_NodeMouseClick);
-			// 
-			// cardPreviewControl
-			// 
-			this.cardPreviewControl.CardUniversalId = -1;
-			resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
-			this.cardPreviewControl.Name = "cardPreviewControl";
-			this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl1_MouseCaptureChanged);
-			this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl1_MouseLeave);
-			this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl1_MouseEnter);
-			// 
 			// DeckBuilderForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -481,14 +500,16 @@ namespace AGoTDB.Forms
 			this.DoubleBuffered = true;
 			this.MainMenuStrip = this.menuStripMain;
 			this.Name = "DeckBuilderForm";
-			this.Shown += new System.EventHandler(this.DeckBuilderForm_Shown);
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(DeckBuilderForm_FormClosed);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DeckBuilderForm_FormClosing);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DeckBuilderForm_FormClosed);
+			this.Shown += new System.EventHandler(this.DeckBuilderForm_Shown);
 			this.splitContainer2.Panel1.ResumeLayout(false);
 			this.splitContainer2.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.tabControlDecks.ResumeLayout(false);
 			this.tabPageDeck.ResumeLayout(false);
@@ -498,6 +519,7 @@ namespace AGoTDB.Forms
 			this.tabPageCardtext.ResumeLayout(false);
 			this.splitCardText.Panel1.ResumeLayout(false);
 			this.splitCardText.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitCardText)).EndInit();
 			this.splitCardText.ResumeLayout(false);
 			this.tabControlGlobalInfo.ResumeLayout(false);
 			this.tabPageDescription.ResumeLayout(false);
@@ -558,5 +580,7 @@ namespace AGoTDB.Forms
 	private System.Windows.Forms.RichTextBox rtbStatistics;
 	private System.Windows.Forms.SplitContainer splitCardText;
 	private CardPreviewControl cardPreviewControl;
+	private System.Windows.Forms.ToolStripMenuItem sdsToolStripMenuItem;
+	private System.Windows.Forms.ToolStripMenuItem exportDeckToOCTGNToolStripMenuItem;
 	}
 }

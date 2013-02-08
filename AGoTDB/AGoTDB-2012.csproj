@@ -129,6 +129,7 @@
     <Compile Include="OCTGN\OctgnLoaderForm.Designer.cs">
       <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OCTGN\OctgnManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Services\CardImageService.cs" />
     <Compile Include="Resource1.fr.Designer.cs">
