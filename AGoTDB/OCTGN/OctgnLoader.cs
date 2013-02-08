@@ -5,7 +5,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Xml;
 
 using AGoTDB.BusinessObjects;
@@ -13,46 +12,7 @@ using AGoTDB.Helper;
 
 namespace AGoTDB.OCTGN
 {
-	public static class OctgnManager
-	{
-		public static void PromptForInitialization()
-		{
-			var dialog = new FolderBrowserDialog
-			{
-				Description = "Select path for OCTGN set files",
-				ShowNewFolderButton = false
-			};
-
-			if (dialog.ShowDialog() == DialogResult.OK)
-			{
-				var octgnLoaderWorker = new BackgroundWorker
-				{
-					WorkerReportsProgress = true,
-					WorkerSupportsCancellation = true
-				};
-
-				octgnLoaderWorker.DoWork += OctgnLoaderWorkerOnDoWork;
-
-				var loaderForm = new OctgnLoaderForm { BackgroundWorker = octgnLoaderWorker, Path = dialog.SelectedPath };
-				loaderForm.Show();
-			}
-		}
-
-		private static void OctgnLoaderWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
-		{
-			var backgroundWorker = (BackgroundWorker)sender;
-			var path = (string)doWorkEventArgs.Argument;
-			var sets = OctgnLoader.LoadAllSets(path, backgroundWorker);
-			if (sets.Count == 0)
-			{
-				//backgroundWorker.Ca
-			}
-			OctgnLoader.UpdateCards(sets, backgroundWorker);
-		}
-
-	}
-
-	public static class OctgnLoader
+    public static class OctgnLoader
 	{
 		private static readonly List<Tuple<PropertyInfo, OctgnCardDataAttribute>> _metadata = new List<Tuple<PropertyInfo, OctgnCardDataAttribute>>();
 
@@ -296,6 +256,13 @@ namespace AGoTDB.OCTGN
 			FindCard,
 			UpdateDatabase
 		}
+
+        public enum OctgnLoaderResult
+        {
+            Undefined,
+            Success,
+            SetsNotFound
+        }
 
 		public static Dictionary<string, List<OctgnCard>> LoadAllSets(string path, BackgroundWorker backgroundWorker)
 		{

@@ -30,6 +30,7 @@ using System.Text;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
 using AGoTDB.Components;
+using AGoTDB.OCTGN;
 using AGoTDB.Services;
 using Beyond.ExtendedControls;
 using GenericDB.BusinessObjects;
@@ -1224,6 +1225,23 @@ namespace AGoTDB.Forms
 		{
 
 		}
+
+        private void exportDeckToOCTGNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!ApplicationSettings.IsOctgnReady)
+            {
+                var dialogResult = MessageBox.Show("OCTGN sets are not loaded. Do you want to load them?", "OCTGN sets not loaded", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Cancel)
+                    return;
+                OctgnManager.PromptForInitialization(ExportDeckToOctgn);
+                return;
+            }
+            ExportDeckToOctgn();
+        }
+
+        private void ExportDeckToOctgn()
+        {
+        }
 	}
 
 	internal delegate bool CardOperation(AgotCard card);

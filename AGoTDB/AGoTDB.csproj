@@ -17,7 +17,7 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,6 +32,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -128,6 +129,16 @@
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\ZipHelper.cs" />
+    <Compile Include="OCTGN\OctgnCard.cs" />
+    <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
+    <Compile Include="OCTGN\OctgnLoader.cs" />
+    <Compile Include="OCTGN\OctgnLoaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OCTGN\OctgnLoaderForm.Designer.cs">
+      <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OCTGN\OctgnManager.cs" />
     <Compile Include="Resource1.fr.Designer.cs">
       <DependentUpon>Resource1.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -181,6 +192,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OCTGN\OctgnLoaderForm.fr.resx">
+      <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OCTGN\OctgnLoaderForm.resx">
+      <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource1.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
