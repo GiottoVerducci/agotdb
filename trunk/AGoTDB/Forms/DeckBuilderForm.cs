@@ -132,7 +132,7 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private static void DeckBuilderForm_FormClosed(object sender, FormClosedEventArgs e)
+		private void DeckBuilderForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			lock (_singletonLock)
 			{
@@ -140,7 +140,7 @@ namespace AGoTDB.Forms
 			}
 		}
 
-		private static void treeViewDeck_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+		private void treeViewDeck_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
 			if ((e.Button == MouseButtons.Right) && IsCardNode(e.Node))
 				((TreeView)sender).SelectedNode = e.Node;
@@ -891,7 +891,7 @@ namespace AGoTDB.Forms
 		#endregion
 
 		#region Deck tree view drawing
-		private static void treeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
+		private void treeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
 		{
 			var treeView = (AgotCardTreeView)sender;
 			if (treeView.IsBeingUpdated()) // no redraw when updating
@@ -1221,7 +1221,7 @@ namespace AGoTDB.Forms
 			HideCardPreviewForm();
 		}
 
-		private static void printDeckToolStripMenuItem_Click(object sender, EventArgs e)
+		private void printDeckToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 
 		}

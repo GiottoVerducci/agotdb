@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="splitContainer2.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 85</value>
   </data>
@@ -134,7 +134,7 @@
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <metadata name="contextMenuStripTreeView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="contextMenuStripTreeView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>6, 24</value>
   </metadata>
   <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
@@ -161,7 +161,7 @@
   <data name="miAddCardList.Text" xml:space="preserve">
     <value>Add a card list</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miAddCardList.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -187,7 +187,7 @@
     <value>contextMenuStripTreeView</value>
   </data>
   <data name="&gt;&gt;contextMenuStripTreeView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="treeViewDeck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -197,24 +197,24 @@
   </data>
   <data name="treeViewDeck.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
-        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
-        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
-        CAgIAgAAAAkDAAAABgQAAAA/WW91IG1heSBhZGQgY2FyZHMgYnkgZG91YmxlLWNsaWNraW5nIG9uIHRo
-        ZW0gaW4gdGhlIG1haW4gd2luZG93BgUAAAAFTm9kZTAA/////wYGAAAAAP////8JBgAAAAAAAAAMBwAA
-        AFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
-        eVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQ
-        cm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNv
-        bG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVtLkRyYXdpbmcuRm9udAcAAAACAAAA
-        Bfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEA
-        AAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAAAAAAAAAJCgAAAAUKAAAAE1N5c3Rl
-        bS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcu
-        Rm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQHAAAABwAAAAYLAAAAFE1pY3Jv
-        c29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVf
-        XwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAcA
-        AAADAAAACw==
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAHUHJvcEJhZwRUZXh0C1Rvb2xUaXBUZXh0BE5hbWUJ
+        SXNDaGVja2VkCkltYWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1h
+        Z2VLZXkKQ2hpbGRDb3VudAQBAQEAAAEAAQApU3lzdGVtLldpbmRvd3MuRm9ybXMuT3duZXJEcmF3UHJv
+        cGVydHlCYWcCAAAAAQgICAIAAAAJAwAAAAYEAAAAP1lvdSBtYXkgYWRkIGNhcmRzIGJ5IGRvdWJsZS1j
+        bGlja2luZyBvbiB0aGVtIGluIHRoZSBtYWluIHdpbmRvdwYFAAAAAAYGAAAABU5vZGUwAP////8JBQAA
+        AP////8JBQAAAAAAAAAMCAAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
+        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93
+        cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQE
+        FFN5c3RlbS5EcmF3aW5nLkNvbG9yCAAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcggAAAATU3lzdGVtLkRy
+        YXdpbmcuRm9udAgAAAACAAAABff///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUK
+        a25vd25Db2xvcgVzdGF0ZQEAAAAJBwcIAAAACgAAAAAAAAAAAAAAAAH2////9////woAAAAAAAAAAAAA
+        AAAJCwAAAAULAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAE
+        BAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlCAAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQI
+        AAAACAAAAAYMAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQXz////GFN5c3RlbS5EcmF3aW5nLkZv
+        bnRTdHlsZQEAAAAHdmFsdWVfXwAICAAAAAIAAAAF8v///xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1Vu
+        aXQBAAAAB3ZhbHVlX18ACAgAAAADAAAACw==
 </value>
   </data>
   <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
@@ -227,7 +227,7 @@
     <value>treeViewDeck</value>
   </data>
   <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
     <value>tabPageDeck</value>
@@ -254,7 +254,7 @@
     <value>tabPageDeck</value>
   </data>
   <data name="&gt;&gt;tabPageDeck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageDeck.Parent" xml:space="preserve">
     <value>tabControlDecks</value>
@@ -270,24 +270,24 @@
   </data>
   <data name="treeViewSide.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
-        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
-        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
-        CAgIAgAAAAkDAAAABgQAAAA/WW91IG1heSBhZGQgY2FyZHMgYnkgZG91YmxlLWNsaWNraW5nIG9uIHRo
-        ZW0gaW4gdGhlIG1haW4gd2luZG93BgUAAAAFTm9kZTAA/////wYGAAAAAP////8JBgAAAAAAAAAMBwAA
-        AFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
-        eVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQ
-        cm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNv
-        bG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVtLkRyYXdpbmcuRm9udAcAAAACAAAA
-        Bfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEA
-        AAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAAAAAAAAAJCgAAAAUKAAAAE1N5c3Rl
-        bS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcu
-        Rm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQHAAAABwAAAAYLAAAAFE1pY3Jv
-        c29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVf
-        XwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAcA
-        AAADAAAACw==
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAHUHJvcEJhZwRUZXh0C1Rvb2xUaXBUZXh0BE5hbWUJ
+        SXNDaGVja2VkCkltYWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1h
+        Z2VLZXkKQ2hpbGRDb3VudAQBAQEAAAEAAQApU3lzdGVtLldpbmRvd3MuRm9ybXMuT3duZXJEcmF3UHJv
+        cGVydHlCYWcCAAAAAQgICAIAAAAJAwAAAAYEAAAAP1lvdSBtYXkgYWRkIGNhcmRzIGJ5IGRvdWJsZS1j
+        bGlja2luZyBvbiB0aGVtIGluIHRoZSBtYWluIHdpbmRvdwYFAAAAAAYGAAAABU5vZGUwAP////8JBQAA
+        AP////8JBQAAAAAAAAAMCAAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
+        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93
+        cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQE
+        FFN5c3RlbS5EcmF3aW5nLkNvbG9yCAAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcggAAAATU3lzdGVtLkRy
+        YXdpbmcuRm9udAgAAAACAAAABff///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUK
+        a25vd25Db2xvcgVzdGF0ZQEAAAAJBwcIAAAACgAAAAAAAAAAAAAAAAH2////9////woAAAAAAAAAAAAA
+        AAAJCwAAAAULAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAE
+        BAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlCAAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQI
+        AAAACAAAAAYMAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQXz////GFN5c3RlbS5EcmF3aW5nLkZv
+        bnRTdHlsZQEAAAAHdmFsdWVfXwAICAAAAAIAAAAF8v///xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1Vu
+        aXQBAAAAB3ZhbHVlX18ACAgAAAADAAAACw==
 </value>
   </data>
   <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
@@ -300,7 +300,7 @@
     <value>treeViewSide</value>
   </data>
   <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
     <value>tabPageSideboard</value>
@@ -327,7 +327,7 @@
     <value>tabPageSideboard</value>
   </data>
   <data name="&gt;&gt;tabPageSideboard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageSideboard.Parent" xml:space="preserve">
     <value>tabControlDecks</value>
@@ -351,7 +351,7 @@
     <value>tabControlDecks</value>
   </data>
   <data name="&gt;&gt;tabControlDecks.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControlDecks.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -363,7 +363,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
     <value>splitContainer1</value>
@@ -396,7 +396,7 @@
     <value>rtbCardText</value>
   </data>
   <data name="&gt;&gt;rtbCardText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rtbCardText.Parent" xml:space="preserve">
     <value>splitCardText.Panel1</value>
@@ -408,7 +408,7 @@
     <value>splitCardText.Panel1</value>
   </data>
   <data name="&gt;&gt;splitCardText.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitCardText.Panel1.Parent" xml:space="preserve">
     <value>splitCardText</value>
@@ -435,7 +435,7 @@
     <value>cardPreviewControl</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
-    <value>AGoTDB.Forms.CardPreviewControl, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AGoTDB.Forms.CardPreviewControl, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
     <value>splitCardText.Panel2</value>
@@ -447,7 +447,7 @@
     <value>splitCardText.Panel2</value>
   </data>
   <data name="&gt;&gt;splitCardText.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitCardText.Panel2.Parent" xml:space="preserve">
     <value>splitCardText</value>
@@ -468,7 +468,7 @@
     <value>splitCardText</value>
   </data>
   <data name="&gt;&gt;splitCardText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitCardText.Parent" xml:space="preserve">
     <value>tabPageCardtext</value>
@@ -495,7 +495,7 @@
     <value>tabPageCardtext</value>
   </data>
   <data name="&gt;&gt;tabPageCardtext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageCardtext.Parent" xml:space="preserve">
     <value>tabControlLocalInfo</value>
@@ -519,7 +519,7 @@
     <value>tabControlLocalInfo</value>
   </data>
   <data name="&gt;&gt;tabControlLocalInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControlLocalInfo.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
@@ -531,7 +531,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
     <value>splitContainer1</value>
@@ -552,7 +552,7 @@
     <value>splitContainer1</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
     <value>splitContainer2.Panel1</value>
@@ -564,7 +564,7 @@
     <value>splitContainer2.Panel1</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Panel1.Parent" xml:space="preserve">
     <value>splitContainer2</value>
@@ -591,7 +591,7 @@
     <value>rtbDescription</value>
   </data>
   <data name="&gt;&gt;rtbDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rtbDescription.Parent" xml:space="preserve">
     <value>tabPageDescription</value>
@@ -618,7 +618,7 @@
     <value>tabPageDescription</value>
   </data>
   <data name="&gt;&gt;tabPageDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageDescription.Parent" xml:space="preserve">
     <value>tabControlGlobalInfo</value>
@@ -642,7 +642,7 @@
     <value>treeViewHistory</value>
   </data>
   <data name="&gt;&gt;treeViewHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;treeViewHistory.Parent" xml:space="preserve">
     <value>tabPageHistory</value>
@@ -669,7 +669,7 @@
     <value>tabPageHistory</value>
   </data>
   <data name="&gt;&gt;tabPageHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageHistory.Parent" xml:space="preserve">
     <value>tabControlGlobalInfo</value>
@@ -696,7 +696,7 @@
     <value>rtbStatistics</value>
   </data>
   <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
     <value>tabPageStats</value>
@@ -723,7 +723,7 @@
     <value>tabPageStats</value>
   </data>
   <data name="&gt;&gt;tabPageStats.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageStats.Parent" xml:space="preserve">
     <value>tabControlGlobalInfo</value>
@@ -747,7 +747,7 @@
     <value>tabControlGlobalInfo</value>
   </data>
   <data name="&gt;&gt;tabControlGlobalInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControlGlobalInfo.Parent" xml:space="preserve">
     <value>splitContainer2.Panel2</value>
@@ -759,7 +759,7 @@
     <value>splitContainer2.Panel2</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Panel2.Parent" xml:space="preserve">
     <value>splitContainer2</value>
@@ -780,7 +780,7 @@
     <value>splitContainer2</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -810,7 +810,7 @@
     <value>lblDeckName</value>
   </data>
   <data name="&gt;&gt;lblDeckName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblDeckName.Parent" xml:space="preserve">
     <value>$this</value>
@@ -834,7 +834,7 @@
     <value>tbDeckName</value>
   </data>
   <data name="&gt;&gt;tbDeckName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbDeckName.Parent" xml:space="preserve">
     <value>$this</value>
@@ -842,14 +842,14 @@
   <data name="&gt;&gt;tbDeckName.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <metadata name="menuStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="menuStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
   <data name="newToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+N</value>
   </data>
   <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="newToolStripMenuItem.Text" xml:space="preserve">
     <value>New deck</value>
@@ -858,7 +858,7 @@
     <value>Ctrl+O</value>
   </data>
   <data name="loadDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="loadDeckToolStripMenuItem.Text" xml:space="preserve">
     <value>Load deck</value>
@@ -867,7 +867,7 @@
     <value>Ctrl+S</value>
   </data>
   <data name="saveDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="saveDeckToolStripMenuItem.Text" xml:space="preserve">
     <value>Save deck</value>
@@ -876,37 +876,28 @@
     <value>Ctrl+Shift+S</value>
   </data>
   <data name="saveDeckAstoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="saveDeckAstoolStripMenuItem.Text" xml:space="preserve">
     <value>Save deck as...</value>
   </data>
   <data name="newVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="newVersionToolStripMenuItem.Text" xml:space="preserve">
     <value>Create a new version</value>
   </data>
   <data name="printDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="printDeckToolStripMenuItem.Text" xml:space="preserve">
     <value>Print deck</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+E</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export deck to clipboard</value>
   </data>
   <data name="exitToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+X</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -929,6 +920,27 @@
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>Tools</value>
   </data>
+  <data name="exportToClipboardToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+E</value>
+  </data>
+  <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 22</value>
+  </data>
+  <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export deck to clipboard</value>
+  </data>
+  <data name="exportDeckToOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 22</value>
+  </data>
+  <data name="exportDeckToOCTGNToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export deck to OCTGN</value>
+  </data>
+  <data name="sdsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="sdsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export</value>
+  </data>
   <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -945,7 +957,7 @@
     <value>menuStripMain</value>
   </data>
   <data name="&gt;&gt;menuStripMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;menuStripMain.Parent" xml:space="preserve">
     <value>$this</value>
@@ -978,7 +990,7 @@
     <value>lblHouse</value>
   </data>
   <data name="&gt;&gt;lblHouse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblHouse.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1035,7 +1047,7 @@
     <value>lblAgenda</value>
   </data>
   <data name="&gt;&gt;lblAgenda.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblAgenda.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1059,7 +1071,7 @@
     <value>tbAuthor</value>
   </data>
   <data name="&gt;&gt;tbAuthor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbAuthor.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1089,7 +1101,7 @@
     <value>lblAuthor</value>
   </data>
   <data name="&gt;&gt;lblAuthor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblAuthor.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1121,7 +1133,7 @@
   <data name="&gt;&gt;eclAgenda.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -1206,9 +1218,6 @@
         AAcAAAAfwAAA//gAH/////////////////8=
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Deck Builder -</value>
   </data>
@@ -1216,108 +1225,120 @@
     <value>miIncreaseCount</value>
   </data>
   <data name="&gt;&gt;miIncreaseCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miDecreaseCount.Name" xml:space="preserve">
     <value>miDecreaseCount</value>
   </data>
   <data name="&gt;&gt;miDecreaseCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miExportDeckToClipboard.Name" xml:space="preserve">
     <value>miExportDeckToClipboard</value>
   </data>
   <data name="&gt;&gt;miExportDeckToClipboard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miAddCardList.Name" xml:space="preserve">
     <value>miAddCardList</value>
   </data>
   <data name="&gt;&gt;miAddCardList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miRemoveCardList.Name" xml:space="preserve">
     <value>miRemoveCardList</value>
   </data>
   <data name="&gt;&gt;miRemoveCardList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miGenerateProxyPdf.Name" xml:space="preserve">
     <value>miGenerateProxyPdf</value>
   </data>
   <data name="&gt;&gt;miGenerateProxyPdf.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;newToolStripMenuItem.Name" xml:space="preserve">
     <value>newToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;newToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;loadDeckToolStripMenuItem.Name" xml:space="preserve">
     <value>loadDeckToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;loadDeckToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;saveDeckToolStripMenuItem.Name" xml:space="preserve">
     <value>saveDeckToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;saveDeckToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;saveDeckAstoolStripMenuItem.Name" xml:space="preserve">
     <value>saveDeckAstoolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;saveDeckAstoolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;newVersionToolStripMenuItem.Name" xml:space="preserve">
     <value>newVersionToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;newVersionToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;printDeckToolStripMenuItem.Name" xml:space="preserve">
     <value>printDeckToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;printDeckToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exportToClipboardToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportToClipboardToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportToClipboardToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
     <value>exitToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolsToolStripMenuItem.Name" xml:space="preserve">
     <value>toolsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;toolsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;drawSimulatorToolStripMenuItem.Name" xml:space="preserve">
     <value>drawSimulatorToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;drawSimulatorToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sdsToolStripMenuItem.Name" xml:space="preserve">
+    <value>sdsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;sdsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportToClipboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportToClipboardToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportToClipboardToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportDeckToOCTGNToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportDeckToOCTGNToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportDeckToOCTGNToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DeckBuilderForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
