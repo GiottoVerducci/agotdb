@@ -227,7 +227,7 @@
     <value>treeViewDeck</value>
   </data>
   <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
     <value>tabPageDeck</value>
@@ -300,7 +300,7 @@
     <value>treeViewSide</value>
   </data>
   <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
     <value>tabPageSideboard</value>
@@ -435,7 +435,7 @@
     <value>cardPreviewControl</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
-    <value>AGoTDB.Forms.CardPreviewControl, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AGoTDB.Forms.CardPreviewControl, AGoTDB, Version=0.70.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
     <value>splitCardText.Panel2</value>
@@ -924,22 +924,40 @@
     <value>Ctrl+E</value>
   </data>
   <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>263, 22</value>
   </data>
   <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
     <value>Export deck to clipboard</value>
   </data>
+  <data name="exportDeckToClipboardSortedBySetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="exportDeckToClipboardSortedBySetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="exportDeckToClipboardSortedByToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 22</value>
+  </data>
+  <data name="exportDeckToClipboardSortedByToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export deck to clipboard sorted by...</value>
+  </data>
   <data name="exportDeckToOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>263, 22</value>
   </data>
   <data name="exportDeckToOCTGNToolStripMenuItem.Text" xml:space="preserve">
     <value>Export deck to OCTGN</value>
   </data>
+  <data name="importDeckFromOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 22</value>
+  </data>
+  <data name="importDeckFromOCTGNToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import deck from OCTGN</value>
+  </data>
   <data name="sdsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
+    <value>99, 20</value>
   </data>
   <data name="sdsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export</value>
+    <value>Import / Export</value>
   </data>
   <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1333,6 +1351,24 @@
     <value>exportDeckToOCTGNToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportDeckToOCTGNToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;importDeckFromOCTGNToolStripMenuItem.Name" xml:space="preserve">
+    <value>importDeckFromOCTGNToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;importDeckFromOCTGNToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportDeckToClipboardSortedByToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportDeckToClipboardSortedByToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportDeckToClipboardSortedByToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportDeckToClipboardSortedBySetToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportDeckToClipboardSortedBySetToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportDeckToClipboardSortedBySetToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

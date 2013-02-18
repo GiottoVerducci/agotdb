@@ -308,6 +308,24 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No OCTGN sets found..
+        /// </summary>
+        internal static string ErrOctgnNotFound {
+            get {
+                return ResourceManager.GetString("ErrOctgnNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sets not found.
+        /// </summary>
+        internal static string ErrOctgnNotFoundTitle {
+            get {
+                return ResourceManager.GetString("ErrOctgnNotFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error!.
         /// </summary>
         internal static string ErrorTitle {
@@ -763,6 +781,24 @@ namespace AGoTDB {
         internal static string WarnImpossibleToAddCardTitle {
             get {
                 return ResourceManager.GetString("WarnImpossibleToAddCardTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCTGN sets are not loaded. Do you want to load them?.
+        /// </summary>
+        internal static string WarnOctgnNotLoaded {
+            get {
+                return ResourceManager.GetString("WarnOctgnNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCTGN sets not loaded.
+        /// </summary>
+        internal static string WarnOctgnNotLoadedTitle {
+            get {
+                return ResourceManager.GetString("WarnOctgnNotLoadedTitle", resourceCulture);
             }
         }
         
