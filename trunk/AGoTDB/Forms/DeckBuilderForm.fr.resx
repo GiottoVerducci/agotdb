@@ -112,34 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tabControlDecks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 211</value>
-  </data>
-  <data name="tabControlLocalInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 211</value>
-  </data>
-  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>845, 211</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>434</value>
-  </data>
-  <data name="tabControlGlobalInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>845, 207</value>
-  </data>
-  <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>845, 422</value>
-  </data>
-  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>426, 185</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>267, 22</value>
   </data>
@@ -181,27 +159,55 @@
   </data>
   <data name="treeViewDeck.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
-        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
-        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
-        CAgIAgAAAAkDAAAABgQAAABUVm91cyBwb3V2ZXogYWpvdXRlciBkZXMgY2FydGVzIGVuIGRvdWJsZS1j
-        bGlxdWFudCBkZXNzdXMgZGFucyBsYSBmZW7DqnRyZSBwcmluY2lwYWxlBgUAAAAFTm9kZTAA/////wYG
-        AAAAAP////8JBgAAAAAAAAAMBwAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2lu
-        ZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250
-        BAQEFFN5c3RlbS5EcmF3aW5nLkNvbG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVt
-        LkRyYXdpbmcuRm9udAcAAAACAAAABfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFs
-        dWUKa25vd25Db2xvcgVzdGF0ZQEAAAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAA
-        AAAAAAAJCgAAAAUKAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0
-        AQAEBAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1Vu
-        aXQHAAAABwAAAAYLAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5n
-        LkZvbnRTdHlsZQEAAAAHdmFsdWVfXwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGlj
-        c1VuaXQBAAAAB3ZhbHVlX18ACAcAAAADAAAACw==
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAHUHJvcEJhZwRUZXh0C1Rvb2xUaXBUZXh0BE5hbWUJ
+        SXNDaGVja2VkCkltYWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1h
+        Z2VLZXkKQ2hpbGRDb3VudAQBAQEAAAEAAQApU3lzdGVtLldpbmRvd3MuRm9ybXMuT3duZXJEcmF3UHJv
+        cGVydHlCYWcCAAAAAQgICAIAAAAJAwAAAAYEAAAAVFZvdXMgcG91dmV6IGFqb3V0ZXIgZGVzIGNhcnRl
+        cyBlbiBkb3VibGUtY2xpcXVhbnQgZGVzc3VzIGRhbnMgbGEgZmVuw6p0cmUgcHJpbmNpcGFsZQYFAAAA
+        AAYGAAAABU5vZGUwAP////8JBQAAAP////8JBQAAAAAAAAAMCAAAAFFTeXN0ZW0uRHJhd2luZywgVmVy
+        c2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBh
+        M2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0Nv
+        bG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNvbG9yCAAAABRTeXN0ZW0uRHJhd2lu
+        Zy5Db2xvcggAAAATU3lzdGVtLkRyYXdpbmcuRm9udAgAAAACAAAABff///8UU3lzdGVtLkRyYXdpbmcu
+        Q29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEAAAAJBwcIAAAACgAAAAAAAAAAAAAA
+        AAH2////9////woAAAAAAAAAAAAAAAAJCwAAAAULAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5h
+        bWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlCAAAABtTeXN0ZW0u
+        RHJhd2luZy5HcmFwaGljc1VuaXQIAAAACAAAAAYMAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQXz
+        ////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVfXwAICAAAAAIAAAAF8v///xtTeXN0
+        ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAgAAAADAAAACw==
 </value>
   </data>
   <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 179</value>
+  </data>
+  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 185</value>
+  </data>
+  <data name="treeViewSide.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAHUHJvcEJhZwRUZXh0C1Rvb2xUaXBUZXh0BE5hbWUJ
+        SXNDaGVja2VkCkltYWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1h
+        Z2VLZXkKQ2hpbGRDb3VudAQBAQEAAAEAAQApU3lzdGVtLldpbmRvd3MuRm9ybXMuT3duZXJEcmF3UHJv
+        cGVydHlCYWcCAAAAAQgICAIAAAAJAwAAAAYEAAAAVFZvdXMgcG91dmV6IGFqb3V0ZXIgZGVzIGNhcnRl
+        cyBlbiBkb3VibGUtY2xpcXVhbnQgZGVzc3VzIGRhbnMgbGEgZmVuw6p0cmUgcHJpbmNpcGFsZQYFAAAA
+        AAYGAAAABU5vZGUwAP////8JBQAAAP////8JBQAAAAAAAAAMCAAAAFFTeXN0ZW0uRHJhd2luZywgVmVy
+        c2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBh
+        M2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0Nv
+        bG9yCUZvcmVDb2xvcgRGb250BAQEFFN5c3RlbS5EcmF3aW5nLkNvbG9yCAAAABRTeXN0ZW0uRHJhd2lu
+        Zy5Db2xvcggAAAATU3lzdGVtLkRyYXdpbmcuRm9udAgAAAACAAAABff///8UU3lzdGVtLkRyYXdpbmcu
+        Q29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEAAAAJBwcIAAAACgAAAAAAAAAAAAAA
+        AAH2////9////woAAAAAAAAAAAAAAAAJCwAAAAULAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5h
+        bWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlCAAAABtTeXN0ZW0u
+        RHJhd2luZy5HcmFwaGljc1VuaXQIAAAACAAAAAYMAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQXz
+        ////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVfXwAICAAAAAIAAAAF8v///xtTeXN0
+        ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAgAAAADAAAACw==
+</value>
+  </data>
+  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
     <value>420, 179</value>
   </data>
   <data name="tabPageSideboard.Size" type="System.Drawing.Size, System.Drawing">
@@ -210,30 +216,21 @@
   <data name="tabPageSideboard.Text" xml:space="preserve">
     <value>Réserve</value>
   </data>
-  <data name="treeViewSide.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAHUHJvcEJhZwRUZXh0BE5hbWUJSXNDaGVja2VkCklt
-        YWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1hZ2VLZXkKQ2hpbGRD
-        b3VudAQBAQAAAQABAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwIAAAAB
-        CAgIAgAAAAkDAAAABgQAAABUVm91cyBwb3V2ZXogYWpvdXRlciBkZXMgY2FydGVzIGVuIGRvdWJsZS1j
-        bGlxdWFudCBkZXNzdXMgZGFucyBsYSBmZW7DqnRyZSBwcmluY2lwYWxlBgUAAAAFTm9kZTAA/////wYG
-        AAAAAP////8JBgAAAAAAAAAMBwAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2lu
-        ZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250
-        BAQEFFN5c3RlbS5EcmF3aW5nLkNvbG9yBwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgcAAAATU3lzdGVt
-        LkRyYXdpbmcuRm9udAcAAAACAAAABfj///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFs
-        dWUKa25vd25Db2xvcgVzdGF0ZQEAAAAJBwcHAAAACgAAAAAAAAAAAAAAAAH3////+P///woAAAAAAAAA
-        AAAAAAAJCgAAAAUKAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0
-        AQAEBAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlBwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1Vu
-        aXQHAAAABwAAAAYLAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQX0////GFN5c3RlbS5EcmF3aW5n
-        LkZvbnRTdHlsZQEAAAAHdmFsdWVfXwAIBwAAAAIAAAAF8////xtTeXN0ZW0uRHJhd2luZy5HcmFwaGlj
-        c1VuaXQBAAAAB3ZhbHVlX18ACAcAAAADAAAACw==
-</value>
+  <data name="tabControlDecks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 211</value>
   </data>
-  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 179</value>
+  <data name="rtbCardText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 179</value>
+  </data>
+  <data name="cardPreviewControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 179</value>
+  </data>
+  <data name="splitCardText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 179</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitCardText.SplitterDistance" type="System.Int32, mscorlib">
+    <value>264</value>
   </data>
   <data name="tabPageCardtext.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 185</value>
@@ -241,22 +238,22 @@
   <data name="tabPageCardtext.Text" xml:space="preserve">
     <value>Texte de la carte</value>
   </data>
-  <data name="rtbCardText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 179</value>
+  <data name="tabControlLocalInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>407, 211</value>
   </data>
-  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 185</value>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>845, 211</value>
   </data>
-  <data name="tabPageStats.Text" xml:space="preserve">
-    <value>Statistiques</value>
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>434</value>
   </data>
-  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 179</value>
+  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>831, 175</value>
   </data>
   <data name="tabPageDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>837, 181</value>
   </data>
-  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 175</value>
   </data>
   <data name="tabPageHistory.Size" type="System.Drawing.Size, System.Drawing">
@@ -265,14 +262,20 @@
   <data name="tabPageHistory.Text" xml:space="preserve">
     <value>Historique</value>
   </data>
-  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 175</value>
   </data>
-  <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
     <value>837, 181</value>
   </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Informations</value>
+  <data name="tabPageStats.Text" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="tabControlGlobalInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>845, 207</value>
+  </data>
+  <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>845, 422</value>
   </data>
   <data name="lblDeckName.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -286,8 +289,47 @@
   <data name="tbDeckName.Size" type="System.Drawing.Size, System.Drawing">
     <value>317, 20</value>
   </data>
-  <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>872, 24</value>
+  <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 22</value>
+  </data>
+  <data name="newToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nouveau deck</value>
+  </data>
+  <data name="loadDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 22</value>
+  </data>
+  <data name="loadDeckToolStripMenuItem.Text" xml:space="preserve">
+    <value>Charger un deck</value>
+  </data>
+  <data name="saveDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 22</value>
+  </data>
+  <data name="saveDeckToolStripMenuItem.Text" xml:space="preserve">
+    <value>Enregistrer le deck</value>
+  </data>
+  <data name="saveDeckAstoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 22</value>
+  </data>
+  <data name="saveDeckAstoolStripMenuItem.Text" xml:space="preserve">
+    <value>Enregistrer le deck sous...</value>
+  </data>
+  <data name="newVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 22</value>
+  </data>
+  <data name="newVersionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Créer une nouvelle version</value>
+  </data>
+  <data name="printDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 22</value>
+  </data>
+  <data name="printDeckToolStripMenuItem.Text" xml:space="preserve">
+    <value>Imprimer le deck</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 22</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Quitter</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 20</value>
@@ -295,53 +337,11 @@
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>Fichier</value>
   </data>
-  <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+  <data name="drawSimulatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
   </data>
-  <data name="newToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nouveau deck</value>
-  </data>
-  <data name="loadDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="loadDeckToolStripMenuItem.Text" xml:space="preserve">
-    <value>Charger un deck</value>
-  </data>
-  <data name="saveDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="saveDeckToolStripMenuItem.Text" xml:space="preserve">
-    <value>Enregistrer le deck</value>
-  </data>
-  <data name="saveDeckAstoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="saveDeckAstoolStripMenuItem.Text" xml:space="preserve">
-    <value>Enregistrer le deck sous...</value>
-  </data>
-  <data name="newVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="newVersionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Créer une nouvelle version</value>
-  </data>
-  <data name="printDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="printDeckToolStripMenuItem.Text" xml:space="preserve">
-    <value>Imprimer le deck</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exporter le deck vers le presse-papier</value>
-  </data>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Quitter</value>
+  <data name="drawSimulatorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Simulateur de pioche</value>
   </data>
   <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -349,11 +349,26 @@
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>Outils</value>
   </data>
-  <data name="drawSimulatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
+  <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 22</value>
   </data>
-  <data name="drawSimulatorToolStripMenuItem.Text" xml:space="preserve">
-    <value>Simulateur de pioche</value>
+  <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exporter le deck vers le presse-papier</value>
+  </data>
+  <data name="exportDeckToOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 22</value>
+  </data>
+  <data name="exportDeckToOCTGNToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exporter le deck vers OCTGN</value>
+  </data>
+  <data name="importDeckFromOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 22</value>
+  </data>
+  <data name="importDeckFromOCTGNToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importer le deck depuis OCTGN</value>
+  </data>
+  <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>872, 24</value>
   </data>
   <data name="lblHouse.Location" type="System.Drawing.Point, System.Drawing">
     <value>418, 36</value>
@@ -470,7 +485,7 @@
         AAcAAAAfwAAA//gAH/////////////////8=
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Inherit</value>
   </data>

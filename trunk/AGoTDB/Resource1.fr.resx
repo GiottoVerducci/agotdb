@@ -105,14 +105,14 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -363,5 +363,17 @@ Trace de l'exception :
   </data>
   <data name="WarVirtueText" xml:space="preserve">
     <value>Guerrier</value>
+  </data>
+  <data name="ErrOctgnNotFound" xml:space="preserve">
+    <value>No OCTGN sets found.</value>
+  </data>
+  <data name="ErrOctgnNotFoundTitle" xml:space="preserve">
+    <value>Sets not found</value>
+  </data>
+  <data name="WarnOctgnNotLoaded" xml:space="preserve">
+    <value>Les extensions OCTGN ne sont pas chargées. Voulez-vous les charger ?</value>
+  </data>
+  <data name="WarnOctgnNotLoadedTitle" xml:space="preserve">
+    <value>Extensions OCTGN non chargées</value>
   </data>
 </root>
