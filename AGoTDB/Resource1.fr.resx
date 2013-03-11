@@ -156,7 +156,10 @@
   <data name="DoomedText" xml:space="preserve">
     <value>MAUDIT</value>
   </data>
-  <data name="ErrDatabaseNotFound" xml:space="preserve">
+    <data name="ErrCardsNotFoundInOctgnDeckFile" xml:space="preserve">
+    <value>Certaines cartes n'ont pu être trouvées dans la base Agot (vérifiez que vous avez mis à jour la base avec les derniers sets Octgn).</value>
+  </data>
+    <data name="ErrDatabaseNotFound" xml:space="preserve">
     <value>Le fichier de données {0} n'a pu être trouvé. Veuillez vérifier que ce fichier se trouve dans le même répertoire que ce programme.</value>
   </data>
   <data name="ErrDatabaseNotFoundTitle" xml:space="preserve">

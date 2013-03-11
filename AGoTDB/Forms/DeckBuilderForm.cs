@@ -28,15 +28,18 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using AGoTDB.BusinessObjects;
-using AGoTDB.Components;
-using AGoTDB.OCTGN;
-using AGoTDB.Services;
+
 using Beyond.ExtendedControls;
+
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Extensions;
 using GenericDB.Forms;
+
+using AGoTDB.BusinessObjects;
+using AGoTDB.Components;
+using AGoTDB.OCTGN;
+using AGoTDB.Services;
 
 namespace AGoTDB.Forms
 {
@@ -988,14 +991,14 @@ namespace AGoTDB.Forms
             String previousFilename = _currentFilename;
             if (string.IsNullOrEmpty(_currentFilename) || forceCallToSaveDialog)
             {
-                using (var fd = new SaveFileDialog())
+                using (var dialog = new SaveFileDialog())
                 {
-                    fd.Filter = Resource1.DeckFileFilter;
-                    fd.ValidateNames = true;
-                    fd.FileName = _versionedDeck.Name + ".xml"; // use deck name as default name. Todo: remove special characters
-                    if (fd.ShowDialog() != DialogResult.OK)
+                    dialog.Filter = Resource1.DeckFileFilter;
+                    dialog.ValidateNames = true;
+                    dialog.FileName = _versionedDeck.Name + ".xml"; // use deck name as default name. Todo: remove special characters
+                    if (dialog.ShowDialog() != DialogResult.OK)
                         return false;
-                    _currentFilename = fd.FileName;
+                    _currentFilename = dialog.FileName;
                 }
             }
             int? databaseVersion = (ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0)
@@ -1018,12 +1021,12 @@ namespace AGoTDB.Forms
         {
             string oldFilename = _currentFilename;
             //_versionedDeck.LoadFromXMLFile("toto.xml"); // for quick debug purpose
-            using (var fd = new OpenFileDialog())
+            using (var dialog = new OpenFileDialog())
             {
-                fd.Filter = Resource1.DeckFileFilter;
-                if (fd.ShowDialog() != DialogResult.OK)
+                dialog.Filter = Resource1.DeckFileFilter;
+                if (dialog.ShowDialog() != DialogResult.OK)
                     return;
-                _currentFilename = fd.FileName;
+                _currentFilename = dialog.FileName;
             }
             var versionedDeck = new AgotVersionedDeck();
             DeckLoadResult result = versionedDeck.LoadFromXmlFile(_currentFilename);
@@ -1048,6 +1051,27 @@ namespace AGoTDB.Forms
                         break;
                 }
                 _currentFilename = oldFilename;
+            }
+            UpdateFormTitle();
+        }
+
+        private void LoadOctgnDeck()
+        {
+            string oldFilename = _currentFilename;
+            try
+            {
+                var versionedDeck = OctgnManager.LoadOctgnDeck();
+
+                _versionedDeck = versionedDeck;
+                _currentDeck = _versionedDeck.LastVersion; // get reference on the latest deck
+                UpdateControlsWithVersionedDeck(true);
+                _lastLoadedDeck = (AgotVersionedDeck)_versionedDeck.Clone(); // performs a deep copy
+
+            }
+            catch
+            {
+                _currentFilename = oldFilename;
+                throw;
             }
             UpdateFormTitle();
         }
@@ -1227,13 +1251,15 @@ namespace AGoTDB.Forms
         }
 
         #region Export / Import
+
         private void ExportDeckToOctgn()
         {
+            OctgnManager.SaveOctgnDeck(_versionedDeck, _currentDeck);
         }
 
         private void ImportDeckFromOctgn()
         {
-            throw new NotImplementedException();
+            LoadOctgnDeck();
         }
 
         private void exportDeckToClipboardSortedBySetToolStripMenuItem_Click(object sender, EventArgs e)

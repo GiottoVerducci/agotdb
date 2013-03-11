@@ -11,6 +11,7 @@ namespace AGoTDB.OCTGN
         public BackgroundWorker BackgroundWorker { get; set; }
         public string Path { get; set; }
         public Action Callback { get; set; }
+        private bool _isLoadCompleted;
 
         public OctgnLoaderForm()
         {
@@ -72,6 +73,7 @@ namespace AGoTDB.OCTGN
 
         private void OctgnLoaderWorkerOnRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
+            _isLoadCompleted = true;
             var result = (OctgnLoader.OctgnLoaderResult)runWorkerCompletedEventArgs.Result;
             if (result == OctgnLoader.OctgnLoaderResult.SetsNotFound)
             {
@@ -93,7 +95,8 @@ namespace AGoTDB.OCTGN
 
         private void OctgnLoaderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = !btAbort.Enabled;
+            var canClose = _isLoadCompleted || btAbort.Enabled;
+            e.Cancel = !canClose;
         }
 
         private void OctgnLoaderForm_FormClosed(object sender, FormClosedEventArgs e)
