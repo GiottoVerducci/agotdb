@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -96,7 +97,8 @@ namespace AGoTDB.OCTGN
 
         private static void AddSection(XElement xRoot, string sectionName, IEnumerable<AgotCard> agotCards)
         {
-            var xSection = new XElement(sectionName);
+            var xSection = new XElement("section");
+            xSection.SetAttributeValue("name", sectionName);
             foreach (var card in agotCards)
             {
                 var xCard = new XElement("card");
@@ -137,16 +139,15 @@ namespace AGoTDB.OCTGN
 
             var cardErrorList = new List<string>();
 
-            var houseNode = XmlToolbox.FindNode(root, "House");
-            versionedDeck.LastVersion.Houses = ComputeOctgnHouseSection(houseNode, cardErrorList);
+            versionedDeck.LastVersion.Houses = ComputeOctgnHouseSection(GetSectionNode(root, "House"), cardErrorList);
 
-            AddOctgnCardToDeck(XmlToolbox.FindNode(root, "Agenda"), versionedDeck.LastVersion.Agenda, cardErrorList);
+            AddOctgnCardToDeck(GetSectionNode(root, "Agenda"), versionedDeck.LastVersion.Agenda, (int)AgotCard.CardType.Agenda, cardErrorList);
             var mainDeckList = versionedDeck.LastVersion.CardLists[1];
-            AddOctgnCardToDeck(XmlToolbox.FindNode(root, "Characters"), mainDeckList, cardErrorList);
-            AddOctgnCardToDeck(XmlToolbox.FindNode(root, "Locations"), mainDeckList, cardErrorList);
-            AddOctgnCardToDeck(XmlToolbox.FindNode(root, "Events"), mainDeckList, cardErrorList);
-            AddOctgnCardToDeck(XmlToolbox.FindNode(root, "Attachments"), mainDeckList, cardErrorList);
-            AddOctgnCardToDeck(XmlToolbox.FindNode(root, "Plots"), mainDeckList, cardErrorList);
+            AddOctgnCardToDeck(GetSectionNode(root, "Characters"), mainDeckList, (int)AgotCard.CardType.Character, cardErrorList);
+            AddOctgnCardToDeck(GetSectionNode(root, "Locations"), mainDeckList, (int)AgotCard.CardType.Location, cardErrorList);
+            AddOctgnCardToDeck(GetSectionNode(root, "Events"), mainDeckList, (int)AgotCard.CardType.Event, cardErrorList);
+            AddOctgnCardToDeck(GetSectionNode(root, "Attachments"), mainDeckList, (int)AgotCard.CardType.Attachment, cardErrorList);
+            AddOctgnCardToDeck(GetSectionNode(root, "Plots"), mainDeckList, (int)AgotCard.CardType.Plot, cardErrorList);
 
             if (cardErrorList.Count > 0)
             {
@@ -155,6 +156,11 @@ namespace AGoTDB.OCTGN
                 MessageBox.Show(message, Resource1.ErrDeckLoadTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return versionedDeck;
+        }
+
+        private static XmlNode GetSectionNode(XmlNode root, string sectionName)
+        {
+            return root.ChildNodes.Cast<XmlNode>().FirstOrDefault(cn => cn.Name == "section" && cn.Attributes != null && cn.Attributes["name"].Value == sectionName);
         }
 
         private static void ProcessOctgnSectionNode(XmlNode sectionNode, Action<Guid, int, string> processAction)
@@ -189,7 +195,7 @@ namespace AGoTDB.OCTGN
             return result;
         }
 
-        private static void AddOctgnCardToDeck(XmlNode sectionNode, CardList<AgotCard> cardlist, List<string> cardErrorList)
+        private static void AddOctgnCardToDeck(XmlNode sectionNode, CardList<AgotCard> cardlist, int expectedCardType, List<string> cardErrorList)
         {
             ProcessOctgnSectionNode(sectionNode, (octgnId, quantity, name) =>
             {
@@ -197,7 +203,17 @@ namespace AGoTDB.OCTGN
                 if (cardTable.Rows.Count == 0)
                     cardErrorList.Add(string.Format("'{0}' (id: '{1}')", name, octgnId));
                 else
-                    cardlist.Add(new AgotCard(cardTable.Rows[0]) { Quantity = quantity });
+                {
+                    DataRow row = null;
+                    if (cardTable.Rows.Count > 0)
+                    {
+                        // try to match the expected cart type
+                        row = cardTable.Rows.Cast<DataRow>().LastOrDefault(r => Int32.Parse(r["Type"].ToString()) == expectedCardType);
+                    }
+                    if(row == null)
+                         row = cardTable.Rows[cardTable.Rows.Count - 1]; // take the most recent card
+                    cardlist.Add(new AgotCard(row) { Quantity = quantity });
+                }
             });
         }
     }

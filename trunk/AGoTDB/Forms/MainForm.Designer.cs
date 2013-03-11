@@ -573,8 +573,8 @@ namespace AGoTDB.Forms
             this.filterToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.windowToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.oCTGNToolStripMenuItem});
+            this.oCTGNToolStripMenuItem,
+            this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
