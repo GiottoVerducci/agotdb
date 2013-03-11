@@ -1,3 +1,6 @@
+Beta 0.742 (11 mars 2013)
+ - Ajout du support OCTGN (import et export de decks)
+
 Beta 0.741 (5 septembre 2012)
  - Ajout du chapitre 3 de Valar Morghulis "Traquer les Dragons"
  - Ajout d'un message en cas d'erreur lors de la mise à jour automatique de la base de données.
