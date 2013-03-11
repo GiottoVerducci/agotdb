@@ -29,7 +29,7 @@ namespace GenericDB.BusinessObjects
         where TCL : class, ICardList<TC>, new()
         where TD : class, IDeck<TCL, TC>, new()
     {
-        protected readonly List<TD> fDecks;
+        protected readonly List<TD> _decks;
 
         /// <summary>
         /// Name of the deck author.
@@ -50,7 +50,7 @@ namespace GenericDB.BusinessObjects
         /// </summary>
         protected VersionedDeck()
         {
-            fDecks = new List<TD> { new TD() };
+            _decks = new List<TD> { new TD() };
             Author = "";
             Description = "";
             Name = "";
@@ -63,10 +63,10 @@ namespace GenericDB.BusinessObjects
         /// <param name="original">The deck to clone.</param>
         protected VersionedDeck(VersionedDeck<TD, TCL, TC> original)
         {
-            fDecks = new List<TD>();
-            for (var i = 0; i < original.fDecks.Count; ++i)
+            _decks = new List<TD>();
+            for (var i = 0; i < original._decks.Count; ++i)
                 //fDecks.Add(new Deck(original.fDecks[i]));
-                fDecks.Add((TD)original.fDecks[i].Clone());
+                _decks.Add((TD)original._decks[i].Clone());
             Author = original.Author;
             Description = original.Description;
             Name = original.Name;
@@ -89,10 +89,10 @@ namespace GenericDB.BusinessObjects
             XmlToolbox.AddElementValue(doc, root, "Description", Description);
             XmlToolbox.AddElementValue(doc, root, "Name", Name);
 
-            for (var i = 0; i < fDecks.Count; ++i)
+            for (var i = 0; i < _decks.Count; ++i)
             {
                 XmlElement deckRoot = doc.CreateElement("Deck" + i);
-                deckRoot.AppendChild(fDecks[i].ToXml(doc));
+                deckRoot.AppendChild(_decks[i].ToXml(doc));
                 root.AppendChild(deckRoot);
             }
             return root;
@@ -111,7 +111,7 @@ namespace GenericDB.BusinessObjects
             Description = XmlToolbox.GetElementValue(doc, root, "Description");
             Name = XmlToolbox.GetElementValue(doc, root, "Name");
 
-            fDecks.Clear();
+            _decks.Clear();
             int i = 0;
             XmlNode deckRoot;
             TD deck = null;
@@ -122,7 +122,7 @@ namespace GenericDB.BusinessObjects
                 //deck = new Deck(doc, deckRoot.FirstChild);
                 deck = new TD();
                 deck.InitializeFromXml(doc, deckRoot.FirstChild);
-                fDecks.Add(deck);
+                _decks.Add(deck);
                 ++i;
             }
         }
@@ -141,11 +141,11 @@ namespace GenericDB.BusinessObjects
             if ((Author != versionedDeck.Author) ||
                 (Description != versionedDeck.Description) ||
                 (Name != versionedDeck.Name) ||
-                (fDecks.Count != versionedDeck.fDecks.Count))
+                (_decks.Count != versionedDeck._decks.Count))
                 return false;
 
-            for (var i = 0; i < fDecks.Count; ++i)
-                if (!StaticComparer.AreEqual(fDecks[i], versionedDeck.fDecks[i]))
+            for (var i = 0; i < _decks.Count; ++i)
+                if (!StaticComparer.AreEqual(_decks[i], versionedDeck._decks[i]))
                     return false;
             return true;
         }
@@ -165,7 +165,7 @@ namespace GenericDB.BusinessObjects
         /// <returns>The <paramref name="versionIndex"/> version of the deck.</returns>
         public TD this[int versionIndex]
         {
-            get { return fDecks[versionIndex]; }
+            get { return _decks[versionIndex]; }
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace GenericDB.BusinessObjects
         /// <returns>The lastest version of the deck.</returns>
         public TD LastVersion
         {
-            get { return fDecks[fDecks.Count - 1]; }
+            get { return _decks[_decks.Count - 1]; }
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace GenericDB.BusinessObjects
         /// <returns>The count of versions of the deck.</returns>
         public int Count
         {
-            get { return fDecks.Count; }
+            get { return _decks.Count; }
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace GenericDB.BusinessObjects
         {
             LastVersion.RevisionComments = commentsForLastVersion;
             LastVersion.Editable = false;
-            fDecks.Add((TD)LastVersion.CreateRevision());
+            _decks.Add((TD)LastVersion.CreateRevision());
         }
 
         public DeckLoadResult LoadFromXmlFile(string filename)
@@ -213,7 +213,7 @@ namespace GenericDB.BusinessObjects
 
                 InitializeFromXml(doc, root);
 
-                if (fDecks.Count == 0)
+                if (_decks.Count == 0)
                     return DeckLoadResult.InvalidContent;
             }
             catch (System.IO.FileNotFoundException)
