@@ -144,43 +144,43 @@ namespace AGoTDB.BusinessObjects
         public static Guid OctgnGameId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnGameId", new Guid("a12af4e8-be4b-4cda-a6b6-534f9717391f")); }
-            set { Singleton.WriteGuid(SearchFormSectionName, "OctgnGameId", value); }
+            set { Singleton.WriteGuid(OctgnSectionName, "OctgnGameId", value); }
         }
 
         public static Guid OctgnHouseBaratheonId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnHouseBaratheonId", new Guid("a12af4e8-be4b-4cda-a6b6-534f97001001")); }
-            set { Singleton.WriteGuid(SearchFormSectionName, "OctgnHouseBaratheonId", value); }
+            set { Singleton.WriteGuid(OctgnSectionName, "OctgnHouseBaratheonId", value); }
         }
 
         public static Guid OctgnHouseGreyjoyId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnHouseGreyjoyId", new Guid("a12af4e8-be4b-4cda-a6b6-534f97001002")); }
-            set { Singleton.WriteGuid(SearchFormSectionName, "OctgnHouseGreyjoyId", value); }
+            set { Singleton.WriteGuid(OctgnSectionName, "OctgnHouseGreyjoyId", value); }
         }
 
         public static Guid OctgnHouseLannisterId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnHouseLannisterId", new Guid("a12af4e8-be4b-4cda-a6b6-534f97001003")); }
-            set { Singleton.WriteGuid(SearchFormSectionName, "OctgnHouseLannisterId", value); }
+            set { Singleton.WriteGuid(OctgnSectionName, "OctgnHouseLannisterId", value); }
         }
 
         public static Guid OctgnHouseMartellId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnHouseMartellId", new Guid("a12af4e8-be4b-4cda-a6b6-534f97001004")); }
-            set { Singleton.WriteGuid(SearchFormSectionName, "OctgnHouseMartellId", value); }
+            set { Singleton.WriteGuid(OctgnSectionName, "OctgnHouseMartellId", value); }
         }
 
         public static Guid OctgnHouseStarkId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnHouseStarkId", new Guid("a12af4e8-be4b-4cda-a6b6-534f97001005")); }
-            set { Singleton.WriteGuid(SearchFormSectionName, "OctgnHouseStarkId", value); }
+            set { Singleton.WriteGuid(OctgnSectionName, "OctgnHouseStarkId", value); }
         }
 
         public static Guid OctgnHouseTargaryenId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnHouseTargaryenId", new Guid("a12af4e8-be4b-4cda-a6b6-534f97001006")); }
-            set { Singleton.WriteGuid(SearchFormSectionName, "OctgnHouseTargaryenId", value); }
+            set { Singleton.WriteGuid(OctgnSectionName, "OctgnHouseTargaryenId", value); }
         }
         #endregion
 

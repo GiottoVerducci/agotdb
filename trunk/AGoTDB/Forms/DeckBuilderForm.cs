@@ -1061,6 +1061,8 @@ namespace AGoTDB.Forms
             try
             {
                 var versionedDeck = OctgnManager.LoadOctgnDeck();
+                if (versionedDeck == null)
+                    return;
 
                 _versionedDeck = versionedDeck;
                 _currentDeck = _versionedDeck.LastVersion; // get reference on the latest deck
