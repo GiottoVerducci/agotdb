@@ -1300,16 +1300,23 @@ namespace AGoTDB.Forms
             text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
             text.Append(lblHouse.Text).Append(AgotCard.GetHouseName(_currentDeck.Houses));
 
+            text.AppendLine();
+
             var cardsBySet = _currentDeck.Agenda
                 .Union(_currentDeck.CardLists.SelectMany(cl => cl))
-                .GroupBy(c => c.Set.Value); // zonk
+                .GroupBy(c => 
+                { 
+                    var sets = c.Set.Value.Split('/');
+                    var mostRecentSet = sets.Last();
+                    return mostRecentSet.Split('(')[0].Trim();
+                });
 
-            foreach (var group in cardsBySet)
+            foreach (var group in cardsBySet.OrderBy(g => g.Key))
             {
+                text.AppendLine();
                 text.AppendLine(group.Key);
                 foreach (var card in group)
-                    text.AppendLine(card.Name.Value);
-                text.AppendLine();
+                    text.AppendLine(string.Format("{0}x {1}", card.Quantity, card.Name.Value));
             }
 
             text.AppendLine();
