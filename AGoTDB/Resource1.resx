@@ -196,6 +196,13 @@ Exception trace:
   <data name="ErrDeckSaveTitle" xml:space="preserve">
     <value>Error while saving a deck.</value>
   </data>
+  <data name="ErrConnectingToDatabase" xml:space="preserve">
+    <value>There was an error while trying to connect to the database using the following connection string (please make sure the provider is correctly installed):
+{0}</value>
+  </data>
+  <data name="ErrConnectingToDatabaseTitle" xml:space="preserve">
+    <value>Error connecting to the database</value>
+  </data>
   <data name="ErrInvalidDatabase" xml:space="preserve">
     <value>The database file {0} could not be loaded. Please download the latest version of the database.</value>
   </data>

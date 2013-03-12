@@ -21,301 +21,311 @@ using System.Windows.Forms;
 
 namespace GenericDB.BusinessObjects
 {
-	// Rewritten from the following by Vincent Ripoll
-	/*
-		The Settings class provides an easy way to store
-		and load application settings/options in an ini-file
-		like structure. The class uses an XML file as its
-		underlying database but hides all the XML details
-		from the user. All data are written/read with a simple
-		interface of Read/Write functions.
+    // Rewritten from the following by Vincent Ripoll
+    /*
+        The Settings class provides an easy way to store
+        and load application settings/options in an ini-file
+        like structure. The class uses an XML file as its
+        underlying database but hides all the XML details
+        from the user. All data are written/read with a simple
+        interface of Read/Write functions.
 
-		Like ini-files the Settings class stores settings in
-		sections which contain name-value pairs, f.e.:
+        Like ini-files the Settings class stores settings in
+        sections which contain name-value pairs, f.e.:
 
-		<Settings>
-			 <LastDirectories>
-				<Dir1 value="c:\" />
-				<Dir2 value="c:\somedirectory" />
-			 </LastDirectories>
-		</Settings>
+        <Settings>
+             <LastDirectories>
+                <Dir1 value="c:\" />
+                <Dir2 value="c:\somedirectory" />
+             </LastDirectories>
+        </Settings>
 
-		To use the class create an instance passing the
-		file name. Use the Read/Write methods as needed.
-		After writing to the file call the Save() method
-		to flush the changes to disk.
+        To use the class create an instance passing the
+        file name. Use the Read/Write methods as needed.
+        After writing to the file call the Save() method
+        to flush the changes to disk.
 
-		Note that the section and name strings must follow
-		the XML rules! Don't use spaces in section and
-		name strings and don't begin with numbers.
+        Note that the section and name strings must follow
+        the XML rules! Don't use spaces in section and
+        name strings and don't begin with numbers.
 
-		For comments/questions email to mail@heelana.com or
-		visit http://wwww.heelana.com
-	*/
+        For comments/questions email to mail@heelana.com or
+        visit http://wwww.heelana.com
+    */
 
-	public class Settings
-	{
-		protected readonly XmlDocument _doc;
-		protected readonly XmlNode _docRoot;
-		protected readonly string _fileName;
-		protected readonly string _rootName;
+    public class Settings
+    {
+        protected readonly XmlDocument _doc;
+        protected readonly XmlNode _docRoot;
+        protected readonly string _fileName;
+        protected readonly string _rootName;
 
-		public Settings(string fileName, string rootName)
-		{
-			if (fileName == null) throw new ArgumentNullException("fileName");
-			if (rootName == null) throw new ArgumentNullException("rootName");
+        public Settings(string fileName, string rootName)
+        {
+            if (fileName == null) throw new ArgumentNullException("fileName");
+            if (rootName == null) throw new ArgumentNullException("rootName");
 
-			_fileName = fileName;
-			_rootName = rootName;
+            _fileName = fileName;
+            _rootName = rootName;
 
-			_doc = new XmlDocument();
+            _doc = new XmlDocument();
 
-			bool loadingSettings = true;
-			try
-			{
-				_doc.Load(fileName);
-			}
-			catch (System.IO.FileNotFoundException)
-			{
-				loadingSettings = false;
-				CreateSettingsDocument();
-			}
-			
-			_docRoot = _doc.DocumentElement;
-			if(_docRoot == null)
-				throw new ApplicationException(string.Format("Error while {0} file {1}", loadingSettings ? "loading" : "creating", fileName));
-		}
+            bool loadingSettings = true;
+            try
+            {
+                _doc.Load(fileName);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                loadingSettings = false;
+                CreateSettingsDocument();
+            }
 
-		public Settings(string fileName)
-			: this(fileName, "Settings")
-		{
-		}
+            _docRoot = _doc.DocumentElement;
+            if (_docRoot == null)
+                throw new ApplicationException(string.Format("Error while {0} file {1}", loadingSettings ? "loading" : "creating", fileName));
+        }
 
-		/// <summary>
-		/// Deletes all entries of a section.
-		/// </summary>
-		/// <param name="sectionName">The section name.</param>
-		public void ClearSection(string sectionName)
-		{
-			XmlNode s = GetSectionNode(sectionName);
+        public Settings(string fileName)
+            : this(fileName, "Settings")
+        {
+        }
 
-			if (s == null)
-				return; //not found
+        /// <summary>
+        /// Deletes all entries of a section.
+        /// </summary>
+        /// <param name="sectionName">The section name.</param>
+        public void ClearSection(string sectionName)
+        {
+            XmlNode s = GetSectionNode(sectionName);
 
-			s.RemoveAll();
-		}
+            if (s == null)
+                return; //not found
 
-		/// <summary>
-		/// Initializes a new settings file with the XML version
-		/// and the root node.
-		/// </summary>
-		protected void CreateSettingsDocument()
-		{
-			_doc.AppendChild(_doc.CreateXmlDeclaration("1.0", null, null));
-			_doc.AppendChild(_doc.CreateElement(_rootName));
-		}
+            s.RemoveAll();
+        }
 
-		/// <summary>
-		/// Saves the pending changes.
-		/// </summary>
-		public void Flush()
-		{
-			try
-			{
-				_doc.Save(_fileName);
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-		}
+        /// <summary>
+        /// Initializes a new settings file with the XML version
+        /// and the root node.
+        /// </summary>
+        protected void CreateSettingsDocument()
+        {
+            _doc.AppendChild(_doc.CreateXmlDeclaration("1.0", null, null));
+            _doc.AppendChild(_doc.CreateElement(_rootName));
+        }
 
-		/// <summary>
-		/// Removes a section and all its entries.
-		/// </summary>
-		/// <param name="sectionName">The section name.</param>
-		public void RemoveSection(string sectionName)
-		{
-			XmlNode s = GetSectionNode(sectionName);
+        /// <summary>
+        /// Saves the pending changes.
+        /// </summary>
+        public void Flush()
+        {
+            try
+            {
+                _doc.Save(_fileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-			if (s != null)
-				_docRoot.RemoveChild(s);
-		}
+        /// <summary>
+        /// Removes a section and all its entries.
+        /// </summary>
+        /// <param name="sectionName">The section name.</param>
+        public void RemoveSection(string sectionName)
+        {
+            XmlNode s = GetSectionNode(sectionName);
 
-		/// <summary>
-		/// Gets the node that represents a section.
-		/// </summary>
-		/// <param name="sectionName">The section name.</param>
-		/// <returns>The node representing the section, null if not found.</returns>
-		protected virtual XmlNode GetSectionNode(string sectionName)
-		{
-			return _docRoot.SelectSingleNode(string.Format("/{0}/{1}", _rootName, sectionName));
-		}
+            if (s != null)
+                _docRoot.RemoveChild(s);
+        }
 
-		public void Save()
-		{
-			Flush();
-		}
+        /// <summary>
+        /// Gets the node that represents a section.
+        /// </summary>
+        /// <param name="sectionName">The section name.</param>
+        /// <returns>The node representing the section, null if not found.</returns>
+        protected virtual XmlNode GetSectionNode(string sectionName)
+        {
+            return _docRoot.SelectSingleNode(string.Format("/{0}/{1}", _rootName, sectionName));
+        }
 
-		#region Read methods
+        public void Save()
+        {
+            Flush();
+        }
 
-		protected delegate T ValueConverter<T>(string value);
+        #region Read methods
 
-		protected T ReadValue<T>(string sectionName, string propertyName, T defaultValue, ValueConverter<T> valueConverter)
-		{
-			string s = ReadString(sectionName, propertyName, "");
+        protected delegate T ValueConverter<T>(string value);
 
-			if (string.IsNullOrEmpty(s))
-				return defaultValue;
-			try
-			{
-				return valueConverter(s);
-			}
-			catch (FormatException)
-			{
-				return defaultValue;
-			}
-		}
+        protected T ReadValue<T>(string sectionName, string propertyName, T defaultValue, ValueConverter<T> valueConverter)
+        {
+            string s = ReadString(sectionName, propertyName, "");
 
-		public bool ReadBool(string sectionName, string propertyName, bool defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToBoolean(v, CultureInfo.InvariantCulture));
-		}
+            if (string.IsNullOrEmpty(s))
+                return defaultValue;
+            try
+            {
+                return valueConverter(s);
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
 
-		public DateTime ReadDateTime(string sectionName, string propertyName, DateTime defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToDateTime(v, CultureInfo.InvariantCulture));
-		}
+        public bool ReadBool(string sectionName, string propertyName, bool defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToBoolean(v, CultureInfo.InvariantCulture));
+        }
 
-		public double ReadDouble(string sectionName, string propertyName, double defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToDouble(v, CultureInfo.InvariantCulture));
-		}
+        public DateTime ReadDateTime(string sectionName, string propertyName, DateTime defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToDateTime(v, CultureInfo.InvariantCulture));
+        }
 
-		public float ReadFloat(string sectionName, string propertyName, float defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToSingle(v, CultureInfo.InvariantCulture));
-		}
+        public double ReadDouble(string sectionName, string propertyName, double defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToDouble(v, CultureInfo.InvariantCulture));
+        }
 
-		public int ReadInt(string sectionName, string propertyName, int defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToInt32(v, CultureInfo.InvariantCulture));
-		}
+        public float ReadFloat(string sectionName, string propertyName, float defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToSingle(v, CultureInfo.InvariantCulture));
+        }
 
-		public long ReadLong(string sectionName, string propertyName, long defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToInt64(v, CultureInfo.InvariantCulture));
-		}
+        public int ReadInt(string sectionName, string propertyName, int defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToInt32(v, CultureInfo.InvariantCulture));
+        }
 
-		public short ReadShort(string sectionName, string propertyName, short defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToInt16(v, CultureInfo.InvariantCulture));
-		}
+        public long ReadLong(string sectionName, string propertyName, long defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToInt64(v, CultureInfo.InvariantCulture));
+        }
 
-		public string ReadString(string sectionName, string propertyName, string defaultValue)
-		{
-			XmlNode s = GetSectionNode(sectionName);
+        public short ReadShort(string sectionName, string propertyName, short defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToInt16(v, CultureInfo.InvariantCulture));
+        }
 
-			if (s == null)
-				return defaultValue; //not found
+        public Guid ReadGuid(string sectionName, string propertyName, Guid defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, Guid.Parse);
+        }
 
-			XmlNode n = s.SelectSingleNode(propertyName);
+        public string ReadString(string sectionName, string propertyName, string defaultValue)
+        {
+            XmlNode s = GetSectionNode(sectionName);
 
-			if (n == null)
-				return defaultValue;  //not found
+            if (s == null)
+                return defaultValue; //not found
 
-			XmlAttributeCollection attrs = n.Attributes;
+            XmlNode n = s.SelectSingleNode(propertyName);
 
-			foreach (XmlAttribute attr in attrs)
-			{
-				if (attr.Name == "value")
-					return attr.Value;
-			}
+            if (n == null)
+                return defaultValue;  //not found
 
-			return defaultValue;
-		}
+            XmlAttributeCollection attrs = n.Attributes;
 
-		public uint ReadUInt(string sectionName, string propertyName, uint defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToUInt32(v, CultureInfo.InvariantCulture));
-		}
+            foreach (XmlAttribute attr in attrs)
+            {
+                if (attr.Name == "value")
+                    return attr.Value;
+            }
 
-		public ulong ReadULong(string sectionName, string propertyName, ulong defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToUInt64(v, CultureInfo.InvariantCulture));
-		}
+            return defaultValue;
+        }
 
-		public ushort ReadUShort(string sectionName, string propertyName, ushort defaultValue)
-		{
-			return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToUInt16(v, CultureInfo.InvariantCulture));
-		}
+        public uint ReadUInt(string sectionName, string propertyName, uint defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToUInt32(v, CultureInfo.InvariantCulture));
+        }
 
-		#endregion
+        public ulong ReadULong(string sectionName, string propertyName, ulong defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToUInt64(v, CultureInfo.InvariantCulture));
+        }
 
-		#region Write methods
+        public ushort ReadUShort(string sectionName, string propertyName, ushort defaultValue)
+        {
+            return ReadValue(sectionName, propertyName, defaultValue, v => Convert.ToUInt16(v, CultureInfo.InvariantCulture));
+        }
 
-		public void WriteBool(string sectionName, string propertyName, bool value)
-		{
-			WriteString(sectionName, propertyName, value.ToString());
-		}
+        #endregion
 
-		public void WriteDateTime(string sectionName, string propertyName, DateTime value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        #region Write methods
 
-		public void WriteDouble(string sectionName, string propertyName, double value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteBool(string sectionName, string propertyName, bool value)
+        {
+            WriteString(sectionName, propertyName, value.ToString());
+        }
 
-		public void WriteFloat(string sectionName, string propertyName, float value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteDateTime(string sectionName, string propertyName, DateTime value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
 
-		public void WriteInt(string sectionName, string propertyName, int value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteDouble(string sectionName, string propertyName, double value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
 
-		public void WriteLong(string sectionName, string propertyName, long value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteFloat(string sectionName, string propertyName, float value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
 
-		public void WriteShort(string sectionName, string propertyName, short value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteInt(string sectionName, string propertyName, int value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
 
-		public void WriteString(string sectionName, string propertyName, string value)
-		{
-			XmlNode s = GetSectionNode(sectionName) 
+        public void WriteLong(string sectionName, string propertyName, long value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
+
+        public void WriteShort(string sectionName, string propertyName, short value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
+
+        public void WriteGuid(string sectionName, string propertyName, Guid value)
+        {
+            WriteString(sectionName, propertyName, value.ToString());
+        }
+
+        public void WriteString(string sectionName, string propertyName, string value)
+        {
+            XmlNode s = GetSectionNode(sectionName)
                 ?? _docRoot.AppendChild(_doc.CreateElement(sectionName));
 
-		    XmlNode n = s.SelectSingleNode(propertyName) 
+            XmlNode n = s.SelectSingleNode(propertyName)
                 ?? s.AppendChild(_doc.CreateElement(propertyName));
 
-		    XmlAttribute attr = ((XmlElement)n).SetAttributeNode("value", "");
-			attr.Value = value;
-		}
+            XmlAttribute attr = ((XmlElement)n).SetAttributeNode("value", "");
+            attr.Value = value;
+        }
 
-		public void WriteUInt(string sectionName, string propertyName, uint value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteUInt(string sectionName, string propertyName, uint value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
 
-		public void WriteULong(string sectionName, string propertyName, ulong value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteULong(string sectionName, string propertyName, ulong value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
 
-		public void WriteUShort(string sectionName, string propertyName, ushort value)
-		{
-			WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
-		}
+        public void WriteUShort(string sectionName, string propertyName, ushort value)
+        {
+            WriteString(sectionName, propertyName, value.ToString(CultureInfo.InvariantCulture));
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

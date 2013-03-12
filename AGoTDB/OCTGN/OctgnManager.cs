@@ -56,12 +56,12 @@ namespace AGoTDB.OCTGN
 
         private static readonly Dictionary<int, AgotCard> _dummyHouseCards = new Dictionary<int, AgotCard>
             {
-                { (int)AgotCard.CardHouse.Baratheon, new AgotCard { OriginalName = new FormattedValue<string>("House Baratheon", null), OctgnId = new Guid("a12af4e8-be4b-4cda-a6b6-534f97001001") } },
-                { (int)AgotCard.CardHouse.Greyjoy, new AgotCard { OriginalName = new FormattedValue<string>("House Greyjoy", null), OctgnId = new Guid("a12af4e8-be4b-4cda-a6b6-534f97001002") } },
-                { (int)AgotCard.CardHouse.Lannister, new AgotCard { OriginalName = new FormattedValue<string>("House Lannister", null), OctgnId = new Guid("a12af4e8-be4b-4cda-a6b6-534f97001003") } },
-                { (int)AgotCard.CardHouse.Martell, new AgotCard { OriginalName = new FormattedValue<string>("House Martell", null), OctgnId = new Guid("a12af4e8-be4b-4cda-a6b6-534f97001004") } },
-                { (int)AgotCard.CardHouse.Stark, new AgotCard { OriginalName = new FormattedValue<string>("House Stark", null), OctgnId = new Guid("a12af4e8-be4b-4cda-a6b6-534f97001005") } },
-                { (int)AgotCard.CardHouse.Targaryen, new AgotCard { OriginalName = new FormattedValue<string>("House Targaryen", null), OctgnId = new Guid("a12af4e8-be4b-4cda-a6b6-534f97001006") } },
+                { (int)AgotCard.CardHouse.Baratheon, new AgotCard { OriginalName = new FormattedValue<string>("House Baratheon", null), OctgnId = UserSettings.OctgnHouseBaratheonId } },
+                { (int)AgotCard.CardHouse.Greyjoy, new AgotCard { OriginalName = new FormattedValue<string>("House Greyjoy", null), OctgnId = UserSettings.OctgnHouseGreyjoyId} },
+                { (int)AgotCard.CardHouse.Lannister, new AgotCard { OriginalName = new FormattedValue<string>("House Lannister", null), OctgnId = UserSettings.OctgnHouseLannisterId } },
+                { (int)AgotCard.CardHouse.Martell, new AgotCard { OriginalName = new FormattedValue<string>("House Martell", null), OctgnId = UserSettings.OctgnHouseMartellId } },
+                { (int)AgotCard.CardHouse.Stark, new AgotCard { OriginalName = new FormattedValue<string>("House Stark", null), OctgnId = UserSettings.OctgnHouseStarkId } },
+                { (int)AgotCard.CardHouse.Targaryen, new AgotCard { OriginalName = new FormattedValue<string>("House Targaryen", null), OctgnId = UserSettings.OctgnHouseTargaryenId } },
             };
 
         public static void SaveOctgnDeck(AgotVersionedDeck versionedDeck, AgotDeck currentDeck)
@@ -78,7 +78,7 @@ namespace AGoTDB.OCTGN
             }
             var xDoc = new XDocument { Declaration = new XDeclaration("1.0", "utf-8", "yes") };
             var xDeck = new XElement("deck");
-            xDeck.SetAttributeValue("game", Guid.NewGuid());
+            xDeck.SetAttributeValue("game", UserSettings.OctgnGameId);
             xDoc.Add(xDeck);
 
 
@@ -210,8 +210,8 @@ namespace AGoTDB.OCTGN
                         // try to match the expected cart type
                         row = cardTable.Rows.Cast<DataRow>().LastOrDefault(r => Int32.Parse(r["Type"].ToString()) == expectedCardType);
                     }
-                    if(row == null)
-                         row = cardTable.Rows[cardTable.Rows.Count - 1]; // take the most recent card
+                    if (row == null)
+                        row = cardTable.Rows[cardTable.Rows.Count - 1]; // take the most recent card
                     cardlist.Add(new AgotCard(row) { Quantity = quantity });
                 }
             });

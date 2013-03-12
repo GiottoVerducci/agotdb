@@ -130,16 +130,21 @@ namespace GenericDB.DataAccess
             // (this option is not supported in the Express versions)
             // Additionnal info :  http://support.microsoft.com/kb/278604
             // "I used regsvr32 with  the five dll's under the Jet 4.0 OLD DB provider and it worked for me."
+            var connectionString = String.Format(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=""|DataDirectory|{0}{1}""", Path.DirectorySeparatorChar, dbFilename);
             try
             {
                 dbConnection = new OleDbConnection();
-                dbConnection.ConnectionString = String.Format(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=""|DataDirectory|{0}{1}""", Path.DirectorySeparatorChar, dbFilename);
+                dbConnection.ConnectionString = connectionString;
                 dbConnection.Open();
                 return new ConnectionResult { ErrorCode = ConnectionErrorCode.Success };
             }
             catch (FileNotFoundException)
             {
                 return new ConnectionResult { ErrorCode = ConnectionErrorCode.FileNotFound, Data = dbFilename };
+            }
+            catch (InvalidOperationException ioe)
+            {
+                return new ConnectionResult { ErrorCode = ConnectionErrorCode.ConnectionError, Data = connectionString + Environment.NewLine + ioe };
             }
             catch
             {
@@ -631,6 +636,7 @@ namespace GenericDB.DataAccess
         ConversionFailed,
         InvalidVersion,
         FileNotFound,
-        InvalidDatabase
+        InvalidDatabase,
+        ConnectionError
     }
 }
