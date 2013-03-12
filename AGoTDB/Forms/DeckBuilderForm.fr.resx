@@ -355,6 +355,9 @@
   <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
     <value>Exporter le deck vers le presse-papier</value>
   </data>
+  <data name="exportDeckToClipboardSortedByToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 22</value>
+  </data>
   <data name="exportDeckToOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>307, 22</value>
   </data>
@@ -487,6 +490,6 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+    <value>NoControl</value>
   </data>
 </root>
