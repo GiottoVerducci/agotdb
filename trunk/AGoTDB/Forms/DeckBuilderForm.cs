@@ -143,13 +143,13 @@ namespace AGoTDB.Forms
             }
         }
 
-        private void treeViewDeck_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void TreeViewDeck_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if ((e.Button == MouseButtons.Right) && IsCardNode(e.Node))
                 ((TreeView)sender).SelectedNode = e.Node;
         }
 
-        private void treeViewDeck_KeyDown(object sender, KeyEventArgs e)
+        private void TreeViewDeck_KeyDown(object sender, KeyEventArgs e)
         {
             var node = ((TreeView)sender).SelectedNode;
 
@@ -166,7 +166,7 @@ namespace AGoTDB.Forms
             }
         }
 
-        private void treeViewDeck_KeyPress(object sender, KeyPressEventArgs e)
+        private void TreeViewDeck_KeyPress(object sender, KeyPressEventArgs e)
         {
             var node = ((TreeView)sender).SelectedNode;
 
@@ -185,12 +185,12 @@ namespace AGoTDB.Forms
             }
         }
 
-        private void eclHouse_SelectedValueChanged(object sender, EventArgs e)
+        private void EclHouse_SelectedValueChanged(object sender, EventArgs e)
         {
             UpdateHouseFromControls();
         }
 
-        private void eclAgenda_SelectedValueChanged(object sender, EventArgs e)
+        private void EclAgenda_SelectedValueChanged(object sender, EventArgs e)
         {
             UpdateAgendaFromControls();
         }
@@ -200,7 +200,7 @@ namespace AGoTDB.Forms
         /// If the selected node is a card, the description of the card is displayed. Otherwise,
         /// the textbox is cleared.
         /// </summary>
-        private void treeViewDeck_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeViewDeck_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ClearCardInformations();
 
@@ -214,7 +214,7 @@ namespace AGoTDB.Forms
             e.Cancel = !CheckDeckChanges();
         }
 
-        private void treeViewHistory_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeViewHistory_AfterSelect(object sender, TreeViewEventArgs e)
         {
             _currentDeck = _versionedDeck[Int32.Parse(e.Node.Name, CultureInfo.InvariantCulture)];
             UpdateControlsWithVersionedDeck(false);
@@ -222,23 +222,23 @@ namespace AGoTDB.Forms
         #endregion
 
         #region Main menu Items (load/save/new...)
-        private void saveDeckToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveDeckToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveVersionedDeck(false);
         }
 
-        private void saveDeckAstoolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveDeckAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveVersionedDeck(true);
         }
 
-        private void loadDeckToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadDeckToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CheckDeckChanges())
                 LoadVersionedDeck();
         }
 
-        private void newVersionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewVersionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (UserSettings.ShowNewVersionMessage)
             {
@@ -259,25 +259,25 @@ namespace AGoTDB.Forms
             }
         }
 
-        private void exportToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExportToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(CurrentDeckToText());
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CheckDeckChanges())
                 NewVersionedDeck(true);
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
         #endregion
 
         #region Deck tree view context menu events (increase/decrease count...)
-        private void contextMenuStripTreeView_Opening(object sender, CancelEventArgs e)
+        private void ContextMenuStripTreeView_Opening(object sender, CancelEventArgs e)
         {
             var cms = (ContextMenuStrip)sender;
             TreeNode node = ((TreeView)cms.SourceControl).SelectedNode;
@@ -289,7 +289,7 @@ namespace AGoTDB.Forms
             miGenerateProxyPdf.Enabled = true;
         }
 
-        private void miIncreaseCount_Click(object sender, EventArgs e)
+        private void MiIncreaseCount_Click(object sender, EventArgs e)
         {
             var tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             TreeNode node = tv.SelectedNode;
@@ -299,7 +299,7 @@ namespace AGoTDB.Forms
             }
         }
 
-        private void miDecreaseCount_Click(object sender, EventArgs e)
+        private void MiDecreaseCount_Click(object sender, EventArgs e)
         {
             var tv = (TreeView)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             TreeNode node = tv.SelectedNode;
@@ -309,7 +309,7 @@ namespace AGoTDB.Forms
             }
         }
 
-        private void exportDeckToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExportDeckToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(CurrentDeckToText());
         }
@@ -457,7 +457,7 @@ namespace AGoTDB.Forms
                 rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, AgotCard.TraitsFormat.Style);
                 rtbStatistics.SelectionColor = AgotCard.TraitsFormat.Color;
 
-                rtbStatistics.AppendText(String.Join(", ", traits.OrderBy(kv => kv.Key).OrderByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
+                rtbStatistics.AppendText(String.Join(", ", traits.OrderBy(kv => kv.Key).ThenByDescending(kv => kv.Value).Select(kv => String.Format("{0} {1}", kv.Value, kv.Key)).ToArray()));
                 rtbStatistics.AppendText("\n");
             }
 
@@ -538,7 +538,7 @@ namespace AGoTDB.Forms
 
                     rtbStatistics.SelectionFont = new Font(rtbStatistics.SelectionFont, FontStyle.Bold);
                     rtbStatistics.AppendText(String.Join(", ",
-                        influenceCost.OrderByDescending(kv => kv.Key).Select(kv => String.Format("{0} influence: {1}", kv.Key == -1 ? "X" : kv.Key.ToString(), kv.Value)).ToArray()));
+                        influenceCost.OrderByDescending(kv => kv.Key).Select(kv => String.Format("{0} influence: {1}", kv.Key == -1 ? "X" : kv.Key.ToString(CultureInfo.InvariantCulture), kv.Value)).ToArray()));
                     rtbStatistics.AppendText("\n");
                 }
             }
@@ -674,8 +674,8 @@ namespace AGoTDB.Forms
             treeViewHistory.Nodes.Clear();
             var lastVersionIndex = _versionedDeck.Count - 1;
             for (var i = 0; i < lastVersionIndex; ++i)
-                treeViewHistory.Nodes.Insert(0, i.ToString(), String.Format(CultureInfo.CurrentCulture, "v{0} {1} {2}: {3}", i, _versionedDeck[i].LastModifiedDate.ToShortDateString(), _versionedDeck[i].LastModifiedDate.ToShortTimeString(), _versionedDeck[i].RevisionComments));
-            treeViewHistory.Nodes.Insert(0, lastVersionIndex.ToString(), String.Format(CultureInfo.CurrentCulture, "{0} {1} {2}", Resource1.CurrentRevision, _versionedDeck.LastVersion.LastModifiedDate.ToShortDateString(), _versionedDeck.LastVersion.LastModifiedDate.ToShortTimeString()));
+                treeViewHistory.Nodes.Insert(0, i.ToString(CultureInfo.InvariantCulture), String.Format(CultureInfo.CurrentCulture, "v{0} {1} {2}: {3}", i, _versionedDeck[i].LastModifiedDate.ToShortDateString(), _versionedDeck[i].LastModifiedDate.ToShortTimeString(), _versionedDeck[i].RevisionComments));
+            treeViewHistory.Nodes.Insert(0, lastVersionIndex.ToString(CultureInfo.InvariantCulture), String.Format(CultureInfo.CurrentCulture, "{0} {1} {2}", Resource1.CurrentRevision, _versionedDeck.LastVersion.LastModifiedDate.ToShortDateString(), _versionedDeck.LastVersion.LastModifiedDate.ToShortTimeString()));
         }
         #endregion
 
@@ -893,7 +893,7 @@ namespace AGoTDB.Forms
         #endregion
 
         #region Deck tree view drawing
-        private void treeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
+        private void TreeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
             var treeView = (AgotCardTreeView)sender;
             if (treeView.IsBeingUpdated()) // no redraw when updating
@@ -1166,19 +1166,19 @@ namespace AGoTDB.Forms
             _deckTreeViewSpaceWidth = spaceWidth2 - spaceWidth;
         }
 
-        private void treeViewDeck_FontChanged(object sender, EventArgs e)
+        private void TreeViewDeck_FontChanged(object sender, EventArgs e)
         {
             ComputeDeckTreeViewSpaceWidth((TreeView)sender);
         }
 
-        private void drawSimulatorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DrawSimulatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DrawSimulatorForm.Singleton.SetDeck(_currentDeck);
             DrawSimulatorForm.Singleton.Show();
             DrawSimulatorForm.Singleton.Activate();
         }
 
-        private void miAddCardList_Click(object sender, EventArgs e)
+        private void MiAddCardList_Click(object sender, EventArgs e)
         {
             var ctv = new AgotCardTreeView();
             ctv.Nodes.Add(new TreeNode(_treeViews[1].NodeInfo.Text));
@@ -1188,7 +1188,7 @@ namespace AGoTDB.Forms
             tabPage.Controls.Add(ctv);
         }
 
-        private void miGenerateProxyPdf_Click(object sender, EventArgs e)
+        private void MiGenerateProxyPdf_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1204,27 +1204,27 @@ namespace AGoTDB.Forms
             }
         }
 
-        private void cardPreviewControl1_MouseEnter(object sender, EventArgs e)
+        private void CardPreviewControl1_MouseEnter(object sender, EventArgs e)
         {
             ShowCardPreviewForm(cardPreviewControl.CardUniversalId);
         }
 
-        private void cardPreviewControl1_MouseLeave(object sender, EventArgs e)
+        private void CardPreviewControl1_MouseLeave(object sender, EventArgs e)
         {
             HideCardPreviewForm();
         }
 
-        private void cardPreviewControl1_MouseCaptureChanged(object sender, EventArgs e)
+        private void CardPreviewControl1_MouseCaptureChanged(object sender, EventArgs e)
         {
             HideCardPreviewForm();
         }
 
-        private void printDeckToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PrintDeckToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void exportDeckToOCTGNToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExportDeckToOctgnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!ApplicationSettings.IsOctgnReady)
             {
@@ -1237,14 +1237,14 @@ namespace AGoTDB.Forms
             ExportDeckToOctgn();
         }
 
-        private void importDeckFromOCTGNToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ImportDeckFromOctgnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!ApplicationSettings.IsOctgnReady)
             {
                 var dialogResult = MessageBox.Show(Resource1.WarnOctgnNotLoaded, Resource1.WarnOctgnNotLoadedTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Cancel)
                     return;
-                OctgnManager.PromptForInitialization(ExportDeckToOctgn);
+                OctgnManager.PromptForInitialization(ImportDeckFromOctgn);
                 return;
             }
             ImportDeckFromOctgn();
@@ -1262,7 +1262,7 @@ namespace AGoTDB.Forms
             LoadOctgnDeck();
         }
 
-        private void exportDeckToClipboardSortedBySetToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExportDeckToClipboardSortedBySetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(CurrentDeckSortedBySetToText());
         }
@@ -1304,8 +1304,8 @@ namespace AGoTDB.Forms
 
             var cardsBySet = _currentDeck.Agenda
                 .Union(_currentDeck.CardLists.SelectMany(cl => cl))
-                .GroupBy(c => 
-                { 
+                .GroupBy(c =>
+                {
                     var sets = c.Set.Value.Split('/');
                     var mostRecentSet = sets.Last();
                     return mostRecentSet.Split('(')[0].Trim();

@@ -379,4 +379,11 @@ Trace de l'exception :
   <data name="WarnOctgnNotLoadedTitle" xml:space="preserve">
     <value>Extensions OCTGN non chargées</value>
   </data>
+  <data name="ErrConnectingToDatabase" xml:space="preserve">
+    <value>Une erreur est survenue lors de la connexion à la base en utilisant la chaîne de connexion suivante (veuillez vérifier que OleDb est bien installé) :
+{0}</value>
+  </data>
+  <data name="ErrConnectingToDatabaseTitle" xml:space="preserve">
+    <value>Erreur lors de la connexion à la base</value>
+  </data>
 </root>

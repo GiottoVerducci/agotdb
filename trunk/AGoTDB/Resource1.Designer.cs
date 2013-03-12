@@ -187,6 +187,25 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an error while trying to connect to the database using the following connection string (please make sure the provider is correctly installed):
+        ///{0}.
+        /// </summary>
+        internal static string ErrConnectingToDatabase {
+            get {
+                return ResourceManager.GetString("ErrConnectingToDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error connecting to the database.
+        /// </summary>
+        internal static string ErrConnectingToDatabaseTitle {
+            get {
+                return ResourceManager.GetString("ErrConnectingToDatabaseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The database file {0} could not be found. Please make sure that file is in the same directory than this program..
         /// </summary>
         internal static string ErrDatabaseNotFound {
