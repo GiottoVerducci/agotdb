@@ -33,9 +33,9 @@ namespace GenericDB.DataAccess
     /// </summary>
     public abstract class DatabaseManager
     {
-        protected OleDbConnection fHDbConnection; // human database
-        protected OleDbConnection fDbConnection; // extended database
-        protected List<DatabaseInfo> fDatabaseInfos;
+        protected OleDbConnection _hdbConnection; // human database
+        protected OleDbConnection _dbConnection; // extended database
+        protected List<DatabaseInfo> _databaseInfos;
         public string HDataBaseFilename { get; protected set; }
         public string DataBaseFilename { get; protected set; }
         public virtual string DataBasePath { get { return "Databases" + Path.DirectorySeparatorChar; } }
@@ -50,8 +50,8 @@ namespace GenericDB.DataAccess
         public abstract TextFormat ErrataFormat { get; }
 
         public bool ConnectedToDatabase { get; protected set; }
-        public OleDbConnection DbConnection { get { return fDbConnection; } }
-        public List<DatabaseInfo> DatabaseInfos { get { return fDatabaseInfos; } }
+        public OleDbConnection DbConnection { get { return _dbConnection; } }
+        public List<DatabaseInfo> DatabaseInfos { get { return _databaseInfos; } }
 
         protected DatabaseManager(string dbFileName, string exDbFileName)
         {
@@ -79,9 +79,9 @@ namespace GenericDB.DataAccess
             if (!ConnectedToDatabase)
                 return result;
 
-            ReadDatabaseInformations(fDbConnection, out fDatabaseInfos);
+            ReadDatabaseInformations(_dbConnection, out _databaseInfos);
 
-            if ((fDatabaseInfos.Count > 0) && (applicationVersion.CompareTo(fDatabaseInfos[0].MinimalApplicationVersion) < 0))
+            if ((_databaseInfos.Count > 0) && (applicationVersion.CompareTo(_databaseInfos[0].MinimalApplicationVersion) < 0))
             {
                 ConnectedToDatabase = false;
                 return new ConnectionResult { ErrorCode = ConnectionErrorCode.InvalidVersion };
@@ -104,7 +104,7 @@ namespace GenericDB.DataAccess
                 return result;
 
             ConnectedToDatabase = true; // required by ConvertDatabase
-            ReadDatabaseInformations(fHDbConnection, out fDatabaseInfos);
+            ReadDatabaseInformations(_hdbConnection, out _databaseInfos);
 
             if (ConvertDatabase())
             {
@@ -183,7 +183,7 @@ namespace GenericDB.DataAccess
         /// <returns>True if the method succeeds, false otherwise</returns>
         protected virtual ConnectionResult ConnectToHumanDatabase()
         {
-            return ConnectToDatabase(ref fHDbConnection, DataBasePath + HDataBaseFilename);
+            return ConnectToDatabase(ref _hdbConnection, DataBasePath + HDataBaseFilename);
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace GenericDB.DataAccess
         /// <returns>True if the method succeeds, false otherwise</returns>
         protected virtual ConnectionResult ConnectToExtendedDatabase()
         {
-            return ConnectToDatabase(ref fDbConnection, DataBasePath + DataBaseFilename);
+            return ConnectToDatabase(ref _dbConnection, DataBasePath + DataBaseFilename);
         }
 
         protected virtual DataTable GetResultFromRequest(string request, OleDbConnection aDbConnection, CommandParameters parameters)
@@ -240,12 +240,12 @@ namespace GenericDB.DataAccess
         public virtual bool ConvertDatabase()
         {
             string query = String.Format("DELETE FROM [{0}]", TableNameMain);
-            GetResultFromRequest(query, fDbConnection, null);
+            GetResultFromRequest(query, _dbConnection, null);
 
             query = String.Format("SELECT * FROM [{0}]", TableNameMain);
-            DataTable humanData = GetResultFromRequest(query, fHDbConnection, null);
+            DataTable humanData = GetResultFromRequest(query, _hdbConnection, null);
 
-            using (var dbDataAdapter = new OleDbDataAdapter(query, fDbConnection))
+            using (var dbDataAdapter = new OleDbDataAdapter(query, _dbConnection))
             {
                 new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
 
@@ -273,7 +273,7 @@ namespace GenericDB.DataAccess
         public void UpdateCards(Func<DataRow, int, bool> updateAction)
         {
             var query = String.Format("SELECT * FROM [{0}]", TableNameMain);
-            using (var dbDataAdapter = new OleDbDataAdapter(query, fDbConnection))
+            using (var dbDataAdapter = new OleDbDataAdapter(query, _dbConnection))
             {
                 new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
 
@@ -324,7 +324,7 @@ namespace GenericDB.DataAccess
         }
 
         /// <summary>
-        /// Reads a formatted string value from a row and returns a FormattedValue object containing the value read 
+        /// Reads a formatted string value from a row, trims it and returns a FormattedValue object containing the value read 
         /// and transformed using a transformation function, and its format.
         /// The read string can use any of given the bound formats.
         /// </summary>
@@ -335,7 +335,7 @@ namespace GenericDB.DataAccess
         /// <returns>A formatted value.</returns>
         protected static FormattedValue<string> ExtractFormattedStringValueFromRow(DataRow row, string columnName, Func<string, string> valueTransformer, params BoundFormat[] boundFormats)
         {
-            string value = row[columnName].ToString();
+            string value = row[columnName].ToString().Trim();
             if (valueTransformer != null)
                 value = valueTransformer(value);
 
@@ -417,7 +417,7 @@ namespace GenericDB.DataAccess
             {
                 var table = GetResultFromRequest(
                     string.Format("SELECT Id FROM {0} WHERE Value LIKE :value", refTableName),
-                    fHDbConnection, new CommandParameters().Add("value", values[i]));
+                    _hdbConnection, new CommandParameters().Add("value", values[i]));
                 intValue += Int32.Parse(table.Rows[0]["Id"].ToString(), CultureInfo.InvariantCulture);
             }
 
