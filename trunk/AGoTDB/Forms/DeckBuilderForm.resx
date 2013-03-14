@@ -117,176 +117,611 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="treeViewHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="&gt;&gt;eclAgenda.Name" xml:space="preserve">
-    <value>eclAgenda</value>
-  </data>
-  <data name="&gt;&gt;eclHouse.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;tbDeckName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitContainer2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="splitContainer2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 85</value>
+  </data>
   <data name="splitContainer2.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
-  <data name="&gt;&gt;contextMenuStripTreeView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="&gt;&gt;printDeckToolStripMenuItem.Name" xml:space="preserve">
-    <value>printDeckToolStripMenuItem</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>797, 519</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblAgenda.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="eclHouse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 19</value>
-  </data>
-  <data name="exportDeckToClipboardSortedByToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export deck to clipboard sorted by...</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabControlGlobalInfo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblHouse.Text" xml:space="preserve">
-    <value>House: </value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="miRemoveCardList.Text" xml:space="preserve">
-    <value>Remove this card list</value>
-  </data>
-  <data name="&gt;&gt;eclHouse.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;tabPageHistory.Parent" xml:space="preserve">
-    <value>tabControlGlobalInfo</value>
-  </data>
-  <data name="rtbStatistics.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tabPageSideboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 185</value>
-  </data>
-  <data name="exportDeckToClipboardSortedBySetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Set</value>
-  </data>
-  <data name="&gt;&gt;tbAuthor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="miExportDeckToClipboard.Text" xml:space="preserve">
-    <value>Export deck to clipboard</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Name" xml:space="preserve">
-    <value>treeViewSide</value>
-  </data>
-  <data name="rtbCardText.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tabPageCardtext.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="printDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
-  </data>
-  <data name="&gt;&gt;newVersionToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.Name" xml:space="preserve">
-    <value>menuStripMain</value>
-  </data>
-  <data name="&gt;&gt;splitContainer2.Panel2.Name" xml:space="preserve">
-    <value>splitContainer2.Panel2</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;loadDeckToolStripMenuItem.Name" xml:space="preserve">
-    <value>loadDeckToolStripMenuItem</value>
-  </data>
-  <data name="sdsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 20</value>
-  </data>
-  <data name="saveDeckAstoolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Shift+S</value>
-  </data>
-  <data name="saveDeckToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+S</value>
-  </data>
-  <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
-    <value>splitCardText.Panel2</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblAuthor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
-  </data>
-  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
-    <value>exitToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;lblDeckName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer2.Panel2.Parent" xml:space="preserve">
-    <value>splitContainer2</value>
+  <metadata name="contextMenuStripTreeView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>6, 24</value>
+  </metadata>
+  <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
   </data>
   <data name="miIncreaseCount.Text" xml:space="preserve">
     <value>Add a copy</value>
   </data>
-  <data name="lblHouse.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="miDecreaseCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
   </data>
-  <data name="&gt;&gt;eclAgenda.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="miDecreaseCount.Text" xml:space="preserve">
+    <value>Remove a copy</value>
   </data>
-  <data name="rtbStatistics.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="miExportDeckToClipboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miExportDeckToClipboard.Text" xml:space="preserve">
+    <value>Export deck to clipboard</value>
+  </data>
+  <data name="miAddCardList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miAddCardList.Text" xml:space="preserve">
+    <value>Add a card list</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miAddCardList.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miRemoveCardList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miRemoveCardList.Text" xml:space="preserve">
+    <value>Remove this card list</value>
+  </data>
+  <data name="miRemoveCardList.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miGenerateProxyPdf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="miGenerateProxyPdf.Text" xml:space="preserve">
+    <value>Generate proxy pdf</value>
+  </data>
+  <data name="contextMenuStripTreeView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 136</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripTreeView.Name" xml:space="preserve">
+    <value>contextMenuStripTreeView</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripTreeView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="treeViewDeck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Deck Builder -</value>
+  <data name="treeViewDeck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;splitContainer2.Panel1.ZOrder" xml:space="preserve">
+  <data name="treeViewDeck.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
+        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAP1lvdSBtYXkgYWRkIGNhcmRzIGJ5IGRvdWJsZS1j
+        bGlja2luZyBvbiB0aGVtIGluIHRoZSBtYWluIHdpbmRvdwYEAAAAAAYFAAAABU5vZGUwAP////8JBAAA
+        AP////8JBAAAAAAAAAAL
+</value>
+  </data>
+  <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 179</value>
+  </data>
+  <data name="treeViewDeck.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tabPageHistory.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;treeViewDeck.Name" xml:space="preserve">
+    <value>treeViewDeck</value>
+  </data>
+  <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
+    <value>tabPageDeck</value>
+  </data>
+  <data name="&gt;&gt;treeViewDeck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageDeck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageDeck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 185</value>
+  </data>
+  <data name="tabPageDeck.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageDeck.Text" xml:space="preserve">
+    <value>Deck</value>
+  </data>
+  <data name="&gt;&gt;tabPageDeck.Name" xml:space="preserve">
+    <value>tabPageDeck</value>
+  </data>
+  <data name="&gt;&gt;tabPageDeck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageDeck.Parent" xml:space="preserve">
+    <value>tabControlDecks</value>
+  </data>
+  <data name="&gt;&gt;tabPageDeck.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="treeViewSide.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="treeViewSide.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="treeViewSide.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
+        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAHnZlcnNpb25lZEVudGl0eVNldC5DaGFuZ2VzZXRJ
+        ZAYEAAAAAAYFAAAABU5vZGUwAP////8JBAAAAP////8JBAAAAAAAAAAL
+</value>
+  </data>
+  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 179</value>
+  </data>
+  <data name="treeViewSide.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
-    <value>211</value>
+  <data name="&gt;&gt;treeViewSide.Name" xml:space="preserve">
+    <value>treeViewSide</value>
+  </data>
+  <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
+    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
+    <value>tabPageSideboard</value>
+  </data>
+  <data name="&gt;&gt;treeViewSide.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageSideboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageSideboard.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageSideboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 185</value>
+  </data>
+  <data name="tabPageSideboard.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageSideboard.Text" xml:space="preserve">
+    <value>Sideboard</value>
+  </data>
+  <data name="&gt;&gt;tabPageSideboard.Name" xml:space="preserve">
+    <value>tabPageSideboard</value>
+  </data>
+  <data name="&gt;&gt;tabPageSideboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageSideboard.Parent" xml:space="preserve">
+    <value>tabControlDecks</value>
+  </data>
+  <data name="&gt;&gt;tabPageSideboard.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControlDecks.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabControlDecks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabControlDecks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>349, 211</value>
+  </data>
+  <data name="tabControlDecks.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tabControlDecks.Name" xml:space="preserve">
+    <value>tabControlDecks</value>
+  </data>
+  <data name="&gt;&gt;tabControlDecks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControlDecks.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tabControlDecks.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitCardText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="splitCardText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="rtbCardText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbCardText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="rtbCardText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 179</value>
+  </data>
+  <data name="rtbCardText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rtbCardText.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;rtbCardText.Name" xml:space="preserve">
+    <value>rtbCardText</value>
+  </data>
+  <data name="&gt;&gt;rtbCardText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rtbCardText.Parent" xml:space="preserve">
+    <value>splitCardText.Panel1</value>
+  </data>
+  <data name="&gt;&gt;rtbCardText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.Name" xml:space="preserve">
+    <value>splitCardText.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.Parent" xml:space="preserve">
+    <value>splitCardText</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cardPreviewControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardPreviewControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="cardPreviewControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 179</value>
+  </data>
+  <data name="cardPreviewControl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cardPreviewControl.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.Name" xml:space="preserve">
+    <value>cardPreviewControl</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
+    <value>AGoTDB.Forms.CardPreviewControl, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
+    <value>splitCardText.Panel2</value>
+  </data>
+  <data name="&gt;&gt;cardPreviewControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.Name" xml:space="preserve">
+    <value>splitCardText.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.Parent" xml:space="preserve">
+    <value>splitCardText</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitCardText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 179</value>
+  </data>
+  <data name="splitCardText.SplitterDistance" type="System.Int32, mscorlib">
+    <value>271</value>
+  </data>
+  <data name="splitCardText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Name" xml:space="preserve">
+    <value>splitCardText</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.Parent" xml:space="preserve">
+    <value>tabPageCardtext</value>
+  </data>
+  <data name="&gt;&gt;splitCardText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageCardtext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageCardtext.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageCardtext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 185</value>
+  </data>
+  <data name="tabPageCardtext.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageCardtext.Text" xml:space="preserve">
+    <value>Cardtext</value>
+  </data>
+  <data name="&gt;&gt;tabPageCardtext.Name" xml:space="preserve">
+    <value>tabPageCardtext</value>
+  </data>
+  <data name="&gt;&gt;tabPageCardtext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageCardtext.Parent" xml:space="preserve">
+    <value>tabControlLocalInfo</value>
+  </data>
+  <data name="&gt;&gt;tabPageCardtext.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tabControlLocalInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="lblDeckName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 36</value>
+  <data name="tabControlLocalInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;splitCardText.Panel1.Name" xml:space="preserve">
-    <value>splitCardText.Panel1</value>
+  <data name="tabControlLocalInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 211</value>
+  </data>
+  <data name="tabControlLocalInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;tabControlLocalInfo.Name" xml:space="preserve">
+    <value>tabControlLocalInfo</value>
+  </data>
+  <data name="&gt;&gt;tabControlLocalInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControlLocalInfo.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;tabControlLocalInfo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>770, 211</value>
+  </data>
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>349</value>
+  </data>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
+    <value>splitContainer2.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.Name" xml:space="preserve">
+    <value>splitContainer2.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rtbDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 175</value>
+  </data>
+  <data name="rtbDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rtbDescription.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;rtbDescription.Name" xml:space="preserve">
+    <value>rtbDescription</value>
+  </data>
+  <data name="&gt;&gt;rtbDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rtbDescription.Parent" xml:space="preserve">
+    <value>tabPageDescription</value>
+  </data>
+  <data name="&gt;&gt;rtbDescription.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageDescription.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>762, 181</value>
+  </data>
+  <data name="tabPageDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="&gt;&gt;tabPageDescription.Name" xml:space="preserve">
+    <value>tabPageDescription</value>
+  </data>
+  <data name="&gt;&gt;tabPageDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageDescription.Parent" xml:space="preserve">
+    <value>tabControlGlobalInfo</value>
+  </data>
+  <data name="&gt;&gt;tabPageDescription.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="treeViewHistory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="treeViewHistory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 175</value>
+  </data>
+  <data name="treeViewHistory.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.Name" xml:space="preserve">
+    <value>treeViewHistory</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.Parent" xml:space="preserve">
+    <value>tabPageHistory</value>
+  </data>
+  <data name="&gt;&gt;treeViewHistory.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageHistory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageHistory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageHistory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>762, 181</value>
+  </data>
+  <data name="tabPageHistory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageHistory.Text" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="&gt;&gt;tabPageHistory.Name" xml:space="preserve">
+    <value>tabPageHistory</value>
+  </data>
+  <data name="&gt;&gt;tabPageHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageHistory.Parent" xml:space="preserve">
+    <value>tabControlGlobalInfo</value>
+  </data>
+  <data name="&gt;&gt;tabPageHistory.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rtbStatistics.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rtbStatistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 175</value>
+  </data>
+  <data name="rtbStatistics.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rtbStatistics.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Name" xml:space="preserve">
+    <value>rtbStatistics</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
+    <value>tabPageStats</value>
+  </data>
+  <data name="&gt;&gt;rtbStatistics.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageStats.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageStats.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>762, 181</value>
+  </data>
+  <data name="tabPageStats.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPageStats.Text" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="&gt;&gt;tabPageStats.Name" xml:space="preserve">
+    <value>tabPageStats</value>
+  </data>
+  <data name="&gt;&gt;tabPageStats.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageStats.Parent" xml:space="preserve">
+    <value>tabControlGlobalInfo</value>
+  </data>
+  <data name="&gt;&gt;tabPageStats.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabControlGlobalInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabControlGlobalInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabControlGlobalInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>770, 207</value>
+  </data>
+  <data name="tabControlGlobalInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;tabControlGlobalInfo.Name" xml:space="preserve">
+    <value>tabControlGlobalInfo</value>
   </data>
   <data name="&gt;&gt;tabControlGlobalInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -294,454 +729,413 @@
   <data name="&gt;&gt;tabControlGlobalInfo.Parent" xml:space="preserve">
     <value>splitContainer2.Panel2</value>
   </data>
-  <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 179</value>
+  <data name="&gt;&gt;tabControlGlobalInfo.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 175</value>
-  </data>
-  <data name="lblHouse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 36</value>
-  </data>
-  <data name="tbDeckName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 20</value>
-  </data>
-  <data name="tbAuthor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;tabControlLocalInfo.Name" xml:space="preserve">
-    <value>tabControlLocalInfo</value>
-  </data>
-  <data name="treeViewSide.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAHUHJvcEJhZwRUZXh0C1Rvb2xUaXBUZXh0BE5hbWUJ
-        SXNDaGVja2VkCkltYWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1h
-        Z2VLZXkKQ2hpbGRDb3VudAQBAQEAAAEAAQApU3lzdGVtLldpbmRvd3MuRm9ybXMuT3duZXJEcmF3UHJv
-        cGVydHlCYWcCAAAAAQgICAIAAAAJAwAAAAYEAAAAP1lvdSBtYXkgYWRkIGNhcmRzIGJ5IGRvdWJsZS1j
-        bGlja2luZyBvbiB0aGVtIGluIHRoZSBtYWluIHdpbmRvdwYFAAAAAAYGAAAABU5vZGUwAP////8JBQAA
-        AP////8JBQAAAAAAAAAMCAAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
-        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93
-        cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQE
-        FFN5c3RlbS5EcmF3aW5nLkNvbG9yCAAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcggAAAATU3lzdGVtLkRy
-        YXdpbmcuRm9udAgAAAACAAAABff///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUK
-        a25vd25Db2xvcgVzdGF0ZQEAAAAJBwcIAAAACgAAAAAAAAAAAAAAAAH2////9////woAAAAAAAAAAAAA
-        AAAJCwAAAAULAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAE
-        BAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlCAAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQI
-        AAAACAAAAAYMAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQXz////GFN5c3RlbS5EcmF3aW5nLkZv
-        bnRTdHlsZQEAAAAHdmFsdWVfXwAICAAAAAIAAAAF8v///xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1Vu
-        aXQBAAAAB3ZhbHVlX18ACAgAAAADAAAACw==
-</value>
-  </data>
-  <data name="treeViewDeck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Name" xml:space="preserve">
-    <value>rtbCardText</value>
-  </data>
-  <data name="&gt;&gt;tbDeckName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="miAddCardList.Text" xml:space="preserve">
-    <value>Add a card list</value>
-  </data>
-  <data name="&gt;&gt;tabPageDescription.Name" xml:space="preserve">
-    <value>tabPageDescription</value>
-  </data>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
-  </data>
-  <data name="splitCardText.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;newVersionToolStripMenuItem.Name" xml:space="preserve">
-    <value>newVersionToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
-    <value>splitContainer1</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Parent" xml:space="preserve">
-    <value>tabPageHistory</value>
-  </data>
-  <data name="&gt;&gt;miExportDeckToClipboard.Name" xml:space="preserve">
-    <value>miExportDeckToClipboard</value>
-  </data>
-  <data name="splitContainer2.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="eclHouse.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Name" xml:space="preserve">
-    <value>treeViewHistory</value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.Name" xml:space="preserve">
-    <value>lblAgenda</value>
-  </data>
-  <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;splitContainer2.Panel2.Name" xml:space="preserve">
+    <value>splitContainer2.Panel2</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;exportDeckToOCTGNToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportDeckToOCTGNToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;tabControlDecks.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;splitContainer2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miRemoveCardList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="splitContainer2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 85</value>
-  </data>
-  <data name="eclAgenda.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="loadDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
+  <data name="&gt;&gt;splitContainer2.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer2</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;splitCardText.Panel1.Parent" xml:space="preserve">
-    <value>splitCardText</value>
+  <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>770, 422</value>
   </data>
-  <data name="&gt;&gt;rtbDescription.Parent" xml:space="preserve">
-    <value>tabPageDescription</value>
+  <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
+    <value>211</value>
   </data>
-  <data name="&gt;&gt;lblAuthor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="splitContainer2.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;splitContainer2.Name" xml:space="preserve">
+    <value>splitContainer2</value>
   </data>
-  <data name="tabPageDeck.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPageStats.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblDeckName.Name" xml:space="preserve">
-    <value>lblDeckName</value>
-  </data>
-  <data name="cardPreviewControl.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tabControlGlobalInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="cardPreviewControl.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.Parent" xml:space="preserve">
-    <value>tabControlDecks</value>
-  </data>
-  <data name="&gt;&gt;lblHouse.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
-    <value>splitContainer2.Panel1</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;eclAgenda.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="rtbDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export deck to clipboard</value>
-  </data>
-  <data name="&gt;&gt;miGenerateProxyPdf.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exit</value>
-  </data>
-  <data name="saveDeckAstoolStripMenuItem.Text" xml:space="preserve">
-    <value>Save deck as...</value>
-  </data>
-  <data name="miExportDeckToClipboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
-  </data>
-  <data name="treeViewDeck.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAHUHJvcEJhZwRUZXh0C1Rvb2xUaXBUZXh0BE5hbWUJ
-        SXNDaGVja2VkCkltYWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1h
-        Z2VLZXkKQ2hpbGRDb3VudAQBAQEAAAEAAQApU3lzdGVtLldpbmRvd3MuRm9ybXMuT3duZXJEcmF3UHJv
-        cGVydHlCYWcCAAAAAQgICAIAAAAJAwAAAAYEAAAAP1lvdSBtYXkgYWRkIGNhcmRzIGJ5IGRvdWJsZS1j
-        bGlja2luZyBvbiB0aGVtIGluIHRoZSBtYWluIHdpbmRvdwYFAAAAAAYGAAAABU5vZGUwAP////8JBQAA
-        AP////8JBQAAAAAAAAAMCAAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
-        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAwAAAClTeXN0ZW0uV2luZG93
-        cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0NvbG9yCUZvcmVDb2xvcgRGb250BAQE
-        FFN5c3RlbS5EcmF3aW5nLkNvbG9yCAAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcggAAAATU3lzdGVtLkRy
-        YXdpbmcuRm9udAgAAAACAAAABff///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUK
-        a25vd25Db2xvcgVzdGF0ZQEAAAAJBwcIAAAACgAAAAAAAAAAAAAAAAH2////9////woAAAAAAAAAAAAA
-        AAAJCwAAAAULAAAAE1N5c3RlbS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAE
-        BAsYU3lzdGVtLkRyYXdpbmcuRm9udFN0eWxlCAAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQI
-        AAAACAAAAAYMAAAAFE1pY3Jvc29mdCBTYW5zIFNlcmlmAAAEQQXz////GFN5c3RlbS5EcmF3aW5nLkZv
-        bnRTdHlsZQEAAAAHdmFsdWVfXwAICAAAAAIAAAAF8v///xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1Vu
-        aXQBAAAAB3ZhbHVlX18ACAgAAAADAAAACw==
-</value>
-  </data>
-  <data name="&gt;&gt;miIncreaseCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;saveDeckToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabControlGlobalInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 207</value>
-  </data>
-  <data name="tabPageDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>762, 181</value>
-  </data>
-  <data name="tabPageDescription.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="&gt;&gt;eclAgenda.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 175</value>
-  </data>
-  <data name="newToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+N</value>
-  </data>
-  <data name="cardPreviewControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 179</value>
-  </data>
-  <data name="tbDeckName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;saveDeckAstoolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="treeViewSide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="tabPageHistory.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;exportDeckToClipboardSortedBySetToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabPageDescription.Text" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="splitCardText.SplitterDistance" type="System.Int32, mscorlib">
-    <value>271</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="tabControlDecks.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
-    <value>splitContainer1</value>
-  </data>
-  <data name="&gt;&gt;sdsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tools</value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Parent" xml:space="preserve">
-    <value>tabPageCardtext</value>
-  </data>
-  <data name="tbDeckName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 33</value>
-  </data>
-  <data name="&gt;&gt;lblAuthor.Name" xml:space="preserve">
-    <value>lblAuthor</value>
-  </data>
-  <data name="saveDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="importDeckFromOCTGNToolStripMenuItem.Text" xml:space="preserve">
-    <value>Import deck from OCTGN</value>
-  </data>
-  <data name="&gt;&gt;miIncreaseCount.Name" xml:space="preserve">
-    <value>miIncreaseCount</value>
-  </data>
-  <data name="lblAuthor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 62</value>
-  </data>
-  <data name="miAddCardList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="cardPreviewControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;fileToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;splitContainer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tabControlLocalInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;splitContainer2.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="lblHouse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblDeckName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDeckName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cardPreviewControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lblAgenda.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tabControlLocalInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;tabControlLocalInfo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="&gt;&gt;saveDeckAstoolStripMenuItem.Name" xml:space="preserve">
-    <value>saveDeckAstoolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
-    <value>fileToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="eclAgenda.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabPageHistory.Name" xml:space="preserve">
-    <value>tabPageHistory</value>
-  </data>
-  <data name="&gt;&gt;lblHouse.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="treeViewSide.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>762, 181</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
-  </data>
-  <data name="lblHouse.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="exportDeckToOCTGNToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export deck to OCTGN</value>
-  </data>
-  <data name="&gt;&gt;tabPageSideboard.Name" xml:space="preserve">
-    <value>tabPageSideboard</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Panel2.Name" xml:space="preserve">
-    <value>splitCardText.Panel2</value>
-  </data>
-  <data name="miDecreaseCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="splitCardText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="&gt;&gt;tbAuthor.Name" xml:space="preserve">
-    <value>tbAuthor</value>
-  </data>
-  <data name="&gt;&gt;exportDeckToClipboardSortedByToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportDeckToClipboardSortedByToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rtbStatistics.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="eclHouse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="lblDeckName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 36</value>
   </data>
   <data name="lblDeckName.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
   </data>
-  <data name="lblAuthor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="lblDeckName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="tabPageCardtext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="lblDeckName.Text" xml:space="preserve">
+    <value>Deck name: </value>
   </data>
-  <data name="&gt;&gt;miRemoveCardList.Name" xml:space="preserve">
-    <value>miRemoveCardList</value>
+  <data name="&gt;&gt;lblDeckName.Name" xml:space="preserve">
+    <value>lblDeckName</value>
   </data>
-  <data name="&gt;&gt;miDecreaseCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblDeckName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miExportDeckToClipboard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblDeckName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblDeckName.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tbDeckName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbDeckName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 33</value>
+  </data>
+  <data name="tbDeckName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 20</value>
+  </data>
+  <data name="tbDeckName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbDeckName.Name" xml:space="preserve">
+    <value>tbDeckName</value>
+  </data>
+  <data name="&gt;&gt;tbDeckName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDeckName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbDeckName.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <metadata name="menuStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0</value>
+  </metadata>
+  <data name="newToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+N</value>
+  </data>
+  <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="newToolStripMenuItem.Text" xml:space="preserve">
+    <value>New deck</value>
+  </data>
+  <data name="loadDeckToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
+  </data>
+  <data name="loadDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="loadDeckToolStripMenuItem.Text" xml:space="preserve">
+    <value>Load deck</value>
+  </data>
+  <data name="saveDeckToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+S</value>
+  </data>
+  <data name="saveDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="saveDeckToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save deck</value>
+  </data>
+  <data name="saveDeckAstoolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Shift+S</value>
+  </data>
+  <data name="saveDeckAstoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="saveDeckAstoolStripMenuItem.Text" xml:space="preserve">
+    <value>Save deck as...</value>
+  </data>
+  <data name="newVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="newVersionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Create a new version</value>
+  </data>
+  <data name="printDeckToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="printDeckToolStripMenuItem.Text" xml:space="preserve">
+    <value>Print deck</value>
+  </data>
+  <data name="exitToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+X</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="drawSimulatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
+  </data>
+  <data name="drawSimulatorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Draw simulator</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="exportToClipboardToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+E</value>
+  </data>
+  <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 22</value>
+  </data>
+  <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export deck to clipboard</value>
+  </data>
+  <data name="exportDeckToClipboardSortedBySetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 22</value>
+  </data>
+  <data name="exportDeckToClipboardSortedBySetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="exportDeckToClipboardSortedByToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 22</value>
+  </data>
+  <data name="exportDeckToClipboardSortedByToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export deck to clipboard sorted by...</value>
+  </data>
+  <data name="exportDeckToOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 22</value>
+  </data>
+  <data name="exportDeckToOCTGNToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export deck to OCTGN</value>
+  </data>
+  <data name="importDeckFromOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 22</value>
+  </data>
+  <data name="importDeckFromOCTGNToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import deck from OCTGN</value>
+  </data>
+  <data name="sdsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 20</value>
+  </data>
+  <data name="sdsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import / Export</value>
+  </data>
+  <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>797, 24</value>
   </data>
+  <data name="menuStripMain.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="menuStripMain.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Name" xml:space="preserve">
+    <value>menuStripMain</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblHouse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblHouse.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblHouse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblHouse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 36</value>
+  </data>
+  <data name="lblHouse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="lblHouse.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblHouse.Text" xml:space="preserve">
+    <value>House: </value>
+  </data>
+  <data name="&gt;&gt;lblHouse.Name" xml:space="preserve">
+    <value>lblHouse</value>
+  </data>
+  <data name="&gt;&gt;lblHouse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblHouse.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblHouse.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="eclHouse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="eclHouse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 34</value>
+  </data>
+  <data name="eclHouse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 19</value>
+  </data>
+  <data name="eclHouse.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;eclHouse.Name" xml:space="preserve">
+    <value>eclHouse</value>
+  </data>
+  <data name="&gt;&gt;eclHouse.Type" xml:space="preserve">
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;eclHouse.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="tabPageDeck.Text" xml:space="preserve">
-    <value>Deck</value>
+  <data name="&gt;&gt;eclHouse.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;tabPageDescription.Parent" xml:space="preserve">
-    <value>tabControlGlobalInfo</value>
+  <data name="lblAgenda.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;treeViewDeck.Name" xml:space="preserve">
-    <value>treeViewDeck</value>
+  <data name="lblAgenda.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;tabPageSideboard.Parent" xml:space="preserve">
-    <value>tabControlDecks</value>
+  <data name="lblAgenda.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;miAddCardList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblAgenda.Location" type="System.Drawing.Point, System.Drawing">
+    <value>540, 36</value>
   </data>
-  <data name="&gt;&gt;exportDeckToClipboardSortedBySetToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportDeckToClipboardSortedBySetToolStripMenuItem</value>
+  <data name="lblAgenda.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
   <data name="lblAgenda.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
+  </data>
+  <data name="lblAgenda.Text" xml:space="preserve">
+    <value>Agenda: </value>
+  </data>
+  <data name="&gt;&gt;lblAgenda.Name" xml:space="preserve">
+    <value>lblAgenda</value>
+  </data>
+  <data name="&gt;&gt;lblAgenda.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAgenda.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAgenda.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tbAuthor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbAuthor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 59</value>
+  </data>
+  <data name="tbAuthor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 20</value>
+  </data>
+  <data name="tbAuthor.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;tbAuthor.Name" xml:space="preserve">
+    <value>tbAuthor</value>
+  </data>
+  <data name="&gt;&gt;tbAuthor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbAuthor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbAuthor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblAuthor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAuthor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAuthor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 62</value>
+  </data>
+  <data name="lblAuthor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="lblAuthor.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblAuthor.Text" xml:space="preserve">
+    <value>Author: </value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.Name" xml:space="preserve">
+    <value>lblAuthor</value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAuthor.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="eclAgenda.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="eclAgenda.Location" type="System.Drawing.Point, System.Drawing">
+    <value>596, 34</value>
+  </data>
+  <data name="eclAgenda.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 19</value>
+  </data>
+  <data name="eclAgenda.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;eclAgenda.Name" xml:space="preserve">
+    <value>eclAgenda</value>
+  </data>
+  <data name="&gt;&gt;eclAgenda.Type" xml:space="preserve">
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;eclAgenda.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;eclAgenda.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>797, 519</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -819,562 +1213,145 @@
         AAcAAAAfwAAA//gAH/////////////////8=
 </value>
   </data>
-  <data name="&gt;&gt;splitContainer2.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Deck Builder -</value>
   </data>
-  <data name="loadDeckToolStripMenuItem.Text" xml:space="preserve">
-    <value>Load deck</value>
+  <data name="&gt;&gt;miIncreaseCount.Name" xml:space="preserve">
+    <value>miIncreaseCount</value>
   </data>
-  <data name="miRemoveCardList.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="splitCardText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 179</value>
-  </data>
-  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="newVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
-  </data>
-  <data name="lblAgenda.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 211</value>
-  </data>
-  <data name="tabPageSideboard.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="miGenerateProxyPdf.Text" xml:space="preserve">
-    <value>Generate proxy pdf</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
-    <value>splitContainer1</value>
-  </data>
-  <data name="tabControlDecks.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rtbDescription.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;printDeckToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;miIncreaseCount.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
-    <value>AGoTDB.Components.AgotCardTreeView, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="sdsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Import / Export</value>
-  </data>
-  <data name="drawSimulatorToolStripMenuItem.Text" xml:space="preserve">
-    <value>Draw simulator</value>
-  </data>
-  <data name="tabPageCardtext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 185</value>
-  </data>
-  <data name="menuStripMain.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="treeViewDeck.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rtbCardText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
-    <value>AGoTDB.Forms.CardPreviewControl, AGoTDB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="miGenerateProxyPdf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="&gt;&gt;tabPageSideboard.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="saveDeckAstoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
-  </data>
-  <data name="tbAuthor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 20</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Parent" xml:space="preserve">
-    <value>splitCardText.Panel1</value>
-  </data>
-  <data name="tabPageSideboard.Text" xml:space="preserve">
-    <value>Sideboard</value>
-  </data>
-  <data name="loadDeckToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
-  </data>
-  <data name="&gt;&gt;sdsToolStripMenuItem.Name" xml:space="preserve">
-    <value>sdsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;saveDeckToolStripMenuItem.Name" xml:space="preserve">
-    <value>saveDeckToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;tbDeckName.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Name" xml:space="preserve">
-    <value>splitCardText</value>
-  </data>
-  <data name="&gt;&gt;tabControlGlobalInfo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rtbDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lblAgenda.Text" xml:space="preserve">
-    <value>Agenda: </value>
-  </data>
-  <data name="&gt;&gt;lblHouse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer2.Panel1.Name" xml:space="preserve">
-    <value>splitContainer2.Panel1</value>
-  </data>
-  <data name="tabPageDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.Parent" xml:space="preserve">
-    <value>tabControlLocalInfo</value>
-  </data>
-  <data name="&gt;&gt;tbAuthor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="lblAgenda.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="&gt;&gt;tbAuthor.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;miGenerateProxyPdf.Name" xml:space="preserve">
-    <value>miGenerateProxyPdf</value>
-  </data>
-  <data name="tabPageHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;menuStripMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>762, 181</value>
-  </data>
-  <data name="tabPageStats.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="&gt;&gt;exportDeckToClipboardSortedByToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabControlDecks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="rtbDescription.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;tabPageDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>DeckBuilderForm</value>
-  </data>
-  <data name="&gt;&gt;miRemoveCardList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControlDecks.Name" xml:space="preserve">
-    <value>tabControlDecks</value>
-  </data>
-  <data name="tabPageSideboard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="exportDeckToClipboardSortedBySetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 22</value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="exitToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+X</value>
-  </data>
-  <data name="&gt;&gt;lblDeckName.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
-  </data>
-  <data name="lblDeckName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;treeViewHistory.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miDecreaseCount.Text" xml:space="preserve">
-    <value>Remove a copy</value>
-  </data>
-  <data name="newVersionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Create a new version</value>
-  </data>
-  <data name="&gt;&gt;lblHouse.Name" xml:space="preserve">
-    <value>lblHouse</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
-    <value>tabPageSideboard</value>
-  </data>
-  <data name="rtbStatistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="exportDeckToOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
-  </data>
-  <data name="&gt;&gt;drawSimulatorToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabPageStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;cardPreviewControl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabControlLocalInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="lblDeckName.Text" xml:space="preserve">
-    <value>Deck name: </value>
-  </data>
-  <data name="splitCardText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tbDeckName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tabPageStats.Parent" xml:space="preserve">
-    <value>tabControlGlobalInfo</value>
-  </data>
-  <data name="lblDeckName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblAuthor.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="eclAgenda.Location" type="System.Drawing.Point, System.Drawing">
-    <value>596, 34</value>
-  </data>
-  <data name="&gt;&gt;exportDeckToOCTGNToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="exportToClipboardToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+E</value>
-  </data>
-  <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 422</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Name" xml:space="preserve">
-    <value>rtbStatistics</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbDeckName.Name" xml:space="preserve">
-    <value>tbDeckName</value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.Name" xml:space="preserve">
-    <value>tabPageCardtext</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblAuthor.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="treeViewHistory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;tabControlDecks.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
-  </data>
-  <data name="tabPageStats.Text" xml:space="preserve">
-    <value>Stats</value>
-  </data>
-  <data name="drawSimulatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 22</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControlLocalInfo.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="&gt;&gt;rtbStatistics.Parent" xml:space="preserve">
-    <value>tabPageStats</value>
-  </data>
-  <data name="&gt;&gt;lblDeckName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 185</value>
-  </data>
-  <data name="&gt;&gt;toolsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabPageDeck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="lblAuthor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rtbCardText.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.Name" xml:space="preserve">
-    <value>tabPageDeck</value>
-  </data>
-  <data name="tabPageHistory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="lblAuthor.Text" xml:space="preserve">
-    <value>Author: </value>
-  </data>
-  <data name="&gt;&gt;tabPageCardtext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripTreeView.Name" xml:space="preserve">
-    <value>contextMenuStripTreeView</value>
-  </data>
-  <data name="&gt;&gt;splitContainer2.Panel1.Parent" xml:space="preserve">
-    <value>splitContainer2</value>
-  </data>
-  <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
-    <value>tabPageDeck</value>
-  </data>
-  <data name="lblAgenda.Location" type="System.Drawing.Point, System.Drawing">
-    <value>540, 36</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabPageCardtext.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="eclHouse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 34</value>
-  </data>
-  <data name="&gt;&gt;tabControlGlobalInfo.Name" xml:space="preserve">
-    <value>tabControlGlobalInfo</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblHouse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="treeViewHistory.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tbAuthor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 59</value>
-  </data>
-  <data name="&gt;&gt;newToolStripMenuItem.Name" xml:space="preserve">
-    <value>newToolStripMenuItem</value>
-  </data>
-  <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;miDecreaseCount.Name" xml:space="preserve">
     <value>miDecreaseCount</value>
   </data>
-  <data name="tabControlDecks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>349, 211</value>
+  <data name="&gt;&gt;miDecreaseCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tabPageCardtext.Text" xml:space="preserve">
-    <value>Cardtext</value>
+  <data name="&gt;&gt;miExportDeckToClipboard.Name" xml:space="preserve">
+    <value>miExportDeckToClipboard</value>
   </data>
-  <data name="splitContainer2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="&gt;&gt;miExportDeckToClipboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tabControlLocalInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 211</value>
+  <data name="&gt;&gt;miAddCardList.Name" xml:space="preserve">
+    <value>miAddCardList</value>
   </data>
-  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>349</value>
+  <data name="&gt;&gt;miAddCardList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tabPageHistory.Text" xml:space="preserve">
-    <value>History</value>
+  <data name="&gt;&gt;miRemoveCardList.Name" xml:space="preserve">
+    <value>miRemoveCardList</value>
   </data>
-  <data name="&gt;&gt;exportToClipboardToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;miRemoveCardList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miGenerateProxyPdf.Name" xml:space="preserve">
+    <value>miGenerateProxyPdf</value>
+  </data>
+  <data name="&gt;&gt;miGenerateProxyPdf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
+    <value>fileToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;fileToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newToolStripMenuItem.Name" xml:space="preserve">
+    <value>newToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;newToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;loadDeckToolStripMenuItem.Name" xml:space="preserve">
+    <value>loadDeckToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;loadDeckToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveDeckToolStripMenuItem.Name" xml:space="preserve">
+    <value>saveDeckToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;saveDeckToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveDeckAstoolStripMenuItem.Name" xml:space="preserve">
+    <value>saveDeckAstoolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;saveDeckAstoolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newVersionToolStripMenuItem.Name" xml:space="preserve">
+    <value>newVersionToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;newVersionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;printDeckToolStripMenuItem.Name" xml:space="preserve">
+    <value>printDeckToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;printDeckToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
+    <value>exitToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolsToolStripMenuItem.Name" xml:space="preserve">
+    <value>toolsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;toolsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;drawSimulatorToolStripMenuItem.Name" xml:space="preserve">
+    <value>drawSimulatorToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;drawSimulatorToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sdsToolStripMenuItem.Name" xml:space="preserve">
+    <value>sdsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;sdsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;exportToClipboardToolStripMenuItem.Name" xml:space="preserve">
     <value>exportToClipboardToolStripMenuItem</value>
   </data>
-  <data name="lblDeckName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabControlDecks.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;eclHouse.Name" xml:space="preserve">
-    <value>eclHouse</value>
-  </data>
-  <data name="treeViewDeck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miAddCardList.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;toolsToolStripMenuItem.Name" xml:space="preserve">
-    <value>toolsToolStripMenuItem</value>
-  </data>
-  <data name="exportDeckToClipboardSortedByToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
-  </data>
-  <data name="tabPageDescription.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;newToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exportToClipboardToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="treeViewSide.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;exportDeckToClipboardSortedByToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportDeckToClipboardSortedByToolStripMenuItem</value>
   </data>
-  <data name="tabPageDeck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;importDeckFromOCTGNToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exportDeckToClipboardSortedByToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rtbDescription.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;exportDeckToClipboardSortedBySetToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportDeckToClipboardSortedBySetToolStripMenuItem</value>
   </data>
-  <data name="contextMenuStripTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 136</value>
+  <data name="&gt;&gt;exportDeckToClipboardSortedBySetToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblHouse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
+  <data name="&gt;&gt;exportDeckToOCTGNToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportDeckToOCTGNToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;tabPageStats.Name" xml:space="preserve">
-    <value>tabPageStats</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="&gt;&gt;lblAuthor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabPageSideboard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rtbCardText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;exportDeckToOCTGNToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;importDeckFromOCTGNToolStripMenuItem.Name" xml:space="preserve">
     <value>importDeckFromOCTGNToolStripMenuItem</value>
   </data>
-  <data name="rtbCardText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 179</value>
-  </data>
-  <data name="&gt;&gt;rtbDescription.Name" xml:space="preserve">
-    <value>rtbDescription</value>
-  </data>
-  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 179</value>
-  </data>
-  <data name="&gt;&gt;drawSimulatorToolStripMenuItem.Name" xml:space="preserve">
-    <value>drawSimulatorToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;cardPreviewControl.Name" xml:space="preserve">
-    <value>cardPreviewControl</value>
-  </data>
-  <data name="newToolStripMenuItem.Text" xml:space="preserve">
-    <value>New deck</value>
-  </data>
-  <data name="&gt;&gt;tabPageDescription.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;treeViewSide.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;splitContainer2.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="printDeckToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print deck</value>
-  </data>
-  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;importDeckFromOCTGNToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="saveDeckToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save deck</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>DeckBuilderForm</value>
   </data>
-  <data name="importDeckFromOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="menuStripMain.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tabPageDeck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabControlGlobalInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="rtbCardText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;splitCardText.Panel2.Parent" xml:space="preserve">
-    <value>splitCardText</value>
-  </data>
-  <data name="&gt;&gt;splitContainer2.Name" xml:space="preserve">
-    <value>splitContainer2</value>
-  </data>
-  <data name="&gt;&gt;miAddCardList.Name" xml:space="preserve">
-    <value>miAddCardList</value>
-  </data>
-  <data name="tbAuthor.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="eclAgenda.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 19</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="tabPageSideboard.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 175</value>
-  </data>
-  <data name="&gt;&gt;loadDeckToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="contextMenuStripTreeView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>6, 24</value>
-  </metadata>
-  <metadata name="menuStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 0</value>
-  </metadata>
 </root>
