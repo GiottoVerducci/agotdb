@@ -95,7 +95,12 @@ namespace AGoTDB.Forms
             InitializeComponent();
             _treeViews = new List<AgotCardTreeView> { treeViewSide, treeViewDeck };
             foreach (AgotCardTreeView t in _treeViews)
-                t.NodeInfo = t.Nodes[0]; // must have been added during design time
+            {
+                var rootNode = new TreeNode(Resource1.TreeNodeAddCard);
+                rootNode.NodeFont = new Font(t.Font, FontStyle.Italic);
+                t.Nodes.Add(rootNode);
+                t.NodeInfo = rootNode;
+            }
             NewVersionedDeck(false);
             for (var i = 0; i < _treeViews.Count; ++i)
             {

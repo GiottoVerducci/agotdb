@@ -153,10 +153,10 @@
   <data name="DeckFileFilter" xml:space="preserve">
     <value>Deck (*.xml)|*.xml</value>
   </data>
-    <data name="OctgnDeckFileFilter" xml:space="preserve">
+  <data name="OctgnDeckFileFilter" xml:space="preserve">
     <value>Octgn (*.o8d)|*.o8d</value>
   </data>
-    <data name="DoomedText" xml:space="preserve">
+  <data name="DoomedText" xml:space="preserve">
     <value>DOOMED</value>
   </data>
   <data name="ErrDatabaseNotFound" xml:space="preserve">
@@ -212,10 +212,10 @@ Exception trace:
   <data name="ErrInvalidXmlDeckFile" xml:space="preserve">
     <value>The content of the file is not a valid AGoTDB deck.</value>
   </data>
-    <data name="ErrCardsNotFoundInOctgnDeckFile" xml:space="preserve">
+  <data name="ErrCardsNotFoundInOctgnDeckFile" xml:space="preserve">
     <value>Some cards couldn't be found in the Agot Database (make sure you have updated the database with the latest Octgn sets).</value>
   </data>
-    <data name="ErrMinimalSoftwareVersionRequired" xml:space="preserve">
+  <data name="ErrMinimalSoftwareVersionRequired" xml:space="preserve">
     <value>This version of the database requires at least the version {0} for the software. Current version of the software is {1}. The software may malfunction. Do you wish to continue?</value>
   </data>
   <data name="ErrMinimalSoftwareVersionRequiredTitle" xml:space="preserve">
@@ -388,5 +388,8 @@ Exception trace:
   </data>
   <data name="WarnOctgnNotLoadedTitle" xml:space="preserve">
     <value>OCTGN sets not loaded</value>
+  </data>
+  <data name="TreeNodeAddCard" xml:space="preserve">
+    <value>You may add cards by double-clicking on them in the main window</value>
   </data>
 </root>
