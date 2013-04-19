@@ -296,21 +296,42 @@ namespace NRADB.Forms
         {
             var types = ApplicationSettings.DatabaseManager.GetCardTypeNames();
             NraCard.CardTypeNames = new Dictionary<int, string>();
+            NraCard.CardTypeSide = new Dictionary<int, int>();
             foreach (DataRow row in types.Rows)
             {
                 if ((int)row["Id"] >= 0)
+                {
                     NraCard.CardTypeNames.Add((int)row["ShortName"], row["Value"].ToString());
+                    NraCard.CardTypeSide.Add((int)row["ShortName"], (int)row["Side"]);
+                }
             }
         }
 
         private static void LoadCardFactionNames()
         {
-            var houses = ApplicationSettings.DatabaseManager.GetCardFactionNames();
+            var factions = ApplicationSettings.DatabaseManager.GetCardFactionNames();
             NraCard.CardFactionNames = new Dictionary<int, string>();
-            foreach (DataRow row in houses.Rows)
+            NraCard.CardFactionSide = new Dictionary<int, int>();
+            foreach (DataRow row in factions.Rows)
             {
                 if ((int)row["Id"] >= 0)
+                {
                     NraCard.CardFactionNames.Add((int)row["Id"], row["Value"].ToString());
+                    NraCard.CardFactionSide.Add((int)row["Id"], (int)row["Side"]);
+                }
+            }
+        }
+
+        private static void LoadCardSideNames()
+        {
+            var sides = ApplicationSettings.DatabaseManager.GetCardSideNames();
+            NraCard.CardSideNames = new Dictionary<int, string>();
+            foreach (DataRow row in sides.Rows)
+            {
+                if ((int)row["Id"] >= 0)
+                {
+                    NraCard.CardSideNames.Add((int)row["Id"], row["Value"].ToString());
+                }
             }
         }
 
@@ -362,14 +383,14 @@ namespace NRADB.Forms
         /// </summary>
         private void UpdateControlsLabels()
         {
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameFaction, "House", TableType.ValueKey);
+            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclCardtype, ApplicationSettings.DatabaseManager.TableNameType, "Type", TableType.ValueShortName);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclMecanism, ApplicationSettings.DatabaseManager.TableNameMechanism, "", TableType.ValueKey);
+            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
+            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclMecanism, ApplicationSettings.DatabaseManager.TableNameMechanism, "", TableType.ValueKey);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclTrigger, ApplicationSettings.DatabaseManager.TableNameTrigger, "Text", TableType.Value);
+            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
+            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclTrigger, ApplicationSettings.DatabaseManager.TableNameTrigger, "Text", TableType.Value);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName);
             ApplicationSettings.DatabaseManager.UpdateFilterMenu(filterToolStripMenuItem, ApplicationSettings.DatabaseManager.TableNameFilterText, tbCardtext, eclCardtextCheck);
         }
@@ -392,14 +413,24 @@ namespace NRADB.Forms
         private static string BuildTypeExpression()
         {
             var types = NraCard.CardTypeNames.ToArray();
-            return BuildTypeExpression(0, types);
+            return BuildAggregateExpression("Type", 0, types);
         }
 
-        private static string BuildTypeExpression(int i, KeyValuePair<int, string>[] types)
+        private static string BuildAggregateExpression(string fieldName, int i, KeyValuePair<int, string>[] types)
         {
             return i < types.Length - 1
-                ? string.Format("IIF(Type={0}, '{1}', {2})", types[i].Key, types[i].Value, BuildTypeExpression(i + 1, types))
+                ? string.Format("IIF({0}={1}, '{2}', {3})", fieldName, types[i].Key, types[i].Value, BuildAggregateExpression(fieldName, i + 1, types))
                 : string.Format("'{0}'", types[i].Value);
+        }
+
+        /// <summary>
+        /// Builds recursively the expression used to display a human "Side" column
+        /// </summary>
+        /// <returns>The expression used by the data column</returns>
+        private static string BuildSideExpression()
+        {
+            var sides = NraCard.CardSideNames.ToArray();
+            return BuildAggregateExpression("Side", 0, sides);
         }
 
         /// <summary>
@@ -407,26 +438,27 @@ namespace NRADB.Forms
         /// </summary>
         private void CustomizeDataTable()
         {
-            var houseTempColumn = new DataColumn("HouseTemp", typeof(String))
+            var factionTempColumn = new DataColumn("FactionTemp", typeof(String))
             {
-                Expression = ""/*String.Format(
-                    "IIF(HouseNeutral, '{0}/', '') + IIF(HouseStark, '{1}/', '') + IIF(HouseLannister, '{2}/', '') + IIF(HouseBaratheon, '{3}/', '') + IIF(HouseGreyjoy, '{4}/', '') + IIF(HouseMartell, '{5}/', '') + IIF(HouseTargaryen, '{6}/', '')",
-                    NraCard.GetHouseName((Int32)NraCard.CardFaction.Neutral),
-                    NraCard.GetHouseName((Int32)NraCard.CardFaction.Stark),
-                    NraCard.GetHouseName((Int32)NraCard.CardFaction.Lannister),
-                    NraCard.GetHouseName((Int32)NraCard.CardFaction.Baratheon),
-                    NraCard.GetHouseName((Int32)NraCard.CardFaction.Greyjoy),
-                    NraCard.GetHouseName((Int32)NraCard.CardFaction.Martell),
-                    NraCard.GetHouseName((Int32)NraCard.CardFaction.Targaryen))*/
+                Expression = String.Format(
+                    "IIF(FactionNeutral, '{0}/', '') + IIF(FactionAnarch, '{1}/', '') + IIF(FactionCriminal, '{2}/', '') + IIF(FactionShaper, '{3}/', '') + IIF(FactionHaasBioroid, '{4}/', '') + IIF(FactionJinteki, '{5}/', '') + IIF(FactionNBN, '{6}/', '') + IIF(FactionWeyland, '{7}/', '')",
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.Neutral),
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.Anarch),
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.Criminal),
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.Shaper),
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.HaasBioroid),
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.Jinteki),
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.NBN),
+                    NraCard.GetFactionName((Int32)NraCard.CardFaction.Weyland))
             };
-            _dataTable.Columns.Add(houseTempColumn);
+            _dataTable.Columns.Add(factionTempColumn);
 
-            var houseColumn = new DataColumn("House", typeof(String))
+            var factionColumn = new DataColumn("Faction", typeof(String))
             {
-                Expression = String.Format("SUBSTRING(HouseTemp, 1, LEN(HouseTemp) - 1)")
+                Expression = String.Format("SUBSTRING(FactionTemp, 1, LEN(FactionTemp) - 1)")
             };
-            _dataTable.Columns.Add(houseColumn);
-            _dataTable.Columns["House"].SetOrdinal(_dataTable.Columns["Name"].Ordinal + 1);
+            _dataTable.Columns.Add(factionColumn);
+            _dataTable.Columns["Faction"].SetOrdinal(_dataTable.Columns["Name"].Ordinal + 1);
 
             var typeColumn = new DataColumn("Type ", typeof(String))
             {
@@ -434,6 +466,13 @@ namespace NRADB.Forms
             };
             _dataTable.Columns.Add(typeColumn);
             _dataTable.Columns["Type "].SetOrdinal(_dataTable.Columns["Type"].Ordinal + 1);
+
+            var sideColumn = new DataColumn("Side ", typeof(String))
+            {
+                Expression = BuildSideExpression()
+            };
+            _dataTable.Columns.Add(sideColumn);
+            _dataTable.Columns["Side "].SetOrdinal(_dataTable.Columns["Side"].Ordinal + 1);
         }
 
         /// <summary>
@@ -493,9 +532,10 @@ namespace NRADB.Forms
         {
             return ((columnName.IndexOf("Style", StringComparison.InvariantCultureIgnoreCase) != -1)
                 || (columnName.IndexOf("Errated", StringComparison.InvariantCultureIgnoreCase) != -1)
-                || ((columnName.StartsWith("House", StringComparison.InvariantCultureIgnoreCase)
-                    && (columnName.Length > "House".Length)))
-                || (string.Compare(columnName, "Type", StringComparison.InvariantCultureIgnoreCase) == 0));
+                || ((columnName.StartsWith("Faction", StringComparison.InvariantCultureIgnoreCase)
+                    && (columnName.Length > "Faction".Length)))
+                || (string.Compare(columnName, "Type", StringComparison.InvariantCultureIgnoreCase) == 0)
+                || (string.Compare(columnName, "Side", StringComparison.InvariantCultureIgnoreCase) == 0));
         }
 
         /// <summary>
@@ -527,7 +567,7 @@ namespace NRADB.Forms
 
             Query filter =
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclCardtype, "OR", PositiveDataType.ExactValue) +
-                QueryBuilder.GetFilterFromExtendedCheckedListBox(eclHouse, "OR", PositiveDataType.Yes) +
+                QueryBuilder.GetFilterFromExtendedCheckedListBox(eclFaction, "OR", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclProvides, "AND", PositiveDataType.Integer) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclMecanism, "AND", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclIcon, "AND", PositiveDataType.Yes) +
@@ -536,7 +576,7 @@ namespace NRADB.Forms
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclTrigger, "OR", PositiveDataType.TriggerValue) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclExpansionSet, "OR", PositiveDataType.LikeValue, additionalIncludedSets, additionalExcludedSets);
 
-            Query costOrIncome = QueryBuilder.GetFilterFromRangeBoxes(tbGoldLow, tbGoldHigh, "Cost");
+            Query costOrIncome = QueryBuilder.GetFilterFromRangeBoxes(tbCostLow, tbCostHigh, "Cost");
             if (!string.IsNullOrEmpty(costOrIncome.SqlQuery))
             {
                 costOrIncome.SqlQuery = string.Format("(({0}) OR ({1}))", costOrIncome.SqlQuery, costOrIncome.SqlQuery.Replace("Cost", "Income"));
@@ -544,11 +584,11 @@ namespace NRADB.Forms
             }
             filter +=
                 costOrIncome +
-                QueryBuilder.GetFilterFromRangeBoxes(tbInitiativeLow, tbInitiativeHigh, "Initiative") +
-                QueryBuilder.GetFilterFromRangeBoxes(tbClaimLow, tbClaimHigh, "Claim") +
-                QueryBuilder.GetFilterFromRangeBoxes(tbStrengthLow, tbStrengthHigh, "Strength") +
+                QueryBuilder.GetFilterFromRangeBoxes(tbMuLow, tbMuHigh, "Stat") +
+                QueryBuilder.GetFilterFromRangeBoxes(tbClaimLow, tbClaimHigh, "Stat") +
+                QueryBuilder.GetFilterFromRangeBoxes(tbStrengthLow, tbStrengthHigh, "Stat") +
                 QueryBuilder.GetFilterFromTextBox(tbCardtext, eclCardtextCheck, "Text") +
-                QueryBuilder.GetFilterFromTextBox(tbTraits, eclTraitCheck, "Traits") +
+                QueryBuilder.GetFilterFromTextBox(tbKeywords, eclKeywordCheck, "Keywords") +
                 QueryBuilder.GetFilterFromTextBox(tbName, eclNameCheck, "Name");
 
             if (!string.IsNullOrEmpty(filter.SqlQuery))
@@ -561,13 +601,13 @@ namespace NRADB.Forms
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            ClearCheckListBoxes(eclHouse, eclCardtype, eclProvides, eclMecanism,
+            ClearCheckListBoxes(eclFaction, eclCardtype, eclProvides, eclMecanism,
                 eclIcon, eclVirtue, eclKeyword, eclTrigger, eclExpansionSet);
 
-            ClearTextBoxes(tbGoldLow, tbGoldHigh, tbInitiativeLow, tbInitiativeHigh,
-                tbClaimLow, tbClaimHigh, tbStrengthLow, tbStrengthHigh, tbCardtext, tbTraits, tbName);
+            ClearTextBoxes(tbCostLow, tbCostHigh, tbMuLow, tbMuHigh,
+                tbClaimLow, tbClaimHigh, tbStrengthLow, tbStrengthHigh, tbCardtext, tbKeywords, tbName);
 
-            ClearCheckBoxes(eclCardtextCheck, eclTraitCheck, eclNameCheck);
+            ClearCheckBoxes(eclCardtextCheck, eclKeywordCheck, eclNameCheck);
 
             UpdateDataTableView();
         }
@@ -782,10 +822,11 @@ namespace NRADB.Forms
 
             SetupDisplay();
             UpdateControlsLabels();
+            LoadCardSideNames();
             LoadCardTypeNames();
             LoadCardFactionNames();
-            LoadCardTriggerNames();
-            LoadCardPatterns();
+            //LoadCardTriggerNames();
+            //LoadCardPatterns();
             LoadExpansionSets();
             UpdateDataTableView();
             dataGridView.DataSource = _dataTable;

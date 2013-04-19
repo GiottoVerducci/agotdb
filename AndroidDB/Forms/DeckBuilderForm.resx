@@ -216,7 +216,7 @@
     <value>treeViewDeck</value>
   </data>
   <data name="&gt;&gt;treeViewDeck.Type" xml:space="preserve">
-    <value>NRADB.Components.NraCardTreeView, NRADB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>NRADB.Components.NraCardTreeView, AndroidDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;treeViewDeck.Parent" xml:space="preserve">
     <value>tabPageDeck</value>
@@ -277,7 +277,7 @@
     <value>treeViewSide</value>
   </data>
   <data name="&gt;&gt;treeViewSide.Type" xml:space="preserve">
-    <value>NRADB.Components.NraCardTreeView, NRADB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>NRADB.Components.NraCardTreeView, AndroidDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;treeViewSide.Parent" xml:space="preserve">
     <value>tabPageSideboard</value>
@@ -412,7 +412,7 @@
     <value>cardPreviewControl</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
-    <value>NRADB.Forms.CardPreviewControl, NRADB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>NRADB.Forms.CardPreviewControl, AndroidDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
     <value>splitCardText.Panel2</value>
@@ -763,7 +763,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;splitContainer2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="lblDeckName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -793,7 +793,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDeckName.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="tbDeckName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -817,7 +817,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tbDeckName.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <metadata name="menuStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
@@ -958,97 +958,64 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStripMain.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
-  <data name="lblHouse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="lblFaction.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="lblHouse.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblFaction.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblHouse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFaction.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblHouse.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFaction.Location" type="System.Drawing.Point, System.Drawing">
     <value>343, 36</value>
   </data>
-  <data name="lblHouse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
+  <data name="lblFaction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
   </data>
-  <data name="lblHouse.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFaction.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="lblHouse.Text" xml:space="preserve">
-    <value>House: </value>
+  <data name="lblFaction.Text" xml:space="preserve">
+    <value>Faction:</value>
   </data>
-  <data name="&gt;&gt;lblHouse.Name" xml:space="preserve">
-    <value>lblHouse</value>
+  <data name="&gt;&gt;lblFaction.Name" xml:space="preserve">
+    <value>lblFaction</value>
   </data>
-  <data name="&gt;&gt;lblHouse.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFaction.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblHouse.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFaction.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblHouse.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;lblFaction.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="eclHouse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="eclFaction.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="eclHouse.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="eclFaction.Location" type="System.Drawing.Point, System.Drawing">
     <value>396, 34</value>
   </data>
-  <data name="eclHouse.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="eclFaction.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 19</value>
   </data>
-  <data name="eclHouse.TabIndex" type="System.Int32, mscorlib">
+  <data name="eclFaction.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Name" xml:space="preserve">
-    <value>eclHouse</value>
+  <data name="&gt;&gt;eclFaction.Name" xml:space="preserve">
+    <value>eclFaction</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Type" xml:space="preserve">
+  <data name="&gt;&gt;eclFaction.Type" xml:space="preserve">
     <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Parent" xml:space="preserve">
+  <data name="&gt;&gt;eclFaction.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;eclHouse.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;eclFaction.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="lblAgenda.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="lblAgenda.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblAgenda.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAgenda.Location" type="System.Drawing.Point, System.Drawing">
-    <value>540, 36</value>
-  </data>
-  <data name="lblAgenda.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="lblAgenda.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="lblAgenda.Text" xml:space="preserve">
-    <value>Agenda: </value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.Name" xml:space="preserve">
-    <value>lblAgenda</value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblAgenda.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="tbAuthor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1103,30 +1070,6 @@
   </data>
   <data name="&gt;&gt;lblAuthor.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="eclAgenda.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="eclAgenda.Location" type="System.Drawing.Point, System.Drawing">
-    <value>596, 34</value>
-  </data>
-  <data name="eclAgenda.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 19</value>
-  </data>
-  <data name="eclAgenda.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;eclAgenda.Name" xml:space="preserve">
-    <value>eclAgenda</value>
-  </data>
-  <data name="&gt;&gt;eclAgenda.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;eclAgenda.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;eclAgenda.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

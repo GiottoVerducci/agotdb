@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Settings>
+  <Startup>
+    <CheckForUpdatesOnStartup value="False" />
+    <CreateExtendedDB value="True" />
+    <UpdateInformationsUrl value="http://v.ripoll.free.fr/NRA/databaseinfo.txt" />
+  </Startup>
+  <General>
+    <DatabaseLanguage value="EN" />
+    <DisplayImages value="False" />
+    <ImagePreviewSize value="100" />
+  </General>
+  <SearchForm>
+    <LcgSetsOnly value="True" />
+  </SearchForm>
+  <DeckBuilder>
+    <!-- 1:Identity 2:Agenda 4:Hardware 8:Ice 16:Program 32:Resource 64: Upgrade -->
+    <TypeOrder value="1,2,8,32,4,16,64" />
+    <ShowNewVersionMessage value="True" />
+  </DeckBuilder>
+</Settings>

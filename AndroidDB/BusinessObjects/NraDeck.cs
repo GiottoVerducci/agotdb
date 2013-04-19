@@ -29,7 +29,7 @@ namespace NRADB.BusinessObjects
 	public class NraDeck : Deck<NraCardList, NraCard>
 	{
 		/// <summary>
-		/// The houses chosen for this deck (more than one for a treaty deck, for example).
+		/// The factions chosen for this deck.
 		/// </summary>
 		public int Factions { get; set; }
 		/// <summary>
@@ -62,7 +62,7 @@ namespace NRADB.BusinessObjects
 		{
 			base.WriteXmlElements(doc, deckRoot);
 
-			XmlToolbox.AddElementValue(doc, deckRoot, "Houses", Factions.ToString());
+			XmlToolbox.AddElementValue(doc, deckRoot, "Factions", Factions.ToString());
 			for (var j = 0; j < Agenda.Count; ++j)
 			{
 				string cardListNodeName = GetAgendaListNodeName(j);
@@ -89,7 +89,7 @@ namespace NRADB.BusinessObjects
 		{
 			base.ReadXmlElements(root, doc);
 			string value;
-			if (!string.IsNullOrEmpty(value = XmlToolbox.GetElementValue(doc, root, "Houses")))
+			if (!string.IsNullOrEmpty(value = XmlToolbox.GetElementValue(doc, root, "Factions")))
 				Factions = Convert.ToInt32(value, CultureInfo.InvariantCulture);
 			// we read the agenda cards
 			Agenda.Clear();

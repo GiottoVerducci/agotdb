@@ -24,38 +24,38 @@ using GenericDB.Components;
 
 namespace NRADB.Components
 {
-	public class NraCardTreeView : CardTreeView<NraCardList, NraCard>
-	{
-		/// <summary>
-		/// Deck partially represented by this treeview (contains global informations such as the house,
-		/// used to highlight out of House cards)
-		/// </summary>
-		public NraDeck Deck { get; set; }
+    public class NraCardTreeView : CardTreeView<NraCardList, NraCard>
+    {
+        /// <summary>
+        /// Deck partially represented by this treeview (contains global informations such as the faction,
+        /// used to highlight out of factions cards)
+        /// </summary>
+        public NraDeck Deck { get; set; }
 
-		/// <summary>
-		/// Keeps the count of calls to BeginUpdate and EndUpdate to be used by the IsBeingUpdated method.
-		/// </summary>
-		protected int _updateCount;
+        /// <summary>
+        /// Keeps the count of calls to BeginUpdate and EndUpdate to be used by the IsBeingUpdated method.
+        /// </summary>
+        protected int _updateCount;
 
-		/// <summary>
-		/// Indicates whether the control is being updated or not. When it is, drawing must be skipped.
-		/// </summary>
-		/// <returns>True if the control is being updated, false otherwise.</returns>
-		public bool IsBeingUpdated()
-		{
-			return _updateCount > 0;
-		}
+        /// <summary>
+        /// Indicates whether the control is being updated or not. When it is, drawing must be skipped.
+        /// </summary>
+        /// <returns>True if the control is being updated, false otherwise.</returns>
+        public bool IsBeingUpdated()
+        {
+            return _updateCount > 0;
+        }
 
-		public new void BeginUpdate()
-		{
-			++_updateCount;
-			base.BeginUpdate();
-		}
+        public new void BeginUpdate()
+        {
+            ++_updateCount;
+            base.BeginUpdate();
+        }
 
-		public new void EndUpdate()
-		{
-			base.EndUpdate();
-			--_updateCount;
-		}
-	}
+        public new void EndUpdate()
+        {
+            base.EndUpdate();
+            --_updateCount;
+        }
+    }
 }

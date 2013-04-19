@@ -77,12 +77,10 @@ namespace NRADB.Forms
             this.exportDeckToClipboardSortedBySetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportDeckToOCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importDeckFromOCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblHouse = new System.Windows.Forms.Label();
-            this.eclHouse = new Beyond.ExtendedControls.ExtendedCheckedListBox();
-            this.lblAgenda = new System.Windows.Forms.Label();
+            this.lblFaction = new System.Windows.Forms.Label();
+            this.eclFaction = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.tbAuthor = new System.Windows.Forms.TextBox();
             this.lblAuthor = new System.Windows.Forms.Label();
-            this.eclAgenda = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -461,28 +459,23 @@ namespace NRADB.Forms
             resources.ApplyResources(this.importDeckFromOCTGNToolStripMenuItem, "importDeckFromOCTGNToolStripMenuItem");
             this.importDeckFromOCTGNToolStripMenuItem.Click += new System.EventHandler(this.ImportDeckFromOctgnToolStripMenuItem_Click);
             // 
-            // lblHouse
+            // lblFaction
             // 
-            resources.ApplyResources(this.lblHouse, "lblHouse");
-            this.lblHouse.Name = "lblHouse";
+            resources.ApplyResources(this.lblFaction, "lblFaction");
+            this.lblFaction.Name = "lblFaction";
             // 
-            // eclHouse
+            // eclFaction
             // 
-            resources.ApplyResources(this.eclHouse, "eclHouse");
-            this.eclHouse.CheckOnClick = true;
-            this.eclHouse.Condensed = true;
-            this.eclHouse.CondensedMode = true;
-            this.eclHouse.FormattingEnabled = true;
-            this.eclHouse.Name = "eclHouse";
-            this.eclHouse.RollDownDelay = 250;
-            this.eclHouse.Summary = "House";
-            this.eclHouse.ThreeState = false;
-            this.eclHouse.SelectedValueChanged += new System.EventHandler(this.EclHouse_SelectedValueChanged);
-            // 
-            // lblAgenda
-            // 
-            resources.ApplyResources(this.lblAgenda, "lblAgenda");
-            this.lblAgenda.Name = "lblAgenda";
+            resources.ApplyResources(this.eclFaction, "eclFaction");
+            this.eclFaction.CheckOnClick = true;
+            this.eclFaction.Condensed = true;
+            this.eclFaction.CondensedMode = true;
+            this.eclFaction.FormattingEnabled = true;
+            this.eclFaction.Name = "eclFaction";
+            this.eclFaction.RollDownDelay = 250;
+            this.eclFaction.Summary = "Faction";
+            this.eclFaction.ThreeState = false;
+            this.eclFaction.SelectedValueChanged += new System.EventHandler(this.EclFaction_SelectedValueChanged);
             // 
             // tbAuthor
             // 
@@ -494,30 +487,15 @@ namespace NRADB.Forms
             resources.ApplyResources(this.lblAuthor, "lblAuthor");
             this.lblAuthor.Name = "lblAuthor";
             // 
-            // eclAgenda
-            // 
-            resources.ApplyResources(this.eclAgenda, "eclAgenda");
-            this.eclAgenda.CheckOnClick = true;
-            this.eclAgenda.Condensed = true;
-            this.eclAgenda.CondensedMode = true;
-            this.eclAgenda.FormattingEnabled = true;
-            this.eclAgenda.Name = "eclAgenda";
-            this.eclAgenda.RollDownDelay = 250;
-            this.eclAgenda.Summary = "Agenda";
-            this.eclAgenda.ThreeState = false;
-            this.eclAgenda.SelectedValueChanged += new System.EventHandler(this.EclAgenda_SelectedValueChanged);
-            // 
             // DeckBuilderForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tbAuthor);
             this.Controls.Add(this.lblAuthor);
-            this.Controls.Add(this.eclHouse);
-            this.Controls.Add(this.eclAgenda);
+            this.Controls.Add(this.eclFaction);
             this.Controls.Add(this.splitContainer2);
-            this.Controls.Add(this.lblAgenda);
-            this.Controls.Add(this.lblHouse);
+            this.Controls.Add(this.lblFaction);
             this.Controls.Add(this.tbDeckName);
             this.Controls.Add(this.lblDeckName);
             this.Controls.Add(this.menuStripMain);
@@ -571,9 +549,8 @@ namespace NRADB.Forms
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem drawSimulatorToolStripMenuItem;
-		private System.Windows.Forms.Label lblHouse;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclHouse;
-    private System.Windows.Forms.Label lblAgenda;
+		private System.Windows.Forms.Label lblFaction;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclFaction;
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private NraCardTreeView treeViewDeck;
@@ -596,8 +573,7 @@ namespace NRADB.Forms
 		private System.Windows.Forms.TabPage tabPageSideboard;
 		private NraCardTreeView treeViewSide;
 		private System.Windows.Forms.ToolStripMenuItem miAddCardList;
-		private System.Windows.Forms.ToolStripMenuItem miRemoveCardList;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclAgenda;
+        private System.Windows.Forms.ToolStripMenuItem miRemoveCardList;
 	private System.Windows.Forms.ToolStripMenuItem miGenerateProxyPdf;
 	private System.Windows.Forms.RichTextBox rtbCardText;
 	private System.Windows.Forms.TabPage tabPageStats;
