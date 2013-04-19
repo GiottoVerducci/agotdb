@@ -60,9 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\ExtendedControls.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>.\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="itextsharp, Version=5.0.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\itextsharp.dll</HintPath>
@@ -79,6 +76,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Helper\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -89,7 +88,6 @@
     <Compile Include="BusinessObjects\AgotVersionedDeck.cs" />
     <Compile Include="BusinessObjects\ApplicationSettings.cs" />
     <Compile Include="BusinessObjects\UserSettings.cs" />
-    <Compile Include="Common\Win32.cs" />
     <Compile Include="Components\AgotCardTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -143,9 +141,7 @@
     <Compile Include="Forms\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\ZipHelper.cs" />
     <Compile Include="OCTGN\OctgnCard.cs" />
-    <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
     <Compile Include="OCTGN\OctgnLoader.cs" />
     <Compile Include="OCTGN\OctgnLoaderForm.cs">
       <SubType>Form</SubType>
@@ -155,7 +151,6 @@
     </Compile>
     <Compile Include="OCTGN\OctgnManager.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Services\CardImageService.cs" />
     <Compile Include="Resource1.fr.Designer.cs">
       <DependentUpon>Resource1.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -167,7 +162,6 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\DeckStatisticsService.cs" />
-    <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\ProxyPdfGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

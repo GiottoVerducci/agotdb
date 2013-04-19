@@ -31,14 +31,17 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+
 using AGoTDB.BusinessObjects;
 using AGoTDB.DataAccess;
-using AGoTDB.Helper;
 using AGoTDB.OCTGN;
+
 using Beyond.ExtendedControls;
+
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Extensions;
+using GenericDB.Helper;
 
 namespace AGoTDB.Forms
 {

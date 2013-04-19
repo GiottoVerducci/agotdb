@@ -270,7 +270,14 @@ namespace GenericDB.DataAccess
             return true;
         }
 
-        public void UpdateCards(Func<DataRow, int, bool> updateAction)
+        public enum OperationResult
+        {
+            Ok,
+            Done,
+            Abort
+        }
+
+        public void UpdateCards(Func<DataRow, int, OperationResult> updateAction)
         {
             var query = String.Format("SELECT * FROM [{0}]", TableNameMain);
             using (var dbDataAdapter = new OleDbDataAdapter(query, _dbConnection))
@@ -286,9 +293,37 @@ namespace GenericDB.DataAccess
                 foreach (DataRow row in rows)
                 {
                     ++progress;
-                    if (!updateAction(row, progress * 100 / rows.Count))
+                    var result = updateAction(row, progress * 100 / rows.Count);
+                    if (result == OperationResult.Abort)
                         return; // abort
+                    if (result == OperationResult.Done)// not used
+                        break;
                 }
+                dbDataAdapter.Update(dataSet);
+            }
+        }
+
+        public void ResetAndImportCards(Func<DataRowCollection, OperationResult> importAction)
+        {
+            string query = String.Format("DELETE FROM [{0}]", TableNameMain);
+            GetResultFromRequest(query, _hdbConnection, null);
+
+            query = String.Format("SELECT * FROM [{0}]", TableNameMain);
+
+            using (var dbDataAdapter = new OleDbDataAdapter(query, _hdbConnection))
+            {
+                new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
+
+                var dataSet = new DataSet();
+                dataSet.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
+                dbDataAdapter.Fill(dataSet);
+
+                OperationResult result;
+                do
+                {
+                    result = importAction(dataSet.Tables[0].Rows);
+                } 
+                while (result == OperationResult.Ok);
                 dbDataAdapter.Update(dataSet);
             }
         }

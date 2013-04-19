@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AGoTDB.OCTGN
+namespace GenericDB.OCTGN
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 	public class OctgnCardDataAttribute : Attribute

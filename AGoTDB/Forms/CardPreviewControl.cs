@@ -24,6 +24,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
 using AGoTDB.Services;
+using GenericDB.Services;
 
 namespace AGoTDB.Forms
 {
@@ -75,7 +76,7 @@ namespace AGoTDB.Forms
 				Invalidate();
 				return;
 			}
-			string imageFileName = CardImageService.GetImageFileName(_cardUniversalId);
+			string imageFileName = CardImageService.GetImageFileName(ApplicationSettings.ImagesFolder, _cardUniversalId);
 			if (CardImageService.GetImageAvailability(imageFileName) == ImageAvailability.Available)
 			{
 				_currentImage = new Bitmap(imageFileName);

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace AGoTDB.Helper
+namespace GenericDB.Helper
 {
 	public static class ZipHelper
 	{

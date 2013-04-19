@@ -75,6 +75,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\ExtendedControls.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>.\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -95,6 +98,7 @@
     <Compile Include="BusinessObjects\Settings.cs" />
     <Compile Include="BusinessObjects\StringPair.cs" />
     <Compile Include="BusinessObjects\VersionedDeck.cs" />
+    <Compile Include="Common\Win32.cs" />
     <Compile Include="Components\CardTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -129,9 +133,13 @@
     <Compile Include="Forms\RevisionCommentInputForm.Designer.cs">
       <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ZipHelper.cs" />
+    <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BusinessObjects\TextFormat.cs" />
     <Compile Include="BusinessObjects\XInt.cs" />
+    <Compile Include="Services\CardImageService.cs" />
+    <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>

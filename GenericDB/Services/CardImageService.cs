@@ -20,10 +20,9 @@
 // © Le Trône de Fer JCE 2008 Edge Entertainment
 
 using System;
-using AGoTDB.BusinessObjects;
 using System.IO;
 
-namespace AGoTDB.Services
+namespace GenericDB.Services
 {
 	public enum ImageAvailability
 	{
@@ -35,7 +34,7 @@ namespace AGoTDB.Services
 
 	public sealed class CardImageService
 	{
-		private static readonly CardImageService fCardImageService = new CardImageService();
+		private static readonly CardImageService _cardImageService = new CardImageService();
 		// Explicit static constructor to tell C# compiler
 		// not to mark type as beforefieldinit (for singleton template implementation)
 		static CardImageService()
@@ -51,21 +50,20 @@ namespace AGoTDB.Services
 		/// </summary>
 		private static CardImageService Singleton
 		{
-			get { return fCardImageService; }
+			get { return _cardImageService; }
 		}
 
-
-		public static string GetImageFileName(int universalId)
+		public static string GetImageFileName(string imagesFolder, int universalId)
 		{
 			return String.Format("{0}{1}{2}.jpg",
-				ApplicationSettings.ImagesFolder,
+				imagesFolder,
 				Path.DirectorySeparatorChar,
 				universalId);
 		}
 
-		public static ImageAvailability GetImageAvailability(int universalId)
+		public static ImageAvailability GetImageAvailability(string imagesFolder, int universalId)
 		{
-			var imageFileName = GetImageFileName(universalId);
+			var imageFileName = GetImageFileName(imagesFolder, universalId);
 			return GetImageAvailability(imageFileName);
 		}
 

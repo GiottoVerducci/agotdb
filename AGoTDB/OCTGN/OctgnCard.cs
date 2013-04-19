@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using GenericDB.OCTGN;
 
 namespace AGoTDB.OCTGN
 {
