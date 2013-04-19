@@ -8,7 +8,9 @@ using System.Reflection;
 using System.Xml;
 
 using AGoTDB.BusinessObjects;
-using AGoTDB.Helper;
+using GenericDB.DataAccess;
+using GenericDB.Helper;
+using GenericDB.OCTGN;
 
 namespace AGoTDB.OCTGN
 {
@@ -231,7 +233,7 @@ namespace AGoTDB.OCTGN
             ApplicationSettings.DatabaseManager.UpdateCards((row, cardProgress) =>
                 {
                     if (backgroundWorker.CancellationPending)
-                        return false;
+                        return DatabaseManager.OperationResult.Abort;
                     var card = FindCard(row, setInformations, octgnSets);
                     if (card != null)
                         row["OctgnId"] = card.Id;
@@ -242,7 +244,7 @@ namespace AGoTDB.OCTGN
                         backgroundWorker.ReportProgress(100, OctgnLoaderTask.FindCard);
                         backgroundWorker.ReportProgress(66, OctgnLoaderTask.UpdateDatabase); // arbitrary, we don't get progress notification when the dataset is updated
                     }
-                    return true;
+                    return DatabaseManager.OperationResult.Ok;
                 });
             if (backgroundWorker.CancellationPending)
                 return;

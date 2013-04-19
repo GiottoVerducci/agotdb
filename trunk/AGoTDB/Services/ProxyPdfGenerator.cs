@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AGoTDB.BusinessObjects;
+using GenericDB.Services;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 
@@ -112,7 +113,7 @@ namespace AGoTDB.Services
 		{
 			foreach (var card in cardList)
 			{
-				var cardfilepath = CardImageService.GetImageFileName(card.UniversalId);
+                var cardfilepath = CardImageService.GetImageFileName(ApplicationSettings.ImagesFolder, card.UniversalId);
 				if (CardImageService.GetImageAvailability(cardfilepath) == ImageAvailability.Available)
 					printList.Add(new ProxyInfo
 					{

@@ -24,13 +24,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 
-namespace AGoTDB.Services
+namespace GenericDB.Services
 {
     public sealed class DownloadService
     {
-        private readonly Dictionary<string, DownloadInfo> fDownloadedFiles = new Dictionary<string, DownloadInfo>();
+        private readonly Dictionary<string, DownloadInfo> _downloadedFiles = new Dictionary<string, DownloadInfo>();
 
-        private static readonly DownloadService fDownloadService = new DownloadService();
+        private static readonly DownloadService _downloadService = new DownloadService();
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit (for singleton template implementation)
         static DownloadService()
@@ -46,15 +46,15 @@ namespace AGoTDB.Services
         /// </summary>
         private static DownloadService Singleton
         {
-            get { return fDownloadService; }
+            get { return _downloadService; }
         }
 
         public static void DownloadFile(string url, string filename)
         {
             lock (Singleton)
             {
-                if (Singleton.fDownloadedFiles.ContainsKey(filename)
-                    && Singleton.fDownloadedFiles[filename].DownloadStatus == DownloadStatus.InProgress)
+                if (Singleton._downloadedFiles.ContainsKey(filename)
+                    && Singleton._downloadedFiles[filename].DownloadStatus == DownloadStatus.InProgress)
                     return;
                 Singleton.StartDownload(url, filename);
             }
@@ -64,15 +64,15 @@ namespace AGoTDB.Services
         {
             lock (Singleton)
             {
-                return Singleton.fDownloadedFiles.ContainsKey(filename)
-                    && Singleton.fDownloadedFiles[filename].DownloadStatus == DownloadStatus.Success;
+                return Singleton._downloadedFiles.ContainsKey(filename)
+                    && Singleton._downloadedFiles[filename].DownloadStatus == DownloadStatus.Success;
             }
         }
 
         private void StartDownload(string url, string filename)
         {
-            var di = Singleton.fDownloadedFiles.ContainsKey(filename)
-                ? Singleton.fDownloadedFiles[filename]
+            var di = Singleton._downloadedFiles.ContainsKey(filename)
+                ? Singleton._downloadedFiles[filename]
                 : new DownloadInfo();
 
             di.Filename = filename;
