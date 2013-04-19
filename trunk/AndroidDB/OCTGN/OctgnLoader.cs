@@ -208,27 +208,6 @@ namespace NRADB.OCTGN
 
         public static void ImportCards(Dictionary<string, List<OctgnCard>> octgnSets, BackgroundWorker backgroundWorker)
         {
-            //var setTable = ApplicationSettings.DatabaseManager.GetExpansionSets();
-            //var setInformations = new Dictionary<int, SetInformation>();
-
-            //var progress = 0;
-            //foreach (DataRow row in setTable.Rows)
-            //{
-            //    if (backgroundWorker.CancellationPending)
-            //        return;
-            //    backgroundWorker.ReportProgress(progress * 100 / setTable.Rows.Count, OctgnLoaderTask.MatchSet);
-            //    if ((int)row["Id"] >= 0)
-            //    {
-            //        var si = new SetInformation { OriginalName = row["OriginalName"].ToString() };
-            //        var name = Strip(si.OriginalName);
-            //        var octgnName = octgnSets.Keys.FirstOrDefault(k => string.Equals(name, Strip(k), StringComparison.InvariantCultureIgnoreCase));
-            //        si.OctgnName = octgnName;
-            //        setInformations.Add(Convert.ToInt32(row["SetId"]), si);
-            //    }
-            //    ++progress;
-            //}
-            //backgroundWorker.ReportProgress(100, OctgnLoaderTask.MatchSet);
-
             var allCards = octgnSets.Values.SelectMany(c => c).ToList();
             var cursor = (object)0;
 
@@ -248,25 +227,33 @@ namespace NRADB.OCTGN
                     var card = allCards[index];
                     cursor = index + 1;
 
+                    var keywords = card.Keywords.Split('-').ToList();
+                    bool isUnique = keywords.Remove("Unique");
+
+                    var setInformations = card.Id.ToString().Substring(31);
+                    var setId = Convert.ToInt32(setInformations.Substring(0, 2));
+                    var cardId = Convert.ToInt32(setInformations.Substring(2));
+
                     destinationRows.Add(
                         index,
                         card.Name,
                         card.Subtitle,
                         card.Side,
-                        card.Faction,
                         card.Type,
-                        //unique.Value, unique.Formats.Count > 0,
-                        card.Keywords,
+                        card.Faction,
+                        isUnique ? "Yes" : "No",
+                        string.Join(". ", keywords),
                         card.Text,
                         card.Instructions,
                         card.Cost,
-                        card.Stat,
-                        card.Influence,
+                        card.Stat == "-" ? string.Empty : card.Stat,
+                        card.Influence == "-" ? string.Empty : card.Influence,
                         card.Requirement,
-                        //card.set,
-                        //originalName.Value, originalName.FormatsToString(),
-                        //banned.Value, banned.Formats.Count > 0,
-                        //restricted.Value, restricted.Formats.Count > 0,
+                        string.Format("CS({0})", cardId),
+                        card.Name,
+                        (setId * 10000 + cardId).ToString(),
+                        "",//banned
+                        "",//restricted
                         card.Id,
                         card.Flavor
                     );
@@ -309,6 +296,7 @@ namespace NRADB.OCTGN
                     return null;
                 backgroundWorker.ReportProgress(progress * 100 / fileInfos.Length, OctgnLoaderTask.LoadSet);
                 var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
+                Directory.CreateDirectory(tempFolderPath);
                 var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
                 var setFile = files.FirstOrDefault(f => !f.StartsWith("[") && f.EndsWith(".xml"));
                 if (setFile == null)

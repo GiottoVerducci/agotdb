@@ -389,4 +389,7 @@ Exception trace:
   <data name="WarnOctgnNotLoadedTitle" xml:space="preserve">
     <value>OCTGN sets not loaded</value>
   </data>
+  <data name="TreeNodeAddCard" xml:space="preserve">
+    <value>You may add cards by double-clicking on them in the main window</value>
+  </data>
 </root>

@@ -25,8 +25,9 @@ namespace NRADB.OCTGN
                 ShowNewFolderButton = false
             };
 
-            if (dialog.ShowDialog() == DialogResult.OK)
+            //if (dialog.ShowDialog() == DialogResult.OK)
             {
+                var path = @"e:\Documents\CCG\Netrunner Android\OCTGN\2.3.0\"; // dialog.SelectedPath
                 var octgnLoaderWorker = new BackgroundWorker
                 {
                     WorkerReportsProgress = true,
@@ -35,7 +36,7 @@ namespace NRADB.OCTGN
 
                 octgnLoaderWorker.DoWork += OctgnLoaderWorkerOnDoWork;
 
-                var loaderForm = new OctgnLoaderForm { BackgroundWorker = octgnLoaderWorker, Path = dialog.SelectedPath, Callback = callback };
+                var loaderForm = new OctgnLoaderForm { BackgroundWorker = octgnLoaderWorker, Path = path, Callback = callback };
                 loaderForm.ShowDialog();
             }
         }

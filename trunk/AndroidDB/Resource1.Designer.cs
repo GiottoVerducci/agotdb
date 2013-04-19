@@ -723,6 +723,15 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You may add cards by double-clicking on them in the main window.
+        /// </summary>
+        internal static string TreeNodeAddCard {
+            get {
+                return ResourceManager.GetString("TreeNodeAddCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         internal static string TypeText {

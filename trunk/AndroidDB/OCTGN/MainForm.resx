@@ -142,7 +142,7 @@
     <value>eclKeyword</value>
   </data>
   <data name="&gt;&gt;eclKeyword.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclKeyword.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -163,7 +163,7 @@
     <value>eclTrigger</value>
   </data>
   <data name="&gt;&gt;eclTrigger.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclTrigger.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -184,7 +184,7 @@
     <value>eclExpansionSet</value>
   </data>
   <data name="&gt;&gt;eclExpansionSet.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclExpansionSet.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -350,112 +350,112 @@
   <data name="&gt;&gt;tbClaimLow.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="tbInitiativeHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbMuHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbInitiativeHigh.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbMuHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>492, 6</value>
   </data>
-  <data name="tbInitiativeHigh.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbMuHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbInitiativeHigh.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbMuHigh.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="tbInitiativeHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbMuHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.Name" xml:space="preserve">
-    <value>tbInitiativeHigh</value>
+  <data name="&gt;&gt;tbMuHigh.Name" xml:space="preserve">
+    <value>tbMuHigh</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbMuHigh.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbMuHigh.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbMuHigh.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="tbInitiativeLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbMuLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbInitiativeLow.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbMuLow.Location" type="System.Drawing.Point, System.Drawing">
     <value>438, 6</value>
   </data>
-  <data name="tbInitiativeLow.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbMuLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbInitiativeLow.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbMuLow.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="tbInitiativeLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbMuLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.Name" xml:space="preserve">
-    <value>tbInitiativeLow</value>
+  <data name="&gt;&gt;tbMuLow.Name" xml:space="preserve">
+    <value>tbMuLow</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbMuLow.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbMuLow.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbMuLow.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="tbGoldHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbCostHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbGoldHigh.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbCostHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>355, 6</value>
   </data>
-  <data name="tbGoldHigh.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbCostHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbGoldHigh.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbCostHigh.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="tbGoldHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbCostHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.Name" xml:space="preserve">
-    <value>tbGoldHigh</value>
+  <data name="&gt;&gt;tbCostHigh.Name" xml:space="preserve">
+    <value>tbCostHigh</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbCostHigh.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbCostHigh.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbCostHigh.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="tbGoldLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbCostLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbGoldLow.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbCostLow.Location" type="System.Drawing.Point, System.Drawing">
     <value>301, 6</value>
   </data>
-  <data name="tbGoldLow.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbCostLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbGoldLow.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbCostLow.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tbGoldLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbCostLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.Name" xml:space="preserve">
-    <value>tbGoldLow</value>
+  <data name="&gt;&gt;tbCostLow.Name" xml:space="preserve">
+    <value>tbCostLow</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbCostLow.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbCostLow.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbCostLow.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -534,7 +534,7 @@
     <value>eclCardtextCheck</value>
   </data>
   <data name="&gt;&gt;eclCardtextCheck.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclCardtextCheck.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -618,7 +618,7 @@
     <value>eclNameCheck</value>
   </data>
   <data name="&gt;&gt;eclNameCheck.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclNameCheck.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -639,7 +639,7 @@
     <value>131</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Traits:</value>
+    <value>Keywords:</value>
   </data>
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -656,58 +656,58 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="tbTraits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbKeywords.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="tbTraits.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbKeywords.Location" type="System.Drawing.Point, System.Drawing">
     <value>617, 66</value>
   </data>
-  <data name="tbTraits.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbKeywords.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 20</value>
   </data>
-  <data name="tbTraits.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbKeywords.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;tbTraits.Name" xml:space="preserve">
-    <value>tbTraits</value>
+  <data name="&gt;&gt;tbKeywords.Name" xml:space="preserve">
+    <value>tbKeywords</value>
   </data>
-  <data name="&gt;&gt;tbTraits.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbKeywords.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbTraits.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbKeywords.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbTraits.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbKeywords.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="eclTraitCheck.AutoSize" type="System.Boolean, mscorlib">
+  <data name="eclKeywordCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="eclTraitCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="eclKeywordCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="eclTraitCheck.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="eclKeywordCheck.Location" type="System.Drawing.Point, System.Drawing">
     <value>599, 68</value>
   </data>
-  <data name="eclTraitCheck.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="eclKeywordCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 17</value>
   </data>
-  <data name="eclTraitCheck.TabIndex" type="System.Int32, mscorlib">
+  <data name="eclKeywordCheck.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="eclTraitCheck.Text" xml:space="preserve">
+  <data name="eclKeywordCheck.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.Name" xml:space="preserve">
-    <value>eclTraitCheck</value>
+  <data name="&gt;&gt;eclKeywordCheck.Name" xml:space="preserve">
+    <value>eclKeywordCheck</value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;eclKeywordCheck.Type" xml:space="preserve">
+    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.Parent" xml:space="preserve">
+  <data name="&gt;&gt;eclKeywordCheck.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;eclKeywordCheck.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
   <data name="eclProvides.Location" type="System.Drawing.Point, System.Drawing">
@@ -723,7 +723,7 @@
     <value>eclProvides</value>
   </data>
   <data name="&gt;&gt;eclProvides.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclProvides.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -744,7 +744,7 @@
     <value>eclIcon</value>
   </data>
   <data name="&gt;&gt;eclIcon.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclIcon.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -765,7 +765,7 @@
     <value>eclCardtype</value>
   </data>
   <data name="&gt;&gt;eclCardtype.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclCardtype.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1209,7 +1209,7 @@
     <value>eclVirtue</value>
   </data>
   <data name="&gt;&gt;eclVirtue.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclVirtue.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1217,25 +1217,25 @@
   <data name="&gt;&gt;eclVirtue.ZOrder" xml:space="preserve">
     <value>34</value>
   </data>
-  <data name="eclHouse.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="eclFaction.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 68</value>
   </data>
-  <data name="eclHouse.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="eclFaction.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
   </data>
-  <data name="eclHouse.TabIndex" type="System.Int32, mscorlib">
+  <data name="eclFaction.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Name" xml:space="preserve">
-    <value>eclHouse</value>
+  <data name="&gt;&gt;eclFaction.Name" xml:space="preserve">
+    <value>eclFaction</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;eclFaction.Type" xml:space="preserve">
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Parent" xml:space="preserve">
+  <data name="&gt;&gt;eclFaction.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;eclHouse.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;eclFaction.ZOrder" xml:space="preserve">
     <value>35</value>
   </data>
   <data name="eclMecanism.Location" type="System.Drawing.Point, System.Drawing">
@@ -1251,7 +1251,7 @@
     <value>eclMecanism</value>
   </data>
   <data name="&gt;&gt;eclMecanism.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclMecanism.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1485,7 +1485,7 @@
     <value>cardPreviewControl</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
-    <value>NRADB.Forms.CardPreviewControl, NRADB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>NRADB.Forms.CardPreviewControl, AndroidDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
     <value>splitCardText.Panel2</value>
@@ -1632,7 +1632,7 @@
     <value>OCTGN</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>168, 22</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>About AndroidDB</value>
@@ -1836,18 +1836,6 @@
   <data name="&gt;&gt;windowToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
-    <value>helpToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
-    <value>aboutToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;oCTGNToolStripMenuItem.Name" xml:space="preserve">
     <value>oCTGNToolStripMenuItem</value>
   </data>
@@ -1858,6 +1846,18 @@
     <value>loadOCTGNDataToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;loadOCTGNDataToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
+    <value>helpToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
+    <value>aboutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkNewVersionBackgroundWorker.Name" xml:space="preserve">

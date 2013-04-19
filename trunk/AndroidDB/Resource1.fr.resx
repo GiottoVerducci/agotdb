@@ -386,4 +386,7 @@ Trace de l'exception :
   <data name="ErrConnectingToDatabaseTitle" xml:space="preserve">
     <value>Erreur lors de la connexion à la base</value>
   </data>
+  <data name="TreeNodeAddCard" xml:space="preserve">
+    <value>Vous pouvez ajouter des cartes en double-cliquant dessus dans la fenêtre principale</value>
+  </data>
 </root>

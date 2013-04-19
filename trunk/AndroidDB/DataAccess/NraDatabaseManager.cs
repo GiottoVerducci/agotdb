@@ -54,9 +54,9 @@ namespace NRADB.DataAccess
 			Int32 universalId;
             Guid octgnId;
             FormattedValue<string> name, subtitle, keywords, text, set, originalName, flavor, instructions;
-            FormattedValue<int> type, faction, influence, side;
+            FormattedValue<int> type, faction, side;
             FormattedValue<bool?> unique, banned, restricted;
-            FormattedValue<XInt> cost, requirement, stat;
+            FormattedValue<XInt> cost, influence, requirement, stat;
 
 			universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
             octgnId = Guid.Parse(GetRowValue(sourceRow, "OctgnId"));
@@ -75,39 +75,39 @@ namespace NRADB.DataAccess
 
 			type = ExtractFormattedIntValueFromRow(sourceRow, "Type", TableNameType);
             faction = ExtractFormattedIntValueFromRow(sourceRow, "Faction", TableNameFaction);
-            influence = ExtractFormattedIntValueFromRow(sourceRow, "Influence", TableNameFaction);
-            side = ExtractFormattedIntValueFromRow(sourceRow, "Side", TableNameFaction);
+            side = ExtractFormattedIntValueFromRow(sourceRow, "Side", TableNameSide);
 
 			unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique", errataBoundFormat);
 			banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
 			restricted = ExtractFormattedBoolValueFromRow(sourceRow, "Restricted", errataBoundFormat);
 
-			cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost", errataBoundFormat);
+            influence = ExtractFormattedXIntValueFromRow(sourceRow, "Influence", errataBoundFormat);
+            cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost", errataBoundFormat);
             requirement = ExtractFormattedXIntValueFromRow(sourceRow, "Requirement", errataBoundFormat);
             stat = ExtractFormattedXIntValueFromRow(sourceRow, "Stat", errataBoundFormat);
 
 #if DEBUG
-			// we compare the case of the name of the card in its title and its cardtext.
-			int index;
-			string textValue = text.Value;
-			do
-			{
-				index = textValue.IndexOf(name.Value, StringComparison.CurrentCultureIgnoreCase);
-				if (index != -1)
-				{
-					if (string.Compare(textValue.Substring(index, name.Value.Length), name.Value, StringComparison.CurrentCulture) != 0)
-						System.Diagnostics.Debug.WriteLine(CultureInfo.CurrentCulture, String.Format("{0} {1}", name.Value, universalId));
-					textValue = textValue.Substring(index + name.Value.Length);
-				}
-			} while (index != -1);
+            //// we compare the case of the name of the card in its title and its cardtext.
+            //int index;
+            //string textValue = text.Value;
+            //do
+            //{
+            //    index = textValue.IndexOf(name.Value, StringComparison.CurrentCultureIgnoreCase);
+            //    if (index != -1)
+            //    {
+            //        if (string.Compare(textValue.Substring(index, name.Value.Length), name.Value, StringComparison.CurrentCulture) != 0)
+            //            System.Diagnostics.Debug.WriteLine(CultureInfo.CurrentCulture, String.Format("{0} {1}", name.Value, universalId));
+            //        textValue = textValue.Substring(index + name.Value.Length);
+            //    }
+            //} while (index != -1);
 #endif
 
 			destinationRows.Add(
 				universalId,
 				name.Value, name.FormatsToString(),
                 subtitle.Value, subtitle.FormatsToString(),
-                type.Value, (type.Formats.Count > 0),
                 side.Value, (side.Formats.Count > 0),
+                type.Value, (type.Formats.Count > 0),
 				(faction.Value == 0),
                 (faction.Value & (Int32)NraCard.CardFaction.Anarch) != 0,
                 (faction.Value & (Int32)NraCard.CardFaction.Criminal) != 0,
@@ -123,8 +123,8 @@ namespace NRADB.DataAccess
                 instructions.Value, instructions.FormatsToString(),
 				XIntToString(cost.Value), cost.Formats.Count > 0,
 				XIntToString(stat.Value), stat.Formats.Count > 0,
-				influence.Value, influence.Formats.Count > 0,
-				requirement.Value, requirement.Formats.Count > 0,
+				XIntToString(influence.Value), influence.Formats.Count > 0,
+				XIntToString(requirement.Value), requirement.Formats.Count > 0,
 				set.Value, set.FormatsToString(),
 				originalName.Value, originalName.FormatsToString(),
 				banned.Value, banned.Formats.Count > 0,

@@ -95,7 +95,12 @@ namespace NRADB.Forms
             InitializeComponent();
             _treeViews = new List<NraCardTreeView> { treeViewSide, treeViewDeck };
             foreach (NraCardTreeView t in _treeViews)
-                t.NodeInfo = t.Nodes[0]; // must have been added during design time
+            {
+                var rootNode = new TreeNode(Resource1.TreeNodeAddCard);
+                rootNode.NodeFont = new Font(t.Font, FontStyle.Italic);
+                t.Nodes.Add(rootNode);
+                t.NodeInfo = rootNode;
+            }
             NewVersionedDeck(false);
             for (var i = 0; i < _treeViews.Count; ++i)
             {
@@ -109,15 +114,15 @@ namespace NRADB.Forms
             );
         }
 
-        #region Form events (FormShown/Closed, NodeClick or HouseValue changed, tvHistory select)
+        #region Form events (FormShown/Closed, NodeClick or FactionValue changed, tvHistory select)
         private void DeckBuilderForm_Shown(object sender, EventArgs e)
         {
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameFaction, "House", TableType.ValueId);
-            eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueId);
+            eclFaction.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 ecl.Summary += " - " + ecl.Items[0];
-                ecl.Items.RemoveAt(0); // remove neutral house
-                ecl.UpdateSize(); // update size because neutral house has been removed
+                ecl.Items.RemoveAt(0); // remove neutral faction
+                ecl.UpdateSize(); // update size because neutral faction has been removed
             });
             UpdateAgendaComboBox();
             UpdateHistoryFromVersionedDeck();
@@ -185,14 +190,9 @@ namespace NRADB.Forms
             }
         }
 
-        private void EclHouse_SelectedValueChanged(object sender, EventArgs e)
+        private void EclFaction_SelectedValueChanged(object sender, EventArgs e)
         {
-            UpdateHouseFromControls();
-        }
-
-        private void EclAgenda_SelectedValueChanged(object sender, EventArgs e)
-        {
-            UpdateAgendaFromControls();
+            UpdateFactionFromControls();
         }
 
         /// <summary>
@@ -561,8 +561,7 @@ namespace NRADB.Forms
         #region Controls / Versioned deck synchronization
         private void UpdateControlsWithVersionedDeck(bool updateHistory)
         {
-            UpdateControlsFromHouse();
-            UpdateControlsFromAgenda();
+            UpdateControlsFromFaction();
             Application.DoEvents();
             UpdateTreeViews();
 
@@ -573,8 +572,7 @@ namespace NRADB.Forms
                 UpdateHistoryFromVersionedDeck();
 
             // enable or disable the edit mode depending on the Editable property of the deck
-            eclHouse.Enabled = _currentDeck.Editable;
-            eclAgenda.Enabled = _currentDeck.Editable;
+            eclFaction.Enabled = _currentDeck.Editable;
             rtbDescription.Enabled = _currentDeck.Editable;
         }
 
@@ -602,16 +600,16 @@ namespace NRADB.Forms
 
         private void UpdateVersionedDeckWithControls()
         {
-            UpdateHouseFromControls();
+            UpdateFactionFromControls();
             _versionedDeck.Name = tbDeckName.Text;
             _versionedDeck.Author = tbAuthor.Text;
             _versionedDeck.Description = rtbDescription.Text;
         }
 
-        private void UpdateHouseFromControls()
+        private void UpdateFactionFromControls()
         {
             var h = 0;
-            eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+            eclFaction.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 for (var i = 0; i < ecl.Items.Count; ++i)
                     if (ecl.GetItemCheckState(i) == CheckState.Checked)
@@ -621,12 +619,12 @@ namespace NRADB.Forms
             UpdateTreeViews();
         }
 
-        private void UpdateControlsFromHouse()
+        private void UpdateControlsFromFaction()
         {
             var h = _currentDeck.Factions;
-            eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
+            eclFaction.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
-                for (var i = ecl.Items.Count - 1; i >= 0; --i) // houses are sorted by increasing value
+                for (var i = ecl.Items.Count - 1; i >= 0; --i) // factions are sorted by increasing value
                 {
                     var hv = Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
                     if (h >= hv)
@@ -636,36 +634,6 @@ namespace NRADB.Forms
                     }
                     else
                         ecl.SetItemCheckState(i, CheckState.Unchecked);
-                }
-            });
-        }
-
-        private void UpdateAgendaFromControls()
-        {
-            var agenda = new NraCardList();
-            eclAgenda.WorkOnExpandedItems(ecl => agenda.AddRange(ecl.Items.Cast<object>()
-                .Where((t, i) => ecl.GetItemCheckState(i) == CheckState.Checked)
-                .Select(t => t as NraCard)));
-            _currentDeck.Agenda.Clear();
-            _currentDeck.Agenda.AddRange(agenda);
-        }
-
-        private void UpdateControlsFromAgenda()
-        {
-            // check for agenda in the deck but missing in our list 
-            var missingAgenda = new List<NraCard>();
-            var currentAgenda = new List<NraCard>(_currentDeck.Agenda);
-            missingAgenda.AddRange(_currentDeck.Agenda);
-
-            eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
-            {
-                missingAgenda.RemoveAll(a => ecl.Items.Contains(a));
-
-                ecl.Items.AddRange(missingAgenda.ToArray());
-                for (var i = ecl.Items.Count - 1; i >= 0; --i)
-                {
-                    var agenda = ecl.Items[i] as NraCard;
-                    ecl.SetItemCheckState(i, currentAgenda.Contains(agenda) ? CheckState.Checked : CheckState.Unchecked);
                 }
             });
         }
@@ -1276,7 +1244,7 @@ namespace NRADB.Forms
 
             text.Append(lblDeckName.Text).AppendLine(_versionedDeck.Name);
             text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
-            text.Append(lblHouse.Text).Append(NraCard.GetFactionName(_currentDeck.Factions));
+            text.Append(lblFaction.Text).Append(NraCard.GetFactionName(_currentDeck.Factions));
             if (_currentDeck.Agenda.Count > 0)
             {
                 var agendaNames = _currentDeck.Agenda.Select(card => card.Name.Value);
@@ -1301,7 +1269,7 @@ namespace NRADB.Forms
 
             text.Append(lblDeckName.Text).AppendLine(_versionedDeck.Name);
             text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
-            text.Append(lblHouse.Text).Append(NraCard.GetFactionName(_currentDeck.Factions));
+            text.Append(lblFaction.Text).Append(NraCard.GetFactionName(_currentDeck.Factions));
 
             text.AppendLine();
 
