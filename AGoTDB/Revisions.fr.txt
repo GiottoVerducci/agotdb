@@ -1,3 +1,9 @@
+Beta 0.744 (21 avril 2013)
+ - Ajout des "Challenge Enhancement".
+ - Ajout du format de deck joute / mêlée dans le deck builder
+ - Les cartes restreintes sont maintenant séparées pour joute et mêlée 
+ - Les colonnes peuvent être réordonnées, redimensionnées, et ces paramétrages sont sauvegardés.
+
 Beta 0.743 (12 mars 2013)
  - Correction d'erreurs de lancement
  - Export de deck au format texte avec les cartes triées par extension
