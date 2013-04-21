@@ -651,11 +651,20 @@ namespace AGoTDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This card is on the tournament restricted list..
+        ///   Looks up a localized string similar to This card is on the tournament restricted list for Joust.
         /// </summary>
-        internal static string RestrictedText {
+        internal static string RestrictedJoustText {
             get {
-                return ResourceManager.GetString("RestrictedText", resourceCulture);
+                return ResourceManager.GetString("RestrictedJoustText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This card is on the tournament restricted list for Melee..
+        /// </summary>
+        internal static string RestrictedMeleeText {
+            get {
+                return ResourceManager.GetString("RestrictedMeleeText", resourceCulture);
             }
         }
         

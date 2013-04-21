@@ -37,6 +37,8 @@ namespace AGoTDB.BusinessObjects
 		/// </summary>
 		public CardList<AgotCard> Agenda { get; set; }
 
+        public AgotDeckFormat DeckFormat { get; set; }
+
 		#region Constructors and clone
 		public AgotDeck()
 		{
@@ -63,7 +65,8 @@ namespace AGoTDB.BusinessObjects
 			base.WriteXmlElements(doc, deckRoot);
 
 			XmlToolbox.AddElementValue(doc, deckRoot, "Houses", Houses.ToString());
-			for (var j = 0; j < Agenda.Count; ++j)
+            XmlToolbox.AddElementValue(doc, deckRoot, "DeckFormat", DeckFormat.ToString());
+            for (var j = 0; j < Agenda.Count; ++j)
 			{
 				string cardListNodeName = GetAgendaListNodeName(j);
 				XmlElement agendaElement = doc.CreateElement(cardListNodeName);
@@ -91,7 +94,9 @@ namespace AGoTDB.BusinessObjects
 			string value;
 			if (!string.IsNullOrEmpty(value = XmlToolbox.GetElementValue(doc, root, "Houses")))
 				Houses = Convert.ToInt32(value, CultureInfo.InvariantCulture);
-			// we read the agenda cards
+            if (!string.IsNullOrEmpty(value = XmlToolbox.GetElementValue(doc, root, "DeckFormat")))
+                DeckFormat = (AgotDeckFormat)Enum.Parse(typeof(AgotDeckFormat), value);
+            // we read the agenda cards
 			Agenda.Clear();
 			XmlNode agendaRoot;
 			var j = 0;
@@ -136,4 +141,10 @@ namespace AGoTDB.BusinessObjects
 			return result;
 		}
 	}
+
+    public enum AgotDeckFormat
+    {
+        Joust,
+        Melee
+    }
 }

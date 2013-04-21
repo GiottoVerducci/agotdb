@@ -370,6 +370,7 @@ namespace AGoTDB.Forms
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclMecanism, ApplicationSettings.DatabaseManager.TableNameMechanism, "", TableType.ValueKey);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
+            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclCE, ApplicationSettings.DatabaseManager.TableNameChallengeEnhancement, "", TableType.ValueKey);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclTrigger, ApplicationSettings.DatabaseManager.TableNameTrigger, "Text", TableType.Value);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName);
@@ -436,6 +437,16 @@ namespace AGoTDB.Forms
             };
             _dataTable.Columns.Add(typeColumn);
             _dataTable.Columns["Type "].SetOrdinal(_dataTable.Columns["Type"].Ordinal + 1);
+
+            if (UserSettings.ColumnsSettings != null)
+            {
+                var columnsSettings = UserSettings.ColumnsSettings.Split('|').Select(s => new ColumnSetting(s)).OrderByDescending(cs => cs.Index);
+                foreach (var columnSetting in columnsSettings)
+                {
+                    var dataTableColumn = _dataTable.Columns[columnSetting.Name];
+                    dataTableColumn.SetOrdinal(Convert.ToInt32(columnSetting.Index));
+                }
+            }
         }
 
         /// <summary>
@@ -534,6 +545,7 @@ namespace AGoTDB.Forms
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclMecanism, "AND", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclIcon, "AND", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclVirtue, "AND", PositiveDataType.Yes) +
+                QueryBuilder.GetFilterFromExtendedCheckedListBox(eclCE, "AND", PositiveDataType.ChallengeEnhancement) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclKeyword, "AND", PositiveDataType.KeywordValue) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclTrigger, "OR", PositiveDataType.TriggerValue) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclExpansionSet, "OR", PositiveDataType.LikeValue, additionalIncludedSets, additionalExcludedSets);
@@ -564,7 +576,7 @@ namespace AGoTDB.Forms
         private void btnReset_Click(object sender, EventArgs e)
         {
             ClearCheckListBoxes(eclHouse, eclCardtype, eclProvides, eclMecanism,
-                eclIcon, eclVirtue, eclKeyword, eclTrigger, eclExpansionSet);
+                eclIcon, eclVirtue, eclCE, eclKeyword, eclTrigger, eclExpansionSet);
 
             ClearTextBoxes(tbGoldLow, tbGoldHigh, tbInitiativeLow, tbInitiativeHigh,
                 tbClaimLow, tbClaimHigh, tbStrengthLow, tbStrengthHigh, tbCardtext, tbTraits, tbName);
@@ -894,6 +906,8 @@ namespace AGoTDB.Forms
                     DeckBuilderForm.Singleton.Close();
                     e.Cancel = DeckBuilderForm.Singleton.Visible; // cancel if deck builder form was not closed
                 }
+                if (!e.Cancel)
+                    SaveGridSettings();
             }
             else
             {
@@ -915,6 +929,45 @@ namespace AGoTDB.Forms
                     windowToolStripMenuItem.DropDownItems.RemoveAt(i);
                     return;
                 }
+        }
+
+        private void SaveGridSettings()
+        {
+            var columnsSettings = new List<string>();
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                var setting = new ColumnSetting(column.Name, column.DisplayIndex, column.Width);
+                columnsSettings.Add(setting.ToString());
+            }
+            UserSettings.ColumnsSettings = string.Join("|", columnsSettings);
+            UserSettings.Save();
+        }
+
+        private class ColumnSetting
+        {
+            public string Name { get; set; }
+            public int Index { get; set; }
+            public int Width { get; set; }
+
+            public override string ToString()
+            {
+                return string.Format("{0};{1};{2}", Name, Index, Width);
+            }
+
+            public ColumnSetting(string setting)
+            {
+                var values = setting.Split(';');
+                Name = values[0];
+                Index = Convert.ToInt32(values[1]);
+                Width = Convert.ToInt32(values[2]);
+            }
+
+            public ColumnSetting(string name, int index, int width)
+            {
+                Name = name;
+                Index = index;
+                Width = width;
+            }
         }
 
         private void miLcgSetsOnly_Click(object sender, EventArgs e)
@@ -1054,6 +1107,19 @@ namespace AGoTDB.Forms
         private void loadOCTGNDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OctgnManager.PromptForInitialization();
+        }
+
+        private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (UserSettings.ColumnsSettings != null)
+            {
+                var columnsSettings = UserSettings.ColumnsSettings.Split('|').Select(s => new ColumnSetting(s)).OrderByDescending(cs => cs.Index);
+                foreach (var columnSetting in columnsSettings)
+                {
+                    var column = dataGridView.Columns[columnSetting.Name];
+                    column.Width = Convert.ToInt32(columnSetting.Width);
+                }
+            }
         }
     }
 }

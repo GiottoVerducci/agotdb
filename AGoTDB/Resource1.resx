@@ -317,8 +317,8 @@ Exception trace:
   <data name="ReportCardErrorMessageTitle" xml:space="preserve">
     <value>Error in card {0}</value>
   </data>
-  <data name="RestrictedText" xml:space="preserve">
-    <value>This card is on the tournament restricted list.</value>
+  <data name="RestrictedJoustText" xml:space="preserve">
+    <value>This card is on the tournament restricted list for Joust</value>
   </data>
   <data name="SeparatorText" xml:space="preserve">
     <value>: </value>
@@ -391,5 +391,8 @@ Exception trace:
   </data>
   <data name="TreeNodeAddCard" xml:space="preserve">
     <value>You may add cards by double-clicking on them in the main window</value>
+  </data>
+  <data name="RestrictedMeleeText" xml:space="preserve">
+    <value>This card is on the tournament restricted list for Melee.</value>
   </data>
 </root>

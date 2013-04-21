@@ -200,6 +200,11 @@ namespace AGoTDB.Forms
             UpdateAgendaFromControls();
         }
 
+        private void CbJoustMeleeChanged(object sender, EventArgs e)
+        {
+            UpdateDeckFormatFromControls();
+        }
+
         /// <summary>
         /// Updates the card detail textbox to match the selected node in the deck tree view.
         /// If the selected node is a card, the description of the card is displayed. Otherwise,
@@ -567,6 +572,7 @@ namespace AGoTDB.Forms
         {
             UpdateControlsFromHouse();
             UpdateControlsFromAgenda();
+            UpdateControlsFromDeckFormat();
             Application.DoEvents();
             UpdateTreeViews();
 
@@ -672,6 +678,17 @@ namespace AGoTDB.Forms
                     ecl.SetItemCheckState(i, currentAgenda.Contains(agenda) ? CheckState.Checked : CheckState.Unchecked);
                 }
             });
+        }
+
+        private void UpdateDeckFormatFromControls()
+        {
+            _currentDeck.DeckFormat = rbJoust.Checked ? AgotDeckFormat.Joust : AgotDeckFormat.Melee;
+        }
+
+        private void UpdateControlsFromDeckFormat()
+        {
+            rbJoust.Checked = _currentDeck.DeckFormat == AgotDeckFormat.Joust;
+            rbMelee.Checked = _currentDeck.DeckFormat == AgotDeckFormat.Melee;
         }
 
         private void UpdateHistoryFromVersionedDeck()
@@ -873,12 +890,26 @@ namespace AGoTDB.Forms
                 result.BackColor = Color.Red;
             }
             // if the card is restricted, check there's no other card restricted in any other deck or sideboard
-            if (card.Restricted != null && card.Restricted.Value
-                && (deck.CardLists.Any(cl => cl.Any(c => c.Restricted != null && c.Restricted.Value && c.UniversalId != card.UniversalId)))
-                    || deck.Agenda.Any(a => a.Restricted != null && a.Restricted.Value))
+
+            if (deck.DeckFormat == AgotDeckFormat.Joust)
             {
-                result.ForeColor = Color.White;
-                result.BackColor = Color.OrangeRed;
+                if (card.RestrictedJoust != null && card.RestrictedJoust.Value
+                    && (deck.CardLists.Any(cl => cl.Any(c => c.RestrictedJoust != null && c.RestrictedJoust.Value && c.UniversalId != card.UniversalId)))
+                        || deck.Agenda.Any(a => a.RestrictedJoust != null && a.RestrictedJoust.Value))
+                {
+                    result.ForeColor = Color.White;
+                    result.BackColor = Color.OrangeRed;
+                }
+            }
+            else if (deck.DeckFormat == AgotDeckFormat.Melee)
+            {
+                if (card.RestrictedMelee != null && card.RestrictedMelee.Value
+                    && (deck.CardLists.Any(cl => cl.Any(c => c.RestrictedMelee != null && c.RestrictedMelee.Value && c.UniversalId != card.UniversalId)))
+                        || deck.Agenda.Any(a => a.RestrictedMelee != null && a.RestrictedMelee.Value))
+                {
+                    result.ForeColor = Color.White;
+                    result.BackColor = Color.OrangeRed;
+                }
             }
             return result;
         }

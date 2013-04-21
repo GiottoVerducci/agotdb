@@ -118,6 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tabControlDecks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 211</value>
+  </data>
+  <data name="tabControlLocalInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>407, 211</value>
+  </data>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>845, 211</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>434</value>
+  </data>
+  <data name="tabControlGlobalInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>845, 207</value>
+  </data>
+  <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>845, 422</value>
+  </data>
+  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 185</value>
+  </data>
+  <data name="contextMenuStripTreeView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 136</value>
+  </data>
+  <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 179</value>
+  </data>
   <data name="miIncreaseCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>267, 22</value>
   </data>
@@ -154,26 +182,20 @@
   <data name="miGenerateProxyPdf.Text" xml:space="preserve">
     <value>Générer les proxys en pdf</value>
   </data>
-  <data name="contextMenuStripTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 136</value>
-  </data>
-  <data name="treeViewDeck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 179</value>
-  </data>
-  <data name="tabPageDeck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>426, 185</value>
-  </data>
-  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 179</value>
-  </data>
   <data name="tabPageSideboard.Size" type="System.Drawing.Size, System.Drawing">
     <value>426, 185</value>
   </data>
   <data name="tabPageSideboard.Text" xml:space="preserve">
     <value>Réserve</value>
   </data>
-  <data name="tabControlDecks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 211</value>
+  <data name="treeViewSide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 179</value>
+  </data>
+  <data name="tabPageCardtext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 185</value>
+  </data>
+  <data name="tabPageCardtext.Text" xml:space="preserve">
+    <value>Texte de la carte</value>
   </data>
   <data name="rtbCardText.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 179</value>
@@ -184,32 +206,13 @@
   <data name="splitCardText.Size" type="System.Drawing.Size, System.Drawing">
     <value>393, 179</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitCardText.SplitterDistance" type="System.Int32, mscorlib">
     <value>264</value>
-  </data>
-  <data name="tabPageCardtext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 185</value>
-  </data>
-  <data name="tabPageCardtext.Text" xml:space="preserve">
-    <value>Texte de la carte</value>
-  </data>
-  <data name="tabControlLocalInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 211</value>
-  </data>
-  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>845, 211</value>
-  </data>
-  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>434</value>
-  </data>
-  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 175</value>
   </data>
   <data name="tabPageDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>837, 181</value>
   </data>
-  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rtbDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 175</value>
   </data>
   <data name="tabPageHistory.Size" type="System.Drawing.Size, System.Drawing">
@@ -218,7 +221,7 @@
   <data name="tabPageHistory.Text" xml:space="preserve">
     <value>Historique</value>
   </data>
-  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="treeViewHistory.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 175</value>
   </data>
   <data name="tabPageStats.Size" type="System.Drawing.Size, System.Drawing">
@@ -227,11 +230,8 @@
   <data name="tabPageStats.Text" xml:space="preserve">
     <value>Statistiques</value>
   </data>
-  <data name="tabControlGlobalInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>845, 207</value>
-  </data>
-  <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>845, 422</value>
+  <data name="rtbStatistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>831, 175</value>
   </data>
   <data name="lblDeckName.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -244,6 +244,15 @@
   </data>
   <data name="tbDeckName.Size" type="System.Drawing.Size, System.Drawing">
     <value>317, 20</value>
+  </data>
+  <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>872, 24</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Fichier</value>
   </data>
   <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 22</value>
@@ -287,23 +296,17 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Quitter</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 20</value>
+  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Fichier</value>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Outils</value>
   </data>
   <data name="drawSimulatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
   </data>
   <data name="drawSimulatorToolStripMenuItem.Text" xml:space="preserve">
     <value>Simulateur de pioche</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Outils</value>
   </data>
   <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>307, 22</value>
@@ -325,9 +328,6 @@
   </data>
   <data name="importDeckFromOCTGNToolStripMenuItem.Text" xml:space="preserve">
     <value>Importer le deck depuis OCTGN</value>
-  </data>
-  <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>872, 24</value>
   </data>
   <data name="lblHouse.Location" type="System.Drawing.Point, System.Drawing">
     <value>418, 36</value>
@@ -364,6 +364,21 @@
   </data>
   <data name="eclAgenda.Location" type="System.Drawing.Point, System.Drawing">
     <value>671, 34</value>
+  </data>
+  <data name="rbJoust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>470, 60</value>
+  </data>
+  <data name="rbJoust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 17</value>
+  </data>
+  <data name="rbJoust.Text" xml:space="preserve">
+    <value>Joute</value>
+  </data>
+  <data name="rbMelee.Location" type="System.Drawing.Point, System.Drawing">
+    <value>527, 60</value>
+  </data>
+  <data name="rbMelee.Text" xml:space="preserve">
+    <value>Mêlée</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>872, 519</value>
@@ -443,9 +458,5 @@
         AB8AAAA/AAAAfwAAAP8AAAD/AAAB/wAAA/8AAAf/AAAP/wAAB/8AAAH/AAAA/wAAAD8AAAAfAAAABwAA
         AAcAAAAfwAAA//gAH/////////////////8=
 </value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
 </root>
