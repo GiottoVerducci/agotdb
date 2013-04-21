@@ -90,12 +90,13 @@ namespace AGoTDB.Forms
             this.deckBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadOCTGNDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkNewVersionBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.eclCE = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -120,6 +121,7 @@ namespace AGoTDB.Forms
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.eclCE);
             this.splitContainer1.Panel1.Controls.Add(this.eclKeyword);
             this.splitContainer1.Panel1.Controls.Add(this.eclTrigger);
             this.splitContainer1.Panel1.Controls.Add(this.eclExpansionSet);
@@ -467,6 +469,7 @@ namespace AGoTDB.Forms
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToOrderColumns = true;
             this.dataGridView.AllowUserToResizeRows = false;
             resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -478,6 +481,7 @@ namespace AGoTDB.Forms
             this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView.DoubleClick += new System.EventHandler(this.dataGridView_DoubleClick);
             // 
@@ -637,6 +641,19 @@ namespace AGoTDB.Forms
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
             // 
+            // oCTGNToolStripMenuItem
+            // 
+            this.oCTGNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadOCTGNDataToolStripMenuItem});
+            this.oCTGNToolStripMenuItem.Name = "oCTGNToolStripMenuItem";
+            resources.ApplyResources(this.oCTGNToolStripMenuItem, "oCTGNToolStripMenuItem");
+            // 
+            // loadOCTGNDataToolStripMenuItem
+            // 
+            this.loadOCTGNDataToolStripMenuItem.Name = "loadOCTGNDataToolStripMenuItem";
+            resources.ApplyResources(this.loadOCTGNDataToolStripMenuItem, "loadOCTGNDataToolStripMenuItem");
+            this.loadOCTGNDataToolStripMenuItem.Click += new System.EventHandler(this.loadOCTGNDataToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -650,18 +667,18 @@ namespace AGoTDB.Forms
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // oCTGNToolStripMenuItem
+            // eclCE
             // 
-            this.oCTGNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadOCTGNDataToolStripMenuItem});
-            this.oCTGNToolStripMenuItem.Name = "oCTGNToolStripMenuItem";
-            resources.ApplyResources(this.oCTGNToolStripMenuItem, "oCTGNToolStripMenuItem");
-            // 
-            // loadOCTGNDataToolStripMenuItem
-            // 
-            this.loadOCTGNDataToolStripMenuItem.Name = "loadOCTGNDataToolStripMenuItem";
-            resources.ApplyResources(this.loadOCTGNDataToolStripMenuItem, "loadOCTGNDataToolStripMenuItem");
-            this.loadOCTGNDataToolStripMenuItem.Click += new System.EventHandler(this.loadOCTGNDataToolStripMenuItem_Click);
+            this.eclCE.CheckOnClick = true;
+            this.eclCE.Condensed = true;
+            this.eclCE.CondensedMode = true;
+            this.eclCE.FormattingEnabled = true;
+            resources.ApplyResources(this.eclCE, "eclCE");
+            this.eclCE.Name = "eclCE";
+            this.eclCE.RollDownDelay = 250;
+            this.eclCE.Summary = "Virtues";
+            this.eclCE.ThreeState = true;
+            this.eclCE.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // MainForm
             // 
@@ -764,5 +781,6 @@ namespace AGoTDB.Forms
         private System.Windows.Forms.Label lblUniversalId;
         private System.Windows.Forms.ToolStripMenuItem oCTGNToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadOCTGNDataToolStripMenuItem;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclCE;
 	}
 }

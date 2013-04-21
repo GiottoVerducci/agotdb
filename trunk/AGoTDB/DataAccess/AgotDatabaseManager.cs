@@ -28,72 +28,77 @@ using GenericDB.DataAccess;
 
 namespace AGoTDB.DataAccess
 {
-	public class AgotDatabaseManager : DatabaseManager
-	{
-		public AgotDatabaseManager(string dbFileName, string exDbFileName)
-			: base(dbFileName, exDbFileName)
-		{
-		}
+    public class AgotDatabaseManager : DatabaseManager
+    {
+        public AgotDatabaseManager(string dbFileName, string exDbFileName)
+            : base(dbFileName, exDbFileName)
+        {
+        }
 
-		public override string TableNameMain { get { return "AGoT-db"; } }
-		public override string TableNameVersion { get { return "TableVersion"; } }
-		public string TableNameFilterText { get { return "TableFilterText"; } }
-		public string TableNameHouse { get { return "TableHouse"; } }
-		public string TableNameIcon { get { return "TableIcon"; } }
-		public string TableNameKeyword { get { return "TableKeyword"; } }
-		public string TableNameMechanism { get { return "TableMecanism"; } }
-		public string TableNameProvides { get { return "TableProvides"; } }
-		public string TableNameSet { get { return "TableSet"; } }
-		public string TableNameTrigger { get { return "TableTrigger"; } }
-		public string TableNameType { get { return "TableType"; } }
-		public string TableNameVirtue { get { return "TableVirtue"; } }
-		public string TableNamePattern { get { return "TablePattern"; } }
-		public override TextFormat ErrataFormat { get { return AgotCard.ErrataFormat; } }
+        public override string TableNameMain { get { return "AGoT-db"; } }
+        public override string TableNameVersion { get { return "TableVersion"; } }
+        public string TableNameFilterText { get { return "TableFilterText"; } }
+        public string TableNameHouse { get { return "TableHouse"; } }
+        public string TableNameIcon { get { return "TableIcon"; } }
+        public string TableNameKeyword { get { return "TableKeyword"; } }
+        public string TableNameMechanism { get { return "TableMecanism"; } }
+        public string TableNameProvides { get { return "TableProvides"; } }
+        public string TableNameSet { get { return "TableSet"; } }
+        public string TableNameTrigger { get { return "TableTrigger"; } }
+        public string TableNameType { get { return "TableType"; } }
+        public string TableNameChallengeEnhancement { get { return "TableChallengeEnhancement"; } }
+        public string TableNameVirtue { get { return "TableVirtue"; } }
+        public string TableNamePattern { get { return "TablePattern"; } }
+        public override TextFormat ErrataFormat { get { return AgotCard.ErrataFormat; } }
 
-		protected override void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows)
-		{
-			Int32 universalId;
-			FormattedValue<string> name, traits, keywords, text, set, originalName;
-			FormattedValue<int> type, house;
-			FormattedValue<bool?> unique, doomed, endless, military, intrigue, power, war, holy, noble, learned, shadow, multiplayer, banned, restricted;
-			FormattedValue<XInt> cost, strength, income, initiative, claim, influence;
+        protected override void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows)
+        {
+            Int32 universalId;
+            FormattedValue<string> name, traits, keywords, text, set, originalName, militaryCE, intrigueCE, powerCE;
+            FormattedValue<int> type, house;
+            FormattedValue<bool?> unique, doomed, endless, military, intrigue, power, war, holy, noble, learned, shadow, multiplayer, banned, restrictedJoust, restrictedMelee;
+            FormattedValue<XInt> cost, strength, income, initiative, claim, influence;
 
-			universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
+            universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
 
-			var errataBoundFormat = new BoundFormat('{', '}', AgotCard.ErrataFormat);
-			var traitsBoundFormat = new BoundFormat('~', AgotCard.TraitsFormat);
+            var errataBoundFormat = new BoundFormat('{', '}', AgotCard.ErrataFormat);
+            var traitsBoundFormat = new BoundFormat('~', AgotCard.TraitsFormat);
 
-			name = ExtractFormattedStringValueFromRow(sourceRow, "Name", errataBoundFormat, traitsBoundFormat);
-			traits = ExtractFormattedStringValueFromRow(sourceRow, "Traits", errataBoundFormat, traitsBoundFormat);
-			keywords = ExtractFormattedStringValueFromRow(sourceRow, "Keywords", errataBoundFormat, traitsBoundFormat);
-			text = ExtractFormattedStringValueFromRow(sourceRow, "Text", errataBoundFormat, traitsBoundFormat);
-			set = ExtractFormattedStringValueFromRow(sourceRow, "Set", errataBoundFormat, traitsBoundFormat);
-			originalName = ExtractFormattedStringValueFromRow(sourceRow, "OriginalName", errataBoundFormat, traitsBoundFormat);
+            name = ExtractFormattedStringValueFromRow(sourceRow, "Name", errataBoundFormat, traitsBoundFormat);
+            traits = ExtractFormattedStringValueFromRow(sourceRow, "Traits", errataBoundFormat, traitsBoundFormat);
+            keywords = ExtractFormattedStringValueFromRow(sourceRow, "Keywords", errataBoundFormat, traitsBoundFormat);
+            text = ExtractFormattedStringValueFromRow(sourceRow, "Text", errataBoundFormat, traitsBoundFormat);
+            set = ExtractFormattedStringValueFromRow(sourceRow, "Set", errataBoundFormat, traitsBoundFormat);
+            originalName = ExtractFormattedStringValueFromRow(sourceRow, "OriginalName", errataBoundFormat, traitsBoundFormat);
 
-			type = ExtractFormattedIntValueFromRow(sourceRow, "Type", TableNameType);
-			house = ExtractFormattedIntValueFromRow(sourceRow, "House", TableNameHouse);
+            type = ExtractFormattedIntValueFromRow(sourceRow, "Type", TableNameType);
+            house = ExtractFormattedIntValueFromRow(sourceRow, "House", TableNameHouse);
 
-			unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique", errataBoundFormat);
-			doomed = ExtractFormattedBoolValueFromRow(sourceRow, "Doomed", errataBoundFormat);
-			endless = ExtractFormattedBoolValueFromRow(sourceRow, "Endless", errataBoundFormat);
-			military = ExtractFormattedBoolValueFromRow(sourceRow, "Military", errataBoundFormat);
-			intrigue = ExtractFormattedBoolValueFromRow(sourceRow, "Intrigue", errataBoundFormat);
-			power = ExtractFormattedBoolValueFromRow(sourceRow, "Power", errataBoundFormat);
-			war = ExtractFormattedBoolValueFromRow(sourceRow, "War", errataBoundFormat);
-			holy = ExtractFormattedBoolValueFromRow(sourceRow, "Holy", errataBoundFormat);
-			noble = ExtractFormattedBoolValueFromRow(sourceRow, "Noble", errataBoundFormat);
-			learned = ExtractFormattedBoolValueFromRow(sourceRow, "Learned", errataBoundFormat);
-			shadow = ExtractFormattedBoolValueFromRow(sourceRow, "Shadow", errataBoundFormat);
-			multiplayer = ExtractFormattedBoolValueFromRow(sourceRow, "Multiplayer", errataBoundFormat);
-			banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
-			restricted = ExtractFormattedBoolValueFromRow(sourceRow, "Restricted", errataBoundFormat);
+            unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique", errataBoundFormat);
+            doomed = ExtractFormattedBoolValueFromRow(sourceRow, "Doomed", errataBoundFormat);
+            endless = ExtractFormattedBoolValueFromRow(sourceRow, "Endless", errataBoundFormat);
+            military = ExtractFormattedBoolValueFromRow(sourceRow, "Military", errataBoundFormat);
+            intrigue = ExtractFormattedBoolValueFromRow(sourceRow, "Intrigue", errataBoundFormat);
+            power = ExtractFormattedBoolValueFromRow(sourceRow, "Power", errataBoundFormat);
+            militaryCE = ExtractFormattedStringValueFromRow(sourceRow, "MilitaryCE", errataBoundFormat, traitsBoundFormat);
+            intrigueCE = ExtractFormattedStringValueFromRow(sourceRow, "IntrigueCE", errataBoundFormat, traitsBoundFormat);
+            powerCE = ExtractFormattedStringValueFromRow(sourceRow, "PowerCE", errataBoundFormat, traitsBoundFormat);
+            war = ExtractFormattedBoolValueFromRow(sourceRow, "War", errataBoundFormat);
+            holy = ExtractFormattedBoolValueFromRow(sourceRow, "Holy", errataBoundFormat);
+            noble = ExtractFormattedBoolValueFromRow(sourceRow, "Noble", errataBoundFormat);
+            learned = ExtractFormattedBoolValueFromRow(sourceRow, "Learned", errataBoundFormat);
+            shadow = ExtractFormattedBoolValueFromRow(sourceRow, "Shadow", errataBoundFormat);
+            multiplayer = ExtractFormattedBoolValueFromRow(sourceRow, "Multiplayer", errataBoundFormat);
+            banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
+            restrictedJoust = ExtractFormattedBoolValueFromRow(sourceRow, "RestrictedJoust", errataBoundFormat);
+            restrictedMelee = ExtractFormattedBoolValueFromRow(sourceRow, "RestrictedMelee", errataBoundFormat);
 
-			cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost", errataBoundFormat);
-			strength = ExtractFormattedXIntValueFromRow(sourceRow, "Strength", errataBoundFormat);
-			income = ExtractFormattedXIntValueFromRow(sourceRow, "Income", errataBoundFormat);
-			initiative = ExtractFormattedXIntValueFromRow(sourceRow, "Initiative", errataBoundFormat);
-			claim = ExtractFormattedXIntValueFromRow(sourceRow, "Claim", errataBoundFormat);
-			influence = ExtractFormattedXIntValueFromRow(sourceRow, "Influence", errataBoundFormat);
+            cost = ExtractFormattedXIntValueFromRow(sourceRow, "Cost", errataBoundFormat);
+            strength = ExtractFormattedXIntValueFromRow(sourceRow, "Strength", errataBoundFormat);
+            income = ExtractFormattedXIntValueFromRow(sourceRow, "Income", errataBoundFormat);
+            initiative = ExtractFormattedXIntValueFromRow(sourceRow, "Initiative", errataBoundFormat);
+            claim = ExtractFormattedXIntValueFromRow(sourceRow, "Claim", errataBoundFormat);
+            influence = ExtractFormattedXIntValueFromRow(sourceRow, "Influence", errataBoundFormat);
 
 #if DEBUG
 			// we compare the case of the name of the card in its title and its cardtext.
@@ -111,88 +116,92 @@ namespace AGoTDB.DataAccess
 			} while (index != -1);
 #endif
 
-			destinationRows.Add(
-				universalId,
-				name.Value, name.FormatsToString(),
-				type.Value, (type.Formats.Count > 0),
-				(house.Value == 0),
-				(house.Value & (Int32)AgotCard.CardHouse.Stark) != 0,
-				(house.Value & (Int32)AgotCard.CardHouse.Lannister) != 0,
-				(house.Value & (Int32)AgotCard.CardHouse.Baratheon) != 0,
-				(house.Value & (Int32)AgotCard.CardHouse.Greyjoy) != 0,
-				(house.Value & (Int32)AgotCard.CardHouse.Martell) != 0,
-				(house.Value & (Int32)AgotCard.CardHouse.Targaryen) != 0,
-				house.Formats.Count > 0,
-				unique.Value, unique.Formats.Count > 0,
-				traits.Value, traits.FormatsToString(),
-				keywords.Value, keywords.FormatsToString(),
-				text.Value, text.FormatsToString(),
-				doomed.Value, doomed.Formats.Count > 0,
-				endless.Value, endless.Formats.Count > 0,
-				XIntToString(cost.Value), cost.Formats.Count > 0,
-				XIntToString(strength.Value), strength.Formats.Count > 0,
-				military.Value, military.Formats.Count > 0,
-				intrigue.Value, intrigue.Formats.Count > 0,
-				power.Value, power.Formats.Count > 0,
-				war.Value, war.Formats.Count > 0,
-				holy.Value, holy.Formats.Count > 0,
-				noble.Value, noble.Formats.Count > 0,
-				learned.Value, learned.Formats.Count > 0,
-				shadow.Value, shadow.Formats.Count > 0,
-				XIntToString(income.Value), income.Formats.Count > 0,
-				XIntToString(initiative.Value), initiative.Formats.Count > 0,
-				XIntToString(claim.Value), claim.Formats.Count > 0,
-				XIntToString(influence.Value), influence.Formats.Count > 0,
-				multiplayer.Value.Value, multiplayer.Formats.Count > 0, // Multiplayer shouldn't be null
-				set.Value, set.FormatsToString(),
-				originalName.Value, originalName.FormatsToString(),
-				banned.Value, banned.Formats.Count > 0,
-				restricted.Value, restricted.Formats.Count > 0
-			);
-		}
+            destinationRows.Add(
+                universalId,
+                name.Value, name.FormatsToString(),
+                type.Value, (type.Formats.Count > 0),
+                (house.Value == 0),
+                (house.Value & (Int32)AgotCard.CardHouse.Stark) != 0,
+                (house.Value & (Int32)AgotCard.CardHouse.Lannister) != 0,
+                (house.Value & (Int32)AgotCard.CardHouse.Baratheon) != 0,
+                (house.Value & (Int32)AgotCard.CardHouse.Greyjoy) != 0,
+                (house.Value & (Int32)AgotCard.CardHouse.Martell) != 0,
+                (house.Value & (Int32)AgotCard.CardHouse.Targaryen) != 0,
+                house.Formats.Count > 0,
+                unique.Value, unique.Formats.Count > 0,
+                traits.Value, traits.FormatsToString(),
+                keywords.Value, keywords.FormatsToString(),
+                text.Value, text.FormatsToString(),
+                doomed.Value, doomed.Formats.Count > 0,
+                endless.Value, endless.Formats.Count > 0,
+                XIntToString(cost.Value), cost.Formats.Count > 0,
+                XIntToString(strength.Value), strength.Formats.Count > 0,
+                military.Value, military.Formats.Count > 0,
+                intrigue.Value, intrigue.Formats.Count > 0,
+                power.Value, power.Formats.Count > 0,
+                militaryCE.Value, militaryCE.FormatsToString(),
+                intrigueCE.Value, intrigueCE.FormatsToString(),
+                powerCE.Value, powerCE.FormatsToString(),
+                war.Value, war.Formats.Count > 0,
+                holy.Value, holy.Formats.Count > 0,
+                noble.Value, noble.Formats.Count > 0,
+                learned.Value, learned.Formats.Count > 0,
+                shadow.Value, shadow.Formats.Count > 0,
+                XIntToString(income.Value), income.Formats.Count > 0,
+                XIntToString(initiative.Value), initiative.Formats.Count > 0,
+                XIntToString(claim.Value), claim.Formats.Count > 0,
+                XIntToString(influence.Value), influence.Formats.Count > 0,
+                multiplayer.Value.Value, multiplayer.Formats.Count > 0, // Multiplayer shouldn't be null
+                set.Value, set.FormatsToString(),
+                originalName.Value, originalName.FormatsToString(),
+                banned.Value, banned.Formats.Count > 0,
+                restrictedJoust.Value, restrictedJoust.Formats.Count > 0,
+                restrictedMelee.Value, restrictedMelee.Formats.Count > 0
+            );
+        }
 
-		public DataTable GetAgendas()
-		{
-			return GetResultFromRequest(
-				string.Format("SELECT * FROM [{0}] WHERE Type = :type ORDER BY Name", ApplicationSettings.DatabaseManager.TableNameMain),
-				new CommandParameters().Add("type", (Int32)AgotCard.CardType.Agenda));
-		}
+        public DataTable GetAgendas()
+        {
+            return GetResultFromRequest(
+                string.Format("SELECT * FROM [{0}] WHERE Type = :type ORDER BY Name", ApplicationSettings.DatabaseManager.TableNameMain),
+                new CommandParameters().Add("type", (Int32)AgotCard.CardType.Agenda));
+        }
 
-		public DataTable GetCardTypeNames()
-		{
-			return GetResultFromRequest(
-				string.Format("SELECT * FROM [{0}]", TableNameType));
-		}
+        public DataTable GetCardTypeNames()
+        {
+            return GetResultFromRequest(
+                string.Format("SELECT * FROM [{0}]", TableNameType));
+        }
 
-		public DataTable GetCardHouseNames()
-		{
-			return GetResultFromRequest(
-				string.Format("SELECT * FROM [{0}]", TableNameHouse));
-		}
+        public DataTable GetCardHouseNames()
+        {
+            return GetResultFromRequest(
+                string.Format("SELECT * FROM [{0}]", TableNameHouse));
+        }
 
-		public DataTable GetCardTriggerNames()
-		{
-			return GetResultFromRequest(
-				string.Format("SELECT * FROM [{0}]", TableNameTrigger));
-		}
+        public DataTable GetCardTriggerNames()
+        {
+            return GetResultFromRequest(
+                string.Format("SELECT * FROM [{0}]", TableNameTrigger));
+        }
 
-		public DataTable GetCardPatterns()
-		{
-			return GetResultFromRequest(
-				string.Format("SELECT * FROM [{0}]", TableNamePattern));
-		}
+        public DataTable GetCardPatterns()
+        {
+            return GetResultFromRequest(
+                string.Format("SELECT * FROM [{0}]", TableNamePattern));
+        }
 
-		public DataTable GetExpansionSets()
-		{
-			return GetResultFromRequest(
-				string.Format("SELECT * FROM [{0}]", TableNameSet));
-		}
+        public DataTable GetExpansionSets()
+        {
+            return GetResultFromRequest(
+                string.Format("SELECT * FROM [{0}]", TableNameSet));
+        }
 
-		public bool HasOctgnData()
-		{
-			var table = GetResultFromRequest(
-				string.Format("SELECT TOP 1 * FROM [{0}]  WHERE [OctgnId] IS NOT NULL", TableNameMain));
-			return table.Rows.Count > 0;
-		}
-	}
+        public bool HasOctgnData()
+        {
+            var table = GetResultFromRequest(
+                string.Format("SELECT TOP 1 * FROM [{0}]  WHERE [OctgnId] IS NOT NULL", TableNameMain));
+            return table.Rows.Count > 0;
+        }
+    }
 }

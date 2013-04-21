@@ -114,6 +114,15 @@ namespace AGoTDB.BusinessObjects
             set { Singleton.WriteString(StartupSectionName, "UpdateInformationsUrl", value); }
         }
         #endregion
+        
+        #region Main form
+        private const string MainFormSectionName = "MainForm";
+        public static string ColumnsSettings
+        {
+            get { return Singleton.ReadString(MainFormSectionName, "ColumnsSettings", null); }
+            set { Singleton.WriteString(MainFormSectionName, "ColumnsSettings", value); }
+        }
+        #endregion
 
         #region DeckBuilder
         private const string DeckBuilderSectionName = "DeckBuilder";

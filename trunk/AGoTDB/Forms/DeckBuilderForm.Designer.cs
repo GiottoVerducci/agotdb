@@ -83,6 +83,8 @@ namespace AGoTDB.Forms
             this.tbAuthor = new System.Windows.Forms.TextBox();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.eclAgenda = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.rbJoust = new System.Windows.Forms.RadioButton();
+            this.rbMelee = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -509,10 +511,27 @@ namespace AGoTDB.Forms
             this.eclAgenda.ThreeState = false;
             this.eclAgenda.SelectedValueChanged += new System.EventHandler(this.EclAgenda_SelectedValueChanged);
             // 
+            // rbJoust
+            // 
+            resources.ApplyResources(this.rbJoust, "rbJoust");
+            this.rbJoust.Checked = true;
+            this.rbJoust.Name = "rbJoust";
+            this.rbJoust.TabStop = true;
+            this.rbJoust.UseVisualStyleBackColor = true;
+            this.rbJoust.CheckedChanged += new System.EventHandler(this.CbJoustMeleeChanged);
+            // 
+            // rbMelee
+            // 
+            resources.ApplyResources(this.rbMelee, "rbMelee");
+            this.rbMelee.Name = "rbMelee";
+            this.rbMelee.UseVisualStyleBackColor = true;
+            // 
             // DeckBuilderForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.rbMelee);
+            this.Controls.Add(this.rbJoust);
             this.Controls.Add(this.tbAuthor);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.eclHouse);
@@ -611,5 +630,7 @@ namespace AGoTDB.Forms
     private System.Windows.Forms.ToolStripMenuItem importDeckFromOCTGNToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportDeckToClipboardSortedByToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportDeckToClipboardSortedBySetToolStripMenuItem;
+    private System.Windows.Forms.RadioButton rbJoust;
+    private System.Windows.Forms.RadioButton rbMelee;
 	}
 }

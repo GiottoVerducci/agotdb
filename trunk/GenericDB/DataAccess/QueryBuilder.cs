@@ -199,7 +199,8 @@ namespace GenericDB.DataAccess
 				var filter = items[i];
 
 				string subresult = "";
-				switch (positiveDataType)
+                var columns = filter.Column.Split('|');
+                switch (positiveDataType)
 				{
 					case PositiveDataType.LikeValue: subresult = String.Format(" ({0}{1} LIKE '%{2}%') ", prefix, filter.Column, EscapeSqlCharacters(filter.ShortName)); break;
 					case PositiveDataType.ExactValue: subresult = String.Format(" ({0}{1} = {2}) ", prefix, filter.Column, EscapeSqlCharacters(filter.ShortName)); break;
@@ -224,9 +225,16 @@ namespace GenericDB.DataAccess
 
 						subresult = String.Format(" ({0}{1} LIKE '{2}') ", prefix, filter.Column, value); break;
 					case PositiveDataType.TriggerValue: subresult = String.Format(" ({0}{1} LIKE '%{2}%') ", prefix, filter.Column, EscapeSqlCharacters(filter + ": ")); break;
+                    case PositiveDataType.ChallengeEnhancement:
+                        var subresults = columns.Select(c => String.Format(" ({0}{1} LIKE '%{2}%') ", prefix, c, EscapeSqlCharacters(filter.ToString())));
+                        subresult = "(" + string.Join(include ? " OR " : " AND ", subresults) + ")";
+                        break;
 				}
-				if (!include)
-					subresult = String.Format(" (({0} IS NULL) OR {1})", filter.Column, subresult);
+                if (!include)
+                {
+                    var nullQuery = string.Join(" AND ", columns.Select(c => string.Format("({0} IS NULL)", c)));
+                    subresult = String.Format(" (({0}) OR {1})", nullQuery, subresult);
+                }
 				result.SqlQuery += subresult + " " + logicalOperator;
 
 				// human part of the query
@@ -270,5 +278,5 @@ namespace GenericDB.DataAccess
 		}
 	}
 
-	public enum PositiveDataType { Unknown, LikeValue, ExactValue, Yes, Integer, KeywordValue, TriggerValue };
+	public enum PositiveDataType { Unknown, LikeValue, ExactValue, Yes, Integer, KeywordValue, TriggerValue, ChallengeEnhancement };
 }

@@ -82,7 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\AgotCardList.cs" />
-    <Compile Include="Common\Win32.cs" />
     <Compile Include="Components\AgotCardTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -129,9 +128,7 @@
     <Compile Include="Forms\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\ZipHelper.cs" />
     <Compile Include="OCTGN\OctgnCard.cs" />
-    <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
     <Compile Include="OCTGN\OctgnLoader.cs" />
     <Compile Include="OCTGN\OctgnLoaderForm.cs">
       <SubType>Form</SubType>
@@ -237,9 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\CardImageService.cs" />
     <Compile Include="Services\DeckStatisticsService.cs" />
-    <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\ProxyPdfGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -284,6 +279,10 @@
       <Project>{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}</Project>
       <Name>GenericDB</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Helper\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
