@@ -26,6 +26,7 @@ namespace GenericDB.BusinessObjects
 	{
 		public int Value { get; private set; }
 		public bool IsX { get; private set; }
+        public bool IsSet { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of XInt, representing an integer value. 
@@ -66,5 +67,7 @@ namespace GenericDB.BusinessObjects
 		{
 			return (IsX) ? "X" : Value.ToString(CultureInfo.CurrentCulture);
 		}
+
+
 	}
 }

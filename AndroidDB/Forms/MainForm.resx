@@ -128,13 +128,419 @@
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
+  <data name="tbTrashCostHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbTrashCostHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>630, 32</value>
+  </data>
+  <data name="tbTrashCostHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbTrashCostHigh.TabIndex" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <data name="tbTrashCostHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostHigh.Name" xml:space="preserve">
+    <value>tbTrashCostHigh</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostHigh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostHigh.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostHigh.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbTrashCostLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbTrashCostLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>576, 32</value>
+  </data>
+  <data name="tbTrashCostLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="tbTrashCostLow.TabIndex" type="System.Int32, mscorlib">
+    <value>151</value>
+  </data>
+  <data name="tbTrashCostLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostLow.Name" xml:space="preserve">
+    <value>tbTrashCostLow</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostLow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostLow.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbTrashCostLow.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="picTrashCost.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="picTrashCost.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTAw9HKhAAACQ0lEQVQ4T2PA
+        BQ5OjQ2NC3D67+Dg9N/FCTt2srf975Pe/h2qBRPMiTH1DHKyOQFUfMLb1fG2u1Pqc5+gMPOwMOy4xNM1
+        PdrJ6y9IvbOD/Qlr78ITUKMgINPUNNYzvupldi4M9CdApbCCFQW5Uk15EJX1heE98QH+/6FSEFAANNA9
+        pviZhalpNKk4IdC0LsYvBNXAff3p/hn+jt8sTK1eAxXdJgXbm1n98M/oeQk1CgEWljoetDDNL4FyiQYF
+        LqEXLXI3pEC5CLC6xRJooDfJBsZ6R1606DoIMXDbjEwxoLOlQXh2lekJIN0M46PiWCBuZwZrQgP2/jEX
+        LWacghi4vD+zxt/X97+/n+9/D0fr/5Y2Dv/9QHywmB+EBrPzgHiiPFgTGrAKiL3oOOcsxMDU1FTWtLRU
+        6bS0NGk3Bys715D41an5ZQogPipuAOLZWF3oEpJwMX3tTcwwBHpN3aeo63/M0ov8UCGC4Pr6bM+wYJ/T
+        5dseKDDYmZqWAQ1Bxt0WfjH/Lazt6tHEwdg6ML7Mae45dahZYHBmvntOlK/lSTAHaKAKUCEcT2pIP2Ub
+        kv7fwj3QCFkchoEGqgAN5AFrhoITM01zIn2sIAaCwNapSVVAxbNBODrI86Gdk/d/C3PLhTAxBI4C4iZh
+        qDY4ODLRNCfCKxRhIDLoB4ZhvGfhf4uoRUSH4ZYy05xQlwLsBs6yNVVPtU74b2Hm7gx0lTkxuNrbtMfH
+        ugG7gctiTPmj7U13Wpqa/gcqJhKb/w8tWgo0kIEBAOaVMQDyZJIBAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="picTrashCost.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="picTrashCost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 32</value>
+  </data>
+  <data name="picTrashCost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="picTrashCost.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="picTrashCost.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>212, 0</value>
+  </metadata>
+  <data name="picTrashCost.ToolTip" xml:space="preserve">
+    <value>Trash cost</value>
+  </data>
+  <data name="&gt;&gt;picTrashCost.Name" xml:space="preserve">
+    <value>picTrashCost</value>
+  </data>
+  <data name="&gt;&gt;picTrashCost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picTrashCost.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;picTrashCost.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>618, 35</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>154</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbLinkHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbLinkHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>492, 32</value>
+  </data>
+  <data name="tbLinkHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="tbLinkHigh.TabIndex" type="System.Int32, mscorlib">
+    <value>148</value>
+  </data>
+  <data name="tbLinkHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbLinkHigh.Name" xml:space="preserve">
+    <value>tbLinkHigh</value>
+  </data>
+  <data name="&gt;&gt;tbLinkHigh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbLinkHigh.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbLinkHigh.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbLinkLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbLinkLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>438, 32</value>
+  </data>
+  <data name="tbLinkLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="tbLinkLow.TabIndex" type="System.Int32, mscorlib">
+    <value>147</value>
+  </data>
+  <data name="tbLinkLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbLinkLow.Name" xml:space="preserve">
+    <value>tbLinkLow</value>
+  </data>
+  <data name="&gt;&gt;tbLinkLow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbLinkLow.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbLinkLow.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="picLink.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="picLink.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTAw9HKhAAABiklEQVQ4T2PI
+        MjX9b0E6DmXABdKtnf9bOEftAiqqJoS9nEz7EgMJGegU/N8ibVU1lIsXHJtuqtaTT9DAkP8WGWuJMvDE
+        TFO13oLBYuDK2lq2vtpa4RoYnrNZ+MgsWw2YgccX1TIvm4QkD8U4DVyQmhpam5r6PxWG+1f+nze/wglm
+        4MGpqfoz6pHkoRingX1ATdGmPkDNjnVAAzIsSiZnLJsZYQgzcFuVqXBdNFAcJAfEiYFWG90dzAkZmAvU
+        PFkNKoQ3DM8ujq6OD7SHGbgOw8B+sIEFQM0ziTLw6qqE6sRgB5CBoUAD1+MwsBCoeRaJBjoCE3bKSqIM
+        PDTFVK0rj5CBlo7/LezDNoICFoLjgbhRGNlAoDgIZ3g5mtbF+BIwsD4i4n8kCq4E4kn6yAYCxeNQ1UTg
+        NrA7K0s4CwW3AvFsZmQDgeLsILnMrEwYZoOaAwdwA3EBbGGIDwyUgajpEB+4sjKhOoGwgcAkZerUB4xV
+        rAUuMs6Jcd7l62KN28AJQANjsBf/eLDpfwAFdGmSFG4oZgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="picLink.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="picLink.Location" type="System.Drawing.Point, System.Drawing">
+    <value>412, 32</value>
+  </data>
+  <data name="picLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="picLink.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="picLink.TabIndex" type="System.Int32, mscorlib">
+    <value>149</value>
+  </data>
+  <data name="picLink.ToolTip" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="&gt;&gt;picLink.Name" xml:space="preserve">
+    <value>picLink</value>
+  </data>
+  <data name="&gt;&gt;picLink.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picLink.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;picLink.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 35</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tbAgendaPointsHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbAgendaPointsHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>355, 32</value>
+  </data>
+  <data name="tbAgendaPointsHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="tbAgendaPointsHigh.TabIndex" type="System.Int32, mscorlib">
+    <value>144</value>
+  </data>
+  <data name="tbAgendaPointsHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsHigh.Name" xml:space="preserve">
+    <value>tbAgendaPointsHigh</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsHigh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsHigh.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsHigh.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="tbAgendaPointsLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbAgendaPointsLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>301, 32</value>
+  </data>
+  <data name="tbAgendaPointsLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="tbAgendaPointsLow.TabIndex" type="System.Int32, mscorlib">
+    <value>143</value>
+  </data>
+  <data name="tbAgendaPointsLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsLow.Name" xml:space="preserve">
+    <value>tbAgendaPointsLow</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsLow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsLow.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbAgendaPointsLow.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="picAgendaPoints.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="picAgendaPoints.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTAw9HKhAAABmklEQVQ4T42U
+        LXjCMBCGK5FIJBKJnJxETiKRSGTlHHISiZycRE5OIicnkUhk973XXEmTtHDP85JyyV3ur62apikiWYid
+        OInviFosSzaQK6pqJj7Fr/gQK/EasRdngfOXzL73RzeHw+vwfy1w7tER7VZMBc7R2dnOR/eg28SPIEKe
+        /wTOcOrREe1BsLcRE/ElOqfubC7cGQe5ee6HUiREeBTvAqdktbC9cIBb3gRRkNYkdjCEhGgpgZUq6Kyb
+        NICbSGWWGg4R2wgPysIGUj2WDMeQMFpMg9mjIEWKbTeUjMaQUH+i9NXSJW1TloweIdHSrvxcBDWwNT74
+        LBItd4eMCN1lbLLJf4SExtwEo3RFQUEprDWnZDSGxN8mf3Os1TSEtKnjUzPoBFt8tDMZlEw6w8mXZJ8a
+        DSHJgvENxuYUnpmlOjYsIXFn1NCiM310gDraYEv8E0V9eiWQuCN3xqt36PaTwzi1D4OgBBSbDrLpeM3o
+        Kg3tvV09h6Zou8Wwk8aqsM9FOKJmu2w/VZjyngqvJYoYSkEm09y2qf4BI7vEQ4lOP+EAAAAASUVORK5C
+        YII=
+</value>
+  </data>
+  <data name="picAgendaPoints.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="picAgendaPoints.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 32</value>
+  </data>
+  <data name="picAgendaPoints.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="picAgendaPoints.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="picAgendaPoints.TabIndex" type="System.Int32, mscorlib">
+    <value>145</value>
+  </data>
+  <data name="picAgendaPoints.ToolTip" xml:space="preserve">
+    <value>Agenda points</value>
+  </data>
+  <data name="&gt;&gt;picAgendaPoints.Name" xml:space="preserve">
+    <value>picAgendaPoints</value>
+  </data>
+  <data name="&gt;&gt;picAgendaPoints.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picAgendaPoints.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;picAgendaPoints.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 35</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>146</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="eclKeyword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 43</value>
+    <value>381, 66</value>
   </data>
   <data name="eclKeyword.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 19</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="eclKeyword.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
@@ -142,16 +548,16 @@
     <value>eclKeyword</value>
   </data>
   <data name="&gt;&gt;eclKeyword.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclKeyword.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclKeyword.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>12</value>
   </data>
   <data name="eclTrigger.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 68</value>
+    <value>381, 91</value>
   </data>
   <data name="eclTrigger.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 19</value>
@@ -163,16 +569,16 @@
     <value>eclTrigger</value>
   </data>
   <data name="&gt;&gt;eclTrigger.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclTrigger.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclTrigger.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>13</value>
   </data>
   <data name="eclExpansionSet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 93</value>
+    <value>381, 116</value>
   </data>
   <data name="eclExpansionSet.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 19</value>
@@ -184,13 +590,13 @@
     <value>eclExpansionSet</value>
   </data>
   <data name="&gt;&gt;eclExpansionSet.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclExpansionSet.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclExpansionSet.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>14</value>
   </data>
   <data name="btnQuickFindNext.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -224,9 +630,6 @@
   <data name="btnQuickFindNext.TabIndex" type="System.Int32, mscorlib">
     <value>142</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>212, 0</value>
-  </metadata>
   <data name="btnQuickFindNext.ToolTip" xml:space="preserve">
     <value>Next match</value>
   </data>
@@ -240,7 +643,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;btnQuickFindNext.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>15</value>
   </data>
   <data name="tbStrengthHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -267,7 +670,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbStrengthHigh.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>16</value>
   </data>
   <data name="tbStrengthLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -294,175 +697,175 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbStrengthLow.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>17</value>
   </data>
-  <data name="tbClaimHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbDeckSizeHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbClaimHigh.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbDeckSizeHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>630, 6</value>
   </data>
-  <data name="tbClaimHigh.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbDeckSizeHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbClaimHigh.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbDeckSizeHigh.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="tbClaimHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbDeckSizeHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbClaimHigh.Name" xml:space="preserve">
-    <value>tbClaimHigh</value>
+  <data name="&gt;&gt;tbDeckSizeHigh.Name" xml:space="preserve">
+    <value>tbDeckSizeHigh</value>
   </data>
-  <data name="&gt;&gt;tbClaimHigh.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbDeckSizeHigh.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbClaimHigh.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbDeckSizeHigh.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbClaimHigh.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;tbDeckSizeHigh.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
-  <data name="tbClaimLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbDeckSizeLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbClaimLow.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbDeckSizeLow.Location" type="System.Drawing.Point, System.Drawing">
     <value>576, 6</value>
   </data>
-  <data name="tbClaimLow.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbDeckSizeLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbClaimLow.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbDeckSizeLow.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="tbClaimLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbDeckSizeLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbClaimLow.Name" xml:space="preserve">
-    <value>tbClaimLow</value>
+  <data name="&gt;&gt;tbDeckSizeLow.Name" xml:space="preserve">
+    <value>tbDeckSizeLow</value>
   </data>
-  <data name="&gt;&gt;tbClaimLow.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbDeckSizeLow.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbClaimLow.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbDeckSizeLow.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbClaimLow.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;tbDeckSizeLow.ZOrder" xml:space="preserve">
+    <value>19</value>
   </data>
-  <data name="tbInitiativeHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbMuHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbInitiativeHigh.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbMuHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>492, 6</value>
   </data>
-  <data name="tbInitiativeHigh.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbMuHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbInitiativeHigh.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbMuHigh.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="tbInitiativeHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbMuHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.Name" xml:space="preserve">
-    <value>tbInitiativeHigh</value>
+  <data name="&gt;&gt;tbMuHigh.Name" xml:space="preserve">
+    <value>tbMuHigh</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbMuHigh.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbMuHigh.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeHigh.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;tbMuHigh.ZOrder" xml:space="preserve">
+    <value>20</value>
   </data>
-  <data name="tbInitiativeLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbMuLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbInitiativeLow.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbMuLow.Location" type="System.Drawing.Point, System.Drawing">
     <value>438, 6</value>
   </data>
-  <data name="tbInitiativeLow.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbMuLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbInitiativeLow.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbMuLow.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="tbInitiativeLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbMuLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.Name" xml:space="preserve">
-    <value>tbInitiativeLow</value>
+  <data name="&gt;&gt;tbMuLow.Name" xml:space="preserve">
+    <value>tbMuLow</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbMuLow.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbMuLow.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbInitiativeLow.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;tbMuLow.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
-  <data name="tbGoldHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbCostHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbGoldHigh.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbCostHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>355, 6</value>
   </data>
-  <data name="tbGoldHigh.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbCostHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbGoldHigh.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbCostHigh.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="tbGoldHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbCostHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.Name" xml:space="preserve">
-    <value>tbGoldHigh</value>
+  <data name="&gt;&gt;tbCostHigh.Name" xml:space="preserve">
+    <value>tbCostHigh</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbCostHigh.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbCostHigh.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbGoldHigh.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="&gt;&gt;tbCostHigh.ZOrder" xml:space="preserve">
+    <value>22</value>
   </data>
-  <data name="tbGoldLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbCostLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tbGoldLow.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbCostLow.Location" type="System.Drawing.Point, System.Drawing">
     <value>301, 6</value>
   </data>
-  <data name="tbGoldLow.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbCostLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
   </data>
-  <data name="tbGoldLow.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbCostLow.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tbGoldLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="tbCostLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.Name" xml:space="preserve">
-    <value>tbGoldLow</value>
+  <data name="&gt;&gt;tbCostLow.Name" xml:space="preserve">
+    <value>tbCostLow</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbCostLow.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbCostLow.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbGoldLow.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="&gt;&gt;tbCostLow.ZOrder" xml:space="preserve">
+    <value>23</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>537, 43</value>
+    <value>537, 66</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -486,13 +889,13 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>24</value>
   </data>
   <data name="tbCardtext.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="tbCardtext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 38</value>
+    <value>617, 61</value>
   </data>
   <data name="tbCardtext.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 20</value>
@@ -510,7 +913,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbCardtext.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>25</value>
   </data>
   <data name="eclCardtextCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -519,7 +922,7 @@
     <value>NoControl</value>
   </data>
   <data name="eclCardtextCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>599, 42</value>
+    <value>599, 65</value>
   </data>
   <data name="eclCardtextCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 17</value>
@@ -534,19 +937,19 @@
     <value>eclCardtextCheck</value>
   </data>
   <data name="&gt;&gt;eclCardtextCheck.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclCardtextCheck.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclCardtextCheck.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>26</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>537, 95</value>
+    <value>537, 118</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -570,13 +973,13 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>27</value>
   </data>
   <data name="tbName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 92</value>
+    <value>617, 115</value>
   </data>
   <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 20</value>
@@ -594,7 +997,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>28</value>
   </data>
   <data name="eclNameCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -603,7 +1006,7 @@
     <value>NoControl</value>
   </data>
   <data name="eclNameCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>599, 94</value>
+    <value>599, 117</value>
   </data>
   <data name="eclNameCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 17</value>
@@ -618,19 +1021,19 @@
     <value>eclNameCheck</value>
   </data>
   <data name="&gt;&gt;eclNameCheck.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclNameCheck.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclNameCheck.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>29</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>537, 69</value>
+    <value>537, 92</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -639,7 +1042,7 @@
     <value>131</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Traits:</value>
+    <value>Keywords:</value>
   </data>
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -654,64 +1057,64 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>30</value>
   </data>
-  <data name="tbTraits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tbKeywords.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="tbTraits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 66</value>
+  <data name="tbKeywords.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 89</value>
   </data>
-  <data name="tbTraits.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbKeywords.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 20</value>
   </data>
-  <data name="tbTraits.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbKeywords.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;tbTraits.Name" xml:space="preserve">
-    <value>tbTraits</value>
+  <data name="&gt;&gt;tbKeywords.Name" xml:space="preserve">
+    <value>tbKeywords</value>
   </data>
-  <data name="&gt;&gt;tbTraits.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbKeywords.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbTraits.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbKeywords.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;tbTraits.ZOrder" xml:space="preserve">
-    <value>19</value>
+  <data name="&gt;&gt;tbKeywords.ZOrder" xml:space="preserve">
+    <value>31</value>
   </data>
-  <data name="eclTraitCheck.AutoSize" type="System.Boolean, mscorlib">
+  <data name="eclKeywordCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="eclTraitCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="eclKeywordCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="eclTraitCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>599, 68</value>
+  <data name="eclKeywordCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>599, 91</value>
   </data>
-  <data name="eclTraitCheck.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="eclKeywordCheck.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 17</value>
   </data>
-  <data name="eclTraitCheck.TabIndex" type="System.Int32, mscorlib">
+  <data name="eclKeywordCheck.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="eclTraitCheck.Text" xml:space="preserve">
+  <data name="eclKeywordCheck.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.Name" xml:space="preserve">
-    <value>eclTraitCheck</value>
+  <data name="&gt;&gt;eclKeywordCheck.Name" xml:space="preserve">
+    <value>eclKeywordCheck</value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;eclKeywordCheck.Type" xml:space="preserve">
+    <value>Beyond.ExtendedControls.ExtendedCheckBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.Parent" xml:space="preserve">
+  <data name="&gt;&gt;eclKeywordCheck.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;eclTraitCheck.ZOrder" xml:space="preserve">
-    <value>20</value>
+  <data name="&gt;&gt;eclKeywordCheck.ZOrder" xml:space="preserve">
+    <value>32</value>
   </data>
   <data name="eclProvides.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 43</value>
+    <value>139, 66</value>
   </data>
   <data name="eclProvides.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
@@ -723,16 +1126,16 @@
     <value>eclProvides</value>
   </data>
   <data name="&gt;&gt;eclProvides.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclProvides.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclProvides.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>33</value>
   </data>
   <data name="eclIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 43</value>
+    <value>265, 66</value>
   </data>
   <data name="eclIcon.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 19</value>
@@ -744,16 +1147,16 @@
     <value>eclIcon</value>
   </data>
   <data name="&gt;&gt;eclIcon.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclIcon.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclIcon.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>34</value>
   </data>
   <data name="eclCardtype.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 43</value>
+    <value>13, 66</value>
   </data>
   <data name="eclCardtype.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
@@ -765,42 +1168,32 @@
     <value>eclCardtype</value>
   </data>
   <data name="&gt;&gt;eclCardtype.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclCardtype.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclCardtype.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>35</value>
   </data>
   <data name="picStrength.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="picStrength.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        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
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTAw9HKhAAACgklEQVQ4T52T
+        XUhTYRjHjxd1VxfdBt1310V01wfedBNCRIJSgsbStZWWBoVKlLR1oeQMEZVkObUCXeU0QsecH+V0oibN
+        j6k5t/ZxPHNz25k2F/x73uMOKK6wHvhx4H3e//99nvM+L7c7DG0dh5Sq28eV6pJC1b2HHUV37psU6lJT
+        QVGxSXGr2HQ151pZXr7iTPlj7eGUJH206FuPPHqiKax8WvNZo2tCfWsX9MY+tJsG0NE7iPYeK16960e9
+        wYhKrQ50yMSlrMvZKfneqK6tv/JM17j6Qt8piXuHpzAw6cSoYxXjC15MOP2wL/gwOuuGdXIRPUOTMHRb
+        oKl7ibwbysEL5zOPpax2oq7lLf/64xDM43OwO31weMJY4kW4glvwhH7CE05I39X1LWnd4QnBNudB78g0
+        mt70QF1aHrqpKjmdsuM4SvDj8z8w741IIt/GNgKxJNbE/fC07qX8irCJGVcQZvs8Wjo/QV1W4c/OvX5U
+        MpxZEfjvQpw2JiQBEwp/geUD0STcVPU3dwh9Yw7650bk5hdqT5w6m8FRVbw/ur3HKBj/tcckHawL1tHU
+        Mg+jeQwPqqpx7mLWSW7OFRCcbh6+UFwykklnwtid80eSWAzE6BIX0dD+HjkFyjrOPPhFILDsFQ5sKOdZ
+        V6xKO00DG6275VVTnHstIniEKGT84c0dQRpkMxlmyC5pxiVQ2zZUaJ6D67eOCARkpmeX9gn/BKvSR22z
+        Ueq2TkBLj4LzhTdt3nUR/4NsyG77AxnWNOipQstwlmVodMs6MoZ/YYAIRBPwRrbxlVru6rehtrnNyQU3
+        xIy1aCKTTrMExWSMEA8C7RdpbkWaR5GepkjvXtQ1Gxp/Ayw7arAAYksVAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="picStrength.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -811,6 +1204,9 @@
   </data>
   <data name="picStrength.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 22</value>
+  </data>
+  <data name="picStrength.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
   </data>
   <data name="picStrength.TabIndex" type="System.Int32, mscorlib">
     <value>118</value>
@@ -828,7 +1224,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picStrength.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>36</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -861,67 +1257,51 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>37</value>
   </data>
-  <data name="picClaim.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="picDeckSize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="picClaim.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picDeckSize.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        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
-        FkH+BZpDs4M+R5t6AAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUCAYAAABSx2cSAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTAw9HKhAAABBklEQVQ4T9WU
+        PQrCQBCFo8FGCxOx8ARew1LQwiKFPygWCqazkxSKdnYW0UIhx7HzCBZp0wrp1/eWRWIMIQERHPjyZmf3
+        7UyxREOILBiG0fM8rxmGYV0IUURNBjdPYA4WwE5gBYTrup7v+1YQBGWsZdBMYweswS6Bi2mad6hwHGdj
+        27aJvACkmR1pfI2Zhq7rLWgVyAJHYwfmbdAF/QSm4Ax4zgIfZhqpWZCfqJkdqC4Yg2GMCTiCVDONFVCK
+        wRovSDWzCw/HgzXufc+8VfnvO//h2EtwUHku80wlV6W5zI3IgoyUZnph/CvUwEAV9kr5fnmIF0d5e9sM
+        XsAJ+FO4gQfgZgqaeALcBagx8DppBgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="picClaim.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="picDeckSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="picClaim.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="picDeckSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>550, 6</value>
   </data>
-  <data name="picClaim.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="picDeckSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
   </data>
-  <data name="picClaim.TabIndex" type="System.Int32, mscorlib">
+  <data name="picDeckSize.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="picDeckSize.TabIndex" type="System.Int32, mscorlib">
     <value>114</value>
   </data>
-  <data name="picClaim.ToolTip" xml:space="preserve">
-    <value>Claim</value>
+  <data name="picDeckSize.ToolTip" xml:space="preserve">
+    <value>Deck size</value>
   </data>
-  <data name="&gt;&gt;picClaim.Name" xml:space="preserve">
-    <value>picClaim</value>
+  <data name="&gt;&gt;picDeckSize.Name" xml:space="preserve">
+    <value>picDeckSize</value>
   </data>
-  <data name="&gt;&gt;picClaim.Type" xml:space="preserve">
+  <data name="&gt;&gt;picDeckSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;picClaim.Parent" xml:space="preserve">
+  <data name="&gt;&gt;picDeckSize.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;picClaim.ZOrder" xml:space="preserve">
-    <value>26</value>
+  <data name="&gt;&gt;picDeckSize.ZOrder" xml:space="preserve">
+    <value>38</value>
   </data>
   <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -954,69 +1334,51 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>39</value>
   </data>
-  <data name="picInit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="picMu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="picInit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picMu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        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
-        AElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EQAACxEBf2RfkQAAAAd0SU1FB9wJBQoeK+aMp/4AAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41
+        LjEwMPRyoQAAAQxJREFUOE+dlL8PwUAYhjs2VWKQtCRiQAwSMxGrmIzGbnaT0SghYSQSEoPVP2HBZDCR
+        sPgrTLyvfkRo/bg3eYb77r6n17R3muM4IVD6k5TmF0wWwRK0f2QMBtL+HkxS2JHh12BtCqzA4oUjKPwt
+        9AsddKkIE2BOTNNsoTcrTOhSEebAhViWtUfvUNjQpSIMgJKQYYGhQ1X42KFt2wf0ToUtXSrCOJgRwzCa
+        6E0KI7pUhGFQE6osMHQ8C/tS/yWPV9Z1/Yze+394oovCGODXKt+Wf08ENIQ6Cwz63R3KIC3Syq3wIVgT
+        BV0P1sAVMhjwSO1AD3id4Ts8y3OQ9yAoOjco8Olet8srPreNpl0BMZLN9dRxlWIAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="picInit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="picMu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="picInit.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="picMu.Location" type="System.Drawing.Point, System.Drawing">
     <value>412, 5</value>
   </data>
-  <data name="picInit.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="picMu.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 22</value>
   </data>
-  <data name="picInit.TabIndex" type="System.Int32, mscorlib">
+  <data name="picMu.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="picMu.TabIndex" type="System.Int32, mscorlib">
     <value>110</value>
   </data>
-  <data name="picInit.ToolTip" xml:space="preserve">
-    <value>Initiative</value>
+  <data name="picMu.ToolTip" xml:space="preserve">
+    <value>MU</value>
   </data>
-  <data name="&gt;&gt;picInit.Name" xml:space="preserve">
-    <value>picInit</value>
+  <data name="&gt;&gt;picMu.Name" xml:space="preserve">
+    <value>picMu</value>
   </data>
-  <data name="&gt;&gt;picInit.Type" xml:space="preserve">
+  <data name="&gt;&gt;picMu.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;picInit.Parent" xml:space="preserve">
+  <data name="&gt;&gt;picMu.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;picInit.ZOrder" xml:space="preserve">
-    <value>28</value>
+  <data name="&gt;&gt;picMu.ZOrder" xml:space="preserve">
+    <value>40</value>
   </data>
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1049,68 +1411,56 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>41</value>
   </data>
-  <data name="picGold.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="picCost.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="picGold.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picCost.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        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
+        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTAw9HKhAAACKUlEQVQ4T3WQ
+        P0gbURzH36IILqKjQ9cOXSr8zDPnJTGX5yV3xtBczrP5AxdNbSI2pklpaI3Nn7MlVFICKd0tlNp2kEJR
+        0iIdCg6dOxVbXAquKuj4vCSP1DTpB37L9/v9cLxD//J6GfrWNfDZ9A2fM7vTx+L/UwlB3u8EaiUKxdGX
+        eRZ3swwweM8JVY8gXWBvzsgIYEgu9wV2Z6qYzwyy2V/mAaqEBOhEeLPCIrShQSVAXBSPh6osQujb1qqe
+        1WcPp2eCZ/Kj7QKf/jDAqsZ7BrYyrkJQFs4wiLVIefsGqi24qaBEaajyeY3tutjdDK7FVELlu68oyvNA
+        eWeE8kLqJuu7+PF2pb/kc5ZFYrQEDI3z/sEQxmzTRRYgIXcKFvPE3xPj/rHil6N+tmvTQ2gdZyU0Xnn3
+        hu3aXBEEGosnqd8+2ZaIGjuK7/zi2LbJFUGmPFdKLmB83Q/wkzMFj56iphBk2yYdAoZiohEmAMY0gMNe
+        wkNTkEipU2iQxHBt5U7quymILGrSEooUFewOOjVX2vMa9SHWdfFxnQzlApN7U9PmF1Ic6DM24cQaeVbH
+        4doI27R5rsKIcdtSJzbpBPNpvRmmOVDmBPspllb3sfhktBmaZHgYTbhg3+HSTrEjq7C4hREAVZds51Yc
+        OlDUpeFF1TesWfCBXY6e4/myymadvE9z0n3NcezxKFTxEErCD45J7pPE6t7sPr0lPl5009mlHA2++Nrx
+        pxBC6BJ7UunVD+aKVQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="picGold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="picCost.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="picGold.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="picCost.Location" type="System.Drawing.Point, System.Drawing">
     <value>275, 6</value>
   </data>
-  <data name="picGold.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="picCost.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
   </data>
-  <data name="picGold.TabIndex" type="System.Int32, mscorlib">
+  <data name="picCost.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="picCost.TabIndex" type="System.Int32, mscorlib">
     <value>106</value>
   </data>
-  <data name="picGold.ToolTip" xml:space="preserve">
-    <value>Cost/income</value>
+  <data name="picCost.ToolTip" xml:space="preserve">
+    <value>Cost</value>
   </data>
-  <data name="&gt;&gt;picGold.Name" xml:space="preserve">
-    <value>picGold</value>
+  <data name="&gt;&gt;picCost.Name" xml:space="preserve">
+    <value>picCost</value>
   </data>
-  <data name="&gt;&gt;picGold.Type" xml:space="preserve">
+  <data name="&gt;&gt;picCost.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;picGold.Parent" xml:space="preserve">
+  <data name="&gt;&gt;picCost.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;picGold.ZOrder" xml:space="preserve">
-    <value>30</value>
+  <data name="&gt;&gt;picCost.ZOrder" xml:space="preserve">
+    <value>42</value>
   </data>
   <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1143,7 +1493,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>43</value>
   </data>
   <data name="tbFind.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1167,7 +1517,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbFind.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>44</value>
   </data>
   <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1194,10 +1544,10 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>45</value>
   </data>
   <data name="eclVirtue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 68</value>
+    <value>265, 91</value>
   </data>
   <data name="eclVirtue.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 19</value>
@@ -1209,37 +1559,37 @@
     <value>eclVirtue</value>
   </data>
   <data name="&gt;&gt;eclVirtue.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclVirtue.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclVirtue.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>46</value>
   </data>
-  <data name="eclHouse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 68</value>
+  <data name="eclFaction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 91</value>
   </data>
-  <data name="eclHouse.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="eclFaction.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
   </data>
-  <data name="eclHouse.TabIndex" type="System.Int32, mscorlib">
+  <data name="eclFaction.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Name" xml:space="preserve">
-    <value>eclHouse</value>
+  <data name="&gt;&gt;eclFaction.Name" xml:space="preserve">
+    <value>eclFaction</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;eclFaction.Type" xml:space="preserve">
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;eclHouse.Parent" xml:space="preserve">
+  <data name="&gt;&gt;eclFaction.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;eclHouse.ZOrder" xml:space="preserve">
-    <value>35</value>
+  <data name="&gt;&gt;eclFaction.ZOrder" xml:space="preserve">
+    <value>47</value>
   </data>
   <data name="eclMecanism.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 68</value>
+    <value>139, 91</value>
   </data>
   <data name="eclMecanism.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
@@ -1251,13 +1601,13 @@
     <value>eclMecanism</value>
   </data>
   <data name="&gt;&gt;eclMecanism.Type" xml:space="preserve">
-    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.2878.25775, Culture=neutral, PublicKeyToken=null</value>
+    <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;eclMecanism.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclMecanism.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>48</value>
   </data>
   <data name="dataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1299,10 +1649,10 @@
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 117</value>
+    <value>0, 141</value>
   </data>
   <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>821, 270</value>
+    <value>821, 246</value>
   </data>
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -1317,13 +1667,13 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>49</value>
   </data>
   <data name="btnReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 91</value>
+    <value>156, 114</value>
   </data>
   <data name="btnReset.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 21</value>
@@ -1344,7 +1694,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;btnReset.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>50</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1485,7 +1835,7 @@
     <value>cardPreviewControl</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Type" xml:space="preserve">
-    <value>NRADB.Forms.CardPreviewControl, NRADB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>NRADB.Forms.CardPreviewControl, AndroidDB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cardPreviewControl.Parent" xml:space="preserve">
     <value>splitCardText.Panel2</value>
@@ -1632,7 +1982,7 @@
     <value>OCTGN</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>168, 22</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>About AndroidDB</value>
@@ -1836,18 +2186,6 @@
   <data name="&gt;&gt;windowToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
-    <value>helpToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
-    <value>aboutToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;oCTGNToolStripMenuItem.Name" xml:space="preserve">
     <value>oCTGNToolStripMenuItem</value>
   </data>
@@ -1858,6 +2196,18 @@
     <value>loadOCTGNDataToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;loadOCTGNDataToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
+    <value>helpToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
+    <value>aboutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkNewVersionBackgroundWorker.Name" xml:space="preserve">

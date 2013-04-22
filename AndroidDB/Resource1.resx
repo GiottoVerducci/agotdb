@@ -132,14 +132,8 @@
   <data name="ClaimText" xml:space="preserve">
     <value>Claim</value>
   </data>
-  <data name="CostOrIncomeText" xml:space="preserve">
-    <value>Cost or income</value>
-  </data>
   <data name="CostText" xml:space="preserve">
     <value>Cost</value>
-  </data>
-  <data name="CrestsText" xml:space="preserve">
-    <value>Crests</value>
   </data>
   <data name="CurrentRevision" xml:space="preserve">
     <value>Current</value>
@@ -153,11 +147,8 @@
   <data name="DeckFileFilter" xml:space="preserve">
     <value>Deck (*.xml)|*.xml</value>
   </data>
-    <data name="OctgnDeckFileFilter" xml:space="preserve">
+  <data name="OctgnDeckFileFilter" xml:space="preserve">
     <value>Octgn (*.o8d)|*.o8d</value>
-  </data>
-    <data name="DoomedText" xml:space="preserve">
-    <value>DOOMED</value>
   </data>
   <data name="ErrDatabaseNotFound" xml:space="preserve">
     <value>The database file {0} could not be found. Please make sure that file is in the same directory than this program.</value>
@@ -210,12 +201,12 @@ Exception trace:
     <value>Invalid database</value>
   </data>
   <data name="ErrInvalidXmlDeckFile" xml:space="preserve">
-    <value>The content of the file is not a valid AGoTDB deck.</value>
+    <value>The content of the file is not a valid AndroidDB deck.</value>
   </data>
-    <data name="ErrCardsNotFoundInOctgnDeckFile" xml:space="preserve">
-    <value>Some cards couldn't be found in the Agot Database (make sure you have updated the database with the latest Octgn sets).</value>
+  <data name="ErrCardsNotFoundInOctgnDeckFile" xml:space="preserve">
+    <value>Some cards couldn't be found in the Database (make sure you have updated the database with the latest Octgn sets).</value>
   </data>
-    <data name="ErrMinimalSoftwareVersionRequired" xml:space="preserve">
+  <data name="ErrMinimalSoftwareVersionRequired" xml:space="preserve">
     <value>This version of the database requires at least the version {0} for the software. Current version of the software is {1}. The software may malfunction. Do you wish to continue?</value>
   </data>
   <data name="ErrMinimalSoftwareVersionRequiredTitle" xml:space="preserve">
@@ -242,14 +233,8 @@ Exception trace:
   <data name="Failure" xml:space="preserve">
     <value>Failure</value>
   </data>
-  <data name="HolyVirtueText" xml:space="preserve">
-    <value>Holy</value>
-  </data>
   <data name="FactionText" xml:space="preserve">
-    <value>House</value>
-  </data>
-  <data name="IconsText" xml:space="preserve">
-    <value>Icons</value>
+    <value>Faction</value>
   </data>
   <data name="ImageFolderDoesntExist" xml:space="preserve">
     <value>The folder containing the card images doesn't exist</value>
@@ -257,53 +242,17 @@ Exception trace:
   <data name="ImageNotAvailable" xml:space="preserve">
     <value>Image not available.</value>
   </data>
-  <data name="IncomeText" xml:space="preserve">
-    <value>Income</value>
-  </data>
-  <data name="InfluenceCostingCardsText" xml:space="preserve">
-    <value>Cards costing influence</value>
-  </data>
-  <data name="InitiativeText" xml:space="preserve">
-    <value>Initiative</value>
-  </data>
-  <data name="IntrigueIconAbrev" xml:space="preserve">
-    <value>INT</value>
-  </data>
-  <data name="LearnedVirtueText" xml:space="preserve">
-    <value>Learned</value>
-  </data>
   <data name="MaxStatsText" xml:space="preserve">
     <value>max</value>
-  </data>
-  <data name="MilitaryIconAbrev" xml:space="preserve">
-    <value>MIL</value>
   </data>
   <data name="MinStatsText" xml:space="preserve">
     <value>min</value>
   </data>
-  <data name="MultiplayerText" xml:space="preserve">
-    <value>MULTIPLAYER</value>
-  </data>
   <data name="NameText" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NobleVirtueText" xml:space="preserve">
-    <value>Noble</value>
-  </data>
   <data name="Or" xml:space="preserve">
     <value>OR</value>
-  </data>
-  <data name="PowerIconAbrev" xml:space="preserve">
-    <value>POW</value>
-  </data>
-  <data name="ProvidedGoldText" xml:space="preserve">
-    <value>INCOME</value>
-  </data>
-  <data name="ProvidedInfluenceText" xml:space="preserve">
-    <value>INFLUENCE</value>
-  </data>
-  <data name="ProvidedInitiativeText" xml:space="preserve">
-    <value>INITIATIVE</value>
   </data>
   <data name="RangeBetween" xml:space="preserve">
     <value>{0} between {1} and {2}</value>
@@ -326,20 +275,11 @@ Exception trace:
   <data name="SetText" xml:space="preserve">
     <value>Set</value>
   </data>
-  <data name="ShadowCostText" xml:space="preserve">
-    <value>Shadow Cost</value>
-  </data>
-  <data name="ShadowVirtueText" xml:space="preserve">
-    <value>Shadow</value>
-  </data>
   <data name="StrengthText" xml:space="preserve">
     <value>Strength</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
-  </data>
-  <data name="TraitsText" xml:space="preserve">
-    <value>Traits</value>
   </data>
   <data name="TypeText" xml:space="preserve">
     <value>Type</value>
@@ -374,9 +314,6 @@ Exception trace:
   <data name="WarnImpossibleToAddCardTitle" xml:space="preserve">
     <value>Action forbidden</value>
   </data>
-  <data name="WarVirtueText" xml:space="preserve">
-    <value>War</value>
-  </data>
   <data name="ErrOctgnNotFound" xml:space="preserve">
     <value>No OCTGN sets found.</value>
   </data>
@@ -391,5 +328,20 @@ Exception trace:
   </data>
   <data name="TreeNodeAddCard" xml:space="preserve">
     <value>You may add cards by double-clicking on them in the main window</value>
+  </data>
+  <data name="AgendaPointsText" xml:space="preserve">
+    <value>Agenda points</value>
+  </data>
+  <data name="AdvancementText" xml:space="preserve">
+    <value>Advancement</value>
+  </data>
+  <data name="InfluenceText" xml:space="preserve">
+    <value>Influence</value>
+  </data>
+  <data name="DeckSizeText" xml:space="preserve">
+    <value>Min deck size</value>
+  </data>
+  <data name="LinkText" xml:space="preserve">
+    <value>Link</value>
   </data>
 </root>

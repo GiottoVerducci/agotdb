@@ -73,10 +73,13 @@ namespace GenericDB.DataAccess
         /// <returns>A formatted xint value.</returns>
         public virtual FormattedValue<XInt> GetXIntAndStyleFromRow(DataRow row, string column)
         {
-            string text = row[column].ToString().Trim();
-            int value = string.IsNullOrEmpty(text) ? 0 : Int32.Parse(text, CultureInfo.InvariantCulture);
             string errated = row[column + "Errated"].ToString().Trim();
-            return new FormattedValue<XInt>((value == -1) ? new XInt() : new XInt(value), GetFormatFromErrata(errated));
+            string text = row[column].ToString().Trim();
+            var isSet = !string.IsNullOrEmpty(text);
+            var value = !isSet ? 0 : Int32.Parse(text, CultureInfo.InvariantCulture);
+            var xIntResult = (value == -1) ? new XInt() : new XInt(value);
+            xIntResult.IsSet = isSet;
+            return new FormattedValue<XInt>(xIntResult, GetFormatFromErrata(errated));
         }
 
         /// <summary>
