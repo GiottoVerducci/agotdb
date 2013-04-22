@@ -234,6 +234,33 @@ namespace NRADB.OCTGN
                     var setId = Convert.ToInt32(setInformations.Substring(0, 2));
                     var cardId = Convert.ToInt32(setInformations.Substring(2));
 
+                    var stat = card.Stat == "-" ? string.Empty : card.Stat;
+                    var strength = string.Equals(card.Type, "ICE", StringComparison.InvariantCultureIgnoreCase)
+                        || string.Equals(card.Type, "Program", StringComparison.InvariantCultureIgnoreCase)
+                        ? (card.Stat == "-" ? string.Empty : (string.IsNullOrEmpty(card.Stat) ? "0" : card.Stat))
+                        : string.Empty;
+                    var agendaPoints = string.Equals(card.Type, "Agenda", StringComparison.InvariantCultureIgnoreCase)
+                        ? stat
+                        : string.Empty;
+                    var link = string.Equals(card.Type, "Identity", StringComparison.InvariantCultureIgnoreCase)
+                        ? card.Cost
+                        : string.Empty;
+                    var trashCost = string.Equals(card.Type, "Asset", StringComparison.InvariantCultureIgnoreCase)
+                         ? stat
+                        : string.Empty;
+
+                    var influence = card.Influence == "-" ? string.Empty : card.Influence;
+                    if (string.Equals(card.Type, "Identity", StringComparison.InvariantCultureIgnoreCase))
+                        influence = stat;
+
+                    var mu = string.Equals(card.Type, "Program", StringComparison.InvariantCultureIgnoreCase)
+                        ? card.Requirement
+                        : string.Empty;
+                    var deckSize = string.Equals(card.Type, "Identity", StringComparison.InvariantCultureIgnoreCase)
+                        ? card.Requirement
+                        : string.Empty;
+
+
                     destinationRows.Add(
                         index,
                         card.Name,
@@ -246,9 +273,15 @@ namespace NRADB.OCTGN
                         card.Text,
                         card.Instructions,
                         card.Cost,
-                        card.Stat == "-" ? string.Empty : card.Stat,
-                        card.Influence == "-" ? string.Empty : card.Influence,
+                        stat,
+                        strength,
+                        agendaPoints,
+                        link,
+                        trashCost,
+                        influence,
                         card.Requirement,
+                        mu,
+                        deckSize,
                         string.Format("CS({0})", cardId),
                         card.Name,
                         (setId * 10000 + cardId).ToString(),

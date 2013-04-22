@@ -17,26 +17,29 @@ namespace GenericDB.Helper
             foreach (var columnSetting in columnSettings)
             {
                 var dataTableColumn = dataTable.Columns[columnSetting.Name];
-                dataTableColumn.SetOrdinal(Convert.ToInt32(columnSetting.Index));
+                if (dataTableColumn != null)
+                    dataTableColumn.SetOrdinal(Convert.ToInt32(columnSetting.Index));
             }
         }
 
         public static void SetDataGridViewColumnsSettings(DataGridView dataGridView, string columnsSettings)
         {
+            if (columnsSettings == null)
+                return;
             var columnSettings = columnsSettings.Split('|').Select(s => new ColumnSetting(s)).OrderByDescending(cs => cs.Index);
             foreach (var columnSetting in columnSettings)
             {
                 var column = dataGridView.Columns[columnSetting.Name];
-                if(column != null)
+                if (column != null)
                     column.Width = Convert.ToInt32(columnSetting.Width);
             }
         }
 
         public static string GetDataGridViewColumnsSettings(DataGridView dataGridView)
         {
-            var columnsSettings = 
-                from DataGridViewColumn column in dataGridView.Columns 
-                select new ColumnSetting(column.Name, column.DisplayIndex, column.Width) into setting 
+            var columnsSettings =
+                from DataGridViewColumn column in dataGridView.Columns
+                select new ColumnSetting(column.Name, column.DisplayIndex, column.Width) into setting
                 select setting.ToString();
             return string.Join("|", columnsSettings);
         }

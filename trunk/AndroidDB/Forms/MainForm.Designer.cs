@@ -31,18 +31,30 @@ namespace NRADB.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tbTrashCostHigh = new System.Windows.Forms.TextBox();
+            this.tbTrashCostLow = new System.Windows.Forms.TextBox();
+            this.picTrashCost = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbLinkHigh = new System.Windows.Forms.TextBox();
+            this.tbLinkLow = new System.Windows.Forms.TextBox();
+            this.picLink = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbAgendaPointsHigh = new System.Windows.Forms.TextBox();
+            this.tbAgendaPointsLow = new System.Windows.Forms.TextBox();
+            this.picAgendaPoints = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.eclKeyword = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclTrigger = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclExpansionSet = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.btnQuickFindNext = new System.Windows.Forms.Button();
             this.tbStrengthHigh = new System.Windows.Forms.TextBox();
             this.tbStrengthLow = new System.Windows.Forms.TextBox();
-            this.tbClaimHigh = new System.Windows.Forms.TextBox();
-            this.tbClaimLow = new System.Windows.Forms.TextBox();
-            this.tbInitiativeHigh = new System.Windows.Forms.TextBox();
-            this.tbInitiativeLow = new System.Windows.Forms.TextBox();
-            this.tbGoldHigh = new System.Windows.Forms.TextBox();
-            this.tbGoldLow = new System.Windows.Forms.TextBox();
+            this.tbDeckSizeHigh = new System.Windows.Forms.TextBox();
+            this.tbDeckSizeLow = new System.Windows.Forms.TextBox();
+            this.tbMuHigh = new System.Windows.Forms.TextBox();
+            this.tbMuLow = new System.Windows.Forms.TextBox();
+            this.tbCostHigh = new System.Windows.Forms.TextBox();
+            this.tbCostLow = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbCardtext = new System.Windows.Forms.TextBox();
             this.eclCardtextCheck = new Beyond.ExtendedControls.ExtendedCheckBox();
@@ -50,23 +62,23 @@ namespace NRADB.Forms
             this.tbName = new System.Windows.Forms.TextBox();
             this.eclNameCheck = new Beyond.ExtendedControls.ExtendedCheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbTraits = new System.Windows.Forms.TextBox();
-            this.eclTraitCheck = new Beyond.ExtendedControls.ExtendedCheckBox();
+            this.tbKeywords = new System.Windows.Forms.TextBox();
+            this.eclKeywordCheck = new Beyond.ExtendedControls.ExtendedCheckBox();
             this.eclProvides = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclIcon = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclCardtype = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.picStrength = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.picClaim = new System.Windows.Forms.PictureBox();
+            this.picDeckSize = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.picInit = new System.Windows.Forms.PictureBox();
+            this.picMu = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.picGold = new System.Windows.Forms.PictureBox();
+            this.picCost = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbFind = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.eclVirtue = new Beyond.ExtendedControls.ExtendedCheckedListBox();
-            this.eclHouse = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.eclFaction = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclMecanism = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.popupGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -90,20 +102,23 @@ namespace NRADB.Forms
             this.deckBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadOCTGNDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkNewVersionBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTrashCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLink)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAgendaPoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStrength)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClaim)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picInit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picGold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDeckSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.popupGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitCardText)).BeginInit();
@@ -120,18 +135,30 @@ namespace NRADB.Forms
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.tbTrashCostHigh);
+            this.splitContainer1.Panel1.Controls.Add(this.tbTrashCostLow);
+            this.splitContainer1.Panel1.Controls.Add(this.picTrashCost);
+            this.splitContainer1.Panel1.Controls.Add(this.label10);
+            this.splitContainer1.Panel1.Controls.Add(this.tbLinkHigh);
+            this.splitContainer1.Panel1.Controls.Add(this.tbLinkLow);
+            this.splitContainer1.Panel1.Controls.Add(this.picLink);
+            this.splitContainer1.Panel1.Controls.Add(this.label9);
+            this.splitContainer1.Panel1.Controls.Add(this.tbAgendaPointsHigh);
+            this.splitContainer1.Panel1.Controls.Add(this.tbAgendaPointsLow);
+            this.splitContainer1.Panel1.Controls.Add(this.picAgendaPoints);
+            this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.eclKeyword);
             this.splitContainer1.Panel1.Controls.Add(this.eclTrigger);
             this.splitContainer1.Panel1.Controls.Add(this.eclExpansionSet);
             this.splitContainer1.Panel1.Controls.Add(this.btnQuickFindNext);
             this.splitContainer1.Panel1.Controls.Add(this.tbStrengthHigh);
             this.splitContainer1.Panel1.Controls.Add(this.tbStrengthLow);
-            this.splitContainer1.Panel1.Controls.Add(this.tbClaimHigh);
-            this.splitContainer1.Panel1.Controls.Add(this.tbClaimLow);
-            this.splitContainer1.Panel1.Controls.Add(this.tbInitiativeHigh);
-            this.splitContainer1.Panel1.Controls.Add(this.tbInitiativeLow);
-            this.splitContainer1.Panel1.Controls.Add(this.tbGoldHigh);
-            this.splitContainer1.Panel1.Controls.Add(this.tbGoldLow);
+            this.splitContainer1.Panel1.Controls.Add(this.tbDeckSizeHigh);
+            this.splitContainer1.Panel1.Controls.Add(this.tbDeckSizeLow);
+            this.splitContainer1.Panel1.Controls.Add(this.tbMuHigh);
+            this.splitContainer1.Panel1.Controls.Add(this.tbMuLow);
+            this.splitContainer1.Panel1.Controls.Add(this.tbCostHigh);
+            this.splitContainer1.Panel1.Controls.Add(this.tbCostLow);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.tbCardtext);
             this.splitContainer1.Panel1.Controls.Add(this.eclCardtextCheck);
@@ -139,23 +166,23 @@ namespace NRADB.Forms
             this.splitContainer1.Panel1.Controls.Add(this.tbName);
             this.splitContainer1.Panel1.Controls.Add(this.eclNameCheck);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.tbTraits);
-            this.splitContainer1.Panel1.Controls.Add(this.eclTraitCheck);
+            this.splitContainer1.Panel1.Controls.Add(this.tbKeywords);
+            this.splitContainer1.Panel1.Controls.Add(this.eclKeywordCheck);
             this.splitContainer1.Panel1.Controls.Add(this.eclProvides);
             this.splitContainer1.Panel1.Controls.Add(this.eclIcon);
             this.splitContainer1.Panel1.Controls.Add(this.eclCardtype);
             this.splitContainer1.Panel1.Controls.Add(this.picStrength);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
-            this.splitContainer1.Panel1.Controls.Add(this.picClaim);
+            this.splitContainer1.Panel1.Controls.Add(this.picDeckSize);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
-            this.splitContainer1.Panel1.Controls.Add(this.picInit);
+            this.splitContainer1.Panel1.Controls.Add(this.picMu);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
-            this.splitContainer1.Panel1.Controls.Add(this.picGold);
+            this.splitContainer1.Panel1.Controls.Add(this.picCost);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.tbFind);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
             this.splitContainer1.Panel1.Controls.Add(this.eclVirtue);
-            this.splitContainer1.Panel1.Controls.Add(this.eclHouse);
+            this.splitContainer1.Panel1.Controls.Add(this.eclFaction);
             this.splitContainer1.Panel1.Controls.Add(this.eclMecanism);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView);
             this.splitContainer1.Panel1.Controls.Add(this.btnReset);
@@ -164,6 +191,84 @@ namespace NRADB.Forms
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer1.Panel2.Controls.Add(this.splitCardText);
+            // 
+            // tbTrashCostHigh
+            // 
+            resources.ApplyResources(this.tbTrashCostHigh, "tbTrashCostHigh");
+            this.tbTrashCostHigh.Name = "tbTrashCostHigh";
+            this.tbTrashCostHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbTrashCostHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // tbTrashCostLow
+            // 
+            resources.ApplyResources(this.tbTrashCostLow, "tbTrashCostLow");
+            this.tbTrashCostLow.Name = "tbTrashCostLow";
+            this.tbTrashCostLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbTrashCostLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // picTrashCost
+            // 
+            resources.ApplyResources(this.picTrashCost, "picTrashCost");
+            this.picTrashCost.Name = "picTrashCost";
+            this.picTrashCost.TabStop = false;
+            this.toolTip1.SetToolTip(this.picTrashCost, resources.GetString("picTrashCost.ToolTip"));
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // tbLinkHigh
+            // 
+            resources.ApplyResources(this.tbLinkHigh, "tbLinkHigh");
+            this.tbLinkHigh.Name = "tbLinkHigh";
+            this.tbLinkHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbLinkHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // tbLinkLow
+            // 
+            resources.ApplyResources(this.tbLinkLow, "tbLinkLow");
+            this.tbLinkLow.Name = "tbLinkLow";
+            this.tbLinkLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbLinkLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // picLink
+            // 
+            resources.ApplyResources(this.picLink, "picLink");
+            this.picLink.Name = "picLink";
+            this.picLink.TabStop = false;
+            this.toolTip1.SetToolTip(this.picLink, resources.GetString("picLink.ToolTip"));
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // tbAgendaPointsHigh
+            // 
+            resources.ApplyResources(this.tbAgendaPointsHigh, "tbAgendaPointsHigh");
+            this.tbAgendaPointsHigh.Name = "tbAgendaPointsHigh";
+            this.tbAgendaPointsHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbAgendaPointsHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // tbAgendaPointsLow
+            // 
+            resources.ApplyResources(this.tbAgendaPointsLow, "tbAgendaPointsLow");
+            this.tbAgendaPointsLow.Name = "tbAgendaPointsLow";
+            this.tbAgendaPointsLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbAgendaPointsLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // picAgendaPoints
+            // 
+            resources.ApplyResources(this.picAgendaPoints, "picAgendaPoints");
+            this.picAgendaPoints.Name = "picAgendaPoints";
+            this.picAgendaPoints.TabStop = false;
+            this.toolTip1.SetToolTip(this.picAgendaPoints, resources.GetString("picAgendaPoints.ToolTip"));
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
             // 
             // eclKeyword
             // 
@@ -227,47 +332,47 @@ namespace NRADB.Forms
             this.tbStrengthLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
             this.tbStrengthLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
-            // tbClaimHigh
+            // tbDeckSizeHigh
             // 
-            resources.ApplyResources(this.tbClaimHigh, "tbClaimHigh");
-            this.tbClaimHigh.Name = "tbClaimHigh";
-            this.tbClaimHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
-            this.tbClaimHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            resources.ApplyResources(this.tbDeckSizeHigh, "tbDeckSizeHigh");
+            this.tbDeckSizeHigh.Name = "tbDeckSizeHigh";
+            this.tbDeckSizeHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbDeckSizeHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
-            // tbClaimLow
+            // tbDeckSizeLow
             // 
-            resources.ApplyResources(this.tbClaimLow, "tbClaimLow");
-            this.tbClaimLow.Name = "tbClaimLow";
-            this.tbClaimLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
-            this.tbClaimLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            resources.ApplyResources(this.tbDeckSizeLow, "tbDeckSizeLow");
+            this.tbDeckSizeLow.Name = "tbDeckSizeLow";
+            this.tbDeckSizeLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbDeckSizeLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
-            // tbInitiativeHigh
+            // tbMuHigh
             // 
-            resources.ApplyResources(this.tbInitiativeHigh, "tbInitiativeHigh");
-            this.tbInitiativeHigh.Name = "tbInitiativeHigh";
-            this.tbInitiativeHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
-            this.tbInitiativeHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            resources.ApplyResources(this.tbMuHigh, "tbMuHigh");
+            this.tbMuHigh.Name = "tbMuHigh";
+            this.tbMuHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbMuHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
-            // tbInitiativeLow
+            // tbMuLow
             // 
-            resources.ApplyResources(this.tbInitiativeLow, "tbInitiativeLow");
-            this.tbInitiativeLow.Name = "tbInitiativeLow";
-            this.tbInitiativeLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
-            this.tbInitiativeLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            resources.ApplyResources(this.tbMuLow, "tbMuLow");
+            this.tbMuLow.Name = "tbMuLow";
+            this.tbMuLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbMuLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
-            // tbGoldHigh
+            // tbCostHigh
             // 
-            resources.ApplyResources(this.tbGoldHigh, "tbGoldHigh");
-            this.tbGoldHigh.Name = "tbGoldHigh";
-            this.tbGoldHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
-            this.tbGoldHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            resources.ApplyResources(this.tbCostHigh, "tbCostHigh");
+            this.tbCostHigh.Name = "tbCostHigh";
+            this.tbCostHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbCostHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
-            // tbGoldLow
+            // tbCostLow
             // 
-            resources.ApplyResources(this.tbGoldLow, "tbGoldLow");
-            this.tbGoldLow.Name = "tbGoldLow";
-            this.tbGoldLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
-            this.tbGoldLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            resources.ApplyResources(this.tbCostLow, "tbCostLow");
+            this.tbCostLow.Name = "tbCostLow";
+            this.tbCostLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbCostLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
             // label1
             // 
@@ -312,19 +417,19 @@ namespace NRADB.Forms
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // tbTraits
+            // tbKeywords
             // 
-            resources.ApplyResources(this.tbTraits, "tbTraits");
-            this.tbTraits.Name = "tbTraits";
-            this.tbTraits.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            resources.ApplyResources(this.tbKeywords, "tbKeywords");
+            this.tbKeywords.Name = "tbKeywords";
+            this.tbKeywords.Validated += new System.EventHandler(this.tbLowHigh_Validated);
             // 
-            // eclTraitCheck
+            // eclKeywordCheck
             // 
-            resources.ApplyResources(this.eclTraitCheck, "eclTraitCheck");
-            this.eclTraitCheck.Name = "eclTraitCheck";
-            this.eclTraitCheck.ThreeState = true;
-            this.eclTraitCheck.UseVisualStyleBackColor = true;
-            this.eclTraitCheck.CheckStateChanged += new System.EventHandler(this.eclCheck_CheckStateChanged);
+            resources.ApplyResources(this.eclKeywordCheck, "eclKeywordCheck");
+            this.eclKeywordCheck.Name = "eclKeywordCheck";
+            this.eclKeywordCheck.ThreeState = true;
+            this.eclKeywordCheck.UseVisualStyleBackColor = true;
+            this.eclKeywordCheck.CheckStateChanged += new System.EventHandler(this.eclCheck_CheckStateChanged);
             // 
             // eclProvides
             // 
@@ -377,36 +482,36 @@ namespace NRADB.Forms
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
             // 
-            // picClaim
+            // picDeckSize
             // 
-            resources.ApplyResources(this.picClaim, "picClaim");
-            this.picClaim.Name = "picClaim";
-            this.picClaim.TabStop = false;
-            this.toolTip1.SetToolTip(this.picClaim, resources.GetString("picClaim.ToolTip"));
+            resources.ApplyResources(this.picDeckSize, "picDeckSize");
+            this.picDeckSize.Name = "picDeckSize";
+            this.picDeckSize.TabStop = false;
+            this.toolTip1.SetToolTip(this.picDeckSize, resources.GetString("picDeckSize.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
             // 
-            // picInit
+            // picMu
             // 
-            resources.ApplyResources(this.picInit, "picInit");
-            this.picInit.Name = "picInit";
-            this.picInit.TabStop = false;
-            this.toolTip1.SetToolTip(this.picInit, resources.GetString("picInit.ToolTip"));
+            resources.ApplyResources(this.picMu, "picMu");
+            this.picMu.Name = "picMu";
+            this.picMu.TabStop = false;
+            this.toolTip1.SetToolTip(this.picMu, resources.GetString("picMu.ToolTip"));
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
-            // picGold
+            // picCost
             // 
-            resources.ApplyResources(this.picGold, "picGold");
-            this.picGold.Name = "picGold";
-            this.picGold.TabStop = false;
-            this.toolTip1.SetToolTip(this.picGold, resources.GetString("picGold.ToolTip"));
+            resources.ApplyResources(this.picCost, "picCost");
+            this.picCost.Name = "picCost";
+            this.picCost.TabStop = false;
+            this.toolTip1.SetToolTip(this.picCost, resources.GetString("picCost.ToolTip"));
             // 
             // label5
             // 
@@ -437,18 +542,18 @@ namespace NRADB.Forms
             this.eclVirtue.ThreeState = true;
             this.eclVirtue.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
-            // eclHouse
+            // eclFaction
             // 
-            this.eclHouse.CheckOnClick = true;
-            this.eclHouse.Condensed = true;
-            this.eclHouse.CondensedMode = true;
-            this.eclHouse.FormattingEnabled = true;
-            resources.ApplyResources(this.eclHouse, "eclHouse");
-            this.eclHouse.Name = "eclHouse";
-            this.eclHouse.RollDownDelay = 250;
-            this.eclHouse.Summary = "House";
-            this.eclHouse.ThreeState = true;
-            this.eclHouse.MouseLeave += new System.EventHandler(this.eclMouseLeave);
+            this.eclFaction.CheckOnClick = true;
+            this.eclFaction.Condensed = true;
+            this.eclFaction.CondensedMode = true;
+            this.eclFaction.FormattingEnabled = true;
+            resources.ApplyResources(this.eclFaction, "eclFaction");
+            this.eclFaction.Name = "eclFaction";
+            this.eclFaction.RollDownDelay = 250;
+            this.eclFaction.Summary = "House";
+            this.eclFaction.ThreeState = true;
+            this.eclFaction.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // eclMecanism
             // 
@@ -478,6 +583,7 @@ namespace NRADB.Forms
             this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView.DoubleClick += new System.EventHandler(this.dataGridView_DoubleClick);
             // 
@@ -637,19 +743,6 @@ namespace NRADB.Forms
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // oCTGNToolStripMenuItem
             // 
             this.oCTGNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -662,6 +755,19 @@ namespace NRADB.Forms
             this.loadOCTGNDataToolStripMenuItem.Name = "loadOCTGNDataToolStripMenuItem";
             resources.ApplyResources(this.loadOCTGNDataToolStripMenuItem, "loadOCTGNDataToolStripMenuItem");
             this.loadOCTGNDataToolStripMenuItem.Click += new System.EventHandler(this.loadOCTGNDataToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -678,10 +784,13 @@ namespace NRADB.Forms
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picTrashCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLink)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAgendaPoints)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picStrength)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClaim)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picInit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picGold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDeckSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.popupGrid.ResumeLayout(false);
             this.splitCardText.Panel1.ResumeLayout(false);
@@ -712,42 +821,42 @@ namespace NRADB.Forms
 		private System.Windows.Forms.TextBox tbName;
 		private Beyond.ExtendedControls.ExtendedCheckBox eclNameCheck;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox tbTraits;
-		private Beyond.ExtendedControls.ExtendedCheckBox eclTraitCheck;
+		private System.Windows.Forms.TextBox tbKeywords;
+		private Beyond.ExtendedControls.ExtendedCheckBox eclKeywordCheck;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclProvides;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclKeyword;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclIcon;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclCardtype;
 		private System.Windows.Forms.PictureBox picStrength;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.PictureBox picClaim;
+		private System.Windows.Forms.PictureBox picDeckSize;
 		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.PictureBox picInit;
+		private System.Windows.Forms.PictureBox picMu;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox tbFind;
 		private System.Windows.Forms.Label label11;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclVirtue;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclHouse;
+		private Beyond.ExtendedControls.ExtendedCheckedListBox eclFaction;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclMecanism;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclTrigger;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclExpansionSet;
 		private System.Windows.Forms.Button btnReset;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-		private System.Windows.Forms.TextBox tbGoldLow;
-		private System.Windows.Forms.TextBox tbInitiativeHigh;
-		private System.Windows.Forms.TextBox tbInitiativeLow;
-		private System.Windows.Forms.TextBox tbGoldHigh;
+		private System.Windows.Forms.TextBox tbCostLow;
+		private System.Windows.Forms.TextBox tbMuHigh;
+		private System.Windows.Forms.TextBox tbMuLow;
+		private System.Windows.Forms.TextBox tbCostHigh;
 		private System.Windows.Forms.TextBox tbStrengthLow;
-		private System.Windows.Forms.TextBox tbClaimHigh;
-		private System.Windows.Forms.TextBox tbClaimLow;
+		private System.Windows.Forms.TextBox tbDeckSizeHigh;
+		private System.Windows.Forms.TextBox tbDeckSizeLow;
 		private System.Windows.Forms.TextBox tbStrengthHigh;
 		private System.Windows.Forms.ContextMenuStrip popupGrid;
 		private System.Windows.Forms.ToolStripMenuItem saveSelectionToTextFileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem moveToANewWindowToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
-		private System.Windows.Forms.PictureBox picGold;
+		private System.Windows.Forms.PictureBox picCost;
 		private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem deckBuilderToolStripMenuItem;
@@ -764,5 +873,17 @@ namespace NRADB.Forms
         private System.Windows.Forms.Label lblUniversalId;
         private System.Windows.Forms.ToolStripMenuItem oCTGNToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadOCTGNDataToolStripMenuItem;
+        private System.Windows.Forms.TextBox tbAgendaPointsHigh;
+        private System.Windows.Forms.TextBox tbAgendaPointsLow;
+        private System.Windows.Forms.PictureBox picAgendaPoints;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbLinkHigh;
+        private System.Windows.Forms.TextBox tbLinkLow;
+        private System.Windows.Forms.PictureBox picLink;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tbTrashCostHigh;
+        private System.Windows.Forms.TextBox tbTrashCostLow;
+        private System.Windows.Forms.PictureBox picTrashCost;
+        private System.Windows.Forms.Label label10;
 	}
 }

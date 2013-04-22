@@ -61,6 +61,24 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advancement.
+        /// </summary>
+        internal static string AdvancementText {
+            get {
+                return ResourceManager.GetString("AdvancementText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agenda points.
+        /// </summary>
+        internal static string AgendaPointsText {
+            get {
+                return ResourceManager.GetString("AgendaPointsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AND.
         /// </summary>
         internal static string And {
@@ -106,29 +124,11 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cost or income.
-        /// </summary>
-        internal static string CostOrIncomeText {
-            get {
-                return ResourceManager.GetString("CostOrIncomeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cost.
         /// </summary>
         internal static string CostText {
             get {
                 return ResourceManager.GetString("CostText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Crests.
-        /// </summary>
-        internal static string CrestsText {
-            get {
-                return ResourceManager.GetString("CrestsText", resourceCulture);
             }
         }
         
@@ -169,16 +169,16 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DOOMED.
+        ///   Looks up a localized string similar to Min deck size.
         /// </summary>
-        internal static string DoomedText {
+        internal static string DeckSizeText {
             get {
-                return ResourceManager.GetString("DoomedText", resourceCulture);
+                return ResourceManager.GetString("DeckSizeText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some cards couldn&apos;t be found in the Agot Database (make sure you have updated the database with the latest Octgn sets)..
+        ///   Looks up a localized string similar to Some cards couldn&apos;t be found in the Database (make sure you have updated the database with the latest Octgn sets)..
         /// </summary>
         internal static string ErrCardsNotFoundInOctgnDeckFile {
             get {
@@ -309,7 +309,7 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The content of the file is not a valid AGoTDB deck..
+        ///   Looks up a localized string similar to The content of the file is not a valid AndroidDB deck..
         /// </summary>
         internal static string ErrInvalidXmlDeckFile {
             get {
@@ -408,7 +408,7 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to House.
+        ///   Looks up a localized string similar to Faction.
         /// </summary>
         internal static string FactionText {
             get {
@@ -422,24 +422,6 @@ namespace AndroidDB {
         internal static string Failure {
             get {
                 return ResourceManager.GetString("Failure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Holy.
-        /// </summary>
-        internal static string HolyVirtueText {
-            get {
-                return ResourceManager.GetString("HolyVirtueText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Icons.
-        /// </summary>
-        internal static string IconsText {
-            get {
-                return ResourceManager.GetString("IconsText", resourceCulture);
             }
         }
         
@@ -462,47 +444,20 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Income.
+        ///   Looks up a localized string similar to Influence.
         /// </summary>
-        internal static string IncomeText {
+        internal static string InfluenceText {
             get {
-                return ResourceManager.GetString("IncomeText", resourceCulture);
+                return ResourceManager.GetString("InfluenceText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cards costing influence.
+        ///   Looks up a localized string similar to Link.
         /// </summary>
-        internal static string InfluenceCostingCardsText {
+        internal static string LinkText {
             get {
-                return ResourceManager.GetString("InfluenceCostingCardsText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Initiative.
-        /// </summary>
-        internal static string InitiativeText {
-            get {
-                return ResourceManager.GetString("InitiativeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INT.
-        /// </summary>
-        internal static string IntrigueIconAbrev {
-            get {
-                return ResourceManager.GetString("IntrigueIconAbrev", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Learned.
-        /// </summary>
-        internal static string LearnedVirtueText {
-            get {
-                return ResourceManager.GetString("LearnedVirtueText", resourceCulture);
+                return ResourceManager.GetString("LinkText", resourceCulture);
             }
         }
         
@@ -516,15 +471,6 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MIL.
-        /// </summary>
-        internal static string MilitaryIconAbrev {
-            get {
-                return ResourceManager.GetString("MilitaryIconAbrev", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to min.
         /// </summary>
         internal static string MinStatsText {
@@ -534,29 +480,11 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MULTIPLAYER.
-        /// </summary>
-        internal static string MultiplayerText {
-            get {
-                return ResourceManager.GetString("MultiplayerText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string NameText {
             get {
                 return ResourceManager.GetString("NameText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Noble.
-        /// </summary>
-        internal static string NobleVirtueText {
-            get {
-                return ResourceManager.GetString("NobleVirtueText", resourceCulture);
             }
         }
         
@@ -575,42 +503,6 @@ namespace AndroidDB {
         internal static string Or {
             get {
                 return ResourceManager.GetString("Or", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to POW.
-        /// </summary>
-        internal static string PowerIconAbrev {
-            get {
-                return ResourceManager.GetString("PowerIconAbrev", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INCOME.
-        /// </summary>
-        internal static string ProvidedGoldText {
-            get {
-                return ResourceManager.GetString("ProvidedGoldText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INFLUENCE.
-        /// </summary>
-        internal static string ProvidedInfluenceText {
-            get {
-                return ResourceManager.GetString("ProvidedInfluenceText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INITIATIVE.
-        /// </summary>
-        internal static string ProvidedInitiativeText {
-            get {
-                return ResourceManager.GetString("ProvidedInitiativeText", resourceCulture);
             }
         }
         
@@ -678,24 +570,6 @@ namespace AndroidDB {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shadow Cost.
-        /// </summary>
-        internal static string ShadowCostText {
-            get {
-                return ResourceManager.GetString("ShadowCostText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shadow.
-        /// </summary>
-        internal static string ShadowVirtueText {
-            get {
-                return ResourceManager.GetString("ShadowVirtueText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Strength.
         /// </summary>
         internal static string StrengthText {
@@ -710,15 +584,6 @@ namespace AndroidDB {
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Traits.
-        /// </summary>
-        internal static string TraitsText {
-            get {
-                return ResourceManager.GetString("TraitsText", resourceCulture);
             }
         }
         
@@ -845,15 +710,6 @@ namespace AndroidDB {
         internal static string WarnOctgnNotLoadedTitle {
             get {
                 return ResourceManager.GetString("WarnOctgnNotLoadedTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to War.
-        /// </summary>
-        internal static string WarVirtueText {
-            get {
-                return ResourceManager.GetString("WarVirtueText", resourceCulture);
             }
         }
     }
