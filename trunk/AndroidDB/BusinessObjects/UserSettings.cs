@@ -139,6 +139,15 @@ namespace NRADB.BusinessObjects
         }
         #endregion
 
+        #region Main form
+        private const string MainFormSectionName = "MainForm";
+        public static string ColumnsSettings
+        {
+            get { return Singleton.ReadString(MainFormSectionName, "ColumnsSettings", null); }
+            set { Singleton.WriteString(MainFormSectionName, "ColumnsSettings", value); }
+        }
+        #endregion
+
         #region OCTGN
         private const string OctgnSectionName = "OCTGN";
         public static Guid OctgnGameId
