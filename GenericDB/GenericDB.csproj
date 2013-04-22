@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="BusinessObjects\Card.cs" />
     <Compile Include="BusinessObjects\CardList.cs" />
+    <Compile Include="BusinessObjects\CardNodeInfo.cs" />
     <Compile Include="BusinessObjects\DatabaseInfo.cs" />
     <Compile Include="BusinessObjects\Deck.cs" />
     <Compile Include="BusinessObjects\DeckTreeNodeSorter.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Forms\RevisionCommentInputForm.Designer.cs">
       <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\GridViewHelper.cs" />
     <Compile Include="Helper\ZipHelper.cs" />
     <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

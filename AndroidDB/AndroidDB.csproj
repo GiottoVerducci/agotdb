@@ -84,6 +84,9 @@
     <Compile Include="Forms\DeckBuilderForm.Designer.cs">
       <DependentUpon>DeckBuilderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DeckBuilderFormCommon.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\DrawSimulatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +94,9 @@
       <DependentUpon>DrawSimulatorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ExecutionTrace.cs" />
+    <Compile Include="Forms\MainFormCommon.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -478,6 +478,7 @@ namespace NRADB.Forms
             this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView.DoubleClick += new System.EventHandler(this.dataGridView_DoubleClick);
             // 
