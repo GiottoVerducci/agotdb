@@ -1,17 +1,14 @@
+using AndroidDB;
+using GenericDB.BusinessObjects;
+using NRADB.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using AndroidDB;
-using GenericDB.BusinessObjects;
-
-using NRADB.BusinessObjects;
 
 namespace NRADB.OCTGN
 {
@@ -46,24 +43,17 @@ namespace NRADB.OCTGN
             var backgroundWorker = (BackgroundWorker)sender;
             var path = (string)doWorkEventArgs.Argument;
             var sets = OctgnLoader.LoadAllSets(path, backgroundWorker);
-            if (sets.Count == 0 || sets.All(s => s.Value.Count == 0))
+            if (sets.Count == 0 || sets.All(s => s.Value.Length == 0))
             {
                 doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.SetsNotFound;
                 return;
             }
+
+            //OctgnLoader.ImportSets(sets, backgroundWorker);
+
             OctgnLoader.ImportCards(sets, backgroundWorker);
             doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.Success;
         }
-
-        //private static readonly Dictionary<int, NraCard> _dummyIdentityCards = new Dictionary<int, NraCard>
-        //    {
-        //        { (int)NraCard.CardHouse.Baratheon, new NraCard { OriginalName = new FormattedValue<string>("House Baratheon", null), OctgnId = UserSettings.OctgnHouseBaratheonId } },
-        //        { (int)NraCard.CardHouse.Greyjoy, new NraCard { OriginalName = new FormattedValue<string>("House Greyjoy", null), OctgnId = UserSettings.OctgnHouseGreyjoyId} },
-        //        { (int)NraCard.CardHouse.Lannister, new NraCard { OriginalName = new FormattedValue<string>("House Lannister", null), OctgnId = UserSettings.OctgnHouseLannisterId } },
-        //        { (int)NraCard.CardHouse.Martell, new NraCard { OriginalName = new FormattedValue<string>("House Martell", null), OctgnId = UserSettings.OctgnHouseMartellId } },
-        //        { (int)NraCard.CardHouse.Stark, new NraCard { OriginalName = new FormattedValue<string>("House Stark", null), OctgnId = UserSettings.OctgnHouseStarkId } },
-        //        { (int)NraCard.CardHouse.Targaryen, new NraCard { OriginalName = new FormattedValue<string>("House Targaryen", null), OctgnId = UserSettings.OctgnHouseTargaryenId } },
-        //    };
 
         public static void SaveOctgnDeck(NraVersionedDeck versionedDeck, NraDeck currentDeck)
         {
@@ -177,24 +167,6 @@ namespace NRADB.OCTGN
                 processAction(octgnId, quantity, name);
             }
         }
-
-        //private static int ComputeOctgnHouseSection(XmlNode sectionNode, List<string> cardErrorList)
-        //{
-        //    var result = 0;
-        //    ProcessOctgnSectionNode(sectionNode, (octgnId, quantity, name) =>
-        //    {
-        //        if (_dummyIdentityCards.Any(kvp => kvp.Value.OctgnId == octgnId))
-        //        {
-        //            var houseCard = _dummyIdentityCards.First(kvp => kvp.Value.OctgnId == octgnId);
-        //            result |= houseCard.Key;
-        //        }
-        //        else
-        //        {
-        //            cardErrorList.Add(string.Format("'{0}' (id: '{1}')", name, octgnId));
-        //        }
-        //    });
-        //    return result;
-        //}
 
         private static void AddOctgnCardToDeck(XmlNode sectionNode, CardList<NraCard> cardlist, int expectedCardType, List<string> cardErrorList)
         {

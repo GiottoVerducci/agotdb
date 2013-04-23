@@ -303,12 +303,12 @@ namespace GenericDB.DataAccess
             }
         }
 
-        public void ResetAndImportCards(Func<DataRowCollection, OperationResult> importAction)
+        public void ResetAndImportTable(string tableName, Func<DataRowCollection, OperationResult> importAction, string deleteWhere = null)
         {
-            string query = String.Format("DELETE FROM [{0}]", TableNameMain);
+            string query = String.Format("DELETE FROM [{0}] {1}", tableName, deleteWhere);
             GetResultFromRequest(query, _hdbConnection, null);
 
-            query = String.Format("SELECT * FROM [{0}]", TableNameMain);
+            query = String.Format("SELECT * FROM [{0}]", tableName);
 
             using (var dbDataAdapter = new OleDbDataAdapter(query, _hdbConnection))
             {
@@ -322,10 +322,15 @@ namespace GenericDB.DataAccess
                 do
                 {
                     result = importAction(dataSet.Tables[0].Rows);
-                } 
+                }
                 while (result == OperationResult.Ok);
                 dbDataAdapter.Update(dataSet);
             }
+        }
+
+        public void ResetAndImportCards(Func<DataRowCollection, OperationResult> importAction)
+        {
+            ResetAndImportTable(TableNameMain, importAction);
         }
 
         protected abstract void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows);

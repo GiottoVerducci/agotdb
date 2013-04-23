@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OctgnLoaderForm));
             this.lblLoadSet = new System.Windows.Forms.Label();
             this.pbLoadSet = new System.Windows.Forms.ProgressBar();
-            this.pbMatchSet = new System.Windows.Forms.ProgressBar();
-            this.lblMatchSet = new System.Windows.Forms.Label();
-            this.pbFindCard = new System.Windows.Forms.ProgressBar();
-            this.lblFindCard = new System.Windows.Forms.Label();
+            this.pbImportSet = new System.Windows.Forms.ProgressBar();
+            this.lblImportSet = new System.Windows.Forms.Label();
+            this.pbImportCard = new System.Windows.Forms.ProgressBar();
+            this.lblImportCard = new System.Windows.Forms.Label();
             this.pbUpdateDatabase = new System.Windows.Forms.ProgressBar();
             this.lblUpdateDatabase = new System.Windows.Forms.Label();
             this.btAbort = new System.Windows.Forms.Button();
@@ -50,25 +50,25 @@
             resources.ApplyResources(this.pbLoadSet, "pbLoadSet");
             this.pbLoadSet.Name = "pbLoadSet";
             // 
-            // pbMatchSet
+            // pbImportSet
             // 
-            resources.ApplyResources(this.pbMatchSet, "pbMatchSet");
-            this.pbMatchSet.Name = "pbMatchSet";
+            resources.ApplyResources(this.pbImportSet, "pbImportSet");
+            this.pbImportSet.Name = "pbImportSet";
             // 
-            // lblMatchSet
+            // lblImportSet
             // 
-            resources.ApplyResources(this.lblMatchSet, "lblMatchSet");
-            this.lblMatchSet.Name = "lblMatchSet";
+            resources.ApplyResources(this.lblImportSet, "lblImportSet");
+            this.lblImportSet.Name = "lblImportSet";
             // 
-            // pbFindCard
+            // pbImportCard
             // 
-            resources.ApplyResources(this.pbFindCard, "pbFindCard");
-            this.pbFindCard.Name = "pbFindCard";
+            resources.ApplyResources(this.pbImportCard, "pbImportCard");
+            this.pbImportCard.Name = "pbImportCard";
             // 
-            // lblFindCard
+            // lblImportCard
             // 
-            resources.ApplyResources(this.lblFindCard, "lblFindCard");
-            this.lblFindCard.Name = "lblFindCard";
+            resources.ApplyResources(this.lblImportCard, "lblImportCard");
+            this.lblImportCard.Name = "lblImportCard";
             // 
             // pbUpdateDatabase
             // 
@@ -94,10 +94,10 @@
             this.Controls.Add(this.btAbort);
             this.Controls.Add(this.pbUpdateDatabase);
             this.Controls.Add(this.lblUpdateDatabase);
-            this.Controls.Add(this.pbFindCard);
-            this.Controls.Add(this.lblFindCard);
-            this.Controls.Add(this.pbMatchSet);
-            this.Controls.Add(this.lblMatchSet);
+            this.Controls.Add(this.pbImportCard);
+            this.Controls.Add(this.lblImportCard);
+            this.Controls.Add(this.pbImportSet);
+            this.Controls.Add(this.lblImportSet);
             this.Controls.Add(this.pbLoadSet);
             this.Controls.Add(this.lblLoadSet);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -113,10 +113,10 @@
 
         private System.Windows.Forms.Label lblLoadSet;
         private System.Windows.Forms.ProgressBar pbLoadSet;
-        private System.Windows.Forms.ProgressBar pbMatchSet;
-        private System.Windows.Forms.Label lblMatchSet;
-        private System.Windows.Forms.ProgressBar pbFindCard;
-        private System.Windows.Forms.Label lblFindCard;
+        private System.Windows.Forms.ProgressBar pbImportSet;
+        private System.Windows.Forms.Label lblImportSet;
+        private System.Windows.Forms.ProgressBar pbImportCard;
+        private System.Windows.Forms.Label lblImportCard;
         private System.Windows.Forms.ProgressBar pbUpdateDatabase;
         private System.Windows.Forms.Label lblUpdateDatabase;
         private System.Windows.Forms.Button btAbort;

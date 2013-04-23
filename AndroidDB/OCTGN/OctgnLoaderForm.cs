@@ -35,11 +35,11 @@ namespace NRADB.OCTGN
                 case OctgnLoader.OctgnLoaderTask.LoadSet:
                     pbLoadSet.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.MatchSet:
-                    pbMatchSet.Value = progressChangedEventArgs.ProgressPercentage;
+                case OctgnLoader.OctgnLoaderTask.ImportSet:
+                    pbImportSet.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.FindCard:
-                    pbFindCard.Value = progressChangedEventArgs.ProgressPercentage;
+                case OctgnLoader.OctgnLoaderTask.ImportCard:
+                    pbImportCard.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
                 case OctgnLoader.OctgnLoaderTask.UpdateDatabase:
                     pbUpdateDatabase.Value = progressChangedEventArgs.ProgressPercentage;
@@ -47,8 +47,8 @@ namespace NRADB.OCTGN
                     break;
             }
             EnforceLabelStyle(lblLoadSet, task == OctgnLoader.OctgnLoaderTask.LoadSet);
-            EnforceLabelStyle(lblMatchSet, task == OctgnLoader.OctgnLoaderTask.MatchSet);
-            EnforceLabelStyle(lblFindCard, task == OctgnLoader.OctgnLoaderTask.FindCard);
+            EnforceLabelStyle(lblImportSet, task == OctgnLoader.OctgnLoaderTask.ImportSet);
+            EnforceLabelStyle(lblImportCard, task == OctgnLoader.OctgnLoaderTask.ImportCard);
             EnforceLabelStyle(lblUpdateDatabase, task == OctgnLoader.OctgnLoaderTask.UpdateDatabase);
         }
 
