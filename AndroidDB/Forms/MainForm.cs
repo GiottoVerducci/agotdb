@@ -143,7 +143,7 @@ namespace NRADB.Forms
         {
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclCardtype, ApplicationSettings.DatabaseManager.TableNameType, "Type", TableType.ValueShortName);
-            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
+            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclMecanism, ApplicationSettings.DatabaseManager.TableNameMechanism, "", TableType.ValueKey);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
@@ -162,7 +162,7 @@ namespace NRADB.Forms
             picMu.Visible = displayImages;
             picDeckSize.Visible = displayImages;
             picStrength.Visible = displayImages;
-            picAgendaPoints.Visible= displayImages;
+            picAgendaPoints.Visible = displayImages;
             picDeckSize.Visible = displayImages;
             picLink.Visible = displayImages;
             picTrashCost.Visible = displayImages;
@@ -251,23 +251,17 @@ namespace NRADB.Forms
             IList<DbFilter> additionalIncludedSets = null;
             IList<DbFilter> additionalExcludedSets = null;
 
-            if (miLcgSetsOnly.Checked)
+            Query filter;
+
+            if (!rbAll.Checked)
             {
-                var uncheckedValues = eclExpansionSet.GetItemsByState(CheckState.Unchecked).ConvertAll(i => (DbFilter)i);
-                var checkedValues = eclExpansionSet.GetItemsByState(CheckState.Checked).ConvertAll(i => (DbFilter)i);
-
-                // add the lcg unchecked expansions to perform a search on all lcg expansions only
-                // only if no lcg expansion is checked
-                additionalIncludedSets = checkedValues.Any(v => NraCard.ExpansionSets[v.ShortName])
-                    ? null
-                    : new List<DbFilter>(uncheckedValues.FindAll(v => NraCard.ExpansionSets[v.ShortName]));
-
-                if (additionalIncludedSets != null && additionalIncludedSets.Count == 0 // all LCG expansions are removed 
-                    && eclExpansionSet.GetItemsByState(CheckState.Checked).Count == 0) //and no other non-LCG set is explicit added
-                    additionalExcludedSets = new List<DbFilter>(uncheckedValues);
+                var side = (Int32)(rbCorpOnly.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner);
+                filter = new Query { SqlQuery = string.Format("Side = {0}", side) };
             }
+            else
+                filter = new Query();
 
-            Query filter =
+            filter +=
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclCardtype, "OR", PositiveDataType.ExactValue) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclFaction, "OR", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclProvides, "AND", PositiveDataType.Integer) +
@@ -318,6 +312,12 @@ namespace NRADB.Forms
             UpdateDataTableView();
         }
 
+        private void rbSide_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateSideChoicesControl();
+            UpdateDataTableView();
+        }
+
         private void SetupDisplay()
         {
             DisplayIcons(UserSettings.DisplayImages);
@@ -335,48 +335,39 @@ namespace NRADB.Forms
 
         private void SetGameOptions()
         {
-            miLcgSetsOnly.Checked = UserSettings.LcgSetsOnly;
-            UpdateSetsChoicesControl();
-        }
-
-        private void miLcgSetsOnly_Click(object sender, EventArgs e)
-        {
-            var lcgSetsOnly = miLcgSetsOnly.Checked;
-            UserSettings.LcgSetsOnly = lcgSetsOnly;
-            UserSettings.Save();
-
-            UpdateSetsChoicesControl();
+            //UpdateSetsChoicesControl();
+            UpdateSideChoicesControl();
         }
 
         /// <summary>
         /// Updates the extended checklist box control according to the 
         /// user settings.
         /// </summary>
-        private void UpdateSetsChoicesControl()
+        private void UpdateSideChoicesControl()
         {
-            bool lcgSetsOnly = UserSettings.LcgSetsOnly;
-            // keep the state of the checked items
-            var checkedItems = eclExpansionSet.GetItemsByState(CheckState.Checked);
-            var indeterminateItems = eclExpansionSet.GetItemsByState(CheckState.Indeterminate);
+            var side = (Int32)(rbAll.Checked ? NraCard.CardSide.None : (rbCorpOnly.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner));
+            var neutralSide = (Int32)NraCard.CardSide.None;
 
-            // reload the items by filtering them if the "LCG only" checkbox is checked
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName,
-                lcgSetsOnly
-                    ? (item => NraCard.ExpansionSets[item.ShortName])
+            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclCardtype, ApplicationSettings.DatabaseManager,
+                ApplicationSettings.DatabaseManager.TableNameType, "Type", TableType.ValueShortName,
+                side != 0
+                    ? (item => 
+                    { 
+                        var currentSide = NraCard.CardTypeSide[Convert.ToInt32(item.ShortName)];
+                        return currentSide == neutralSide || currentSide == side;
+                    })
                     : (Predicate<DbFilter>)null);
 
-            // recheck the items the way they were before
-            eclExpansionSet.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
-            {
-                for (int i = 0; i < ecl.Items.Count; ++i)
-                {
-                    var item = (DbFilter)ecl.Items[i];
-                    if (checkedItems.Any(o => ((DbFilter)o).ShortName == item.ShortName))
-                        ecl.SetItemCheckState(i, CheckState.Checked);
-                    else if (indeterminateItems.Any(o => ((DbFilter)o).ShortName == item.ShortName))
-                        ecl.SetItemCheckState(i, CheckState.Indeterminate);
-                }
-            });
+            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclFaction, ApplicationSettings.DatabaseManager, 
+                ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey,
+                side != 0
+                    ? (item =>
+                    {
+                        var faction = NraCard.CardFactionNames.First(kvp => kvp.Value == item.ShortName);
+                        var currentSide = NraCard.CardFactionSide[faction.Key];
+                        return currentSide == neutralSide || currentSide == side;
+                    })
+                    : (Predicate<DbFilter>)null);
         }
     }
 }

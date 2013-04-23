@@ -134,6 +134,7 @@
     <Compile Include="Forms\RevisionCommentInputForm.Designer.cs">
       <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ExtendedCheckListBoxHelper.cs" />
     <Compile Include="Helper\GridViewHelper.cs" />
     <Compile Include="Helper\ZipHelper.cs" />
     <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />

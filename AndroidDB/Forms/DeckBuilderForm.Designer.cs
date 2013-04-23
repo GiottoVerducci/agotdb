@@ -81,6 +81,8 @@ namespace NRADB.Forms
             this.eclFaction = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.tbAuthor = new System.Windows.Forms.TextBox();
             this.lblAuthor = new System.Windows.Forms.Label();
+            this.rbCorp = new System.Windows.Forms.RadioButton();
+            this.rbRunner = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -157,8 +159,6 @@ namespace NRADB.Forms
             this.treeViewDeck.HideSelection = false;
             this.treeViewDeck.Name = "treeViewDeck";
             this.treeViewDeck.NodeInfo = null;
-            this.treeViewDeck.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewDeck.Nodes")))});
             this.treeViewDeck.ShowNodeToolTips = true;
             this.treeViewDeck.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.TreeViewDeck_DrawNode);
             this.treeViewDeck.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewDeck_AfterSelect);
@@ -232,8 +232,6 @@ namespace NRADB.Forms
             this.treeViewSide.HideSelection = false;
             this.treeViewSide.Name = "treeViewSide";
             this.treeViewSide.NodeInfo = null;
-            this.treeViewSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeViewSide.Nodes")))});
             this.treeViewSide.ShowNodeToolTips = true;
             this.treeViewSide.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.TreeViewDeck_DrawNode);
             this.treeViewSide.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewDeck_AfterSelect);
@@ -487,10 +485,28 @@ namespace NRADB.Forms
             resources.ApplyResources(this.lblAuthor, "lblAuthor");
             this.lblAuthor.Name = "lblAuthor";
             // 
+            // rbCorp
+            // 
+            resources.ApplyResources(this.rbCorp, "rbCorp");
+            this.rbCorp.Name = "rbCorp";
+            this.rbCorp.UseVisualStyleBackColor = true;
+            this.rbCorp.CheckedChanged += new System.EventHandler(this.rbSide_CheckedChanged);
+            // 
+            // rbRunner
+            // 
+            resources.ApplyResources(this.rbRunner, "rbRunner");
+            this.rbRunner.Checked = true;
+            this.rbRunner.Name = "rbRunner";
+            this.rbRunner.TabStop = true;
+            this.rbRunner.UseVisualStyleBackColor = true;
+            this.rbRunner.CheckedChanged += new System.EventHandler(this.rbSide_CheckedChanged);
+            // 
             // DeckBuilderForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.rbRunner);
+            this.Controls.Add(this.rbCorp);
             this.Controls.Add(this.tbAuthor);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.eclFaction);
@@ -585,5 +601,7 @@ namespace NRADB.Forms
     private System.Windows.Forms.ToolStripMenuItem importDeckFromOCTGNToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportDeckToClipboardSortedByToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportDeckToClipboardSortedBySetToolStripMenuItem;
+    private System.Windows.Forms.RadioButton rbCorp;
+    private System.Windows.Forms.RadioButton rbRunner;
 	}
 }

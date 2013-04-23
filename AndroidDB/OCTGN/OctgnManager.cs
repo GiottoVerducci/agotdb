@@ -45,14 +45,24 @@ namespace NRADB.OCTGN
             var sets = OctgnLoader.LoadAllSets(path, backgroundWorker);
             if (sets.Count == 0 || sets.All(s => s.Value.Length == 0))
             {
-                doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.SetsNotFound;
+                doWorkEventArgs.Result = new OctgnLoader.OctgnLoaderResultAndValue { Result = OctgnLoader.OctgnLoaderResult.NoSetsFounds };
                 return;
             }
 
             //OctgnLoader.ImportSets(sets, backgroundWorker);
 
-            OctgnLoader.ImportCards(sets, backgroundWorker);
-            doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.Success;
+            var importCardResult = OctgnLoader.ImportCards(sets, backgroundWorker);
+            if(importCardResult.IsSuccessful)
+                doWorkEventArgs.Result = new OctgnLoader.OctgnLoaderResultAndValue { Result = OctgnLoader.OctgnLoaderResult.Success };
+            else
+            {
+                if(importCardResult.SetNotFound != null)
+                    doWorkEventArgs.Result = new OctgnLoader.OctgnLoaderResultAndValue
+                    {
+                        Result = OctgnLoader.OctgnLoaderResult.SetNotDefinedInDatabase,
+                        Value = importCardResult.SetNotFound
+                    };
+            }
         }
 
         public static void SaveOctgnDeck(NraVersionedDeck versionedDeck, NraDeck currentDeck)

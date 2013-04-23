@@ -145,9 +145,6 @@
     <EmbeddedResource Include="Forms\CardPreviewForm.resx">
       <DependentUpon>CardPreviewForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DeckBuilderForm.fr.resx">
-      <DependentUpon>DeckBuilderForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DeckBuilderForm.resx">
       <DependentUpon>DeckBuilderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,9 +162,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.fr.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

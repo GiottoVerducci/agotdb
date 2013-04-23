@@ -32,6 +32,9 @@ namespace NRADB.BusinessObjects
 		/// The factions chosen for this deck.
 		/// </summary>
 		public int Factions { get; set; }
+
+        public NraCard.CardSide Side { get; set; }
+
 		/// <summary>
 		/// The agenda chosen for this deck (if any).
 		/// </summary>

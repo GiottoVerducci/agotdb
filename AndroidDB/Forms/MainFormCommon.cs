@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -167,6 +168,36 @@ namespace NRADB.Forms
             e.Result = InitializeDatabaseConnection();
         }
 
+        public bool ShowConnectionErrorMessage(ConnectionResult connectionResult)
+        {
+            switch (connectionResult.ErrorCode)
+            {
+                case ConnectionErrorCode.Success:
+                    return true;
+                case ConnectionErrorCode.InvalidVersion:
+                    return MessageBox.Show(string.Format(
+                            CultureInfo.CurrentCulture,
+                            Resource1.ErrMinimalSoftwareVersionRequired,
+                            ApplicationSettings.DatabaseManager.DatabaseInfos[0].MinimalApplicationVersion,
+                            ApplicationSettings.ApplicationVersion),
+                        Resource1.ErrMinimalSoftwareVersionRequiredTitle,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No;
+                case ConnectionErrorCode.FileNotFound:
+                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrDatabaseNotFound, connectionResult.Data),
+                        Resource1.ErrDatabaseNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+                case ConnectionErrorCode.InvalidDatabase:
+                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrInvalidDatabase, connectionResult.Data),
+                        Resource1.ErrInvalidDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+                case ConnectionErrorCode.ConnectionError:
+                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrConnectingToDatabase, connectionResult.Data),
+                        Resource1.ErrConnectingToDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return true;
+            }
+            return true;
+        }
+
         private void CheckNewVersionBw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             checkNewVersionBackgroundWorker.RunWorkerCompleted -= CheckNewVersionBw_RunWorkerCompleted;
@@ -184,12 +215,7 @@ namespace NRADB.Forms
                     _isDataBaseLoaded = true;
                     break;
                 case ConnectionErrorCode.InvalidVersion:
-                    if (MessageBox.Show(string.Format(CultureInfo.CurrentCulture,
-                        Resource1.ErrMinimalSoftwareVersionRequired,
-                        ApplicationSettings.DatabaseManager.DatabaseInfos[0].MinimalApplicationVersion,
-                        ApplicationSettings.ApplicationVersion),
-                        Resource1.ErrMinimalSoftwareVersionRequiredTitle,
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    if (ShowConnectionErrorMessage(connectionResult))
                     {
                         Application.Exit();
                     }
@@ -199,18 +225,15 @@ namespace NRADB.Forms
                     }
                     break;
                 case ConnectionErrorCode.FileNotFound:
-                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrDatabaseNotFound, connectionResult.Data),
-                        Resource1.ErrDatabaseNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowConnectionErrorMessage(connectionResult);
                     Application.Exit();
                     break;
                 case ConnectionErrorCode.InvalidDatabase:
-                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrInvalidDatabase, connectionResult.Data),
-                        Resource1.ErrInvalidDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowConnectionErrorMessage(connectionResult);
                     Application.Exit();
                     break;
                 case ConnectionErrorCode.ConnectionError:
-                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Resource1.ErrConnectingToDatabase, connectionResult.Data),
-                        Resource1.ErrConnectingToDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowConnectionErrorMessage(connectionResult);
                     Application.Exit();
                     break;
             }
@@ -763,7 +786,29 @@ namespace NRADB.Forms
 
         private void loadOCTGNDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OctgnManager.PromptForInitialization();
+            var connectionResult = ApplicationSettings.DatabaseManager.PrepareConnectionToHumanDatabase();
+            if (connectionResult.ErrorCode != ConnectionErrorCode.Success)
+            {
+                ShowConnectionErrorMessage(connectionResult);
+                return;
+            }
+
+            OctgnManager.PromptForInitialization(
+                () =>
+                {
+                    UserSettings.CreateExtendedDB = true;
+                    connectionResult = InitializeDatabaseConnection();
+                    if (connectionResult.ErrorCode != ConnectionErrorCode.Success)
+                    {
+                        ShowConnectionErrorMessage(connectionResult);
+                        return;
+                    }
+                    UserSettings.CreateExtendedDB = false;
+                    UserSettings.Save();
+                    MessageBox.Show("OCTGN Import successful! Application will now restart.");
+                    Application.Exit();
+                    Process.Start(Application.ExecutablePath, string.Empty);
+                });
         }
 
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
