@@ -75,15 +75,24 @@ namespace NRADB.OCTGN
         private void OctgnLoaderWorkerOnRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
             _isLoadCompleted = true;
-            var result = (OctgnLoader.OctgnLoaderResult)runWorkerCompletedEventArgs.Result;
-            if (result == OctgnLoader.OctgnLoaderResult.SetsNotFound)
+            var result = (OctgnLoader.OctgnLoaderResultAndValue)runWorkerCompletedEventArgs.Result;
+            if (result.Result == OctgnLoader.OctgnLoaderResult.NoSetsFounds)
             {
                 MessageBox.Show(Resource1.ErrOctgnNotFound, Resource1.ErrOctgnNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
+                return;
+            }
+            if (result.Result == OctgnLoader.OctgnLoaderResult.SetNotDefinedInDatabase)
+            {
+                var octgnSetNotFound = (OctgnLoader.OctgnSetData)result.Value;
+                MessageBox.Show(string.Format(Resource1.ErrOctgnSetNotDefinedInDatabase, octgnSetNotFound.Name, octgnSetNotFound.Id),
+                    Resource1.ErrOctgnSetNotDefinedInDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
             }
 
             if (!runWorkerCompletedEventArgs.Cancelled)
-                ApplicationSettings.IsOctgnReady = ApplicationSettings.DatabaseManager.HasOctgnData();
+                ApplicationSettings.IsOctgnReady = true; // ApplicationSettings.DatabaseManager.HasOctgnData();
             this.Close();
             if (this.Callback != null && ApplicationSettings.IsOctgnReady)
                 this.Callback();

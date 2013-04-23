@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Xml;
 using GenericDB.DataAccess;
 using GenericDB.OCTGN;
@@ -125,7 +126,19 @@ namespace NRADB.OCTGN
         //        });
         //}
 
-        public static void ImportCards(Dictionary<OctgnSetData, OctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
+        public struct ImportResult
+        {
+            public bool IsSuccessful;
+            public OctgnSetData SetNotFound;
+        }
+
+        public static Regex ProvidesRecurringCreditsRegex = new Regex(@"atTurnStart:Refill([\dX])Credits", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+        public static Regex ProvidesLinkRegex = new Regex(@"whileRezzed:Gain([\dX])Base Link", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+        public static Regex ProvidesMURegex = new Regex(@"whileRezzed:Gain([\dX])MU", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+        public static Regex ProvidesCreditsRegex = new Regex(@"Gain([\dX])Credits", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+        public static Regex TransferCreditsRegex = new Regex(@"Transfer([\dX])Credits", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+
+        public static ImportResult ImportCards(Dictionary<OctgnSetData, OctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
         {
             var setTable = ApplicationSettings.DatabaseManager.GetExpansionSets();
             var setInformations = new Dictionary<int, SetInformation>();
@@ -134,7 +147,7 @@ namespace NRADB.OCTGN
             foreach (DataRow row in setTable.Rows)
             {
                 if (backgroundWorker.CancellationPending)
-                    return;
+                    return new ImportResult { IsSuccessful = false };
                 backgroundWorker.ReportProgress(progress * 100 / setTable.Rows.Count, OctgnLoaderTask.ImportSet);
                 var setId = (int)row["Id"];
                 if (setId >= 0)
@@ -144,7 +157,7 @@ namespace NRADB.OCTGN
                         OriginalName = row["OriginalName"].ToString(),
                         ShortName = row["ShortName"].ToString(),
                         ByChapter = (bool)row["ByChapter"],
-                        SetId = (byte) row["SetId"],
+                        SetId = (byte)row["SetId"],
                         ChaptersNames = row["ChaptersNames"].ToString().Split(',').Select(s => s.Trim()).ToArray()
                     };
                     //var name = Strip(si.OriginalName);
@@ -159,7 +172,7 @@ namespace NRADB.OCTGN
             var allCards = new List<KeyValuePair<OctgnSetData, OctgnCard>>();
             foreach (var kvp in octgnSets)
                 allCards.AddRange(kvp.Value.Select((card => new KeyValuePair<OctgnSetData, OctgnCard>(kvp.Key, card))));
-            allCards = allCards.OrderBy(kvp => 
+            allCards = allCards.OrderBy(kvp =>
             {
                 int setId, cardId;
                 ExtractSetIdAndCardIdFromOctgnId(kvp.Value.Id, out setId, out cardId);
@@ -167,6 +180,7 @@ namespace NRADB.OCTGN
             }).ToList();
 
             var cursor = (object)0;
+            object errorObject = null;
 
             ApplicationSettings.DatabaseManager.ResetAndImportCards(destinationRows =>
                 {
@@ -199,6 +213,8 @@ namespace NRADB.OCTGN
                         ? stat
                         : string.Empty;
                     var link = string.Equals(card.Type, "Identity", StringComparison.InvariantCultureIgnoreCase)
+                        && string.Equals(card.Side, "Runner", StringComparison.InvariantCultureIgnoreCase)
+                        && !string.Equals(card.Cost.Trim(), "0")
                         ? card.Cost
                         : string.Empty;
                     var trashCost = string.Equals(card.Type, "Asset", StringComparison.InvariantCultureIgnoreCase)
@@ -216,10 +232,47 @@ namespace NRADB.OCTGN
                         ? card.Requirement
                         : string.Empty;
 
+                    if (!setInformations.ContainsKey(allCards[index].Key.Id))
+                    {
+                        errorObject = allCards[index].Key;
+                        return DatabaseManager.OperationResult.Abort;
+                    }
+
                     var setInformation = setInformations[allCards[index].Key.Id];
                     var set = setInformation.ByChapter
                         ? string.Format("{0}-{1}({2})", setInformation.ShortName, setInformation.GetChapterId(allCards[index].Key.Name), cardId)
                         : string.Format("{0}({1})", setInformation.ShortName, cardId);
+
+                    var recurringMatches = ProvidesRecurringCreditsRegex.Matches(card.AutoScript);
+                    string recurringCredits = recurringMatches.Count > 0
+                        ? recurringMatches[0].Groups[1].ToString()
+                        : null;
+
+                    if (link.Length == 0)
+                    {
+                        var linkMatches = ProvidesLinkRegex.Matches(card.AutoScript);
+                        link = linkMatches.Count > 0
+                            ? linkMatches[0].Groups[1].ToString()
+                            : null;
+                    }
+
+                    var muMatches = ProvidesMURegex.Matches(card.AutoScript);
+                    string providesMU = muMatches.Count > 0
+                        ? muMatches[0].Groups[1].ToString()
+                        : null;
+
+                    var creditMatches = ProvidesCreditsRegex.Matches(card.AutoScript);
+                    string creditsIncome = creditMatches.Count > 0
+                        ? creditMatches[0].Groups[1].ToString()
+                        : null;
+
+                    if (creditsIncome == null)
+                    {
+                        creditMatches = TransferCreditsRegex.Matches(card.AutoScript);
+                        creditsIncome = creditMatches.Count > 0
+                            ? creditMatches[0].Groups[1].ToString()
+                            : null;
+                    }
 
                     destinationRows.Add(
                         index,
@@ -248,15 +301,23 @@ namespace NRADB.OCTGN
                         "",//banned
                         "",//restricted
                         card.Id,
-                        card.Flavor
+                        card.Flavor,
+                        recurringCredits,
+                        creditsIncome,
+                        providesMU
                     );
 
                     backgroundWorker.ReportProgress((index * 100) / allCards.Count, OctgnLoaderTask.ImportCard);
                     return DatabaseManager.OperationResult.Ok;
                 });
             if (backgroundWorker.CancellationPending)
-                return;
+                return new ImportResult { IsSuccessful = false };
+
+            if (errorObject is OctgnSetData)
+                return new ImportResult { IsSuccessful = false, SetNotFound = errorObject as OctgnSetData };
+
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.UpdateDatabase);
+            return new ImportResult { IsSuccessful = true };
         }
 
         private static int GetUniversalId(int setId, int cardId)
@@ -277,7 +338,14 @@ namespace NRADB.OCTGN
         {
             Undefined,
             Success,
-            SetsNotFound
+            NoSetsFounds,
+            SetNotDefinedInDatabase
+        }
+
+        public class OctgnLoaderResultAndValue
+        {
+            public OctgnLoaderResult Result;
+            public object Value;
         }
 
         public class OctgnSetData

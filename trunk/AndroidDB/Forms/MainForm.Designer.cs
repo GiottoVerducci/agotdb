@@ -31,6 +31,9 @@ namespace NRADB.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.rbRunnerOnly = new System.Windows.Forms.RadioButton();
+            this.rbCorpOnly = new System.Windows.Forms.RadioButton();
+            this.rbAll = new System.Windows.Forms.RadioButton();
             this.tbTrashCostHigh = new System.Windows.Forms.TextBox();
             this.tbTrashCostLow = new System.Windows.Forms.TextBox();
             this.picTrashCost = new System.Windows.Forms.PictureBox();
@@ -97,7 +100,6 @@ namespace NRADB.Forms
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.miLcgSetsOnly = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deckBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,6 +137,9 @@ namespace NRADB.Forms
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.rbRunnerOnly);
+            this.splitContainer1.Panel1.Controls.Add(this.rbCorpOnly);
+            this.splitContainer1.Panel1.Controls.Add(this.rbAll);
             this.splitContainer1.Panel1.Controls.Add(this.tbTrashCostHigh);
             this.splitContainer1.Panel1.Controls.Add(this.tbTrashCostLow);
             this.splitContainer1.Panel1.Controls.Add(this.picTrashCost);
@@ -191,6 +196,29 @@ namespace NRADB.Forms
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer1.Panel2.Controls.Add(this.splitCardText);
+            // 
+            // rbRunnerOnly
+            // 
+            resources.ApplyResources(this.rbRunnerOnly, "rbRunnerOnly");
+            this.rbRunnerOnly.Name = "rbRunnerOnly";
+            this.rbRunnerOnly.UseVisualStyleBackColor = true;
+            this.rbRunnerOnly.CheckedChanged += new System.EventHandler(this.rbSide_CheckedChanged);
+            // 
+            // rbCorpOnly
+            // 
+            resources.ApplyResources(this.rbCorpOnly, "rbCorpOnly");
+            this.rbCorpOnly.Name = "rbCorpOnly";
+            this.rbCorpOnly.UseVisualStyleBackColor = true;
+            this.rbCorpOnly.CheckedChanged += new System.EventHandler(this.rbSide_CheckedChanged);
+            // 
+            // rbAll
+            // 
+            resources.ApplyResources(this.rbAll, "rbAll");
+            this.rbAll.Checked = true;
+            this.rbAll.Name = "rbAll";
+            this.rbAll.TabStop = true;
+            this.rbAll.UseVisualStyleBackColor = true;
+            this.rbAll.CheckedChanged += new System.EventHandler(this.rbSide_CheckedChanged);
             // 
             // tbTrashCostHigh
             // 
@@ -572,6 +600,7 @@ namespace NRADB.Forms
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToOrderColumns = true;
             this.dataGridView.AllowUserToResizeRows = false;
             resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -705,18 +734,8 @@ namespace NRADB.Forms
             // 
             // filterToolStripMenuItem
             // 
-            this.filterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miLcgSetsOnly});
             this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
             resources.ApplyResources(this.filterToolStripMenuItem, "filterToolStripMenuItem");
-            // 
-            // miLcgSetsOnly
-            // 
-            this.miLcgSetsOnly.CheckOnClick = true;
-            this.miLcgSetsOnly.Name = "miLcgSetsOnly";
-            resources.ApplyResources(this.miLcgSetsOnly, "miLcgSetsOnly");
-            this.miLcgSetsOnly.CheckedChanged += new System.EventHandler(this.eclCheck_CheckStateChanged);
-            this.miLcgSetsOnly.Click += new System.EventHandler(this.miLcgSetsOnly_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -863,8 +882,7 @@ namespace NRADB.Forms
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.ToolStripMenuItem addCardToDeckToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addCardToSideboardToolStripMenuItem;
-		private System.Windows.Forms.Button btnQuickFindNext;
-		private System.Windows.Forms.ToolStripMenuItem miLcgSetsOnly;
+        private System.Windows.Forms.Button btnQuickFindNext;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
 		private System.ComponentModel.BackgroundWorker checkNewVersionBackgroundWorker;
 		private System.Windows.Forms.SplitContainer splitCardText;
@@ -885,5 +903,8 @@ namespace NRADB.Forms
         private System.Windows.Forms.TextBox tbTrashCostLow;
         private System.Windows.Forms.PictureBox picTrashCost;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.RadioButton rbRunnerOnly;
+        private System.Windows.Forms.RadioButton rbCorpOnly;
+        private System.Windows.Forms.RadioButton rbAll;
 	}
 }

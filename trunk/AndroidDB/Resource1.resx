@@ -344,4 +344,12 @@ Exception trace:
   <data name="LinkText" xml:space="preserve">
     <value>Link</value>
   </data>
+  <data name="ErrOctgnSetNotDefinedInDatabase" xml:space="preserve">
+    <value>Error while loading the OCTGN set: '{0}' (id: {1})
+The database TableSet doesn't contain the definition of that set (or if this is a chapter, the set containing that chapter): 
+Please update the databases manually to add the set definition.</value>
+  </data>
+  <data name="ErrOctgnSetNotDefinedInDatabaseTitle" xml:space="preserve">
+    <value>OTCGN set not found in database</value>
+  </data>
 </root>

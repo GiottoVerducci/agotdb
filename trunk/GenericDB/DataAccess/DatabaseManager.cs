@@ -59,6 +59,11 @@ namespace GenericDB.DataAccess
             DataBaseFilename = exDbFileName;
         }
 
+        public virtual ConnectionResult PrepareConnectionToHumanDatabase()
+        {
+            return ConnectToHumanDatabase();
+        }
+
         /// <summary>
         /// Establishes the connection with the database, initializing the extended database
         /// if asked for. A check is performed on the minimal software version required by the database, 

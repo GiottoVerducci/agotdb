@@ -56,7 +56,8 @@ namespace NRADB.DataAccess
             FormattedValue<string> name, subtitle, keywords, text, set, originalName, flavor, instructions;
             FormattedValue<int> type, faction, side;
             FormattedValue<bool?> unique, banned, restricted;
-            FormattedValue<XInt> cost, influence, requirement, mu, deckSize, stat, strength, agendaPoints, link, trashCost;
+            FormattedValue<XInt> cost, influence, requirement, mu, deckSize, stat, strength, agendaPoints, 
+                link, trashCost, recurringCredits, creditsIncome, providesMu;
 
             universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
             octgnId = Guid.Parse(GetRowValue(sourceRow, "OctgnId"));
@@ -91,7 +92,9 @@ namespace NRADB.DataAccess
             requirement = ExtractFormattedXIntValueFromRow(sourceRow, "Requirement", errataBoundFormat);
             mu = ExtractFormattedXIntValueFromRow(sourceRow, "MU", errataBoundFormat);
             deckSize = ExtractFormattedXIntValueFromRow(sourceRow, "DeckSize", errataBoundFormat);
-
+            recurringCredits = ExtractFormattedXIntValueFromRow(sourceRow, "RecurringCredits", errataBoundFormat);
+            creditsIncome = ExtractFormattedXIntValueFromRow(sourceRow, "CreditsIncome", errataBoundFormat);
+            providesMu = ExtractFormattedXIntValueFromRow(sourceRow, "ProvidesMU", errataBoundFormat);
 #if DEBUG
             //// we compare the case of the name of the card in its title and its cardtext.
             //int index;
@@ -142,7 +145,10 @@ namespace NRADB.DataAccess
                 banned.Value, banned.Formats.Count > 0,
                 restricted.Value, restricted.Formats.Count > 0,
                 octgnId,
-                flavor.Value, flavor.FormatsToString()
+                flavor.Value, flavor.FormatsToString(),
+                XIntToString(recurringCredits.Value), recurringCredits.Formats.Count > 0,
+                XIntToString(creditsIncome.Value), creditsIncome.Formats.Count > 0,
+                XIntToString(providesMu.Value), providesMu.Formats.Count > 0
             );
         }
 

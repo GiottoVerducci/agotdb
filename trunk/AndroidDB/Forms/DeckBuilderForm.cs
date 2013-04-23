@@ -31,7 +31,7 @@ using Beyond.ExtendedControls;
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
 using GenericDB.Extensions;
-
+using GenericDB.Helper;
 using NRADB.BusinessObjects;
 using NRADB.Components;
 
@@ -66,6 +66,8 @@ namespace NRADB.Forms
                 splitCardText.Panel2Collapsed = true;
                 splitCardText.IsSplitterFixed = true;
             }
+            UpdateSideChoicesControl();
+            _currentDeck.Side = rbCorp.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner;
         }
 
         private void EclFaction_SelectedValueChanged(object sender, EventArgs e)
@@ -251,34 +253,40 @@ namespace NRADB.Forms
 
         private void UpdateFactionFromControls()
         {
-            var h = 0;
+            var value = 0;
             eclFaction.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 for (var i = 0; i < ecl.Items.Count; ++i)
                     if (ecl.GetItemCheckState(i) == CheckState.Checked)
-                        h += Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
+                    {
+                        var factionName = ((DbFilter)ecl.Items[i]).ShortName;
+                        value += Int32.Parse(factionName, CultureInfo.InvariantCulture);
+                    }
             });
-            _currentDeck.Factions = h;
+            _currentDeck.Factions = value;
+            _currentDeck.Side = rbCorp.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner;
             UpdateTreeViews();
         }
 
         private void UpdateControlsFromFaction()
         {
-            var h = _currentDeck.Factions;
+            var value = _currentDeck.Factions;
             eclFaction.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 for (var i = ecl.Items.Count - 1; i >= 0; --i) // factions are sorted by increasing value
                 {
-                    var hv = Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
-                    if (h >= hv)
+                    var v = Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
+                    if (value >= v)
                     {
                         ecl.SetItemCheckState(i, CheckState.Checked);
-                        h -= hv;
+                        value -= v;
                     }
                     else
                         ecl.SetItemCheckState(i, CheckState.Unchecked);
                 }
             });
+            rbCorp.Checked = _currentDeck.Side == NraCard.CardSide.Corp;
+            rbRunner.Checked = _currentDeck.Side == NraCard.CardSide.Runner;
         }
         #endregion
 
@@ -316,10 +324,19 @@ namespace NRADB.Forms
             //    result.ForeColor = Color.White;
             //    result.BackColor = Color.Gray;
             //}
-            //if (card.Faction != null && card.Faction.Value != (int)NraCard.CardFaction.Neutral && (deck.Factions & card.Faction.Value) == 0)
-            //{
-            //    result.ForeColor = Enlighten(Color.OrangeRed, result.BackColor);
-            //}
+            //var deckIsCorp = NraCard.CardFactionSide.Where(kvp => kvp.Value == (Int32)NraCard.CardSide.Corp).Any(kvp => (kvp.Key & deck.Factions) != 0);
+            //var deckIsRunner = NraCard.CardFactionSide.Where(kvp => kvp.Value == (Int32)NraCard.CardSide.Corp).Any(kvp => (kvp.Key & deck.Factions) != 0);
+            //var deckSide = deck.Factions
+
+            if (card.Side != null && card.Side.Value != (Int32)deck.Side)
+            {
+                result.ForeColor = Color.White;
+                result.BackColor = Color.Red;
+            }
+            else if (card.Faction != null && card.Faction.Value != (int)NraCard.CardFaction.Neutral && (deck.Factions & card.Faction.Value) == 0)
+            {
+                result.ForeColor = Enlighten(Color.OrangeRed, result.BackColor);
+            }
             if (card.Banned != null && card.Banned.Value)
             {
                 result.ForeColor = Color.White;
@@ -441,5 +458,32 @@ namespace NRADB.Forms
             return text.ToString();
         }
         #endregion
+
+        private void rbSide_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateSideChoicesControl();
+            UpdateVersionedDeckWithControls();
+        }
+
+        /// <summary>
+        /// Updates the extended checklist box control according to the 
+        /// user settings.
+        /// </summary>
+        private void UpdateSideChoicesControl()
+        {
+            var side = (Int32)(rbCorp.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner);
+            var neutralSide = (Int32)NraCard.CardSide.None;
+
+            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclFaction, ApplicationSettings.DatabaseManager,
+                ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey,
+                side != 0
+                    ? (item =>
+                    {
+                        var faction = NraCard.CardFactionNames.First(kvp => kvp.Value == item.ShortName);
+                        var currentSide = NraCard.CardFactionSide[faction.Key];
+                        return currentSide == neutralSide || currentSide == side;
+                    })
+                    : (Predicate<DbFilter>)null);
+        }
     }
 }

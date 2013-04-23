@@ -33,6 +33,9 @@ namespace NRADB.OCTGN
         [OctgnCardData(PropertyName = "Rules")]
         public string Text { get; set; }
 
+        [OctgnCardData(PropertyName = "AutoScript")]
+        public string AutoScript { get; set; }
+
         [OctgnCardData(PropertyName = "Flavor")]
         public string Flavor { get; set; }
 

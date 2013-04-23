@@ -354,6 +354,26 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while loading the OCTGN set: &apos;{0}&apos; (id: {1})
+        ///The database TableSet doesn&apos;t contain the definition of that set (or if this is a chapter, the set containing that chapter): 
+        ///Please update the databases manually to add the set definition..
+        /// </summary>
+        internal static string ErrOctgnSetNotDefinedInDatabase {
+            get {
+                return ResourceManager.GetString("ErrOctgnSetNotDefinedInDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OTCGN set not found in database.
+        /// </summary>
+        internal static string ErrOctgnSetNotDefinedInDatabaseTitle {
+            get {
+                return ResourceManager.GetString("ErrOctgnSetNotDefinedInDatabaseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error!.
         /// </summary>
         internal static string ErrorTitle {
