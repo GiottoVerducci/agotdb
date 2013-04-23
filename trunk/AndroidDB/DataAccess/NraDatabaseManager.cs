@@ -195,5 +195,10 @@ namespace NRADB.DataAccess
                 string.Format("SELECT TOP 1 * FROM [{0}]  WHERE [OctgnId] IS NOT NULL", TableNameMain));
             return table.Rows.Count > 0;
         }
+
+        public void ResetAndImportSets(Func<DataRowCollection, OperationResult> importAction)
+        {
+            ResetAndImportTable(TableNameSet, importAction, "WHERE Id > -1");
+        }
     }
 }

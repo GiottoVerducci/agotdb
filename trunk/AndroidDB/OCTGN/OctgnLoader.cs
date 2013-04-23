@@ -42,6 +42,18 @@ namespace NRADB.OCTGN
         {
             public string OriginalName;
             public string OctgnName;
+            public int SetId;
+            public bool ByChapter;
+            public string ShortName;
+            public string[] ChaptersNames;
+
+            public int GetChapterId(string chapterName)
+            {
+                for (int i = 0; i < ChaptersNames.Length; ++i)
+                    if (string.Equals(ChaptersNames[i], chapterName, StringComparison.InvariantCultureIgnoreCase))
+                        return i + 1;
+                return 0;
+            }
         }
 
         private static string Strip(string name)
@@ -51,137 +63,6 @@ namespace NRADB.OCTGN
         }
 
         private static readonly List<string> _outputSummary = new List<string>();
-
-        //private static OctgnCard FindCard(DataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<string, List<OctgnCard>> octgnSets)
-        //{
-        //    var universalId = (int)row["UniversalId"];
-        //    var setId = universalId / 10000;
-        //    SetInformation setInformation;
-        //    if (setInformations.TryGetValue(setId, out setInformation))
-        //    {
-        //        var originalName = Strip(row["OriginalName"].ToString());
-        //        List<OctgnCard> octgnSet;
-        //        if (setInformation.OctgnName != null && octgnSets.TryGetValue(setInformation.OctgnName, out octgnSet))
-        //        {
-        //            var cards = octgnSet.Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase)).ToList();
-        //            if (cards.Count == 1)
-        //                return cards[0];
-        //            if (cards.Count > 1)
-        //                return cards.OrderByDescending(card => GetMatchingScore(row, card)).First();
-        //            // try searching approximative names in the set
-        //            var distanceCards = octgnSet
-        //                .Select(c => new Tuple<int, OctgnCard>(ComputeLevenshteinDistance(Strip(c.Name), originalName), c))
-        //                .Where(distanceCard => distanceCard.Item1 <= 2)
-        //                .OrderBy(distanceCard => distanceCard.Item1)
-        //                .ToList();
-        //            if (distanceCards.Count > 0)
-        //            {
-        //                // for debugging purpose: keep track of the mismatch values
-        //                var output = string.Format("{0}\t{1} -> {2}", universalId, row["OriginalName"], distanceCards.First().Item2.Name);
-        //                _outputSummary.Add(output);
-        //                return distanceCards.First().Item2;
-        //            }
-
-        //        }
-        //        var scoreCards = octgnSets.Values
-        //            .SelectMany(c => c)
-        //            .Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase))
-        //            .Select(card => new Tuple<int, OctgnCard>(GetMatchingScore(row, card), card))
-        //            .Where(card => card.Item1 >= 0)
-        //            .OrderByDescending(card => card.Item1)
-        //            .ToList();
-        //        if (scoreCards.Count > 0)
-        //            return scoreCards.First().Item2;
-        //        return null;
-        //    }
-        //    return null;
-        //}
-
-        /// <summary>
-        /// Compute the distance between two strings.
-        /// </summary>
-        public static int ComputeLevenshteinDistance(string s, string t)
-        {
-            int n = s.Length;
-            int m = t.Length;
-            int[,] d = new int[n + 1, m + 1];
-
-            // Step 1
-            if (n == 0)
-                return m;
-
-            if (m == 0)
-                return n;
-
-            // Step 2
-            for (int i = 0; i <= n; d[i, 0] = i++) ;
-            for (int j = 0; j <= m; d[0, j] = j++) ;
-
-            // Step 3
-            for (int i = 1; i <= n; i++)
-            {
-                //Step 4
-                for (int j = 1; j <= m; j++)
-                {
-                    // Step 5
-                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
-
-                    // Step 6
-                    d[i, j] = Math.Min(
-                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
-                        d[i - 1, j - 1] + cost);
-                }
-            }
-            // Step 7
-            return d[n, m];
-        }
-
-        //public static int GetMatchingScore(DataRow row, OctgnCard card)
-        //{
-        //    var result = 0;
-        //    if (card.House != null)
-        //    {
-        //        var oHouses = card.House.Split('.', ' ', '/').Select(Strip).Where(h => !string.IsNullOrEmpty(h)).ToList();
-        //        result += oHouses.Where(house => (bool)row["House" + house]).Sum(house => 10);
-        //    }
-        //    if (card.Type != null)
-        //    {
-        //        var aType = (AgotCard.CardType)Convert.ToInt32(row["Type"]);
-        //        if (!string.Equals(card.Type, aType.ToString(), StringComparison.InvariantCultureIgnoreCase))
-        //            result -= 1000;
-        //    }
-
-        //    Func<string, string, bool> boolEquals = (oValue, columnName) => !string.IsNullOrWhiteSpace(oValue) && (oValue == "1") == ((bool)row[columnName]);
-
-        //    if (boolEquals(card.Unique, "Unique"))
-        //        result += 10;
-
-        //    if (!string.IsNullOrWhiteSpace(card.Cost))
-        //    {
-        //        var oCost = OctgnInt(card.Cost);
-        //        var aCost = DbInt(row["Cost"]);
-        //        //result += 5 - Math.Abs(oCost - aCost);
-        //        if (oCost == aCost)
-        //            result += 5;
-        //    }
-        //    if (!string.IsNullOrWhiteSpace(card.Strength))
-        //    {
-        //        var oStrength = OctgnInt(card.Strength);
-        //        var aStrength = DbInt(row["Strength"]);
-        //        //result += 5 - Math.Abs(oStrength - aStrength);
-        //        if (oStrength == aStrength)
-        //            result += 5;
-        //    }
-
-        //    if (boolEquals(card.Military, "Military"))
-        //        result++;
-        //    if (boolEquals(card.Intrigue, "Intrigue"))
-        //        result++;
-        //    if (boolEquals(card.Power, "Power"))
-        //        result++;
-
-        //    return result;
-        //}
 
         public static int OctgnInt(string value)
         {
@@ -199,16 +80,92 @@ namespace NRADB.OCTGN
             return Convert.ToInt32(obj);
         }
 
-        //public static T ConvertFromDbVal<T>(object obj)
+        public static void ExtractSetIdAndCardIdFromOctgnId(string octgnId, out int setId, out int cardId)
+        {
+            var setInformations = octgnId.Substring(31);
+            setId = Convert.ToInt32(setInformations.Substring(0, 2));
+            cardId = Convert.ToInt32(setInformations.Substring(2));
+        }
+
+        //public static void ImportSets(Dictionary<OctgnSetData, OctgnCard[]> sets, BackgroundWorker backgroundWorker)
         //{
-        //    if (obj == null || obj == DBNull.Value)
-        //        return default(T); // returns the default value for the type
-        //    return (T)obj;
+        //    var setDataById = sets.Keys.GroupBy(sd => sd.Id).OrderBy(g => g.Key).ToArray();
+        //    var cursor = (object)0;
+        //    ApplicationSettings.DatabaseManager.ResetAndImportSets(destinationRows =>
+        //        {
+        //            if (backgroundWorker.CancellationPending)
+        //                return DatabaseManager.OperationResult.Abort;
+        //            var index = (int)cursor;
+        //            if (index >= setDataById.Length)
+        //            {
+        //                backgroundWorker.ReportProgress(100, OctgnLoaderTask.ImportSet);
+        //                backgroundWorker.ReportProgress(66, OctgnLoaderTask.UpdateDatabase); // arbitrary, we don't get progress notification when the dataset is updated
+        //                return DatabaseManager.OperationResult.Done;
+        //            }
+        //            var setDataGroup = setDataById[index];
+        //            cursor = index + 1;
+        //            var chapters = setDataGroup.OrderBy(sd => sd.MinCardId).ToArray();
+        //            var chapterId = 0;
+        //            foreach (var chapter in chapters)
+        //                chapter.ChapterId = ++chapterId;
+
+        //            var chapterNames = string.Join(", ", chapters.Select(sd => sd.Name));
+        //            destinationRows.Add(
+        //                index,
+        //                chapters.Length > 1 ? "Set " + (index + 1) : chapterNames,
+        //                chapters.Length > 1 ? "Set " + (index + 1) : chapterNames,
+        //                setDataGroup.Key,
+        //                chapters.Length > 1,
+        //                true,
+        //                chapters.Length > 1 ? chapterNames : null,
+        //                chapters.Length > 1 ? "Set " + (index + 1) : chapterNames);
+
+        //            backgroundWorker.ReportProgress((index * 100) / setDataById.Length, OctgnLoaderTask.ImportSet);
+        //            return DatabaseManager.OperationResult.Ok;
+        //        });
         //}
 
-        public static void ImportCards(Dictionary<string, List<OctgnCard>> octgnSets, BackgroundWorker backgroundWorker)
+        public static void ImportCards(Dictionary<OctgnSetData, OctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
         {
-            var allCards = octgnSets.Values.SelectMany(c => c).ToList();
+            var setTable = ApplicationSettings.DatabaseManager.GetExpansionSets();
+            var setInformations = new Dictionary<int, SetInformation>();
+
+            var progress = 0;
+            foreach (DataRow row in setTable.Rows)
+            {
+                if (backgroundWorker.CancellationPending)
+                    return;
+                backgroundWorker.ReportProgress(progress * 100 / setTable.Rows.Count, OctgnLoaderTask.ImportSet);
+                var setId = (int)row["Id"];
+                if (setId >= 0)
+                {
+                    var si = new SetInformation
+                    {
+                        OriginalName = row["OriginalName"].ToString(),
+                        ShortName = row["ShortName"].ToString(),
+                        ByChapter = (bool)row["ByChapter"],
+                        SetId = (byte) row["SetId"],
+                        ChaptersNames = row["ChaptersNames"].ToString().Split(',').Select(s => s.Trim()).ToArray()
+                    };
+                    //var name = Strip(si.OriginalName);
+                    //var octgnName = octgnSets.Keys.FirstOrDefault(k => string.Equals(name, Strip(k.Name), StringComparison.InvariantCultureIgnoreCase));
+                    //si.OctgnName = octgnName.Name;
+                    setInformations.Add(Convert.ToInt32(row["SetId"]), si);
+                }
+                ++progress;
+            }
+            backgroundWorker.ReportProgress(100, OctgnLoaderTask.ImportSet); // match set
+
+            var allCards = new List<KeyValuePair<OctgnSetData, OctgnCard>>();
+            foreach (var kvp in octgnSets)
+                allCards.AddRange(kvp.Value.Select((card => new KeyValuePair<OctgnSetData, OctgnCard>(kvp.Key, card))));
+            allCards = allCards.OrderBy(kvp => 
+            {
+                int setId, cardId;
+                ExtractSetIdAndCardIdFromOctgnId(kvp.Value.Id, out setId, out cardId);
+                return GetUniversalId(setId, cardId);
+            }).ToList();
+
             var cursor = (object)0;
 
             ApplicationSettings.DatabaseManager.ResetAndImportCards(destinationRows =>
@@ -219,20 +176,19 @@ namespace NRADB.OCTGN
                     var index = (int)cursor;
                     if (index >= allCards.Count)
                     {
-                        backgroundWorker.ReportProgress(100, OctgnLoaderTask.FindCard);
+                        backgroundWorker.ReportProgress(100, OctgnLoaderTask.ImportCard);
                         backgroundWorker.ReportProgress(66, OctgnLoaderTask.UpdateDatabase); // arbitrary, we don't get progress notification when the dataset is updated
                         return DatabaseManager.OperationResult.Done;
                     }
 
-                    var card = allCards[index];
+                    var card = allCards[index].Value;
                     cursor = index + 1;
 
                     var keywords = card.Keywords.Split('-').ToList();
                     bool isUnique = keywords.Remove("Unique");
 
-                    var setInformations = card.Id.ToString().Substring(31);
-                    var setId = Convert.ToInt32(setInformations.Substring(0, 2));
-                    var cardId = Convert.ToInt32(setInformations.Substring(2));
+                    int setId, cardId;
+                    ExtractSetIdAndCardIdFromOctgnId(card.Id, out setId, out cardId);
 
                     var stat = card.Stat == "-" ? string.Empty : card.Stat;
                     var strength = string.Equals(card.Type, "ICE", StringComparison.InvariantCultureIgnoreCase)
@@ -260,6 +216,10 @@ namespace NRADB.OCTGN
                         ? card.Requirement
                         : string.Empty;
 
+                    var setInformation = setInformations[allCards[index].Key.Id];
+                    var set = setInformation.ByChapter
+                        ? string.Format("{0}-{1}({2})", setInformation.ShortName, setInformation.GetChapterId(allCards[index].Key.Name), cardId)
+                        : string.Format("{0}({1})", setInformation.ShortName, cardId);
 
                     destinationRows.Add(
                         index,
@@ -282,16 +242,16 @@ namespace NRADB.OCTGN
                         card.Requirement,
                         mu,
                         deckSize,
-                        string.Format("CS({0})", cardId),
+                        set,
                         card.Name,
-                        (setId * 10000 + cardId).ToString(),
+                        (GetUniversalId(setId, cardId)).ToString(),
                         "",//banned
                         "",//restricted
                         card.Id,
                         card.Flavor
                     );
 
-                    backgroundWorker.ReportProgress((index * 100) / allCards.Count, OctgnLoaderTask.FindCard);
+                    backgroundWorker.ReportProgress((index * 100) / allCards.Count, OctgnLoaderTask.ImportCard);
                     return DatabaseManager.OperationResult.Ok;
                 });
             if (backgroundWorker.CancellationPending)
@@ -299,12 +259,17 @@ namespace NRADB.OCTGN
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.UpdateDatabase);
         }
 
+        private static int GetUniversalId(int setId, int cardId)
+        {
+            return setId * 10000 + cardId;
+        }
+
         public enum OctgnLoaderTask
         {
             Undefined,
             LoadSet,
-            MatchSet,
-            FindCard,
+            ImportSet,
+            ImportCard,
             UpdateDatabase
         }
 
@@ -315,9 +280,18 @@ namespace NRADB.OCTGN
             SetsNotFound
         }
 
-        public static Dictionary<string, List<OctgnCard>> LoadAllSets(string path, BackgroundWorker backgroundWorker)
+        public class OctgnSetData
         {
-            var result = new Dictionary<string, List<OctgnCard>>(); // key: set name
+            public string Name { get; set; }
+            public int Id { get; set; }
+            public int MinCardId { get; set; }
+            public int MaxCardId { get; set; }
+            public int ChapterId { get; set; }
+        }
+
+        public static Dictionary<OctgnSetData, OctgnCard[]> LoadAllSets(string path, BackgroundWorker backgroundWorker)
+        {
+            var result = new Dictionary<OctgnSetData, OctgnCard[]>(); // key: set name
 
             var directoryInfo = new DirectoryInfo(path);
             var fileInfos = directoryInfo.GetFiles("*.o8s", SearchOption.TopDirectoryOnly);
@@ -345,15 +319,33 @@ namespace NRADB.OCTGN
                     throw new Exception("Couldn't read set definition file " + setFile, ex);
                 }
 
+                var setData = new OctgnSetData();
+
                 XmlNode setNode = doc.SelectNodes("//set")[0];
-                var setName = setNode.Attributes["name"].Value;
+                setData.Name = setNode.Attributes["name"].Value;
 
                 var cardNodes = setNode.SelectNodes("cards/card");
 
-                var setCards = (from XmlNode cardNode in cardNodes select LoadOctgnCard(cardNode)).OrderBy(c => c.Name).ToList();
+                var setCards = (from XmlNode cardNode in cardNodes select LoadOctgnCard(cardNode)).OrderBy(c => c.Name).ToArray();
 
-                if (setCards.Count > 0)
-                    result.Add(setName, setCards);
+                if (setCards.Length > 0)
+                {
+                    setData.MinCardId = int.MaxValue;
+                    setData.MaxCardId = int.MinValue;
+
+                    foreach (var card in setCards)
+                    {
+                        int setId, cardId;
+                        ExtractSetIdAndCardIdFromOctgnId(card.Id, out setId, out cardId);
+                        setData.Id = setId;
+                        if (cardId > setData.MaxCardId)
+                            setData.MaxCardId = cardId;
+                        if (cardId < setData.MinCardId)
+                            setData.MinCardId = cardId;
+                    }
+
+                    result.Add(setData, setCards);
+                }
 
                 var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
                 tempDirectoryInfo.Delete(true);
