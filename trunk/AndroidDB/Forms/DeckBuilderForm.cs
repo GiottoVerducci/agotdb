@@ -1,5 +1,5 @@
-// NRADB - A card searcher and deck builder tool for the CCG "A Game of Thrones"
-// Copyright © 2007, 2008, 2009, 2010 Vincent Ripoll
+// AndroidDB - A card searcher and deck builder tool for the LCG "Netrunner Android"
+// Copyright © 2013 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -13,11 +13,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
-// © A Game of Thrones 2005 George R. R. Martin
-// © A Game of Thrones CCG 2005 Fantasy Flight Publishing, Inc.
-// © A Game of Thrones LCG 2008 Fantasy Flight Publishing, Inc.
-// © Le Trône de Fer JCC 2005-2007 Stratagèmes éditions / Xénomorphe Sàrl
-// © Le Trône de Fer JCE 2008 Edge Entertainment
+// © Fantasy Flight Games 2012
+
 
 using System;
 using System.Drawing;
@@ -25,7 +22,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using AndroidDB;
 using Beyond.ExtendedControls;
 
 using GenericDB.BusinessObjects;
@@ -72,13 +69,15 @@ namespace NRADB.Forms
 
         private void EclFaction_SelectedValueChanged(object sender, EventArgs e)
         {
+            UpdateSideFromControls();
             UpdateFactionFromControls();
+            UpdateTreeViews();
         }
 
         #endregion
 
         #region Form update methods
-        private static void UpdateTypeNodeText(TreeNode typeNode)
+        private void UpdateTypeNodeText(TreeNode typeNode)
         {
             var count = 0;
             int maxWidth = 0, maxLength = 0;
@@ -97,9 +96,9 @@ namespace NRADB.Forms
 
             var typeNodeValue = Convert.ToInt32(typeNode.Name, CultureInfo.InvariantCulture);
 
-            typeNode.Text = /*typeNodeValue == (Int32)NraCard.CardType.Plot
-                ? ComputeStatsPlots(((NraCardTreeView)typeNode.TreeView).Cards)
-                :*/ string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", NraCard.GetTypeName(typeNodeValue), count);
+            typeNode.Text = typeNodeValue == (Int32)NraCard.CardType.Identity
+                ? ComputeStatsIdentity(_currentDeck, ((NraCardTreeView)typeNode.TreeView).Cards)
+                : string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", NraCard.GetTypeName(typeNodeValue), count);
         }
 
         private void UpdateStatistics()
@@ -228,6 +227,7 @@ namespace NRADB.Forms
         #region Controls / Versioned deck synchronization
         private void UpdateControlsWithVersionedDeck(bool updateHistory)
         {
+            UpdateControlsFromSide();
             UpdateControlsFromFaction();
             Application.DoEvents();
             UpdateTreeViews();
@@ -245,6 +245,7 @@ namespace NRADB.Forms
 
         private void UpdateVersionedDeckWithControls()
         {
+            UpdateSideFromControls();
             UpdateFactionFromControls();
             _versionedDeck.Name = tbDeckName.Text;
             _versionedDeck.Author = tbAuthor.Text;
@@ -260,11 +261,11 @@ namespace NRADB.Forms
                     if (ecl.GetItemCheckState(i) == CheckState.Checked)
                     {
                         var factionName = ((DbFilter)ecl.Items[i]).ShortName;
-                        value += Int32.Parse(factionName, CultureInfo.InvariantCulture);
+                        var factionValue = Enum.Parse(typeof(NraCard.CardFaction), factionName);
+                        value += (Int32)factionValue;
                     }
             });
             _currentDeck.Factions = value;
-            _currentDeck.Side = rbCorp.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner;
             UpdateTreeViews();
         }
 
@@ -273,21 +274,34 @@ namespace NRADB.Forms
             var value = _currentDeck.Factions;
             eclFaction.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
+                var noFactionChecked = true;
                 for (var i = ecl.Items.Count - 1; i >= 0; --i) // factions are sorted by increasing value
                 {
-                    var v = Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
-                    if (value >= v)
+                    var factionName = ((DbFilter)ecl.Items[i]).ShortName;
+                    var v = (Int32)Enum.Parse(typeof(NraCard.CardFaction), factionName);
+                    if ((v == 0 && noFactionChecked) || (v != 0 && value >= v))
                     {
                         ecl.SetItemCheckState(i, CheckState.Checked);
                         value -= v;
+                        noFactionChecked = false;
                     }
                     else
                         ecl.SetItemCheckState(i, CheckState.Unchecked);
                 }
             });
+        }
+
+        private void UpdateSideFromControls()
+        {
+            _currentDeck.Side = rbCorp.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner;
+        }
+
+        private void UpdateControlsFromSide()
+        {
             rbCorp.Checked = _currentDeck.Side == NraCard.CardSide.Corp;
             rbRunner.Checked = _currentDeck.Side == NraCard.CardSide.Runner;
         }
+
         #endregion
 
         #region Node methods
@@ -299,7 +313,7 @@ namespace NRADB.Forms
         {
             var tabPage = (TabPage)treeView.Parent;
             var count = treeView.Cards
-                .Where(card => card.Type != null)// && card.Type.Value != (Int32)NraCard.CardType.Plot)
+                .Where(card => card.Type != null && card.Type.Value != (Int32)NraCard.CardType.Identity)
                 .Sum(card => card.Quantity);
 
             var index = tabPage.Text.IndexOf('[');
@@ -312,11 +326,14 @@ namespace NRADB.Forms
         {
             var card = (NraCard)cardNode.Tag;
             var deck = ((NraCardTreeView)cardNode.TreeView).Deck;
-            var result = new CardNodeInfo(String.Format(CultureInfo.CurrentCulture, "{0}× {1}", card.Quantity, card.Name.Value), card.GetSummaryInfo());
+            var suffix = string.IsNullOrEmpty(card.Subtitle.Value) ? null : ", " + card.Subtitle.Value;
+            var result = new CardNodeInfo(String.Format(CultureInfo.CurrentCulture, "{0}× {1}{2}", card.Quantity, card.Name.Value, suffix), card.GetSummaryInfo());
             if (card.Unique == null)
                 result.Value1 += " ?";
-            else if (card.Unique.Value)
-                result.Value1 += String.Format(CultureInfo.CurrentCulture, " * ({0})", card.GetShortSet());
+            if ((card.Faction.Value & deck.Factions) == 0)
+                result.Value1 += new string('•', card.Influence.Value);
+            //else if (card.Unique.Value)
+            //    result.Value1 += String.Format(CultureInfo.CurrentCulture, " * ({0})", card.GetShortSet());
             result.ForeColor = cardNode.TreeView.ForeColor; // default value
             result.BackColor = cardNode.TreeView.BackColor; // default value
             //if (card.Shadow != null && card.Shadow.Value)
@@ -345,7 +362,7 @@ namespace NRADB.Forms
             // if the card is restricted, check there's no other card restricted in any other deck or sideboard
             if (card.Restricted != null && card.Restricted.Value
                 && (deck.CardLists.Any(cl => cl.Any(c => c.Restricted != null && c.Restricted.Value && c.UniversalId != card.UniversalId)))
-                    || deck.Agenda.Any(a => a.Restricted != null && a.Restricted.Value))
+                    )//|| deck.Agenda.Any(a => a.Restricted != null && a.Restricted.Value))
             {
                 result.ForeColor = Color.White;
                 result.BackColor = Color.OrangeRed;
@@ -375,25 +392,25 @@ namespace NRADB.Forms
         //        NraCard.GetTypeName((Int32)NraCard.CardType.Plot), count, Resource1.IncomeText, Resource1.MinStatsText, minIncome, Resource1.MaxStatsText, maxIncome, Resource1.AvgStatsText, (totalIncome / count));
         //}
 
-        private static String ComputeStatsPlots(NraCardList cards)
+        private static String ComputeStatsIdentity(NraDeck deck, NraCardList cards)
         {
-            //int maxIncome = 0, minIncome = int.MaxValue, count = 0, totalIncome = 0;
-            //foreach (NraCard card in cards)
-            //{
-            //    if (card.Type != null && card.Type.Value == (Int32)NraCard.CardType.Plot)
-            //    {
-            //        if (!card.Income.Value.IsX)
-            //        {
-            //            maxIncome = Math.Max(maxIncome, card.Income.Value.Value);
-            //            minIncome = Math.Min(minIncome, card.Income.Value.Value);
-            //            totalIncome += (card.Income.Value.Value) * card.Quantity;
-            //        }
-            //        count += card.Quantity;
-            //    }
-            //}
-            //return String.Format(CultureInfo.CurrentCulture, "{0} [{1}] ({2}: {3}: {4} {5}: {6} {7}: {8:F})",
-            //    NraCard.GetTypeName((Int32)NraCard.CardType.Plot), count, Resource1.IncomeText, Resource1.MinStatsText, minIncome, Resource1.MaxStatsText, maxIncome, Resource1.AvgStatsText, (totalIncome / count));
-            return null;
+            var identities = cards.Where(c => c.Type.Value == (Int32)NraCard.CardType.Identity).ToArray();
+
+            if (identities.Length > 1)
+                return "Multiple identities";
+
+            var deckBaseLink = identities[0].Link.Value;
+            var deckMinSize = identities[0].DeckSize.Value;
+            var deckMaxInfluence = identities[0].Influence.Value;
+            var deckCurrentInfluence = cards
+                .Where(c => c.Type.Value != (Int32)NraCard.CardType.Identity && (c.Faction.Value & deck.Factions) == 0)
+                .Sum(c => c.Influence.Value * c.Quantity);
+
+            return string.Format(CultureInfo.CurrentCulture, "{0} ({1}: {2} {3}: {4} {5}: {6}/{7})",
+                NraCard.GetTypeName((Int32)NraCard.CardType.Identity),
+                Resource1.BaseLinkText, deckBaseLink,
+                Resource1.DeckSizeText, deckMinSize,
+                Resource1.InfluenceText, deckCurrentInfluence, deckMaxInfluence);
         }
         #endregion
 
@@ -404,12 +421,12 @@ namespace NRADB.Forms
 
             text.Append(lblDeckName.Text).AppendLine(_versionedDeck.Name);
             text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
-            text.Append(lblFaction.Text).Append(NraCard.GetFactionName(_currentDeck.Factions));
-            if (_currentDeck.Agenda.Count > 0)
-            {
-                var agendaNames = _currentDeck.Agenda.Select(card => card.Name.Value);
-                text.AppendFormat(" ({0})", string.Join(" + ", agendaNames.ToArray()));
-            }
+            text.AppendLine(String.Format("{0} - {1}", _currentDeck.Side.ToString(), NraCard.GetFactionName(_currentDeck.Factions)));
+            //if (_currentDeck.Agenda.Count > 0)
+            //{
+            //    var agendaNames = _currentDeck.Agenda.Select(card => card.Name.Value);
+            //    text.AppendFormat(" ({0})", string.Join(" + ", agendaNames.ToArray()));
+            //}
 
             text.AppendLine().AppendLine();
             text.Append(tabPageDescription.Text).Append(" : ").AppendLine(_versionedDeck.Description);
@@ -433,8 +450,9 @@ namespace NRADB.Forms
 
             text.AppendLine();
 
-            var cardsBySet = _currentDeck.Agenda
-                .Union(_currentDeck.CardLists.SelectMany(cl => cl))
+            var cardsBySet = /*_currentDeck.Agenda
+                .Union(_currentDeck.CardLists.SelectMany(cl => cl))*/
+                _currentDeck.CardLists.SelectMany(cl => cl)
                 .GroupBy(c =>
                 {
                     var sets = c.Set.Value.Split('/');
@@ -463,6 +481,7 @@ namespace NRADB.Forms
         {
             UpdateSideChoicesControl();
             UpdateVersionedDeckWithControls();
+            UpdateTreeViews();
         }
 
         /// <summary>

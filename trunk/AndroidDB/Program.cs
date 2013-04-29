@@ -1,4 +1,4 @@
-// NRADB - A card searcher and deck builder tool for the CCG "Netrunner Android"
+// AndroidDB - A card searcher and deck builder tool for the LCG "Netrunner Android"
 // Copyright © 2013 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

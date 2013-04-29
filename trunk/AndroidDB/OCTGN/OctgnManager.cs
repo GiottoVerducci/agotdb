@@ -22,9 +22,9 @@ namespace NRADB.OCTGN
                 ShowNewFolderButton = false
             };
 
-            //if (dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var path = @"e:\Documents\CCG\Netrunner Android\OCTGN\2.3.0\"; // dialog.SelectedPath
+                var path = dialog.SelectedPath; // @"e:\Documents\CCG\Netrunner Android\OCTGN\2.3.0\"; // 
                 var octgnLoaderWorker = new BackgroundWorker
                 {
                     WorkerReportsProgress = true,

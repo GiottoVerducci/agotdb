@@ -952,13 +952,13 @@
     <value>372, 62</value>
   </data>
   <data name="lblFaction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>48, 13</value>
   </data>
   <data name="lblFaction.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblFaction.Text" xml:space="preserve">
-    <value>Faction:</value>
+    <value>Faction: </value>
   </data>
   <data name="&gt;&gt;lblFaction.Name" xml:space="preserve">
     <value>lblFaction</value>
