@@ -24,7 +24,7 @@ namespace NRADB.OCTGN
         {
             BackgroundWorker.ProgressChanged += OctgnLoaderWorkerOnProgressChanged;
             BackgroundWorker.RunWorkerCompleted += OctgnLoaderWorkerOnRunWorkerCompleted;
-            BackgroundWorker.RunWorkerAsync(this.Path); // @"C:\Users\vripoll\Downloads\Sets"); //
+            BackgroundWorker.RunWorkerAsync(this.Path);
         }
 
         private void OctgnLoaderWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)

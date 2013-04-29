@@ -44,6 +44,7 @@ namespace NRADB.DataAccess
         public string TableNameTrigger { get { return "TableTrigger"; } }
         public string TableNameType { get { return "TableType"; } }
         public string TableNamePattern { get { return "TablePattern"; } }
+        public string TableNameIceType { get { return "TableIceType"; } }
         public override TextFormat ErrataFormat { get { return NraCard.ErrataFormat; } }
 
         protected override void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows)
@@ -51,7 +52,7 @@ namespace NRADB.DataAccess
             Int32 universalId;
             Guid octgnId;
             FormattedValue<string> name, subtitle, keywords, text, set, originalName, flavor, instructions;
-            FormattedValue<int> type, faction, side;
+            FormattedValue<int> type, faction, side, iceType;
             FormattedValue<bool?> unique, banned, restricted;
             FormattedValue<XInt> cost, influence, requirement, mu, deckSize, stat, strength, agendaPoints, 
                 link, trashCost, recurringCredits, creditsIncome, providesMu;
@@ -74,6 +75,7 @@ namespace NRADB.DataAccess
             type = ExtractFormattedIntValueFromRow(sourceRow, "Type", TableNameType);
             faction = ExtractFormattedIntValueFromRow(sourceRow, "Faction", TableNameFaction);
             side = ExtractFormattedIntValueFromRow(sourceRow, "Side", TableNameSide);
+            iceType = ExtractFormattedIntValueFromRow(sourceRow, "IceType", TableNameIceType);
 
             unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique", errataBoundFormat);
             banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
@@ -145,7 +147,8 @@ namespace NRADB.DataAccess
                 flavor.Value, flavor.FormatsToString(),
                 XIntToString(recurringCredits.Value), recurringCredits.Formats.Count > 0,
                 XIntToString(creditsIncome.Value), creditsIncome.Formats.Count > 0,
-                XIntToString(providesMu.Value), providesMu.Formats.Count > 0
+                XIntToString(providesMu.Value), providesMu.Formats.Count > 0,
+                iceType.Value, iceType.Formats.Count > 0
             );
         }
 
@@ -190,6 +193,12 @@ namespace NRADB.DataAccess
         {
             return GetResultFromRequest(
                 string.Format("SELECT * FROM [{0}]", TableNameSet));
+        }
+
+        public DataTable GetIceTypes()
+        {
+            return GetResultFromRequest(
+                string.Format("SELECT * FROM [{0}]", TableNameIceType));
         }
 
         public bool HasOctgnData()

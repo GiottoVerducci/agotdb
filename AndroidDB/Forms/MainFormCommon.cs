@@ -218,11 +218,9 @@ namespace NRADB.Forms
                     if (ShowConnectionErrorMessage(connectionResult))
                     {
                         Application.Exit();
+                        return;
                     }
-                    else
-                    {
-                        _isDataBaseLoaded = true;
-                    }
+                    _isDataBaseLoaded = true;
                     break;
                 case ConnectionErrorCode.FileNotFound:
                     ShowConnectionErrorMessage(connectionResult);

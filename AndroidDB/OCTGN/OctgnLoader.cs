@@ -138,9 +138,17 @@ namespace NRADB.OCTGN
         public static Regex ProvidesCreditsRegex = new Regex(@"Gain([\dX])Credits", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
         public static Regex TransferCreditsRegex = new Regex(@"Transfer([\dX])Credits", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
+        private static string[] GetIceTypes()
+        {
+            var rawData = ApplicationSettings.DatabaseManager.GetIceTypes();
+            return rawData.Rows.Cast<DataRow>().Select(row => row["Key"].ToString()).ToArray();
+        }
+
         public static ImportResult ImportCards(Dictionary<OctgnSetData, OctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
         {
             var setTable = ApplicationSettings.DatabaseManager.GetExpansionSets();
+            var iceTypes = GetIceTypes();
+
             var setInformations = new Dictionary<int, SetInformation>();
 
             var progress = 0;
@@ -232,6 +240,8 @@ namespace NRADB.OCTGN
                         ? card.Requirement
                         : string.Empty;
 
+                    var iceType = string.Join("/", iceTypes.Where(keywords.Contains));
+
                     if (!setInformations.ContainsKey(allCards[index].Key.Id))
                     {
                         errorObject = allCards[index].Key;
@@ -282,7 +292,7 @@ namespace NRADB.OCTGN
                         card.Type,
                         card.Faction,
                         isUnique ? "Yes" : "No",
-                        string.Join(". ", keywords),
+                        string.Join(". ", keywords) + (keywords.Count > 0 ? "." : null),
                         card.Text,
                         card.Instructions,
                         card.Cost,
@@ -304,7 +314,8 @@ namespace NRADB.OCTGN
                         card.Flavor,
                         recurringCredits,
                         creditsIncome,
-                        providesMU
+                        providesMU,
+                        iceType
                     );
 
                     backgroundWorker.ReportProgress((index * 100) / allCards.Count, OctgnLoaderTask.ImportCard);
