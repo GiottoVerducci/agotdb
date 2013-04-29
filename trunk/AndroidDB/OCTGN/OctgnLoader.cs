@@ -138,10 +138,16 @@ namespace NRADB.OCTGN
         public static Regex ProvidesCreditsRegex = new Regex(@"Gain([\dX])Credits", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
         public static Regex TransferCreditsRegex = new Regex(@"Transfer([\dX])Credits", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
-        private static string[] GetIceTypes()
+        private static List<string> GetIceTypes()
         {
             var rawData = ApplicationSettings.DatabaseManager.GetIceTypes();
-            return rawData.Rows.Cast<DataRow>().Select(row => row["Key"].ToString()).ToArray();
+            var result = new List<string>();
+            foreach (DataRow dataRow in rawData.Rows)
+            {
+                result.Add(dataRow["Key"].ToString());
+                result.Add(dataRow["Icebreaker"].ToString());
+            }
+            return result;
         }
 
         public static ImportResult ImportCards(Dictionary<OctgnSetData, OctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)

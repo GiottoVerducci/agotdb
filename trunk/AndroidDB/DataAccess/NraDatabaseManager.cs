@@ -75,7 +75,7 @@ namespace NRADB.DataAccess
             type = ExtractFormattedIntValueFromRow(sourceRow, "Type", TableNameType);
             faction = ExtractFormattedIntValueFromRow(sourceRow, "Faction", TableNameFaction);
             side = ExtractFormattedIntValueFromRow(sourceRow, "Side", TableNameSide);
-            iceType = ExtractFormattedIntValueFromRow(sourceRow, "IceType", TableNameIceType);
+            iceType = ExtractFormattedIntValueFromRow(sourceRow, "IceType", TableNameIceType, new [] { "Key", "Icebreaker" });
 
             unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique", errataBoundFormat);
             banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
