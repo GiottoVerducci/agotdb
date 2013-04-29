@@ -1,2 +1,7 @@
+Beta 0.2 (April, 29 2013)
+ - Added Ice/Icebreaker filter
+ - Added card sort in deck builder.
+ - Deckbuilder: Added stats for Agenda
+ 
 Beta 0.1 (April, 29 2013)
  - Initial revision
