@@ -169,7 +169,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>A Game of Thrones Deck Builder</value>
+    <value>A Netrunner - Android Deck Builder</value>
   </data>
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -262,7 +262,7 @@
     <value>5</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>AndroidDB - A card searcher and deck builder tool for the LCG "Netrunner Android"
+    <value>AndroidDB - A card searcher and deck builder tool for the LCG "Netrunner - Android"
 Copyright © 2013 Vincent Ripoll
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
 

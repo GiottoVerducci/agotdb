@@ -679,7 +679,7 @@ namespace AGoTDB.Forms
 
         private void btnReportError_Click(object sender, EventArgs e)
         {
-            var subject = string.Format(Resource1.ReportCardErrorMessageTitle, _displayedCard.UniversalId);
+            var subject = string.Format(ApplicationSettings.ApplicationName + "-" + Resource1.ReportCardErrorMessageTitle, _displayedCard.UniversalId);
             var body = new StringBuilder();
             body.AppendLine(Resource1.ReportCardErrorMessageBody);
             body.AppendLine();
@@ -691,7 +691,7 @@ namespace AGoTDB.Forms
 
             body.AppendLine();
             body.AppendLine();
-            body.AppendLine(ApplicationSettings.ApplicationVersion.ToString());
+            body.AppendLine(ApplicationSettings.ApplicationName + " " + ApplicationSettings.ApplicationVersion);
             var databaseInfo = ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0
                 ? ApplicationSettings.DatabaseManager.DatabaseInfos[0]
                 : null;

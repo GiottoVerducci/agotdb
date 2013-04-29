@@ -106,6 +106,15 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Base link.
+        /// </summary>
+        internal static string BaseLinkText {
+            get {
+                return ResourceManager.GetString("BaseLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deck couldn&apos;t be saved!.
         /// </summary>
         internal static string CantSaveDeckErr {
