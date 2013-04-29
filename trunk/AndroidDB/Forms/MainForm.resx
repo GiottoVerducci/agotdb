@@ -1696,28 +1696,25 @@
   <data name="&gt;&gt;eclFaction.ZOrder" xml:space="preserve">
     <value>50</value>
   </data>
-  <data name="eclMecanism.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="eclIceType.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 91</value>
   </data>
-  <data name="eclMecanism.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="eclIceType.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
   </data>
-  <data name="eclMecanism.TabIndex" type="System.Int32, mscorlib">
+  <data name="eclIceType.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="eclMecanism.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;eclIceType.Name" xml:space="preserve">
+    <value>eclIceType</value>
   </data>
-  <data name="&gt;&gt;eclMecanism.Name" xml:space="preserve">
-    <value>eclMecanism</value>
-  </data>
-  <data name="&gt;&gt;eclMecanism.Type" xml:space="preserve">
+  <data name="&gt;&gt;eclIceType.Type" xml:space="preserve">
     <value>Beyond.ExtendedControls.ExtendedCheckedListBox, ExtendedControls, Version=1.0.4819.28648, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;eclMecanism.Parent" xml:space="preserve">
+  <data name="&gt;&gt;eclIceType.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;eclMecanism.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;eclIceType.ZOrder" xml:space="preserve">
     <value>51</value>
   </data>
   <data name="dataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">

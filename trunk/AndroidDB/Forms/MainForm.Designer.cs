@@ -82,7 +82,7 @@ namespace NRADB.Forms
             this.label11 = new System.Windows.Forms.Label();
             this.eclVirtue = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclFaction = new Beyond.ExtendedControls.ExtendedCheckedListBox();
-            this.eclMecanism = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.eclIceType = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.popupGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.saveSelectionToTextFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -188,7 +188,7 @@ namespace NRADB.Forms
             this.splitContainer1.Panel1.Controls.Add(this.label11);
             this.splitContainer1.Panel1.Controls.Add(this.eclVirtue);
             this.splitContainer1.Panel1.Controls.Add(this.eclFaction);
-            this.splitContainer1.Panel1.Controls.Add(this.eclMecanism);
+            this.splitContainer1.Panel1.Controls.Add(this.eclIceType);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView);
             this.splitContainer1.Panel1.Controls.Add(this.btnReset);
             // 
@@ -583,18 +583,18 @@ namespace NRADB.Forms
             this.eclFaction.ThreeState = true;
             this.eclFaction.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
-            // eclMecanism
+            // eclIceType
             // 
-            this.eclMecanism.CheckOnClick = true;
-            this.eclMecanism.Condensed = true;
-            this.eclMecanism.CondensedMode = true;
-            this.eclMecanism.FormattingEnabled = true;
-            resources.ApplyResources(this.eclMecanism, "eclMecanism");
-            this.eclMecanism.Name = "eclMecanism";
-            this.eclMecanism.RollDownDelay = 250;
-            this.eclMecanism.Summary = "Mecanism";
-            this.eclMecanism.ThreeState = true;
-            this.eclMecanism.MouseLeave += new System.EventHandler(this.eclMouseLeave);
+            this.eclIceType.CheckOnClick = true;
+            this.eclIceType.Condensed = true;
+            this.eclIceType.CondensedMode = true;
+            this.eclIceType.FormattingEnabled = true;
+            resources.ApplyResources(this.eclIceType, "eclIceType");
+            this.eclIceType.Name = "eclIceType";
+            this.eclIceType.RollDownDelay = 250;
+            this.eclIceType.Summary = "Mecanism";
+            this.eclIceType.ThreeState = true;
+            this.eclIceType.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // dataGridView
             // 
@@ -857,7 +857,7 @@ namespace NRADB.Forms
 		private System.Windows.Forms.Label label11;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclVirtue;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclFaction;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclMecanism;
+		private Beyond.ExtendedControls.ExtendedCheckedListBox eclIceType;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclTrigger;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclExpansionSet;
 		private System.Windows.Forms.Button btnReset;

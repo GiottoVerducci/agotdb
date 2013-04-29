@@ -17,6 +17,8 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -49,6 +51,7 @@ namespace NRADB.Forms
                 ecl.Items.RemoveAt(0); // remove neutral faction
                 ecl.UpdateSize(); // update size because neutral faction has been removed
             });
+
             //UpdateAgendaComboBox();
             UpdateHistoryFromVersionedDeck();
             //treeViewDeck.TreeViewNodeSorter = deckTreeNodeSorter; // we don't use it because it's slower than inserting directly at the right place (visible when loading decks)
@@ -96,9 +99,18 @@ namespace NRADB.Forms
 
             var typeNodeValue = Convert.ToInt32(typeNode.Name, CultureInfo.InvariantCulture);
 
-            typeNode.Text = typeNodeValue == (Int32)NraCard.CardType.Identity
-                ? ComputeStatsIdentity(_currentDeck, ((NraCardTreeView)typeNode.TreeView).Cards)
-                : string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", NraCard.GetTypeName(typeNodeValue), count);
+            switch ((NraCard.CardType)typeNodeValue)
+            {
+                case NraCard.CardType.Identity:
+                    typeNode.Text = ComputeStatsIdentity(_currentDeck, ((NraCardTreeView)typeNode.TreeView).Cards);
+                    break;
+                case NraCard.CardType.Agenda:
+                    typeNode.Text = ComputeStatsAgenda(_currentDeck, ((NraCardTreeView)typeNode.TreeView).Cards);
+                    break;
+                default:
+                    typeNode.Text = string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", NraCard.GetTypeName(typeNodeValue), count);
+                    break;
+            }
         }
 
         private void UpdateStatistics()
@@ -260,9 +272,8 @@ namespace NRADB.Forms
                 for (var i = 0; i < ecl.Items.Count; ++i)
                     if (ecl.GetItemCheckState(i) == CheckState.Checked)
                     {
-                        var factionName = ((DbFilter)ecl.Items[i]).ShortName;
-                        var factionValue = Enum.Parse(typeof(NraCard.CardFaction), factionName);
-                        value += (Int32)factionValue;
+                        var factionId = Convert.ToInt32(((DbFilter)ecl.Items[i]).ShortName);
+                        value += factionId;
                     }
             });
             _currentDeck.Factions = value;
@@ -277,8 +288,8 @@ namespace NRADB.Forms
                 var noFactionChecked = true;
                 for (var i = ecl.Items.Count - 1; i >= 0; --i) // factions are sorted by increasing value
                 {
-                    var factionName = ((DbFilter)ecl.Items[i]).ShortName;
-                    var v = (Int32)Enum.Parse(typeof(NraCard.CardFaction), factionName);
+                    var v = Convert.ToInt32(((DbFilter)ecl.Items[i]).ShortName);
+
                     if ((v == 0 && noFactionChecked) || (v != 0 && value >= v))
                     {
                         ecl.SetItemCheckState(i, CheckState.Checked);
@@ -412,6 +423,35 @@ namespace NRADB.Forms
                 Resource1.DeckSizeText, deckMinSize,
                 Resource1.InfluenceText, deckCurrentInfluence, deckMaxInfluence);
         }
+
+        private static String ComputeStatsAgenda(NraDeck deck, NraCardList cards)
+        {
+            int deckSize = cards
+                .Where(c => c.Type.Value != (Int32)NraCard.CardType.Identity)
+                .Sum(c => c.Quantity);
+            int requiredAgendaPoints;
+            if (deckSize >= 40 && deckSize <= 44)
+                requiredAgendaPoints = 18;
+            else if (deckSize >= 45 && deckSize <= 49)
+                requiredAgendaPoints = 20;
+            else if (deckSize >= 50 && deckSize <= 54)
+                requiredAgendaPoints = 22;
+            else if (deckSize >= 55)
+                requiredAgendaPoints = 22 + 2 * ((deckSize - 50) % 5);
+            else
+                requiredAgendaPoints = 0;
+
+            if (requiredAgendaPoints == 0)
+                return string.Format(CultureInfo.CurrentCulture, "{0}", NraCard.GetTypeName((Int32)NraCard.CardType.Agenda));
+
+            var agenda = cards.Where(c => c.Type.Value == (Int32)NraCard.CardType.Agenda).ToArray();
+
+            var agendaPoints = agenda.Sum(a => a.AgendaPoints.Value.Value * a.Quantity); // X values are not handled, but there's currently no agenda with X points
+            
+            return string.Format(CultureInfo.CurrentCulture, "{0} ({1}: {2}/{3}-{4})",
+                NraCard.GetTypeName((Int32)NraCard.CardType.Agenda),
+                Resource1.AgendaPointsText, agendaPoints, requiredAgendaPoints, requiredAgendaPoints + 1);
+        }
         #endregion
 
         #region Export / Import
@@ -494,11 +534,11 @@ namespace NRADB.Forms
             var neutralSide = (Int32)NraCard.CardSide.None;
 
             ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclFaction, ApplicationSettings.DatabaseManager,
-                ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey,
+                ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueId,
                 side != 0
                     ? (item =>
                     {
-                        var faction = NraCard.CardFactionNames.First(kvp => kvp.Value == item.ShortName);
+                        var faction = NraCard.CardFactionNames.First(kvp => kvp.Key == Convert.ToInt32(item.ShortName));
                         var currentSide = NraCard.CardFactionSide[faction.Key];
                         return currentSide == neutralSide || currentSide == side;
                     })

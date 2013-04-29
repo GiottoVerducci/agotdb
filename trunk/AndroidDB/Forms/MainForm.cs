@@ -141,7 +141,7 @@ namespace NRADB.Forms
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclCardtype, ApplicationSettings.DatabaseManager.TableNameType, "Type", TableType.ValueShortName);
             ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
-            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclMecanism, ApplicationSettings.DatabaseManager.TableNameMechanism, "", TableType.ValueKey);
+            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIceType, ApplicationSettings.DatabaseManager.TableNameIceType, "IceType", TableType.ValueId);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
             //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
@@ -262,7 +262,7 @@ namespace NRADB.Forms
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclCardtype, "OR", PositiveDataType.ExactValue) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclFaction, "OR", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclProvides, "AND", PositiveDataType.Integer) +
-                QueryBuilder.GetFilterFromExtendedCheckedListBox(eclMecanism, "AND", PositiveDataType.Yes) +
+                QueryBuilder.GetFilterFromExtendedCheckedListBox(eclIceType, "OR", PositiveDataType.ExactValue) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclIcon, "AND", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclVirtue, "AND", PositiveDataType.Yes) +
                 QueryBuilder.GetFilterFromExtendedCheckedListBox(eclKeyword, "AND", PositiveDataType.KeywordValue) +
@@ -298,7 +298,7 @@ namespace NRADB.Forms
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            ClearCheckListBoxes(eclFaction, eclCardtype, eclProvides, eclMecanism,
+            ClearCheckListBoxes(eclFaction, eclCardtype, eclProvides, eclIceType,
                 eclIcon, eclVirtue, eclKeyword, eclTrigger, eclExpansionSet);
 
             ClearTextBoxes(tbCostLow, tbCostHigh, tbMuLow, tbMuHigh,
