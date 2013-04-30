@@ -113,6 +113,16 @@ namespace NRADB.Forms
             }
         }
 
+        private void UpdateDependentTypeNodeTexts(int value, TreeView treeView)
+        {
+            if (value != (Int32)NraCard.CardType.Identity)
+            {
+                var identityRootNodeIndex = treeView.Nodes.IndexOfKey(((Int32)NraCard.CardType.Identity).ToString(CultureInfo.InvariantCulture));
+                if (identityRootNodeIndex >= 0)
+                    UpdateTypeNodeText(treeView.Nodes[identityRootNodeIndex]);
+            }
+        }
+
         private void UpdateStatistics()
         {
             rtbStatistics.Clear();
@@ -447,7 +457,7 @@ namespace NRADB.Forms
             var agenda = cards.Where(c => c.Type.Value == (Int32)NraCard.CardType.Agenda).ToArray();
 
             var agendaPoints = agenda.Sum(a => a.AgendaPoints.Value.Value * a.Quantity); // X values are not handled, but there's currently no agenda with X points
-            
+
             return string.Format(CultureInfo.CurrentCulture, "{0} ({1}: {2}/{3}-{4})",
                 NraCard.GetTypeName((Int32)NraCard.CardType.Agenda),
                 Resource1.AgendaPointsText, agendaPoints, requiredAgendaPoints, requiredAgendaPoints + 1);

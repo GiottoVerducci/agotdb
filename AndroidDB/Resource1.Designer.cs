@@ -509,6 +509,15 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MU.
+        /// </summary>
+        internal static string MuText {
+            get {
+                return ResourceManager.GetString("MuText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string NameText {

@@ -212,7 +212,7 @@ namespace NRADB.OCTGN
                     var card = allCards[index].Value;
                     cursor = index + 1;
 
-                    var keywords = card.Keywords.Split('-').ToList();
+                    var keywords = card.Keywords.Split('-').Where(k => !string.IsNullOrEmpty(k)).ToList();
                     bool isUnique = keywords.Remove("Unique");
 
                     int setId, cardId;
