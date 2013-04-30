@@ -43,6 +43,18 @@ namespace AGoTDB.OCTGN
         {
             public string OriginalName;
             public string OctgnName;
+            public int SetId;
+            public bool ByChapter;
+            public string ShortName;
+            public string[] ChaptersNames;
+
+            public int GetChapterId(string chapterName)
+            {
+                for (int i = 0; i < ChaptersNames.Length; ++i)
+                    if (string.Equals(ChaptersNames[i], chapterName, StringComparison.InvariantCultureIgnoreCase))
+                        return i + 1;
+                return 0;
+            }
         }
 
         private static string Strip(string name)
@@ -53,7 +65,7 @@ namespace AGoTDB.OCTGN
 
         private static readonly List<string> _outputSummary = new List<string>();
 
-        private static OctgnCard FindCard(DataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<string, List<OctgnCard>> octgnSets)
+        private static OctgnCard FindCard(DataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<OctgnSetData, OctgnCard[]> octgnSets)
         {
             var universalId = (int)row["UniversalId"];
             var setId = universalId / 10000;
@@ -61,28 +73,31 @@ namespace AGoTDB.OCTGN
             if (setInformations.TryGetValue(setId, out setInformation))
             {
                 var originalName = Strip(row["OriginalName"].ToString());
-                List<OctgnCard> octgnSet;
-                if (setInformation.OctgnName != null && octgnSets.TryGetValue(setInformation.OctgnName, out octgnSet))
+                if (setInformation.OctgnName != null)
                 {
-                    var cards = octgnSet.Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase)).ToList();
-                    if (cards.Count == 1)
-                        return cards[0];
-                    if (cards.Count > 1)
-                        return cards.OrderByDescending(card => GetMatchingScore(row, card)).First();
-                    // try searching approximative names in the set
-                    var distanceCards = octgnSet
-                        .Select(c => new Tuple<int, OctgnCard>(ComputeLevenshteinDistance(Strip(c.Name), originalName), c))
-                        .Where(distanceCard => distanceCard.Item1 <= 2)
-                        .OrderBy(distanceCard => distanceCard.Item1)
-                        .ToList();
-                    if (distanceCards.Count > 0)
+                    var octgnSetData = octgnSets.FirstOrDefault(kvp => kvp.Key.Name == setInformation.OctgnName);
+                    if (octgnSetData.Value != null)
                     {
-                        // for debugging purpose: keep track of the mismatch values
-                        var output = string.Format("{0}\t{1} -> {2}", universalId, row["OriginalName"], distanceCards.First().Item2.Name);
-                        _outputSummary.Add(output);
-                        return distanceCards.First().Item2;
+                        var octgnSet = octgnSetData.Value;
+                        var cards = octgnSet.Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                        if (cards.Count == 1)
+                            return cards[0];
+                        if (cards.Count > 1)
+                            return cards.OrderByDescending(card => GetMatchingScore(row, card)).First();
+                        // try searching approximative names in the set
+                        var distanceCards = octgnSet
+                            .Select(c => new Tuple<int, OctgnCard>(ComputeLevenshteinDistance(Strip(c.Name), originalName), c))
+                            .Where(distanceCard => distanceCard.Item1 <= 2)
+                            .OrderBy(distanceCard => distanceCard.Item1)
+                            .ToList();
+                        if (distanceCards.Count > 0)
+                        {
+                            // for debugging purpose: keep track of the mismatch values
+                            var output = string.Format("{0}\t{1} -> {2}", universalId, row["OriginalName"], distanceCards.First().Item2.Name);
+                            _outputSummary.Add(output);
+                            return distanceCards.First().Item2;
+                        }
                     }
-
                 }
                 var scoreCards = octgnSets.Values
                     .SelectMany(c => c)
@@ -200,14 +215,20 @@ namespace AGoTDB.OCTGN
             return Convert.ToInt32(obj);
         }
 
-        //public static T ConvertFromDbVal<T>(object obj)
-        //{
-        //    if (obj == null || obj == DBNull.Value)
-        //        return default(T); // returns the default value for the type
-        //    return (T)obj;
-        //}
+        public static void ExtractSetIdAndCardIdFromOctgnId(string octgnId, out int setId, out int cardId)
+        {
+            var setInformations = octgnId.Substring(31);
+            setId = Convert.ToInt32(setInformations.Substring(0, 2));
+            cardId = Convert.ToInt32(setInformations.Substring(2));
+        }
 
-        public static void UpdateCards(Dictionary<string, List<OctgnCard>> octgnSets, BackgroundWorker backgroundWorker)
+        public struct ImportResult
+        {
+            public bool IsSuccessful;
+            public OctgnSetData SetNotFound;
+        }
+
+        public static ImportResult UpdateCards(Dictionary<OctgnSetData, OctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
         {
             var setTable = ApplicationSettings.DatabaseManager.GetExpansionSets();
             var setInformations = new Dictionary<int, SetInformation>();
@@ -216,19 +237,21 @@ namespace AGoTDB.OCTGN
             foreach (DataRow row in setTable.Rows)
             {
                 if (backgroundWorker.CancellationPending)
-                    return;
+                    return new ImportResult { IsSuccessful = false };
                 backgroundWorker.ReportProgress(progress * 100 / setTable.Rows.Count, OctgnLoaderTask.MatchSet);
                 if ((int)row["Id"] >= 0)
                 {
                     var si = new SetInformation { OriginalName = row["OriginalName"].ToString() };
                     var name = Strip(si.OriginalName);
-                    var octgnName = octgnSets.Keys.FirstOrDefault(k => string.Equals(name, Strip(k), StringComparison.InvariantCultureIgnoreCase));
-                    si.OctgnName = octgnName;
+                    var octgnSetData = octgnSets.Keys.First(k => string.Equals(name, Strip(k.Name), StringComparison.InvariantCultureIgnoreCase));
+                    si.OctgnName = octgnSetData.Name;
                     setInformations.Add(Convert.ToInt32(row["SetId"]), si);
                 }
                 ++progress;
             }
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.MatchSet);
+
+            object errorObject = null;
 
             ApplicationSettings.DatabaseManager.UpdateCards((row, cardProgress) =>
                 {
@@ -247,8 +270,18 @@ namespace AGoTDB.OCTGN
                     return DatabaseManager.OperationResult.Ok;
                 });
             if (backgroundWorker.CancellationPending)
-                return;
+                return new ImportResult { IsSuccessful = false };
+
+            if (errorObject is OctgnSetData)
+                return new ImportResult { IsSuccessful = false, SetNotFound = errorObject as OctgnSetData };
+
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.UpdateDatabase);
+            return new ImportResult { IsSuccessful = true };
+        }
+
+        private static int GetUniversalId(int setId, int cardId)
+        {
+            return setId * 10000 + cardId;
         }
 
         public enum OctgnLoaderTask
@@ -264,25 +297,50 @@ namespace AGoTDB.OCTGN
         {
             Undefined,
             Success,
-            SetsNotFound
+            NoSetsFounds,
+            SetNotDefinedInDatabase
         }
 
-        public static Dictionary<string, List<OctgnCard>> LoadAllSets(string path, BackgroundWorker backgroundWorker)
+        public class OctgnLoaderResultAndValue
         {
-            var result = new Dictionary<string, List<OctgnCard>>(); // key: set name
+            public OctgnLoaderResult Result;
+            public object Value;
+        }
+
+        public class OctgnSetData
+        {
+            public string Name { get; set; }
+            public int Id { get; set; }
+            public int MinCardId { get; set; }
+            public int MaxCardId { get; set; }
+            public int ChapterId { get; set; }
+            public string Version { get; set; }
+        }
+
+        public static Dictionary<OctgnSetData, OctgnCard[]> LoadAllSets(string path, BackgroundWorker backgroundWorker)
+        {
+            var result = new Dictionary<OctgnSetData, OctgnCard[]>();
 
             var directoryInfo = new DirectoryInfo(path);
             var fileInfos = directoryInfo.GetFiles("*.o8s", SearchOption.TopDirectoryOnly);
+            var patchFileInfos = directoryInfo.GetFiles("*.o8p", SearchOption.TopDirectoryOnly);
+
+            var totalFileCount = fileInfos.Length + patchFileInfos.Length;
 
             var progress = 0;
             foreach (FileInfo fileInfo in fileInfos)
             {
                 if (backgroundWorker.CancellationPending)
                     return null;
-                backgroundWorker.ReportProgress(progress * 100 / fileInfos.Length, OctgnLoaderTask.LoadSet);
+                backgroundWorker.ReportProgress(progress * 100 / totalFileCount, OctgnLoaderTask.LoadSet);
                 var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
+                Directory.CreateDirectory(tempFolderPath);
                 var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
-                var setFile = files.FirstOrDefault(f => !f.StartsWith("[") && f.EndsWith(".xml"));
+                var setFile = files.FirstOrDefault(f => 
+                {
+                    var name = Path.GetFileName(f);
+                    return !name.StartsWith("[") && name.EndsWith(".xml"); 
+                });
                 if (setFile == null)
                     throw new Exception("Couldn't find set definition file in set file " + fileInfo);
 
@@ -296,15 +354,114 @@ namespace AGoTDB.OCTGN
                     throw new Exception("Couldn't read set definition file " + setFile, ex);
                 }
 
+                var setData = new OctgnSetData();
+
                 XmlNode setNode = doc.SelectNodes("//set")[0];
-                var setName = setNode.Attributes["name"].Value;
+                setData.Name = setNode.Attributes["name"].Value;
+                setData.Version = setNode.Attributes["version"].Value;
 
                 var cardNodes = setNode.SelectNodes("cards/card");
 
-                var setCards = (from XmlNode cardNode in cardNodes select LoadOctgnCard(cardNode)).OrderBy(c => c.Name).ToList();
+                var setCards = (from XmlNode cardNode in cardNodes select LoadOctgnCard(cardNode)).OrderBy(c => c.Name).ToArray();
 
-                if (setCards.Count > 0)
-                    result.Add(setName, setCards);
+                if (setCards.Length > 0)
+                {
+                    setData.MinCardId = int.MaxValue;
+                    setData.MaxCardId = int.MinValue;
+
+                    foreach (var card in setCards)
+                    {
+                        int setId, cardId;
+                        ExtractSetIdAndCardIdFromOctgnId(card.Id, out setId, out cardId);
+                        setData.Id = setId;
+                        if (cardId > setData.MaxCardId)
+                            setData.MaxCardId = cardId;
+                        if (cardId < setData.MinCardId)
+                            setData.MinCardId = cardId;
+                    }
+
+                    result.Add(setData, setCards);
+                }
+
+                var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
+                tempDirectoryInfo.Delete(true);
+                ++progress;
+            }
+            // load patchs
+            foreach (FileInfo fileInfo in patchFileInfos)
+            {
+                if (backgroundWorker.CancellationPending)
+                    return null;
+                backgroundWorker.ReportProgress(progress * 100 / totalFileCount, OctgnLoaderTask.LoadSet);
+                var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
+                Directory.CreateDirectory(tempFolderPath);
+                var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
+                var patchSetFiles = files.Where(f => 
+                {
+                    var pathItems = f.Split('\\', '/');
+                    return pathItems.Length > 1 && pathItems[pathItems.Length-2] == "xmls"
+                        && !pathItems[pathItems.Length - 1].StartsWith("[") && pathItems[pathItems.Length - 1].EndsWith(".xml"); 
+                }).ToArray();
+                if (patchSetFiles.Length == 0)
+                    continue;
+
+                foreach (var patchSetFile in patchSetFiles)
+                {
+                    var doc = new XmlDocument();
+                    try
+                    {
+                        doc.Load(patchSetFile);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Couldn't read patch set definition file " + patchSetFile, ex);
+                    }
+
+                    XmlNode setNode = doc.SelectNodes("//set")[0];
+                    var name = setNode.Attributes["name"].Value;
+
+                    OctgnSetData setData = result.Keys.FirstOrDefault(k => k.Name == name);
+                    if (setData == null) // set to patch not found
+                        continue;
+
+                    var version = setNode.Attributes["version"].Value;
+                    if (setData.Version != version) // the patch applies to another version
+                        continue;
+
+                    var setCards = result[setData];
+
+                    var cardNodes = setNode.SelectNodes("cards/card");
+
+                    var patchSetCards = (from XmlNode cardNode in cardNodes select LoadOctgnCard(cardNode)).OrderBy(c => c.Name).ToArray();
+
+                    // replace the cards by their patched value
+                    foreach (var card in patchSetCards)
+                    {
+                        int i = 0;
+                        while (i < setCards.Length && setCards[i].Id != card.Id)
+                            ++i;
+                        if (i < setCards.Length)
+                            setCards[i] = card;
+                    }
+
+                    // recompute the data
+                    if (setCards.Length > 0)
+                    {
+                        setData.MinCardId = int.MaxValue;
+                        setData.MaxCardId = int.MinValue;
+
+                        foreach (var card in setCards)
+                        {
+                            int setId, cardId;
+                            ExtractSetIdAndCardIdFromOctgnId(card.Id, out setId, out cardId);
+                            setData.Id = setId;
+                            if (cardId > setData.MaxCardId)
+                                setData.MaxCardId = cardId;
+                            if (cardId < setData.MinCardId)
+                                setData.MinCardId = cardId;
+                        }
+                    }
+                }
 
                 var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
                 tempDirectoryInfo.Delete(true);

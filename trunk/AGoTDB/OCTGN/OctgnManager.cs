@@ -45,9 +45,9 @@ namespace AGoTDB.OCTGN
             var backgroundWorker = (BackgroundWorker)sender;
             var path = (string)doWorkEventArgs.Argument;
             var sets = OctgnLoader.LoadAllSets(path, backgroundWorker);
-            if (sets.Count == 0 || sets.All(s => s.Value.Count == 0))
+            if (sets.Count == 0 || sets.All(s => s.Value.Length == 0))
             {
-                doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.SetsNotFound;
+                doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.NoSetsFounds;
                 return;
             }
             OctgnLoader.UpdateCards(sets, backgroundWorker);

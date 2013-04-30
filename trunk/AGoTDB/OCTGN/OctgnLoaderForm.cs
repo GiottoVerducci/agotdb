@@ -75,7 +75,7 @@ namespace AGoTDB.OCTGN
         {
             _isLoadCompleted = true;
             var result = (OctgnLoader.OctgnLoaderResult)runWorkerCompletedEventArgs.Result;
-            if (result == OctgnLoader.OctgnLoaderResult.SetsNotFound)
+            if (result == OctgnLoader.OctgnLoaderResult.NoSetsFounds)
             {
                 MessageBox.Show(Resource1.ErrOctgnNotFound, Resource1.ErrOctgnNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
