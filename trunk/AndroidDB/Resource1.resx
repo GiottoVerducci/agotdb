@@ -358,4 +358,7 @@ Please update the databases manually to add the set definition.</value>
   <data name="MuText" xml:space="preserve">
     <value>MU</value>
   </data>
+  <data name="OctgnFolderSelectPromptMessage" xml:space="preserve">
+    <value>Select path to OCTGN '.o8s' set files  and '.o8p' patch files (if any):</value>
+  </data>
 </root>

@@ -1,6 +1,3 @@
-using AndroidDB;
-using GenericDB.BusinessObjects;
-using NRADB.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +7,11 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
+using GenericDB.BusinessObjects;
+
+using AndroidDB;
+using NRADB.BusinessObjects;
+
 namespace NRADB.OCTGN
 {
     public static class OctgnManager
@@ -18,7 +20,7 @@ namespace NRADB.OCTGN
         {
             var dialog = new FolderBrowserDialog
             {
-                Description = "Select path for OCTGN set files",
+                Description = Resource1.OctgnFolderSelectPromptMessage,
                 ShowNewFolderButton = false
             };
 
