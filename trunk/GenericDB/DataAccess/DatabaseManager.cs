@@ -20,6 +20,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Beyond.ExtendedControls;
@@ -448,20 +449,25 @@ namespace GenericDB.DataAccess
         /// <param name="columnName">The colum in the row containing the string value to read.</param>
         /// <param name="refTableName">The table in which we can find the association between a string value and its bit value.</param>
         /// <returns>A formatted value.</returns>
-        protected virtual FormattedValue<int> ExtractFormattedIntValueFromRow(DataRow row, string columnName, string refTableName)
+        protected virtual FormattedValue<int> ExtractFormattedIntValueFromRow(DataRow row, string columnName, string refTableName, string[] refTableColumnNames = null)
         {
             FormattedValue<string> stringValue = ExtractFormattedStringValueFromRow(row, columnName);
-            string[] values = stringValue.Value.Split('/');
+            string[] values = stringValue.Value.Split('/').Where(v => !string.IsNullOrWhiteSpace(v)).ToArray();
 
             int intValue = 0;
             var formatSections = new List<FormatSection>();
             if (stringValue.Formats.Count != 0)
                 formatSections.Add(new FormatSection(0, 0, ErrataFormat));
 
+            if (refTableColumnNames == null)
+                refTableColumnNames = new[] { "Value" };
+            
+            var wherePredicate = string.Join(" OR ", refTableColumnNames.Select(c => string.Format("{0} like :value", c)));
+
             for (var i = 0; i < values.Length; ++i)
             {
                 var table = GetResultFromRequest(
-                    string.Format("SELECT Id FROM {0} WHERE Value LIKE :value", refTableName),
+                    string.Format("SELECT Id FROM {0} WHERE {1}", refTableName, wherePredicate),
                     _hdbConnection, new CommandParameters().Add("value", values[i]));
                 intValue += Int32.Parse(table.Rows[0]["Id"].ToString(), CultureInfo.InvariantCulture);
             }
@@ -582,7 +588,7 @@ namespace GenericDB.DataAccess
                     case TableType.Value: converter = (r => new DbFilter(r["Value"].ToString(), column)); break;
                     case TableType.ValueKey: converter = (r => new DbFilter(r["Value"].ToString(), r["Key"].ToString())); break;
                     case TableType.ValueShortName: converter = (r => new DbFilter(r["Value"].ToString(), column, r["ShortName"].ToString())); break;
-                    case TableType.ValueId: converter = (r => new DbFilter(r["Value"].ToString(), r["Id"].ToString())); break;
+                    case TableType.ValueId: converter = (r => new DbFilter(r["Value"].ToString(), column, r["Id"].ToString())); break;
                     default: throw new ArgumentException(string.Format("TableType {0} not supported.", tableType));
                 }
 

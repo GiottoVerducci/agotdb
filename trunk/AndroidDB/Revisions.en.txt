@@ -1,3 +1,8 @@
+Beta 0.3 (April, 30 2013)
+ - Added MU cost in card detail.
+ - Dependant section titles now get updated when a card is added/removed from the deck (eg. adding a card with influence will update the total influence value).
+ - Fixed keyword import from OCTGN.
+
 Beta 0.2 (April, 29 2013)
  - Added Ice/Icebreaker filter
  - Added card sort in deck builder.
