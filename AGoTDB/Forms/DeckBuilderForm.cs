@@ -110,6 +110,11 @@ namespace AGoTDB.Forms
                 : string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", AgotCard.GetTypeName(typeNodeValue), count);
         }
 
+        private void UpdateDependentTypeNodeTexts(int value, TreeView treeView)
+        {
+            // nothing to do in this deck builder
+        }
+
         /// <summary>
         /// Loads the agenda-card items in the agenda checkbox.
         /// </summary>

@@ -7,10 +7,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
+
 using GenericDB.DataAccess;
-using GenericDB.OCTGN;
-using NRADB.BusinessObjects;
 using GenericDB.Helper;
+using GenericDB.OCTGN;
+
+using NRADB.BusinessObjects;
 
 namespace NRADB.OCTGN
 {
@@ -88,43 +90,6 @@ namespace NRADB.OCTGN
             cardId = Convert.ToInt32(setInformations.Substring(2));
         }
 
-        //public static void ImportSets(Dictionary<OctgnSetData, OctgnCard[]> sets, BackgroundWorker backgroundWorker)
-        //{
-        //    var setDataById = sets.Keys.GroupBy(sd => sd.Id).OrderBy(g => g.Key).ToArray();
-        //    var cursor = (object)0;
-        //    ApplicationSettings.DatabaseManager.ResetAndImportSets(destinationRows =>
-        //        {
-        //            if (backgroundWorker.CancellationPending)
-        //                return DatabaseManager.OperationResult.Abort;
-        //            var index = (int)cursor;
-        //            if (index >= setDataById.Length)
-        //            {
-        //                backgroundWorker.ReportProgress(100, OctgnLoaderTask.ImportSet);
-        //                backgroundWorker.ReportProgress(66, OctgnLoaderTask.UpdateDatabase); // arbitrary, we don't get progress notification when the dataset is updated
-        //                return DatabaseManager.OperationResult.Done;
-        //            }
-        //            var setDataGroup = setDataById[index];
-        //            cursor = index + 1;
-        //            var chapters = setDataGroup.OrderBy(sd => sd.MinCardId).ToArray();
-        //            var chapterId = 0;
-        //            foreach (var chapter in chapters)
-        //                chapter.ChapterId = ++chapterId;
-
-        //            var chapterNames = string.Join(", ", chapters.Select(sd => sd.Name));
-        //            destinationRows.Add(
-        //                index,
-        //                chapters.Length > 1 ? "Set " + (index + 1) : chapterNames,
-        //                chapters.Length > 1 ? "Set " + (index + 1) : chapterNames,
-        //                setDataGroup.Key,
-        //                chapters.Length > 1,
-        //                true,
-        //                chapters.Length > 1 ? chapterNames : null,
-        //                chapters.Length > 1 ? "Set " + (index + 1) : chapterNames);
-
-        //            backgroundWorker.ReportProgress((index * 100) / setDataById.Length, OctgnLoaderTask.ImportSet);
-        //            return DatabaseManager.OperationResult.Ok;
-        //        });
-        //}
 
         public struct ImportResult
         {
@@ -290,6 +255,12 @@ namespace NRADB.OCTGN
                             : null;
                     }
 
+                    //var cleanName = new string(card.Name.Where(c => char.IsLetterOrDigit(c) || char.IsSeparator(c) || char.IsPunctuation(c)).ToArray());
+                    //if (!string.Equals(cleanName, card.Name))
+                    //{
+                    //    Debugger.Break();
+                    //}
+
                     destinationRows.Add(
                         index,
                         card.Name,
@@ -377,7 +348,7 @@ namespace NRADB.OCTGN
 
         public static Dictionary<OctgnSetData, OctgnCard[]> LoadAllSets(string path, BackgroundWorker backgroundWorker)
         {
-            var result = new Dictionary<OctgnSetData, OctgnCard[]>(); // key: set name
+            var result = new Dictionary<OctgnSetData, OctgnCard[]>();
 
             var directoryInfo = new DirectoryInfo(path);
             var fileInfos = directoryInfo.GetFiles("*.o8s", SearchOption.TopDirectoryOnly);

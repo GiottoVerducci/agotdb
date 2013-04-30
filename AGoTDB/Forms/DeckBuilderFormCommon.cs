@@ -446,6 +446,9 @@ namespace AGoTDB.Forms
             // we must redraw each node in order to redisplay the nodes - is there another method?
             foreach (TreeNode node in root.Nodes)
                 UpdateCardNodeText(node);
+
+            UpdateDependentTypeNodeTexts(card.Type.Value, treeView);
+
             root.Expand();
             treeView.EndUpdate();
             UpdateTabText(treeView); // updates the card count (excluding plots)
@@ -494,6 +497,7 @@ namespace AGoTDB.Forms
                 foreach (TreeNode node in root.Nodes)
                     UpdateCardNodeText(node);
                 root.Expand();
+                UpdateDependentTypeNodeTexts(card.Type.Value, treeView);
             }
 
             if (treeView.Nodes.Count == 0) // add the information node
