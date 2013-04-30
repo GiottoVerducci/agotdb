@@ -536,6 +536,15 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select path to OCTGN &apos;.o8s&apos; set files  and &apos;.o8p&apos; patch files (if any):.
+        /// </summary>
+        internal static string OctgnFolderSelectPromptMessage {
+            get {
+                return ResourceManager.GetString("OctgnFolderSelectPromptMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OR.
         /// </summary>
         internal static string Or {

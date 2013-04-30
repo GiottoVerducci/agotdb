@@ -1,3 +1,6 @@
+Beta 0.4 (April, 30 2013)
+ - Added support for OCTGN patch files (*.o8p)
+
 Beta 0.3 (April, 30 2013)
  - Added MU cost in card detail.
  - Dependant section titles now get updated when a card is added/removed from the deck (eg. adding a card with influence will update the total influence value).

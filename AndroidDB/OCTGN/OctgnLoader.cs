@@ -372,6 +372,7 @@ namespace NRADB.OCTGN
             public int MinCardId { get; set; }
             public int MaxCardId { get; set; }
             public int ChapterId { get; set; }
+            public string Version { get; set; }
         }
 
         public static Dictionary<OctgnSetData, OctgnCard[]> LoadAllSets(string path, BackgroundWorker backgroundWorker)
@@ -380,17 +381,24 @@ namespace NRADB.OCTGN
 
             var directoryInfo = new DirectoryInfo(path);
             var fileInfos = directoryInfo.GetFiles("*.o8s", SearchOption.TopDirectoryOnly);
+            var patchFileInfos = directoryInfo.GetFiles("*.o8p", SearchOption.TopDirectoryOnly);
+
+            var totalFileCount = fileInfos.Length + patchFileInfos.Length;
 
             var progress = 0;
             foreach (FileInfo fileInfo in fileInfos)
             {
                 if (backgroundWorker.CancellationPending)
                     return null;
-                backgroundWorker.ReportProgress(progress * 100 / fileInfos.Length, OctgnLoaderTask.LoadSet);
+                backgroundWorker.ReportProgress(progress * 100 / totalFileCount, OctgnLoaderTask.LoadSet);
                 var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
                 Directory.CreateDirectory(tempFolderPath);
                 var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
-                var setFile = files.FirstOrDefault(f => !f.StartsWith("[") && f.EndsWith(".xml"));
+                var setFile = files.FirstOrDefault(f => 
+                {
+                    var name = Path.GetFileName(f);
+                    return !name.StartsWith("[") && name.EndsWith(".xml"); 
+                });
                 if (setFile == null)
                     throw new Exception("Couldn't find set definition file in set file " + fileInfo);
 
@@ -408,6 +416,7 @@ namespace NRADB.OCTGN
 
                 XmlNode setNode = doc.SelectNodes("//set")[0];
                 setData.Name = setNode.Attributes["name"].Value;
+                setData.Version = setNode.Attributes["version"].Value;
 
                 var cardNodes = setNode.SelectNodes("cards/card");
 
@@ -436,6 +445,88 @@ namespace NRADB.OCTGN
                 tempDirectoryInfo.Delete(true);
                 ++progress;
             }
+
+            // load patchs
+            foreach (FileInfo fileInfo in patchFileInfos)
+            {
+                if (backgroundWorker.CancellationPending)
+                    return null;
+                backgroundWorker.ReportProgress(progress * 100 / totalFileCount, OctgnLoaderTask.LoadSet);
+                var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
+                Directory.CreateDirectory(tempFolderPath);
+                var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
+                var patchSetFiles = files.Where(f => 
+                {
+                    var pathItems = f.Split('\\', '/');
+                    return pathItems.Length > 1 && pathItems[pathItems.Length-2] == "xmls"
+                        && !pathItems[pathItems.Length - 1].StartsWith("[") && pathItems[pathItems.Length - 1].EndsWith(".xml"); 
+                }).ToArray();
+                if (patchSetFiles.Length == 0)
+                    continue;
+
+                foreach (var patchSetFile in patchSetFiles)
+                {
+                    var doc = new XmlDocument();
+                    try
+                    {
+                        doc.Load(patchSetFile);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Couldn't read patch set definition file " + patchSetFile, ex);
+                    }
+
+                    XmlNode setNode = doc.SelectNodes("//set")[0];
+                    var name = setNode.Attributes["name"].Value;
+
+                    OctgnSetData setData = result.Keys.FirstOrDefault(k => k.Name == name);
+                    if (setData == null) // set to patch not found
+                        continue;
+
+                    var version = setNode.Attributes["version"].Value;
+                    if (setData.Version != version) // the patch applies to another version
+                        continue;
+
+                    var setCards = result[setData];
+
+                    var cardNodes = setNode.SelectNodes("cards/card");
+
+                    var patchSetCards = (from XmlNode cardNode in cardNodes select LoadOctgnCard(cardNode)).OrderBy(c => c.Name).ToArray();
+
+                    // replace the cards by their patched value
+                    foreach (var card in patchSetCards)
+                    {
+                        int i = 0;
+                        while (i < setCards.Length && setCards[i].Id != card.Id)
+                            ++i;
+                        if (i < setCards.Length)
+                            setCards[i] = card;
+                    }
+
+                    // recompute the data
+                    if (setCards.Length > 0)
+                    {
+                        setData.MinCardId = int.MaxValue;
+                        setData.MaxCardId = int.MinValue;
+
+                        foreach (var card in setCards)
+                        {
+                            int setId, cardId;
+                            ExtractSetIdAndCardIdFromOctgnId(card.Id, out setId, out cardId);
+                            setData.Id = setId;
+                            if (cardId > setData.MaxCardId)
+                                setData.MaxCardId = cardId;
+                            if (cardId < setData.MinCardId)
+                                setData.MinCardId = cardId;
+                        }
+                    }
+                }
+
+                var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
+                tempDirectoryInfo.Delete(true);
+                ++progress;
+            }
+
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.LoadSet);
             return result;
         }
