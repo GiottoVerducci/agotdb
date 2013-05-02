@@ -31,8 +31,8 @@ namespace AGoTDB.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.eclKeyword = new Beyond.ExtendedControls.ExtendedCheckedListBox();
-            this.eclTrigger = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.eclVirtue = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.eclCE = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclExpansionSet = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.btnQuickFindNext = new System.Windows.Forms.Button();
             this.tbStrengthHigh = new System.Windows.Forms.TextBox();
@@ -53,7 +53,6 @@ namespace AGoTDB.Forms
             this.tbTraits = new System.Windows.Forms.TextBox();
             this.eclTraitCheck = new Beyond.ExtendedControls.ExtendedCheckBox();
             this.eclProvides = new Beyond.ExtendedControls.ExtendedCheckedListBox();
-            this.eclIcon = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclCardtype = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.picStrength = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -65,7 +64,6 @@ namespace AGoTDB.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.tbFind = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.eclVirtue = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclHouse = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.eclMecanism = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -96,7 +94,9 @@ namespace AGoTDB.Forms
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkNewVersionBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.eclCE = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.eclIcon = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.eclTrigger = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.eclKeyword = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -121,9 +121,11 @@ namespace AGoTDB.Forms
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.eclCE);
             this.splitContainer1.Panel1.Controls.Add(this.eclKeyword);
             this.splitContainer1.Panel1.Controls.Add(this.eclTrigger);
+            this.splitContainer1.Panel1.Controls.Add(this.eclIcon);
+            this.splitContainer1.Panel1.Controls.Add(this.eclVirtue);
+            this.splitContainer1.Panel1.Controls.Add(this.eclCE);
             this.splitContainer1.Panel1.Controls.Add(this.eclExpansionSet);
             this.splitContainer1.Panel1.Controls.Add(this.btnQuickFindNext);
             this.splitContainer1.Panel1.Controls.Add(this.tbStrengthHigh);
@@ -144,7 +146,6 @@ namespace AGoTDB.Forms
             this.splitContainer1.Panel1.Controls.Add(this.tbTraits);
             this.splitContainer1.Panel1.Controls.Add(this.eclTraitCheck);
             this.splitContainer1.Panel1.Controls.Add(this.eclProvides);
-            this.splitContainer1.Panel1.Controls.Add(this.eclIcon);
             this.splitContainer1.Panel1.Controls.Add(this.eclCardtype);
             this.splitContainer1.Panel1.Controls.Add(this.picStrength);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
@@ -156,7 +157,6 @@ namespace AGoTDB.Forms
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.tbFind);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
-            this.splitContainer1.Panel1.Controls.Add(this.eclVirtue);
             this.splitContainer1.Panel1.Controls.Add(this.eclHouse);
             this.splitContainer1.Panel1.Controls.Add(this.eclMecanism);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView);
@@ -167,31 +167,29 @@ namespace AGoTDB.Forms
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer1.Panel2.Controls.Add(this.splitCardText);
             // 
-            // eclKeyword
+            // eclVirtue
             // 
-            this.eclKeyword.CheckOnClick = true;
-            this.eclKeyword.Condensed = true;
-            this.eclKeyword.CondensedMode = true;
-            this.eclKeyword.FormattingEnabled = true;
-            resources.ApplyResources(this.eclKeyword, "eclKeyword");
-            this.eclKeyword.Name = "eclKeyword";
-            this.eclKeyword.RollDownDelay = 250;
-            this.eclKeyword.Summary = "Keywords";
-            this.eclKeyword.ThreeState = true;
-            this.eclKeyword.MouseLeave += new System.EventHandler(this.eclMouseLeave);
+            this.eclVirtue.CheckOnClick = true;
+            this.eclVirtue.Condensed = true;
+            this.eclVirtue.CondensedMode = true;
+            this.eclVirtue.FormattingEnabled = true;
+            resources.ApplyResources(this.eclVirtue, "eclVirtue");
+            this.eclVirtue.Name = "eclVirtue";
+            this.eclVirtue.RollDownDelay = 250;
+            this.eclVirtue.Summary = "Virtues";
+            this.eclVirtue.ThreeState = true;
             // 
-            // eclTrigger
+            // eclCE
             // 
-            this.eclTrigger.CheckOnClick = true;
-            this.eclTrigger.Condensed = true;
-            this.eclTrigger.CondensedMode = true;
-            this.eclTrigger.FormattingEnabled = true;
-            resources.ApplyResources(this.eclTrigger, "eclTrigger");
-            this.eclTrigger.Name = "eclTrigger";
-            this.eclTrigger.RollDownDelay = 250;
-            this.eclTrigger.Summary = "Trigger";
-            this.eclTrigger.ThreeState = true;
-            this.eclTrigger.MouseLeave += new System.EventHandler(this.eclMouseLeave);
+            this.eclCE.CheckOnClick = true;
+            this.eclCE.Condensed = true;
+            this.eclCE.CondensedMode = true;
+            this.eclCE.FormattingEnabled = true;
+            resources.ApplyResources(this.eclCE, "eclCE");
+            this.eclCE.Name = "eclCE";
+            this.eclCE.RollDownDelay = 250;
+            this.eclCE.Summary = "Virtues";
+            this.eclCE.ThreeState = true;
             // 
             // eclExpansionSet
             // 
@@ -341,19 +339,6 @@ namespace AGoTDB.Forms
             this.eclProvides.ThreeState = true;
             this.eclProvides.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
-            // eclIcon
-            // 
-            this.eclIcon.CheckOnClick = true;
-            this.eclIcon.Condensed = true;
-            this.eclIcon.CondensedMode = true;
-            this.eclIcon.FormattingEnabled = true;
-            resources.ApplyResources(this.eclIcon, "eclIcon");
-            this.eclIcon.Name = "eclIcon";
-            this.eclIcon.RollDownDelay = 250;
-            this.eclIcon.Summary = "Icons";
-            this.eclIcon.ThreeState = true;
-            this.eclIcon.MouseLeave += new System.EventHandler(this.eclMouseLeave);
-            // 
             // eclCardtype
             // 
             this.eclCardtype.CheckOnClick = true;
@@ -425,19 +410,6 @@ namespace AGoTDB.Forms
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            // 
-            // eclVirtue
-            // 
-            this.eclVirtue.CheckOnClick = true;
-            this.eclVirtue.Condensed = true;
-            this.eclVirtue.CondensedMode = true;
-            this.eclVirtue.FormattingEnabled = true;
-            resources.ApplyResources(this.eclVirtue, "eclVirtue");
-            this.eclVirtue.Name = "eclVirtue";
-            this.eclVirtue.RollDownDelay = 250;
-            this.eclVirtue.Summary = "Virtues";
-            this.eclVirtue.ThreeState = true;
-            this.eclVirtue.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // eclHouse
             // 
@@ -667,18 +639,41 @@ namespace AGoTDB.Forms
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // eclCE
+            // eclIcon
             // 
-            this.eclCE.CheckOnClick = true;
-            this.eclCE.Condensed = true;
-            this.eclCE.CondensedMode = true;
-            this.eclCE.FormattingEnabled = true;
-            resources.ApplyResources(this.eclCE, "eclCE");
-            this.eclCE.Name = "eclCE";
-            this.eclCE.RollDownDelay = 250;
-            this.eclCE.Summary = "Virtues";
-            this.eclCE.ThreeState = true;
-            this.eclCE.MouseLeave += new System.EventHandler(this.eclMouseLeave);
+            this.eclIcon.CheckOnClick = true;
+            this.eclIcon.Condensed = true;
+            this.eclIcon.CondensedMode = true;
+            this.eclIcon.FormattingEnabled = true;
+            resources.ApplyResources(this.eclIcon, "eclIcon");
+            this.eclIcon.Name = "eclIcon";
+            this.eclIcon.RollDownDelay = 250;
+            this.eclIcon.Summary = "Icons";
+            this.eclIcon.ThreeState = true;
+            // 
+            // eclTrigger
+            // 
+            this.eclTrigger.CheckOnClick = true;
+            this.eclTrigger.Condensed = true;
+            this.eclTrigger.CondensedMode = true;
+            this.eclTrigger.FormattingEnabled = true;
+            resources.ApplyResources(this.eclTrigger, "eclTrigger");
+            this.eclTrigger.Name = "eclTrigger";
+            this.eclTrigger.RollDownDelay = 250;
+            this.eclTrigger.Summary = "Trigger";
+            this.eclTrigger.ThreeState = true;
+            // 
+            // eclKeyword
+            // 
+            this.eclKeyword.CheckOnClick = true;
+            this.eclKeyword.Condensed = true;
+            this.eclKeyword.CondensedMode = true;
+            this.eclKeyword.FormattingEnabled = true;
+            resources.ApplyResources(this.eclKeyword, "eclKeyword");
+            this.eclKeyword.Name = "eclKeyword";
+            this.eclKeyword.RollDownDelay = 250;
+            this.eclKeyword.Summary = "Keywords";
+            this.eclKeyword.ThreeState = true;
             // 
             // MainForm
             // 
@@ -731,9 +726,7 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox tbTraits;
 		private Beyond.ExtendedControls.ExtendedCheckBox eclTraitCheck;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclProvides;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclKeyword;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclIcon;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclProvides;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclCardtype;
 		private System.Windows.Forms.PictureBox picStrength;
 		private System.Windows.Forms.Label label8;
@@ -743,11 +736,9 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox tbFind;
-		private System.Windows.Forms.Label label11;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclVirtue;
+        private System.Windows.Forms.Label label11;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclHouse;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclMecanism;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclTrigger;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclMecanism;
 		private Beyond.ExtendedControls.ExtendedCheckedListBox eclExpansionSet;
 		private System.Windows.Forms.Button btnReset;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -782,5 +773,9 @@ namespace AGoTDB.Forms
         private System.Windows.Forms.ToolStripMenuItem oCTGNToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadOCTGNDataToolStripMenuItem;
         private Beyond.ExtendedControls.ExtendedCheckedListBox eclCE;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclVirtue;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclKeyword;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclTrigger;
+        private Beyond.ExtendedControls.ExtendedCheckedListBox eclIcon;
 	}
 }
