@@ -3,6 +3,7 @@ Beta 0.745 (2 mai 2013)
  - Ajout des chapitres 1, 2 et 3 du Chant de la Mer (L’Étreinte de la Seiche, La Grande Flotte, Les Pirates de Lys)
  - Traduction de Challenge Enhancement par "Renforcement".
  - Correction de l'affichage des listes déroulantes
+ - Le filtre JCE permet de masquer les agendas qui sont uniquement CCG dans le deckbuilder.
 
 Beta 0.744 (21 avril 2013)
  - Ajout des "Challenge Enhancement".
