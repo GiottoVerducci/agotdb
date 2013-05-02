@@ -120,12 +120,18 @@ namespace AGoTDB.Forms
         /// </summary>
         private void UpdateAgendaComboBox()
         {
+            bool lcgSetsOnly = UserSettings.LcgSetsOnly;
+
             eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 ecl.Items.Clear();
                 var table = ApplicationSettings.DatabaseManager.GetAgendas();
                 foreach (DataRow row in table.Rows)
-                    ecl.Items.Add(new AgotCard(row));
+                {
+                    var agendaCard = new AgotCard(row);
+                    if (!lcgSetsOnly || agendaCard.IsLcg)
+                        ecl.Items.Add(agendaCard);
+                }
                 ecl.UpdateSize();
             });
         }
