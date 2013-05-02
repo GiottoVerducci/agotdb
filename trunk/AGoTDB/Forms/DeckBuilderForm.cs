@@ -295,7 +295,7 @@ namespace AGoTDB.Forms
             {
                 for (var i = 0; i < ecl.Items.Count; ++i)
                     if (ecl.GetItemCheckState(i) == CheckState.Checked)
-                        h += Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
+                        h += Int32.Parse(((DbFilter)ecl.Items[i]).ShortName, CultureInfo.InvariantCulture);
             });
             _currentDeck.Houses = h;
             UpdateTreeViews();
@@ -308,7 +308,7 @@ namespace AGoTDB.Forms
             {
                 for (var i = ecl.Items.Count - 1; i >= 0; --i) // houses are sorted by increasing value
                 {
-                    var hv = Int32.Parse(((DbFilter)ecl.Items[i]).Column, CultureInfo.InvariantCulture);
+                    var hv = Int32.Parse(((DbFilter)ecl.Items[i]).ShortName, CultureInfo.InvariantCulture);
                     if (h >= hv)
                     {
                         ecl.SetItemCheckState(i, CheckState.Checked);
@@ -347,6 +347,7 @@ namespace AGoTDB.Forms
                     var agenda = ecl.Items[i] as AgotCard;
                     ecl.SetItemCheckState(i, currentAgenda.Contains(agenda) ? CheckState.Checked : CheckState.Unchecked);
                 }
+                ecl.UpdateSize(); // we may have added some agenda that were missing
             });
         }
 
