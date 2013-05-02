@@ -78,13 +78,13 @@ namespace AGoTDB.Forms
             this.exportDeckToOCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importDeckFromOCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblHouse = new System.Windows.Forms.Label();
-            this.eclHouse = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.lblAgenda = new System.Windows.Forms.Label();
             this.tbAuthor = new System.Windows.Forms.TextBox();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.eclAgenda = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             this.rbJoust = new System.Windows.Forms.RadioButton();
             this.rbMelee = new System.Windows.Forms.RadioButton();
+            this.eclHouse = new Beyond.ExtendedControls.ExtendedCheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -117,12 +117,10 @@ namespace AGoTDB.Forms
             // 
             // splitContainer2.Panel1
             // 
-            resources.ApplyResources(this.splitContainer2.Panel1, "splitContainer2.Panel1");
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
             // 
             // splitContainer2.Panel2
             // 
-            resources.ApplyResources(this.splitContainer2.Panel2, "splitContainer2.Panel2");
             this.splitContainer2.Panel2.Controls.Add(this.tabControlGlobalInfo);
             // 
             // splitContainer1
@@ -132,35 +130,33 @@ namespace AGoTDB.Forms
             // 
             // splitContainer1.Panel1
             // 
-            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             this.splitContainer1.Panel1.Controls.Add(this.tabControlDecks);
             // 
             // splitContainer1.Panel2
             // 
-            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             this.splitContainer1.Panel2.Controls.Add(this.tabControlLocalInfo);
             // 
             // tabControlDecks
             // 
-            resources.ApplyResources(this.tabControlDecks, "tabControlDecks");
             this.tabControlDecks.Controls.Add(this.tabPageDeck);
             this.tabControlDecks.Controls.Add(this.tabPageSideboard);
+            resources.ApplyResources(this.tabControlDecks, "tabControlDecks");
             this.tabControlDecks.Name = "tabControlDecks";
             this.tabControlDecks.SelectedIndex = 0;
             // 
             // tabPageDeck
             // 
-            resources.ApplyResources(this.tabPageDeck, "tabPageDeck");
             this.tabPageDeck.Controls.Add(this.treeViewDeck);
+            resources.ApplyResources(this.tabPageDeck, "tabPageDeck");
             this.tabPageDeck.Name = "tabPageDeck";
             this.tabPageDeck.UseVisualStyleBackColor = true;
             // 
             // treeViewDeck
             // 
-            resources.ApplyResources(this.treeViewDeck, "treeViewDeck");
             this.treeViewDeck.Cards = null;
             this.treeViewDeck.ContextMenuStrip = this.contextMenuStripTreeView;
             this.treeViewDeck.Deck = null;
+            resources.ApplyResources(this.treeViewDeck, "treeViewDeck");
             this.treeViewDeck.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.treeViewDeck.HideSelection = false;
             this.treeViewDeck.Name = "treeViewDeck";
@@ -175,7 +171,6 @@ namespace AGoTDB.Forms
             // 
             // contextMenuStripTreeView
             // 
-            resources.ApplyResources(this.contextMenuStripTreeView, "contextMenuStripTreeView");
             this.contextMenuStripTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miIncreaseCount,
             this.miDecreaseCount,
@@ -184,56 +179,57 @@ namespace AGoTDB.Forms
             this.miRemoveCardList,
             this.miGenerateProxyPdf});
             this.contextMenuStripTreeView.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStripTreeView, "contextMenuStripTreeView");
             this.contextMenuStripTreeView.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStripTreeView_Opening);
             // 
             // miIncreaseCount
             // 
-            resources.ApplyResources(this.miIncreaseCount, "miIncreaseCount");
             this.miIncreaseCount.Name = "miIncreaseCount";
+            resources.ApplyResources(this.miIncreaseCount, "miIncreaseCount");
             this.miIncreaseCount.Click += new System.EventHandler(this.MiIncreaseCount_Click);
             // 
             // miDecreaseCount
             // 
-            resources.ApplyResources(this.miDecreaseCount, "miDecreaseCount");
             this.miDecreaseCount.Name = "miDecreaseCount";
+            resources.ApplyResources(this.miDecreaseCount, "miDecreaseCount");
             this.miDecreaseCount.Click += new System.EventHandler(this.MiDecreaseCount_Click);
             // 
             // miExportDeckToClipboard
             // 
-            resources.ApplyResources(this.miExportDeckToClipboard, "miExportDeckToClipboard");
             this.miExportDeckToClipboard.Name = "miExportDeckToClipboard";
+            resources.ApplyResources(this.miExportDeckToClipboard, "miExportDeckToClipboard");
             this.miExportDeckToClipboard.Click += new System.EventHandler(this.ExportDeckToClipboardToolStripMenuItem_Click);
             // 
             // miAddCardList
             // 
-            resources.ApplyResources(this.miAddCardList, "miAddCardList");
             this.miAddCardList.Name = "miAddCardList";
+            resources.ApplyResources(this.miAddCardList, "miAddCardList");
             this.miAddCardList.Click += new System.EventHandler(this.MiAddCardList_Click);
             // 
             // miRemoveCardList
             // 
-            resources.ApplyResources(this.miRemoveCardList, "miRemoveCardList");
             this.miRemoveCardList.Name = "miRemoveCardList";
+            resources.ApplyResources(this.miRemoveCardList, "miRemoveCardList");
             // 
             // miGenerateProxyPdf
             // 
-            resources.ApplyResources(this.miGenerateProxyPdf, "miGenerateProxyPdf");
             this.miGenerateProxyPdf.Name = "miGenerateProxyPdf";
+            resources.ApplyResources(this.miGenerateProxyPdf, "miGenerateProxyPdf");
             this.miGenerateProxyPdf.Click += new System.EventHandler(this.MiGenerateProxyPdf_Click);
             // 
             // tabPageSideboard
             // 
-            resources.ApplyResources(this.tabPageSideboard, "tabPageSideboard");
             this.tabPageSideboard.Controls.Add(this.treeViewSide);
+            resources.ApplyResources(this.tabPageSideboard, "tabPageSideboard");
             this.tabPageSideboard.Name = "tabPageSideboard";
             this.tabPageSideboard.UseVisualStyleBackColor = true;
             // 
             // treeViewSide
             // 
-            resources.ApplyResources(this.treeViewSide, "treeViewSide");
             this.treeViewSide.Cards = null;
             this.treeViewSide.ContextMenuStrip = this.contextMenuStripTreeView;
             this.treeViewSide.Deck = null;
+            resources.ApplyResources(this.treeViewSide, "treeViewSide");
             this.treeViewSide.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.treeViewSide.HideSelection = false;
             this.treeViewSide.Name = "treeViewSide";
@@ -245,15 +241,15 @@ namespace AGoTDB.Forms
             // 
             // tabControlLocalInfo
             // 
-            resources.ApplyResources(this.tabControlLocalInfo, "tabControlLocalInfo");
             this.tabControlLocalInfo.Controls.Add(this.tabPageCardtext);
+            resources.ApplyResources(this.tabControlLocalInfo, "tabControlLocalInfo");
             this.tabControlLocalInfo.Name = "tabControlLocalInfo";
             this.tabControlLocalInfo.SelectedIndex = 0;
             // 
             // tabPageCardtext
             // 
-            resources.ApplyResources(this.tabPageCardtext, "tabPageCardtext");
             this.tabPageCardtext.Controls.Add(this.splitCardText);
+            resources.ApplyResources(this.tabPageCardtext, "tabPageCardtext");
             this.tabPageCardtext.Name = "tabPageCardtext";
             this.tabPageCardtext.UseVisualStyleBackColor = true;
             // 
@@ -264,24 +260,22 @@ namespace AGoTDB.Forms
             // 
             // splitCardText.Panel1
             // 
-            resources.ApplyResources(this.splitCardText.Panel1, "splitCardText.Panel1");
             this.splitCardText.Panel1.Controls.Add(this.rtbCardText);
             // 
             // splitCardText.Panel2
             // 
-            resources.ApplyResources(this.splitCardText.Panel2, "splitCardText.Panel2");
             this.splitCardText.Panel2.Controls.Add(this.cardPreviewControl);
             // 
             // rtbCardText
             // 
-            resources.ApplyResources(this.rtbCardText, "rtbCardText");
             this.rtbCardText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.rtbCardText, "rtbCardText");
             this.rtbCardText.Name = "rtbCardText";
             // 
             // cardPreviewControl
             // 
-            resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
             this.cardPreviewControl.CardUniversalId = -1;
+            resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
             this.cardPreviewControl.Name = "cardPreviewControl";
             this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.CardPreviewControl1_MouseCaptureChanged);
             this.cardPreviewControl.MouseEnter += new System.EventHandler(this.CardPreviewControl1_MouseEnter);
@@ -289,52 +283,52 @@ namespace AGoTDB.Forms
             // 
             // tabControlGlobalInfo
             // 
-            resources.ApplyResources(this.tabControlGlobalInfo, "tabControlGlobalInfo");
             this.tabControlGlobalInfo.Controls.Add(this.tabPageDescription);
             this.tabControlGlobalInfo.Controls.Add(this.tabPageHistory);
             this.tabControlGlobalInfo.Controls.Add(this.tabPageStats);
+            resources.ApplyResources(this.tabControlGlobalInfo, "tabControlGlobalInfo");
             this.tabControlGlobalInfo.Name = "tabControlGlobalInfo";
             this.tabControlGlobalInfo.SelectedIndex = 0;
             // 
             // tabPageDescription
             // 
-            resources.ApplyResources(this.tabPageDescription, "tabPageDescription");
             this.tabPageDescription.Controls.Add(this.rtbDescription);
+            resources.ApplyResources(this.tabPageDescription, "tabPageDescription");
             this.tabPageDescription.Name = "tabPageDescription";
             this.tabPageDescription.UseVisualStyleBackColor = true;
             // 
             // rtbDescription
             // 
-            resources.ApplyResources(this.rtbDescription, "rtbDescription");
             this.rtbDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.rtbDescription, "rtbDescription");
             this.rtbDescription.Name = "rtbDescription";
             // 
             // tabPageHistory
             // 
-            resources.ApplyResources(this.tabPageHistory, "tabPageHistory");
             this.tabPageHistory.Controls.Add(this.treeViewHistory);
+            resources.ApplyResources(this.tabPageHistory, "tabPageHistory");
             this.tabPageHistory.Name = "tabPageHistory";
             this.tabPageHistory.UseVisualStyleBackColor = true;
             // 
             // treeViewHistory
             // 
-            resources.ApplyResources(this.treeViewHistory, "treeViewHistory");
             this.treeViewHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.treeViewHistory, "treeViewHistory");
             this.treeViewHistory.HideSelection = false;
             this.treeViewHistory.Name = "treeViewHistory";
             this.treeViewHistory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewHistory_AfterSelect);
             // 
             // tabPageStats
             // 
-            resources.ApplyResources(this.tabPageStats, "tabPageStats");
             this.tabPageStats.Controls.Add(this.rtbStatistics);
+            resources.ApplyResources(this.tabPageStats, "tabPageStats");
             this.tabPageStats.Name = "tabPageStats";
             this.tabPageStats.UseVisualStyleBackColor = true;
             // 
             // rtbStatistics
             // 
-            resources.ApplyResources(this.rtbStatistics, "rtbStatistics");
             this.rtbStatistics.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.rtbStatistics, "rtbStatistics");
             this.rtbStatistics.Name = "rtbStatistics";
             // 
             // lblDeckName
@@ -349,16 +343,15 @@ namespace AGoTDB.Forms
             // 
             // menuStripMain
             // 
-            resources.ApplyResources(this.menuStripMain, "menuStripMain");
             this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.sdsToolStripMenuItem});
+            resources.ApplyResources(this.menuStripMain, "menuStripMain");
             this.menuStripMain.Name = "menuStripMain";
             // 
             // fileToolStripMenuItem
             // 
-            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.loadDeckToolStripMenuItem,
@@ -368,120 +361,108 @@ namespace AGoTDB.Forms
             this.printDeckToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // newToolStripMenuItem
             // 
-            resources.ApplyResources(this.newToolStripMenuItem, "newToolStripMenuItem");
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            resources.ApplyResources(this.newToolStripMenuItem, "newToolStripMenuItem");
             this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
             // 
             // loadDeckToolStripMenuItem
             // 
-            resources.ApplyResources(this.loadDeckToolStripMenuItem, "loadDeckToolStripMenuItem");
             this.loadDeckToolStripMenuItem.Name = "loadDeckToolStripMenuItem";
+            resources.ApplyResources(this.loadDeckToolStripMenuItem, "loadDeckToolStripMenuItem");
             this.loadDeckToolStripMenuItem.Click += new System.EventHandler(this.LoadDeckToolStripMenuItem_Click);
             // 
             // saveDeckToolStripMenuItem
             // 
-            resources.ApplyResources(this.saveDeckToolStripMenuItem, "saveDeckToolStripMenuItem");
             this.saveDeckToolStripMenuItem.Name = "saveDeckToolStripMenuItem";
+            resources.ApplyResources(this.saveDeckToolStripMenuItem, "saveDeckToolStripMenuItem");
             this.saveDeckToolStripMenuItem.Click += new System.EventHandler(this.SaveDeckToolStripMenuItem_Click);
             // 
             // saveDeckAstoolStripMenuItem
             // 
-            resources.ApplyResources(this.saveDeckAstoolStripMenuItem, "saveDeckAstoolStripMenuItem");
             this.saveDeckAstoolStripMenuItem.Name = "saveDeckAstoolStripMenuItem";
+            resources.ApplyResources(this.saveDeckAstoolStripMenuItem, "saveDeckAstoolStripMenuItem");
             this.saveDeckAstoolStripMenuItem.Click += new System.EventHandler(this.SaveDeckAsToolStripMenuItem_Click);
             // 
             // newVersionToolStripMenuItem
             // 
-            resources.ApplyResources(this.newVersionToolStripMenuItem, "newVersionToolStripMenuItem");
             this.newVersionToolStripMenuItem.Name = "newVersionToolStripMenuItem";
+            resources.ApplyResources(this.newVersionToolStripMenuItem, "newVersionToolStripMenuItem");
             this.newVersionToolStripMenuItem.Click += new System.EventHandler(this.NewVersionToolStripMenuItem_Click);
             // 
             // printDeckToolStripMenuItem
             // 
-            resources.ApplyResources(this.printDeckToolStripMenuItem, "printDeckToolStripMenuItem");
             this.printDeckToolStripMenuItem.Name = "printDeckToolStripMenuItem";
+            resources.ApplyResources(this.printDeckToolStripMenuItem, "printDeckToolStripMenuItem");
             this.printDeckToolStripMenuItem.Click += new System.EventHandler(this.PrintDeckToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
-            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
-            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.drawSimulatorToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
             // 
             // drawSimulatorToolStripMenuItem
             // 
-            resources.ApplyResources(this.drawSimulatorToolStripMenuItem, "drawSimulatorToolStripMenuItem");
             this.drawSimulatorToolStripMenuItem.Name = "drawSimulatorToolStripMenuItem";
+            resources.ApplyResources(this.drawSimulatorToolStripMenuItem, "drawSimulatorToolStripMenuItem");
             this.drawSimulatorToolStripMenuItem.Click += new System.EventHandler(this.DrawSimulatorToolStripMenuItem_Click);
             // 
             // sdsToolStripMenuItem
             // 
-            resources.ApplyResources(this.sdsToolStripMenuItem, "sdsToolStripMenuItem");
             this.sdsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportToClipboardToolStripMenuItem,
             this.exportDeckToClipboardSortedByToolStripMenuItem,
             this.exportDeckToOCTGNToolStripMenuItem,
             this.importDeckFromOCTGNToolStripMenuItem});
             this.sdsToolStripMenuItem.Name = "sdsToolStripMenuItem";
+            resources.ApplyResources(this.sdsToolStripMenuItem, "sdsToolStripMenuItem");
             // 
             // exportToClipboardToolStripMenuItem
             // 
-            resources.ApplyResources(this.exportToClipboardToolStripMenuItem, "exportToClipboardToolStripMenuItem");
             this.exportToClipboardToolStripMenuItem.Name = "exportToClipboardToolStripMenuItem";
+            resources.ApplyResources(this.exportToClipboardToolStripMenuItem, "exportToClipboardToolStripMenuItem");
             this.exportToClipboardToolStripMenuItem.Click += new System.EventHandler(this.ExportToClipboardToolStripMenuItem_Click);
             // 
             // exportDeckToClipboardSortedByToolStripMenuItem
             // 
-            resources.ApplyResources(this.exportDeckToClipboardSortedByToolStripMenuItem, "exportDeckToClipboardSortedByToolStripMenuItem");
             this.exportDeckToClipboardSortedByToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportDeckToClipboardSortedBySetToolStripMenuItem});
             this.exportDeckToClipboardSortedByToolStripMenuItem.Name = "exportDeckToClipboardSortedByToolStripMenuItem";
+            resources.ApplyResources(this.exportDeckToClipboardSortedByToolStripMenuItem, "exportDeckToClipboardSortedByToolStripMenuItem");
             // 
             // exportDeckToClipboardSortedBySetToolStripMenuItem
             // 
-            resources.ApplyResources(this.exportDeckToClipboardSortedBySetToolStripMenuItem, "exportDeckToClipboardSortedBySetToolStripMenuItem");
             this.exportDeckToClipboardSortedBySetToolStripMenuItem.Name = "exportDeckToClipboardSortedBySetToolStripMenuItem";
+            resources.ApplyResources(this.exportDeckToClipboardSortedBySetToolStripMenuItem, "exportDeckToClipboardSortedBySetToolStripMenuItem");
             this.exportDeckToClipboardSortedBySetToolStripMenuItem.Click += new System.EventHandler(this.ExportDeckToClipboardSortedBySetToolStripMenuItem_Click);
             // 
             // exportDeckToOCTGNToolStripMenuItem
             // 
-            resources.ApplyResources(this.exportDeckToOCTGNToolStripMenuItem, "exportDeckToOCTGNToolStripMenuItem");
             this.exportDeckToOCTGNToolStripMenuItem.Name = "exportDeckToOCTGNToolStripMenuItem";
+            resources.ApplyResources(this.exportDeckToOCTGNToolStripMenuItem, "exportDeckToOCTGNToolStripMenuItem");
             this.exportDeckToOCTGNToolStripMenuItem.Click += new System.EventHandler(this.ExportDeckToOctgnToolStripMenuItem_Click);
             // 
             // importDeckFromOCTGNToolStripMenuItem
             // 
-            resources.ApplyResources(this.importDeckFromOCTGNToolStripMenuItem, "importDeckFromOCTGNToolStripMenuItem");
             this.importDeckFromOCTGNToolStripMenuItem.Name = "importDeckFromOCTGNToolStripMenuItem";
+            resources.ApplyResources(this.importDeckFromOCTGNToolStripMenuItem, "importDeckFromOCTGNToolStripMenuItem");
             this.importDeckFromOCTGNToolStripMenuItem.Click += new System.EventHandler(this.ImportDeckFromOctgnToolStripMenuItem_Click);
             // 
             // lblHouse
             // 
             resources.ApplyResources(this.lblHouse, "lblHouse");
             this.lblHouse.Name = "lblHouse";
-            // 
-            // eclHouse
-            // 
-            resources.ApplyResources(this.eclHouse, "eclHouse");
-            this.eclHouse.CheckOnClick = true;
-            this.eclHouse.Condensed = true;
-            this.eclHouse.CondensedMode = true;
-            this.eclHouse.FormattingEnabled = true;
-            this.eclHouse.Name = "eclHouse";
-            this.eclHouse.RollDownDelay = 250;
-            this.eclHouse.Summary = "House";
-            this.eclHouse.ThreeState = false;
-            this.eclHouse.SelectedValueChanged += new System.EventHandler(this.EclHouse_SelectedValueChanged);
             // 
             // lblAgenda
             // 
@@ -526,15 +507,27 @@ namespace AGoTDB.Forms
             this.rbMelee.Name = "rbMelee";
             this.rbMelee.UseVisualStyleBackColor = true;
             // 
+            // eclHouse
+            // 
+            resources.ApplyResources(this.eclHouse, "eclHouse");
+            this.eclHouse.CheckOnClick = true;
+            this.eclHouse.Condensed = true;
+            this.eclHouse.CondensedMode = true;
+            this.eclHouse.FormattingEnabled = true;
+            this.eclHouse.Name = "eclHouse";
+            this.eclHouse.RollDownDelay = 250;
+            this.eclHouse.Summary = "House";
+            this.eclHouse.ThreeState = false;
+            // 
             // DeckBuilderForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.eclHouse);
             this.Controls.Add(this.rbMelee);
             this.Controls.Add(this.rbJoust);
             this.Controls.Add(this.tbAuthor);
             this.Controls.Add(this.lblAuthor);
-            this.Controls.Add(this.eclHouse);
             this.Controls.Add(this.eclAgenda);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.lblAgenda);
@@ -592,8 +585,7 @@ namespace AGoTDB.Forms
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem drawSimulatorToolStripMenuItem;
-		private System.Windows.Forms.Label lblHouse;
-		private Beyond.ExtendedControls.ExtendedCheckedListBox eclHouse;
+        private System.Windows.Forms.Label lblHouse;
     private System.Windows.Forms.Label lblAgenda;
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private System.Windows.Forms.SplitContainer splitContainer1;
@@ -632,5 +624,6 @@ namespace AGoTDB.Forms
     private System.Windows.Forms.ToolStripMenuItem exportDeckToClipboardSortedBySetToolStripMenuItem;
     private System.Windows.Forms.RadioButton rbJoust;
     private System.Windows.Forms.RadioButton rbMelee;
+    private Beyond.ExtendedControls.ExtendedCheckedListBox eclHouse;
 	}
 }
