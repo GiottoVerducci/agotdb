@@ -20,6 +20,7 @@
 // © Le Trône de Fer JCE 2008 Edge Entertainment
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using AGoTDB.BusinessObjects;
@@ -51,6 +52,8 @@ namespace AGoTDB.DataAccess
         public string TableNamePattern { get { return "TablePattern"; } }
         public override TextFormat ErrataFormat { get { return AgotCard.ErrataFormat; } }
 
+        private HashSet<Int32> _universalIds = new HashSet<int>();
+
         protected override void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows)
         {
             Int32 universalId;
@@ -60,6 +63,10 @@ namespace AGoTDB.DataAccess
             FormattedValue<XInt> cost, strength, income, initiative, claim, influence;
 
             universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
+
+            if(_universalIds.Contains(universalId))
+                throw new Exception("Universal id already used: " + universalId);
+            _universalIds.Add(universalId);
 
             var errataBoundFormat = new BoundFormat('{', '}', AgotCard.ErrataFormat);
             var traitsBoundFormat = new BoundFormat('~', AgotCard.TraitsFormat);
