@@ -148,6 +148,36 @@ namespace NRADB.OCTGN
             }
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.ImportSet); // match set
 
+            var missingSets = octgnSets.Keys.Where(setData =>
+            {
+                var setInfo = setInformations.FirstOrDefault(si => si.Key == setData.Id);
+                return setInfo.Value == null || (setInfo.Value.ByChapter && setInfo.Value.ChaptersNames.All(name => !string.Equals(name, setData.Name, StringComparison.InvariantCultureIgnoreCase)));
+            }).OrderBy(setData => setData.Id).ThenBy(setData => setData.MinCardId).ToArray();
+
+            if (missingSets.Length > 0)
+            {
+                var setUpdateOperations = missingSets
+                    .Select(missingSet =>
+                    {
+                        var setInfo = setInformations.FirstOrDefault(si => si.Key == missingSet.Id);
+                        if (setInfo.Value == null)
+                            return new Action<DataRowCollection>(rows => rows.Add(missingSet.Id - 1, missingSet.Name, missingSet.Id, true, true, missingSet.Name, missingSet.Name));
+                        return new Action<DataRowCollection>(rows =>
+                        {
+                            foreach (DataRow dataRow in rows)
+                            {
+                                if ((Int32)dataRow["Id"] == -1 || (byte)dataRow["SetId"] != missingSet.Id)
+                                    continue;
+                                var chapterNames = dataRow["ChaptersNames"].ToString().Split(',').Select(n => n.Trim()).ToList();
+                                chapterNames.Add(missingSet.Name);
+                                dataRow["ChaptersNames"] = string.Join(", ", chapterNames);
+                            }
+                        });
+                    })
+                    .ToArray();
+                ApplicationSettings.DatabaseManager.UpdateSets(setUpdateOperations);
+            }
+
             var allCards = new List<KeyValuePair<OctgnSetData, OctgnCard>>();
             foreach (var kvp in octgnSets)
                 allCards.AddRange(kvp.Value.Select((card => new KeyValuePair<OctgnSetData, OctgnCard>(kvp.Key, card))));
@@ -350,28 +380,18 @@ namespace NRADB.OCTGN
         {
             var result = new Dictionary<OctgnSetData, OctgnCard[]>();
 
-            var directoryInfo = new DirectoryInfo(path);
-            var fileInfos = directoryInfo.GetFiles("*.o8s", SearchOption.TopDirectoryOnly);
-            var patchFileInfos = directoryInfo.GetFiles("*.o8p", SearchOption.TopDirectoryOnly);
-
-            var totalFileCount = fileInfos.Length + patchFileInfos.Length;
-
             var progress = 0;
-            foreach (FileInfo fileInfo in fileInfos)
+            var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
+            Directory.CreateDirectory(tempFolderPath);
+            var files = ZipHelper.UnZipFile(path, tempFolderPath, filePattern: "*set.xml");
+
+            var totalFileCount = files.Count;
+
+            foreach (var setFile in files)//FileInfo fileInfo in fileInfos)
             {
                 if (backgroundWorker.CancellationPending)
                     return null;
                 backgroundWorker.ReportProgress(progress * 100 / totalFileCount, OctgnLoaderTask.LoadSet);
-                var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
-                Directory.CreateDirectory(tempFolderPath);
-                var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
-                var setFile = files.FirstOrDefault(f => 
-                {
-                    var name = Path.GetFileName(f);
-                    return !name.StartsWith("[") && name.EndsWith(".xml"); 
-                });
-                if (setFile == null)
-                    throw new Exception("Couldn't find set definition file in set file " + fileInfo);
 
                 var doc = new XmlDocument();
                 try
@@ -387,6 +407,10 @@ namespace NRADB.OCTGN
 
                 XmlNode setNode = doc.SelectNodes("//set")[0];
                 setData.Name = setNode.Attributes["name"].Value;
+
+                if (setData.Name == "Markers")
+                    continue;
+
                 setData.Version = setNode.Attributes["version"].Value;
 
                 var cardNodes = setNode.SelectNodes("cards/card");
@@ -412,91 +436,10 @@ namespace NRADB.OCTGN
                     result.Add(setData, setCards);
                 }
 
-                var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
-                tempDirectoryInfo.Delete(true);
                 ++progress;
             }
-
-            // load patchs
-            foreach (FileInfo fileInfo in patchFileInfos)
-            {
-                if (backgroundWorker.CancellationPending)
-                    return null;
-                backgroundWorker.ReportProgress(progress * 100 / totalFileCount, OctgnLoaderTask.LoadSet);
-                var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
-                Directory.CreateDirectory(tempFolderPath);
-                var files = ZipHelper.UnZipFile(fileInfo.FullName, tempFolderPath, filePattern: "*.xml");
-                var patchSetFiles = files.Where(f => 
-                {
-                    var pathItems = f.Split('\\', '/');
-                    return pathItems.Length > 1 && pathItems[pathItems.Length-2] == "xmls"
-                        && !pathItems[pathItems.Length - 1].StartsWith("[") && pathItems[pathItems.Length - 1].EndsWith(".xml"); 
-                }).ToArray();
-                if (patchSetFiles.Length == 0)
-                    continue;
-
-                foreach (var patchSetFile in patchSetFiles)
-                {
-                    var doc = new XmlDocument();
-                    try
-                    {
-                        doc.Load(patchSetFile);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("Couldn't read patch set definition file " + patchSetFile, ex);
-                    }
-
-                    XmlNode setNode = doc.SelectNodes("//set")[0];
-                    var name = setNode.Attributes["name"].Value;
-
-                    OctgnSetData setData = result.Keys.FirstOrDefault(k => k.Name == name);
-                    if (setData == null) // set to patch not found
-                        continue;
-
-                    var version = setNode.Attributes["version"].Value;
-                    if (setData.Version != version) // the patch applies to another version
-                        continue;
-
-                    var setCards = result[setData];
-
-                    var cardNodes = setNode.SelectNodes("cards/card");
-
-                    var patchSetCards = (from XmlNode cardNode in cardNodes select LoadOctgnCard(cardNode)).OrderBy(c => c.Name).ToArray();
-
-                    // replace the cards by their patched value
-                    foreach (var card in patchSetCards)
-                    {
-                        int i = 0;
-                        while (i < setCards.Length && setCards[i].Id != card.Id)
-                            ++i;
-                        if (i < setCards.Length)
-                            setCards[i] = card;
-                    }
-
-                    // recompute the data
-                    if (setCards.Length > 0)
-                    {
-                        setData.MinCardId = int.MaxValue;
-                        setData.MaxCardId = int.MinValue;
-
-                        foreach (var card in setCards)
-                        {
-                            int setId, cardId;
-                            ExtractSetIdAndCardIdFromOctgnId(card.Id, out setId, out cardId);
-                            setData.Id = setId;
-                            if (cardId > setData.MaxCardId)
-                                setData.MaxCardId = cardId;
-                            if (cardId < setData.MinCardId)
-                                setData.MinCardId = cardId;
-                        }
-                    }
-                }
-
-                var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
-                tempDirectoryInfo.Delete(true);
-                ++progress;
-            }
+            var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
+            tempDirectoryInfo.Delete(true);
 
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.LoadSet);
             return result;

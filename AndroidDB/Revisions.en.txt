@@ -1,8 +1,16 @@
+Beta 0.6 (Mai, 07 2013)
+ - Added Genesis - Humanity's Shadow
+ - Added support for the new OCTGN set format.
+ - OCTGN sets can now be loaded from the internet or from a local file. The default url path is defined in the xml configuration file, key "OctgnSetsDownloadUrl".
+ - Missing sets are now automatically added (though the Cycle name can't be guessed and will require manual update)
+ - Updated icons (there were still some remaining AGoT icons).
+ - Fixed "Upgrade" side (Corp, not Runner)
+
 Beta 0.5 (Mai, 07 2013)
-	- Switched back to .NET 4.0 for WinXP compatibility.
-	- Added MU, total MU and available MU to program description in deckbuilder tree.
-	- Added influence filter.
-	- "Unique" now appears in the keyword list.
+ - Switched back to .NET 4.0 for WinXP compatibility.
+ - Added MU, total MU and available MU to program description in deckbuilder tree.
+ - Added influence filter.
+ - "Unique" now appears in the keyword list.
 
 Beta 0.4 (April, 30 2013)
  - Added support for OCTGN patch files (*.o8p)

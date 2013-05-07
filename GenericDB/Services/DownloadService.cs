@@ -66,11 +66,44 @@ namespace GenericDB.Services
             }
         }
 
+        public static bool GetDownloadProgress(string filename, out long downloadedBytes, out long totalBytes, out int downloadProgress)
+        {
+            lock (Singleton)
+            {
+                if (!Singleton._downloadedFiles.ContainsKey(filename))
+                {
+                    downloadedBytes = -1;
+                    totalBytes = -1;
+                    downloadProgress = -1;
+                    return false;
+                }
+
+                var info = Singleton._downloadedFiles[filename];
+                downloadedBytes = info.BytesReceived;
+                totalBytes = info.TotalBytesToReceive;
+                downloadProgress = info.DownloadProgress;
+                return true;
+            }
+        }
+
+        public static void CancelDownload(string filename)
+        {
+            lock (Singleton)
+            {
+                if (!Singleton._downloadedFiles.ContainsKey(filename))
+                    return;
+                Singleton._downloadedFiles[filename].BackgroundWorker.CancelAsync();
+            }
+        }
+
         private void StartDownload(string url, string filename)
         {
-            var di = Singleton._downloadedFiles.ContainsKey(filename)
-                ? Singleton._downloadedFiles[filename]
-                : new DownloadInfo();
+            DownloadInfo di;
+            if (!Singleton._downloadedFiles.TryGetValue(filename, out di))
+            {
+                di = new DownloadInfo();
+                Singleton._downloadedFiles[filename] = di;
+            }
 
             di.Filename = filename;
             di.Url = url;
@@ -92,6 +125,12 @@ namespace GenericDB.Services
             var di = (DownloadInfo)e.Argument;
             using (var wc = new WebClient())
             {
+                wc.DownloadProgressChanged += delegate(object o, DownloadProgressChangedEventArgs args)
+                {
+                    di.BytesReceived = args.BytesReceived;
+                    di.TotalBytesToReceive = args.TotalBytesToReceive;
+                    di.DownloadProgress = args.ProgressPercentage;
+                };
                 wc.DownloadFileCompleted += delegate(object s, AsyncCompletedEventArgs ee)
                     {
                         di.DownloadStatus = ee.Error != null ? DownloadStatus.Fail : DownloadStatus.Success;
@@ -119,6 +158,9 @@ namespace GenericDB.Services
     internal class DownloadInfo
     {
         public DownloadStatus DownloadStatus { get; set; }
+        public long BytesReceived { get; set; }
+        public long TotalBytesToReceive { get; set; }
+        public int DownloadProgress { get; set; }
         public BackgroundWorker BackgroundWorker { get; set; }
         public string Url { get; set; }
         public string Filename { get; set; }

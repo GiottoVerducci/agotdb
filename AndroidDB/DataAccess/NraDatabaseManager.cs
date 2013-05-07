@@ -15,9 +15,9 @@
 // You can contact me at v.ripoll@gmail.com
 // © Fantasy Flight Games 2012
 
-
 using System;
 using System.Data;
+using System.Data.OleDb;
 using System.Globalization;
 using NRADB.BusinessObjects;
 using GenericDB.BusinessObjects;
@@ -47,6 +47,31 @@ namespace NRADB.DataAccess
         public string TableNameIceType { get { return "TableIceType"; } }
         public override TextFormat ErrataFormat { get { return NraCard.ErrataFormat; } }
 
+        public override bool ConvertDatabase()
+        {
+            string query = String.Format("DELETE FROM [{0}]", TableNameSet);
+            GetResultFromRequest(query, _dbConnection, null);
+
+            query = String.Format("SELECT * FROM [{0}]", TableNameSet);
+            DataTable humanData = GetResultFromRequest(query, _hdbConnection, null);
+
+            using (var dbDataAdapter = new OleDbDataAdapter(query, _dbConnection))
+            {
+                new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
+
+                var dataSet = new DataSet();
+                dataSet.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
+                dbDataAdapter.Fill(dataSet);
+
+                foreach (DataRow row in humanData.Rows)
+                {
+                    dataSet.Tables[0].Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]);
+                }
+                dbDataAdapter.Update(dataSet);
+            }
+            return base.ConvertDatabase();
+        }
+
         protected override void ConvertCard(DataRow sourceRow, DataRowCollection destinationRows)
         {
             Int32 universalId;
@@ -54,7 +79,7 @@ namespace NRADB.DataAccess
             FormattedValue<string> name, subtitle, keywords, text, set, originalName, flavor, instructions;
             FormattedValue<int> type, faction, side, iceType;
             FormattedValue<bool?> unique, banned, restricted;
-            FormattedValue<XInt> cost, influence, requirement, mu, deckSize, stat, strength, agendaPoints, 
+            FormattedValue<XInt> cost, influence, requirement, mu, deckSize, stat, strength, agendaPoints,
                 link, trashCost, recurringCredits, creditsIncome, providesMu;
 
             universalId = Int32.Parse(GetRowValue(sourceRow, "UniversalId"), CultureInfo.InvariantCulture);
@@ -75,7 +100,7 @@ namespace NRADB.DataAccess
             type = ExtractFormattedIntValueFromRow(sourceRow, "Type", TableNameType);
             faction = ExtractFormattedIntValueFromRow(sourceRow, "Faction", TableNameFaction);
             side = ExtractFormattedIntValueFromRow(sourceRow, "Side", TableNameSide);
-            iceType = ExtractFormattedIntValueFromRow(sourceRow, "IceType", TableNameIceType, new [] { "Key", "Icebreaker" });
+            iceType = ExtractFormattedIntValueFromRow(sourceRow, "IceType", TableNameIceType, new[] { "Key", "Icebreaker" });
 
             unique = ExtractFormattedBoolValueFromRow(sourceRow, "Unique", errataBoundFormat);
             banned = ExtractFormattedBoolValueFromRow(sourceRow, "Banned", errataBoundFormat);
@@ -208,9 +233,23 @@ namespace NRADB.DataAccess
             return table.Rows.Count > 0;
         }
 
-        public void ResetAndImportSets(Func<DataRowCollection, OperationResult> importAction)
+        public void UpdateSets(Action<DataRowCollection>[] updateActions)
         {
-            ResetAndImportTable(TableNameSet, importAction, "WHERE Id > -1");
+            var query = String.Format("SELECT * FROM [{0}]", TableNameSet);
+
+            using (var dbDataAdapter = new OleDbDataAdapter(query, _hdbConnection))
+            {
+                new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
+
+                var dataSet = new DataSet();
+                dataSet.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
+                dbDataAdapter.Fill(dataSet);
+
+                foreach (var action in updateActions)
+                    action(dataSet.Tables[0].Rows);
+
+                dbDataAdapter.Update(dataSet);
+            }
         }
     }
 }
