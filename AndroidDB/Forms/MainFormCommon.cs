@@ -548,6 +548,11 @@ namespace NRADB.Forms
             CreateNewWindowWithResults();
         }
 
+        private void resizeColumnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
+        }
+
         private void CreateNewWindowWithResults()
         {
             var form = new MainForm();
