@@ -1,4 +1,4 @@
-Beta 0.6 (Mai, 07 2013)
+Beta 0.6 (May, 07 2013)
  - Added Genesis - Humanity's Shadow
  - Added support for the new OCTGN set format.
  - OCTGN sets can now be loaded from the internet or from a local file. The default url path is defined in the xml configuration file, key "OctgnSetsDownloadUrl".
@@ -6,8 +6,9 @@ Beta 0.6 (Mai, 07 2013)
  - Updated icons (there were still some remaining AGoT icons).
  - Fixed "Upgrade" side (Corp, not Runner)
  - Added popup option: "Resize columns" that restores the size of the columns to their default value.
+ - Restored Windows XP support
 
-Beta 0.5 (Mai, 07 2013)
+Beta 0.5 (May, 07 2013)
  - Switched back to .NET 4.0 for WinXP compatibility.
  - Added MU, total MU and available MU to program description in deckbuilder tree.
  - Added influence filter.
