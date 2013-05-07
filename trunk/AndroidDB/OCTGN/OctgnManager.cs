@@ -18,15 +18,11 @@ namespace NRADB.OCTGN
     {
         public static void PromptForInitialization(Action callback = null)
         {
-            var dialog = new FolderBrowserDialog
-            {
-                Description = Resource1.OctgnFolderSelectPromptMessage,
-                ShowNewFolderButton = false
-            };
+            var dialog = new OctgnSetSelector { IsUrl = true, Url = UserSettings.OctgnSetsDownloadUrl };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var path = dialog.SelectedPath; // @"e:\Documents\CCG\Netrunner Android\OCTGN\2.3.0\"; // 
+                var path = dialog.Path;
                 var octgnLoaderWorker = new BackgroundWorker
                 {
                     WorkerReportsProgress = true,
@@ -54,11 +50,11 @@ namespace NRADB.OCTGN
             //OctgnLoader.ImportSets(sets, backgroundWorker);
 
             var importCardResult = OctgnLoader.ImportCards(sets, backgroundWorker);
-            if(importCardResult.IsSuccessful)
+            if (importCardResult.IsSuccessful)
                 doWorkEventArgs.Result = new OctgnLoader.OctgnLoaderResultAndValue { Result = OctgnLoader.OctgnLoaderResult.Success };
             else
             {
-                if(importCardResult.SetNotFound != null)
+                if (importCardResult.SetNotFound != null)
                     doWorkEventArgs.Result = new OctgnLoader.OctgnLoaderResultAndValue
                     {
                         Result = OctgnLoader.OctgnLoaderResult.SetNotDefinedInDatabase,

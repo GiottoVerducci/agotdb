@@ -152,6 +152,12 @@ namespace NRADB.BusinessObjects
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnGameId", new Guid("a12af4e8-be4b-4cda-a6b6-534f9717391f")); }
             set { Singleton.WriteGuid(OctgnSectionName, "OctgnGameId", value); }
         }
+
+        public static string OctgnSetsDownloadUrl
+        {
+            get { return Singleton.ReadString(OctgnSectionName, "OctgnSetsDownloadUrl", "http://www.myget.org/F/octgngamedirectory/api/v2/package/0f38e453-26df-4c04-9d67-6d43de939c77/"); }
+            set { Singleton.WriteString(OctgnSectionName, "OctgnSetsDownloadUrl", value); }
+        }
         #endregion
 
 

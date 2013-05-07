@@ -610,7 +610,6 @@ namespace GenericDB.DataAccess
             UpdateExtendedCheckedListBox(clb, tableName, column, tableType, null);
         }
 
-
         /// <summary>
         /// Returns a table (that should have only 1 row) containing the card(s) that have a given universal id.
         /// </summary>
@@ -634,7 +633,6 @@ namespace GenericDB.DataAccess
                 string.Format("SELECT * FROM [{0}] WHERE OctgnId = :octgnId", TableNameMain),
                 new CommandParameters().Add("octgnId", octgnId.ToString()));
         }
-
 
         /// <summary>
         /// Returns a table containing the card(s) that match a name and set.
