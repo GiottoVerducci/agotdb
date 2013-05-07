@@ -1,3 +1,9 @@
+Beta 0.5 (Mai, 07 2013)
+	- Switched back to .NET 4.0 for WinXP compatibility.
+	- Added MU, total MU and available MU to program description in deckbuilder tree.
+	- Added influence filter.
+	- "Unique" now appears in the keyword list.
+
 Beta 0.4 (April, 30 2013)
  - Added support for OCTGN patch files (*.o8p)
 
