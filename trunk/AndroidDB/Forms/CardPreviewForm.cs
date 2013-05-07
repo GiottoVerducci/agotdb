@@ -22,71 +22,79 @@ using NRADB.BusinessObjects;
 
 namespace NRADB.Forms
 {
-	public partial class CardPreviewForm : Form
-	{
-		/// <summary>
-		/// The id of the card displayed.
-		/// </summary>
-		public int CardUniversalId
-		{
-			get { return cardPreviewControl.CardUniversalId; }
-			set
-			{
-				if (value != cardPreviewControl.CardUniversalId && ApplicationSettings.ImagesFolderExists)
-				{
-					cardPreviewControl.CardUniversalId = value;
-				}
-				Show();
-			}
-		}
+    public partial class CardPreviewForm : Form
+    {
+        /// <summary>
+        /// The id of the card displayed.
+        /// </summary>
+        public int CardUniversalId
+        {
+            get { return cardPreviewControl.CardUniversalId; }
+            set
+            {
+                if (value != cardPreviewControl.CardUniversalId)
+                {
+                    if (ApplicationSettings.ImagesFolderExists)
+                    {
+                        cardPreviewControl.CardUniversalId = value;
+                        Show();
+                    }
+                    else
+                    {
+                        Hide();
+                    }
+                }
+            }
+        }
 
-		public CardPreviewForm()
-		{
-			InitializeComponent();
-			Enabled = false;
-			Hide();
-		}
+        public CardPreviewForm()
+        {
+            InitializeComponent();
+            Enabled = false;
+            Hide();
+        }
 
-		protected override bool ShowWithoutActivation
-		{
-			get { return true; }
-		}
+        protected override bool ShowWithoutActivation
+        {
+            get { return true; }
+        }
 
-		protected override CreateParams CreateParams
-		{
-			get
-			{
-				// to avoid the activation of the window when shown
-				var parameters = base.CreateParams;
-				parameters.ExStyle |= (int)(
-					Win32.ExtendedWindowsStyle.WS_EX_LAYERED
-					| Win32.ExtendedWindowsStyle.WS_EX_TOOLWINDOW
-				);
-				return parameters;
-			}
-		}
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                // to avoid the activation of the window when shown
+                var parameters = base.CreateParams;
+                parameters.ExStyle = (int)(
+                    Win32.ExtendedWindowsStyle.WS_EX_LAYERED
+                    | Win32.ExtendedWindowsStyle.WS_EX_TOOLWINDOW
+                    | Win32.ExtendedWindowsStyle.WS_EX_NOACTIVATE
+                );
+                return parameters;
+            }
+        }
 
-		/// <summary>
-		/// The form is hidden by setting its size to 0.
-		/// </summary>
-		public new void Hide()
-		{
-			Size = new Size(0, 0);
-		}
+        /// <summary>
+        /// The form is hidden by setting its size to 0.
+        /// </summary>
+        public new void Hide()
+        {
+            Size = new Size(0, 0);
+        }
 
-		/// <summary>
-		/// The form is shown by setting its size to the correct size
-		/// </summary>
-		public new void Show()
-		{
-			if (cardPreviewControl.IsImageDisplayed())
-			{
-				var resize = UserSettings.ImagePreviewSize;
-				var imageSize = cardPreviewControl.GetDesiredSize();
-				Size = new Size(imageSize.Width * resize / 100, imageSize.Height * resize / 100);
-			}
-			else
-				Size = cardPreviewControl.GetDesiredSize();
-		}
-	}
+        /// <summary>
+        /// The form is shown by setting its size to the correct size
+        /// </summary>
+        public new void Show()
+        {
+            if (cardPreviewControl.IsImageDisplayed())
+            {
+                var resize = UserSettings.ImagePreviewSize;
+                var imageSize = cardPreviewControl.GetDesiredSize();
+                Size = new Size(imageSize.Width * resize / 100, imageSize.Height * resize / 100);
+            }
+            else
+                Size = cardPreviewControl.GetDesiredSize();
+        }
+    }
 }

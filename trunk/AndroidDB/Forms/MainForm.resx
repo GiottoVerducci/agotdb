@@ -128,10 +128,127 @@
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
+  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>687, 35</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 13</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label13.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>•••</value>
+  </data>
+  <data name="label13.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
+  </data>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbInfluenceHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbInfluenceHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>768, 32</value>
+  </data>
+  <data name="tbInfluenceHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="tbInfluenceHigh.TabIndex" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="tbInfluenceHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceHigh.Name" xml:space="preserve">
+    <value>tbInfluenceHigh</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceHigh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceHigh.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceHigh.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbInfluenceLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbInfluenceLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>714, 32</value>
+  </data>
+  <data name="tbInfluenceLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="tbInfluenceLow.TabIndex" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="tbInfluenceLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceLow.Name" xml:space="preserve">
+    <value>tbInfluenceLow</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceLow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceLow.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tbInfluenceLow.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>756, 35</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="rbRunnerOnly.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rbRunnerOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -160,7 +277,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;rbRunnerOnly.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="rbCorpOnly.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -193,7 +310,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;rbCorpOnly.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="rbAll.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -223,7 +340,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;rbAll.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="tbTrashCostHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -250,7 +367,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbTrashCostHigh.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="tbTrashCostLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -277,7 +394,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbTrashCostLow.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="picTrashCost.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -329,7 +446,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picTrashCost.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -362,7 +479,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="tbLinkHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -389,7 +506,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbLinkHigh.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="tbLinkLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -416,7 +533,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbLinkLow.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="picLink.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -462,7 +579,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picLink.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -495,7 +612,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>14</value>
   </data>
   <data name="tbAgendaPointsHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -522,7 +639,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbAgendaPointsHigh.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>15</value>
   </data>
   <data name="tbAgendaPointsLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -549,7 +666,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbAgendaPointsLow.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>16</value>
   </data>
   <data name="picAgendaPoints.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -596,7 +713,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picAgendaPoints.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>17</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -629,7 +746,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>18</value>
   </data>
   <data name="eclKeyword.Location" type="System.Drawing.Point, System.Drawing">
     <value>381, 112</value>
@@ -653,7 +770,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclKeyword.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>19</value>
   </data>
   <data name="eclTrigger.Location" type="System.Drawing.Point, System.Drawing">
     <value>381, 91</value>
@@ -677,7 +794,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclTrigger.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>20</value>
   </data>
   <data name="eclExpansionSet.Location" type="System.Drawing.Point, System.Drawing">
     <value>391, 66</value>
@@ -698,7 +815,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclExpansionSet.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>21</value>
   </data>
   <data name="btnQuickFindNext.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -745,7 +862,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;btnQuickFindNext.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>22</value>
   </data>
   <data name="tbStrengthHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -772,7 +889,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbStrengthHigh.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>23</value>
   </data>
   <data name="tbStrengthLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -799,7 +916,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbStrengthLow.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>24</value>
   </data>
   <data name="tbDeckSizeHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -826,7 +943,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbDeckSizeHigh.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>25</value>
   </data>
   <data name="tbDeckSizeLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -853,7 +970,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbDeckSizeLow.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>26</value>
   </data>
   <data name="tbMuHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -880,7 +997,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbMuHigh.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>27</value>
   </data>
   <data name="tbMuLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -907,7 +1024,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbMuLow.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>28</value>
   </data>
   <data name="tbCostHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -934,7 +1051,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbCostHigh.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>29</value>
   </data>
   <data name="tbCostLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -961,7 +1078,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbCostLow.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>30</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -991,7 +1108,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>31</value>
   </data>
   <data name="tbCardtext.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1015,7 +1132,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbCardtext.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>32</value>
   </data>
   <data name="eclCardtextCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1045,7 +1162,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclCardtextCheck.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>33</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1075,7 +1192,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>34</value>
   </data>
   <data name="tbName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1099,7 +1216,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>35</value>
   </data>
   <data name="eclNameCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1129,7 +1246,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclNameCheck.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>36</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1159,7 +1276,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>37</value>
   </data>
   <data name="tbKeywords.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1183,7 +1300,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbKeywords.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>38</value>
   </data>
   <data name="eclKeywordCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1213,7 +1330,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclKeywordCheck.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>39</value>
   </data>
   <data name="eclProvides.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 66</value>
@@ -1234,7 +1351,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclProvides.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>40</value>
   </data>
   <data name="eclIcon.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 112</value>
@@ -1258,7 +1375,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclIcon.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>41</value>
   </data>
   <data name="eclCardtype.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 66</value>
@@ -1279,7 +1396,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclCardtype.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>42</value>
   </data>
   <data name="picStrength.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1329,7 +1446,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picStrength.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>43</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1362,7 +1479,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>44</value>
   </data>
   <data name="picDeckSize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1406,7 +1523,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picDeckSize.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>45</value>
   </data>
   <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1439,7 +1556,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>46</value>
   </data>
   <data name="picMu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1483,7 +1600,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picMu.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>47</value>
   </data>
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1516,7 +1633,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>48</value>
   </data>
   <data name="picCost.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1565,7 +1682,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;picCost.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>49</value>
   </data>
   <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1598,7 +1715,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>46</value>
+    <value>50</value>
   </data>
   <data name="tbFind.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1622,7 +1739,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;tbFind.ZOrder" xml:space="preserve">
-    <value>47</value>
+    <value>51</value>
   </data>
   <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1649,7 +1766,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>48</value>
+    <value>52</value>
   </data>
   <data name="eclVirtue.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 91</value>
@@ -1673,7 +1790,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclVirtue.ZOrder" xml:space="preserve">
-    <value>49</value>
+    <value>53</value>
   </data>
   <data name="eclFaction.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 66</value>
@@ -1694,7 +1811,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclFaction.ZOrder" xml:space="preserve">
-    <value>50</value>
+    <value>54</value>
   </data>
   <data name="eclIceType.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 91</value>
@@ -1715,7 +1832,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;eclIceType.ZOrder" xml:space="preserve">
-    <value>51</value>
+    <value>55</value>
   </data>
   <data name="dataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1775,7 +1892,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
-    <value>52</value>
+    <value>56</value>
   </data>
   <data name="btnReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1802,7 +1919,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;btnReset.ZOrder" xml:space="preserve">
-    <value>53</value>
+    <value>57</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>

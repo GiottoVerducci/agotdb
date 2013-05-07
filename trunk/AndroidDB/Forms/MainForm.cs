@@ -284,6 +284,7 @@ namespace NRADB.Forms
                 QueryBuilder.GetFilterFromRangeBoxes(tbAgendaPointsLow, tbAgendaPointsHigh, "AgendaPoints") +
                 QueryBuilder.GetFilterFromRangeBoxes(tbLinkLow, tbLinkHigh, "Link") +
                 QueryBuilder.GetFilterFromRangeBoxes(tbTrashCostLow, tbTrashCostHigh, "TrashCost") +
+                QueryBuilder.GetFilterFromRangeBoxes(tbInfluenceLow, tbInfluenceHigh, "Influence") +
                 QueryBuilder.GetFilterFromTextBox(tbCardtext, eclCardtextCheck, "Text") +
                 QueryBuilder.GetFilterFromTextBox(tbKeywords, eclKeywordCheck, "Keywords") +
                 QueryBuilder.GetFilterFromTextBox(tbName, eclNameCheck, "Name");
@@ -301,8 +302,15 @@ namespace NRADB.Forms
             ClearCheckListBoxes(eclFaction, eclCardtype, eclProvides, eclIceType,
                 eclIcon, eclVirtue, eclKeyword, eclTrigger, eclExpansionSet);
 
-            ClearTextBoxes(tbCostLow, tbCostHigh, tbMuLow, tbMuHigh,
-                tbDeckSizeLow, tbDeckSizeHigh, tbStrengthLow, tbStrengthHigh, tbCardtext, tbKeywords, tbName);
+            ClearTextBoxes(tbCostLow, tbCostHigh, 
+                tbMuLow, tbMuHigh,
+                tbDeckSizeLow, tbDeckSizeHigh, 
+                tbStrengthLow, tbStrengthHigh, 
+                tbAgendaPointsLow, tbAgendaPointsHigh,
+                tbLinkLow, tbLinkHigh,
+                tbTrashCostLow, tbTrashCostHigh,
+                tbInfluenceLow, tbInfluenceHigh,
+                tbCardtext, tbKeywords, tbName);
 
             ClearCheckBoxes(eclCardtextCheck, eclKeywordCheck, eclNameCheck);
 

@@ -178,7 +178,7 @@ namespace NRADB.OCTGN
                     cursor = index + 1;
 
                     var keywords = card.Keywords.Split('-').Where(k => !string.IsNullOrEmpty(k)).ToList();
-                    bool isUnique = keywords.Remove("Unique");
+                    bool isUnique = keywords.Contains("Unique");
 
                     int setId, cardId;
                     ExtractSetIdAndCardIdFromOctgnId(card.Id, out setId, out cardId);
