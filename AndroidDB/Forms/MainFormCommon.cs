@@ -325,6 +325,9 @@ namespace NRADB.Forms
 
             try
             {
+                if (!_dataTableFirstLoad)
+                    SaveGridSettings();
+
                 int selectedRowId = -1;
                 if (dataGridView.SelectedRows.Count != 0)
                     selectedRowId = (int)((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row["UniversalId"];
@@ -816,6 +819,7 @@ namespace NRADB.Forms
 
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
             GridViewHelper.SetDataGridViewColumnsSettings(dataGridView, UserSettings.ColumnsSettings);
         }
     }

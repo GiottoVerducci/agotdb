@@ -9,7 +9,7 @@ namespace GenericDB.Helper
     {
         public static void SetDataTableColumnsSettings(DataTable dataTable, string columnsSettings)
         {
-            if (columnsSettings == null)
+            if (String.IsNullOrWhiteSpace(columnsSettings))
                 return;
             var columnSettings = columnsSettings.Split('|').Select(s => new ColumnSetting(s)).OrderByDescending(cs => cs.Index);
             foreach (var columnSetting in columnSettings)
