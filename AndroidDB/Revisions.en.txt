@@ -5,6 +5,7 @@ Beta 0.6 (Mai, 07 2013)
  - Missing sets are now automatically added (though the Cycle name can't be guessed and will require manual update)
  - Updated icons (there were still some remaining AGoT icons).
  - Fixed "Upgrade" side (Corp, not Runner)
+ - Added popup option: "Resize columns" that restores the size of the columns to their default value.
 
 Beta 0.5 (Mai, 07 2013)
  - Switched back to .NET 4.0 for WinXP compatibility.
