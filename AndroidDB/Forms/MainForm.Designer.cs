@@ -31,6 +31,10 @@ namespace NRADB.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbInfluenceHigh = new System.Windows.Forms.TextBox();
+            this.tbInfluenceLow = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.rbRunnerOnly = new System.Windows.Forms.RadioButton();
             this.rbCorpOnly = new System.Windows.Forms.RadioButton();
             this.rbAll = new System.Windows.Forms.RadioButton();
@@ -137,6 +141,10 @@ namespace NRADB.Forms
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label13);
+            this.splitContainer1.Panel1.Controls.Add(this.tbInfluenceHigh);
+            this.splitContainer1.Panel1.Controls.Add(this.tbInfluenceLow);
+            this.splitContainer1.Panel1.Controls.Add(this.label12);
             this.splitContainer1.Panel1.Controls.Add(this.rbRunnerOnly);
             this.splitContainer1.Panel1.Controls.Add(this.rbCorpOnly);
             this.splitContainer1.Panel1.Controls.Add(this.rbAll);
@@ -196,6 +204,30 @@ namespace NRADB.Forms
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer1.Panel2.Controls.Add(this.splitCardText);
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
+            // tbInfluenceHigh
+            // 
+            resources.ApplyResources(this.tbInfluenceHigh, "tbInfluenceHigh");
+            this.tbInfluenceHigh.Name = "tbInfluenceHigh";
+            this.tbInfluenceHigh.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbInfluenceHigh.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // tbInfluenceLow
+            // 
+            resources.ApplyResources(this.tbInfluenceLow, "tbInfluenceLow");
+            this.tbInfluenceLow.Name = "tbInfluenceLow";
+            this.tbInfluenceLow.TextChanged += new System.EventHandler(this.tbLowHigh_TextChanged);
+            this.tbInfluenceLow.Validated += new System.EventHandler(this.tbLowHigh_Validated);
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
             // 
             // rbRunnerOnly
             // 
@@ -906,5 +938,9 @@ namespace NRADB.Forms
         private System.Windows.Forms.RadioButton rbRunnerOnly;
         private System.Windows.Forms.RadioButton rbCorpOnly;
         private System.Windows.Forms.RadioButton rbAll;
+        private System.Windows.Forms.TextBox tbInfluenceHigh;
+        private System.Windows.Forms.TextBox tbInfluenceLow;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
 	}
 }

@@ -14,13 +14,16 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
 
+using System;
+
 namespace Win32
 {
-	public enum ExtendedWindowsStyle
-	{
-		WS_EX_LAYERED = 0x00080000,
-		WS_EX_NOACTIVATE = 0x08000000,
-		WS_EX_TOOLWINDOW = 0x00000080,
-		WS_EX_TRANSPARENT = 0x00000020
-	}
+    [Flags]
+    public enum ExtendedWindowsStyle
+    {
+        WS_EX_LAYERED = 0x00080000,
+        WS_EX_NOACTIVATE = 0x08000000,
+        WS_EX_TOOLWINDOW = 0x00000080,
+        WS_EX_TRANSPARENT = 0x00000020
+    }
 }

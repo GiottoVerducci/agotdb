@@ -107,6 +107,9 @@ namespace NRADB.Forms
                 case NraCard.CardType.Agenda:
                     typeNode.Text = ComputeStatsAgenda(_currentDeck, ((NraCardTreeView)typeNode.TreeView).Cards);
                     break;
+                case NraCard.CardType.Program:
+                    typeNode.Text = ComputeStatsProgram(_currentDeck, ((NraCardTreeView)typeNode.TreeView).Cards);
+                    break;
                 default:
                     typeNode.Text = string.Format(CultureInfo.CurrentCulture, "{0} [{1}]", NraCard.GetTypeName(typeNodeValue), count);
                     break;
@@ -461,6 +464,19 @@ namespace NRADB.Forms
             return string.Format(CultureInfo.CurrentCulture, "{0} ({1}: {2}/{3}-{4})",
                 NraCard.GetTypeName((Int32)NraCard.CardType.Agenda),
                 Resource1.AgendaPointsText, agendaPoints, requiredAgendaPoints, requiredAgendaPoints + 1);
+        }
+
+        private static String ComputeStatsProgram(NraDeck deck, NraCardList cards)
+        {
+            var programs = cards.Where(c => c.Type.Value == (Int32)NraCard.CardType.Program).ToArray();
+            var nonPrograms = cards.Where(c => c.Type.Value != (Int32)NraCard.CardType.Program).ToArray();
+
+            var memoryUsage = programs.Sum(p => p.MU.Value.Value * (p.Unique.Value ? 1 : p.Quantity)); // X values are not handled, but there's currently no program with X points
+            var memoryProvided = 4 + nonPrograms.Sum(p => p.MU.Value.Value * (p.Unique.Value ? 1 : p.Quantity)); // X values are not handled, but there's currently no program with X points
+
+            return string.Format(CultureInfo.CurrentCulture, "{0} ({1}: {2}/{3})",
+                NraCard.GetTypeName((Int32)NraCard.CardType.Program),
+                Resource1.MuText, memoryUsage, memoryProvided);
         }
         #endregion
 
