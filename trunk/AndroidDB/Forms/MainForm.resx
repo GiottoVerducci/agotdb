@@ -318,6 +318,9 @@
   <data name="rbAll.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rbAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rbAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 30</value>
   </data>
@@ -1864,8 +1867,14 @@
   <data name="addCardToSideboardToolStripMenuItem.Text" xml:space="preserve">
     <value>Add card to sideboard</value>
   </data>
+  <data name="resizeColumnsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="resizeColumnsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Resize columns</value>
+  </data>
   <data name="popupGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 92</value>
+    <value>213, 136</value>
   </data>
   <data name="&gt;&gt;popupGrid.Name" xml:space="preserve">
     <value>popupGrid</value>
@@ -2272,6 +2281,9 @@
         jo3UspQjDhgAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Android Deck Builder</value>
   </data>
@@ -2382,6 +2394,12 @@
   </data>
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;resizeColumnsToolStripMenuItem.Name" xml:space="preserve">
+    <value>resizeColumnsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;resizeColumnsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
