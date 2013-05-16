@@ -200,7 +200,8 @@ namespace NRADB.OCTGN
                     if (index >= allCards.Count)
                     {
                         backgroundWorker.ReportProgress(100, OctgnLoaderTask.ImportCard);
-                        backgroundWorker.ReportProgress(66, OctgnLoaderTask.UpdateDatabase); // arbitrary, we don't get progress notification when the dataset is updated
+                        backgroundWorker.ReportProgress(66, OctgnLoaderTask.UpdateDatabase); // arbitrary, we don't get progress notification when the dataset is updated 
+                        // nb: we could using OnRowUpdated according to http://stackoverflow.com/questions/15889694/dataadapter-update-method-progress-status
                         return DatabaseManager.OperationResult.Done;
                     }
 

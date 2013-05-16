@@ -361,4 +361,7 @@ Please update the databases manually to add the set definition.</value>
   <data name="OctgnFileSelectPromptMessage" xml:space="preserve">
     <value>Select the OCTGN definition file</value>
   </data>
+  <data name="TrashCostText" xml:space="preserve">
+    <value>Trash cost</value>
+  </data>
 </root>
