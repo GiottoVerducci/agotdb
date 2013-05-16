@@ -635,6 +635,15 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trash cost.
+        /// </summary>
+        internal static string TrashCostText {
+            get {
+                return ResourceManager.GetString("TrashCostText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You may add cards by double-clicking on them in the main window.
         /// </summary>
         internal static string TreeNodeAddCard {

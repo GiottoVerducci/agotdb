@@ -211,6 +211,10 @@ namespace NRADB.Forms
                     {
                         UserSettings.CreateExtendedDB = false;
                         UserSettings.Save();
+                        MessageBox.Show("Database update successful! Application will now restart.");
+                        Application.Exit();
+                        Process.Start(Application.ExecutablePath, string.Empty);
+                        return;
                     }
                     _isDataBaseLoaded = true;
                     break;
