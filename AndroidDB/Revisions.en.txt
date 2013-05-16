@@ -1,3 +1,7 @@
+Beta 0.7 (May, 16 2013)
+ - Bug fix: after converting the database, the last card wouldn't appear until the next application start. Now, the application automatically restarts.
+ - Added trash cost.
+
 Beta 0.6 (May, 07 2013)
  - Added Genesis - Humanity's Shadow
  - Added support for the new OCTGN set format.
