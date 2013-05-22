@@ -79,6 +79,19 @@ namespace AndroidDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agenda points required according to deck size
+        ///Deck size 40-44: 18-19 points
+        ///Deck size 45-49: 20-21 points
+        ///Deck size 50-54: 22-23 points
+        ///Deck size 55+: 22 points + 2 points for each 5 cards above 50..
+        /// </summary>
+        internal static string AgendaRulesText {
+            get {
+                return ResourceManager.GetString("AgendaRulesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AND.
         /// </summary>
         internal static string And {

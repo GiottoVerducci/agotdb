@@ -93,11 +93,13 @@ namespace NRADB.Forms
             this.moveToANewWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCardToDeckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCardToSideboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resizeColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnReset = new System.Windows.Forms.Button();
             this.splitCardText = new System.Windows.Forms.SplitContainer();
             this.lblUniversalId = new System.Windows.Forms.Label();
             this.btnReportError = new System.Windows.Forms.Button();
             this.rtbCardDetails = new System.Windows.Forms.RichTextBox();
+            this.cardPreviewControl = new NRADB.Forms.CardPreviewControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -113,8 +115,6 @@ namespace NRADB.Forms
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkNewVersionBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cardPreviewControl = new NRADB.Forms.CardPreviewControl();
-            this.resizeColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -684,6 +684,12 @@ namespace NRADB.Forms
             resources.ApplyResources(this.addCardToSideboardToolStripMenuItem, "addCardToSideboardToolStripMenuItem");
             this.addCardToSideboardToolStripMenuItem.Click += new System.EventHandler(this.addCardToSideboardToolStripMenuItem_Click);
             // 
+            // resizeColumnsToolStripMenuItem
+            // 
+            this.resizeColumnsToolStripMenuItem.Name = "resizeColumnsToolStripMenuItem";
+            resources.ApplyResources(this.resizeColumnsToolStripMenuItem, "resizeColumnsToolStripMenuItem");
+            this.resizeColumnsToolStripMenuItem.Click += new System.EventHandler(this.resizeColumnsToolStripMenuItem_Click);
+            // 
             // btnReset
             // 
             resources.ApplyResources(this.btnReset, "btnReset");
@@ -724,6 +730,16 @@ namespace NRADB.Forms
             // 
             resources.ApplyResources(this.rtbCardDetails, "rtbCardDetails");
             this.rtbCardDetails.Name = "rtbCardDetails";
+            // 
+            // cardPreviewControl
+            // 
+            this.cardPreviewControl.BackColor = System.Drawing.Color.Transparent;
+            this.cardPreviewControl.CardUniversalId = -1;
+            resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
+            this.cardPreviewControl.Name = "cardPreviewControl";
+            this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl_MouseCaptureChanged);
+            this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl_MouseEnter);
+            this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl_MouseLeave);
             // 
             // menuStrip1
             // 
@@ -811,22 +827,6 @@ namespace NRADB.Forms
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // cardPreviewControl
-            // 
-            this.cardPreviewControl.BackColor = System.Drawing.Color.Transparent;
-            this.cardPreviewControl.CardUniversalId = -1;
-            resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
-            this.cardPreviewControl.Name = "cardPreviewControl";
-            this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.cardPreviewControl_MouseCaptureChanged);
-            this.cardPreviewControl.MouseEnter += new System.EventHandler(this.cardPreviewControl_MouseEnter);
-            this.cardPreviewControl.MouseLeave += new System.EventHandler(this.cardPreviewControl_MouseLeave);
-            // 
-            // resizeColumnsToolStripMenuItem
-            // 
-            this.resizeColumnsToolStripMenuItem.Name = "resizeColumnsToolStripMenuItem";
-            resources.ApplyResources(this.resizeColumnsToolStripMenuItem, "resizeColumnsToolStripMenuItem");
-            this.resizeColumnsToolStripMenuItem.Click += new System.EventHandler(this.resizeColumnsToolStripMenuItem_Click);
             // 
             // MainForm
             // 

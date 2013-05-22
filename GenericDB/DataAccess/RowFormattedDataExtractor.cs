@@ -58,10 +58,11 @@ namespace GenericDB.DataAccess
         /// <returns>A formatted int value.</returns>
         public virtual FormattedValue<int> GetIntAndStyleFromRow(DataRow row, string column)
         {
-            string text = row[column].ToString();
-            int value = string.IsNullOrEmpty(text.Trim()) ? 0 : Int32.Parse(text);
+            string text = row[column].ToString().Trim();
+            var isNull = string.IsNullOrEmpty(text);
+            int value = isNull ? 0 : Int32.Parse(text);
             string errated = row[column + "Errated"].ToString().Trim();
-            return new FormattedValue<int>(value, GetFormatFromErrata(errated));
+            return new FormattedValue<int>(value, GetFormatFromErrata(errated), isNull);
         }
 
         /// <summary>

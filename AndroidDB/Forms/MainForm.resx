@@ -128,6 +128,9 @@
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
+  <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1874,7 +1877,7 @@
     <value>Resize columns</value>
   </data>
   <data name="popupGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 136</value>
+    <value>213, 114</value>
   </data>
   <data name="&gt;&gt;popupGrid.Name" xml:space="preserve">
     <value>popupGrid</value>
@@ -2281,9 +2284,6 @@
         jo3UspQjDhgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Android Deck Builder</value>
   </data>
@@ -2309,6 +2309,12 @@
     <value>addCardToSideboardToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;addCardToSideboardToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;resizeColumnsToolStripMenuItem.Name" xml:space="preserve">
+    <value>resizeColumnsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;resizeColumnsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
@@ -2394,12 +2400,6 @@
   </data>
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;resizeColumnsToolStripMenuItem.Name" xml:space="preserve">
-    <value>resizeColumnsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;resizeColumnsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
