@@ -19,33 +19,36 @@ using System.Collections.Generic;
 
 namespace GenericDB.BusinessObjects
 {
-	///<summary>
-	/// Represents a value and a list of format sections.
-	///</summary>
-	///<typeparam name="T">The type of the value.</typeparam>
-	public class FormattedValue<T>
-	{
-		/// <summary>
-		/// The value to which the formatted sections applies.
-		/// </summary>
-		public T Value { get; private set; }
-		/// <summary>
-		/// The format sections that apply to the value.
-		/// </summary>
-		public List<FormatSection> Formats { get; private set; }
+    ///<summary>
+    /// Represents a value and a list of format sections.
+    ///</summary>
+    ///<typeparam name="T">The type of the value.</typeparam>
+    public class FormattedValue<T>
+    {
+        /// <summary>
+        /// The value to which the formatted sections applies.
+        /// </summary>
+        public T Value { get; private set; }
+        /// <summary>
+        /// The format sections that apply to the value.
+        /// </summary>
+        public List<FormatSection> Formats { get; private set; }
 
-		public FormattedValue(T value, List<FormatSection> formats)
-		{
-			Value = value;
-			Formats = formats;
-		}
+        public bool IsNull { get; private set; }
 
-		/// Styles are: errata (in human mode: {errata}), trait (~trait~)
-		/// Style is encoded as follows: style1, start1-stop1; ... ;styleN, startN-stopN;
-		/// For non-text column, start and stop are ignored. The style is applied to the whole field
-		public String FormatsToString()
-		{
-			return string.Join("; ", Formats.ConvertAll(f => f.ToString()).ToArray());
-		}
-	}
+        public FormattedValue(T value, List<FormatSection> formats, bool isNull = false)
+        {
+            Value = value;
+            IsNull = isNull;
+            Formats = formats;
+        }
+
+        /// Styles are: errata (in human mode: {errata}), trait (~trait~)
+        /// Style is encoded as follows: style1, start1-stop1; ... ;styleN, startN-stopN;
+        /// For non-text column, start and stop are ignored. The style is applied to the whole field
+        public String FormatsToString()
+        {
+            return string.Join("; ", Formats.ConvertAll(f => f.ToString()).ToArray());
+        }
+    }
 }

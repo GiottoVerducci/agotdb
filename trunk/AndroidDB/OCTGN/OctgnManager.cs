@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
@@ -80,15 +82,8 @@ namespace NRADB.OCTGN
             xDeck.SetAttributeValue("game", UserSettings.OctgnGameId);
             xDoc.Add(xDeck);
 
-            //if (currentDeck.Houses != (int)NraCard.CardHouse.Neutral)
-            //    AddSection(xDeck, "House", _dummyIdentityCards.Where(hc => (hc.Key & currentDeck.Houses) == hc.Key).Select(hc => hc.Value));
-
-            //AddSection(xDeck, "Agenda", currentDeck.Agenda);
-            //AddSection(xDeck, "Characters", currentDeck.CardLists[1].Where(card => card.Type.Value == (int)NraCard.CardType.Character));
-            //AddSection(xDeck, "Locations", currentDeck.CardLists[1].Where(card => card.Type.Value == (int)NraCard.CardType.Location));
-            //AddSection(xDeck, "Events", currentDeck.CardLists[1].Where(card => card.Type.Value == (int)NraCard.CardType.Event));
-            //AddSection(xDeck, "Attachments", currentDeck.CardLists[1].Where(card => card.Type.Value == (int)NraCard.CardType.Attachment));
-            //AddSection(xDeck, "Plots", currentDeck.CardLists[1].Where(card => card.Type.Value == (int)NraCard.CardType.Plot));
+            AddSection(xDeck, "Identity", currentDeck.CardLists[1].Where(card => card.Type.Value == (int)NraCard.CardType.Identity));
+            AddSection(xDeck, "R&D / Stack", currentDeck.CardLists[1].Where(card => card.Type.Value != (int)NraCard.CardType.Identity));
 
             xDoc.Save(filename);
         }
@@ -110,51 +105,47 @@ namespace NRADB.OCTGN
 
         public static NraVersionedDeck LoadOctgnDeck()
         {
-            //string filename;
-            //using (var dialog = new OpenFileDialog())
-            //{
-            //    dialog.Filter = Resource1.OctgnDeckFileFilter;
-            //    if (dialog.ShowDialog() != DialogResult.OK)
-            //        return null;
-            //    filename = dialog.FileName;
-            //    //_currentFilename = Path.ChangeExtension(filename, "xml");
-            //}
+            string filename;
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = Resource1.OctgnDeckFileFilter;
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return null;
+                filename = dialog.FileName;
+                //_currentFilename = Path.ChangeExtension(filename, "xml");
+            }
 
-            //var doc = new XmlDocument();
-            //try
-            //{
-            //    doc.Load(filename);
-            //}
-            //catch (FileNotFoundException)
-            //{
-            //    MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrXmlDeckFileNotFound, filename),
-            //        Resource1.ErrDeckLoadTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            var doc = new XmlDocument();
+            try
+            {
+                doc.Load(filename);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show(String.Format(CultureInfo.CurrentCulture, Resource1.ErrXmlDeckFileNotFound, filename),
+                    Resource1.ErrDeckLoadTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            //XmlNode xmlDecl = doc.FirstChild;
-            //XmlNode root = xmlDecl.NextSibling;
-            //var versionedDeck = new AgotVersionedDeck { Name = Path.GetFileNameWithoutExtension(filename) };
+            XmlNode xmlDecl = doc.FirstChild;
+            XmlNode root = xmlDecl.NextSibling;
+            var versionedDeck = new NraVersionedDeck { Name = Path.GetFileNameWithoutExtension(filename) };
 
-            //var cardErrorList = new List<string>();
+            var cardErrorList = new List<string>();
 
             //versionedDeck.LastVersion.Houses = ComputeOctgnHouseSection(GetSectionNode(root, "House"), cardErrorList);
 
             //AddOctgnCardToDeck(GetSectionNode(root, "Agenda"), versionedDeck.LastVersion.Agenda, (int)NraCard.CardType.Agenda, cardErrorList);
-            //var mainDeckList = versionedDeck.LastVersion.CardLists[1];
-            //AddOctgnCardToDeck(GetSectionNode(root, "Characters"), mainDeckList, (int)NraCard.CardType.Character, cardErrorList);
-            //AddOctgnCardToDeck(GetSectionNode(root, "Locations"), mainDeckList, (int)NraCard.CardType.Location, cardErrorList);
-            //AddOctgnCardToDeck(GetSectionNode(root, "Events"), mainDeckList, (int)NraCard.CardType.Event, cardErrorList);
-            //AddOctgnCardToDeck(GetSectionNode(root, "Attachments"), mainDeckList, (int)NraCard.CardType.Attachment, cardErrorList);
-            //AddOctgnCardToDeck(GetSectionNode(root, "Plots"), mainDeckList, (int)NraCard.CardType.Plot, cardErrorList);
+            var mainDeckList = versionedDeck.LastVersion.CardLists[1];
+            AddOctgnCardToDeck(GetSectionNode(root, "Identity"), mainDeckList, (int)NraCard.CardType.Identity, cardErrorList);
+            AddOctgnCardToDeck(GetSectionNode(root, "R&D / Stack"), mainDeckList, (int)NraCard.CardType.None, cardErrorList);
 
-            //if (cardErrorList.Count > 0)
-            //{
-            //    var message = Resource1.ErrCardsNotFoundInOctgnDeckFile + Environment.NewLine
-            //        + string.Join(Environment.NewLine, cardErrorList);
-            //    MessageBox.Show(message, Resource1.ErrDeckLoadTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            //return versionedDeck;
-            return null;
+            if (cardErrorList.Count > 0)
+            {
+                var message = Resource1.ErrCardsNotFoundInOctgnDeckFile + Environment.NewLine
+                    + string.Join(Environment.NewLine, cardErrorList);
+                MessageBox.Show(message, Resource1.ErrDeckLoadTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return versionedDeck;
         }
 
         private static XmlNode GetSectionNode(XmlNode root, string sectionName)
@@ -186,9 +177,9 @@ namespace NRADB.OCTGN
                 else
                 {
                     DataRow row = null;
-                    if (cardTable.Rows.Count > 0)
+                    if (cardTable.Rows.Count > 1 && expectedCardType > 0)
                     {
-                        // try to match the expected cart type
+                        // try to match the expected card type
                         row = cardTable.Rows.Cast<DataRow>().LastOrDefault(r => Int32.Parse(r["Type"].ToString()) == expectedCardType);
                     }
                     if (row == null)

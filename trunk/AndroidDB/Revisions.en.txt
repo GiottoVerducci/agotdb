@@ -1,3 +1,10 @@
+Beta 0.8 (May, 22 2013)
+ - Fixed a bug when loading a Corp deck while the "Runner" combobox was selected (and the other way round).
+ - Highlight cards as errors (in red) when using a off-faction card that has no influence cost.
+ - Added a rule summary text for agenda when selecting the Agenda node.
+ - Fixed influence filter display when resizing the main window.
+ - Export/import deck to/from OCTGN is now supported.
+
 Beta 0.7 (May, 16 2013)
  - Bug fix: after converting the database, the last card wouldn't appear until the next application start. Now, the application automatically restarts.
  - Added trash cost.

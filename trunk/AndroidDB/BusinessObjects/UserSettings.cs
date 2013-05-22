@@ -149,7 +149,7 @@ namespace NRADB.BusinessObjects
         private const string OctgnSectionName = "OCTGN";
         public static Guid OctgnGameId
         {
-            get { return Singleton.ReadGuid(OctgnSectionName, "OctgnGameId", new Guid("a12af4e8-be4b-4cda-a6b6-534f9717391f")); }
+            get { return Singleton.ReadGuid(OctgnSectionName, "OctgnGameId", new Guid("0f38e453-26df-4c04-9d67-6d43de939c77")); }
             set { Singleton.WriteGuid(OctgnSectionName, "OctgnGameId", value); }
         }
 

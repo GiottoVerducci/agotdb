@@ -23,6 +23,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using AndroidDB;
 using Beyond.ExtendedControls;
@@ -250,9 +251,16 @@ namespace NRADB.Forms
         #endregion
 
         #region Controls / Versioned deck synchronization
+
+        private bool _isUpdatingControls;
+
         private void UpdateControlsWithVersionedDeck(bool updateHistory)
         {
+            _isUpdatingControls = true;
             UpdateControlsFromSide();
+            UpdateSideChoicesControl();
+            _isUpdatingControls = false;
+            Application.DoEvents();
             UpdateControlsFromFaction();
             Application.DoEvents();
             UpdateTreeViews();
@@ -354,7 +362,7 @@ namespace NRADB.Forms
             var result = new CardNodeInfo(String.Format(CultureInfo.CurrentCulture, "{0}× {1}{2}", card.Quantity, card.Name.Value, suffix), card.GetSummaryInfo());
             if (card.Unique == null)
                 result.Value1 += " ?";
-            if ((card.Faction.Value & deck.Factions) == 0)
+            if ((card.Faction.Value & deck.Factions) == 0 && card.Type != null && card.Type.Value != (Int32)NraCard.CardType.Identity)
                 result.Value1 += new string('•', card.Influence.Value);
             //else if (card.Unique.Value)
             //    result.Value1 += String.Format(CultureInfo.CurrentCulture, " * ({0})", card.GetShortSet());
@@ -376,7 +384,13 @@ namespace NRADB.Forms
             }
             else if (card.Faction != null && card.Faction.Value != (int)NraCard.CardFaction.Neutral && (deck.Factions & card.Faction.Value) == 0)
             {
-                result.ForeColor = Enlighten(Color.OrangeRed, result.BackColor);
+                if (card.Influence.IsNull)
+                {
+                    result.ForeColor = Color.White;
+                    result.BackColor = Color.Red;
+                }
+                else
+                    result.ForeColor = Enlighten(Color.OrangeRed, result.BackColor);
             }
             if (card.Banned != null && card.Banned.Value)
             {
@@ -545,9 +559,31 @@ namespace NRADB.Forms
 
         private void rbSide_CheckedChanged(object sender, EventArgs e)
         {
+            if (_isUpdatingControls)
+                return;
             UpdateSideChoicesControl();
             UpdateVersionedDeckWithControls();
             UpdateTreeViews();
+        }
+
+        private void RootNodeSelected(TreeNode node)
+        {
+            var typeNodeInfo = node.Tag as TypeNodeInfo;
+            if (typeNodeInfo == null)
+                return;
+            switch ((NraCard.CardType)typeNodeInfo.Type)
+            {
+                case NraCard.CardType.Agenda:
+                    var text = Resource1.AgendaRulesText.Split('\n');
+                    var firstLine = true;
+                    foreach (var line in text)
+                    {
+                        rtbCardText.SelectionFont = new Font(rtbCardText.SelectionFont, firstLine ? FontStyle.Bold : FontStyle.Regular);
+                        rtbCardText.AppendText(line + "\n");
+                        firstLine = false;
+                    }
+                    break;
+            }
         }
 
         /// <summary>

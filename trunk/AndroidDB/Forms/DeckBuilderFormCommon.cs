@@ -152,7 +152,11 @@ namespace NRADB.Forms
             ClearCardInformations();
 
             if (!IsCardNode(e.Node) || (e.Node.Tag == null))
+            {
+                RootNodeSelected(e.Node);
                 return;
+            }
+
             UpdateCardInformations((TCard)e.Node.Tag);
         }
 
@@ -525,7 +529,7 @@ namespace NRADB.Forms
         {
             return new Font(FontFamily.GenericMonospace, GetNodeFont(node).Size);
         }
-        
+
         private static Color Enlighten(Color color, Color backgroundColor)
         {
             if (backgroundColor.GetBrightness() * color.GetBrightness() < 0.5f)
@@ -538,7 +542,7 @@ namespace NRADB.Forms
             return color;
         }
         #endregion
-        
+
         #region Deck tree view drawing
         private void TreeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
