@@ -12,6 +12,7 @@ namespace NRADB.OCTGN
         public bool IsUrl;
         public string Url;
         public string Path;
+        public string Items;
 
         public OctgnSetSelector()
         {
@@ -24,6 +25,16 @@ namespace NRADB.OCTGN
             tbUrl.Text = Url;
             rbPath.Checked = !IsUrl;
             rbUrl.Checked = IsUrl;
+
+            rbPath.Text = string.Format(rbPath.Text, Items);
+            rbUrl.Text = string.Format(rbUrl.Text, Items);
+
+            // readjust size and position of the text boxes to accomodate the various length of the radiobuttons
+            var pathPreviousRight = tbPath.Right;
+            var urlPreviousRight = tbUrl.Right;
+            tbPath.Left = tbUrl.Left = Math.Max(rbPath.Right, rbUrl.Right) + 10;
+            tbPath.Width = pathPreviousRight - tbPath.Left;
+            tbUrl.Width = urlPreviousRight - tbUrl.Left;
         }
 
         private void rb_CheckedChanged(object sender, EventArgs e)
@@ -52,6 +63,7 @@ namespace NRADB.OCTGN
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 tbPath.Text = dialog.FileName;
+                rbPath.Checked = true;
             }
         }
 
@@ -59,26 +71,33 @@ namespace NRADB.OCTGN
         {
             //if (e.CloseReason != CloseReason.UserClosing)
             //    return;
-            if (this.DialogResult == DialogResult.OK && rbUrl.Checked)
+            if (this.DialogResult == DialogResult.OK)
             {
-                if (string.IsNullOrWhiteSpace(tbUrl.Text))
+                if (rbUrl.Checked)
                 {
-                    MessageBox.Show("Please enter an url.");
-                    return;
-                }
+                    if (string.IsNullOrWhiteSpace(tbUrl.Text))
+                    {
+                        MessageBox.Show("Please enter an url.");
+                        return;
+                    }
 
-                var path = System.IO.Path.GetTempPath() + System.IO.Path.GetRandomFileName();
+                    var path = System.IO.Path.GetTempPath() + System.IO.Path.GetRandomFileName();
 
-                var loadingForm = new OctgnDownloadForm { Url = tbUrl.Text, Path = path };
+                    var loadingForm = new OctgnDownloadForm {Url = tbUrl.Text, Path = path};
 
-                if (loadingForm.ShowDialog() == DialogResult.OK)
-                {
-                    DialogResult = DialogResult.OK;
-                    Path = path;
+                    if (loadingForm.ShowDialog() == DialogResult.OK)
+                    {
+                        DialogResult = DialogResult.OK;
+                        Path = path;
+                    }
+                    else
+                    {
+                        DialogResult = DialogResult.Cancel;
+                    }
                 }
                 else
                 {
-                    DialogResult = DialogResult.Cancel;
+                    Path = tbPath.Text;
                 }
             }
         }

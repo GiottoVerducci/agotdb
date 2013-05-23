@@ -22,13 +22,9 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-using Beyond.ExtendedControls;
-
 using GenericDB.DataAccess;
-using GenericDB.Extensions;
 using GenericDB.Helper;
 
-using AndroidDB;
 using NRADB.BusinessObjects;
 using NRADB.DataAccess;
 

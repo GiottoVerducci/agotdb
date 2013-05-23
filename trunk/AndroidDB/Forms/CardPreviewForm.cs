@@ -16,6 +16,7 @@
 // © Fantasy Flight Games 2012
 
 
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using NRADB.BusinessObjects;
@@ -24,27 +25,26 @@ namespace NRADB.Forms
 {
     public partial class CardPreviewForm : Form
     {
+        public void SetId(int universalId, Guid octgnId)
+        {
+            cardPreviewControl.SetId(universalId, octgnId);
+            
+            if (ApplicationSettings.ImagesFolderExists)
+            {
+                Show();
+            }
+            else
+            {
+                Hide();
+            }
+        }
+
         /// <summary>
         /// The id of the card displayed.
         /// </summary>
         public int CardUniversalId
         {
             get { return cardPreviewControl.CardUniversalId; }
-            set
-            {
-                if (value != cardPreviewControl.CardUniversalId)
-                {
-                    if (ApplicationSettings.ImagesFolderExists)
-                    {
-                        cardPreviewControl.CardUniversalId = value;
-                        Show();
-                    }
-                    else
-                    {
-                        Hide();
-                    }
-                }
-            }
         }
 
         public CardPreviewForm()

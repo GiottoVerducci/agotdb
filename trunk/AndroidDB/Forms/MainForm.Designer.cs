@@ -111,6 +111,7 @@ namespace NRADB.Forms
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oCTGNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadOCTGNDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importOCTGNImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkNewVersionBackgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -805,7 +806,8 @@ namespace NRADB.Forms
             // oCTGNToolStripMenuItem
             // 
             this.oCTGNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadOCTGNDataToolStripMenuItem});
+            this.loadOCTGNDataToolStripMenuItem,
+            this.importOCTGNImagesToolStripMenuItem});
             this.oCTGNToolStripMenuItem.Name = "oCTGNToolStripMenuItem";
             resources.ApplyResources(this.oCTGNToolStripMenuItem, "oCTGNToolStripMenuItem");
             // 
@@ -814,6 +816,12 @@ namespace NRADB.Forms
             this.loadOCTGNDataToolStripMenuItem.Name = "loadOCTGNDataToolStripMenuItem";
             resources.ApplyResources(this.loadOCTGNDataToolStripMenuItem, "loadOCTGNDataToolStripMenuItem");
             this.loadOCTGNDataToolStripMenuItem.Click += new System.EventHandler(this.loadOCTGNDataToolStripMenuItem_Click);
+            // 
+            // importOCTGNImagesToolStripMenuItem
+            // 
+            this.importOCTGNImagesToolStripMenuItem.Name = "importOCTGNImagesToolStripMenuItem";
+            resources.ApplyResources(this.importOCTGNImagesToolStripMenuItem, "importOCTGNImagesToolStripMenuItem");
+            this.importOCTGNImagesToolStripMenuItem.Click += new System.EventHandler(this.importOCTGNImagesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -951,5 +959,6 @@ namespace NRADB.Forms
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ToolStripMenuItem resizeColumnsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importOCTGNImagesToolStripMenuItem;
 	}
 }

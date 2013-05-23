@@ -2201,10 +2201,16 @@
     <value>Window</value>
   </data>
   <data name="loadOCTGNDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="loadOCTGNDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>Load OCTGN data</value>
+    <value>Import OCTGN data</value>
+  </data>
+  <data name="importOCTGNImagesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 22</value>
+  </data>
+  <data name="importOCTGNImagesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import OCTGN images</value>
   </data>
   <data name="oCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 20</value>
@@ -2375,6 +2381,12 @@
     <value>loadOCTGNDataToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;loadOCTGNDataToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;importOCTGNImagesToolStripMenuItem.Name" xml:space="preserve">
+    <value>importOCTGNImagesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;importOCTGNImagesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">

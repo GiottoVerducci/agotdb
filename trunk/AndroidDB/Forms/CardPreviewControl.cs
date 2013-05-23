@@ -30,17 +30,46 @@ namespace NRADB.Forms
 	{
 		private Image _currentImage;
 		private int _cardUniversalId = -1;
+	    private Guid _cardOctgnId = Guid.Empty;
 
-		/// <summary>
+	    public bool SetId(int universalId, Guid octgnId)
+	    {
+	        bool mustLoadImage = false;
+            if (universalId != _cardUniversalId)
+            {
+                _cardUniversalId = universalId;
+                mustLoadImage = true;
+            }
+
+            if (octgnId != _cardOctgnId)
+            {
+                _cardOctgnId = octgnId;
+                mustLoadImage = true;
+            }
+
+            if(mustLoadImage)
+                LoadCardImage();
+	        return mustLoadImage;
+	    }
+
+	    /// <summary>
 		/// The id of the card displayed.
 		/// </summary>
 		public int CardUniversalId
 		{
 			get { return _cardUniversalId; }
-			set { if (value != _cardUniversalId) { _cardUniversalId = value; LoadCardImage(); } }
+            set { }
 		}
 
-		public CardPreviewControl()
+        /// <summary>
+        /// The id of the card displayed.
+        /// </summary>
+        public Guid CardOctgnId
+        {
+            get { return _cardOctgnId; }
+        }
+        
+        public CardPreviewControl()
 		{
 			InitializeComponent();
 		}
@@ -74,10 +103,11 @@ namespace NRADB.Forms
 				Invalidate();
 				return;
 			}
-			string imageFileName = CardImageService.GetImageFileName(ApplicationSettings.ImagesFolder, _cardUniversalId);
-			if (CardImageService.GetImageAvailability(imageFileName) == ImageAvailability.Available)
+			var imageFileNames = CardImageService.GetImageFileNames(ApplicationSettings.ImagesFolder, _cardUniversalId, _cardOctgnId);
+		    int index;
+            if (CardImageService.GetImageAvailability(imageFileNames, out index) == ImageAvailability.Available)
 			{
-				_currentImage = new Bitmap(imageFileName);
+				_currentImage = new Bitmap(imageFileNames[index]);
 				pbImage.Image = _currentImage;
 				pbImage.SizeMode = PictureBoxSizeMode.Zoom;
 				DisplayImageOrText(true);

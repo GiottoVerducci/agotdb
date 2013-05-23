@@ -1,3 +1,8 @@
+Beta 0.9 (May, 23 2013)
+ - Added support for images imported from OCTGN files (o8c definition files).
+ - Added import button for OCTGN images
+ - Fixed file selection in OCTGN import (previously only url would work).
+
 Beta 0.8 (May, 22 2013)
  - Fixed a bug when loading a Corp deck while the "Runner" combobox was selected (and the other way round).
  - Highlight cards as errors (in red) when using a off-faction card that has no influence cost.
