@@ -744,7 +744,7 @@ namespace NRADB.Forms
 
         private void cardPreviewControl_MouseEnter(object sender, EventArgs e)
         {
-            ShowCardPreviewForm(cardPreviewControl.CardUniversalId);
+            ShowCardPreviewForm(cardPreviewControl.CardUniversalId, cardPreviewControl.CardOctgnId);
         }
 
         private void cardPreviewControl_MouseLeave(object sender, EventArgs e)
@@ -763,18 +763,18 @@ namespace NRADB.Forms
         private void UpdateCardImage(TCard card)
         {
             cardPreviewControl.Visible = true;
-            cardPreviewControl.CardUniversalId = card.UniversalId;
+            cardPreviewControl.SetId(card.UniversalId, card.OctgnId);
         }
 
         /// <summary>
         /// Shows the card preview form for given card id.
         /// </summary>
         /// <param name="universalId">The card id.</param>
-        private void ShowCardPreviewForm(int universalId)
+        private void ShowCardPreviewForm(int universalId, Guid octgnId)
         {
             if (!ApplicationSettings.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
-            _cardPreviewForm.CardUniversalId = universalId;
+            _cardPreviewForm.SetId(universalId, octgnId);
             var x = this.Location.X + this.Width;
             var y = this.Location.Y + 10;
 
@@ -819,6 +819,11 @@ namespace NRADB.Forms
                     Application.Exit();
                     Process.Start(Application.ExecutablePath, string.Empty);
                 });
+        }
+
+        private void importOCTGNImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OctgnManager.ImportImages();
         }
 
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

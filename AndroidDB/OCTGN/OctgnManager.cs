@@ -18,9 +18,36 @@ namespace NRADB.OCTGN
 {
     public static class OctgnManager
     {
+        public static void ImportImages()
+        {
+            var dialog = new OctgnSetSelector { IsUrl = false, Url = null, Items = "images" };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var path = dialog.Path;
+                var octgnImageWorker = new BackgroundWorker
+                {
+                    //WorkerReportsProgress = true,
+                    //WorkerSupportsCancellation = true
+                };
+
+                octgnImageWorker.DoWork += OctgnImageImportWorkerOnDoWork;
+                octgnImageWorker.RunWorkerAsync(new[] { path, ApplicationSettings.ImagesFolder });
+                ApplicationSettings.ImagesFolderExists = true;
+            }
+        }
+
+        private static void OctgnImageImportWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            var backgroundWorker = (BackgroundWorker)sender;
+            var paths = (string[])doWorkEventArgs.Argument;
+
+            OctgnLoader.ImportAllImages(paths[1], paths[0], backgroundWorker);
+        }
+
         public static void PromptForInitialization(Action callback = null)
         {
-            var dialog = new OctgnSetSelector { IsUrl = true, Url = UserSettings.OctgnSetsDownloadUrl };
+            var dialog = new OctgnSetSelector { IsUrl = true, Url = UserSettings.OctgnSetsDownloadUrl, Items = "sets" };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {

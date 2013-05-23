@@ -43,9 +43,9 @@
             this.rbPath.AutoSize = true;
             this.rbPath.Location = new System.Drawing.Point(12, 12);
             this.rbPath.Name = "rbPath";
-            this.rbPath.Size = new System.Drawing.Size(119, 17);
+            this.rbPath.Size = new System.Drawing.Size(114, 17);
             this.rbPath.TabIndex = 0;
-            this.rbPath.Text = "Load sets from disk:";
+            this.rbPath.Text = "Load {0} from disk:";
             this.rbPath.UseVisualStyleBackColor = true;
             this.rbPath.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
             // 
@@ -55,10 +55,10 @@
             this.rbUrl.Checked = true;
             this.rbUrl.Location = new System.Drawing.Point(12, 35);
             this.rbUrl.Name = "rbUrl";
-            this.rbUrl.Size = new System.Drawing.Size(135, 17);
+            this.rbUrl.Size = new System.Drawing.Size(130, 17);
             this.rbUrl.TabIndex = 1;
             this.rbUrl.TabStop = true;
-            this.rbUrl.Text = "Load sets from internet:";
+            this.rbUrl.Text = "Load {0} from internet:";
             this.rbUrl.UseVisualStyleBackColor = true;
             this.rbUrl.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
             // 
@@ -66,24 +66,24 @@
             // 
             this.tbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbUrl.Location = new System.Drawing.Point(153, 34);
+            this.tbUrl.Location = new System.Drawing.Point(186, 34);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(246, 20);
+            this.tbUrl.Size = new System.Drawing.Size(286, 20);
             this.tbUrl.TabIndex = 2;
             // 
             // tbPath
             // 
             this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPath.Location = new System.Drawing.Point(153, 11);
+            this.tbPath.Location = new System.Drawing.Point(186, 11);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(215, 20);
+            this.tbPath.Size = new System.Drawing.Size(255, 20);
             this.tbPath.TabIndex = 3;
             // 
             // btBrowsePath
             // 
             this.btBrowsePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowsePath.Location = new System.Drawing.Point(374, 11);
+            this.btBrowsePath.Location = new System.Drawing.Point(447, 11);
             this.btBrowsePath.Name = "btBrowsePath";
             this.btBrowsePath.Size = new System.Drawing.Size(25, 20);
             this.btBrowsePath.TabIndex = 4;
@@ -95,7 +95,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(324, 86);
+            this.btnCancel.Location = new System.Drawing.Point(397, 86);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -106,7 +106,7 @@
             // 
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoad.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnLoad.Location = new System.Drawing.Point(243, 86);
+            this.btnLoad.Location = new System.Drawing.Point(316, 86);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 6;
@@ -119,7 +119,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(411, 121);
+            this.ClientSize = new System.Drawing.Size(484, 121);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btBrowsePath);

@@ -90,7 +90,6 @@ namespace NRADB.OCTGN
             cardId = Convert.ToInt32(setInformations.Substring(2));
         }
 
-
         public struct ImportResult
         {
             public bool IsSuccessful;
@@ -377,6 +376,24 @@ namespace NRADB.OCTGN
             public string Version { get; set; }
         }
 
+        public static void ImportAllImages(string imagePath, string o8cPath, BackgroundWorker backgroundWorker)
+        {
+            Directory.CreateDirectory(imagePath);
+            var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
+            Directory.CreateDirectory(tempFolderPath);
+            var filePaths = ZipHelper.UnZipFile(o8cPath, tempFolderPath, filePattern: "*.jpg");
+
+            foreach (var filePath in filePaths)
+            {
+                var newPath = imagePath + Path.DirectorySeparatorChar + Path.GetFileName(filePath);
+                if (File.Exists(newPath))
+                    File.Delete(newPath);
+                File.Move(filePath, newPath);
+            }
+            var tempDirectoryInfo = new DirectoryInfo(tempFolderPath);
+            tempDirectoryInfo.Delete(true);
+        }
+
         public static Dictionary<OctgnSetData, OctgnCard[]> LoadAllSets(string path, BackgroundWorker backgroundWorker)
         {
             var result = new Dictionary<OctgnSetData, OctgnCard[]>();
@@ -384,11 +401,11 @@ namespace NRADB.OCTGN
             var progress = 0;
             var tempFolderPath = Path.GetTempPath() + Path.GetRandomFileName();
             Directory.CreateDirectory(tempFolderPath);
-            var files = ZipHelper.UnZipFile(path, tempFolderPath, filePattern: "*set.xml");
+            var filePaths = ZipHelper.UnZipFile(path, tempFolderPath, filePattern: "*set.xml");
 
-            var totalFileCount = files.Count;
+            var totalFileCount = filePaths.Count;
 
-            foreach (var setFile in files)//FileInfo fileInfo in fileInfos)
+            foreach (var setFilePath in filePaths)//FileInfo fileInfo in fileInfos)
             {
                 if (backgroundWorker.CancellationPending)
                     return null;
@@ -397,11 +414,11 @@ namespace NRADB.OCTGN
                 var doc = new XmlDocument();
                 try
                 {
-                    doc.Load(setFile);
+                    doc.Load(setFilePath);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Couldn't read set definition file " + setFile, ex);
+                    throw new Exception("Couldn't read set definition file " + setFilePath, ex);
                 }
 
                 var setData = new OctgnSetData();
