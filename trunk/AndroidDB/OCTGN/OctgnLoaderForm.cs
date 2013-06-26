@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using AndroidDB;
+using GenericDB.OCTGN;
 using NRADB.BusinessObjects;
 
 namespace NRADB.OCTGN
@@ -29,27 +30,27 @@ namespace NRADB.OCTGN
 
         private void OctgnLoaderWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
         {
-            var task = (OctgnLoader.OctgnLoaderTask)progressChangedEventArgs.UserState;
+            var task = (NraOctgnLoader.OctgnLoaderTask)progressChangedEventArgs.UserState;
             switch (task)
             {
-                case OctgnLoader.OctgnLoaderTask.LoadSet:
+                case NraOctgnLoader.OctgnLoaderTask.LoadSet:
                     pbLoadSet.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.ImportSet:
+                case NraOctgnLoader.OctgnLoaderTask.ImportSet:
                     pbImportSet.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.ImportCard:
+                case NraOctgnLoader.OctgnLoaderTask.ImportCard:
                     pbImportCard.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.UpdateDatabase:
+                case NraOctgnLoader.OctgnLoaderTask.UpdateDatabase:
                     pbUpdateDatabase.Value = progressChangedEventArgs.ProgressPercentage;
                     btAbort.Enabled = false;
                     break;
             }
-            EnforceLabelStyle(lblLoadSet, task == OctgnLoader.OctgnLoaderTask.LoadSet);
-            EnforceLabelStyle(lblImportSet, task == OctgnLoader.OctgnLoaderTask.ImportSet);
-            EnforceLabelStyle(lblImportCard, task == OctgnLoader.OctgnLoaderTask.ImportCard);
-            EnforceLabelStyle(lblUpdateDatabase, task == OctgnLoader.OctgnLoaderTask.UpdateDatabase);
+            EnforceLabelStyle(lblLoadSet, task == NraOctgnLoader.OctgnLoaderTask.LoadSet);
+            EnforceLabelStyle(lblImportSet, task == NraOctgnLoader.OctgnLoaderTask.ImportSet);
+            EnforceLabelStyle(lblImportCard, task == NraOctgnLoader.OctgnLoaderTask.ImportCard);
+            EnforceLabelStyle(lblUpdateDatabase, task == NraOctgnLoader.OctgnLoaderTask.UpdateDatabase);
         }
 
         private static void EnforceLabelStyle(Label label, bool indicatorIsVisible)
@@ -75,16 +76,16 @@ namespace NRADB.OCTGN
         private void OctgnLoaderWorkerOnRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
             _isLoadCompleted = true;
-            var result = (OctgnLoader.OctgnLoaderResultAndValue)runWorkerCompletedEventArgs.Result;
-            if (result.Result == OctgnLoader.OctgnLoaderResult.NoSetsFounds)
+            var result = (OctgnLoaderResultAndValue)runWorkerCompletedEventArgs.Result;
+            if (result.Result == OctgnLoaderResult.NoSetsFounds)
             {
                 MessageBox.Show(Resource1.ErrOctgnNotFound, Resource1.ErrOctgnNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
                 return;
             }
-            if (result.Result == OctgnLoader.OctgnLoaderResult.SetNotDefinedInDatabase)
+            if (result.Result == OctgnLoaderResult.SetNotDefinedInDatabase)
             {
-                var octgnSetNotFound = (OctgnLoader.OctgnSetData)result.Value;
+                var octgnSetNotFound = (NraOctgnLoader.OctgnSetData)result.Value;
                 MessageBox.Show(string.Format(Resource1.ErrOctgnSetNotDefinedInDatabase, octgnSetNotFound.Name, octgnSetNotFound.Id),
                     Resource1.ErrOctgnSetNotDefinedInDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
@@ -92,9 +93,9 @@ namespace NRADB.OCTGN
             }
 
             if (!runWorkerCompletedEventArgs.Cancelled)
-                ApplicationSettings.IsOctgnReady = true; // ApplicationSettings.DatabaseManager.HasOctgnData();
+                ApplicationSettings.Instance.IsOctgnReady = true; // ApplicationSettings.Instance.DatabaseManager.HasOctgnData();
             this.Close();
-            if (this.Callback != null && ApplicationSettings.IsOctgnReady)
+            if (this.Callback != null && ApplicationSettings.Instance.IsOctgnReady)
                 this.Callback();
         }
 

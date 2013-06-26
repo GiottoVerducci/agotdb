@@ -150,8 +150,8 @@
     <Compile Include="Forms\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="OCTGN\AGoTOctgnLoader.cs" />
     <Compile Include="OCTGN\OctgnCard.cs" />
-    <Compile Include="OCTGN\OctgnLoader.cs" />
     <Compile Include="OCTGN\OctgnLoaderForm.cs">
       <SubType>Form</SubType>
     </Compile>

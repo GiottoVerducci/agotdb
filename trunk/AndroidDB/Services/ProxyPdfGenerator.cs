@@ -110,7 +110,7 @@ namespace NRADB.Services
         {
             foreach (var card in cardList)
             {
-                var imageFileNames = CardImageService.GetImageFileNames(ApplicationSettings.ImagesFolder, card.UniversalId, card.OctgnId);
+                var imageFileNames = CardImageService.GetImageFileNames(ApplicationSettings.Instance.ImagesFolder, card.UniversalId, card.OctgnId);
                 int index;
                 if (CardImageService.GetImageAvailability(imageFileNames, out index) == ImageAvailability.Available)
                     printList.Add(new ProxyInfo

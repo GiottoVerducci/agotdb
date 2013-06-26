@@ -50,7 +50,7 @@ namespace NRADB.Forms
             this.tabPageCardtext = new System.Windows.Forms.TabPage();
             this.splitCardText = new System.Windows.Forms.SplitContainer();
             this.rtbCardText = new System.Windows.Forms.RichTextBox();
-            this.cardPreviewControl = new NRADB.Forms.CardPreviewControl();
+            this.cardPreviewControl = new GenericDB.Forms.CardPreviewControl();
             this.tabControlGlobalInfo = new System.Windows.Forms.TabControl();
             this.tabPageDescription = new System.Windows.Forms.TabPage();
             this.rtbDescription = new System.Windows.Forms.RichTextBox();
@@ -595,7 +595,7 @@ namespace NRADB.Forms
 	private System.Windows.Forms.TabPage tabPageStats;
 	private System.Windows.Forms.RichTextBox rtbStatistics;
 	private System.Windows.Forms.SplitContainer splitCardText;
-	private CardPreviewControl cardPreviewControl;
+	private GenericDB.Forms.CardPreviewControl cardPreviewControl;
 	private System.Windows.Forms.ToolStripMenuItem sdsToolStripMenuItem;
 	private System.Windows.Forms.ToolStripMenuItem exportDeckToOCTGNToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem importDeckFromOCTGNToolStripMenuItem;

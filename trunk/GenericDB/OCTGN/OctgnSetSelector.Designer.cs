@@ -1,4 +1,4 @@
-﻿namespace NRADB.OCTGN
+﻿namespace GenericDB.OCTGN
 {
     partial class OctgnSetSelector
     {

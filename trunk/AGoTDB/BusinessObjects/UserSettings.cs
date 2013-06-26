@@ -156,6 +156,12 @@ namespace AGoTDB.BusinessObjects
             set { Singleton.WriteGuid(OctgnSectionName, "OctgnGameId", value); }
         }
 
+        public static string OctgnSetsDownloadUrl
+        {
+            get { return Singleton.ReadString(OctgnSectionName, "OctgnSetsDownloadUrl", string.Format("http://www.myget.org/F/octgngamedirectory/api/v2/package/{0}/", OctgnGameId)); }
+            set { Singleton.WriteString(OctgnSectionName, "OctgnSetsDownloadUrl", value); }
+        }
+
         public static Guid OctgnHouseBaratheonId
         {
             get { return Singleton.ReadGuid(OctgnSectionName, "OctgnHouseBaratheonId", new Guid("a12af4e8-be4b-4cda-a6b6-534f97001001")); }

@@ -1,4 +1,4 @@
-﻿namespace NRADB.Forms
+﻿namespace GenericDB.Forms
 {
 	partial class CardPreviewForm
 	{
@@ -31,7 +31,7 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CardPreviewForm));
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-			this.cardPreviewControl = new NRADB.Forms.CardPreviewControl();
+			this.cardPreviewControl = new Forms.CardPreviewControl();
 			this.SuspendLayout();
 			// 
 			// imageList1

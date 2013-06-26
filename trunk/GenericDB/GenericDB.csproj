@@ -96,6 +96,7 @@
     <Compile Include="BusinessObjects\DeckTreeNodeSorter.cs" />
     <Compile Include="BusinessObjects\FormatSection.cs" />
     <Compile Include="BusinessObjects\FormattedValue.cs" />
+    <Compile Include="BusinessObjects\IApplicationSettings.cs" />
     <Compile Include="BusinessObjects\Settings.cs" />
     <Compile Include="BusinessObjects\StringPair.cs" />
     <Compile Include="BusinessObjects\VersionedDeck.cs" />
@@ -122,6 +123,18 @@
     <Compile Include="Extensions\ExtendedCheckedListBoxExtension.cs" />
     <Compile Include="Extensions\IDictionaryExtension.cs" />
     <Compile Include="Extensions\RichTextBoxExtension.cs" />
+    <Compile Include="Forms\CardPreviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\CardPreviewControl.designer.cs">
+      <DependentUpon>CardPreviewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CardPreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CardPreviewForm.designer.cs">
+      <DependentUpon>CardPreviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NewVersionInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,15 +150,43 @@
     <Compile Include="Helper\ExtendedCheckListBoxHelper.cs" />
     <Compile Include="Helper\GridViewHelper.cs" />
     <Compile Include="Helper\ZipHelper.cs" />
+    <Compile Include="OCTGN\IOctgnCard.cs" />
     <Compile Include="OCTGN\OctgnCardDataAttribute.cs" />
+    <Compile Include="OCTGN\OctgnDownloadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OCTGN\OctgnDownloadForm.designer.cs">
+      <DependentUpon>OctgnDownloadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OCTGN\OctgnLoader.cs" />
+    <Compile Include="OCTGN\OctgnLoaderResultAndValue.cs" />
+    <Compile Include="OCTGN\OctgnManager.cs" />
+    <Compile Include="OCTGN\OctgnSetSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OCTGN\OctgnSetSelector.designer.cs">
+      <DependentUpon>OctgnSetSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OCTGN\SetInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BusinessObjects\TextFormat.cs" />
     <Compile Include="BusinessObjects\XInt.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\CardImageService.cs" />
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\CardPreviewControl.resx">
+      <DependentUpon>CardPreviewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CardPreviewForm.resx">
+      <DependentUpon>CardPreviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewVersionInfoForm.fr.resx">
       <DependentUpon>NewVersionInfoForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -161,6 +202,16 @@
     <EmbeddedResource Include="Forms\RevisionCommentInputForm.resx">
       <DependentUpon>RevisionCommentInputForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OCTGN\OctgnDownloadForm.resx">
+      <DependentUpon>OctgnDownloadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OCTGN\OctgnSetSelector.resx">
+      <DependentUpon>OctgnSetSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -112,6 +112,15 @@ namespace NRADB.BusinessObjects
         }
         #endregion
 
+        #region Main form
+        private const string MainFormSectionName = "MainForm";
+        public static string ColumnsSettings
+        {
+            get { return Singleton.ReadString(MainFormSectionName, "ColumnsSettings", null); }
+            set { Singleton.WriteString(MainFormSectionName, "ColumnsSettings", value); }
+        }
+        #endregion
+
         #region DeckBuilder
         private const string DeckBuilderSectionName = "DeckBuilder";
         public static string[] TypeOrder
@@ -136,15 +145,6 @@ namespace NRADB.BusinessObjects
         }
         #endregion
 
-        #region Main form
-        private const string MainFormSectionName = "MainForm";
-        public static string ColumnsSettings
-        {
-            get { return Singleton.ReadString(MainFormSectionName, "ColumnsSettings", null); }
-            set { Singleton.WriteString(MainFormSectionName, "ColumnsSettings", value); }
-        }
-        #endregion
-
         #region OCTGN
         private const string OctgnSectionName = "OCTGN";
         public static Guid OctgnGameId
@@ -155,7 +155,7 @@ namespace NRADB.BusinessObjects
 
         public static string OctgnSetsDownloadUrl
         {
-            get { return Singleton.ReadString(OctgnSectionName, "OctgnSetsDownloadUrl", "http://www.myget.org/F/octgngamedirectory/api/v2/package/0f38e453-26df-4c04-9d67-6d43de939c77/"); }
+            get { return Singleton.ReadString(OctgnSectionName, "OctgnSetsDownloadUrl", string.Format("http://www.myget.org/F/octgngamedirectory/api/v2/package/{0}/", OctgnGameId)); }
             set { Singleton.WriteString(OctgnSectionName, "OctgnSetsDownloadUrl", value); }
         }
         #endregion

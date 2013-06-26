@@ -15,18 +15,32 @@
 // You can contact me at v.ripoll@gmail.com
 // © Fantasy Flight Games 2012
 
+using System;
 using NRADB.DataAccess;
 using GenericDB.BusinessObjects;
 
 namespace NRADB.BusinessObjects
 {
-	public static class ApplicationSettings
-	{
-		public static readonly string ApplicationName = "NRADB";
-		public static readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 9, 0);
-		public static NraDatabaseManager DatabaseManager { get; set; }
-		public static bool ImagesFolderExists { get; set; }
-		public static string ImagesFolder { get; set; }
-		public static bool IsOctgnReady { get; set; }
-	}
+    public class ApplicationSettings : IApplicationSettings
+    {
+        private static readonly ApplicationSettings _instance = new ApplicationSettings();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static ApplicationSettings(){}
+
+        private ApplicationSettings(){}
+
+        public static ApplicationSettings Instance
+        {
+            get { return _instance; }
+        }
+
+        public readonly string ApplicationName = "NRADB";
+        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 9, 0);
+        public NraDatabaseManager DatabaseManager { get; set; }
+        public bool ImagesFolderExists { get; set; }
+        public string ImagesFolder { get; set; }
+        public bool IsOctgnReady { get; set; }
+    }
 }

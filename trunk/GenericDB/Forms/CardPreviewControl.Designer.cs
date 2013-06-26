@@ -1,4 +1,4 @@
-﻿namespace NRADB.Forms
+﻿namespace GenericDB.Forms
 {
 	partial class CardPreviewControl
 	{

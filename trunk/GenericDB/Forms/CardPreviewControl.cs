@@ -1,5 +1,5 @@
-﻿// AndroidDB - A card searcher and deck builder tool for the LCG "Netrunner Android"
-// Copyright © 2013 Vincent Ripoll
+﻿// GenericDB - A generic card searcher and deck builder library for CCGs
+// Copyright © 2007, 2008, 2009, 2010, 2011, 2012, 2013 Vincent Ripoll
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -13,24 +13,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 // You can contact me at v.ripoll@gmail.com
-// © Fantasy Flight Games 2012
-
 
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using AndroidDB;
+using GenericDB.BusinessObjects;
 using GenericDB.Services;
-using NRADB.BusinessObjects;
-using NRADB.Services;
 
-namespace NRADB.Forms
+namespace GenericDB.Forms
 {
 	public partial class CardPreviewControl : UserControl
 	{
 		private Image _currentImage;
 		private int _cardUniversalId = -1;
 	    private Guid _cardOctgnId = Guid.Empty;
+
+        public IApplicationSettings Settings { get; set; }
 
 	    public bool SetId(int universalId, Guid octgnId)
 	    {
@@ -96,14 +94,14 @@ namespace NRADB.Forms
 
 		private void LoadCardImage()
 		{
-			if (!ApplicationSettings.ImagesFolderExists)
+            if (!Settings.ImagesFolderExists)
 			{
 				lblUnavailable.Text = Resource1.ImageFolderDoesntExist;
 				DisplayImageOrText(false);
 				Invalidate();
 				return;
 			}
-			var imageFileNames = CardImageService.GetImageFileNames(ApplicationSettings.ImagesFolder, _cardUniversalId, _cardOctgnId);
+            var imageFileNames = CardImageService.GetImageFileNames(Settings.ImagesFolder, _cardUniversalId, _cardOctgnId);
 		    int index;
             if (CardImageService.GetImageAvailability(imageFileNames, out index) == ImageAvailability.Available)
 			{
