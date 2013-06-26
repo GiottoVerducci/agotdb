@@ -27,9 +27,9 @@ namespace NRADB.BusinessObjects
 
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit
-        static ApplicationSettings(){}
+        static ApplicationSettings() { }
 
-        private ApplicationSettings(){}
+        private ApplicationSettings() { }
 
         public static ApplicationSettings Instance
         {
@@ -37,7 +37,7 @@ namespace NRADB.BusinessObjects
         }
 
         public readonly string ApplicationName = "NRADB";
-        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 9, 0);
+        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 10, 0);
         public NraDatabaseManager DatabaseManager { get; set; }
         public bool ImagesFolderExists { get; set; }
         public string ImagesFolder { get; set; }
