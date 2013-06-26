@@ -77,7 +77,7 @@ namespace AGoTDB.Forms
             this.lblUniversalId = new System.Windows.Forms.Label();
             this.btnReportError = new System.Windows.Forms.Button();
             this.rtbCardDetails = new System.Windows.Forms.RichTextBox();
-            this.cardPreviewControl = new AGoTDB.Forms.CardPreviewControl();
+            this.cardPreviewControl = new GenericDB.Forms.CardPreviewControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -768,7 +768,7 @@ namespace AGoTDB.Forms
 		private System.ComponentModel.BackgroundWorker checkNewVersionBackgroundWorker;
 		private System.Windows.Forms.SplitContainer splitCardText;
 		private System.Windows.Forms.Button btnReportError;
-		private CardPreviewControl cardPreviewControl;
+        private GenericDB.Forms.CardPreviewControl cardPreviewControl;
         private System.Windows.Forms.Label lblUniversalId;
         private System.Windows.Forms.ToolStripMenuItem oCTGNToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadOCTGNDataToolStripMenuItem;

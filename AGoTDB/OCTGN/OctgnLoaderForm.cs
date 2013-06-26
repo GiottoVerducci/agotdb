@@ -92,9 +92,9 @@ namespace AGoTDB.OCTGN
             }
 
             if (!runWorkerCompletedEventArgs.Cancelled)
-                ApplicationSettings.IsOctgnReady = true; // ApplicationSettings.DatabaseManager.HasOctgnData();
+                ApplicationSettings.Instance.IsOctgnReady = true; // ApplicationSettings.Instance.DatabaseManager.HasOctgnData();
             this.Close();
-            if (this.Callback != null && ApplicationSettings.IsOctgnReady)
+            if (this.Callback != null && ApplicationSettings.Instance.IsOctgnReady)
                 this.Callback();
         }
 

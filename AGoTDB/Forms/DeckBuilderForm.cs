@@ -46,17 +46,18 @@ namespace AGoTDB.Forms
         #region Form events (FormShown/Closed, NodeClick or HouseValue changed, tvHistory select)
         private void DeckBuilderForm_Shown(object sender, EventArgs e)
         {
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameHouse, "House", TableType.ValueId);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.Instance.DatabaseManager.TableNameHouse, "House", TableType.ValueId);
             eclHouse.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 ecl.Summary += " - " + ecl.Items[0];
                 ecl.Items.RemoveAt(0); // remove neutral house
                 ecl.UpdateSize(); // update size because neutral house has been removed
             });
+
             UpdateAgendaComboBox();
             UpdateHistoryFromVersionedDeck();
             //treeViewDeck.TreeViewNodeSorter = deckTreeNodeSorter; // we don't use it because it's slower than inserting directly at the right place (visible when loading decks)
-            miGenerateProxyPdf.Visible = ApplicationSettings.ImagesFolderExists; // show the proxy generator only if the images folder exists
+            miGenerateProxyPdf.Visible = ApplicationSettings.Instance.ImagesFolderExists; // show the proxy generator only if the images folder exists
 
             if (UserSettings.DisplayImages)
             {
@@ -125,7 +126,7 @@ namespace AGoTDB.Forms
             eclAgenda.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 ecl.Items.Clear();
-                var table = ApplicationSettings.DatabaseManager.GetAgendas();
+                var table = ApplicationSettings.Instance.DatabaseManager.GetAgendas();
                 foreach (DataRow row in table.Rows)
                 {
                     var agendaCard = new AgotCard(row);

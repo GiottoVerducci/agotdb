@@ -98,18 +98,6 @@
     <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CardPreviewControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\CardPreviewControl.Designer.cs">
-      <DependentUpon>CardPreviewControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CardPreviewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CardPreviewForm.Designer.cs">
-      <DependentUpon>CardPreviewForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\DeckBuilderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,12 +167,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CardPreviewControl.resx">
-      <DependentUpon>CardPreviewControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CardPreviewForm.resx">
-      <DependentUpon>CardPreviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DeckBuilderForm.fr.resx">
       <DependentUpon>DeckBuilderForm.cs</DependentUpon>

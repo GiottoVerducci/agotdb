@@ -46,12 +46,12 @@ namespace AGoTDB.Forms
 
         private void InitializeDatabaseManager()
         {
-            ApplicationSettings.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
+            ApplicationSettings.Instance.DatabaseManager = new AgotDatabaseManager("AGoT.mdb", "AGoTEx.mdb");
         }
         
         private static void LoadCardTypeNames()
         {
-            var types = ApplicationSettings.DatabaseManager.GetCardTypeNames();
+            var types = ApplicationSettings.Instance.DatabaseManager.GetCardTypeNames();
             AgotCard.CardTypeNames = new Dictionary<int, string>();
             foreach (DataRow row in types.Rows)
             {
@@ -62,7 +62,7 @@ namespace AGoTDB.Forms
 
         private static void LoadCardHouseNames()
         {
-            var houses = ApplicationSettings.DatabaseManager.GetCardHouseNames();
+            var houses = ApplicationSettings.Instance.DatabaseManager.GetCardHouseNames();
             AgotCard.CardHouseNames = new Dictionary<int, string>();
             foreach (DataRow row in houses.Rows)
             {
@@ -73,7 +73,7 @@ namespace AGoTDB.Forms
 
         private static void LoadCardTriggerNames()
         {
-            var triggers = ApplicationSettings.DatabaseManager.GetCardTriggerNames();
+            var triggers = ApplicationSettings.Instance.DatabaseManager.GetCardTriggerNames();
             AgotCard.CardTriggerNames = new List<string>();
             foreach (DataRow row in triggers.Rows)
             {
@@ -84,7 +84,7 @@ namespace AGoTDB.Forms
 
         private static void LoadCardPatterns()
         {
-            var patterns = ApplicationSettings.DatabaseManager.GetCardPatterns();
+            var patterns = ApplicationSettings.Instance.DatabaseManager.GetCardPatterns();
             AgotCard.CardPatterns = new Dictionary<AgotCard.Pattern, string>();
             foreach (DataRow row in patterns.Rows)
             {
@@ -96,7 +96,7 @@ namespace AGoTDB.Forms
         private static void LoadExpansionSets()
         {
             AgotCard.ExpansionSets = new Dictionary<string, bool>();
-            var sets = ApplicationSettings.DatabaseManager.GetExpansionSets();
+            var sets = ApplicationSettings.Instance.DatabaseManager.GetExpansionSets();
             foreach (DataRow row in sets.Rows)
             {
                 if ((int)row["Id"] >= 0)
@@ -119,17 +119,17 @@ namespace AGoTDB.Forms
         /// </summary>
         private void UpdateControlsLabels()
         {
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.DatabaseManager.TableNameHouse, "House", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclCardtype, ApplicationSettings.DatabaseManager.TableNameType, "Type", TableType.ValueShortName);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclMecanism, ApplicationSettings.DatabaseManager.TableNameMechanism, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclCE, ApplicationSettings.DatabaseManager.TableNameChallengeEnhancement, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclTrigger, ApplicationSettings.DatabaseManager.TableNameTrigger, "Text", TableType.Value);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName);
-            ApplicationSettings.DatabaseManager.UpdateFilterMenu(filterToolStripMenuItem, ApplicationSettings.DatabaseManager.TableNameFilterText, tbCardtext, eclCardtextCheck);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclHouse, ApplicationSettings.Instance.DatabaseManager.TableNameHouse, "House", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclCardtype, ApplicationSettings.Instance.DatabaseManager.TableNameType, "Type", TableType.ValueShortName);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.Instance.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclMecanism, ApplicationSettings.Instance.DatabaseManager.TableNameMechanism, "", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.Instance.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.Instance.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclCE, ApplicationSettings.Instance.DatabaseManager.TableNameChallengeEnhancement, "", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.Instance.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclTrigger, ApplicationSettings.Instance.DatabaseManager.TableNameTrigger, "Text", TableType.Value);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.Instance.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName);
+            ApplicationSettings.Instance.DatabaseManager.UpdateFilterMenu(filterToolStripMenuItem, ApplicationSettings.Instance.DatabaseManager.TableNameFilterText, tbCardtext, eclCardtextCheck);
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace AGoTDB.Forms
         /// <returns>The SQL query/human query pair reflecting the controls state</returns>
         private Query BuildQueryFromControls()
         {
-            var result = new Query(String.Format("SELECT * FROM [{0}]", ApplicationSettings.DatabaseManager.TableNameMain), "");
+            var result = new Query(String.Format("SELECT * FROM [{0}]", ApplicationSettings.Instance.DatabaseManager.TableNameMain), "");
 
             IList<DbFilter> additionalIncludedSets = null;
             IList<DbFilter> additionalExcludedSets = null;
@@ -313,7 +313,7 @@ namespace AGoTDB.Forms
             var indeterminateItems = eclExpansionSet.GetItemsByState(CheckState.Indeterminate);
 
             // reload the items by filtering them if the "LCG only" checkbox is checked
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName,
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.Instance.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName,
                 lcgSetsOnly
                     ? (item => AgotCard.ExpansionSets[item.ShortName])
                     : (Predicate<DbFilter>)null);
