@@ -1,3 +1,6 @@
+Beta 0.10 (June, 26 2013)
+ - Fixed OCTGN import for new chapters
+
 Beta 0.9 (May, 23 2013)
  - Added support for images imported from OCTGN files (o8c definition files).
  - Added import button for OCTGN images
