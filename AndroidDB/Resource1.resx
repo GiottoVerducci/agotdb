@@ -236,12 +236,6 @@ Exception trace:
   <data name="FactionText" xml:space="preserve">
     <value>Faction</value>
   </data>
-  <data name="ImageFolderDoesntExist" xml:space="preserve">
-    <value>The folder containing the card images doesn't exist</value>
-  </data>
-  <data name="ImageNotAvailable" xml:space="preserve">
-    <value>Image not available.</value>
-  </data>
   <data name="MaxStatsText" xml:space="preserve">
     <value>max</value>
   </data>

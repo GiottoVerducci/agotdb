@@ -10,23 +10,26 @@ using System.Xml;
 using System.Xml.Linq;
 
 using GenericDB.BusinessObjects;
+using GenericDB.OCTGN;
 
 using AGoTDB.BusinessObjects;
 
 namespace AGoTDB.OCTGN
 {
-    public static class OctgnManager
+    public class AgotOctgnManager : OctgnManager
     {
+        public AgotOctgnManager()
+            : base(new AgotOctgnLoader())
+        {
+        }
+
         public static void PromptForInitialization(Action callback = null)
         {
-            var dialog = new FolderBrowserDialog
-            {
-                Description = "Select path for OCTGN set files",
-                ShowNewFolderButton = false
-            };
+            var dialog = new OctgnSetSelector { IsUrl = true, Url = UserSettings.OctgnSetsDownloadUrl, Items = "sets" };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                var path = dialog.Path;
                 var octgnLoaderWorker = new BackgroundWorker
                 {
                     WorkerReportsProgress = true,
@@ -35,7 +38,7 @@ namespace AGoTDB.OCTGN
 
                 octgnLoaderWorker.DoWork += OctgnLoaderWorkerOnDoWork;
 
-                var loaderForm = new OctgnLoaderForm { BackgroundWorker = octgnLoaderWorker, Path = dialog.SelectedPath, Callback = callback };
+                var loaderForm = new OctgnLoaderForm { BackgroundWorker = octgnLoaderWorker, Path = path, Callback = callback };
                 loaderForm.ShowDialog();
             }
         }
@@ -44,14 +47,14 @@ namespace AGoTDB.OCTGN
         {
             var backgroundWorker = (BackgroundWorker)sender;
             var path = (string)doWorkEventArgs.Argument;
-            var sets = OctgnLoader.LoadAllSets(path, backgroundWorker);
+            var sets = AgotOctgnLoader.LoadAllSets(path, backgroundWorker);
             if (sets.Count == 0 || sets.All(s => s.Value.Length == 0))
             {
-                doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.NoSetsFounds;
+                doWorkEventArgs.Result = new OctgnLoaderResultAndValue { Result = OctgnLoaderResult.NoSetsFounds };
                 return;
             }
-            OctgnLoader.UpdateCards(sets, backgroundWorker);
-            doWorkEventArgs.Result = OctgnLoader.OctgnLoaderResult.Success;
+            AgotOctgnLoader.UpdateCards(sets, backgroundWorker);
+            doWorkEventArgs.Result = OctgnLoaderResult.Success;
         }
 
         private static readonly Dictionary<int, AgotCard> _dummyHouseCards = new Dictionary<int, AgotCard>

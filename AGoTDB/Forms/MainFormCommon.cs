@@ -211,6 +211,10 @@ namespace AGoTDB.Forms
                     {
                         UserSettings.CreateExtendedDB = false;
                         UserSettings.Save();
+                        MessageBox.Show("Database update successful! Application will now restart.");
+                        Application.Exit();
+                        Process.Start(Application.ExecutablePath, string.Empty);
+                        return;
                     }
                     _isDataBaseLoaded = true;
                     break;
@@ -325,6 +329,9 @@ namespace AGoTDB.Forms
 
             try
             {
+                if (!_dataTableFirstLoad)
+                    SaveGridSettings();
+
                 int selectedRowId = -1;
                 if (dataGridView.SelectedRows.Count != 0)
                     selectedRowId = (int)((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row["UniversalId"];
@@ -548,6 +555,11 @@ namespace AGoTDB.Forms
             CreateNewWindowWithResults();
         }
 
+        private void resizeColumnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
+        }
+
         private void CreateNewWindowWithResults()
         {
             var form = new MainForm();
@@ -732,7 +744,7 @@ namespace AGoTDB.Forms
 
         private void cardPreviewControl_MouseEnter(object sender, EventArgs e)
         {
-            ShowCardPreviewForm(cardPreviewControl.CardUniversalId);
+            ShowCardPreviewForm(cardPreviewControl.CardUniversalId, cardPreviewControl.CardOctgnId);
         }
 
         private void cardPreviewControl_MouseLeave(object sender, EventArgs e)
@@ -751,18 +763,18 @@ namespace AGoTDB.Forms
         private void UpdateCardImage(TCard card)
         {
             cardPreviewControl.Visible = true;
-            cardPreviewControl.CardUniversalId = card.UniversalId;
+            cardPreviewControl.SetId(card.UniversalId, card.OctgnId);
         }
 
         /// <summary>
         /// Shows the card preview form for given card id.
         /// </summary>
         /// <param name="universalId">The card id.</param>
-        private void ShowCardPreviewForm(int universalId)
+        private void ShowCardPreviewForm(int universalId, Guid octgnId)
         {
             if (!ApplicationSettings.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
-            _cardPreviewForm.CardUniversalId = universalId;
+            _cardPreviewForm.SetId(universalId, octgnId);
             var x = this.Location.X + this.Width;
             var y = this.Location.Y + 10;
 
@@ -809,8 +821,14 @@ namespace AGoTDB.Forms
                 });
         }
 
+        private void importOCTGNImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OctgnManager.ImportImages();
+        }
+
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
             GridViewHelper.SetDataGridViewColumnsSettings(dataGridView, UserSettings.ColumnsSettings);
         }
     }

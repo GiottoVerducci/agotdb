@@ -32,7 +32,7 @@ namespace NRADB.Forms
         private TDeck _currentDeck; // deck currently displayed
         private String _currentFilename; // filename of the deck (non-empty if the deck was loaded or saved)
         private readonly List<TCardTreeView> _treeViews;
-        private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm();
+        private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm { ApplicationSettings = ApplicationSettings.Instance};
 
         private int _deckTreeViewSpaceWidth; // width of a space using the deck tree view font (used to expand the lines)
         private readonly DeckTreeNodeSorter _deckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
@@ -329,8 +329,9 @@ namespace NRADB.Forms
         /// <param name="universalId">The card id.</param>
         private void ShowCardPreviewForm(int universalId, Guid octgnId)
         {
-            if (!ApplicationSettings.ImagesFolderExists || !UserSettings.DisplayImages)
+            if (!ApplicationSettings.Instance.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
+            _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
             _cardPreviewForm.SetId(universalId, octgnId);
             var x = this.Location.X + this.Width;
             var y = this.Location.Y + 10;
@@ -652,11 +653,11 @@ namespace NRADB.Forms
                     _currentFilename = dialog.FileName;
                 }
             }
-            int? databaseVersion = (ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0)
-                ? (int?)ApplicationSettings.DatabaseManager.DatabaseInfos[0].VersionId
+            int? databaseVersion = (ApplicationSettings.Instance.DatabaseManager.DatabaseInfos.Count > 0)
+                ? (int?)ApplicationSettings.Instance.DatabaseManager.DatabaseInfos[0].VersionId
                 : null;
 
-            var result = _versionedDeck.SaveToXmlFile(_currentFilename, ApplicationSettings.ApplicationName, ApplicationSettings.ApplicationVersion, databaseVersion);
+            var result = _versionedDeck.SaveToXmlFile(_currentFilename, ApplicationSettings.Instance.ApplicationName, ApplicationSettings.Instance.ApplicationVersion, databaseVersion);
             if (result == DeckSaveResult.Success)
                 _lastLoadedDeck = (TVersionedDeck)_versionedDeck.Clone(); // performs a deep copy
             else
@@ -711,7 +712,7 @@ namespace NRADB.Forms
             string oldFilename = _currentFilename;
             try
             {
-                var versionedDeck = OctgnManager.LoadOctgnDeck();
+                var versionedDeck = NraOctgnManager.LoadOctgnDeck();
                 if (versionedDeck == null)
                     return;
 
@@ -859,12 +860,12 @@ namespace NRADB.Forms
 
         private void ExportDeckToOctgnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!ApplicationSettings.IsOctgnReady)
+            if (!ApplicationSettings.Instance.IsOctgnReady)
             {
                 var dialogResult = MessageBox.Show(Resource1.WarnOctgnNotLoaded, Resource1.WarnOctgnNotLoadedTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Cancel)
                     return;
-                OctgnManager.PromptForInitialization(ExportDeckToOctgn);
+                NraOctgnManager.PromptForInitialization(ExportDeckToOctgn);
                 return;
             }
             ExportDeckToOctgn();
@@ -872,12 +873,12 @@ namespace NRADB.Forms
 
         private void ImportDeckFromOctgnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!ApplicationSettings.IsOctgnReady)
+            if (!ApplicationSettings.Instance.IsOctgnReady)
             {
                 var dialogResult = MessageBox.Show(Resource1.WarnOctgnNotLoaded, Resource1.WarnOctgnNotLoadedTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Cancel)
                     return;
-                OctgnManager.PromptForInitialization(ImportDeckFromOctgn);
+                NraOctgnManager.PromptForInitialization(ImportDeckFromOctgn);
                 return;
             }
             ImportDeckFromOctgn();
@@ -886,7 +887,7 @@ namespace NRADB.Forms
         #region Export / Import
         private void ExportDeckToOctgn()
         {
-            OctgnManager.SaveOctgnDeck(_versionedDeck, _currentDeck);
+            NraOctgnManager.SaveOctgnDeck(_versionedDeck, _currentDeck);
         }
 
         private void ImportDeckFromOctgn()

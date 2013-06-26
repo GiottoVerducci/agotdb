@@ -16,6 +16,7 @@ using Beyond.ExtendedControls;
 
 using GenericDB.BusinessObjects;
 using GenericDB.DataAccess;
+using GenericDB.Forms;
 using GenericDB.Helper;
 
 using NRADB.BusinessObjects;
@@ -36,7 +37,7 @@ namespace NRADB.Forms
         private bool _isDataBaseLoaded;
         private DataRow[] _quickFindRows; // quick find results
         private int _quickFindIndex; // index of the current quick find result
-        private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm();
+        private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm { ApplicationSettings = ApplicationSettings.Instance };
 
         private readonly DataTable _dataTable = new DataTable();
         private Query _query = new Query();
@@ -53,9 +54,10 @@ namespace NRADB.Forms
 
             if (isMainForm)
             {
-                ApplicationSettings.ImagesFolder = String.Format("{0}{1}Images", Application.StartupPath, Path.DirectorySeparatorChar);
-                ApplicationSettings.ImagesFolderExists = Directory.Exists(ApplicationSettings.ImagesFolder);
+                ApplicationSettings.Instance.ImagesFolder = String.Format("{0}{1}Images", Application.StartupPath, Path.DirectorySeparatorChar);
+                ApplicationSettings.Instance.ImagesFolderExists = Directory.Exists(ApplicationSettings.Instance.ImagesFolder);
                 InitializeDatabaseManager();
+                cardPreviewControl.Settings = ApplicationSettings.Instance;
 
                 var url = UserSettings.CheckForUpdatesOnStartup ? CheckNewerVersion() : null;
 
@@ -68,7 +70,7 @@ namespace NRADB.Forms
 
         private string CheckNewerVersion()
         {
-            var databaseFilePath = ApplicationSettings.DatabaseManager.DataBasePath + ApplicationSettings.DatabaseManager.HDataBaseFilename;
+            var databaseFilePath = ApplicationSettings.Instance.DatabaseManager.DataBasePath + ApplicationSettings.Instance.DatabaseManager.HDataBaseFilename;
             string url = null;
             try
             {
@@ -115,7 +117,7 @@ namespace NRADB.Forms
             }
             catch (Exception e)
             {
-                var errorMessage = string.Format(Resource1.ErrDatabaseUpdateInformationsCouldntBeRetrieved, ApplicationSettings.ApplicationVersion, url, databaseFilePath, e);
+                var errorMessage = string.Format(Resource1.ErrDatabaseUpdateInformationsCouldntBeRetrieved, ApplicationSettings.Instance.ApplicationVersion, url, databaseFilePath, e);
                 MessageBox.Show(errorMessage, Resource1.ErrDatabaseUpdateInformationsTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
@@ -147,9 +149,9 @@ namespace NRADB.Forms
                         if (filePaths != null)
                         {
                             // overwrite our database files with it
-                            step = executionTrace.AddStep(string.Format(Resource1.UpdatingDB_CopyingFiles, ApplicationSettings.DatabaseManager.DataBasePath));
+                            step = executionTrace.AddStep(string.Format(Resource1.UpdatingDB_CopyingFiles, ApplicationSettings.Instance.DatabaseManager.DataBasePath));
                             foreach (var filePath in filePaths)
-                                File.Copy(filePath, ApplicationSettings.DatabaseManager.DataBasePath + Path.GetFileName(filePath), true);
+                                File.Copy(filePath, ApplicationSettings.Instance.DatabaseManager.DataBasePath + Path.GetFileName(filePath), true);
                             step.IsSuccessful = true;
                         }
                         else
@@ -160,7 +162,7 @@ namespace NRADB.Forms
                 }
                 catch (Exception ex)
                 {
-                    var errorMessage = string.Format(Resource1.ErrDatabaseUpdateFailed, ApplicationSettings.ApplicationVersion, url, executionTrace, ex);
+                    var errorMessage = string.Format(Resource1.ErrDatabaseUpdateFailed, ApplicationSettings.Instance.ApplicationVersion, url, executionTrace, ex);
                     MessageBox.Show(errorMessage, Resource1.ErrDatabaseUpdateTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -178,8 +180,8 @@ namespace NRADB.Forms
                     return MessageBox.Show(string.Format(
                             CultureInfo.CurrentCulture,
                             Resource1.ErrMinimalSoftwareVersionRequired,
-                            ApplicationSettings.DatabaseManager.DatabaseInfos[0].MinimalApplicationVersion,
-                            ApplicationSettings.ApplicationVersion),
+                            ApplicationSettings.Instance.DatabaseManager.DatabaseInfos[0].MinimalApplicationVersion,
+                            ApplicationSettings.Instance.ApplicationVersion),
                         Resource1.ErrMinimalSoftwareVersionRequiredTitle,
                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No;
                 case ConnectionErrorCode.FileNotFound:
@@ -239,7 +241,7 @@ namespace NRADB.Forms
                     Application.Exit();
                     break;
             }
-            if (!UserSettings.IsAvailable() || !ApplicationSettings.DatabaseManager.ConnectedToDatabase)
+            if (!UserSettings.IsAvailable() || !ApplicationSettings.Instance.DatabaseManager.ConnectedToDatabase)
                 Application.Exit();
             this.Visible = true;
             InitializeMainFormForShowing();
@@ -248,7 +250,7 @@ namespace NRADB.Forms
         private static ConnectionResult InitializeDatabaseConnection()
         {
             var createExtendedDb = UserSettings.CreateExtendedDB;
-            var connectionResult = ApplicationSettings.DatabaseManager.Connect(createExtendedDb, ApplicationSettings.ApplicationVersion);
+            var connectionResult = ApplicationSettings.Instance.DatabaseManager.Connect(createExtendedDb, ApplicationSettings.Instance.ApplicationVersion);
             return connectionResult;
         }
 
@@ -337,7 +339,7 @@ namespace NRADB.Forms
                     selectedRowId = (int)((DataRowView)dataGridView.SelectedRows[0].DataBoundItem).Row["UniversalId"];
 
                 _query = query;
-                using (var dbDataAdapter = new OleDbDataAdapter(query.SqlQuery, ApplicationSettings.DatabaseManager.DbConnection))
+                using (var dbDataAdapter = new OleDbDataAdapter(query.SqlQuery, ApplicationSettings.Instance.DatabaseManager.DbConnection))
                 {
                     _dataTable.Clear();
                     dbDataAdapter.Fill(_dataTable);
@@ -375,7 +377,7 @@ namespace NRADB.Forms
             UpdateDataTableView();
             dataGridView.DataSource = _dataTable;
 
-            ApplicationSettings.IsOctgnReady = ApplicationSettings.DatabaseManager.HasOctgnData();
+            ApplicationSettings.Instance.IsOctgnReady = ApplicationSettings.Instance.DatabaseManager.HasOctgnData();
 
             dataGridView.Sort(dataGridView.Columns["Name"], ListSortDirection.Ascending);
             dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader);
@@ -390,6 +392,7 @@ namespace NRADB.Forms
 
             if (UserSettings.DisplayImages)
             {
+                _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
                 _cardPreviewForm.Visible = true;
             }
             else
@@ -712,7 +715,7 @@ namespace NRADB.Forms
 
         private void btnReportError_Click(object sender, EventArgs e)
         {
-            var subject = string.Format(ApplicationSettings.ApplicationName + "-" + Resource1.ReportCardErrorMessageTitle, _displayedCard.UniversalId);
+            var subject = string.Format(ApplicationSettings.Instance.ApplicationName + "-" + Resource1.ReportCardErrorMessageTitle, _displayedCard.UniversalId);
             var body = new StringBuilder();
             body.AppendLine(Resource1.ReportCardErrorMessageBody);
             body.AppendLine();
@@ -724,9 +727,9 @@ namespace NRADB.Forms
 
             body.AppendLine();
             body.AppendLine();
-            body.AppendLine(ApplicationSettings.ApplicationName + " " + ApplicationSettings.ApplicationVersion);
-            var databaseInfo = ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0
-                ? ApplicationSettings.DatabaseManager.DatabaseInfos[0]
+            body.AppendLine(ApplicationSettings.Instance.ApplicationName + " " + ApplicationSettings.Instance.ApplicationVersion);
+            var databaseInfo = ApplicationSettings.Instance.DatabaseManager.DatabaseInfos.Count > 0
+                ? ApplicationSettings.Instance.DatabaseManager.DatabaseInfos[0]
                 : null;
             if (databaseInfo != null)
                 body.AppendLine(string.Format(CultureInfo.InvariantCulture, "DB version: {0} ({1})",
@@ -772,8 +775,9 @@ namespace NRADB.Forms
         /// <param name="universalId">The card id.</param>
         private void ShowCardPreviewForm(int universalId, Guid octgnId)
         {
-            if (!ApplicationSettings.ImagesFolderExists || !UserSettings.DisplayImages)
+            if (!ApplicationSettings.Instance.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
+            _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
             _cardPreviewForm.SetId(universalId, octgnId);
             var x = this.Location.X + this.Width;
             var y = this.Location.Y + 10;
@@ -796,14 +800,14 @@ namespace NRADB.Forms
 
         private void loadOCTGNDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var connectionResult = ApplicationSettings.DatabaseManager.PrepareConnectionToHumanDatabase();
+            var connectionResult = ApplicationSettings.Instance.DatabaseManager.PrepareConnectionToHumanDatabase();
             if (connectionResult.ErrorCode != ConnectionErrorCode.Success)
             {
                 ShowConnectionErrorMessage(connectionResult);
                 return;
             }
 
-            OctgnManager.PromptForInitialization(
+            NraOctgnManager.PromptForInitialization(
                 () =>
                 {
                     UserSettings.CreateExtendedDB = true;
@@ -823,7 +827,9 @@ namespace NRADB.Forms
 
         private void importOCTGNImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OctgnManager.ImportImages();
+            var octgnManager = new NraOctgnManager();
+            octgnManager.ImportImages(ApplicationSettings.Instance.ImagesFolder);
+            ApplicationSettings.Instance.ImagesFolderExists = true;
         }
 
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

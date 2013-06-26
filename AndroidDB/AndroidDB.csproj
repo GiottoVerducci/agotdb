@@ -88,18 +88,6 @@
     <Compile Include="Forms\AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CardPreviewControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\CardPreviewControl.Designer.cs">
-      <DependentUpon>CardPreviewControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CardPreviewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CardPreviewForm.Designer.cs">
-      <DependentUpon>CardPreviewForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\DeckBuilderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,26 +128,14 @@
     <Compile Include="Forms\MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OCTGN\OctgnCard.cs" />
-    <Compile Include="OCTGN\OctgnDownloadForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OCTGN\OctgnDownloadForm.Designer.cs">
-      <DependentUpon>OctgnDownloadForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OCTGN\OctgnLoader.cs" />
+    <Compile Include="OCTGN\NraOctgnLoader.cs" />
+    <Compile Include="OCTGN\NraOctgnCard.cs" />
+    <Compile Include="OCTGN\NraOctgnManager.cs" />
     <Compile Include="OCTGN\OctgnLoaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OCTGN\OctgnLoaderForm.Designer.cs">
       <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OCTGN\OctgnManager.cs" />
-    <Compile Include="OCTGN\OctgnSetSelector.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OCTGN\OctgnSetSelector.Designer.cs">
-      <DependentUpon>OctgnSetSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,12 +148,6 @@
     <Compile Include="Services\ProxyPdfGenerator.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CardPreviewControl.resx">
-      <DependentUpon>CardPreviewControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CardPreviewForm.resx">
-      <DependentUpon>CardPreviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DeckBuilderForm.resx">
       <DependentUpon>DeckBuilderForm.cs</DependentUpon>
@@ -200,17 +170,11 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OCTGN\OctgnDownloadForm.resx">
-      <DependentUpon>OctgnDownloadForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="OCTGN\OctgnLoaderForm.fr.resx">
       <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OCTGN\OctgnLoaderForm.resx">
       <DependentUpon>OctgnLoaderForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OCTGN\OctgnSetSelector.resx">
-      <DependentUpon>OctgnSetSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

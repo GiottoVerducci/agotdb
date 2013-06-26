@@ -4,7 +4,7 @@ using GenericDB.OCTGN;
 namespace AGoTDB.OCTGN
 {
 	[DebuggerDisplay("{Name}")]
-	public class OctgnCard
+	public class AgotOctgnCard: IOctgnCard
 	{
 		[OctgnCardData(AttributeName = "id")]
 		public string Id { get; set; }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using AGoTDB.BusinessObjects;
+using GenericDB.OCTGN;
 
 namespace AGoTDB.OCTGN
 {
@@ -28,27 +29,27 @@ namespace AGoTDB.OCTGN
 
         private void OctgnLoaderWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
         {
-            var task = (OctgnLoader.OctgnLoaderTask)progressChangedEventArgs.UserState;
+            var task = (AgotOctgnLoader.OctgnLoaderTask)progressChangedEventArgs.UserState;
             switch (task)
             {
-                case OctgnLoader.OctgnLoaderTask.LoadSet:
+                case AgotOctgnLoader.OctgnLoaderTask.LoadSet:
                     pbLoadSet.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.MatchSet:
+                case AgotOctgnLoader.OctgnLoaderTask.MatchSet:
                     pbMatchSet.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.FindCard:
+                case AgotOctgnLoader.OctgnLoaderTask.FindCard:
                     pbFindCard.Value = progressChangedEventArgs.ProgressPercentage;
                     break;
-                case OctgnLoader.OctgnLoaderTask.UpdateDatabase:
+                case AgotOctgnLoader.OctgnLoaderTask.UpdateDatabase:
                     pbUpdateDatabase.Value = progressChangedEventArgs.ProgressPercentage;
                     btAbort.Enabled = false;
                     break;
             }
-            EnforceLabelStyle(lblLoadSet, task == OctgnLoader.OctgnLoaderTask.LoadSet);
-            EnforceLabelStyle(lblMatchSet, task == OctgnLoader.OctgnLoaderTask.MatchSet);
-            EnforceLabelStyle(lblFindCard, task == OctgnLoader.OctgnLoaderTask.FindCard);
-            EnforceLabelStyle(lblUpdateDatabase, task == OctgnLoader.OctgnLoaderTask.UpdateDatabase);
+            EnforceLabelStyle(lblLoadSet, task == AgotOctgnLoader.OctgnLoaderTask.LoadSet);
+            EnforceLabelStyle(lblMatchSet, task == AgotOctgnLoader.OctgnLoaderTask.MatchSet);
+            EnforceLabelStyle(lblFindCard, task == AgotOctgnLoader.OctgnLoaderTask.FindCard);
+            EnforceLabelStyle(lblUpdateDatabase, task == AgotOctgnLoader.OctgnLoaderTask.UpdateDatabase);
         }
 
         private static void EnforceLabelStyle(Label label, bool indicatorIsVisible)
@@ -74,15 +75,24 @@ namespace AGoTDB.OCTGN
         private void OctgnLoaderWorkerOnRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
             _isLoadCompleted = true;
-            var result = (OctgnLoader.OctgnLoaderResult)runWorkerCompletedEventArgs.Result;
-            if (result == OctgnLoader.OctgnLoaderResult.NoSetsFounds)
+            var result = (OctgnLoaderResultAndValue)runWorkerCompletedEventArgs.Result;
+            if (result.Result == OctgnLoaderResult.NoSetsFounds)
             {
                 MessageBox.Show(Resource1.ErrOctgnNotFound, Resource1.ErrOctgnNotFoundTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
+                return;
+            }
+            if (result.Result == OctgnLoaderResult.SetNotDefinedInDatabase)
+            {
+                var octgnSetNotFound = (AgotOctgnLoader.OctgnSetData)result.Value;
+                MessageBox.Show(string.Format(Resource1.ErrOctgnSetNotDefinedInDatabase, octgnSetNotFound.Name, octgnSetNotFound.Id),
+                    Resource1.ErrOctgnSetNotDefinedInDatabaseTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
             }
 
             if (!runWorkerCompletedEventArgs.Cancelled)
-                ApplicationSettings.IsOctgnReady = ApplicationSettings.DatabaseManager.HasOctgnData();
+                ApplicationSettings.IsOctgnReady = true; // ApplicationSettings.DatabaseManager.HasOctgnData();
             this.Close();
             if (this.Callback != null && ApplicationSettings.IsOctgnReady)
                 this.Callback();

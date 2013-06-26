@@ -45,7 +45,7 @@ namespace NRADB.Forms
         #region Form events (FormShown/Closed, NodeClick or FactionValue changed, tvHistory select)
         private void DeckBuilderForm_Shown(object sender, EventArgs e)
         {
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueId);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.Instance.DatabaseManager.TableNameFaction, "Faction", TableType.ValueId);
             eclFaction.WorkOnExpandedItems(delegate(ExtendedCheckedListBox ecl)
             {
                 ecl.Summary += " - " + ecl.Items[0];
@@ -56,10 +56,11 @@ namespace NRADB.Forms
             //UpdateAgendaComboBox();
             UpdateHistoryFromVersionedDeck();
             //treeViewDeck.TreeViewNodeSorter = deckTreeNodeSorter; // we don't use it because it's slower than inserting directly at the right place (visible when loading decks)
-            miGenerateProxyPdf.Visible = ApplicationSettings.ImagesFolderExists; // show the proxy generator only if the images folder exists
+            miGenerateProxyPdf.Visible = ApplicationSettings.Instance.ImagesFolderExists; // show the proxy generator only if the images folder exists
 
             if (UserSettings.DisplayImages)
             {
+                _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
                 _cardPreviewForm.Visible = true;
             }
             else
@@ -595,8 +596,8 @@ namespace NRADB.Forms
             var side = (Int32)(rbCorp.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner);
             var neutralSide = (Int32)NraCard.CardSide.None;
 
-            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclFaction, ApplicationSettings.DatabaseManager,
-                ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueId,
+            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclFaction, ApplicationSettings.Instance.DatabaseManager,
+                ApplicationSettings.Instance.DatabaseManager.TableNameFaction, "Faction", TableType.ValueId,
                 side != 0
                     ? (item =>
                     {

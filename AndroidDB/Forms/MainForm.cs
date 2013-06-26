@@ -40,12 +40,12 @@ namespace NRADB.Forms
 
         private void InitializeDatabaseManager()
         {
-            ApplicationSettings.DatabaseManager = new NraDatabaseManager("NRA.mdb", "NRAEx.mdb");
+            ApplicationSettings.Instance.DatabaseManager = new NraDatabaseManager("NRA.mdb", "NRAEx.mdb");
         }
 
         private static void LoadCardTypeNames()
         {
-            var types = ApplicationSettings.DatabaseManager.GetCardTypeNames();
+            var types = ApplicationSettings.Instance.DatabaseManager.GetCardTypeNames();
             NraCard.CardTypeNames = new Dictionary<int, string>();
             NraCard.CardTypeSide = new Dictionary<int, int>();
             foreach (DataRow row in types.Rows)
@@ -60,7 +60,7 @@ namespace NRADB.Forms
 
         private static void LoadCardFactionNames()
         {
-            var factions = ApplicationSettings.DatabaseManager.GetCardFactionNames();
+            var factions = ApplicationSettings.Instance.DatabaseManager.GetCardFactionNames();
             NraCard.CardFactionNames = new Dictionary<int, string>();
             NraCard.CardFactionSide = new Dictionary<int, int>();
             foreach (DataRow row in factions.Rows)
@@ -75,7 +75,7 @@ namespace NRADB.Forms
 
         private static void LoadCardSideNames()
         {
-            var sides = ApplicationSettings.DatabaseManager.GetCardSideNames();
+            var sides = ApplicationSettings.Instance.DatabaseManager.GetCardSideNames();
             NraCard.CardSideNames = new Dictionary<int, string>();
             foreach (DataRow row in sides.Rows)
             {
@@ -88,7 +88,7 @@ namespace NRADB.Forms
 
         //private static void LoadCardTriggerNames()
         //{
-        //    var triggers = ApplicationSettings.DatabaseManager.GetCardTriggerNames();
+        //    var triggers = ApplicationSettings.Instance.DatabaseManager.GetCardTriggerNames();
         //    NraCard.CardTriggerNames = new List<string>();
         //    foreach (DataRow row in triggers.Rows)
         //    {
@@ -99,7 +99,7 @@ namespace NRADB.Forms
 
         //private static void LoadCardPatterns()
         //{
-        //    var patterns = ApplicationSettings.DatabaseManager.GetCardPatterns();
+        //    var patterns = ApplicationSettings.Instance.DatabaseManager.GetCardPatterns();
         //    NraCard.CardPatterns = new Dictionary<NraCard.Pattern, string>();
         //    foreach (DataRow row in patterns.Rows)
         //    {
@@ -111,7 +111,7 @@ namespace NRADB.Forms
         private static void LoadExpansionSets()
         {
             NraCard.ExpansionSets = new Dictionary<string, bool>();
-            var sets = ApplicationSettings.DatabaseManager.GetExpansionSets();
+            var sets = ApplicationSettings.Instance.DatabaseManager.GetExpansionSets();
             foreach (DataRow row in sets.Rows)
             {
                 if ((int)row["Id"] >= 0)
@@ -134,16 +134,16 @@ namespace NRADB.Forms
         /// </summary>
         private void UpdateControlsLabels()
         {
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclCardtype, ApplicationSettings.DatabaseManager.TableNameType, "Type", TableType.ValueShortName);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIceType, ApplicationSettings.DatabaseManager.TableNameIceType, "IceType", TableType.ValueId);
-            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
-            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
-            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
-            //ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclTrigger, ApplicationSettings.DatabaseManager.TableNameTrigger, "Text", TableType.Value);
-            ApplicationSettings.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName);
-            ApplicationSettings.DatabaseManager.UpdateFilterMenu(filterToolStripMenuItem, ApplicationSettings.DatabaseManager.TableNameFilterText, tbCardtext, eclCardtextCheck);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclFaction, ApplicationSettings.Instance.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclCardtype, ApplicationSettings.Instance.DatabaseManager.TableNameType, "Type", TableType.ValueShortName);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclProvides, ApplicationSettings.Instance.DatabaseManager.TableNameProvides, "", TableType.ValueKey);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclIceType, ApplicationSettings.Instance.DatabaseManager.TableNameIceType, "IceType", TableType.ValueId);
+            //ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclIcon, ApplicationSettings.Instance.DatabaseManager.TableNameIcon, "", TableType.ValueKey);
+            //ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclVirtue, ApplicationSettings.Instance.DatabaseManager.TableNameVirtue, "", TableType.ValueKey);
+            //ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclKeyword, ApplicationSettings.Instance.DatabaseManager.TableNameKeyword, "Keywords", TableType.Value);
+            //ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclTrigger, ApplicationSettings.Instance.DatabaseManager.TableNameTrigger, "Text", TableType.Value);
+            ApplicationSettings.Instance.DatabaseManager.UpdateExtendedCheckedListBox(eclExpansionSet, ApplicationSettings.Instance.DatabaseManager.TableNameSet, "Set", TableType.ValueShortName);
+            ApplicationSettings.Instance.DatabaseManager.UpdateFilterMenu(filterToolStripMenuItem, ApplicationSettings.Instance.DatabaseManager.TableNameFilterText, tbCardtext, eclCardtextCheck);
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace NRADB.Forms
         /// <returns>The SQL query/human query pair reflecting the controls state</returns>
         private Query BuildQueryFromControls()
         {
-            var result = new Query(String.Format("SELECT * FROM [{0}]", ApplicationSettings.DatabaseManager.TableNameMain), "");
+            var result = new Query(String.Format("SELECT * FROM [{0}]", ApplicationSettings.Instance.DatabaseManager.TableNameMain), "");
 
             IList<DbFilter> additionalIncludedSets = null;
             IList<DbFilter> additionalExcludedSets = null;
@@ -349,8 +349,8 @@ namespace NRADB.Forms
             var side = (Int32)(rbAll.Checked ? NraCard.CardSide.None : (rbCorpOnly.Checked ? NraCard.CardSide.Corp : NraCard.CardSide.Runner));
             var neutralSide = (Int32)NraCard.CardSide.None;
 
-            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclCardtype, ApplicationSettings.DatabaseManager,
-                ApplicationSettings.DatabaseManager.TableNameType, "Type", TableType.ValueShortName,
+            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclCardtype, ApplicationSettings.Instance.DatabaseManager,
+                ApplicationSettings.Instance.DatabaseManager.TableNameType, "Type", TableType.ValueShortName,
                 side != 0
                     ? (item => 
                     { 
@@ -359,8 +359,8 @@ namespace NRADB.Forms
                     })
                     : (Predicate<DbFilter>)null);
 
-            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclFaction, ApplicationSettings.DatabaseManager, 
-                ApplicationSettings.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey,
+            ExtendedCheckListBoxHelper.UpdateEclAccordingToDatabase(eclFaction, ApplicationSettings.Instance.DatabaseManager, 
+                ApplicationSettings.Instance.DatabaseManager.TableNameFaction, "Faction", TableType.ValueKey,
                 side != 0
                     ? (item =>
                     {
