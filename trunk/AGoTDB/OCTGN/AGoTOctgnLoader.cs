@@ -160,7 +160,7 @@ namespace AGoTDB.OCTGN
 
         public static ImportResult UpdateCards(Dictionary<OctgnSetData, AgotOctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
         {
-            var setTable = ApplicationSettings.DatabaseManager.GetExpansionSets();
+            var setTable = ApplicationSettings.Instance.DatabaseManager.GetExpansionSets();
             var setInformations = new Dictionary<int, SetInformation>();
 
             var progress = 0;
@@ -183,7 +183,7 @@ namespace AGoTDB.OCTGN
 
             object errorObject = null;
 
-            ApplicationSettings.DatabaseManager.UpdateCards((row, cardProgress) =>
+            ApplicationSettings.Instance.DatabaseManager.UpdateCards((row, cardProgress) =>
                 {
                     if (backgroundWorker.CancellationPending)
                         return DatabaseManager.OperationResult.Abort;

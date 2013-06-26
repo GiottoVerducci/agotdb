@@ -24,13 +24,26 @@ using GenericDB.BusinessObjects;
 
 namespace AGoTDB.BusinessObjects
 {
-	public static class ApplicationSettings
-	{
-		public static readonly string ApplicationName = "AGoTDB";
-		public static readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 745, 0);
-		public static AgotDatabaseManager DatabaseManager { get; set; }
-		public static bool ImagesFolderExists { get; set; }
-		public static string ImagesFolder { get; set; }
-		public static bool IsOctgnReady { get; set; }
-	}
+    public class ApplicationSettings : IApplicationSettings
+    {
+        private static readonly ApplicationSettings _instance = new ApplicationSettings();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static ApplicationSettings() { }
+
+        private ApplicationSettings() { }
+
+        public static ApplicationSettings Instance
+        {
+            get { return _instance; }
+        }
+
+        public readonly string ApplicationName = "AGoTDB";
+        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 745, 0);
+        public AgotDatabaseManager DatabaseManager { get; set; }
+        public bool ImagesFolderExists { get; set; }
+        public string ImagesFolder { get; set; }
+        public bool IsOctgnReady { get; set; }
+    }
 }

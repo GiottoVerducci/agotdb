@@ -170,7 +170,7 @@ namespace AGoTDB.DataAccess
         public DataTable GetAgendas()
         {
             return GetResultFromRequest(
-                string.Format("SELECT * FROM [{0}] WHERE Type = :type ORDER BY Name", ApplicationSettings.DatabaseManager.TableNameMain),
+                string.Format("SELECT * FROM [{0}] WHERE Type = :type ORDER BY Name", ApplicationSettings.Instance.DatabaseManager.TableNameMain),
                 new CommandParameters().Add("type", (Int32)AgotCard.CardType.Agenda));
         }
 

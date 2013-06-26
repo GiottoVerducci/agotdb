@@ -42,9 +42,9 @@ namespace AGoTDB.Forms
 
 		private void AboutForm_Shown(object sender, EventArgs e)
 		{
-			lblVersion.Text = ApplicationSettings.ApplicationVersion.ToString();
-			var databaseInfo = ApplicationSettings.DatabaseManager.DatabaseInfos.Count > 0
-				? ApplicationSettings.DatabaseManager.DatabaseInfos[0]
+			lblVersion.Text = ApplicationSettings.Instance.ApplicationVersion.ToString();
+			var databaseInfo = ApplicationSettings.Instance.DatabaseManager.DatabaseInfos.Count > 0
+				? ApplicationSettings.Instance.DatabaseManager.DatabaseInfos[0]
 				: null;
 			if (databaseInfo != null)
 				lblDbVersion.Text = string.Format(CultureInfo.InvariantCulture, "DB version: {0} ({1})",

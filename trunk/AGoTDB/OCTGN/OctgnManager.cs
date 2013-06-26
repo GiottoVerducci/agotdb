@@ -202,7 +202,7 @@ namespace AGoTDB.OCTGN
         {
             ProcessOctgnSectionNode(sectionNode, (octgnId, quantity, name) =>
             {
-                var cardTable = ApplicationSettings.DatabaseManager.GetCardFromOctgnId(octgnId);
+                var cardTable = ApplicationSettings.Instance.DatabaseManager.GetCardFromOctgnId(octgnId);
                 if (cardTable.Rows.Count == 0)
                     cardErrorList.Add(string.Format("'{0}' (id: '{1}')", name, octgnId));
                 else
