@@ -23,7 +23,17 @@ namespace GenericDB.Forms
 {
     public partial class CardPreviewForm : Form
     {
-        public IApplicationSettings ApplicationSettings { get; set; }
+        private IApplicationSettings _applicationSettings;
+        public IApplicationSettings ApplicationSettings
+        {
+            get { return _applicationSettings; }
+            set
+            {
+                _applicationSettings = value;
+                cardPreviewControl.Settings = value;
+            }
+        }
+
         public int ImagePreviewSize { get; set; }
 
         public void SetId(int universalId, Guid octgnId)

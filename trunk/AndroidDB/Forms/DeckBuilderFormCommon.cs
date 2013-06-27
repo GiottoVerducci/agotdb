@@ -70,6 +70,7 @@ namespace NRADB.Forms
         private DeckBuilderForm()
         {
             InitializeComponent();
+            cardPreviewControl.Settings = ApplicationSettings.Instance;
             _treeViews = new List<TCardTreeView> { treeViewSide, treeViewDeck };
             foreach (TCardTreeView t in _treeViews)
             {
@@ -331,6 +332,7 @@ namespace NRADB.Forms
         {
             if (!ApplicationSettings.Instance.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
+            _cardPreviewForm.ApplicationSettings = ApplicationSettings.Instance;
             _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
             _cardPreviewForm.SetId(universalId, octgnId);
             var x = this.Location.X + this.Width;
