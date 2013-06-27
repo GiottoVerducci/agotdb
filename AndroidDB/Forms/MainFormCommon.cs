@@ -392,6 +392,7 @@ namespace NRADB.Forms
 
             if (UserSettings.DisplayImages)
             {
+                _cardPreviewForm.ApplicationSettings = ApplicationSettings.Instance;
                 _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
                 _cardPreviewForm.Visible = true;
             }
@@ -777,6 +778,7 @@ namespace NRADB.Forms
         {
             if (!ApplicationSettings.Instance.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
+            _cardPreviewForm.ApplicationSettings = ApplicationSettings.Instance;
             _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
             _cardPreviewForm.SetId(universalId, octgnId);
             var x = this.Location.X + this.Width;

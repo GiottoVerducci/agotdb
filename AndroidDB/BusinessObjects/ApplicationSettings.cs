@@ -37,7 +37,7 @@ namespace NRADB.BusinessObjects
         }
 
         public readonly string ApplicationName = "NRADB";
-        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 10, 0);
+        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 11, 0);
         public NraDatabaseManager DatabaseManager { get; set; }
         public bool ImagesFolderExists { get; set; }
         public string ImagesFolder { get; set; }

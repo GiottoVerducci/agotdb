@@ -60,6 +60,7 @@ namespace NRADB.Forms
 
             if (UserSettings.DisplayImages)
             {
+                _cardPreviewForm.ApplicationSettings = ApplicationSettings.Instance;
                 _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
                 _cardPreviewForm.Visible = true;
             }
