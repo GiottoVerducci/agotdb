@@ -47,14 +47,15 @@ namespace AGoTDB.OCTGN
         {
             var backgroundWorker = (BackgroundWorker)sender;
             var path = (string)doWorkEventArgs.Argument;
-            var sets = AgotOctgnLoader.LoadAllSets(path, backgroundWorker);
+            var loader = new AgotOctgnLoader();
+            var sets = loader.LoadAllSets(path, backgroundWorker);
             if (sets.Count == 0 || sets.All(s => s.Value.Length == 0))
             {
                 doWorkEventArgs.Result = new OctgnLoaderResultAndValue { Result = OctgnLoaderResult.NoSetsFounds };
                 return;
             }
             AgotOctgnLoader.UpdateCards(sets, backgroundWorker);
-            doWorkEventArgs.Result = OctgnLoaderResult.Success;
+            doWorkEventArgs.Result = new OctgnLoaderResultAndValue { Result = OctgnLoaderResult.Success };
         }
 
         private static readonly Dictionary<int, AgotCard> _dummyHouseCards = new Dictionary<int, AgotCard>

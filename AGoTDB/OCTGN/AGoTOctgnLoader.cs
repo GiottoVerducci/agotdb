@@ -173,7 +173,9 @@ namespace AGoTDB.OCTGN
                 {
                     var si = new SetInformation { OriginalName = row["OriginalName"].ToString() };
                     var name = Strip(si.OriginalName);
-                    var octgnSetData = octgnSets.Keys.First(k => string.Equals(name, Strip(k.Name), StringComparison.InvariantCultureIgnoreCase));
+                    var octgnSetData = octgnSets.Keys.FirstOrDefault(k => Strip(k.Name).EndsWith(name, StringComparison.InvariantCultureIgnoreCase));
+                    if (octgnSetData == null)
+                        continue;
                     si.OctgnName = octgnSetData.Name;
                     setInformations.Add(Convert.ToInt32(row["SetId"]), si);
                 }
@@ -208,5 +210,13 @@ namespace AGoTDB.OCTGN
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.UpdateDatabase);
             return new ImportResult { IsSuccessful = true };
         }
+
+        public override void ExtractSetIdAndCardIdFromOctgnId(string octgnId, out int setId, out int cardId)
+        {
+            //var setInformations = octgnId.Substring(32);
+            setId = octgnId.Substring(0, 33).GetHashCode();
+            cardId = Convert.ToInt32(octgnId.Substring(33));
+        }
+
     }
 }
