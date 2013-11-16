@@ -66,7 +66,7 @@ namespace GenericDB.OCTGN
             return Convert.ToInt32(obj);
         }
 
-        public static void ExtractSetIdAndCardIdFromOctgnId(string octgnId, out int setId, out int cardId)
+        public virtual void ExtractSetIdAndCardIdFromOctgnId(string octgnId, out int setId, out int cardId)
         {
             var setInformations = octgnId.Substring(31);
             setId = Convert.ToInt32(setInformations.Substring(0, 2));
@@ -123,7 +123,7 @@ namespace GenericDB.OCTGN
             tempDirectoryInfo.Delete(true);
         }
 
-        public static Dictionary<OctgnSetData, TOctgnCard[]> LoadAllSets(string path, BackgroundWorker backgroundWorker)
+        public virtual Dictionary<OctgnSetData, TOctgnCard[]> LoadAllSets(string path, BackgroundWorker backgroundWorker)
         {
             var result = new Dictionary<OctgnSetData, TOctgnCard[]>();
 
