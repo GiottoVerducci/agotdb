@@ -288,7 +288,9 @@ namespace GenericDB.DataAccess
             var query = String.Format("SELECT * FROM [{0}]", TableNameMain);
             using (var dbDataAdapter = new OleDbDataAdapter(query, _dbConnection))
             {
-                new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
+                var commandBuilder = new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
+
+                dbDataAdapter.UpdateCommand = commandBuilder.GetUpdateCommand(true);
 
                 var dataSet = new DataSet();
                 dataSet.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
@@ -305,7 +307,7 @@ namespace GenericDB.DataAccess
                     if (result == OperationResult.Done)// not used
                         break;
                 }
-                dbDataAdapter.Update(dataSet);
+                dbDataAdapter.Update(dataSet); // ZONK: ne met pas à jour la base :(
             }
         }
 
@@ -318,7 +320,7 @@ namespace GenericDB.DataAccess
 
             using (var dbDataAdapter = new OleDbDataAdapter(query, _hdbConnection))
             {
-                new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
+                var commandBuilder = new OleDbCommandBuilder(dbDataAdapter) { QuotePrefix = "[", QuoteSuffix = "]" }; // required (as a side-effect)
 
                 var dataSet = new DataSet();
                 dataSet.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
