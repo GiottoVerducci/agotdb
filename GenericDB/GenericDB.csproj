@@ -104,9 +104,13 @@
     <Compile Include="Components\CardTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DataAccess\CsvManager.cs" />
+    <Compile Include="DataAccess\DataTableWrapper.cs" />
     <Compile Include="DataAccess\IDatabaseManager.cs" />
     <Compile Include="DataAccess\IDataRow.cs" />
-    <Compile Include="DataAccess\OldeDbDataRowWrapper.cs" />
+    <Compile Include="DataAccess\IDataRowProvider.cs" />
+    <Compile Include="DataAccess\OldeDbDataRowProvider.cs" />
+    <Compile Include="DataAccess\DataRowWrapper.cs" />
     <Compile Include="DataAccess\QueryBuilder.cs" />
     <Compile Include="DataAccess\BoundFormat.cs" />
     <Compile Include="DataAccess\CommandParameters.cs" />

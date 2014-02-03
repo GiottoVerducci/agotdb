@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGoTDB-2012", "AGoTDB-2012.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDB", "..\GenericDB\GenericDB.csproj", "{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDBTests", "..\GenericDBTests\GenericDBTests.csproj", "{17FE01D0-539C-4F7B-956D-4803C723810E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,12 @@ Global
 		{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}.Release|x86.ActiveCfg = Release|x86
 		{A44C6B5A-C776-4E85-B4E8-7F19A63DDDA6}.Release|x86.Build.0 = Release|x86
+		{17FE01D0-539C-4F7B-956D-4803C723810E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17FE01D0-539C-4F7B-956D-4803C723810E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17FE01D0-539C-4F7B-956D-4803C723810E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{17FE01D0-539C-4F7B-956D-4803C723810E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17FE01D0-539C-4F7B-956D-4803C723810E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17FE01D0-539C-4F7B-956D-4803C723810E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

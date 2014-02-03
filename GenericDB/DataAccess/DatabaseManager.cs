@@ -301,7 +301,7 @@ namespace GenericDB.DataAccess
                 foreach (DataRow row in rows)
                 {
                     ++progress;
-                    var result = updateAction(new OldeDbDataRowWrapper(row), progress * 100 / rows.Count);
+                    var result = updateAction(new DataRowWrapper(row), progress * 100 / rows.Count);
                     if (result == OperationResult.Abort)
                         return; // abort
                     if (result == OperationResult.Done)// not used
