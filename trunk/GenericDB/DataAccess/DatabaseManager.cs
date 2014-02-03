@@ -32,7 +32,7 @@ namespace GenericDB.DataAccess
     /// <summary>
     /// Provides an interface with the card database.
     /// </summary>
-    public abstract class DatabaseManager
+    public abstract class DatabaseManager : IDatabaseManager
     {
         protected OleDbConnection _hdbConnection; // human database
         protected OleDbConnection _dbConnection; // extended database
@@ -50,7 +50,7 @@ namespace GenericDB.DataAccess
         /// </summary>
         public abstract TextFormat ErrataFormat { get; }
 
-        public bool ConnectedToDatabase { get; protected set; }
+        public bool IsConnectedToDatabase { get; protected set; }
         public OleDbConnection DbConnection { get { return _dbConnection; } }
         public List<DatabaseInfo> DatabaseInfos { get { return _databaseInfos; } }
 
@@ -81,15 +81,15 @@ namespace GenericDB.DataAccess
                 return ConnectWithConversion();
 
             var result = ConnectToExtendedDatabase();
-            ConnectedToDatabase = result.ErrorCode == ConnectionErrorCode.Success;
-            if (!ConnectedToDatabase)
+            IsConnectedToDatabase = result.ErrorCode == ConnectionErrorCode.Success;
+            if (!IsConnectedToDatabase)
                 return result;
 
             ReadDatabaseInformations(_dbConnection, out _databaseInfos);
 
             if ((_databaseInfos.Count > 0) && (applicationVersion.CompareTo(_databaseInfos[0].MinimalApplicationVersion) < 0))
             {
-                ConnectedToDatabase = false;
+                IsConnectedToDatabase = false;
                 return new ConnectionResult { ErrorCode = ConnectionErrorCode.InvalidVersion };
             }
             return new ConnectionResult { ErrorCode = ConnectionErrorCode.Success };
@@ -109,16 +109,16 @@ namespace GenericDB.DataAccess
             if (result.ErrorCode != ConnectionErrorCode.Success)
                 return result;
 
-            ConnectedToDatabase = true; // required by ConvertDatabase
+            IsConnectedToDatabase = true; // required by ConvertDatabase
             ReadDatabaseInformations(_hdbConnection, out _databaseInfos);
 
             if (ConvertDatabase())
             {
                 result = ConnectToExtendedDatabase();
-                ConnectedToDatabase = result.ErrorCode == ConnectionErrorCode.Success;
+                IsConnectedToDatabase = result.ErrorCode == ConnectionErrorCode.Success;
                 return result;
             }
-            ConnectedToDatabase = false;
+            IsConnectedToDatabase = false;
             return new ConnectionResult { ErrorCode = ConnectionErrorCode.ConversionFailed };
         }
 
@@ -205,7 +205,7 @@ namespace GenericDB.DataAccess
         {
             var table = new DataTable();
             table.Locale = System.Threading.Thread.CurrentThread.CurrentCulture; // ZONK to check
-            if (ConnectedToDatabase)
+            if (IsConnectedToDatabase)
             {
                 var command = new OleDbCommand(request, aDbConnection);
                 if (parameters != null)
@@ -283,7 +283,7 @@ namespace GenericDB.DataAccess
             Abort
         }
 
-        public void UpdateCards(Func<DataRow, int, OperationResult> updateAction)
+        public void UpdateCards(Func<IDataRow, int, OperationResult> updateAction)
         {
             var query = String.Format("SELECT * FROM [{0}]", TableNameMain);
             using (var dbDataAdapter = new OleDbDataAdapter(query, _dbConnection))
@@ -301,7 +301,7 @@ namespace GenericDB.DataAccess
                 foreach (DataRow row in rows)
                 {
                     ++progress;
-                    var result = updateAction(row, progress * 100 / rows.Count);
+                    var result = updateAction(new OldeDbDataRowWrapper(row), progress * 100 / rows.Count);
                     if (result == OperationResult.Abort)
                         return; // abort
                     if (result == OperationResult.Done)// not used
@@ -311,7 +311,7 @@ namespace GenericDB.DataAccess
             }
         }
 
-        public void ResetAndImportTable(string tableName, Func<DataRowCollection, OperationResult> importAction, string deleteWhere = null)
+        public void ResetAndImportTable(string tableName, Func<IDataRowProvider, OperationResult> importAction, string deleteWhere = null)
         {
             string query = String.Format("DELETE FROM [{0}] {1}", tableName, deleteWhere);
             GetResultFromRequest(query, _hdbConnection, null);
@@ -329,14 +329,16 @@ namespace GenericDB.DataAccess
                 OperationResult result;
                 do
                 {
-                    result = importAction(dataSet.Tables[0].Rows);
+                    var rows = new OldeDbDataRowProvider(dataSet.Tables[0].Rows);
+
+                    result = importAction(rows);
                 }
                 while (result == OperationResult.Ok);
                 dbDataAdapter.Update(dataSet);
             }
         }
 
-        public void ResetAndImportCards(Func<DataRowCollection, OperationResult> importAction)
+        public void ResetAndImportCards(Func<IDataRowProvider, OperationResult> importAction)
         {
             ResetAndImportTable(TableNameMain, importAction);
         }

@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 namespace GenericDB.OCTGN
 {
-    public abstract class OctgnManager
+    public abstract class OctgnManager<TLoader>
+        where TLoader: IOctgnLoader
     {
-        private readonly IOctgnLoader _octgnLoader;
+        protected abstract TLoader OctgnLoader { get; }
 
-        protected OctgnManager(IOctgnLoader octgnLoader)
+        protected OctgnManager()
         {
-            _octgnLoader = octgnLoader;
         }
 
         public void ImportImages(string imagesFolder)
@@ -36,7 +36,7 @@ namespace GenericDB.OCTGN
             var backgroundWorker = (BackgroundWorker)sender;
             var paths = (string[])doWorkEventArgs.Argument;
 
-            _octgnLoader.ImportAllImages(paths[1], paths[0], backgroundWorker);
+            OctgnLoader.ImportAllImages(paths[1], paths[0], backgroundWorker);
         }
     }
 }

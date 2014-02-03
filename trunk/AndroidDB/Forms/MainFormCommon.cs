@@ -241,7 +241,7 @@ namespace NRADB.Forms
                     Application.Exit();
                     break;
             }
-            if (!UserSettings.IsAvailable() || !ApplicationSettings.Instance.DatabaseManager.ConnectedToDatabase)
+            if (!UserSettings.IsAvailable() || !ApplicationSettings.Instance.DatabaseManager.IsConnectedToDatabase)
                 Application.Exit();
             this.Visible = true;
             InitializeMainFormForShowing();

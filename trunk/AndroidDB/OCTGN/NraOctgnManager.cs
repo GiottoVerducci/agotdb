@@ -15,10 +15,18 @@ using NRADB.BusinessObjects;
 
 namespace NRADB.OCTGN
 {
-    public class NraOctgnManager : OctgnManager
+    public class NraOctgnManager : OctgnManager<NraOctgnLoader>
     {
+        private NraOctgnLoader _nraOctgnLoader;
+        protected override NraOctgnLoader OctgnLoader
+        {
+            get
+            {
+                return _nraOctgnLoader ?? (_nraOctgnLoader = new NraOctgnLoader());
+            }
+        }
+
         public NraOctgnManager()
-            : base(new NraOctgnLoader())
         {
         }
 
@@ -35,18 +43,20 @@ namespace NRADB.OCTGN
                         WorkerSupportsCancellation = true
                     };
 
-                octgnLoaderWorker.DoWork += OctgnLoaderWorkerOnDoWork;
+                var octgnManager = new NraOctgnManager();
+
+                octgnLoaderWorker.DoWork += octgnManager.OctgnLoaderWorkerOnDoWork;
 
                 var loaderForm = new OctgnLoaderForm { BackgroundWorker = octgnLoaderWorker, Path = path, Callback = callback };
                 loaderForm.ShowDialog();
             }
         }
 
-        private static void OctgnLoaderWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        private void OctgnLoaderWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
         {
             var backgroundWorker = (BackgroundWorker)sender;
             var path = (string)doWorkEventArgs.Argument;
-            var sets = NraOctgnLoader.LoadAllSets(path, backgroundWorker);
+            var sets = this.OctgnLoader.LoadAllSets(path, backgroundWorker);
             if (sets.Count == 0 || sets.All(s => s.Value.Length == 0))
             {
                 doWorkEventArgs.Result = new OctgnLoaderResultAndValue { Result = OctgnLoaderResult.NoSetsFounds };
@@ -55,7 +65,7 @@ namespace NRADB.OCTGN
 
             //OctgnLoader.ImportSets(sets, backgroundWorker);
 
-            var importCardResult = NraOctgnLoader.ImportCards(sets, backgroundWorker);
+            var importCardResult = this.OctgnLoader.ImportCards(sets, backgroundWorker);
             if (importCardResult.IsSuccessful)
                 doWorkEventArgs.Result = new OctgnLoaderResultAndValue { Result = OctgnLoaderResult.Success };
             else

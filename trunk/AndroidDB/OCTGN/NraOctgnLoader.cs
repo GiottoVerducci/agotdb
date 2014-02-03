@@ -32,7 +32,7 @@ namespace NRADB.OCTGN
             return result;
         }
         
-        public static ImportResult ImportCards(Dictionary<OctgnSetData, NraOctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
+        public ImportResult ImportCards(Dictionary<OctgnSetData, NraOctgnCard[]> octgnSets, BackgroundWorker backgroundWorker)
         {
             var setTable = ApplicationSettings.Instance.DatabaseManager.GetExpansionSets();
             var iceTypes = GetIceTypes();

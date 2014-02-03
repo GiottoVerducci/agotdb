@@ -16,10 +16,18 @@ using AGoTDB.BusinessObjects;
 
 namespace AGoTDB.OCTGN
 {
-    public class AgotOctgnManager : OctgnManager
+    public class AgotOctgnManager : OctgnManager<AgotOctgnLoader>
     {
+        private AgotOctgnLoader _octgnLoader;
+        protected override AgotOctgnLoader OctgnLoader
+        {
+            get
+            {
+                return _octgnLoader ?? (_octgnLoader = new AgotOctgnLoader());
+            }
+        }
+
         public AgotOctgnManager()
-            : base(new AgotOctgnLoader())
         {
         }
 
