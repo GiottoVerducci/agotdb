@@ -24,7 +24,7 @@ namespace AGoTDB.OCTGN
 
         private static readonly List<string> _outputSummary = new List<string>();
 
-        private static AgotOctgnCard FindCard(DataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<OctgnSetData, AgotOctgnCard[]> octgnSets)
+        private static AgotOctgnCard FindCard(IDataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<OctgnSetData, AgotOctgnCard[]> octgnSets)
         {
             var universalId = (int)row["UniversalId"];
             var setId = universalId / 10000;
@@ -111,7 +111,7 @@ namespace AGoTDB.OCTGN
             return d[n, m];
         }
 
-        public static int GetMatchingScore(DataRow row, AgotOctgnCard card)
+        public static int GetMatchingScore(IDataRow row, AgotOctgnCard card)
         {
             var result = 0;
             if (card.House != null)
