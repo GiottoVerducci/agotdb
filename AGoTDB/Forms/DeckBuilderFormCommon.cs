@@ -14,7 +14,6 @@ using GenericDB.Forms;
 using AGoTDB.BusinessObjects;
 using AGoTDB.OCTGN;
 using AGoTDB.Services;
-using GenericDB.OCTGN;
 using TCard = AGoTDB.BusinessObjects.AgotCard;
 using TCardTreeView = AGoTDB.Components.AgotCardTreeView;
 using TDeck = AGoTDB.BusinessObjects.AgotDeck;
@@ -32,7 +31,7 @@ namespace AGoTDB.Forms
         private TDeck _currentDeck; // deck currently displayed
         private String _currentFilename; // filename of the deck (non-empty if the deck was loaded or saved)
         private readonly List<TCardTreeView> _treeViews;
-        private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm { ApplicationSettings = ApplicationSettings.Instance};
+        private readonly CardPreviewForm _cardPreviewForm = new CardPreviewForm { ApplicationSettings = ApplicationSettings.Instance };
 
         private int _deckTreeViewSpaceWidth; // width of a space using the deck tree view font (used to expand the lines)
         private readonly DeckTreeNodeSorter _deckTreeNodeSorter; // not fully used, we keep our sorting algorithm when inserting new nodes
@@ -70,6 +69,7 @@ namespace AGoTDB.Forms
         private DeckBuilderForm()
         {
             InitializeComponent();
+            cardPreviewControl.Settings = ApplicationSettings.Instance;
             _treeViews = new List<TCardTreeView> { treeViewSide, treeViewDeck };
             foreach (TCardTreeView t in _treeViews)
             {
@@ -320,19 +320,20 @@ namespace AGoTDB.Forms
         private void UpdateCardImage(TCard card)
         {
             cardPreviewControl.Visible = true;
-            cardPreviewControl.SetId(card.UniversalId, card.OctgnId);
+            cardPreviewControl.SetIds(card.UniversalId, card.OctgnIds);
         }
 
         /// <summary>
         /// Shows the card preview form for given card id.
         /// </summary>
         /// <param name="universalId">The card id.</param>
-        private void ShowCardPreviewForm(int universalId, Guid octgnId)
+        /// <param name="octgnId">The octgn id of the card.</param>
+        private void ShowCardPreviewForm(int universalId, Guid[] octgnIds)
         {
             if (!ApplicationSettings.Instance.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
             _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
-            _cardPreviewForm.SetId(universalId, octgnId);
+            _cardPreviewForm.SetIds(universalId, octgnIds);
             var x = this.Location.X + this.Width;
             var y = this.Location.Y + 10;
 
@@ -452,7 +453,10 @@ namespace AGoTDB.Forms
             foreach (TreeNode node in root.Nodes)
                 UpdateCardNodeText(node);
 
-            UpdateDependentTypeNodeTexts(card.Type.Value, treeView);
+            if (card.Type != null)
+            {
+                UpdateDependentTypeNodeTexts(card.Type.Value, treeView);
+            }
 
             root.Expand();
             treeView.EndUpdate();
@@ -530,7 +534,7 @@ namespace AGoTDB.Forms
         {
             return new Font(FontFamily.GenericMonospace, GetNodeFont(node).Size);
         }
-        
+
         private static Color Enlighten(Color color, Color backgroundColor)
         {
             if (backgroundColor.GetBrightness() * color.GetBrightness() < 0.5f)
@@ -543,7 +547,7 @@ namespace AGoTDB.Forms
             return color;
         }
         #endregion
-        
+
         #region Deck tree view drawing
         private void TreeViewDeck_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
@@ -840,7 +844,7 @@ namespace AGoTDB.Forms
 
         private void CardPreviewControl1_MouseEnter(object sender, EventArgs e)
         {
-            ShowCardPreviewForm(cardPreviewControl.CardUniversalId, cardPreviewControl.CardOctgnId);
+            ShowCardPreviewForm(cardPreviewControl.CardUniversalId, cardPreviewControl.CardOctgnIds);
         }
 
         private void CardPreviewControl1_MouseLeave(object sender, EventArgs e)

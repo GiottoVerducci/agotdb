@@ -21,7 +21,6 @@ using GenericDB.Helper;
 
 using AGoTDB.BusinessObjects;
 using AGoTDB.OCTGN;
-using GenericDB.OCTGN;
 using TCard = AGoTDB.BusinessObjects.AgotCard;
 
 namespace AGoTDB.Forms
@@ -747,7 +746,7 @@ namespace AGoTDB.Forms
 
         private void cardPreviewControl_MouseEnter(object sender, EventArgs e)
         {
-            ShowCardPreviewForm(cardPreviewControl.CardUniversalId, cardPreviewControl.CardOctgnId);
+            ShowCardPreviewForm(cardPreviewControl.CardUniversalId, cardPreviewControl.CardOctgnIds);
         }
 
         private void cardPreviewControl_MouseLeave(object sender, EventArgs e)
@@ -766,19 +765,19 @@ namespace AGoTDB.Forms
         private void UpdateCardImage(TCard card)
         {
             cardPreviewControl.Visible = true;
-            cardPreviewControl.SetId(card.UniversalId, card.OctgnId);
+            cardPreviewControl.SetIds(card.UniversalId, card.OctgnIds);
         }
 
         /// <summary>
         /// Shows the card preview form for given card id.
         /// </summary>
         /// <param name="universalId">The card id.</param>
-        private void ShowCardPreviewForm(int universalId, Guid octgnId)
+        private void ShowCardPreviewForm(int universalId, Guid[] octgnIds)
         {
             if (!ApplicationSettings.Instance.ImagesFolderExists || !UserSettings.DisplayImages)
                 return;
             _cardPreviewForm.ImagePreviewSize = UserSettings.ImagePreviewSize;
-            _cardPreviewForm.SetId(universalId, octgnId);
+            _cardPreviewForm.SetIds(universalId, octgnIds);
             var x = this.Location.X + this.Width;
             var y = this.Location.Y + 10;
 
