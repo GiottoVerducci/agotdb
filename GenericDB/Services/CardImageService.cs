@@ -15,7 +15,9 @@
 // You can contact me at v.ripoll@gmail.com
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace GenericDB.Services
 {
@@ -48,32 +50,33 @@ namespace GenericDB.Services
             get { return _cardImageService; }
         }
 
-        public static string[] GetImageFileNames(string imagesFolder, int universalId, Guid octgnId)
+        public static ICollection<string> GetImageFileNames(string imagesFolder, int universalId, Guid[] octgnIds)
         {
-            return new[]
+            var result = new List<string>
             {
                 String.Format("{0}{1}{2}.jpg",
                     imagesFolder,
                     Path.DirectorySeparatorChar,
                     universalId),
-                String.Format("{0}{1}{2}.jpg",
+            };
+            result.AddRange(octgnIds.Select(octgnId => String.Format("{0}{1}{2}.jpg",
                     imagesFolder,
                     Path.DirectorySeparatorChar,
-                    octgnId)
-            };
+                    octgnId)));
+            return result;
         }
 
-        public static ImageAvailability GetImageAvailability(string imagesFolder, int universalId, Guid octgnId)
+        public static ImageAvailability GetImageAvailability(string imagesFolder, int universalId, Guid[] octgnIds)
         {
-            var imageFileNames = GetImageFileNames(imagesFolder, universalId, octgnId);
+            var imageFileNames = GetImageFileNames(imagesFolder, universalId, octgnIds);
             int dummy;
             return GetImageAvailability(imageFileNames, out dummy);
         }
 
-        public static ImageAvailability GetImageAvailability(string[] imageFileNames, out int index)
+        public static ImageAvailability GetImageAvailability(ICollection<string> imageFileNames, out int index)
         {
-            for (int i = 0; i < imageFileNames.Length; ++i)
-                if (File.Exists(imageFileNames[i]))
+            for (int i = 0; i < imageFileNames.Count; ++i)
+                if (File.Exists(imageFileNames.ElementAt(i)))
                 {
                     index = i;
                     return ImageAvailability.Available;

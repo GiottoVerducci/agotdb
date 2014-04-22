@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using GenericDB.BusinessObjects;
 
 namespace GenericDB.DataAccess
@@ -116,6 +117,24 @@ namespace GenericDB.DataAccess
             string text = row[column].ToString().Trim();
             Guid result;
             return Guid.TryParse(text, out result) ? result : Guid.Empty;
+        }
+
+        public virtual Guid[] GetGuidsFromRow(DataRow row, string column, char separator)
+        {
+            var result = row[column].ToString().Trim()
+                .Split(separator)
+                .Select(w =>
+                    {
+                        Guid guid;
+                        return Guid.TryParse(w, out guid) ? guid : Guid.Empty;
+                    })
+                .Where(guid => guid != Guid.Empty)
+                .ToArray();
+            if (result.Length == 0)
+            {
+                result = new[] { Guid.Empty };
+            }
+            return result;
         }
 
         /// <summary>
