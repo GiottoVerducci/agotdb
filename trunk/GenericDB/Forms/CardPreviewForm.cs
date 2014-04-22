@@ -36,9 +36,9 @@ namespace GenericDB.Forms
 
         public int ImagePreviewSize { get; set; }
 
-        public void SetId(int universalId, Guid octgnId)
+        public void SetIds(int universalId, Guid[] octgnIds)
         {
-            cardPreviewControl.SetId(universalId, octgnId);
+            cardPreviewControl.SetIds(universalId, octgnIds);
 
             if (ApplicationSettings.ImagesFolderExists)
             {
@@ -81,9 +81,9 @@ namespace GenericDB.Forms
                     | Win32.ExtendedWindowsStyle.WS_EX_TOOLWINDOW
 
                 //parameters.ExStyle = (int)(
-                //    Win32.ExtendedWindowsStyle.WS_EX_LAYERED
-                //    | Win32.ExtendedWindowsStyle.WS_EX_TOOLWINDOW
-                //    | Win32.ExtendedWindowsStyle.WS_EX_NOACTIVATE
+                    //    Win32.ExtendedWindowsStyle.WS_EX_LAYERED
+                    //    | Win32.ExtendedWindowsStyle.WS_EX_TOOLWINDOW
+                    //    | Win32.ExtendedWindowsStyle.WS_EX_NOACTIVATE
                 );
                 return parameters;
             }

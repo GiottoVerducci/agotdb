@@ -24,7 +24,7 @@ namespace GenericDB.BusinessObjects
     {
         public Int32 UniversalId { get; set; }
         public int Quantity { get; set; }
-        public Guid OctgnId;
+        public Guid[] OctgnIds;
 
         #region Constructors and clone
         public abstract ICard Clone();

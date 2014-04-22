@@ -1,3 +1,8 @@
+Beta 0.748 (22 avril 2014)
+ - Ajout du support des identifiants OCTGN multiples pour chaque carte.
+ - Correction d'un plantage lors du chargement d'une carte inconnue
+ - Correction d'un plantage lorsque la prévisualisation était activée
+
 Beta 0.747 (21 décembre 2013)
  - Correction du bug qui empêchait d'ajouter un agenda dans le deck builder
  
