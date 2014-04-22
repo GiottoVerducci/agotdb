@@ -113,12 +113,12 @@ namespace AGoTDB.Services
         {
             foreach (var card in cardList)
             {
-                var imageFileNames = CardImageService.GetImageFileNames(ApplicationSettings.Instance.ImagesFolder, card.UniversalId, card.OctgnId);
+                var imageFileNames = CardImageService.GetImageFileNames(ApplicationSettings.Instance.ImagesFolder, card.UniversalId, card.OctgnIds);
                 int index;
                 if (CardImageService.GetImageAvailability(imageFileNames, out index) == ImageAvailability.Available)
                     printList.Add(new ProxyInfo
                     {
-                        ImagePath = imageFileNames[index],
+                        ImagePath = imageFileNames.ElementAt(index),
                         Quantity = card.Quantity,
                         MustRotate = card.Type != null && card.Type.Value == (int)AgotCard.CardType.Plot
                     });

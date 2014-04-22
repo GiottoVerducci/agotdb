@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Xml;
-
 using AGoTDB.BusinessObjects;
 using GenericDB.DataAccess;
-using GenericDB.Helper;
 using GenericDB.OCTGN;
 
 namespace AGoTDB.OCTGN
 {
-    public class AgotOctgnLoader: OctgnLoader<AgotOctgnCard>
+    public class AgotOctgnLoader : OctgnLoader<AgotOctgnCard>
     {
         private static string Strip(string name)
         {
@@ -24,50 +19,109 @@ namespace AGoTDB.OCTGN
 
         private static readonly List<string> _outputSummary = new List<string>();
 
-        private static AgotOctgnCard FindCard(IDataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<OctgnSetData, AgotOctgnCard[]> octgnSets)
+        /// <summary>Find in the octgn data the cards matching a row.</summary>
+        /// <param name="row">The row from the database.</param>
+        /// <param name="setInformations">The octgn data set informations.</param>
+        /// <param name="octgnSets">The octgn data sets.</param>
+        /// <returns>The cards matching the row (the card may appear more than once in the octgn data).</returns>
+        private static ICollection<AgotOctgnCard> FindCards(IDataRow row, Dictionary<int, SetInformation> setInformations, Dictionary<OctgnSetData, AgotOctgnCard[]> octgnSets)
         {
             var universalId = (int)row["UniversalId"];
-            var setId = universalId / 10000;
-            SetInformation setInformation;
-            if (setInformations.TryGetValue(setId, out setInformation))
-            {
-                var originalName = Strip(row["OriginalName"].ToString());
-                if (setInformation.OctgnName != null)
-                {
-                    var octgnSetData = octgnSets.FirstOrDefault(kvp => kvp.Key.Name == setInformation.OctgnName);
-                    if (octgnSetData.Value != null)
+            //var setId = universalId / 10000;
+
+            var sets = row["Set"].ToString()
+                .Split('/')
+                .Select(w =>
                     {
-                        var octgnSet = octgnSetData.Value;
-                        var cards = octgnSet.Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase)).ToList();
-                        if (cards.Count == 1)
-                            return cards[0];
-                        if (cards.Count > 1)
-                            return cards.OrderByDescending(card => GetMatchingScore(row, card)).First();
-                        // try searching approximative names in the set
-                        var distanceCards = octgnSet
-                            .Select(c => new Tuple<int, AgotOctgnCard>(ComputeLevenshteinDistance(Strip(c.Name), originalName), c))
-                            .Where(distanceCard => distanceCard.Item1 <= 2)
-                            .OrderBy(distanceCard => distanceCard.Item1)
-                            .ToList();
-                        if (distanceCards.Count > 0)
+                        var index = w.IndexOf('-');
+                        if (index == -1)
+                            index = w.IndexOf('(');
+                        return w.Substring(0, index);
+                    })
+                .Select(w => w.Trim())
+                .ToArray();
+
+            var setsIds = setInformations
+                .Where(kvp => sets.Contains(kvp.Value.ShortName))
+                .Select(kvp => kvp.Key)
+                .OrderByDescending(setId => setId)
+                .ToArray();
+
+            var result = new List<Tuple<bool, AgotOctgnCard>>();
+
+            foreach (var setId in setsIds)
+            {
+                SetInformation setInformation;
+                if (setInformations.TryGetValue(setId, out setInformation))
+                {
+                    string name = row["OriginalName"].ToString();
+                TryAgain: // temporary, until OCTGN data are correct
+                    var originalName = Strip(name);
+                    if (setInformation.OctgnName != null)
+                    {
+                        var octgnSetData = octgnSets.FirstOrDefault(kvp => kvp.Key.Name == setInformation.OctgnName);
+                        if (octgnSetData.Value != null)
                         {
-                            // for debugging purpose: keep track of the mismatch values
-                            var output = string.Format("{0}\t{1} -> {2}", universalId, row["OriginalName"], distanceCards.First().Item2.Name);
-                            _outputSummary.Add(output);
-                            return distanceCards.First().Item2;
+                            var octgnSet = octgnSetData.Value;
+                            var cards = octgnSet.Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                            if (cards.Count == 1)
+                            {
+                                result.Add(new Tuple<bool, AgotOctgnCard>(true, cards[0])); // perfect match
+                                continue;
+                            }
+                            if (cards.Count > 1)
+                            {
+                                var matchingCards = cards.GroupBy(card => GetMatchingScore(row, card)).OrderByDescending(group => group.Key);
+                                //result.AddRange(matchingCards.First());
+                                result.Add(new Tuple<bool, AgotOctgnCard>(false, matchingCards.First().First())); // we keep only one card per set
+                                continue;
+                            }
+                            // try searching approximative names in the set
+                            var distanceCards = octgnSet
+                                .GroupBy(c => ComputeLevenshteinDistance(Strip(c.Name), originalName))
+                                .Where(group => group.Key <= 2)
+                                .OrderBy(group => group.Key)
+                                .ToArray();
+                            if (distanceCards.Length > 0)
+                            {
+                                // for debugging purpose: keep track of the mismatch values
+                                foreach (var card in distanceCards[0])
+                                {
+                                    var output = string.Format("{0}\t{1} -> {2}", universalId, row["OriginalName"], card.Name);
+                                    _outputSummary.Add(output);
+                                }
+                                result.Add(new Tuple<bool, AgotOctgnCard>(false, distanceCards[0].First()));
+                            }
+                            else // try again with variation because the OCTGN card set contains shit ("When Intrigue Woke" instead of "When I Woke", really!?)
+                            {
+                                if (name.Contains(" I "))
+                                {
+                                    name = Strip(name.Replace(" I ", " Intrigue "));
+                                    goto TryAgain;
+                                }
+                            }
                         }
                     }
+                    //var scoreCards = octgnSets.Values
+                    //    .SelectMany(c => c)
+                    //    .Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase))
+                    //    .Select(card => new Tuple<int, AgotOctgnCard>(GetMatchingScore(row, card), card))
+                    //    .Where(card => card.Item1 >= 0)
+                    //    .OrderByDescending(card => card.Item1)
+                    //    .ToList();
+                    //if (scoreCards.Count > 0)
+                    //    return new[] { scoreCards.First().Item2 };
+                    //return null;
                 }
-                var scoreCards = octgnSets.Values
-                    .SelectMany(c => c)
-                    .Where(c => string.Equals(Strip(c.Name), originalName, StringComparison.InvariantCultureIgnoreCase))
-                    .Select(card => new Tuple<int, AgotOctgnCard>(GetMatchingScore(row, card), card))
-                    .Where(card => card.Item1 >= 0)
-                    .OrderByDescending(card => card.Item1)
-                    .ToList();
-                if (scoreCards.Count > 0)
-                    return scoreCards.First().Item2;
-                return null;
+            }
+
+            if (result.Any(c => c.Item1)) // at least 1 perfect match
+            {
+                return result.Where(c => c.Item1).Select(c => c.Item2).ToArray();
+            }
+            if (result.Count >= 1)
+            {
+                return result.Select(c => c.Item2).ToArray();
             }
             return null;
         }
@@ -171,7 +225,7 @@ namespace AGoTDB.OCTGN
                 backgroundWorker.ReportProgress(progress * 100 / setTable.Rows.Count, OctgnLoaderTask.MatchSet);
                 if ((int)row["Id"] >= 0)
                 {
-                    var si = new SetInformation { OriginalName = row["OriginalName"].ToString() };
+                    var si = new SetInformation { OriginalName = row["OriginalName"].ToString(), ShortName = row["ShortName"].ToString() };
                     var name = Strip(si.OriginalName);
                     var octgnSetData = octgnSets.Keys.FirstOrDefault(k => Strip(k.Name).EndsWith(name, StringComparison.InvariantCultureIgnoreCase));
                     if (octgnSetData == null)
@@ -189,9 +243,9 @@ namespace AGoTDB.OCTGN
                 {
                     if (backgroundWorker.CancellationPending)
                         return DatabaseManager.OperationResult.Abort;
-                    var card = FindCard(row, setInformations, octgnSets);
-                    if (card != null)
-                        row["OctgnId"] = card.Id;
+                    var cards = FindCards(row, setInformations, octgnSets);
+                    if (cards != null)
+                        row["OctgnId"] = string.Join(",", cards.Select(card => card.Id));
                     if (cardProgress < 100)
                         backgroundWorker.ReportProgress(cardProgress, OctgnLoaderTask.FindCard);
                     else
