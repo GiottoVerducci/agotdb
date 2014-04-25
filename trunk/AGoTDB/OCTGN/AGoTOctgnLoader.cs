@@ -72,14 +72,35 @@ namespace AGoTDB.OCTGN
                             if (cards.Count > 1)
                             {
                                 var matchingCards = cards.GroupBy(card => GetMatchingScore(row, card)).OrderByDescending(group => group.Key);
-                                //result.AddRange(matchingCards.First());
-                                result.Add(new Tuple<bool, AgotOctgnCard>(false, matchingCards.First().First())); // we keep only one card per set
+                                var bestMatchingCards = matchingCards.First().ToArray();
+                                // there are now two possibilities:
+                                // 1) either the same card appear twice (eg. Carrion Birds)
+                                // 2) either two different cards share the same name (eg. The Kingsroad)
+                                if (bestMatchingCards.Length == 1 || bestMatchingCards.Skip(1).All(c => c.Equals(bestMatchingCards[0])))
+                                {
+                                    // case 1)
+                                    result.AddRange(bestMatchingCards.Select(card => new Tuple<bool, AgotOctgnCard>(true, card)));
+                                }
+                                else
+                                {
+                                    // case 2)
+                                    var universalIdOrder = universalId % 1000; // keep the last 3 digits
+                                    var bestMatch = bestMatchingCards.FirstOrDefault(c => 
+                                        {
+                                            int order;
+                                            return int.TryParse(c.Id.Substring(c.Id.Length - 3), out order) && order == universalIdOrder;
+                                        });
+                                    if (bestMatch != null)
+                                    {
+                                        result.Add(new Tuple<bool, AgotOctgnCard>(true, bestMatch));
+                                    }
+                                }
                                 continue;
                             }
                             // try searching approximative names in the set
                             var distanceCards = octgnSet
                                 .GroupBy(c => ComputeLevenshteinDistance(Strip(c.Name), originalName))
-                                .Where(group => group.Key <= 2)
+                                .Where(group => group.Key <= 6)
                                 .OrderBy(group => group.Key)
                                 .ToArray();
                             if (distanceCards.Length > 0)
@@ -218,6 +239,7 @@ namespace AGoTDB.OCTGN
             var setInformations = new Dictionary<int, SetInformation>();
 
             var progress = 0;
+            var remainingOctgnSets = new Dictionary<OctgnSetData, AgotOctgnCard[]>(octgnSets);
             foreach (DataRow row in setTable.Rows)
             {
                 if (backgroundWorker.CancellationPending)
@@ -227,14 +249,39 @@ namespace AGoTDB.OCTGN
                 {
                     var si = new SetInformation { OriginalName = row["OriginalName"].ToString(), ShortName = row["ShortName"].ToString() };
                     var name = Strip(si.OriginalName);
-                    var octgnSetData = octgnSets.Keys.FirstOrDefault(k => Strip(k.Name).EndsWith(name, StringComparison.InvariantCultureIgnoreCase));
-                    if (octgnSetData == null)
-                        continue;
-                    si.OctgnName = octgnSetData.Name;
+                    var octgnSetData = remainingOctgnSets.Keys.FirstOrDefault(k => Strip(k.Name).EndsWith(name, StringComparison.InvariantCultureIgnoreCase));
+                    if (octgnSetData != null)
+                    {
+                        si.OctgnName = octgnSetData.Name;
+                        remainingOctgnSets.Remove(octgnSetData);
+                    }
                     setInformations.Add(Convert.ToInt32(row["SetId"]), si);
                 }
                 ++progress;
             }
+
+            // try to match the remaining sets
+            foreach (var kvp in setInformations.Where(kvp => kvp.Value.OctgnName == null).ToArray())
+            {
+                var si = kvp.Value;
+                var name = Strip(si.OriginalName);
+                var octgnSetData = remainingOctgnSets.Keys.FirstOrDefault(k => 
+                    {
+                        var stripped = Strip(k.Name);
+                        stripped = new string(stripped.SkipWhile(c => !char.IsLetter(c)).ToArray());
+                        return ComputeLevenshteinDistance(stripped, name) <= 4;
+                    });
+                if (octgnSetData != null)
+                {
+                    si.OctgnName = octgnSetData.Name;
+                    remainingOctgnSets.Remove(octgnSetData);
+                }
+                else
+                {
+                    setInformations.Remove(kvp.Key);
+                }
+            }
+
             backgroundWorker.ReportProgress(100, OctgnLoaderTask.MatchSet);
 
             object errorObject = null;
