@@ -220,8 +220,7 @@ namespace GenericDB.OCTGN
 
         private static Action<TOctgnCard, string> GetSetter(string propertyName)
         {
-            var metadata =
-                _metadata.FirstOrDefault(p => p.Item2.AttributeName == propertyName || p.Item2.PropertyName == propertyName);
+            var metadata = _metadata.FirstOrDefault(p => p.Item2.AttributeName == propertyName || p.Item2.PropertyName == propertyName);
             if (metadata == null)
                 return null;
 

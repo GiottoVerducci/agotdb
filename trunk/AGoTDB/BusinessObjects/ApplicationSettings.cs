@@ -40,7 +40,7 @@ namespace AGoTDB.BusinessObjects
         }
 
         public readonly string ApplicationName = "AGoTDB";
-        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 747, 0);
+        public readonly SoftwareVersion ApplicationVersion = new SoftwareVersion(0, 749 , 0);
         public AgotDatabaseManager DatabaseManager { get; set; }
         public bool ImagesFolderExists { get; set; }
         public string ImagesFolder { get; set; }
