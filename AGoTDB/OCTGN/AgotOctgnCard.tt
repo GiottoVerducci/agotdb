@@ -1,0 +1,64 @@
+﻿<#@ template language="C#" hostspecific="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ output extension=".cs" #>
+<#
+    var properties = new[] 
+        {
+            new { AttributeName = "name", PropertyName = "Name" },
+            new { AttributeName = "House", PropertyName = "House" },
+            new { AttributeName = "Type", PropertyName = "Type" },
+            new { AttributeName = "Traits", PropertyName = "Traits" },
+            new { AttributeName = "Text", PropertyName = "Text" },
+            new { AttributeName = "Keywords", PropertyName = "Keywords" },
+            new { AttributeName = "Unique", PropertyName = "Unique" },
+            new { AttributeName = "Cost", PropertyName = "Cost" },
+            new { AttributeName = "Strength", PropertyName = "Strength" },
+            new { AttributeName = "Military", PropertyName = "Military" },
+            new { AttributeName = "Intrigue", PropertyName = "Intrigue" },
+            new { AttributeName = "Power", PropertyName = "Power" },
+            new { AttributeName = "Crest", PropertyName = "Crest" },
+            new { AttributeName = "GoldIncome", PropertyName = "GoldIncome" },
+            new { AttributeName = "Influence", PropertyName = "Influence" },
+            new { AttributeName = "Initiative", PropertyName = "Initiative" },
+            new { AttributeName = "PlotGoldIncome", PropertyName = "PlotGoldIncome" },
+            new { AttributeName = "PlotInitiative", PropertyName = "PlotInitiative" },
+            new { AttributeName = "PlotClaim", PropertyName = "PlotClaim" }
+        };
+#>
+using System.Diagnostics;
+using GenericDB.OCTGN;
+
+namespace AGoTDB.OCTGN
+{
+    [DebuggerDisplay("{Name}")]
+    public class AgotOctgnCard : IOctgnCard
+    {
+        [OctgnCardData(AttributeName = "id")]
+        public string Id { get; set; }
+<#
+    foreach(var property in properties)
+    {
+#>
+
+        [OctgnCardData(AttributeName = "<#= property.AttributeName #>")]
+        public string <#= property.PropertyName #> { get; set; }
+<#
+    }
+#>
+
+        public bool Equals(AgotOctgnCard other)
+        {
+<#
+    var text = string.Join("\r\n               && ", properties.Select(p => string.Format("this.{0} == other.{0}", p.PropertyName)));
+#>
+            return <#= text #>;
+        }
+    }
+}
