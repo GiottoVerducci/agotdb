@@ -724,7 +724,6 @@ namespace AGoTDB.Forms
                 _currentDeck = _versionedDeck.LastVersion; // get reference on the latest deck
                 UpdateControlsWithVersionedDeck(true);
                 _lastLoadedDeck = (TVersionedDeck)_versionedDeck.Clone(); // performs a deep copy
-
             }
             catch
             {

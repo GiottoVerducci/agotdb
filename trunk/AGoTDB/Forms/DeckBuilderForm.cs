@@ -412,8 +412,8 @@ namespace AGoTDB.Forms
             if (deck.DeckFormat == AgotDeckFormat.Joust)
             {
                 if (card.RestrictedJoust != null && card.RestrictedJoust.Value
-                    && (deck.CardLists.Any(cl => cl.Any(c => c.RestrictedJoust != null && c.RestrictedJoust.Value && c.UniversalId != card.UniversalId)))
-                        || deck.Agenda.Any(a => a.RestrictedJoust != null && a.RestrictedJoust.Value))
+                    && (deck.CardLists.Any(cl => cl.Any(c => c.RestrictedJoust != null && c.RestrictedJoust.Value && c.UniversalId != card.UniversalId))
+                        || deck.Agenda.Any(a => a.RestrictedJoust != null && a.RestrictedJoust.Value)))
                 {
                     result.ForeColor = Color.White;
                     result.BackColor = Color.OrangeRed;
@@ -422,8 +422,8 @@ namespace AGoTDB.Forms
             else if (deck.DeckFormat == AgotDeckFormat.Melee)
             {
                 if (card.RestrictedMelee != null && card.RestrictedMelee.Value
-                    && (deck.CardLists.Any(cl => cl.Any(c => c.RestrictedMelee != null && c.RestrictedMelee.Value && c.UniversalId != card.UniversalId)))
-                        || deck.Agenda.Any(a => a.RestrictedMelee != null && a.RestrictedMelee.Value))
+                    && (deck.CardLists.Any(cl => cl.Any(c => c.RestrictedMelee != null && c.RestrictedMelee.Value && c.UniversalId != card.UniversalId))
+                        || deck.Agenda.Any(a => a.RestrictedMelee != null && a.RestrictedMelee.Value)))
                 {
                     result.ForeColor = Color.White;
                     result.BackColor = Color.OrangeRed;

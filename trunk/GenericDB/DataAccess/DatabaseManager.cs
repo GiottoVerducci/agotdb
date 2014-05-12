@@ -634,7 +634,7 @@ namespace GenericDB.DataAccess
         public virtual DataTable GetCardFromOctgnId(Guid octgnId)
         {
             return GetResultFromRequest(
-                string.Format("SELECT * FROM [{0}] WHERE OctgnId = :octgnId", TableNameMain),
+                string.Format("SELECT * FROM [{0}] WHERE OctgnId like '%' + :octgnId + '%'", TableNameMain),
                 new CommandParameters().Add("octgnId", octgnId.ToString()));
         }
 
