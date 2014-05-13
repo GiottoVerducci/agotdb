@@ -518,6 +518,7 @@ namespace AGoTDB.Forms
             this.eclHouse.RollDownDelay = 250;
             this.eclHouse.Summary = "House";
             this.eclHouse.ThreeState = false;
+            this.eclHouse.SelectedValueChanged += new System.EventHandler(this.EclHouse_SelectedValueChanged);
             // 
             // DeckBuilderForm
             // 
