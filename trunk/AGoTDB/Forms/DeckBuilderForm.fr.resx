@@ -317,6 +317,9 @@
   <data name="exportDeckToClipboardSortedByToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>307, 22</value>
   </data>
+  <data name="exportConciseDeckToClipboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exporter le deck concis vers le presse-papier</value>
+  </data>
   <data name="exportDeckToClipboardSortedByToolStripMenuItem.Text" xml:space="preserve">
     <value>Exporter le deck vers le presse-papier, trié par...</value>
   </data>

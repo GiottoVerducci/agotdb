@@ -880,10 +880,19 @@
     <value>Ctrl+E</value>
   </data>
   <data name="exportToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
+    <value>329, 22</value>
   </data>
   <data name="exportToClipboardToolStripMenuItem.Text" xml:space="preserve">
     <value>Export deck to clipboard</value>
+  </data>
+  <data name="exportConciseDeckToClipboardToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Shift+E</value>
+  </data>
+  <data name="exportConciseDeckToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 22</value>
+  </data>
+  <data name="exportConciseDeckToClipboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export concise deck to clipboard</value>
   </data>
   <data name="exportDeckToClipboardSortedBySetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 22</value>
@@ -892,19 +901,19 @@
     <value>Set</value>
   </data>
   <data name="exportDeckToClipboardSortedByToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
+    <value>329, 22</value>
   </data>
   <data name="exportDeckToClipboardSortedByToolStripMenuItem.Text" xml:space="preserve">
     <value>Export deck to clipboard sorted by...</value>
   </data>
   <data name="exportDeckToOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
+    <value>329, 22</value>
   </data>
   <data name="exportDeckToOCTGNToolStripMenuItem.Text" xml:space="preserve">
     <value>Export deck to OCTGN</value>
   </data>
   <data name="importDeckFromOCTGNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 22</value>
+    <value>329, 22</value>
   </data>
   <data name="importDeckFromOCTGNToolStripMenuItem.Text" xml:space="preserve">
     <value>Import deck from OCTGN</value>
@@ -1388,6 +1397,12 @@
     <value>importDeckFromOCTGNToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;importDeckFromOCTGNToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportConciseDeckToClipboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportConciseDeckToClipboardToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportConciseDeckToClipboardToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

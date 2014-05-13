@@ -215,6 +215,11 @@ namespace AGoTDB.Forms
             Clipboard.SetText(CurrentDeckToText());
         }
 
+        private void exportConciseToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(CurrentDeckToConciseText());
+        }
+
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CheckDeckChanges())

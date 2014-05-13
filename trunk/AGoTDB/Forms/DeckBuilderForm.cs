@@ -393,7 +393,7 @@ namespace AGoTDB.Forms
             else if (card.Unique.Value)
                 result.Value1 += String.Format(CultureInfo.CurrentCulture, " * ({0})", card.GetShortSet());
 
-            if((deck.DeckFormat == AgotDeckFormat.Joust && card.RestrictedJoust != null && card.RestrictedJoust.Value)
+            if ((deck.DeckFormat == AgotDeckFormat.Joust && card.RestrictedJoust != null && card.RestrictedJoust.Value)
                 || (deck.DeckFormat == AgotDeckFormat.Melee && card.RestrictedMelee != null && card.RestrictedMelee.Value))
             {
                 result.Value1 += string.Format(" [{0}]", Resource1.Restricted);
@@ -462,10 +462,8 @@ namespace AGoTDB.Forms
         }
 
         #region Export / Import
-        private string CurrentDeckToText()
+        private void AppendCurrentDeckHeader(StringBuilder text)
         {
-            var text = new StringBuilder();
-
             text.Append(lblDeckName.Text).AppendFormat("{0} [{1}]", _versionedDeck.Name, _currentDeck.DeckFormat == AgotDeckFormat.Joust ? rbJoust.Text : rbMelee.Text).AppendLine();
             text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
             text.Append(lblHouse.Text).Append(AgotCard.GetHouseName(_currentDeck.Houses));
@@ -475,7 +473,15 @@ namespace AGoTDB.Forms
                 text.AppendFormat(" ({0})", string.Join(" + ", agendaNames.ToArray()));
             }
 
-            text.AppendLine().AppendLine();
+            text.AppendLine();
+        }
+
+        private string CurrentDeckToText()
+        {
+            var text = new StringBuilder();
+            AppendCurrentDeckHeader(text);
+
+            text.AppendLine();
             text.Append(tabPageDescription.Text).Append(" : ").AppendLine(_versionedDeck.Description);
 
             text.AppendLine().AppendLine(tabPageDeck.Text);
@@ -487,13 +493,36 @@ namespace AGoTDB.Forms
             return text.ToString();
         }
 
+        private string CurrentDeckToConciseText()
+        {
+            var text = new StringBuilder();
+            AppendCurrentDeckHeader(text);
+
+            text.AppendLine();
+
+            var cardsByType = _currentDeck.Agenda
+                .Union(_currentDeck.CardLists.SelectMany(cl => cl))
+                .GroupBy(c => c.Type.Value)
+                .OrderBy(g => _deckTreeNodeSorter.GetTypeOrder(g.Key));
+
+            foreach (var group in cardsByType)
+            {
+                text.AppendLine();
+                text.AppendLine(AgotCard.GetTypeName(group.Key));
+                foreach (var card in group)
+                {
+                    text.AppendLine(string.Format("{0}x {1}", card.Quantity, card.GetNameAndLastSet()));
+                }
+            }
+
+            return text.ToString();
+        }
+
         private string CurrentDeckSortedBySetToText()
         {
             var text = new StringBuilder();
 
-            text.Append(lblDeckName.Text).AppendLine(_versionedDeck.Name);
-            text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
-            text.Append(lblHouse.Text).Append(AgotCard.GetHouseName(_currentDeck.Houses));
+            AppendCurrentDeckHeader(text);
 
             text.AppendLine();
 
