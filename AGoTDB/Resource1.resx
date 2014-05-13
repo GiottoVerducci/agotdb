@@ -403,4 +403,7 @@ Please update the databases manually to add the set definition.</value>
   <data name="ErrOctgnSetNotDefinedInDatabaseTitle" xml:space="preserve">
     <value>OTCGN set not found in database</value>
   </data>
+  <data name="Restricted" xml:space="preserve">
+    <value>Restricted</value>
+  </data>
 </root>

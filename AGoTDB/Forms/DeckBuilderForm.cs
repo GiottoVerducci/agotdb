@@ -83,6 +83,7 @@ namespace AGoTDB.Forms
         private void CbJoustMeleeChanged(object sender, EventArgs e)
         {
             UpdateDeckFormatFromControls();
+            UpdateTreeViews();
         }
         #endregion
 
@@ -391,6 +392,13 @@ namespace AGoTDB.Forms
                 result.Value1 += " ?";
             else if (card.Unique.Value)
                 result.Value1 += String.Format(CultureInfo.CurrentCulture, " * ({0})", card.GetShortSet());
+
+            if((deck.DeckFormat == AgotDeckFormat.Joust && card.RestrictedJoust != null && card.RestrictedJoust.Value)
+                || (deck.DeckFormat == AgotDeckFormat.Melee && card.RestrictedMelee != null && card.RestrictedMelee.Value))
+            {
+                result.Value1 += string.Format(" [{0}]", Resource1.Restricted);
+            }
+
             result.ForeColor = cardNode.TreeView.ForeColor; // default value
             result.BackColor = cardNode.TreeView.BackColor; // default value
             if (card.Shadow != null && card.Shadow.Value)
@@ -458,7 +466,7 @@ namespace AGoTDB.Forms
         {
             var text = new StringBuilder();
 
-            text.Append(lblDeckName.Text).AppendLine(_versionedDeck.Name);
+            text.Append(lblDeckName.Text).AppendFormat("{0} [{1}]", _versionedDeck.Name, _currentDeck.DeckFormat == AgotDeckFormat.Joust ? rbJoust.Text : rbMelee.Text).AppendLine();
             text.Append(lblAuthor.Text).AppendLine(_versionedDeck.Author);
             text.Append(lblHouse.Text).Append(AgotCard.GetHouseName(_currentDeck.Houses));
             if (_currentDeck.Agenda.Count > 0)
