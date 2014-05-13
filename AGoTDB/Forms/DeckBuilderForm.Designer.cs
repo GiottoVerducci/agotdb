@@ -85,6 +85,7 @@ namespace AGoTDB.Forms
             this.rbJoust = new System.Windows.Forms.RadioButton();
             this.rbMelee = new System.Windows.Forms.RadioButton();
             this.eclHouse = new Beyond.ExtendedControls.ExtendedCheckedListBox();
+            this.exportConciseDeckToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -277,6 +278,7 @@ namespace AGoTDB.Forms
             this.cardPreviewControl.CardUniversalId = -1;
             resources.ApplyResources(this.cardPreviewControl, "cardPreviewControl");
             this.cardPreviewControl.Name = "cardPreviewControl";
+            this.cardPreviewControl.Settings = null;
             this.cardPreviewControl.MouseCaptureChanged += new System.EventHandler(this.CardPreviewControl1_MouseCaptureChanged);
             this.cardPreviewControl.MouseEnter += new System.EventHandler(this.CardPreviewControl1_MouseEnter);
             this.cardPreviewControl.MouseLeave += new System.EventHandler(this.CardPreviewControl1_MouseLeave);
@@ -422,6 +424,7 @@ namespace AGoTDB.Forms
             // 
             this.sdsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportToClipboardToolStripMenuItem,
+            this.exportConciseDeckToClipboardToolStripMenuItem,
             this.exportDeckToClipboardSortedByToolStripMenuItem,
             this.exportDeckToOCTGNToolStripMenuItem,
             this.importDeckFromOCTGNToolStripMenuItem});
@@ -519,6 +522,12 @@ namespace AGoTDB.Forms
             this.eclHouse.Summary = "House";
             this.eclHouse.ThreeState = false;
             this.eclHouse.SelectedValueChanged += new System.EventHandler(this.EclHouse_SelectedValueChanged);
+            // 
+            // exportConciseDeckToClipboardToolStripMenuItem
+            // 
+            this.exportConciseDeckToClipboardToolStripMenuItem.Name = "exportConciseDeckToClipboardToolStripMenuItem";
+            resources.ApplyResources(this.exportConciseDeckToClipboardToolStripMenuItem, "exportConciseDeckToClipboardToolStripMenuItem");
+            this.exportConciseDeckToClipboardToolStripMenuItem.Click += new System.EventHandler(this.exportConciseToClipboardToolStripMenuItem_Click);
             // 
             // DeckBuilderForm
             // 
@@ -626,5 +635,6 @@ namespace AGoTDB.Forms
     private System.Windows.Forms.RadioButton rbJoust;
     private System.Windows.Forms.RadioButton rbMelee;
     private Beyond.ExtendedControls.ExtendedCheckedListBox eclHouse;
+    private System.Windows.Forms.ToolStripMenuItem exportConciseDeckToClipboardToolStripMenuItem;
 	}
 }
