@@ -1,3 +1,19 @@
+Beta 0.750 (13 mai 2014)
+Defect #18: Simplification de l'export vers le presse papier: Added a new export format to "concise"
+Defect #14: Deckbuilder: export to clipboard/set non traduit: Dans le deckbuilder import/export export to clipboard/set non traduit
+Defect #12: Affichage du nom de l'extension JCE et non CCG: La règle est d'utiliser le dernier set en date où la carte apparaît.
+Unified text when a card is restricted both in joust and melee.
+Bug fix: the trees of the deckbuilder were now longer updated when changing houses.
+Defect #11: Format (Joute ou Mêlée) et carte Restreinte non précisé a l'export vers le press papier
+Added the Melee/Joust information after the deck name.
+Added the "[Restricted]" information on restricted cards in the DeckBuilderForm. The trees are now refreshed when switching between Joust and Melee.
+Defect #16: Espace entre le numero de la carte et le set: La règle est: jamais d'espace entre le set et son numéro. Eg. Hiver(R1)
+L'espace sera ajouté à l'affichage.
+Defect #9: Selection d'une vertue ou autre case a cocher. "Le rafraichissement ne s'effectue pas quand on coche la case vertue (ou une autre case). Il s'effectue qu'apres avoir survolé une autre case a cocher." => Les event eclXxxxx.MouseLeave avait disparu lors de la réorganisation des z-order.
+Defect #10: Réponse {Limitée}: n'apparaît pas en gras => Réponse {limitée}:
+Bug: the coloration for Joust/Melee was wrong
+Added support for multiple octgn ids in DatabaseManager.GetCardFromOctgnId
+
 Beta 0.749 (25 avril 2014)
  - OCTGN: La tolérance aux erreurs dans les noms OCTGN a été augmentée pour le nom des extensions et des cartes
  - OCTGN: Gestion des cartes multiples identiques avec des id OCTGN différents (ex : Oiseau charognard) et des cartes différentes avec le même nom dans le même set (ex : La Route Royale)
