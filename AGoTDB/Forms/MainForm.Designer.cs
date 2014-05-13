@@ -178,6 +178,7 @@ namespace AGoTDB.Forms
             this.eclVirtue.RollDownDelay = 250;
             this.eclVirtue.Summary = "Virtues";
             this.eclVirtue.ThreeState = true;
+            this.eclVirtue.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // eclCE
             // 
@@ -190,6 +191,7 @@ namespace AGoTDB.Forms
             this.eclCE.RollDownDelay = 250;
             this.eclCE.Summary = "Virtues";
             this.eclCE.ThreeState = true;
+            this.eclCE.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // eclExpansionSet
             // 
@@ -650,6 +652,7 @@ namespace AGoTDB.Forms
             this.eclIcon.RollDownDelay = 250;
             this.eclIcon.Summary = "Icons";
             this.eclIcon.ThreeState = true;
+            this.eclIcon.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // eclTrigger
             // 
@@ -662,6 +665,7 @@ namespace AGoTDB.Forms
             this.eclTrigger.RollDownDelay = 250;
             this.eclTrigger.Summary = "Trigger";
             this.eclTrigger.ThreeState = true;
+            this.eclTrigger.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // eclKeyword
             // 
@@ -674,6 +678,7 @@ namespace AGoTDB.Forms
             this.eclKeyword.RollDownDelay = 250;
             this.eclKeyword.Summary = "Keywords";
             this.eclKeyword.ThreeState = true;
+            this.eclKeyword.MouseLeave += new System.EventHandler(this.eclMouseLeave);
             // 
             // MainForm
             // 
