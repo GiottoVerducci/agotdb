@@ -320,7 +320,10 @@ Exception trace:
   <data name="RestrictedJoustText" xml:space="preserve">
     <value>This card is on the tournament restricted list for Joust</value>
   </data>
-  <data name="SeparatorText" xml:space="preserve">
+  <data name="RestrictedJoustAndMeleeText" xml:space="preserve">
+    <value>This card is on the tournament restricted list for Joust and Melee.</value>
+  </data>
+    <data name="SeparatorText" xml:space="preserve">
     <value>: </value>
   </data>
   <data name="SetText" xml:space="preserve">

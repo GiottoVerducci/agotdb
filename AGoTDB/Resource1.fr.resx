@@ -395,4 +395,7 @@ Trace de l'exception :
   <data name="Restricted" xml:space="preserve">
     <value>Restreinte</value>
   </data>
+  <data name="RestrictedJoustAndMeleeText" xml:space="preserve">
+    <value>Cette carte est sur la liste des cartes restreintes en tournoi en Joute et Mêlée.</value>
+  </data>
 </root>
