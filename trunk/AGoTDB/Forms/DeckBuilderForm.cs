@@ -511,7 +511,9 @@ namespace AGoTDB.Forms
                 text.AppendLine(AgotCard.GetTypeName(group.Key));
                 foreach (var card in group)
                 {
-                    text.AppendLine(string.Format("{0}x {1}", card.Quantity, card.GetNameAndLastSet()));
+                    bool isRestricted = (_currentDeck.DeckFormat == AgotDeckFormat.Joust && card.RestrictedJoust != null && card.RestrictedJoust.Value)
+                        || (_currentDeck.DeckFormat == AgotDeckFormat.Melee && card.RestrictedMelee != null && card.RestrictedMelee.Value);
+                    text.AppendLine(string.Format("{0}x {1}", card.Quantity, card.ToConciseString(isRestricted)));
                 }
             }
 
