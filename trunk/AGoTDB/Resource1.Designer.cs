@@ -680,6 +680,15 @@ namespace AGoTDB {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This card is on the tournament restricted list for Joust and Melee..
+        /// </summary>
+        internal static string RestrictedJoustAndMeleeText {
+            get {
+                return ResourceManager.GetString("RestrictedJoustAndMeleeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This card is on the tournament restricted list for Joust.
         /// </summary>
         internal static string RestrictedJoustText {
