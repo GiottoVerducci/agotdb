@@ -1,3 +1,5 @@
+Migration vers GIT (14 mars 2015)
+
 Beta 0.750 (13 mai 2014)
  - Ajout d'un nouveau format "concis" lors de l'export de decks vers le presse-papier
  - Ajout des traductions manquantes
